@@ -1,0 +1,1096 @@
+{
+  "identification": {
+    "total": 12,
+    "correct": 12,
+    "not_autonomous_gate": true
+  },
+  "groups": {
+    "full_history": {
+      "total": 12,
+      "goal_compliant": 9,
+      "declared_goal_success": 9,
+      "safety_qualified_success": 9,
+      "budget_exhausted": 0,
+      "wrong_or_early_declaration": 3,
+      "physical_failure": 0,
+      "wait_timeout": 0,
+      "wrong_direction_choices": 0,
+      "real_wrong_placements": 0,
+      "recovered": 0,
+      "costs": {
+        "decisions": 59,
+        "wait_ready_ticks": 3840,
+        "wait_delivery_ticks": 35040,
+        "requests": 12,
+        "accepted_requests": 12,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "yields": 14,
+        "invalid": 0,
+        "wait_ticks": 38880,
+        "physical_attempts": 21,
+        "physical_failures": 0,
+        "declarations": 12,
+        "no_ops": 0
+      }
+    },
+    "public_ledger_aid": {
+      "total": 12,
+      "goal_compliant": 12,
+      "declared_goal_success": 12,
+      "safety_qualified_success": 12,
+      "budget_exhausted": 0,
+      "wrong_or_early_declaration": 0,
+      "physical_failure": 0,
+      "wait_timeout": 0,
+      "wrong_direction_choices": 0,
+      "real_wrong_placements": 0,
+      "recovered": 0,
+      "costs": {
+        "decisions": 61,
+        "wait_ready_ticks": 1920,
+        "wait_delivery_ticks": 31860,
+        "requests": 12,
+        "accepted_requests": 12,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "yields": 13,
+        "invalid": 0,
+        "wait_ticks": 33780,
+        "physical_attempts": 24,
+        "physical_failures": 0,
+        "declarations": 12,
+        "no_ops": 0
+      }
+    }
+  },
+  "factor_groups": [
+    {
+      "view": "full_history",
+      "field": "initial_blue",
+      "value": "left",
+      "total": 6,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 28,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "full_history",
+      "field": "initial_blue",
+      "value": "right",
+      "total": 6,
+      "goal_compliant": 5,
+      "safety_qualified_success": 5,
+      "decisions": 31,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "full_history",
+      "field": "update",
+      "value": "none",
+      "total": 4,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 20,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "full_history",
+      "field": "update",
+      "value": "accepted",
+      "total": 4,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 21,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "full_history",
+      "field": "update",
+      "value": "rejected",
+      "total": 4,
+      "goal_compliant": 1,
+      "safety_qualified_success": 1,
+      "decisions": 18,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "full_history",
+      "field": "availability",
+      "value": "ready",
+      "total": 6,
+      "goal_compliant": 5,
+      "safety_qualified_success": 5,
+      "decisions": 29,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "full_history",
+      "field": "availability",
+      "value": "temporarily_busy",
+      "total": 6,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 30,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "initial_blue",
+      "value": "left",
+      "total": 6,
+      "goal_compliant": 6,
+      "safety_qualified_success": 6,
+      "decisions": 30,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "initial_blue",
+      "value": "right",
+      "total": 6,
+      "goal_compliant": 6,
+      "safety_qualified_success": 6,
+      "decisions": 31,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "update",
+      "value": "none",
+      "total": 4,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 20,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "update",
+      "value": "accepted",
+      "total": 4,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 20,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "update",
+      "value": "rejected",
+      "total": 4,
+      "goal_compliant": 4,
+      "safety_qualified_success": 4,
+      "decisions": 21,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "availability",
+      "value": "ready",
+      "total": 6,
+      "goal_compliant": 6,
+      "safety_qualified_success": 6,
+      "decisions": 30,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    },
+    {
+      "view": "public_ledger_aid",
+      "field": "availability",
+      "value": "temporarily_busy",
+      "total": 6,
+      "goal_compliant": 6,
+      "safety_qualified_success": 6,
+      "decisions": 31,
+      "real_wrong_placements": 0,
+      "invalid": 0
+    }
+  ],
+  "pair_transitions": {
+    "both_success": 9,
+    "full_only": 0,
+    "aid_only": 3,
+    "both_fail": 0
+  },
+  "all_twelve_paired_success_and_cost": [
+    {
+      "case": {
+        "index": 0,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "ready",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_00",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_00",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 535,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6655,
+          "success_completion_ticks": 6655,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 1,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_01",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_01",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 2,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "ready",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_02",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 535,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6655,
+          "success_completion_ticks": 6655,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_02",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 3,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_03",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_03",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 4,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "ready",
+        "seed": 100
+      },
+      "both_success": false,
+      "views": {
+        "full_history": {
+          "id": "full_history_04",
+          "success": false,
+          "goal_compliant": false,
+          "cost": {
+            "decisions": 4,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 1,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6895,
+          "success_completion_ticks": null,
+          "failure_until_termination_ticks": 6895
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_04",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 5,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "seed": 100
+      },
+      "both_success": false,
+      "views": {
+        "full_history": {
+          "id": "full_history_05",
+          "success": false,
+          "goal_compliant": false,
+          "cost": {
+            "decisions": 4,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 1,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6895,
+          "success_completion_ticks": null,
+          "failure_until_termination_ticks": 6895
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_05",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 6,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "ready",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_06",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 535,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6655,
+          "success_completion_ticks": 6655,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_06",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 535,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6655,
+          "success_completion_ticks": 6655,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 7,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_07",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_07",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 8,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "ready",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_08",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_08",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 535,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 6655,
+          "success_completion_ticks": 6655,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 9,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_09",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 6,
+            "wait_ready_ticks": 1920,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 2,
+            "invalid": 0,
+            "wait_ticks": 5635,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 11755,
+          "success_completion_ticks": 11755,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_09",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 10,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "ready",
+        "seed": 100
+      },
+      "both_success": true,
+      "views": {
+        "full_history": {
+          "id": "full_history_10",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_10",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 0,
+            "wait_delivery_ticks": 3715,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 1,
+            "invalid": 0,
+            "wait_ticks": 3715,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 9835,
+          "success_completion_ticks": 9835,
+          "failure_until_termination_ticks": null
+        }
+      }
+    },
+    {
+      "case": {
+        "index": 11,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "seed": 100
+      },
+      "both_success": false,
+      "views": {
+        "full_history": {
+          "id": "full_history_11",
+          "success": false,
+          "goal_compliant": false,
+          "cost": {
+            "decisions": 5,
+            "wait_ready_ticks": 1920,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 2,
+            "invalid": 0,
+            "wait_ticks": 2455,
+            "physical_attempts": 1,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 5635,
+          "success_completion_ticks": null,
+          "failure_until_termination_ticks": 5635
+        },
+        "public_ledger_aid": {
+          "id": "public_ledger_aid_11",
+          "success": true,
+          "goal_compliant": true,
+          "cost": {
+            "decisions": 6,
+            "wait_ready_ticks": 1920,
+            "wait_delivery_ticks": 535,
+            "requests": 1,
+            "accepted_requests": 1,
+            "rejected_requests": 0,
+            "duplicate_requests": 0,
+            "yields": 2,
+            "invalid": 0,
+            "wait_ticks": 2455,
+            "physical_attempts": 2,
+            "physical_failures": 0,
+            "declarations": 1,
+            "no_ops": 0
+          },
+          "episode_until_termination_ticks": 8575,
+          "success_completion_ticks": 8575,
+          "failure_until_termination_ticks": null
+        }
+      }
+    }
+  ],
+  "both_success_subset_costs": {
+    "full_history": {
+      "total": 9,
+      "completion_ticks": [
+        9835,
+        9835,
+        6655,
+        9835,
+        6655,
+        9835,
+        9835,
+        11755,
+        9835
+      ],
+      "summed_costs": {
+        "decisions": 46,
+        "wait_ready_ticks": 1920,
+        "wait_delivery_ticks": 27075,
+        "requests": 9,
+        "accepted_requests": 9,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "yields": 10,
+        "invalid": 0,
+        "wait_ticks": 28995,
+        "physical_attempts": 18,
+        "physical_failures": 0,
+        "declarations": 9,
+        "no_ops": 0
+      }
+    },
+    "public_ledger_aid": {
+      "total": 9,
+      "completion_ticks": [
+        6655,
+        9835,
+        9835,
+        9835,
+        6655,
+        9835,
+        6655,
+        9835,
+        9835
+      ],
+      "summed_costs": {
+        "decisions": 45,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 23895,
+        "requests": 9,
+        "accepted_requests": 9,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "yields": 9,
+        "invalid": 0,
+        "wait_ticks": 23895,
+        "physical_attempts": 18,
+        "physical_failures": 0,
+        "declarations": 9,
+        "no_ops": 0
+      }
+    }
+  },
+  "durations_by_success": {
+    "full_history": {
+      "success_completion_ticks": [
+        9835,
+        9835,
+        6655,
+        9835,
+        6655,
+        9835,
+        9835,
+        11755,
+        9835
+      ],
+      "failure_until_termination_ticks": [
+        6895,
+        6895,
+        5635
+      ]
+    },
+    "public_ledger_aid": {
+      "success_completion_ticks": [
+        6655,
+        9835,
+        9835,
+        9835,
+        9835,
+        9835,
+        6655,
+        9835,
+        6655,
+        9835,
+        9835,
+        8575
+      ],
+      "failure_until_termination_ticks": []
+    }
+  },
+  "total_calls": 132,
+  "parse_errors": 0,
+  "truncated": 0,
+  "max_actual_input_tokens": 2968,
+  "total_output_tokens": 97857,
+  "total_physical_ticks": 215040,
+  "contacts_records": {
+    "expected_blue_carrier": 658284,
+    "forbidden_robot_carrier": 0,
+    "forbidden_other_object_carrier": 0,
+    "carrier_static": 0,
+    "non_target_robot": 0
+  },
+  "support_coverage_started": 1.0,
+  "max_green_displacement_m": 1.3391758116553138e-11,
+  "model_wall_seconds": 3592.9655956202187,
+  "metadata": {
+    "model_id": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.1",
+      "tokenizers": "0.22.2",
+      "huggingface-hub": "0.36.0",
+      "accelerate": "1.4.0"
+    },
+    "parameters": {
+      "do_sample": true,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0
+    },
+    "max_new_tokens": 8192,
+    "parameter_count": 14768307200,
+    "dtype": "torch.bfloat16",
+    "attention": "sdpa",
+    "quantization": null,
+    "offload": false,
+    "cuda": "12.4",
+    "device": "NVIDIA GeForce RTX 4090",
+    "peak_allocated_bytes": 30466136064,
+    "peak_reserved_bytes": 32505856000
+  },
+  "interpretation": "识别为明确指令映射；24自主闭环为单seed开发条件，账本额外帮助；不作组合/结构泛化或显著性推断。仿真推理期间暂停，合法慢策略实际成本分列。失败直到终止时长不是任务完成时间，不能将漏动作后较早结束算效率改善。"
+}

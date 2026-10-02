@@ -1,0 +1,134 @@
+{
+  "utc": "2026-10-02T23:44:11.826209+00:00",
+  "run": {
+    "handle": 98899,
+    "pid": 121752,
+    "exit_code": 0
+  },
+  "audit": {
+    "handle": 22099,
+    "exit_code": 0
+  },
+  "freeze_sha256": "2615312d805c9f20dee5b7bdf0229d3853255540a20462ae40a5e855c1691da1",
+  "runtime_source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+    "experiments/responsive_transport_v16/world.py": "dc8c1ecaa16bd356c782c1b2f6eb28bffe060168d4f2883b5ccb396bf3894a09",
+    "experiments/responsive_transport_v16/protocol.py": "35c441cfbc02e7407973fe7326b5ad2adca5b5d579cb3e761e5641f3ed642197",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/responsive_transport_v16/measure.py": "44baeb80224a1c5ec4d3804ae3c96b3459faa6f6344c89737f25f2b0a58639c6",
+    "experiments/responsive_transport_v16/run.py": "3af8711ae0efa35527a4fb943fbfdc3f05ee35049443b0eb4214e2ff5997e30b",
+    "experiments/structure_handoff_v15/reference_audit.py": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+    "tests/test_responsive_transport_v16.py": "1bf005ecab9c6360f74fcc80326495da3bb1b032a6e87e94cd40415084838bc0",
+    "experiments/sustained_activity_v18/protocol.py": "ec810c04af2410c156a0a6f0155624b3646c55c72c7b47b4c4a98e5e12d12363",
+    "experiments/sustained_activity_v18/run.py": "01cef485e123c58992e13555f6d7c384b9eb9c9493d0794d4d56e5e00c16b904",
+    "tests/test_sustained_activity_v18.py": "e84d8d5a6d0bcb1c9fd8505e64a7dca9773fb6161ee05176ee5c8df79cfe58d4",
+    "experiments/sustained_model_v19/inputs.py": "5f44ede9565ef99e74e188a1d9687b4ebe524befef95b575b6d03f59f46d17aa",
+    "experiments/sustained_model_v19/backend.py": "875ba81f727eb63297858b9ca9941e8b9a56184782c72fa05ecb1bd89de04062",
+    "experiments/sustained_model_v19/run.py": "d6c50426a4775ca638169c956c57be32dde41d9d0a3e08e25a72cba233343644",
+    "experiments/reasoning_baseline_v17/adapter.py": "cbcf7566b12a92cbd98da01ea7288e7d2aa9169d1575a6d5d24a2b4de8b03a99",
+    "tests/test_sustained_model_v19.py": "b226e21682bef97a6e4bbc460159ad6a7f534b622d0ca1f455ffca0166ef06cc"
+  },
+  "runtime_source_unchanged": true,
+  "audit_source_sha256": "6eec60e9deb1caa985c74b718847213b76d4c5a071a524128e240b372cbca1f9",
+  "report_source_sha256": "452f7ff58ca0b75de86305abf23e37b44b92d32e2527df377ab98e64909e2dc0",
+  "artifacts_sha256": {
+    "model_summary.json": "9f3ace2eadf866a9c9ed319e03d1f9b1bf7ab3d56249237ead9854e94c4705f7",
+    "model_audit.json": "3db0fd6847a560cea82bd9226897f49992459e40d91f6ab10833d903422b769a",
+    "final_summary.json": "375e06738c5dce62f3722a2b40d306b07adb6cadb0f7fd2f1ff540f2e58d40dc",
+    "raw/failure_audit.json": "7bd3853c96b0869bf0c2e8429aaf4e152a550a741e3017c5cdbcea28a0019d7e",
+    "raw/gpu_preflight.json": "1c20cf47f426efd4e4a54b010158bb51a252e9cc850f8220da5385d290bfa362",
+    "raw/identification_calls.json": "0ab45ee47a901c61604c9a3423a53dd1f6cd80fcde57b4002ce9a1eda113ec0e"
+  },
+  "tests": {
+    "focused": 8,
+    "focused_exit_code": 0,
+    "full_at_freeze": 129,
+    "full_handle": 37212,
+    "full_exit_code": 0,
+    "full_log_sha256": "acf26455b9dc6b50e886c70e577c16c536f153772fffa1260a010e3d92eed83d",
+    "post_audit_regression": 2,
+    "post_audit_regression_exit": 0,
+    "post_audit_log_sha256": "7996810215a2da7c289a85211988710b963aefdc652d70aeeea5baf286ee72ca",
+    "shared_final_full": 146,
+    "shared_final_full_handle": 17124,
+    "shared_final_full_exit": 0,
+    "shared_final_full_log": "results/structure_foundation_v20/raw/tests_full_final.log",
+    "shared_final_full_log_sha256": "2bc63551e8ab9dd118b6e90a8a625bfa93d6214f87677e8a6af1bd6c6d8066fc"
+  },
+  "preliminary_audits": {
+    "identification": {
+      "handle": 83588,
+      "exit_code": 0,
+      "source_sha256": "c23d59555be780038ec09496a79abd3b6df5276d613ca8bb10c4a8b378559a80",
+      "report_sha256": "a4f748c6cdfed84b5f3fcb1def44cf3192bbca034a044e4df406a1554ae79b9b"
+    },
+    "full_history_original": {
+      "handle": 53627,
+      "exit_code": 1,
+      "source_sha256": "44f36d29b6a52bbc98e01be39b706e32e6a9f77face165b76f21b5998a15583f",
+      "report_sha256": "5099b8611055855c88031c9001b7f56f3a7ae59c4029ceef59a8a95b28e897e0",
+      "failure": "事后汇总变量selected被局部blue方向字符串覆盖；逐例输入/物理检查全部true，非模型或物理运行失败。原报告及源保留。"
+    },
+    "full_history_corrected": {
+      "handle": 80262,
+      "exit_code": 0,
+      "source_sha256": "6eec60e9deb1caa985c74b718847213b76d4c5a071a524128e240b372cbca1f9",
+      "report_sha256": "a0f67b4264be8bc3a6e2713e7bbcf8b03773ef36d782ff6b83d84c373384d25b",
+      "change": "仅派生局部变量selected_destination及聚合results_passed；冻结运行源/模型输入与输出未改/未重跑。"
+    }
+  },
+  "cpu_freeze_handle": 81918,
+  "cpu_freeze_exit_code": 0,
+  "raw_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/sustained_model_v19",
+  "raw_bytes": 188315631,
+  "postrun_gpu_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 15, 48494\n3, NVIDIA GeForce RTX 4090, 49140, 17, 48492\n",
+  "runner_pid_absent": true,
+  "model_metadata": {
+    "model_id": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.1",
+      "tokenizers": "0.22.2",
+      "huggingface-hub": "0.36.0",
+      "accelerate": "1.4.0"
+    },
+    "parameters": {
+      "do_sample": true,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0
+    },
+    "max_new_tokens": 8192,
+    "parameter_count": 14768307200,
+    "dtype": "torch.bfloat16",
+    "attention": "sdpa",
+    "quantization": null,
+    "offload": false,
+    "cuda": "12.4",
+    "device": "NVIDIA GeForce RTX 4090",
+    "peak_allocated_bytes": 30466136064,
+    "peak_reserved_bytes": 32505856000
+  },
+  "model_download_receipt_sha256": "70a3fd8c73dd77dfadfe401ad7b7970e94a74cfb8021f08c4eb11af27f450910",
+  "no_download": true,
+  "inputs": "识别12与24初始输入/案例及动态构造源先冻；未来自主输入不伪预冻，事后按实际物理/公开历史逐步重建。",
+  "concurrency": "v18所有运行/独立审计已exit0后才启动GPU；期间按后续独立授权并行v20 CPU指定控制/审计，无额外GPU/model调用；共享主机负载下墙钟不作性能比较。",
+  "inference_and_physics": "物理DT只在world.step推进，推理墙钟另列；包含技能停留/停车，不能称实时异步流畅度。"
+}
