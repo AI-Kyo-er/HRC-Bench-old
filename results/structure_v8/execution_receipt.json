@@ -1,0 +1,214 @@
+{
+  "recorded_utc": "2026-10-02T18:05:47.138194+00:00",
+  "parent_head": "567932773b098e91404edb80e75467af6b266c30",
+  "task": "第八轮真实载台投递与机器人接手/实际协调成本机制；无模型调用",
+  "freeze_sha256": "fa1a1bb5a920291fbec893dab3cfac0f1092b147072d0381c5c6d91ed2acddb1",
+  "runtime_source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1"
+  },
+  "runtime_source_still_matches_freeze": true,
+  "postfreeze_readonly_auditor_sha256": "8dd280c0c8b760acbb7275c7a661d3b332c338dccae60218b5719408e55b392a",
+  "permanent_tests_sha256": "2ac0fcf6443fed3760dc084bbb289b4c55df2629e6038c7ffd02d8fc55646dab",
+  "packages": {
+    "pybullet": "3.2.7",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "mani_skill": "3.0.1",
+    "sapien": "3.0.3",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.49.0"
+  },
+  "development_versions": {
+    "dev0": {
+      "passed": 0,
+      "total": 3,
+      "observed_process_exit": 0,
+      "reason": "托盘阻挡载台，交付事件未发生；保留不通过原轨迹"
+    },
+    "dev1": {
+      "passed": 3,
+      "total": 3,
+      "change": "轨道/blue初始化高度抬升，速度和相对交付判据不变"
+    },
+    "dev2": {
+      "passed": 3,
+      "total": 3,
+      "change": "仅当前FK测量更新；保留dev1原源/hash/数据，正式使用dev2"
+    }
+  },
+  "final_controls": {
+    "passed": 3,
+    "cases": 3,
+    "total_ticks": 20745,
+    "robot_partner_ticks": 0,
+    "other_objects_partner_ticks": 0,
+    "expected_support_records": 66168
+  },
+  "reference": {
+    "total": 6,
+    "passed": 6,
+    "success": 6,
+    "total_ticks": 53730,
+    "robot_carrier_ticks": 0,
+    "other_object_carrier_ticks": 0,
+    "carrier_static_ticks": 0,
+    "non_target_robot_ticks": 0,
+    "expected_blue_carrier_records": 164520,
+    "cost": {
+      "decisions": 18,
+      "invalid": 0,
+      "yields": 6,
+      "requests": 0,
+      "wait_ticks": 15930,
+      "physical_attempts": 12,
+      "physical_failures": 0
+    }
+  },
+  "shared_comparison_initial_messages_exact_match": [
+    {
+      "seed": 70,
+      "initial_messages_exact_match": true
+    },
+    {
+      "seed": 71,
+      "initial_messages_exact_match": true
+    }
+  ],
+  "input_cost_audit": {
+    "total_episodes": 6,
+    "total_decisions": 18,
+    "all_passed": true
+  },
+  "canonical_physical_trajectory_pairs": [
+    {
+      "seed": 70,
+      "original_gzip_artifact_sha_equal": false,
+      "decompressed_canonical_physical_sha256": [
+        "e23ff74baecd7c075bfdfcf35066e44edcd8d45f4967919f0e808a2d0a4cb953",
+        "e23ff74baecd7c075bfdfcf35066e44edcd8d45f4967919f0e808a2d0a4cb953"
+      ],
+      "full_physical_trajectory_exact_match": true,
+      "errata": "原字段比较压缩artifact SHA，gzip头mtime可不同；物理等同性以解压全tick规范JSON digest为准，原冻结/输出不改。"
+    },
+    {
+      "seed": 71,
+      "original_gzip_artifact_sha_equal": false,
+      "decompressed_canonical_physical_sha256": [
+        "13347c590e2f3a0f902f1b34cfc83158db3dff6fcffc75b47ef4e71b9cf0f72e",
+        "13347c590e2f3a0f902f1b34cfc83158db3dff6fcffc75b47ef4e71b9cf0f72e"
+      ],
+      "full_physical_trajectory_exact_match": true,
+      "errata": "原字段比较压缩artifact SHA，gzip头mtime可不同；物理等同性以解压全tick规范JSON digest为准，原冻结/输出不改。"
+    }
+  ],
+  "comparator_errata": "冻结字段比较gzip artifact而非规范物理内容；原false/原freeze保留；解压逐tick/规范digest均证明exclusive/shared_wait机械轨迹相同。无物理重跑。",
+  "tests": {
+    "early_new_focused_passed": 4,
+    "full_suite_passed": 34,
+    "full_suite_runs": 1,
+    "measurement_fix_focused_passed": 4,
+    "final_comparator_focused_passed": 5,
+    "final_repository_total_test_methods": 35,
+    "full35_suite_run": false,
+    "scope": "4初版包含FactsWorld协议/固定profile；最终第5是永久gzip比较回归，不是物理错误恢复。"
+  },
+  "observed_handles": [
+    {
+      "handle": 33086,
+      "stage": "dev0控制失败归档",
+      "exit_code": 0
+    },
+    {
+      "handle": 66991,
+      "stage": "dev1控制",
+      "exit_code": 0
+    },
+    {
+      "handle": 97368,
+      "stage": "早期控制审计和一次34tests",
+      "exit_code": 0
+    },
+    {
+      "handle": 53481,
+      "stage": "dev2控制",
+      "exit_code": 0
+    },
+    {
+      "handle": 69474,
+      "stage": "最终控制审计/focused4/freeze",
+      "exit_code": 0
+    },
+    {
+      "handle": 71609,
+      "stage": "六reference",
+      "exit_code": 0
+    },
+    {
+      "handle": 43833,
+      "stage": "规范物理逐tick比较",
+      "exit_code": 0
+    },
+    {
+      "handle": 49646,
+      "stage": "final focused5与输入成本审计",
+      "exit_code": 0
+    }
+  ],
+  "current_process_check": {
+    "pattern": "^.venv-llm/bin/python -m experiments.structure_v8",
+    "returncode": 1,
+    "matches": "",
+    "active_handles": []
+  },
+  "model_calls": 0,
+  "gpu_programs_started": 0,
+  "downloads_started": 0,
+  "raw_data_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_v8",
+  "raw_data_size_bytes": 88286134,
+  "representative_frames": [
+    "results/structure_v8/raw/reference/A_delivery_shared_overlap_70/frames/00000.png",
+    "results/structure_v8/raw/reference/A_delivery_shared_overlap_70/frames/00001.png",
+    "results/structure_v8/raw/reference/A_delivery_shared_overlap_70/frames/00002.png",
+    "results/structure_v8/raw/reference/A_delivery_shared_overlap_70/frames/00003.png"
+  ],
+  "artifact_sha256": {
+    "control_summary.json": "27083b0921cfa2ac286a9c6d27aecbdc46f3eb2a65f707ba7d3f6a06fdc5c8f8",
+    "control_dev1_summary.json": "c1b5575050035dcd4fa5eb534c72819444647f5576bfa374462c9651b3ffc691",
+    "control_dev2_summary.json": "2e0566aa1f5311a56e3b4053f3094a1169ea29f3db60aa1da60daae6fb1afe9f",
+    "control_contact_audit_dev1.json": "641f58fe766c6a4806a228739a69100d609ecb4ccc5ded5c7fb31c4790d0e2c7",
+    "control_contact_audit.json": "4ec0922b8f6bc91dfa25f9e9943aa5dc8505268481c668debdfc4e495986d778",
+    "reference_summary.json": "012472384cf6b64034a19701da484c7204b9a5ee246f21e9551a3fb7b0f4c651",
+    "input_cost_audit.json": "7b11f1479cf1b5e78c957df3cd607b34794fe28574123de3fafc8aecb804ac6c",
+    "raw/controls_dev0.log": "e6963484c59f6798a07c43daca6bfe07b68547adaea625eb243e0d74b3c66676",
+    "raw/controls_dev1.log": "dd76c18b75fcc6784cc2b9827c3cfc7199cd74be59808f6065b91a20e5ab0d74",
+    "raw/controls_dev2.log": "73131c0ba9c6dc3a442c3c1134fbb3376c7d514a1964c675ff96e8f85f592655",
+    "raw/reference.log": "287593417b59fdc008086fdd1084c1e5918bcdc503caef7b6b7fa948df229af3",
+    "raw/control_audit_final.log": "f0c5741a669f5ff2e5edd3f2adacba136ae8376ac21701fdc9f1afb967c8d530",
+    "raw/focused_tests_comparator_final.log": "823d153cded6d37886f0d60a795c54d5c79478de1e1d116bc642734dee11d8d0",
+    "raw/tests.log": "5e81d84ab886c42b8a4ecdfeb2f590a65319710de8fc1cbaa8a1e0d7f1cb8a52",
+    "raw/reference_audit.log": "9ae6f2a8928bcafa2d0a6f464dc8a6da6222b3cca8846ebbe1e5de125123903f"
+  },
+  "limits": [
+    "机械伙伴代理，脚本接受背景，不是自然人/模型协商",
+    "两seed仅开发实例复现，不是结构留出/显著性证据",
+    "共同makespan包含最终停车，技能重叠含停留/停车，非流畅度指标",
+    "协议拒绝分支只FactsWorld测试，非真实碰撞/恢复轨迹",
+    "transport_only pickup锁存验收不适用，有真实pickup的控制/reference才验证事件保留",
+    "20菜单包含未覆盖分支，不称穷尽路径或策略最优",
+    "仅仿真，未上真机"
+  ]
+}

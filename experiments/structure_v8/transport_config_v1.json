@@ -1,0 +1,36 @@
+{
+  "version": "structure-v8-transport-dev1-raised-rail",
+  "nominal_velocity_m_s": 0.04,
+  "ramp_seconds": 0.5,
+  "travel_m": 0.6,
+  "carrier_center_start": [
+    0.65,
+    0.6,
+    0.045
+  ],
+  "carrier_half_extents": [
+    0.06,
+    0.06,
+    0.005
+  ],
+  "blue_center_start": [
+    0.65,
+    0.6,
+    0.073
+  ],
+  "carrier_friction": 1.0,
+  "blue_friction": 1.0,
+  "carrier_goal_joint_tolerance": 0.005,
+  "carrier_speed_limit": 0.005,
+  "blue_relative_xy_tolerance": 0.025,
+  "blue_relative_z_range": [
+    0.025,
+    0.035
+  ],
+  "blue_world_speed_limit": 0.01,
+  "blue_relative_speed_limit": 0.01,
+  "support_contact_max_distance": 0.0001,
+  "support_contact_min_force": 0.001,
+  "wait_budget_ticks": 6000,
+  "notes": "修复dev0载台与right托盘实体相交：抬高水平轨道，x/y行程、速度、加减速和交付相对判据完全不变；不调等待效果。"
+}

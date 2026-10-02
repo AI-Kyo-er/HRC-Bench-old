@@ -1,0 +1,692 @@
+{
+  "dev0": [
+    {
+      "id": "overlap_handoff",
+      "audit": {
+        "total_ticks": 12300,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 10199,
+            "records": 40796,
+            "max_normal_force": 2.4104806382181296,
+            "negative_distance_records": 40792,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 4,
+            "body_pairs": {
+              "3-11": 40796
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 10850,
+            "records": 86660,
+            "max_normal_force": 110.90891106613654,
+            "negative_distance_records": 43280,
+            "near_zero_distance_records": 43380,
+            "positive_distance_records": 0,
+            "body_pairs": {
+              "10-11": 43380,
+              "8-11": 43280
+            }
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": null,
+        "recomputed_first_goal_region_ticks": {
+          "red": 2150,
+          "blue": 11090
+        },
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 0.0001666963803128585,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 1.380737627422215e-11,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": true,
+        "online_match": true,
+        "pickup_exposed": true,
+        "transport_ticks": 12120,
+        "transport_supported_ticks": 10020,
+        "max_relative_xy_slip_m": 0.66303853346046,
+        "support_coverage": 0.8267326732673267,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": false,
+        "trace_sha256": "28629f688068a6c001b64231726201ab28be28cad2ceb24b222fed794d94495e"
+      }
+    },
+    {
+      "id": "serial_handoff",
+      "audit": {
+        "total_ticks": 12300,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 10199,
+            "records": 40796,
+            "max_normal_force": 2.4106763383245275,
+            "negative_distance_records": 40792,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 4,
+            "body_pairs": {
+              "3-11": 40796
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 10850,
+            "records": 86660,
+            "max_normal_force": 110.90891106613654,
+            "negative_distance_records": 43280,
+            "near_zero_distance_records": 43380,
+            "positive_distance_records": 0,
+            "body_pairs": {
+              "10-11": 43380,
+              "8-11": 43280
+            }
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": null,
+        "recomputed_first_goal_region_ticks": {
+          "red": 8150,
+          "blue": 11090
+        },
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 0.0001666963803128585,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 1.380737627422215e-11,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": true,
+        "online_match": true,
+        "pickup_exposed": true,
+        "transport_ticks": 12120,
+        "transport_supported_ticks": 10020,
+        "max_relative_xy_slip_m": 0.6630382441317431,
+        "support_coverage": 0.8267326732673267,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": false,
+        "trace_sha256": "4ec07a2302be045149bf519ecc8bcf8dfed73d83fa142ce518236578dfddce97"
+      }
+    },
+    {
+      "id": "transport_only",
+      "audit": {
+        "total_ticks": 6180,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 6177,
+            "records": 24708,
+            "max_normal_force": 0.7588326561103451,
+            "negative_distance_records": 24708,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {
+              "3-11": 24708
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 4730,
+            "records": 37700,
+            "max_normal_force": 110.90891106613654,
+            "negative_distance_records": 18800,
+            "near_zero_distance_records": 18900,
+            "positive_distance_records": 0,
+            "body_pairs": {
+              "10-11": 18900,
+              "8-11": 18800
+            }
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": null,
+        "recomputed_first_goal_region_ticks": {},
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 0.0001666963803128585,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 6.8333774330899615e-12,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": null,
+        "online_match": true,
+        "pickup_exposed": false,
+        "transport_ticks": 6000,
+        "transport_supported_ticks": 6000,
+        "max_relative_xy_slip_m": 8.708882233475534e-06,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": false,
+        "trace_sha256": "45b36ff2bc84829823a6e0e76d3b810f968ab53ac0fa404dc9317414bc5771fa"
+      }
+    }
+  ],
+  "dev1": [
+    {
+      "id": "overlap_handoff",
+      "audit": {
+        "total_ticks": 6835,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 4735,
+            "records": 18940,
+            "max_normal_force": 1.682185660934956,
+            "negative_distance_records": 18611,
+            "near_zero_distance_records": 2,
+            "positive_distance_records": 327,
+            "body_pairs": {
+              "3-11": 18940
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": 3895,
+        "recomputed_first_goal_region_ticks": {
+          "red": 2150,
+          "blue": 5625
+        },
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 0.0001666963803128585,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 7.579681221827374e-12,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": true,
+        "online_match": true,
+        "pickup_exposed": true,
+        "transport_ticks": 3715,
+        "transport_supported_ticks": 3715,
+        "max_relative_xy_slip_m": 3.6871882379906537e-07,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": true,
+        "trace_sha256": "4ef53d7ca1b47cddaa27f662deb7474161b67fc64877b742a7a2add21c0b7f1f"
+      }
+    },
+    {
+      "id": "serial_handoff",
+      "audit": {
+        "total_ticks": 10015,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 7915,
+            "records": 31660,
+            "max_normal_force": 1.533947054212542,
+            "negative_distance_records": 31329,
+            "near_zero_distance_records": 2,
+            "positive_distance_records": 329,
+            "body_pairs": {
+              "3-11": 31660
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": 3895,
+        "recomputed_first_goal_region_ticks": {
+          "red": 5865,
+          "blue": 8805
+        },
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 0.0001666963803128585,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 1.1203339159706794e-11,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": true,
+        "online_match": true,
+        "pickup_exposed": true,
+        "transport_ticks": 3715,
+        "transport_supported_ticks": 3715,
+        "max_relative_xy_slip_m": 3.6871882379906537e-07,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": true,
+        "trace_sha256": "ef89924b09b8fcb11e1a3bb65bbf217b96b80bd3b8088c1b71fab551e9ded932"
+      }
+    },
+    {
+      "id": "transport_only",
+      "audit": {
+        "total_ticks": 3895,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 3892,
+            "records": 15568,
+            "max_normal_force": 0.7588326561103448,
+            "negative_distance_records": 15568,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {
+              "3-11": 15568
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": 3895,
+        "recomputed_first_goal_region_ticks": {},
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 0.0001666963803128585,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 4.230929240288423e-12,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": null,
+        "online_match": true,
+        "pickup_exposed": false,
+        "transport_ticks": 3715,
+        "transport_supported_ticks": 3715,
+        "max_relative_xy_slip_m": 3.6871882379906537e-07,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": true,
+        "trace_sha256": "e87cecf87c325ec5b7937c4c32dc2a937ec22fd0b1a78397726798f541d14453"
+      }
+    }
+  ],
+  "dev2": [
+    {
+      "id": "overlap_handoff",
+      "audit": {
+        "total_ticks": 6835,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 4735,
+            "records": 18940,
+            "max_normal_force": 1.682185660934956,
+            "negative_distance_records": 18611,
+            "near_zero_distance_records": 2,
+            "positive_distance_records": 327,
+            "body_pairs": {
+              "3-11": 18940
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": 3895,
+        "recomputed_first_goal_region_ticks": {
+          "red": 2150,
+          "blue": 5625
+        },
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 2.978922741814216e-08,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 7.579681221827374e-12,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": true,
+        "online_match": true,
+        "pickup_exposed": true,
+        "transport_ticks": 3715,
+        "transport_supported_ticks": 3715,
+        "max_relative_xy_slip_m": 3.6871882379906537e-07,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": true,
+        "trace_sha256": "028811dc0407f03ce82928bc805fff485cf96ead3093e5b8bc8df413ed45c93e"
+      }
+    },
+    {
+      "id": "serial_handoff",
+      "audit": {
+        "total_ticks": 10015,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 7915,
+            "records": 31660,
+            "max_normal_force": 1.533947054212542,
+            "negative_distance_records": 31329,
+            "near_zero_distance_records": 2,
+            "positive_distance_records": 329,
+            "body_pairs": {
+              "3-11": 31660
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": 3895,
+        "recomputed_first_goal_region_ticks": {
+          "red": 5865,
+          "blue": 8805
+        },
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 2.978922741814216e-08,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 1.1203339159706794e-11,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": true,
+        "online_match": true,
+        "pickup_exposed": true,
+        "transport_ticks": 3715,
+        "transport_supported_ticks": 3715,
+        "max_relative_xy_slip_m": 3.6871882379906537e-07,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": true,
+        "trace_sha256": "3766b66d7db2af209c3a92898d6bc0a1f2633f69c2b0de044cc647ab14b4b476"
+      }
+    },
+    {
+      "id": "transport_only",
+      "audit": {
+        "total_ticks": 3895,
+        "groups": {
+          "expected_blue_carrier": {
+            "ticks": 3892,
+            "records": 15568,
+            "max_normal_force": 0.7588326561103448,
+            "negative_distance_records": 15568,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {
+              "3-11": 15568
+            }
+          },
+          "forbidden_robot_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "forbidden_other_object_carrier": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "carrier_static": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          },
+          "non_target_robot": {
+            "ticks": 0,
+            "records": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0,
+            "near_zero_distance_records": 0,
+            "positive_distance_records": 0,
+            "body_pairs": {}
+          }
+        },
+        "missing_distance_or_position_pair_records": 0,
+        "recomputed_first_delivery_tick": 3895,
+        "recomputed_first_goal_region_ticks": {},
+        "goal_first_ticks_match": true,
+        "same_tick_current_FK_joint_max_y_error_m": 2.978922741814216e-08,
+        "all_delivery_facts_match_independent_recomputation": true,
+        "max_green_displacement_m": 4.230929240288423e-12,
+        "event_history_consistent": true,
+        "event_persists_after_pickup": null,
+        "online_match": true,
+        "pickup_exposed": false,
+        "transport_ticks": 3715,
+        "transport_supported_ticks": 3715,
+        "max_relative_xy_slip_m": 3.6871882379906537e-07,
+        "support_coverage": 1.0,
+        "non_target_robot_contact_records_by_item": {},
+        "safety_pass": true,
+        "trace_sha256": "4f29f405c135fa92c68db53f54fc9d993849050a8784cecf7caa098452d94969"
+      }
+    }
+  ]
+}
