@@ -1,0 +1,101 @@
+{
+  "utc": "2026-10-02T22:34:24.814195+00:00",
+  "handles": {
+    "recovery": {
+      "run": 7895,
+      "run_pid": 110913,
+      "run_exit_code": 0,
+      "audit": 88556,
+      "audit_exit_code": 0
+    },
+    "negative": {
+      "run": 58754,
+      "run_exit_code": 0,
+      "audit": 68313,
+      "audit_pid": 113982,
+      "audit_exit_code": 0
+    },
+    "reference": {
+      "run": 90454,
+      "run_pid": 113917,
+      "run_exit_code": 0,
+      "audit": 49509,
+      "audit_pid": 118364,
+      "audit_exit_code": 0
+    }
+  },
+  "freeze_sha256": {
+    "recovery": "a6db9accae1d94d5b414378fb794f2d743522812803107aca8eab4154be7c51d",
+    "negative": "90d13fcd5afa8c7c8a38585e91672363f7281e1a99cfbcb172ae0b0b5880a7fc",
+    "reference": "264e92148d9ba81998f35fe2c846bcebf6ba9c17e4a9fa181d7458cac6ba8735"
+  },
+  "source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+    "experiments/responsive_transport_v16/world.py": "dc8c1ecaa16bd356c782c1b2f6eb28bffe060168d4f2883b5ccb396bf3894a09",
+    "experiments/responsive_transport_v16/protocol.py": "35c441cfbc02e7407973fe7326b5ad2adca5b5d579cb3e761e5641f3ed642197",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/responsive_transport_v16/measure.py": "44baeb80224a1c5ec4d3804ae3c96b3459faa6f6344c89737f25f2b0a58639c6",
+    "experiments/responsive_transport_v16/run.py": "3af8711ae0efa35527a4fb943fbfdc3f05ee35049443b0eb4214e2ff5997e30b",
+    "experiments/structure_handoff_v15/reference_audit.py": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+    "tests/test_responsive_transport_v16.py": "1bf005ecab9c6360f74fcc80326495da3bb1b032a6e87e94cd40415084838bc0",
+    "experiments/sustained_activity_v18/protocol.py": "ec810c04af2410c156a0a6f0155624b3646c55c72c7b47b4c4a98e5e12d12363",
+    "experiments/sustained_activity_v18/run.py": "01cef485e123c58992e13555f6d7c384b9eb9c9493d0794d4d56e5e00c16b904",
+    "tests/test_sustained_activity_v18.py": "e84d8d5a6d0bcb1c9fd8505e64a7dca9773fb6161ee05176ee5c8df79cfe58d4"
+  },
+  "audit_source_sha256": {
+    "recovery": {
+      "experiments/sustained_activity_v18/audit.py": "814c06ce3a53ee147a29a79ffd6340b4f200739736cf02d01275efcf4eaf5510",
+      "experiments/transport_goal_v17/audit.py": "6f908904dbf4a33d8e2dcf0d6d69b7496d92c5004b74e0119c8e0011ec5394b5",
+      "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+      "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75"
+    },
+    "negative": {
+      "experiments/sustained_activity_v18/audit.py": "814c06ce3a53ee147a29a79ffd6340b4f200739736cf02d01275efcf4eaf5510",
+      "experiments/transport_goal_v17/audit.py": "6f908904dbf4a33d8e2dcf0d6d69b7496d92c5004b74e0119c8e0011ec5394b5",
+      "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+      "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75"
+    },
+    "reference": {
+      "experiments/sustained_activity_v18/audit.py": "814c06ce3a53ee147a29a79ffd6340b4f200739736cf02d01275efcf4eaf5510",
+      "experiments/transport_goal_v17/audit.py": "6f908904dbf4a33d8e2dcf0d6d69b7496d92c5004b74e0119c8e0011ec5394b5",
+      "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+      "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75"
+    }
+  },
+  "artifact_sha256": {
+    "recovery_summary.json": "84da4c0fe63734c9755b3473b1fdf9625d513e3cbb33c1dfe96977ef3633dd32",
+    "recovery_audit.json": "403b5544390e26be5088352759bfc0da1244d994d6cde3d73914f51f5025e60c",
+    "negative_summary.json": "572bdd0733c27058d702e73a6f3dd40fc8c4a89568f3ca569f0aff5d5dd9c6e7",
+    "negative_audit.json": "e292fb6508a7080b79832c3f19187e987106325e4f16f108d83b36234a2b425d",
+    "reference_summary.json": "b2410cff92b608f86c2c0ae5a1b2e9bcc6498dc6e62b83109b0249203b0680b6",
+    "reference_audit.json": "052ef8332c5fa08071c719f87e2a0ebfa66e28a8884dfaf273f2ecf83ec0975c"
+  },
+  "tests": {
+    "focused": 11,
+    "full": 121,
+    "full_handle": 17232,
+    "full_exit_code": 0,
+    "full_log_sha256": "bef1f78d48c1191d978005ea48b0be37129a47914a742a601f6c762cb3b1259a",
+    "initial_schema_failure": "旧事实替身objects为区域字符串/None，补position/velocity schema后通过；失败源/log保留。"
+  },
+  "raw_real_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/sustained_activity_v18",
+  "raw_bytes": 393588701,
+  "no_new_model_or_download": true,
+  "concurrency": "恢复控制/CPU实现与v17 GPU末段重叠；参考批次开始时GPU已退出，负面审计与参考CPU短暂重叠；不据墙钟比较速度。",
+  "timer": "实际已发生availability tick和observed_tick分列，初始busy不提供未来恢复时刻；busy不是人体暂离。",
+  "simulation_time": "共同t0到明确声明终止，包括最后技能停车；仿真在高层计算时暂停，推理墙钟和通信决策独立，不称真实异步团队流畅度。"
+}

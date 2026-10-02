@@ -1,0 +1,530 @@
+{
+  "version": "sustained-activity-v18.0",
+  "stage": "reference",
+  "cases": [
+    {
+      "id": "Reference_left_none_ready_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_none_ready_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_accepted_ready_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_accepted_ready_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_rejected_ready_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_rejected_ready_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_none_ready_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_none_ready_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_accepted_ready_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_accepted_ready_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_rejected_ready_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_rejected_ready_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_public_ledger_parallel_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_conservative_serial_100",
+      "seed": 100,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_none_ready_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_none_ready_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_accepted_ready_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_accepted_ready_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_rejected_ready_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_rejected_ready_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "left",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_none_ready_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_none_ready_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "none",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_accepted_ready_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_accepted_ready_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "accepted",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_rejected_ready_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_rejected_ready_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "ready",
+      "policy": "conservative_serial"
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_public_ledger_parallel_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "public_ledger_parallel"
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_conservative_serial_101",
+      "seed": 101,
+      "initial_blue": "right",
+      "update": "rejected",
+      "availability": "temporarily_busy",
+      "policy": "conservative_serial"
+    }
+  ],
+  "source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+    "experiments/responsive_transport_v16/world.py": "dc8c1ecaa16bd356c782c1b2f6eb28bffe060168d4f2883b5ccb396bf3894a09",
+    "experiments/responsive_transport_v16/protocol.py": "35c441cfbc02e7407973fe7326b5ad2adca5b5d579cb3e761e5641f3ed642197",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/responsive_transport_v16/measure.py": "44baeb80224a1c5ec4d3804ae3c96b3459faa6f6344c89737f25f2b0a58639c6",
+    "experiments/responsive_transport_v16/run.py": "3af8711ae0efa35527a4fb943fbfdc3f05ee35049443b0eb4214e2ff5997e30b",
+    "experiments/structure_handoff_v15/reference_audit.py": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+    "tests/test_responsive_transport_v16.py": "1bf005ecab9c6360f74fcc80326495da3bb1b032a6e87e94cd40415084838bc0",
+    "experiments/sustained_activity_v18/protocol.py": "ec810c04af2410c156a0a6f0155624b3646c55c72c7b47b4c4a98e5e12d12363",
+    "experiments/sustained_activity_v18/run.py": "01cef485e123c58992e13555f6d7c384b9eb9c9493d0794d4d56e5e00c16b904",
+    "tests/test_sustained_activity_v18.py": "e84d8d5a6d0bcb1c9fd8505e64a7dca9773fb6161ee05176ee5c8df79cfe58d4"
+  },
+  "assets_sha256": {
+    "franka_panda/LICENSE.txt": "59899c6091b540582ed617e8eeaac4919dc985ccfc35459ee9752b699be5205b",
+    "franka_panda/meshes/collision/finger.obj": "c05dee2e2770ac3d45a097cec4a9d758e279ebdb7dc550eb249571c4690a6476",
+    "franka_panda/meshes/collision/hand.obj": "a216bedc742a736f2c6cab010c6014475fe5f7b5ed53e371509adf885df618a2",
+    "franka_panda/meshes/collision/link0.obj": "d29233f03537b6ee92a6861d4139290960325c2bacf9a640ab7935a5539c653f",
+    "franka_panda/meshes/collision/link1.obj": "0879335b20930eccccdc7d2565553895589f9125d4c8c0d462ad0f74f17e7472",
+    "franka_panda/meshes/collision/link2.obj": "cfca62e5846d3ba6db8be3740fc2219454401f1048db11a78bd9ec8f30cdc128",
+    "franka_panda/meshes/collision/link3.obj": "22235fb3676b5cb45a2f512065fab94fecf052a767cddfaed62cbb6d1efcf1f8",
+    "franka_panda/meshes/collision/link4.obj": "64b5914ef159149f87b767ff0eae4db41b9c267aecdddf2816ff25726fa0e6f2",
+    "franka_panda/meshes/collision/link5.obj": "ff8d4bb5ab506b8cf621f44b928be7714dff86b669a92909b8d4f71c5b01597e",
+    "franka_panda/meshes/collision/link6.mtl": "569f88e12d5672c190e2aa14526fcc16b609c25bd5ade907ddb83106ac61e78c",
+    "franka_panda/meshes/collision/link6.obj": "e1dc8bbca8690944e6331f5a108d49c363eeec179b56a9f913541a541e6a2cfc",
+    "franka_panda/meshes/collision/link7.obj": "675a784e949b2b47894f1965016bd56b992b136bd90e1a62e832f49b4a55b240",
+    "franka_panda/meshes/visual/colors.png": "bc8c81d8e9723de374dd718a1ddcd91dfe6dfe1e371b18383f6d084a13fe525b",
+    "franka_panda/meshes/visual/finger.mtl": "525d16f9a1338ebc2f3c062b30e462a279356aa4fe242617d39e05fa6926c27b",
+    "franka_panda/meshes/visual/finger.obj": "c6959401c281e6d5b4486f08072140b6fdb3461678face301ac448cec06322d3",
+    "franka_panda/meshes/visual/hand.mtl": "da2fb08fb2efec231cfd38b710e657b3ef04d3d3cf18082d3d043080dd6c79df",
+    "franka_panda/meshes/visual/hand.obj": "3c95c6f99024842a8b9e73629dacc30ac5ee459feb0dbcc16df765fd27620584",
+    "franka_panda/meshes/visual/link1.mtl": "8c6e1b7fe3a382b872c986cfb3601e79b701afb7b4bfc72dcd6abd4b31f9d0f5",
+    "franka_panda/meshes/visual/link1.obj": "e0ec1bec9432a46f797e912cd8165798e62ebfd85c0807dce142bd6b9a768cd7",
+    "franka_panda/meshes/visual/link2.mtl": "e7821edf4876534ddeb9cdc789453e6473e2f1b9d33747f036005788b83199da",
+    "franka_panda/meshes/visual/link2.obj": "a1a41ada6d6cb8c51a8d0d19db9cadea101493842a52db75529e7ba0d4592904",
+    "franka_panda/meshes/visual/link3.mtl": "c2648eae04bf57f48100234ada9400156b1867d0fc2dbda2606bb786d6cfec51",
+    "franka_panda/meshes/visual/link3.obj": "82f81c15c236a41918dade0241ce40e59c4a0ee7fb08985f3a934380a8f7f594",
+    "franka_panda/meshes/visual/link4.mtl": "aa5e228aca4026e34e69dc9eb80bed96cc7d81dae5595984c16b464de5ba5963",
+    "franka_panda/meshes/visual/link4.obj": "91f36ecba40ecce6c169ede6d152a6c8853ee886e2b145ef6c5865cc9d5516b8",
+    "franka_panda/meshes/visual/link5.mtl": "1d44e731edacef0b66d7813468107877d05a12893f363ce3a0985c8305f404f3",
+    "franka_panda/meshes/visual/link5.obj": "10d084e6f728af7d291403f0359373c121e87785b177e5c6df8a7e1e88077f11",
+    "franka_panda/meshes/visual/link6.mtl": "78299752f3c28e87c19f5456e851423de647fbb065f8d88332c1f72ba5729b4c",
+    "franka_panda/meshes/visual/link6.obj": "7d6c29421e8066761c993a519474eb58f851885387cc2ad5a606f96eb428f059",
+    "franka_panda/panda.urdf": "9c27cf846302e26a1d3a44ccfd4dd2dbba89cccc9f17b96b6bd1f8bceedd1ff0",
+    "plane.urdf": "0854ed06ba0b15079ba05396b4138f366dc784d670583d96230f3b5a4105bae2",
+    "plane100.obj": "0ef1366701af4d234af4f98789249ec6e9383914d9497c85d8113d9a445bf4da",
+    "checker_blue.png": "266d8e7010b8d615c873c27dccb4eca37e79035bd24efdca0b54eeb74a9fa419"
+  },
+  "packages": {
+    "pybullet": "3.2.7",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "mani_skill": "3.0.1",
+    "sapien": "3.0.3",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.49.0"
+  },
+  "config_sha256": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+  "config": {
+    "version": "structure-v8-transport-dev1-raised-rail",
+    "nominal_velocity_m_s": 0.04,
+    "ramp_seconds": 0.5,
+    "travel_m": 0.6,
+    "carrier_center_start": [
+      0.65,
+      0.6,
+      0.045
+    ],
+    "carrier_half_extents": [
+      0.06,
+      0.06,
+      0.005
+    ],
+    "blue_center_start": [
+      0.65,
+      0.6,
+      0.073
+    ],
+    "carrier_friction": 1.0,
+    "blue_friction": 1.0,
+    "carrier_goal_joint_tolerance": 0.005,
+    "carrier_speed_limit": 0.005,
+    "blue_relative_xy_tolerance": 0.025,
+    "blue_relative_z_range": [
+      0.025,
+      0.035
+    ],
+    "blue_world_speed_limit": 0.01,
+    "blue_relative_speed_limit": 0.01,
+    "support_contact_max_distance": 0.0001,
+    "support_contact_min_force": 0.001,
+    "wait_budget_ticks": 6000,
+    "notes": "修复dev0载台与right托盘实体相交：抬高水平轨道，x/y行程、速度、加减速和交付相对判据完全不变；不调等待效果。"
+  },
+  "system": "持续共同整理活动：red固定到left，blue目的地依据早期公开已接受约定及绑定提议的接受/拒绝；green不分配并保留。拒绝提议不改变有效约定。\n伙伴资源只公开当前ready/temporarily_busy，只有request_transport被接受才真实启动载台运输。拒绝不排队，ready后需新请求；重复已启动请求为合法no-op，不重启。\nyield：已启动等实际稳定交付；未启动busy等实际ready；ready未启动为合法no-op，不自动请求或运输。当前物理技能期间载台每tick同步推进，决策计算期间仿真暂停。每次等待上限6000tick。\ncareful_red_left真实整理red并停车；place_blue_left/right在实际稳定交付且当前来源为稳定载台或盘区时真实抓放，包括与约定不符的方向。重复所选实际区域可no-op，反馈只报告实际区域。全条件同六能力，不依据正确目标筛候选。\ndeclare_done可在任意时点宣布完成，立即终止活动，只确认收到声明；过早或错误声明也终止，之后不得再执行。完成符合性在终止后独立评分，不给你正确目标或遗漏提示。预算12决策，耗尽与物理/等待失败另记终止。\n只输出一个JSON对象，唯一字符串字段choice填公开候选ID，不输出分析。\n",
+  "candidates": [
+    {
+      "id": "request_transport",
+      "meaning": "请求伙伴运输blue；仅接受才启动"
+    },
+    {
+      "id": "yield",
+      "meaning": "等待当前已启动运输交付或未启动时的公开ready"
+    },
+    {
+      "id": "careful_red_left",
+      "meaning": "沿已核验绕行路径真实抓放red到left"
+    },
+    {
+      "id": "place_blue_left",
+      "meaning": "实际交付后真实抓放blue到left"
+    },
+    {
+      "id": "place_blue_right",
+      "meaning": "实际交付后真实抓放blue到right"
+    },
+    {
+      "id": "declare_done",
+      "meaning": "宣布整个活动完成并立即结束；可能过早或错误"
+    }
+  ],
+  "step_budget": 12,
+  "termination": "声明真实终止（允许错误）；budget/physical_failure/wait_timeout另记；不使用result.success。",
+  "concurrency": "可能与固定v17 GPU评测并行CPU工作；模型墙钟不作速度比较。",
+  "recovery_freeze_sha256": "a6db9accae1d94d5b414378fb794f2d743522812803107aca8eab4154be7c51d",
+  "recovery_audit_sha256": "403b5544390e26be5088352759bfc0da1244d994d6cde3d73914f51f5025e60c"
+}

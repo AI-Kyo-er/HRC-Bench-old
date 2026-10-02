@@ -1,0 +1,1969 @@
+{
+  "total_episodes": 56,
+  "total_ticks": 483750,
+  "stage_counts": {
+    "recovery": {
+      "total": 4,
+      "passed": 4,
+      "goal_compliant": 4,
+      "total_ticks": 39100
+    },
+    "negative": {
+      "total": 4,
+      "passed": 4,
+      "goal_compliant": 0,
+      "total_ticks": 17210
+    },
+    "reference": {
+      "total": 48,
+      "passed": 48,
+      "goal_compliant": 48,
+      "total_ticks": 427440
+    }
+  },
+  "contacts_records": {
+    "expected_blue_carrier": 1434336,
+    "forbidden_robot_carrier": 0,
+    "forbidden_other_object_carrier": 0,
+    "carrier_static": 0,
+    "non_target_robot": 0
+  },
+  "reference_costs": [
+    {
+      "id": "Reference_left_none_ready_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_left_none_ready_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_ready_conservative_serial_100",
+      "case": {
+        "id": "Reference_left_none_ready_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_left_none_temporarily_busy_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_conservative_serial_100",
+      "case": {
+        "id": "Reference_left_none_temporarily_busy_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_ready_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_left_accepted_ready_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_ready_conservative_serial_100",
+      "case": {
+        "id": "Reference_left_accepted_ready_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_left_accepted_temporarily_busy_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_conservative_serial_100",
+      "case": {
+        "id": "Reference_left_accepted_temporarily_busy_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_ready_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_left_rejected_ready_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_ready_conservative_serial_100",
+      "case": {
+        "id": "Reference_left_rejected_ready_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_left_rejected_temporarily_busy_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_conservative_serial_100",
+      "case": {
+        "id": "Reference_left_rejected_temporarily_busy_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_ready_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_right_none_ready_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_ready_conservative_serial_100",
+      "case": {
+        "id": "Reference_right_none_ready_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_right_none_temporarily_busy_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_conservative_serial_100",
+      "case": {
+        "id": "Reference_right_none_temporarily_busy_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_ready_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_right_accepted_ready_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_ready_conservative_serial_100",
+      "case": {
+        "id": "Reference_right_accepted_ready_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_right_accepted_temporarily_busy_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_conservative_serial_100",
+      "case": {
+        "id": "Reference_right_accepted_temporarily_busy_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_ready_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_right_rejected_ready_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_ready_conservative_serial_100",
+      "case": {
+        "id": "Reference_right_rejected_ready_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_public_ledger_parallel_100",
+      "case": {
+        "id": "Reference_right_rejected_temporarily_busy_public_ledger_parallel_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_conservative_serial_100",
+      "case": {
+        "id": "Reference_right_rejected_temporarily_busy_conservative_serial_100",
+        "seed": 100,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_ready_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_left_none_ready_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_ready_conservative_serial_101",
+      "case": {
+        "id": "Reference_left_none_ready_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_left_none_temporarily_busy_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_none_temporarily_busy_conservative_serial_101",
+      "case": {
+        "id": "Reference_left_none_temporarily_busy_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_ready_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_left_accepted_ready_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_ready_conservative_serial_101",
+      "case": {
+        "id": "Reference_left_accepted_ready_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_left_accepted_temporarily_busy_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_accepted_temporarily_busy_conservative_serial_101",
+      "case": {
+        "id": "Reference_left_accepted_temporarily_busy_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_ready_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_left_rejected_ready_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_ready_conservative_serial_101",
+      "case": {
+        "id": "Reference_left_rejected_ready_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_left_rejected_temporarily_busy_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_left_rejected_temporarily_busy_conservative_serial_101",
+      "case": {
+        "id": "Reference_left_rejected_temporarily_busy_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "left",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_ready_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_right_none_ready_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_ready_conservative_serial_101",
+      "case": {
+        "id": "Reference_right_none_ready_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_right_none_temporarily_busy_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_none_temporarily_busy_conservative_serial_101",
+      "case": {
+        "id": "Reference_right_none_temporarily_busy_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "none",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 4,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_ready_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_right_accepted_ready_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_ready_conservative_serial_101",
+      "case": {
+        "id": "Reference_right_accepted_ready_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_right_accepted_temporarily_busy_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_accepted_temporarily_busy_conservative_serial_101",
+      "case": {
+        "id": "Reference_right_accepted_temporarily_busy_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "accepted",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_ready_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_right_rejected_ready_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 5,
+      "makespan_ticks": 6655,
+      "makespan_seconds": 27.729166666666668,
+      "first_joint_physical_satisfaction_tick": 5625,
+      "first_satisfaction_from_t0_ticks": 5445,
+      "delivery_actual_first_tick": 3895,
+      "delivery_start_tick": 180,
+      "delivery_from_t0_ticks": 3715,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_ready_conservative_serial_101",
+      "case": {
+        "id": "Reference_right_rejected_ready_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "ready",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 180,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 180
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_public_ledger_parallel_101",
+      "case": {
+        "id": "Reference_right_rejected_temporarily_busy_public_ledger_parallel_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "public_ledger_parallel"
+      },
+      "decisions": 6,
+      "makespan_ticks": 8575,
+      "makespan_seconds": 35.729166666666664,
+      "first_joint_physical_satisfaction_tick": 7545,
+      "first_satisfaction_from_t0_ticks": 7365,
+      "delivery_actual_first_tick": 5815,
+      "delivery_start_tick": 2100,
+      "delivery_from_t0_ticks": 5635,
+      "red_transport_overlap_ticks": 3180,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 1920,
+      "wait_delivery_ticks": 535,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 2100
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 2,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    },
+    {
+      "id": "Reference_right_rejected_temporarily_busy_conservative_serial_101",
+      "case": {
+        "id": "Reference_right_rejected_temporarily_busy_conservative_serial_101",
+        "seed": 101,
+        "initial_blue": "right",
+        "update": "rejected",
+        "availability": "temporarily_busy",
+        "policy": "conservative_serial"
+      },
+      "decisions": 5,
+      "makespan_ticks": 9835,
+      "makespan_seconds": 40.979166666666664,
+      "first_joint_physical_satisfaction_tick": 8805,
+      "first_satisfaction_from_t0_ticks": 8625,
+      "delivery_actual_first_tick": 7075,
+      "delivery_start_tick": 3360,
+      "delivery_from_t0_ticks": 6895,
+      "red_transport_overlap_ticks": 0,
+      "red_overlap_includes_skill_dwell_and_parking": true,
+      "wait_ready_ticks": 0,
+      "wait_delivery_ticks": 3715,
+      "availability_actual_and_observed_events": [
+        {
+          "kind": "partner_ready",
+          "availability_actual_tick": 2100,
+          "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。",
+          "event_sequence": 6,
+          "observed_tick": 3360
+        }
+      ],
+      "requests": 1,
+      "accepted_requests": 1,
+      "rejected_requests": 0,
+      "duplicate_requests": 0,
+      "yields": 1,
+      "declarations": 1,
+      "physical_attempts": 2,
+      "physical_failures": 0
+    }
+  ],
+  "reference_totals": {
+    "decisions": 252,
+    "requests": 48,
+    "accepted_requests": 48,
+    "rejected_requests": 0,
+    "duplicate_requests": 0,
+    "yields": 60,
+    "declarations": 48,
+    "physical_attempts": 96,
+    "physical_failures": 0
+  },
+  "support_coverage_started": 1.0,
+  "max_green_displacement_m": 1.1203476333191783e-11,
+  "all_current_sources_match_freezes": true,
+  "report_source_sha256": "145116c0a17e9902dfac525e6fc5b23be412fd8f1f4bf98275cab5408c00bf2e",
+  "interpretation": "52符合目标（恢复4+参考48），负面4故意不符合；56/56是控制/审计通过而非任务成功率；busy仅资源占用，两seed非结构留出。"
+}
