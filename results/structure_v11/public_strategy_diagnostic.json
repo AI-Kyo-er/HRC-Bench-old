@@ -1,0 +1,1088 @@
+{
+  "rows": [
+    {
+      "id": "B_update_before_child_accepted_left_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_60",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_60",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_60",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_60",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 60,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_left_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_accepted_right_61",
+      "timing": "before_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_left_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_before_child_rejected_right_61",
+      "timing": "before_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_left_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_accepted_right_61",
+      "timing": "during_child",
+      "reply": "accepted",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_left_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "left",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "first_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_proposal",
+      "choice": "place_blue_left",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": false,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "snapshot_restore",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    },
+    {
+      "id": "B_update_during_child_rejected_right_61",
+      "timing": "during_child",
+      "reply": "rejected",
+      "initial_blue": "right",
+      "seed": 61,
+      "strategy": "last_accepted_outer",
+      "choice": "place_blue_right",
+      "effective_choices": [
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "first_return_match": true,
+      "physical_execution": false,
+      "whole_episode_result": null
+    }
+  ],
+  "by_strategy": {
+    "first_outer": {
+      "total": 16,
+      "first_return_match": 8,
+      "by_timing": {
+        "before_child": {
+          "total": 8,
+          "matched": 4
+        },
+        "during_child": {
+          "total": 8,
+          "matched": 4
+        }
+      }
+    },
+    "last_proposal": {
+      "total": 16,
+      "first_return_match": 8,
+      "by_timing": {
+        "before_child": {
+          "total": 8,
+          "matched": 4
+        },
+        "during_child": {
+          "total": 8,
+          "matched": 4
+        }
+      }
+    },
+    "snapshot_restore": {
+      "total": 16,
+      "first_return_match": 12,
+      "by_timing": {
+        "before_child": {
+          "total": 8,
+          "matched": 8
+        },
+        "during_child": {
+          "total": 8,
+          "matched": 4
+        }
+      }
+    },
+    "last_accepted_outer": {
+      "total": 16,
+      "first_return_match": 16,
+      "by_timing": {
+        "before_child": {
+          "total": 8,
+          "matched": 8
+        },
+        "during_child": {
+          "total": 8,
+          "matched": 8
+        }
+      }
+    }
+  },
+  "interpretation": "公开history策略对实际finish后的首次返回有效集合离线匹配，不执行错误动作，不是整段episode结果。",
+  "source_sha256": "fcad4f42f8183755a8af705fff7622b3a1f6b62a8f2cbee14222147200e3df82"
+}

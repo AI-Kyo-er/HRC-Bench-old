@@ -1,0 +1,254 @@
+{
+  "all_passed": true,
+  "pairs": [
+    {
+      "seed": 60,
+      "reply": "accepted",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_accepted_left_60",
+        "B_update_during_child_accepted_left_60"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reply": "accepted",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_accepted_right_60",
+        "B_update_during_child_accepted_right_60"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reply": "rejected",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_rejected_left_60",
+        "B_update_during_child_rejected_left_60"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reply": "rejected",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_rejected_right_60",
+        "B_update_during_child_rejected_right_60"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "accepted",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_accepted_left_61",
+        "B_update_during_child_accepted_left_61"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "accepted",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_accepted_right_61",
+        "B_update_during_child_accepted_right_61"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "rejected",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_rejected_left_61",
+        "B_update_during_child_rejected_left_61"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "rejected",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_rejected_right_61",
+        "B_update_during_child_rejected_right_61"
+      ],
+      "checks": {
+        "nonupdate_history_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "without_history_exact": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "both_fifteen_events": true,
+        "both_budget_eight": true
+      },
+      "passed": true
+    }
+  ],
+  "source_files_sha256": {
+    "results/structure_v7/raw/reference/B_neutral_left_60_normal/decisions.json": "b70cba7ada720eb8929cbc03d68154a5b7ee0eb3a4d7710375b04cd2267d163c",
+    "results/structure_v7/raw/reference/B_neutral_right_60_normal/decisions.json": "79f6b0b0af3b86ca561ad8a9935a6cda5917a06d4fb2b036eca0b754e8172479",
+    "results/structure_v7/raw/reference/B_neutral_left_61_normal/decisions.json": "58476ca08c136b6856ca8b1fc3392701cabee8c2e74ba55720b892de38a73522",
+    "results/structure_v7/raw/reference/B_neutral_right_61_normal/decisions.json": "5aaa7402353158c7d311cafb80504714eccdb2337198e22a9c93646b5944e92d"
+  },
+  "token_lengths": [
+    {
+      "id": "B_update_before_child_accepted_left_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_accepted_right_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_rejected_left_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_rejected_right_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_accepted_left_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_accepted_right_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_rejected_left_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_rejected_right_60",
+      "input_tokens": 2090,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_accepted_left_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_accepted_right_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_rejected_left_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_before_child_rejected_right_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_accepted_left_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_accepted_right_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_rejected_left_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    },
+    {
+      "id": "B_update_during_child_rejected_right_61",
+      "input_tokens": 2089,
+      "characters": 4330
+    }
+  ],
+  "scope": "旧实际D5观察承载拟议15事件的冻结前设计核验；不是新v11真实输入/轨迹。最终真实输入仍独立审计。"
+}

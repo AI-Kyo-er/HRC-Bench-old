@@ -1,0 +1,2449 @@
+{
+  "all_passed": true,
+  "total_episodes": 16,
+  "total_decisions": 80,
+  "episodes": [
+    {
+      "id": "B_update_before_child_accepted_left_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "57f1c8c17f52a3beec3ca198b8c4ac97ac42ca9caaf35157187398be29074798",
+      "ticks_gzip_sha256": "25f70a70fca4e09448c3b93032ca37ce8a8ddbd162b6502afd42eae9e0fb04e0",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006"
+    },
+    {
+      "id": "B_update_before_child_accepted_right_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "e93c543ba90945dad36aa340b0fba9079da9a6108d82254e37d6c26626c0dbb1",
+      "ticks_gzip_sha256": "30b4a277577873c70d23a4f4191448ba7e546e8c9890d63c23515d9df22dedaf",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c"
+    },
+    {
+      "id": "B_update_before_child_rejected_left_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "2331d3d73d5ede1515f6e9cce654b146a65e84100fe10b492290ed34da0cba49",
+      "ticks_gzip_sha256": "4ad8dfbeaac8cf303fe2c1e12021d96f45664a0ce1a6e2ed8f514efbb8df1e39",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c"
+    },
+    {
+      "id": "B_update_before_child_rejected_right_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "2c74ab2f0abd348fede7c9161e3597fa53083203f75e07b346047903165e38a9",
+      "ticks_gzip_sha256": "94c4bb4c8081c7ce27382a7bac40ce09a1d7d18a5590bebd4d6ec8fcf0431913",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006"
+    },
+    {
+      "id": "B_update_during_child_accepted_left_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "db3612b14b1b5c1495accddb2f988cf8ad62ac83d1b030f78e1e272417d0f8a8",
+      "ticks_gzip_sha256": "a9aa72688e29f5d4f1fb1728e09eeb66194d0bd42480a92f56d83e6c00e0ef84",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006"
+    },
+    {
+      "id": "B_update_during_child_accepted_right_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "a054725ed2a67fe270766bfea5bbe222b50cff8ac2c7bfa8d36c1bb71068ddb1",
+      "ticks_gzip_sha256": "e606c82040ad395d07975a40ca3c846026f2a7596bf8f2c1ff7282ab450de748",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c"
+    },
+    {
+      "id": "B_update_during_child_rejected_left_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "74a3f38cfc5711b4f8f1f14c82fc007bc42942ade89f0b8ccd3f025adbd164b9",
+      "ticks_gzip_sha256": "72c603e1fc300d8294666b7579090fd19ac3f9078e80d9b8a4b93bbe6f826582",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c"
+    },
+    {
+      "id": "B_update_during_child_rejected_right_60",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2090,
+      "finish_characters": 4330,
+      "decisions_sha256": "8bfe275e0fb8609a51fc0f27f4fac39caedb4378a2a25e309f8b856215afe224",
+      "ticks_gzip_sha256": "6b4428ba1226d6071c50c88278f7530fa8dec12298b9bcd8783d0ba58929056c",
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_trace_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006"
+    },
+    {
+      "id": "B_update_before_child_accepted_left_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "ac22ac7f822b7e868d52af388ec684d0379d7ef151c8f0493d41ee9b910fa7d5",
+      "ticks_gzip_sha256": "e2b1689157a55cdba6a67320855ffee19b8d9e78a71b24bb62237b3085887b70",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba"
+    },
+    {
+      "id": "B_update_before_child_accepted_right_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "ee5fd8d4c5c3a7ceb740549fbb8c6fdf1a8637b8b17fcf1b1ac2c3feb4f28a3b",
+      "ticks_gzip_sha256": "022196a9d9362b0c255736250440e0797041a2a18ffec31c3adddc159c80adeb",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575"
+    },
+    {
+      "id": "B_update_before_child_rejected_left_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "739a5c65f3f3a2af2063b6a336737c3ddfbc885d54a7f8c34de9c747bbfd8160",
+      "ticks_gzip_sha256": "aa7d722f119ca0613a7cbf5297cf091cdf7e6d8cbf4dc064dffa1a561664d4ff",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575"
+    },
+    {
+      "id": "B_update_before_child_rejected_right_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 3,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "9e60c8ad62964401b887a69678f32eb9056147f3488fcd7b989feb72dd0a8b46",
+      "ticks_gzip_sha256": "4477dbcecfcba3a4e38c68abbcc88d4b1a06d61a588b2c4de90ae6930041cf2d",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba"
+    },
+    {
+      "id": "B_update_during_child_accepted_left_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "cca9f3c64372c59b87986f7ff9ad7f741f5f0c1901098074357a8aed7831fec7",
+      "ticks_gzip_sha256": "d35cca767844d5f525cd49fdb42246ef25d357a59c47464ae3932bb3b1459798",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba"
+    },
+    {
+      "id": "B_update_during_child_accepted_right_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "84c6b42ca5fea3759d5927dc80afc9c0841ad5f77b30311f347db611be5ee6e1",
+      "ticks_gzip_sha256": "dd240b90af5152dbd75947e80830052f7c464690dad4fb516ca0844a295b0ef6",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575"
+    },
+    {
+      "id": "B_update_during_child_rejected_left_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_left",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "61d8cb9dcb53932b365430675c3d5d4d60b1a73f9ead89a9f6590f9c4fa640c5",
+      "ticks_gzip_sha256": "ef7ce9ff7d11f462e42673a30df9694682feab5a5bf8cf6059462e51e9b890b5",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575"
+    },
+    {
+      "id": "B_update_during_child_rejected_right_61",
+      "passed": true,
+      "decisions": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        },
+        {
+          "decision": 5,
+          "messages_exact": true,
+          "physical_exact": true,
+          "region_exact": true,
+          "candidate_exact": true,
+          "only_public_keys": true,
+          "budget_exact": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "no_future_update_leak": true,
+          "passed": true
+        }
+      ],
+      "update_delivery": {
+        "no_physical_step": true,
+        "event_block_exact": true,
+        "correct_actual_arrival_tick": true,
+        "active_child_remains_neutral": true,
+        "other_goals_preserved": true
+      },
+      "update_start_index": 9,
+      "checkpoint": {
+        "finish_matches_tick": true,
+        "history_matches_prefreeze_design": true,
+        "green_preserved": true,
+        "blue_neutral_and_whole_task_unfinished": true,
+        "finish_does_not_restate_target": true,
+        "green_done_while_child": true
+      },
+      "first_return": {
+        "choice": "place_blue_right",
+        "decision": 5,
+        "target_correct": true,
+        "prior_target_feedback": 0,
+        "physical_attempt": true,
+        "physical_success": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "finish_tokens": 2089,
+      "finish_characters": 4330,
+      "decisions_sha256": "54374a4d1bad38bf4011f823862c89fcb916cc4d0823978cbe7414275cf68063",
+      "ticks_gzip_sha256": "994b48d1f98fe5465573432f6a6bdcf12241ce14ce57c7f1509e1d8ec42de513",
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_trace_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba"
+    }
+  ],
+  "timing_pairs": [
+    {
+      "seed": 60,
+      "reply": "accepted",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_accepted_left_60",
+        "B_update_during_child_accepted_left_60"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reply": "accepted",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_accepted_right_60",
+        "B_update_during_child_accepted_right_60"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reply": "rejected",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_rejected_left_60",
+        "B_update_during_child_rejected_left_60"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reply": "rejected",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_rejected_right_60",
+        "B_update_during_child_rejected_right_60"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "accepted",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_accepted_left_61",
+        "B_update_during_child_accepted_left_61"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "accepted",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_accepted_right_61",
+        "B_update_during_child_accepted_right_61"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "rejected",
+      "initial_blue": "left",
+      "ids": [
+        "B_update_before_child_rejected_left_61",
+        "B_update_during_child_rejected_left_61"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reply": "rejected",
+      "initial_blue": "right",
+      "ids": [
+        "B_update_before_child_rejected_right_61",
+        "B_update_during_child_rejected_right_61"
+      ],
+      "checks": {
+        "checkpoint_exact": true,
+        "full_prefix_exact": true,
+        "complete_physical_trace_exact": true,
+        "no_history_input_exact": true,
+        "nonupdate_events_exact": true,
+        "update_block_exact": true,
+        "event_multiset_exact": true,
+        "fifteen_events": true,
+        "tokens_equal": true,
+        "characters_equal": true,
+        "budget_both_eight": true
+      },
+      "passed": true
+    }
+  ],
+  "response_pairs": [
+    {
+      "seed": 60,
+      "timing": "before_child",
+      "initial_blue": "left",
+      "effective_sets": [
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 60,
+      "timing": "before_child",
+      "initial_blue": "right",
+      "effective_sets": [
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 60,
+      "timing": "during_child",
+      "initial_blue": "left",
+      "effective_sets": [
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 60,
+      "timing": "during_child",
+      "initial_blue": "right",
+      "effective_sets": [
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 61,
+      "timing": "before_child",
+      "initial_blue": "left",
+      "effective_sets": [
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 61,
+      "timing": "before_child",
+      "initial_blue": "right",
+      "effective_sets": [
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 61,
+      "timing": "during_child",
+      "initial_blue": "left",
+      "effective_sets": [
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    },
+    {
+      "seed": 61,
+      "timing": "during_child",
+      "initial_blue": "right",
+      "effective_sets": [
+        [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        [
+          "place_blue_right",
+          "careful_blue_right"
+        ]
+      ],
+      "disjoint": true,
+      "same_finish_physical": true
+    }
+  ],
+  "freeze_sha256": "3449cd36abb8a9d07b3534fd8e045a27c7c08fd2fe5d1c3ffa27919896570be5",
+  "runtime_source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v7/world.py": "fe08015dc82cc2d074ea209f0eae574268e291288985385403310e14e014863c",
+    "experiments/structure_v7/controls.py": "2ad9a2841d625c83d5d002783f1a20aec6d21eb064344564cafe2f982985250f",
+    "experiments/structure_v11/protocol.py": "315d2a4c9614742133bd7a554540e0b10b64dcaf06825c9383b5b42117bab004",
+    "experiments/structure_v11/run.py": "8df7fc2673392247088c49657b8d92b4b235b932b2dff5b1b09d443297b1cc26",
+    "experiments/structure_v11/preflight.py": "b2ad258f66454bc0cc1c6ffdc34058ad738a8a110cab3156e8afddcb713bad36",
+    "experiments/structure_v5/protocol.py": "a36119ed3ef9b36eb6d10516a0c56fdacc701b5e6fcdf38dfaffea93cec44ccc"
+  },
+  "postfreeze_auditor_sha256": "a719c04e6683970b7d790689c272881a25f3a335f8b938ccbe4f54a06dcf9857",
+  "correct_public_ledger_matches_all": true,
+  "model_calls": 0,
+  "interpretation": "timing移动同事件块亦改变新近程度；早期决策历史不等长。单层脚本回应规则可行性，非纯scope因果/模型/组合泛化。"
+}
