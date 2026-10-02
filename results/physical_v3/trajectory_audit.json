@@ -1,0 +1,1626 @@
+{
+  "reference": {
+    "formal_upfront_10_0": {
+      "ticks": 9060,
+      "contacts": {
+        "robot_partner_ticks": 4,
+        "robot_partner_max_force": 1075.125961436895,
+        "finger_object_ticks": 3858,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {
+          "park": 4
+        }
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "careful": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            7.736537105396124e-12,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            4.681667682093383e-31,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.055,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            4.681667682093383e-31,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "71f34662167b7e6f385a546fd5fb50d425b08aab4f2ab3652a83bbe631fce06f",
+      "decisions_sha256": "fce3f0abf22d49374ac5fea5b826aef7f4f2298b7c4a81af44f63a8f58c28218",
+      "summary_sha256": "cef13d0b04a71e8dd3c8280691722ee15af307afa21c7bec1043307731fb5539"
+    },
+    "formal_revision_10_0": {
+      "ticks": 9060,
+      "contacts": {
+        "robot_partner_ticks": 4,
+        "robot_partner_max_force": 1075.125961436895,
+        "finger_object_ticks": 3858,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {
+          "park": 4
+        }
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "careful": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            7.736537105396124e-12,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            4.681667682093383e-31,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.055,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            4.681667682093383e-31,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "01ca915d419984fa313b06a2f0a606a772433f28ab307d3ee5b786d17e07cec8",
+      "decisions_sha256": "69a16cda92475409dc8a59897c86f0ff9541d698839ae361f6ff62be8e32c17a",
+      "summary_sha256": "f1f17633cedc4898ba5e67ce8618d8528b23311ce7a46e350b515ceee788a496"
+    },
+    "formal_upfront_10_1": {
+      "ticks": 9240,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 3420,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "assisted": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "ec2bef0a88566e844961ba5e03863de889a3c9d2a54c2705e83aa9fc3fb027b1",
+      "decisions_sha256": "a6e0fc1c2aa8d7f3b7bca5488094ce13d993574ccea6bbde704cd19777bd353d",
+      "summary_sha256": "25ff3e867d4de23afaa48a7b91b5ade6601259aedaad768ba6da023c1f9c2fd7"
+    },
+    "formal_revision_10_1": {
+      "ticks": 9240,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 3420,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "assisted": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "703f5b806583dc6742217030bfe0bde3723959cbe97cb6eed04fce93e3ba5071",
+      "decisions_sha256": "8f8f382780e33f84a4dbe94df96208fee00d3f63d0c932f50270ee1ea86a3acc",
+      "summary_sha256": "3a5449cba85d85c739183cec3982888b2341c162342aa6ed968ea82aa5dad953"
+    },
+    "formal_upfront_11_0": {
+      "ticks": 9060,
+      "contacts": {
+        "robot_partner_ticks": 4,
+        "robot_partner_max_force": 910.7514984727833,
+        "finger_object_ticks": 3861,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {
+          "park": 4
+        }
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "careful": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            -3.0610729229163525e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            -1.8523697648619307e-30,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.055,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            -1.8523697648619307e-30,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "53ffa16264fb26ad290eb3f5d6690261be9aca3eb4b7b529835dcaedc33e80d5",
+      "decisions_sha256": "7bb87c53c62bf713f80ffee71a8d9c0d51c5a6b8d5ed0aa5c7264bffcb0fe4ed",
+      "summary_sha256": "9a38c314e0aa98ded357714ac1f21b123e6a67309753d98d877bebb8b442dacf"
+    },
+    "formal_revision_11_0": {
+      "ticks": 9060,
+      "contacts": {
+        "robot_partner_ticks": 4,
+        "robot_partner_max_force": 910.7514984727833,
+        "finger_object_ticks": 3861,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {
+          "park": 4
+        }
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "careful": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            -3.0610729229163525e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            -1.8523697648619307e-30,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.055,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            -1.8523697648619307e-30,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "ad259fb052f00b527090d6e00c61c08004bb77477355a8b42d84a5f9d69631d5",
+      "decisions_sha256": "9a8975c3375cf542d0b08e909c68bc3d28357a7c7611ecb435939a3fc721d642",
+      "summary_sha256": "cfb63eea352cdb243c6560e04e16c4944e36555b660e56363a6985828a0a1e2c"
+    },
+    "formal_upfront_11_1": {
+      "ticks": 9240,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 3422,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "assisted": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "39d2e60675b751cf17b2867733756dd622ab5385bfc7ddedef3d80b7b946deff",
+      "decisions_sha256": "d0d54e5c5903763965b438d570d2701e28d539ea15e50ca55071cad1d5b1bcaf",
+      "summary_sha256": "e6a3da8175bcbab8133269292844ec208a84ea423ec93c221721171f68bcb581"
+    },
+    "formal_revision_11_1": {
+      "ticks": 9240,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 3422,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {},
+      "action_types": {
+        "place": 2,
+        "request": 1,
+        "assisted": 1,
+        "yield": 1
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        },
+        {
+          "before": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": false,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                0.5449999999418869,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.654999999941887,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": 0.48999999994188687
+          }
+        }
+      ],
+      "ticks_sha256": "4903c7572ebc627f3b3a71d060184d33f8c887e92a93a78bde3ece449c123a58",
+      "decisions_sha256": "a5808023dd9a201aec16e3bc9610efd6e6e8ea9fc9b24294c8f922856411992a",
+      "summary_sha256": "f36a5ee8b00913d1f14d69fdcb86711bcc063809ea8f155b1a505f146e7278dc"
+    }
+  },
+  "model": {
+    "formal_upfront_10_0": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "该物品已物理完成，请选择其他未完成物品。": 5,
+        "目标与已接受指令冲突：green应到right，可重试。": 6
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "5818b23e2913322b89724cb7c846d4b565b0d728be5364fe5f051b700056fd69",
+      "decisions_sha256": "e0452dc286bae2116866e88c67ed6ad72aea6b5014f1214d17f4248899d9dcb8",
+      "summary_sha256": "552eade43342d00a3cbd7c8baf3f65f0dfd06d803f7573dc798e6a94df43aa36"
+    },
+    "formal_revision_10_0": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "该物品已物理完成，请选择其他未完成物品。": 7,
+        "目标与已接受指令冲突：green应到right，可重试。": 4
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "9220752555fc254730c48c1a460420a122cffe2a580ca4523006345415344fe5",
+      "decisions_sha256": "3de9593c719694f358dc3bea75c21f3c0a4d3076ebc04b963f3887ef65271f69",
+      "summary_sha256": "ef9b1c5b661e2eef9aa19c5060b210299ed524ec1d2c17990797d2dbc035a587"
+    },
+    "formal_upfront_10_1": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "该物品已物理完成，请选择其他未完成物品。": 5,
+        "目标与已接受指令冲突：green应到right，可重试。": 6
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "24215e964ea8b24cafd6e06f9c94c27fcffa8ccafc6ee332eea988f2d4d70404",
+      "decisions_sha256": "75133f2cdbf999a3ad70b5a2c1281030782a1b4c9bcbd0922aaca965563e4fa2",
+      "summary_sha256": "dc6ef8a95bd4e4c53dd8da4d96a8c96a94765509dd40639d55207cb2d65495fe"
+    },
+    "formal_revision_10_1": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "该物品已物理完成，请选择其他未完成物品。": 7,
+        "目标与已接受指令冲突：green应到right，可重试。": 4
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "766a0d5c13d5d0a346b0a57947041ee721329a0923b9f6800173513a092cc74c",
+      "decisions_sha256": "25b4a2fa9b88e2d784c548b0eacefa93d08319ac03445a1facb1f2b05e62668a",
+      "summary_sha256": "dc72d45783d543929d38b3865f54ad563809ec75d6dcd3e0489a9ec692fc3127"
+    },
+    "formal_upfront_11_0": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "目标与已接受指令冲突：green应到left，可重试。": 1,
+        "该物品已物理完成，请选择其他未完成物品。": 10
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "d7e241a5fd2cd0323b50a99b4ed44a67991edb2f6b8677838c49334f362fa0de",
+      "decisions_sha256": "324717211bdb8b00c97bb416d2ea125d4202f91e817e5e4a55b126ea50657c13",
+      "summary_sha256": "00497d4a0a9dc025642880f017aa7ffd64a672dea06a24f946461b44e9aac7d6"
+    },
+    "formal_revision_11_0": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "目标与已接受指令冲突：green应到left，可重试。": 1,
+        "该物品已物理完成，请选择其他未完成物品。": 10
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "8d3a07a9bfe61bfa8cc59c6ae2d69052c6e9589048340908feb4009d5a16e9fe",
+      "decisions_sha256": "9ce01113915b158919089cc838b497e75300bf4e9f79a62d44b04a7e6d5b250e",
+      "summary_sha256": "a9ce020d84fce1b4ba04a5ce14ad53ccca1a10362bcedd1cb21780a8e85aae81"
+    },
+    "formal_upfront_11_1": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "目标与已接受指令冲突：green应到left，可重试。": 1,
+        "该物品已物理完成，请选择其他未完成物品。": 10
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "18264259bcf6f602df84a63e1f9516de8b9a3c5af0f8a4250eb85f6a402ed95b",
+      "decisions_sha256": "3863e34e17f7e1b441b6a84374a35eb431bda20f35961f5ee2924f2fa6d7e28b",
+      "summary_sha256": "80f4fb05ddf760def08abfc2370575b703994667eb4a403bb0fc70f0b1d8c305"
+    },
+    "formal_revision_11_1": {
+      "ticks": 3300,
+      "contacts": {
+        "robot_partner_ticks": 0,
+        "robot_partner_max_force": 0,
+        "finger_object_ticks": 1377,
+        "object_partner_ticks": 0,
+        "robot_partner_phases": {}
+      },
+      "protocol_rejections": {
+        "目标与已接受指令冲突：green应到left，可重试。": 1,
+        "该物品已物理完成，请选择其他未完成物品。": 10
+      },
+      "action_types": {
+        "careful": 12
+      },
+      "partner_motions": [
+        {
+          "before": [
+            0.5400000214576721,
+            0.6000000238418579,
+            0.23999999463558197
+          ],
+          "after": [
+            0.5400000214576721,
+            5.8113104606238863e-11,
+            0.23999999463558197
+          ],
+          "reached": true,
+          "direct_blocked_after": true,
+          "central_waypoint_clearance": {
+            "partner_aabb": [
+              [
+                0.505,
+                -0.054999999941886896,
+                0.07999999999999999
+              ],
+              [
+                0.5750000000000001,
+                0.055000000058113105,
+                0.4
+              ]
+            ],
+            "waypoint": [
+              0.54,
+              0.0,
+              0.26
+            ],
+            "probe_radius": 0.055,
+            "aabb_sphere_clearance": -0.055
+          }
+        }
+      ],
+      "ticks_sha256": "f778c25082f50db85a5759591229316e0de8ace1fbe0c818113c970aaa9dfcdd",
+      "decisions_sha256": "a722f76b16195f8f2e569356034932cc5819839bb3dc282a0c92b34a789ed846",
+      "summary_sha256": "efabacd7d3a2b9156875829496619585f6f7417523fb474acdbdaa7e6e9d2605"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "freeze_sha256": "0910eae2657ca7f2de4cbd8de4076c70b4f6c3f8c0594bad7b52930895db7373",
+  "summaries_sha256": {
+    "results/physical_v3/formal_reference_summary.json": "e9ba55888e83b66a583c2d0413541eb34ecb31dd9a5bdde74e725034960ed45d",
+    "results/physical_v3/formal_model_summary.json": "1eaa52e2a81738c538ca2e1027ed661a468b189251228b578357224bc85d19cc"
+  },
+  "audit_sha256": "09738529dc6fd5d354599a12d3d01b5dcc282bfb1877b94e652548c026569f16",
+  "analysis_source_sha256": "d4f0617687e6311b0e18ca3ff46967657d841e3632ed2e1082eb2e7a03ac3e86",
+  "interpretation": "物理完成、协议拒绝、实际接触、未执行的安全前提拒绝分开；接触不是自动判为任务失败。",
+  "sessions_exit0": {
+    "install": 69291,
+    "maniskill_probe": 95383,
+    "calibration_v3_0": 42204,
+    "calibration_v3_1": 73145,
+    "controls_v3_0": 65558,
+    "controls_v3_1": 63949,
+    "tests": 9449,
+    "formal_reference": 51603,
+    "formal_model": 17294,
+    "analysis": 25077
+  },
+  "source_freeze_verified": true,
+  "tests": "13/13通过；tests_v3_1.log",
+  "known_controller_defect": "4个拒绝case的park有robot-partner接触，不视为安全通过，详见trajectory_audit",
+  "gpu3_released": true,
+  "model_weights": {
+    "model-00002-of-00002.safetensors": {
+      "bytes": 2203268048,
+      "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+    },
+    "model-00001-of-00002.safetensors": {
+      "bytes": 3968658944,
+      "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+    }
+  },
+  "model_weights_match_v2": true
+}
