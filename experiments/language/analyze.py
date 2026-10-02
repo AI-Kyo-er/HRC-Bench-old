@@ -11,7 +11,14 @@ def analyze(root, output):
     lengths=defaultdict(list)
     errors=Counter()
     requests=Counter()
+    stages=defaultdict(lambda:{'calls':0,'completed':0,'parse_errors':0,'invalid_actions':0})
     for call in calls:
+        structure=call['case_id'].split('.')[2]
+        stage=stages[f"{structure}/{call['view']}/step{call['step']}"]
+        stage['calls']+=1
+        stage['completed']+=int(call['step_completed'])
+        stage['parse_errors']+=int(call['parse_error'] is not None)
+        stage['invalid_actions']+=int(call['parsed_action'] is not None and call['parsed_action'] not in call['reference_allowed_actions'])
         lengths[call['view']].append(call['input_tokens'])
         if call['parsed_action'] and call['parsed_action'].get('action')=='request':
             requests[call['case_id'].rsplit('.',1)[-1]]+=1
@@ -32,7 +39,7 @@ def analyze(root, output):
     for e in episodes:
         paired[e['case_id']][e['view']]=e['episode_completed']
     contingency=Counter(f"history={int(v['full_history'])},summary={int(v['oracle_summary'])}" for v in paired.values())
-    result={'paired_episode_contingency':dict(contingency),'observed_error_categories':dict(errors),
+    result={'decision_stage_breakdown':dict(stages),'paired_episode_contingency':dict(contingency),'observed_error_categories':dict(errors),
             'requests_by_hidden_partner_type':dict(requests),
             'input_tokens':{k:{'min':min(v),'max':max(v),'mean':sum(v)/len(v),'calls':len(v)} for k,v in lengths.items()},
             'generation_hit_limit':sum(call['generation_hit_limit'] for call in calls),
