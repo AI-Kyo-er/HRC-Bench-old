@@ -1,0 +1,2715 @@
+{
+  "total": 160,
+  "by_stage_arm": {
+    "d04_raw_full": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_S": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_G": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_P": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SG": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SP": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_GP": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SGP": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_source_only": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_v9_full_aid": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 8
+      },
+      "action_classes": {
+        "finish_guidance": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_raw_full": {
+      "total": 8,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 6
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "finish_guidance": 6
+      },
+      "action_classes": {
+        "place_blue": 2,
+        "finish_guidance": 6
+      },
+      "illegal_choices": 6,
+      "duplicate_finish": 6,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_S": {
+      "total": 8,
+      "protocol_progress": 4,
+      "protocol_admissible": 4,
+      "legal_no_op": 0,
+      "reference_action_hit": 4,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 4
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "finish_guidance": 4,
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 4,
+        "finish_guidance": 4
+      },
+      "illegal_choices": 4,
+      "duplicate_finish": 4,
+      "blue_placement_attempts": 4,
+      "blue_direction_correct": 4,
+      "blue_direction_wrong": 0
+    },
+    "d05_G": {
+      "total": 8,
+      "protocol_progress": 5,
+      "protocol_admissible": 5,
+      "legal_no_op": 0,
+      "reference_action_hit": 5,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 3
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "place_blue_right": 3,
+        "finish_guidance": 3
+      },
+      "action_classes": {
+        "place_blue": 5,
+        "finish_guidance": 3
+      },
+      "illegal_choices": 3,
+      "duplicate_finish": 3,
+      "blue_placement_attempts": 5,
+      "blue_direction_correct": 5,
+      "blue_direction_wrong": 0
+    },
+    "d05_P": {
+      "total": 8,
+      "protocol_progress": 6,
+      "protocol_admissible": 6,
+      "legal_no_op": 0,
+      "reference_action_hit": 6,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "place_blue_right": 4,
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "place_blue": 6,
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 6,
+      "blue_direction_correct": 6,
+      "blue_direction_wrong": 0
+    },
+    "d05_SG": {
+      "total": 8,
+      "protocol_progress": 5,
+      "protocol_admissible": 5,
+      "legal_no_op": 0,
+      "reference_action_hit": 5,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 3
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "place_blue_right": 3,
+        "finish_guidance": 3
+      },
+      "action_classes": {
+        "place_blue": 5,
+        "finish_guidance": 3
+      },
+      "illegal_choices": 3,
+      "duplicate_finish": 3,
+      "blue_placement_attempts": 5,
+      "blue_direction_correct": 5,
+      "blue_direction_wrong": 0
+    },
+    "d05_SP": {
+      "total": 8,
+      "protocol_progress": 6,
+      "protocol_admissible": 6,
+      "legal_no_op": 0,
+      "reference_action_hit": 6,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "place_blue_right": 4,
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "place_blue": 6,
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 6,
+      "blue_direction_correct": 6,
+      "blue_direction_wrong": 0
+    },
+    "d05_GP": {
+      "total": 8,
+      "protocol_progress": 7,
+      "protocol_admissible": 7,
+      "legal_no_op": 0,
+      "reference_action_hit": 7,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "place_blue_left": 3,
+        "place_blue_right": 4,
+        "finish_guidance": 1
+      },
+      "action_classes": {
+        "place_blue": 7,
+        "finish_guidance": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 7,
+      "blue_direction_correct": 7,
+      "blue_direction_wrong": 0
+    },
+    "d05_SGP": {
+      "total": 8,
+      "protocol_progress": 7,
+      "protocol_admissible": 7,
+      "legal_no_op": 0,
+      "reference_action_hit": 7,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "place_blue_left": 3,
+        "place_blue_right": 4,
+        "finish_guidance": 1
+      },
+      "action_classes": {
+        "place_blue": 7,
+        "finish_guidance": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 7,
+      "blue_direction_correct": 7,
+      "blue_direction_wrong": 0
+    },
+    "d05_source_only": {
+      "total": 8,
+      "protocol_progress": 4,
+      "protocol_admissible": 4,
+      "legal_no_op": 0,
+      "reference_action_hit": 4,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 4
+      },
+      "actions": {
+        "place_blue_left": 2,
+        "finish_guidance": 4,
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 4,
+        "finish_guidance": 4
+      },
+      "illegal_choices": 4,
+      "duplicate_finish": 4,
+      "blue_placement_attempts": 4,
+      "blue_direction_correct": 4,
+      "blue_direction_wrong": 0
+    },
+    "d05_v9_full_aid": {
+      "total": 8,
+      "protocol_progress": 8,
+      "protocol_admissible": 8,
+      "legal_no_op": 0,
+      "reference_action_hit": 8,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 4,
+        "place_blue_right": 4
+      },
+      "action_classes": {
+        "place_blue": 8
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 8,
+      "blue_direction_correct": 8,
+      "blue_direction_wrong": 0
+    }
+  },
+  "by_stage_arm_target_menu": {
+    "d04_raw_full_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_raw_full_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_raw_full_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_raw_full_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_S_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_S_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_S_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_S_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_G_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_G_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_G_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_G_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_P_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_P_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_P_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_P_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SG_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SG_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SG_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SG_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SP_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SP_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SP_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SP_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_GP_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_GP_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_GP_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_GP_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SGP_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SGP_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SGP_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_SGP_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_source_only_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_source_only_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_source_only_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_source_only_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_v9_full_aid_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_v9_full_aid_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_v9_full_aid_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d04_v9_full_aid_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_raw_full_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_raw_full_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_raw_full_right_normal": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_raw_full_right_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_S_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_S_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_S_right_normal": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_S_right_reverse": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_G_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_G_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_G_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_G_right_reverse": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_P_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_P_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_P_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_P_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SG_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SG_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_SG_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SG_right_reverse": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_SP_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SP_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_SP_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SP_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_GP_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_GP_left_reverse": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_left": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_GP_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_GP_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SGP_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SGP_left_reverse": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_left": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_SGP_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_SGP_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_source_only_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_source_only_left_reverse": {
+      "total": 2,
+      "protocol_progress": 0,
+      "protocol_admissible": 0,
+      "legal_no_op": 0,
+      "reference_action_hit": 0,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 2
+      },
+      "actions": {
+        "finish_guidance": 2
+      },
+      "action_classes": {
+        "finish_guidance": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 2,
+      "blue_placement_attempts": 0,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 0
+    },
+    "d05_source_only_right_normal": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_source_only_right_reverse": {
+      "total": 2,
+      "protocol_progress": 1,
+      "protocol_admissible": 1,
+      "legal_no_op": 0,
+      "reference_action_hit": 1,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 1
+      },
+      "actions": {
+        "finish_guidance": 1,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 1,
+        "place_blue": 1
+      },
+      "illegal_choices": 1,
+      "duplicate_finish": 1,
+      "blue_placement_attempts": 1,
+      "blue_direction_correct": 1,
+      "blue_direction_wrong": 0
+    },
+    "d05_v9_full_aid_left_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_v9_full_aid_left_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_v9_full_aid_right_normal": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    },
+    "d05_v9_full_aid_right_reverse": {
+      "total": 2,
+      "protocol_progress": 2,
+      "protocol_admissible": 2,
+      "legal_no_op": 0,
+      "reference_action_hit": 2,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {},
+      "actions": {
+        "place_blue_right": 2
+      },
+      "action_classes": {
+        "place_blue": 2
+      },
+      "illegal_choices": 0,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 2,
+      "blue_direction_wrong": 0
+    }
+  },
+  "d5_pairs": [
+    {
+      "arm": "raw_full",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "raw_full",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "arm": "raw_full",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "raw_full",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "arm": "S",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "S",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "arm": "S",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "S",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "G",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "G",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "arm": "G",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "G",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "P",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "P",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "P",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "P",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "SG",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SG",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "arm": "SG",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SG",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "SP",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SP",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "SP",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SP",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "GP",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "GP",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "GP",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "GP",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SGP",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SGP",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "SGP",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "SGP",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "source_only",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "source_only",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "arm": "source_only",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "source_only",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "arm": "v9_full_aid",
+      "seed": 60,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "v9_full_aid",
+      "seed": 60,
+      "reverse_menu": true,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "v9_full_aid",
+      "seed": 61,
+      "reverse_menu": false,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "arm": "v9_full_aid",
+      "seed": 61,
+      "reverse_menu": true,
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "outcome": "two_correct"
+    }
+  ],
+  "pair_outcomes": {
+    "one_correct": 14,
+    "none_correct": 6,
+    "two_correct": 20
+  },
+  "descriptive_factorial": {
+    "d04": {
+      "cell_rates": {
+        "raw_full": 1.0,
+        "S": 1.0,
+        "G": 1.0,
+        "P": 1.0,
+        "SG": 1.0,
+        "SP": 1.0,
+        "GP": 1.0,
+        "SGP": 1.0
+      },
+      "main_difference": {
+        "S": 0.0,
+        "G": 0.0,
+        "P": 0.0
+      },
+      "pair_difference_of_differences": {
+        "SG": 0.0,
+        "SP": 0.0,
+        "GP": 0.0
+      },
+      "triple_difference": 0.0,
+      "source_only_rate": 1.0,
+      "source_only_minus_raw": 0.0
+    },
+    "d05": {
+      "cell_rates": {
+        "raw_full": 0.25,
+        "S": 0.5,
+        "G": 0.625,
+        "P": 0.75,
+        "SG": 0.625,
+        "SP": 0.75,
+        "GP": 0.875,
+        "SGP": 0.875
+      },
+      "main_difference": {
+        "S": 0.0625,
+        "G": 0.1875,
+        "P": 0.3125
+      },
+      "pair_difference_of_differences": {
+        "SG": -0.125,
+        "SP": -0.125,
+        "GP": -0.125
+      },
+      "triple_difference": 0.25,
+      "source_only_rate": 0.5,
+      "source_only_minus_raw": 0.25
+    }
+  },
+  "physical_actions_executed": 0,
+  "no_new_gate": true,
+  "interpretation": "D4/D5真实规则轨迹离线检查点的公开字段呈现消融，P含目标信息、token不匹配，非内部记忆机制因果/自主闭环/泛化。",
+  "model": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.49.0",
+      "huggingface-hub": "0.29.3",
+      "accelerate": "1.4.0"
+    },
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "visible_device": 2,
+    "seed": 0,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "peak_allocated_bytes": 30388056576,
+    "model_id": "Qwen/Qwen2.5-14B-Instruct",
+    "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+    "parameter_count": 14770033664,
+    "dtype": "torch.bfloat16",
+    "logical_device": "cuda:0",
+    "cuda_visible_devices": "2",
+    "attention_implementation": "sdpa",
+    "quantization": null,
+    "offload": false
+  },
+  "gpu_preflight": {
+    "checked_utc": "2026-10-02T18:39:27.758271+00:00",
+    "physical_gpu": 2,
+    "name": "NVIDIA GeForce RTX 4090",
+    "memory_total_mib": 49140,
+    "memory_used_mib": 16231,
+    "memory_free_mib": 32278,
+    "required_free_mib": 31244,
+    "max_input_tokens": 2118,
+    "raw_gpu_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 16231, 32278\n3, NVIDIA GeForce RTX 4090, 49140, 27987, 20522\n"
+  },
+  "freeze_sha256": "893578e753030886744db0d5184b424f3395ae5a9e7b0dc66f1a5ee89289c46a",
+  "source_sha256": {
+    "experiments/structure_ablation_v10/dataset.py": "5e92b83b1aead71515d3eb650964cc112ce7edddda1b33d22ce984e3a13f8604",
+    "experiments/structure_ablation_v10/scoring.py": "4c5af5861b3be9dd307406f8e8949c9c1d51ace1c74fa2ee7fe1038dbd9564ca",
+    "experiments/structure_ablation_v10/run.py": "248bfd38b9fa21a78af52afd39b0fe1a41f49aa1bb0102fb5ecc1cfa18cfee32",
+    "experiments/structure_ablation_v10/analysis.py": "479571c168ceaebd07fae8b832459a425ab18dd5dfbb5a3c7a2eee6f06a4dca2",
+    "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/structure_v7/protocol.py": "35adf73152aada6faa4e54f37d19d8ca2c39736469a41c51eac0fa997ef02985",
+    "experiments/structure_diagnostic_v9/dataset.py": "8cd7f0331631c90459c4a2d8c341476f6b49f1028ec984868cf10d124dbadd8c",
+    "experiments/structure_diagnostic_v9/scoring.py": "655486b6e3885eb068c1f5e0757cfcdfaf424c0539eabb72279abfae8844aae3",
+    "experiments/structure_diagnostic_v9/analysis.py": "c4af59668be4157eaf6f12f770a8f4d088b2913e01817d129d9a9abb20a921ab"
+  },
+  "inputs_sha256": "86dc00770fa6743bac19c465a045e98b2cbf4f4a0f590d538c84115bf67a0157"
+}

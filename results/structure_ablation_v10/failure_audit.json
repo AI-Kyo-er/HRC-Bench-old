@@ -1,0 +1,21 @@
+{
+  "total_nonprogress": 26,
+  "by_stage_arm": {
+    "d05_raw_full": 6,
+    "d05_S": 4,
+    "d05_source_only": 4,
+    "d05_G": 3,
+    "d05_P": 2,
+    "d05_SG": 3,
+    "d05_SP": 2,
+    "d05_GP": 1,
+    "d05_SGP": 1
+  },
+  "errors": {
+    "no_active_guidance_or_duplicate_finish": 26
+  },
+  "original_messages_outputs_path": "results/structure_ablation_v10/raw/nonprogress_calls.json",
+  "original_messages_outputs_sha256": "60ae579e095be6150643d639efe0d396dc2dce90b27b14defc0c84194a39f0f1",
+  "no_physical_execution": true,
+  "explanation": "重复finish表示已结束scope后未推进；非blue放置尝试不能称方向错误或忘目标。所有非推进输出完整保存，包括合法no-op。"
+}

@@ -1,0 +1,193 @@
+{
+  "finished_utc": "2026-10-02T18:46:14.633266+00:00",
+  "sessions": {
+    "focused_tests": {
+      "exit_code": 0,
+      "passed": 5
+    },
+    "full_tests": {
+      "id": 75961,
+      "exit_code": 0,
+      "passed": 45
+    },
+    "freeze": {
+      "id": 79314,
+      "exit_code": 0
+    },
+    "model": {
+      "id": 9495,
+      "pid": 6941,
+      "exit_code": 0
+    },
+    "audit_attempt001": {
+      "exit_code": 1,
+      "reason": "派生summary的interpretation被runner按freeze正常覆盖，旧比较器错误要求analysis简述一致。"
+    },
+    "final_audit": {
+      "id": null,
+      "exit_code": 0,
+      "execution": "同步exec_command，无持续句柄"
+    },
+    "post_audit_focused_tests": {
+      "exit_code": 0,
+      "passed": 6
+    }
+  },
+  "actual_calls": 160,
+  "source_checkpoints": 16,
+  "physics_actions_executed": 0,
+  "no_new_downloads": true,
+  "no_new_gate": true,
+  "old_14b_gate_passed": false,
+  "live_task_handles": [],
+  "own_model_pid_absent": true,
+  "own_pid_absent_from_gpu_processes": true,
+  "gpu_after_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 16231, 32278\n3, NVIDIA GeForce RTX 4090, 49140, 27987, 20522\n",
+  "started": {
+    "pid": 6941,
+    "utc": "2026-10-02T18:39:27.758634+00:00",
+    "freeze_sha256": "893578e753030886744db0d5184b424f3395ae5a9e7b0dc66f1a5ee89289c46a",
+    "inputs_sha256": "86dc00770fa6743bac19c465a045e98b2cbf4f4a0f590d538c84115bf67a0157",
+    "source_sha256": {
+      "experiments/structure_ablation_v10/dataset.py": "5e92b83b1aead71515d3eb650964cc112ce7edddda1b33d22ce984e3a13f8604",
+      "experiments/structure_ablation_v10/scoring.py": "4c5af5861b3be9dd307406f8e8949c9c1d51ace1c74fa2ee7fe1038dbd9564ca",
+      "experiments/structure_ablation_v10/run.py": "248bfd38b9fa21a78af52afd39b0fe1a41f49aa1bb0102fb5ecc1cfa18cfee32",
+      "experiments/structure_ablation_v10/analysis.py": "479571c168ceaebd07fae8b832459a425ab18dd5dfbb5a3c7a2eee6f06a4dca2",
+      "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+      "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+      "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+      "experiments/structure_v7/protocol.py": "35adf73152aada6faa4e54f37d19d8ca2c39736469a41c51eac0fa997ef02985",
+      "experiments/structure_diagnostic_v9/dataset.py": "8cd7f0331631c90459c4a2d8c341476f6b49f1028ec984868cf10d124dbadd8c",
+      "experiments/structure_diagnostic_v9/scoring.py": "655486b6e3885eb068c1f5e0757cfcdfaf424c0539eabb72279abfae8844aae3",
+      "experiments/structure_diagnostic_v9/analysis.py": "c4af59668be4157eaf6f12f770a8f4d088b2913e01817d129d9a9abb20a921ab"
+    },
+    "gpu_preflight": {
+      "checked_utc": "2026-10-02T18:39:27.758271+00:00",
+      "physical_gpu": 2,
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_total_mib": 49140,
+      "memory_used_mib": 16231,
+      "memory_free_mib": 32278,
+      "required_free_mib": 31244,
+      "max_input_tokens": 2118,
+      "raw_gpu_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 16231, 32278\n3, NVIDIA GeForce RTX 4090, 49140, 27987, 20522\n"
+    }
+  },
+  "model": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.49.0",
+      "huggingface-hub": "0.29.3",
+      "accelerate": "1.4.0"
+    },
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "visible_device": 2,
+    "seed": 0,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "peak_allocated_bytes": 30388056576,
+    "model_id": "Qwen/Qwen2.5-14B-Instruct",
+    "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+    "parameter_count": 14770033664,
+    "dtype": "torch.bfloat16",
+    "logical_device": "cuda:0",
+    "cuda_visible_devices": "2",
+    "attention_implementation": "sdpa",
+    "quantization": null,
+    "offload": false
+  },
+  "official_weight_receipt_path": "results/model_scale_v4/download_receipt.json",
+  "official_weight_receipt_sha256": "c852ffdbf5e4abc8ca87bc0ec5ab7177986658bb80a4079a18ca6840e48fba65",
+  "eight_shard_official_sha_verification_reused": true,
+  "model_config_tokenizer_sha256": {
+    "model.safetensors.index.json": "46627f7a9e851d9cede6a7a4c49999082148ced9c22d2b9cfaaa5ba8b65dc68f",
+    "generation_config.json": "ea35dfb6fc5051b01114f9b995820d55dab01ed33ee490f6378b442af82c09f9",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "config.json": "0f2085dbbe2ee251bd6a6a0797d84a6ce34436044d629aa3cba793b43d311a9e",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  },
+  "freeze_sha256": "893578e753030886744db0d5184b424f3395ae5a9e7b0dc66f1a5ee89289c46a",
+  "inputs_sha256": "86dc00770fa6743bac19c465a045e98b2cbf4f4a0f590d538c84115bf67a0157",
+  "model_spec_sha256": "c272cc1a2630821fae8837d51df261a8421cb80e29c274edf35d3e17740f3db1",
+  "postfreeze_changes": "仅新增audit.py/receipt.py派生审计与归档文档；冻结运行源/评分/输入保持原样。",
+  "postfreeze_receipt_writer_sha256": "16902e98e3402fee599ab918f10dfe522dfc548e90db0ee6240a92c499c688e9",
+  "all_audit_checks_passed": true,
+  "repeated_v9_anchor_summary": {
+    "raw_full": {
+      "total": 16,
+      "same_choice": 16,
+      "same_response": 16,
+      "same_progress": 16
+    },
+    "v9_full_aid": {
+      "total": 16,
+      "same_choice": 16,
+      "same_response": 16,
+      "same_progress": 16
+    }
+  },
+  "paired_arm_comparison_summary": {
+    "d04_S_vs_source_only": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    },
+    "d04_GP_vs_SGP": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    },
+    "d05_S_vs_source_only": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    },
+    "d05_GP_vs_SGP": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    }
+  },
+  "validation": {
+    "focused_command": ".venv-llm/bin/python -m unittest tests.test_structure_ablation_v10",
+    "focused_passed": 5,
+    "full_command": ".venv-llm/bin/python -m unittest discover -s tests",
+    "full_passed": 45,
+    "post_audit_focused_passed": 6,
+    "full_suite_timing": "冻结前45项；之后仅增加比较器回归并跑focused6，不冒称全套46通过。",
+    "permanent_tests": true
+  },
+  "artifacts_sha256": {
+    "summary.json": "429c2d4510e7b77d237080a4e47e20368b9578ba06fb466eb94aecb385807b37",
+    "audit.json": "a07964089a624d47b49122203947984d4474506017c47352cf4fefe81f3fb3d1",
+    "failure_audit.json": "782f30dcfbde8cb3fa4e557fc5eb6854e59551f079e1aa27427e4cbb9e989d86"
+  },
+  "raw_artifacts_sha256": {
+    "frozen_inputs.json": "86dc00770fa6743bac19c465a045e98b2cbf4f4a0f590d538c84115bf67a0157",
+    "model/calls.json": "c3bc3144ba58366bfcdc50e03bca6b06b11f7562ed32c55920c07b3f53dc6001",
+    "model/started.json": "ab3a97607303760f7914c86237d317f3a624ae8e795584f28cdd7bb418b3c17b",
+    "model/finished.json": "a792925ecf212b43c6247ecc7616da9e50531c42664d7b4e8100a2f2186a4b5c",
+    "model/gpu_preflight.json": "69e2786ae4538ab3eaabd117f120265ef3fcf4f1165278076904f4c2c881f669",
+    "model.log": "1f865461142f1fc88c02f5013b651aac538ef1db0f1f8dd070d8dcc1cd596abc",
+    "freeze.log": "ccdaf3edc73c0ef8101617830ef2decfe2939c6a2f0f358e7e35c125652bb4a7",
+    "focused_tests.log": "0a7487dd447ed39892a423a22370611e100bf0b90f72781bde8e794e93941693",
+    "focused_postaudit_tests.log": "869a9c102d66165e7a031e8a235972433171a416be80960c17c6e68371358d74",
+    "tests.log": "bc42d3c16aa5353e99ddf67620328d80119405dd7a8b35e68623d32325b87c5c",
+    "audit.log": "b349354c7b0e8c5fd7a0928a6c69854c44008139f26c202412f4d5f64f038dda",
+    "audit_final.log": "b349354c7b0e8c5fd7a0928a6c69854c44008139f26c202412f4d5f64f038dda",
+    "audit_attempt001.log": "20608539c305bcc06626410a16ac74d127616c36e0d1e77ecf960ef637da1dc1",
+    "audit_attempt001.json": "90bc48d8c0a89e368dbbe5cfc07297f938058302beea70ff0b6800cd1724f637",
+    "audit_attempt001.py": "04581331b1516bd0e3ad17347ac5ad1c10cdff0284ce2a880b7788b8e21a1f45",
+    "nonprogress_calls.json": "60ae579e095be6150643d639efe0d396dc2dce90b27b14defc0c84194a39f0f1"
+  },
+  "raw_storage_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_ablation_v10",
+  "raw_total_bytes": 3639666
+}

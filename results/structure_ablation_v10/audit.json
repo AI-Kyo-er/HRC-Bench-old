@@ -1,0 +1,4608 @@
+{
+  "all_passed": true,
+  "original_source_checkpoints": 16,
+  "input_records": 160,
+  "actual_calls": 160,
+  "input_checks": [
+    {
+      "id": "B_neutral_left_60_normal__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__raw_full",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__S",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__G",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__P",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__SG",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__SP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__GP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__SGP",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__source_only",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__v9_full_aid",
+      "unchanged_original_fields": true,
+      "added_fields_exact": true
+    }
+  ],
+  "call_checks": [
+    {
+      "id": "B_neutral_left_60_normal__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__raw_full",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__S",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__G",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__P",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__SG",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__SP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__GP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__SGP",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__source_only",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__v9_full_aid",
+      "input_exact": true,
+      "token_exact": true,
+      "parse_exact": true,
+      "score_exact": true,
+      "truncation_exact": true,
+      "no_physical_success": true
+    }
+  ],
+  "summary_exact": true,
+  "repeated_anchor_checks": [
+    {
+      "id": "B_neutral_left_60_normal__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "place_blue_left",
+      "current_choice": "place_blue_left",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_normal__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_left",
+      "current_choice": "place_blue_left",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_normal__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_right",
+      "current_choice": "place_blue_right",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_60_reverse__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_left",
+      "current_choice": "place_blue_left",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_60_reverse__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_right",
+      "current_choice": "place_blue_right",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "place_blue_left",
+      "current_choice": "place_blue_left",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_normal__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_left",
+      "current_choice": "place_blue_left",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_normal__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_right",
+      "current_choice": "place_blue_right",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_left_61_reverse__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_left",
+      "current_choice": "place_blue_left",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__raw_full",
+      "stage": 4,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d04__v9_full_aid",
+      "stage": 4,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__raw_full",
+      "stage": 5,
+      "arm": "raw_full",
+      "messages_exact": true,
+      "previous_choice": "finish_guidance",
+      "current_choice": "finish_guidance",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    },
+    {
+      "id": "B_neutral_right_61_reverse__d05__v9_full_aid",
+      "stage": 5,
+      "arm": "v9_full_aid",
+      "messages_exact": true,
+      "previous_choice": "place_blue_right",
+      "current_choice": "place_blue_right",
+      "choice_equal": true,
+      "response_equal": true,
+      "token_equal": true,
+      "progress_equal": true
+    }
+  ],
+  "repeated_anchor_summary": {
+    "raw_full": {
+      "total": 16,
+      "same_choice": 16,
+      "same_response": 16,
+      "same_progress": 16
+    },
+    "v9_full_aid": {
+      "total": 16,
+      "same_choice": 16,
+      "same_response": 16,
+      "same_progress": 16
+    }
+  },
+  "paired_arm_comparisons": [
+    {
+      "source_v9_id": "B_neutral_left_60_normal__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_normal__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_left\"}",
+        "{\"choice\":\"place_blue_left\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_normal__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_normal__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        },
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        },
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        },
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_normal__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_normal__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_left\"}",
+        "{\"choice\":\"place_blue_left\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_normal__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_normal__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_right\"}",
+        "{\"choice\":\"place_blue_right\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        },
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "S",
+        "source_only"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_right\"}",
+        "{\"choice\":\"place_blue_right\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_normal__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_normal__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_left\"}",
+        "{\"choice\":\"place_blue_left\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_normal__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_normal__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_right\"}",
+        "{\"choice\":\"place_blue_right\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_60_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        },
+        {
+          "protocol_progress": false,
+          "protocol_admissible": false,
+          "legal_no_op": false,
+          "reference_action_hit": false,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [
+            "no_active_guidance_or_duplicate_finish"
+          ],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": true,
+          "duplicate_finish": true
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_60_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 60,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_right\"}",
+        "{\"choice\":\"place_blue_right\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_normal__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_normal__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_left\"}",
+        "{\"choice\":\"place_blue_left\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_normal__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_normal__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": false,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_right\"}",
+        "{\"choice\":\"place_blue_right\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_left_61_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "left",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_left",
+            "careful_blue_left"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_left\"}",
+        "{\"choice\":\"place_blue_left\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_reverse__d04__full_history",
+      "stage": 4,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "finish_guidance"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": false,
+          "blue_direction_correct": null,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"finish_guidance\"}",
+        "{\"choice\":\"finish_guidance\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    },
+    {
+      "source_v9_id": "B_neutral_right_61_reverse__d05__full_history",
+      "stage": 5,
+      "seed": 61,
+      "outer_blue": "right",
+      "reverse_menu": true,
+      "arms": [
+        "GP",
+        "SGP"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "scores": [
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        },
+        {
+          "protocol_progress": true,
+          "protocol_admissible": true,
+          "legal_no_op": false,
+          "reference_action_hit": true,
+          "acceptable_progress_choices": [
+            "place_blue_right",
+            "careful_blue_right"
+          ],
+          "errors": [],
+          "physical_execution": false,
+          "physical_success": null,
+          "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+          "blue_placement_attempted": true,
+          "blue_direction_correct": true,
+          "illegal_choice": false,
+          "duplicate_finish": false
+        }
+      ],
+      "responses": [
+        "{\"choice\":\"place_blue_right\"}",
+        "{\"choice\":\"place_blue_right\"}"
+      ],
+      "same_choice": true,
+      "same_score": true,
+      "same_response": true
+    }
+  ],
+  "paired_arm_comparison_summary": {
+    "d04_S_vs_source_only": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    },
+    "d04_GP_vs_SGP": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    },
+    "d05_S_vs_source_only": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    },
+    "d05_GP_vs_SGP": {
+      "total": 8,
+      "same_choice": 8,
+      "same_score": 8,
+      "same_response": 8
+    }
+  },
+  "anchor_consistency_note": "输出一致性是实测诊断，不将一致当通过审计的必要条件；无额外调用。",
+  "freeze_sha256": "893578e753030886744db0d5184b424f3395ae5a9e7b0dc66f1a5ee89289c46a",
+  "inputs_sha256": "86dc00770fa6743bac19c465a045e98b2cbf4f4a0f590d538c84115bf67a0157",
+  "calls_sha256": "c3bc3144ba58366bfcdc50e03bca6b06b11f7562ed32c55920c07b3f53dc6001",
+  "v9_calls_sha256": "413a28f1480aa8680d1ae2dfe4527d0af5098285a2b875fa8cf7722107ecf459",
+  "source_sha256": {
+    "experiments/structure_ablation_v10/dataset.py": "5e92b83b1aead71515d3eb650964cc112ce7edddda1b33d22ce984e3a13f8604",
+    "experiments/structure_ablation_v10/scoring.py": "4c5af5861b3be9dd307406f8e8949c9c1d51ace1c74fa2ee7fe1038dbd9564ca",
+    "experiments/structure_ablation_v10/run.py": "248bfd38b9fa21a78af52afd39b0fe1a41f49aa1bb0102fb5ecc1cfa18cfee32",
+    "experiments/structure_ablation_v10/analysis.py": "479571c168ceaebd07fae8b832459a425ab18dd5dfbb5a3c7a2eee6f06a4dca2",
+    "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/structure_v7/protocol.py": "35adf73152aada6faa4e54f37d19d8ca2c39736469a41c51eac0fa997ef02985",
+    "experiments/structure_diagnostic_v9/dataset.py": "8cd7f0331631c90459c4a2d8c341476f6b49f1028ec984868cf10d124dbadd8c",
+    "experiments/structure_diagnostic_v9/scoring.py": "655486b6e3885eb068c1f5e0757cfcdfaf424c0539eabb72279abfae8844aae3",
+    "experiments/structure_diagnostic_v9/analysis.py": "c4af59668be4157eaf6f12f770a8f4d088b2913e01817d129d9a9abb20a921ab"
+  },
+  "postfreeze_auditor_sha256": "537b143c43a4e9e5c6e6ea8951afc7e3a7e39c197fd4c00f3c430062e6d0f647",
+  "physical_actions_executed": 0,
+  "no_new_gate": true
+}
