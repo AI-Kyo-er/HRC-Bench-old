@@ -1,0 +1,148 @@
+{
+  "version": "structure-v7-neutral-reference-dev0",
+  "total": 8,
+  "passed": 8,
+  "success": 8,
+  "first_blue_attempt_correct_without_prior_target_feedback": 8,
+  "first_blue_placement_success_without_prior_target_feedback": 8,
+  "total_ticks": 102240,
+  "robot_partner_ticks": 0,
+  "object_partner_ticks": 0,
+  "pairs": [
+    {
+      "seed": 60,
+      "reverse_menu": false,
+      "ids": [
+        "B_neutral_left_60_normal",
+        "B_neutral_right_60_normal"
+      ],
+      "finish_physical_checkpoint_exact_match": true,
+      "full_physical_prefix_to_finish_exact_match": true,
+      "model_visible_input_without_history_exact_match": true,
+      "effective_blue_return_sets": [
+        [
+          "careful_blue_left",
+          "place_blue_left"
+        ],
+        [
+          "careful_blue_right",
+          "place_blue_right"
+        ]
+      ],
+      "effective_blue_return_sets_disjoint": true,
+      "both_global_success_at_finish_false": true,
+      "history_required_scope": "首次未获blue目标纠错反馈的blue放置选择；不证明利用反馈的整个episode必败。",
+      "passed": true
+    },
+    {
+      "seed": 60,
+      "reverse_menu": true,
+      "ids": [
+        "B_neutral_left_60_reverse",
+        "B_neutral_right_60_reverse"
+      ],
+      "finish_physical_checkpoint_exact_match": true,
+      "full_physical_prefix_to_finish_exact_match": true,
+      "model_visible_input_without_history_exact_match": true,
+      "effective_blue_return_sets": [
+        [
+          "careful_blue_left",
+          "place_blue_left"
+        ],
+        [
+          "careful_blue_right",
+          "place_blue_right"
+        ]
+      ],
+      "effective_blue_return_sets_disjoint": true,
+      "both_global_success_at_finish_false": true,
+      "history_required_scope": "首次未获blue目标纠错反馈的blue放置选择；不证明利用反馈的整个episode必败。",
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reverse_menu": false,
+      "ids": [
+        "B_neutral_left_61_normal",
+        "B_neutral_right_61_normal"
+      ],
+      "finish_physical_checkpoint_exact_match": true,
+      "full_physical_prefix_to_finish_exact_match": true,
+      "model_visible_input_without_history_exact_match": true,
+      "effective_blue_return_sets": [
+        [
+          "careful_blue_left",
+          "place_blue_left"
+        ],
+        [
+          "careful_blue_right",
+          "place_blue_right"
+        ]
+      ],
+      "effective_blue_return_sets_disjoint": true,
+      "both_global_success_at_finish_false": true,
+      "history_required_scope": "首次未获blue目标纠错反馈的blue放置选择；不证明利用反馈的整个episode必败。",
+      "passed": true
+    },
+    {
+      "seed": 61,
+      "reverse_menu": true,
+      "ids": [
+        "B_neutral_left_61_reverse",
+        "B_neutral_right_61_reverse"
+      ],
+      "finish_physical_checkpoint_exact_match": true,
+      "full_physical_prefix_to_finish_exact_match": true,
+      "model_visible_input_without_history_exact_match": true,
+      "effective_blue_return_sets": [
+        [
+          "careful_blue_left",
+          "place_blue_left"
+        ],
+        [
+          "careful_blue_right",
+          "place_blue_right"
+        ]
+      ],
+      "effective_blue_return_sets_disjoint": true,
+      "both_global_success_at_finish_false": true,
+      "history_required_scope": "首次未获blue目标纠错反馈的blue放置选择；不证明利用反馈的整个episode必败。",
+      "passed": true
+    }
+  ],
+  "cost": {
+    "decisions": 40,
+    "invalid": 0,
+    "requests": 0,
+    "yields": 8,
+    "finishes": 8,
+    "physical_attempts": 24,
+    "physical_failures": 0,
+    "target_corrections": 0,
+    "blue_target_corrections": 0
+  },
+  "position_only_readonly_diagnostic": {
+    "fixed_left_first_attempt_correct": 4,
+    "fixed_right_first_attempt_correct": 4,
+    "total": 8,
+    "old_opposite_region_rule_defined": 0,
+    "explanation": "实际finish时blue均在neutral，左右反盘规则无定义；常选left/right分别匹配四个真实有效集合，仅首次尝试诊断，无盲策略物理重跑。"
+  },
+  "freeze_sha256": "c5e25a7966c027b9ab1918616bcd5fcfd023102ba56211ed6ed3ad66d843362e",
+  "source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v7/world.py": "fe08015dc82cc2d074ea209f0eae574268e291288985385403310e14e014863c",
+    "experiments/structure_v7/controls.py": "2ad9a2841d625c83d5d002783f1a20aec6d21eb064344564cafe2f982985250f",
+    "experiments/structure_v7/protocol.py": "35adf73152aada6faa4e54f37d19d8ca2c39736469a41c51eac0fa997ef02985",
+    "experiments/structure_v7/run.py": "8f410663ad6d28dfdf509d96874cee4beae5d5d2f912e781ca64595fa922a007"
+  },
+  "interpretation": "8例脚本共同背景开发规则可行性/首次选择可辨识性；无模型协商或组合/神经泛化。"
+}
