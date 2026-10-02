@@ -1,0 +1,33 @@
+{
+  "model_weights": {
+    "model-00002-of-00002.safetensors": {
+      "bytes": 2203268048,
+      "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+    },
+    "model-00001-of-00002.safetensors": {
+      "bytes": 3968658944,
+      "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+    }
+  },
+  "use_sliding_window": false,
+  "sliding_window": 32768,
+  "download_exit_code": 0,
+  "download_session": 18507,
+  "dev_exit_code": 0,
+  "dev_session": 44716,
+  "formal_exit_code": 0,
+  "formal_session": 11216,
+  "calibration_exit_code": 0,
+  "calibration_session": 62118,
+  "formal_case_hash_unmodified": "a6a984daffd31c0da9c57e8d7f9bad9f383df44ddd848f05236488b817c4c5c6",
+  "warning_notes": [
+    "sdpa的sliding-window警告已出现；模型配置use_sliding_window=false，输入均远短于窗口。",
+    "greedy do_sample=false时模型generation_config的temperature/top_p/top_k被忽略；保留运行警告。"
+  ],
+  "source_prompt_and_scoring_unchanged_after_dev": true,
+  "tests": "python -m unittest discover -s tests -v: 8 passed",
+  "independent_full_neural_reproduction_performed": false,
+  "calibration_system_prompt_sha256": "15b3f9d9b79a7a6d27b26e95d72855a0d88dce2d6877e0ca5b11814cdb42ce54",
+  "calibration_source_sha256": "1394bf9fed520c3f6b686c3eb663a8f644d5de11be56dffcef08c75c4b1b5480",
+  "active_project_model_processes_at_completion": []
+}

@@ -33,14 +33,24 @@ def analyze(root, output):
             elif a['action']=='place' and any(x['action']=='place' for x in allowed) and all(
                     x.get('destination')!=a.get('destination') for x in allowed if x['action']=='place'):
                 errors['wrong_destination']+=1
+            elif a['action']=='request' and '本轮不需要支撑' in call['messages'][-1]['content']:
+                errors['support_request_when_not_needed']+=1
+            elif a['action']=='request' and '伙伴暂离' in call['messages'][-1]['content']:
+                errors['support_request_when_partner_absent']+=1
             else:
                 errors['other_invalid_action']+=1
+    executed_requests=Counter()
+    for e in episodes:
+        executed_requests[e['case_id'].rsplit('.',1)[-1]]+=e['requests']
+        for step in range(3):
+            stages[f"{e['structure']}/{e['view']}/step{step}"]['assigned_steps']=sum(x['structure']==e['structure'] and x['view']==e['view'] for x in episodes)
     paired=defaultdict(dict)
     for e in episodes:
         paired[e['case_id']][e['view']]=e['episode_completed']
     contingency=Counter(f"history={int(v['full_history'])},summary={int(v['oracle_summary'])}" for v in paired.values())
     result={'decision_stage_breakdown':dict(stages),'paired_episode_contingency':dict(contingency),'observed_error_categories':dict(errors),
-            'requests_by_hidden_partner_type':dict(requests),
+            'attempted_requests_by_partner_type':dict(requests),'executed_requests_by_partner_type':dict(executed_requests),
+            'invalid_action_ends_current_step':True,'recovery_opportunities_after_invalid':0,
             'input_tokens':{k:{'min':min(v),'max':max(v),'mean':sum(v)/len(v),'calls':len(v)} for k,v in lengths.items()},
             'generation_hit_limit':sum(call['generation_hit_limit'] for call in calls),
             'total_calls':len(calls),'elapsed_generation_seconds':sum(call['seconds'] for call in calls),

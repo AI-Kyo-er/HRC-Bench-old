@@ -1,0 +1,257 @@
+{
+  "decision_stage_breakdown": {
+    "retain/full_history/step0": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "retain/full_history/step1": {
+      "calls": 24,
+      "completed": 6,
+      "parse_errors": 0,
+      "invalid_actions": 0,
+      "assigned_steps": 12
+    },
+    "retain/full_history/step2": {
+      "calls": 12,
+      "completed": 9,
+      "parse_errors": 0,
+      "invalid_actions": 3,
+      "assigned_steps": 12
+    },
+    "retain/oracle_summary/step0": {
+      "calls": 12,
+      "completed": 2,
+      "parse_errors": 0,
+      "invalid_actions": 10,
+      "assigned_steps": 12
+    },
+    "retain/oracle_summary/step1": {
+      "calls": 24,
+      "completed": 6,
+      "parse_errors": 0,
+      "invalid_actions": 0,
+      "assigned_steps": 12
+    },
+    "retain/oracle_summary/step2": {
+      "calls": 12,
+      "completed": 4,
+      "parse_errors": 0,
+      "invalid_actions": 8,
+      "assigned_steps": 12
+    },
+    "revoke/full_history/step0": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "revoke/full_history/step1": {
+      "calls": 24,
+      "completed": 6,
+      "parse_errors": 0,
+      "invalid_actions": 0,
+      "assigned_steps": 12
+    },
+    "revoke/full_history/step2": {
+      "calls": 12,
+      "completed": 6,
+      "parse_errors": 0,
+      "invalid_actions": 6,
+      "assigned_steps": 12
+    },
+    "revoke/oracle_summary/step0": {
+      "calls": 12,
+      "completed": 2,
+      "parse_errors": 0,
+      "invalid_actions": 10,
+      "assigned_steps": 12
+    },
+    "revoke/oracle_summary/step1": {
+      "calls": 24,
+      "completed": 6,
+      "parse_errors": 0,
+      "invalid_actions": 0,
+      "assigned_steps": 12
+    },
+    "revoke/oracle_summary/step2": {
+      "calls": 12,
+      "completed": 4,
+      "parse_errors": 0,
+      "invalid_actions": 8,
+      "assigned_steps": 12
+    },
+    "nested/full_history/step0": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "nested/full_history/step1": {
+      "calls": 24,
+      "completed": 1,
+      "parse_errors": 0,
+      "invalid_actions": 5,
+      "assigned_steps": 12
+    },
+    "nested/full_history/step2": {
+      "calls": 12,
+      "completed": 10,
+      "parse_errors": 0,
+      "invalid_actions": 2,
+      "assigned_steps": 12
+    },
+    "nested/oracle_summary/step0": {
+      "calls": 12,
+      "completed": 2,
+      "parse_errors": 0,
+      "invalid_actions": 10,
+      "assigned_steps": 12
+    },
+    "nested/oracle_summary/step1": {
+      "calls": 24,
+      "completed": 2,
+      "parse_errors": 0,
+      "invalid_actions": 4,
+      "assigned_steps": 12
+    },
+    "nested/oracle_summary/step2": {
+      "calls": 12,
+      "completed": 6,
+      "parse_errors": 0,
+      "invalid_actions": 6,
+      "assigned_steps": 12
+    },
+    "reentry/full_history/step0": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "reentry/full_history/step1": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "reentry/full_history/step2": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "reentry/oracle_summary/step0": {
+      "calls": 12,
+      "completed": 2,
+      "parse_errors": 0,
+      "invalid_actions": 10,
+      "assigned_steps": 12
+    },
+    "reentry/oracle_summary/step1": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "reentry/oracle_summary/step2": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "nested_reentry/full_history/step0": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "nested_reentry/full_history/step1": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "nested_reentry/full_history/step2": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "nested_reentry/oracle_summary/step0": {
+      "calls": 12,
+      "completed": 2,
+      "parse_errors": 0,
+      "invalid_actions": 10,
+      "assigned_steps": 12
+    },
+    "nested_reentry/oracle_summary/step1": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    },
+    "nested_reentry/oracle_summary/step2": {
+      "calls": 12,
+      "completed": 0,
+      "parse_errors": 0,
+      "invalid_actions": 12,
+      "assigned_steps": 12
+    }
+  },
+  "paired_episode_contingency": {
+    "history=0,summary=0": 57,
+    "history=0,summary=1": 3
+  },
+  "observed_error_categories": {
+    "support_request_when_not_needed": 111,
+    "wrong_destination": 41,
+    "support_request_when_partner_absent": 48,
+    "wrong_owner_action": 48
+  },
+  "attempted_requests_by_partner_type": {
+    "p1": 126,
+    "p0": 153
+  },
+  "executed_requests_by_partner_type": {
+    "p1": 36,
+    "p0": 72
+  },
+  "invalid_action_ends_current_step": true,
+  "recovery_opportunities_after_invalid": 0,
+  "input_tokens": {
+    "full_history": {
+      "min": 442,
+      "max": 585,
+      "mean": 494.6990740740741,
+      "calls": 216
+    },
+    "oracle_summary": {
+      "min": 359,
+      "max": 387,
+      "mean": 368.68981481481484,
+      "calls": 216
+    }
+  },
+  "generation_hit_limit": 0,
+  "total_calls": 432,
+  "elapsed_generation_seconds": 113.92188824660843,
+  "limitations": [
+    "错误类型为可见动作偏差，不能证明隐藏记忆或意图机制。",
+    "各view由自身模型动作驱动伙伴轨迹，严格输入长度与轨迹未匹配。",
+    "oracle摘要为诊断干预，不是公平方法比较。",
+    "若没有request，接受/拒绝轴虽冻结但并未被模型轨迹触发。"
+  ]
+}

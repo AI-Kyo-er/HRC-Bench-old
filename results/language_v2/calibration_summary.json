@@ -1,0 +1,44 @@
+{
+  "instances": 12,
+  "action_valid": 6,
+  "completing_action": 3,
+  "parse_errors": 0,
+  "generation_hit_limit": 0,
+  "by_profile": {
+    "solo": {
+      "instances": 3,
+      "action_valid": 0,
+      "completing_action": 0
+    },
+    "assisted": {
+      "instances": 3,
+      "action_valid": 3,
+      "completing_action": 3
+    },
+    "yield": {
+      "instances": 3,
+      "action_valid": 0,
+      "completing_action": 0
+    },
+    "rejected_solo": {
+      "instances": 3,
+      "action_valid": 3,
+      "completing_action": 0
+    }
+  },
+  "model": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.49.0",
+      "huggingface-hub": "0.29.3",
+      "accelerate": "1.4.0"
+    },
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "visible_device": 3,
+    "seed": 0,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "peak_allocated_bytes": 6333861376
+  }
+}

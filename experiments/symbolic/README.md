@@ -66,3 +66,5 @@ python experiments/symbolic/run.py --seeds 1000 --steps 12 --output-dir results/
 标准库CPU运行，不依赖GPU。3个永久测试覆盖：同当前场景/反历史目标、来源同构/强策略可解、无历史配对上限、拒绝后的替代路线。完整实例记录为本地 `episodes.csv`，从上述命令确定重建；git保存摘要、seed0轨迹和SHA256而不保存大CSV。`checksums.json`是文件校验记录，不编码训练样本配对。再次执行到临时目录并逐文件SHA256比较验收确定复现。
 
 当前标准Python环境没有torch/transformers/vllm包；本用户HF缓存约3.2MB，检索范围内没有权重。GPU3当时空闲约49GB，不启动或连接GPU0–2的他人服务。后续真实模型实验需要单独建立环境、选定权重与显存估计，再决定下载。上述状态仅为执行时资源快照。
+
+新增数据盘规则下，本轮完整CSV已迁至 `/data1/sieniwgroup/sieniw/HRC-Bench/results/symbolic_v1/episodes.csv`，原项目路径为符号链接，迁移前后SHA256完全相同。当前默认复现命令打开原链接并写入数据盘；首次在其他输出目录复现时，应先将大型输出目录设在数据盘，再以ln链接到项目，不能在系统盘新建大CSV。
