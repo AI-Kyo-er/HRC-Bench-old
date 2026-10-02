@@ -1,0 +1,765 @@
+{
+  "control_dev_0": [
+    {
+      "id": "blue_rework_left_right_careful_40",
+      "audit": {
+        "total_ticks": 6720,
+        "all_contact_records": 77158,
+        "all_missing_distance_records": 77158,
+        "robot_partner": {
+          "ticks": 198,
+          "records": 210,
+          "max_normal_force": 1464.6948860637024,
+          "phases": {
+            "approach": 197,
+            "descend": 1
+          },
+          "missing_distance_records": 210,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": false
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    },
+    {
+      "id": "blue_rework_left_right_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79590,
+        "all_missing_distance_records": 79590,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    },
+    {
+      "id": "blue_rework_right_left_careful_40",
+      "audit": {
+        "total_ticks": 4800,
+        "all_contact_records": 56838,
+        "all_missing_distance_records": 56838,
+        "robot_partner": {
+          "ticks": 451,
+          "records": 862,
+          "max_normal_force": 1273.99576732151,
+          "phases": {
+            "approach": 197,
+            "descend": 240,
+            "grasp": 14
+          },
+          "missing_distance_records": 862,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": false
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    },
+    {
+      "id": "blue_rework_right_left_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79592,
+        "all_missing_distance_records": 79592,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    }
+  ],
+  "control_dev_1": [
+    {
+      "id": "blue_rework_left_right_careful_40",
+      "audit": {
+        "total_ticks": 7860,
+        "all_contact_records": 90991,
+        "all_missing_distance_records": 90991,
+        "robot_partner": {
+          "ticks": 357,
+          "records": 361,
+          "max_normal_force": 0,
+          "phases": {
+            "descend": 124,
+            "grasp": 180,
+            "lift": 53
+          },
+          "missing_distance_records": 361,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": false
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    },
+    {
+      "id": "blue_rework_left_right_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79590,
+        "all_missing_distance_records": 79590,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    },
+    {
+      "id": "blue_rework_right_left_careful_40",
+      "audit": {
+        "total_ticks": 7860,
+        "all_contact_records": 90632,
+        "all_missing_distance_records": 90632,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    },
+    {
+      "id": "blue_rework_right_left_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79592,
+        "all_missing_distance_records": 79592,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "unchanged World initialization order: plane0,robot1,red2,blue3,green4"
+    }
+  ],
+  "control_dev_2": [
+    {
+      "id": "blue_rework_left_right_careful_40",
+      "audit": {
+        "total_ticks": 7860,
+        "all_contact_records": 90634,
+        "all_missing_distance_records": 90634,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    },
+    {
+      "id": "blue_rework_left_right_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79590,
+        "all_missing_distance_records": 79590,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    },
+    {
+      "id": "blue_rework_right_left_careful_40",
+      "audit": {
+        "total_ticks": 7860,
+        "all_contact_records": 90641,
+        "all_missing_distance_records": 90641,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    },
+    {
+      "id": "blue_rework_right_left_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79592,
+        "all_missing_distance_records": 79592,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    }
+  ],
+  "control_dev_3": [
+    {
+      "id": "blue_rework_left_right_careful_40",
+      "audit": {
+        "total_ticks": 7860,
+        "all_contact_records": 90634,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    },
+    {
+      "id": "blue_rework_left_right_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79590,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    },
+    {
+      "id": "blue_rework_right_left_careful_40",
+      "audit": {
+        "total_ticks": 7860,
+        "all_contact_records": 90641,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    },
+    {
+      "id": "blue_rework_right_left_direct_40",
+      "audit": {
+        "total_ticks": 6900,
+        "all_contact_records": 79592,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "object_id_provenance": "recorded"
+    }
+  ],
+  "initial_controls": [
+    {
+      "id": "initial_red_left_40",
+      "audit": {
+        "total_ticks": 3360,
+        "all_contact_records": 38216,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      }
+    },
+    {
+      "id": "initial_red_right_40",
+      "audit": {
+        "total_ticks": 3360,
+        "all_contact_records": 38214,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      }
+    },
+    {
+      "id": "initial_blue_left_40",
+      "audit": {
+        "total_ticks": 3360,
+        "all_contact_records": 38414,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      }
+    },
+    {
+      "id": "initial_blue_right_40",
+      "audit": {
+        "total_ticks": 3360,
+        "all_contact_records": 38221,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      }
+    },
+    {
+      "id": "initial_green_left_40",
+      "audit": {
+        "total_ticks": 3360,
+        "all_contact_records": 38214,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      }
+    },
+    {
+      "id": "initial_green_right_40",
+      "audit": {
+        "total_ticks": 3360,
+        "all_contact_records": 38213,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      }
+    }
+  ]
+}

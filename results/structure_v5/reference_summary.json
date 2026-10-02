@@ -1,0 +1,124 @@
+{
+  "version": "structure-v5-reference-dev-1",
+  "total": 10,
+  "passed": 10,
+  "success": 10,
+  "total_ticks": 110400,
+  "robot_partner_ticks": 0,
+  "object_partner_ticks": 0,
+  "pairs": [
+    {
+      "seed": 40,
+      "family": "A",
+      "ids": [
+        "A_exclusive_40",
+        "A_shared_40",
+        "A_independent_40"
+      ],
+      "checkpoint_exact_match": true,
+      "full_physical_prefix_trace_exact_match": true,
+      "checkpoint_input_lengths": [
+        {
+          "characters": 3198,
+          "history_events": 5
+        },
+        {
+          "characters": 3201,
+          "history_events": 5
+        },
+        {
+          "characters": 3197,
+          "history_events": 5
+        }
+      ]
+    },
+    {
+      "seed": 40,
+      "family": "B",
+      "ids": [
+        "B_nested_40",
+        "B_direct_return_40"
+      ],
+      "checkpoint_exact_match": true,
+      "full_physical_prefix_trace_exact_match": true,
+      "checkpoint_input_lengths": [
+        {
+          "characters": 3205,
+          "history_events": 4
+        },
+        {
+          "characters": 3211,
+          "history_events": 4
+        }
+      ]
+    },
+    {
+      "seed": 41,
+      "family": "A",
+      "ids": [
+        "A_exclusive_41",
+        "A_shared_41",
+        "A_independent_41"
+      ],
+      "checkpoint_exact_match": true,
+      "full_physical_prefix_trace_exact_match": true,
+      "checkpoint_input_lengths": [
+        {
+          "characters": 3202,
+          "history_events": 5
+        },
+        {
+          "characters": 3205,
+          "history_events": 5
+        },
+        {
+          "characters": 3201,
+          "history_events": 5
+        }
+      ]
+    },
+    {
+      "seed": 41,
+      "family": "B",
+      "ids": [
+        "B_nested_41",
+        "B_direct_return_41"
+      ],
+      "checkpoint_exact_match": true,
+      "full_physical_prefix_trace_exact_match": true,
+      "checkpoint_input_lengths": [
+        {
+          "characters": 3209,
+          "history_events": 4
+        },
+        {
+          "characters": 3215,
+          "history_events": 4
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "decisions": 34,
+    "invalid": 0,
+    "requests": 0,
+    "yields": 6,
+    "finishes": 4,
+    "physical_attempts": 24,
+    "physical_failures": 0
+  },
+  "requests_exposed": 0,
+  "freeze_sha256": "d201651e151abd64079834fa03f53a5e571ed81ece5e72b136699c8ffadc1876",
+  "source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/protocol.py": "a36119ed3ef9b36eb6d10516a0c56fdacc701b5e6fcdf38dfaffea93cec44ccc",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c"
+  },
+  "interpretation": "十例脚本共同背景的开发规则可行性，不是模型协商、泛化/组合holdout、严格等信息因果对照；21候选新增组成需独立基础校准。"
+}

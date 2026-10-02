@@ -1,0 +1,32 @@
+{
+  "checked_utc": "2026-10-02T16:40:56.844697+00:00",
+  "complete_shards": 6,
+  "partial_files": 2,
+  "downloaded_weight_bytes": 27002062688,
+  "expected_weight_bytes": 29540134000,
+  "not_ready_for_inference": true,
+  "sessions": {
+    "original": {
+      "id": 7241,
+      "pid": 3823858,
+      "status": "running"
+    },
+    "helper": {
+      "id": 2960,
+      "pid": 3823971,
+      "status": "completed",
+      "exit_code": 0
+    }
+  },
+  "pid_evidence_original": "3823858 .venv-llm/bin/python -m experiments.model_scale_v4.download",
+  "helper_pid_absent": true,
+  "helper_receipt": "results/model_scale_v4/raw/recovery_attempt_002/helper_receipt.json",
+  "gpu_resource_query": [
+    "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538",
+    "1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536",
+    "2, NVIDIA GeForce RTX 4090, 49140, 16231, 32278",
+    "3, NVIDIA GeForce RTX 4090, 49140, 31681, 16828"
+  ],
+  "resource_query_is_not_model_launch": true,
+  "inference": "14B未运行；完整权重/官方SHA全部通过后必须再次单卡显存前检，无自动量化、分卡或offload。"
+}

@@ -1,0 +1,83 @@
+{
+  "finished_utc": "2026-10-02T16:40:56.845109+00:00",
+  "git_base_at_archive": "206bef5971fcb451313b0a1e37b567b5f3322e04",
+  "sessions": {
+    "control_dev0": {
+      "id": 42233,
+      "exit_code": 0
+    },
+    "control_dev1": {
+      "id": 13304,
+      "exit_code": 0
+    },
+    "control_dev2": {
+      "id": 22172,
+      "exit_code": 0
+    },
+    "control_dev3": {
+      "id": 93756,
+      "exit_code": 0
+    },
+    "initial_controls": {
+      "id": 95837,
+      "exit_code": 0
+    },
+    "tests_and_control_audit": {
+      "id": 89890,
+      "exit_code": 0,
+      "tests": 24
+    },
+    "reference": {
+      "id": 76221,
+      "exit_code": 0
+    },
+    "input_and_pair_audit": {
+      "id": 5976,
+      "exit_code": 0
+    }
+  },
+  "physics_backend": "PyBullet CPU DIRECT + TinyRenderer; no simulation GPU process",
+  "final_control_and_reference_total_ticks": 160080,
+  "final_robot_partner_contact_ticks": 0,
+  "final_object_partner_contact_ticks": 0,
+  "old_failure_preserved": {
+    "dev0_robot_partner_ticks": 649,
+    "dev1_robot_partner_ticks": 357,
+    "old_contact_distance_missing_not_reconstructed": true
+  },
+  "dev2_to_dev3_only_trace_fields_changed": true,
+  "freeze_sha256": "d201651e151abd64079834fa03f53a5e571ed81ece5e72b136699c8ffadc1876",
+  "source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/protocol.py": "a36119ed3ef9b36eb6d10516a0c56fdacc701b5e6fcdf38dfaffea93cec44ccc",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c"
+  },
+  "artifact_sha256": {
+    "control_dev_3_summary.json": "d7a4618fa5c59ee9bbd4b8c017f72f3f1307cdae14d0bb0f1876ed9573ad874e",
+    "initial_controls_summary.json": "f9221e1e095c8c44081622a424c3b31a03c602157f68c29812b0533a240fc8bb",
+    "control_contact_audit.json": "5e7ee860681d22dc62f6ca729c5f9ca191788f6d8fae2293aac5e824c1f00c4a",
+    "reference_summary.json": "ad0710c036907d90c2a26106132260328f817552d96f665c90ca945e2055746c",
+    "input_and_pair_audit.json": "f20ab4228c314e2c89ab14d8d32f832e38d0b38c6cb57e9d163daae426b1d60f"
+  },
+  "raw_files_root": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_v5",
+  "scripted_accepted_background": true,
+  "neural_calls_v5": 0,
+  "request_clear_physical_branch_exposed": 0,
+  "no_coverage_claim_for_unexecuted_legal_branches": true,
+  "refusal_tests": "FactsWorld unit regression; early/repeated finish cost1 decision+finish+invalid, no physical tick/partner motion; actual reference only valid finish, no rejection branch.",
+  "future_neural_metrics": [
+    "task completion",
+    "first constrained decision correct",
+    "protocol refusals",
+    "feedback recovery",
+    "partner branch exposure"
+  ],
+  "new21_candidate_atomic_calibration_required_before_neural_v5": true,
+  "model_download_status_sha256": "4dbec6ca70bf7b368caff062313a3717accc01638c924f2c07fc207e5c725032"
+}
