@@ -1,0 +1,13 @@
+{
+  "status": "exact_match",
+  "files": {
+    "episodes.csv": "f027f8901ea6f2eac5db5a371ce58895097b8f6dbe8aec0e38f059437fbb27d3",
+    "traces.jsonl": "ce478e2772b648d6b3288e906e5b8bf7833fd4916e8e40d21037c14b1c00f16e",
+    "summary.json": "17e05b8f6e106d4609a3978f10bd6089a3ddfae6a7ea280a421600141453cced"
+  },
+  "command": "python experiments/symbolic/run.py --seeds 1000 --steps 12 --output-dir /tmp/hrc-symbolic-reproduce",
+  "tests": "python -m unittest discover -s tests -v: 3 passed",
+  "formal_session": 69656,
+  "reproduction_session": 66723,
+  "exit_code": 0
+}
