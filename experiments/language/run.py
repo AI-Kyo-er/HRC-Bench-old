@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import time
+import subprocess
 from collections import defaultdict
 from pathlib import Path
 from experiments.language.backend import LocalModel
@@ -52,6 +53,8 @@ def run(args):
     cases = [json.loads(line) for line in case_path.read_text().splitlines()]
     receipt = {'split':args.split,'case_sha256':hashlib.sha256(case_path.read_bytes()).hexdigest(),
         'system_prompt_sha256':hashlib.sha256(SYSTEM.encode()).hexdigest(),
+        'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+        'source_hashes':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('experiments/language').glob('*.py')},
         'model_id':MODEL_ID,'revision':REVISION,'start_unix_time':time.time(),
         'oracle_summary_intervention':True,'structural_holdout':'nested_reentry'}
     (args.output_dir/'protocol.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')

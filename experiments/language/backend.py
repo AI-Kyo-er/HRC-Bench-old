@@ -24,6 +24,7 @@ class LocalModel:
         tokens = output[0, inputs['input_ids'].shape[1]:]
         return {'response': self.tokenizer.decode(tokens, skip_special_tokens=True),
                 'input_tokens': inputs['input_ids'].shape[1], 'output_tokens': len(tokens),
+                'generation_hit_limit':len(tokens) == self.max_new_tokens and int(tokens[-1]) not in ([self.model.generation_config.eos_token_id] if isinstance(self.model.generation_config.eos_token_id,int) else self.model.generation_config.eos_token_id),
                 'seconds': time.monotonic()-start}
 
     def metadata(self):
