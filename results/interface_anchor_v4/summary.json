@@ -1,0 +1,155 @@
+{
+  "variants": {
+    "example_red_left": {
+      "acceptable": 4,
+      "total": 12,
+      "matches_example_item": 3,
+      "matches_example_target": 11,
+      "selected_completed_item": 6,
+      "wrong_destination": 5,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_red_left": 3,
+        "careful_green_left": 8,
+        "careful_green_right": 1
+      }
+    },
+    "example_red_right": {
+      "acceptable": 5,
+      "total": 12,
+      "matches_example_item": 4,
+      "matches_example_target": 4,
+      "selected_completed_item": 5,
+      "wrong_destination": 5,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_red_right": 2,
+        "careful_green_left": 6,
+        "careful_red_left": 2,
+        "careful_green_right": 1,
+        "careful_blue_right": 1
+      }
+    },
+    "example_blue_left": {
+      "acceptable": 5,
+      "total": 12,
+      "matches_example_item": 6,
+      "matches_example_target": 9,
+      "selected_completed_item": 4,
+      "wrong_destination": 5,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_blue_left": 6,
+        "careful_green_right": 3,
+        "careful_green_left": 3
+      }
+    },
+    "example_blue_right": {
+      "acceptable": 4,
+      "total": 12,
+      "matches_example_item": 5,
+      "matches_example_target": 5,
+      "selected_completed_item": 5,
+      "wrong_destination": 6,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_blue_right": 3,
+        "careful_green_right": 2,
+        "careful_green_left": 5,
+        "careful_blue_left": 2
+      }
+    },
+    "example_green_left": {
+      "acceptable": 4,
+      "total": 12,
+      "matches_example_item": 12,
+      "matches_example_target": 12,
+      "selected_completed_item": 4,
+      "wrong_destination": 6,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_green_left": 12
+      }
+    },
+    "example_green_right": {
+      "acceptable": 4,
+      "total": 12,
+      "matches_example_item": 12,
+      "matches_example_target": 0,
+      "selected_completed_item": 4,
+      "wrong_destination": 6,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_green_left": 12
+      }
+    },
+    "format_only": {
+      "acceptable": 4,
+      "total": 12,
+      "matches_example_item": null,
+      "matches_example_target": null,
+      "selected_completed_item": 6,
+      "wrong_destination": 3,
+      "parse_errors": 0,
+      "choice_distribution": {
+        "careful_red_left": 1,
+        "careful_green_right": 4,
+        "careful_red_right": 1,
+        "careful_green_left": 6
+      }
+    }
+  },
+  "calls": 84,
+  "model": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.49.0",
+      "huggingface-hub": "0.29.3",
+      "accelerate": "1.4.0"
+    },
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "visible_device": 3,
+    "seed": 0,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "peak_allocated_bytes": 6421090816,
+    "model_id": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-3B-Instruct",
+    "parameter_count": 3085938688,
+    "dtype": "torch.bfloat16",
+    "logical_device": "cuda:0",
+    "cuda_visible_devices": "3",
+    "attention_implementation": "sdpa",
+    "quantization": null,
+    "offload": false
+  },
+  "generation_hit_limit": 0,
+  "original_repeat": {
+    "same_choice": 12,
+    "same_acceptable": 12,
+    "old_acceptable": 4,
+    "total": 12
+  },
+  "gpu_preflight": {
+    "checked_utc": "2026-10-02T15:34:34.934571+00:00",
+    "physical_gpu": 3,
+    "name": "NVIDIA GeForce RTX 4090",
+    "memory_total_mib": 49140,
+    "memory_used_mib": 31677,
+    "memory_free_mib": 16832,
+    "required_free_mib": 8959,
+    "estimate_basis": "official BF16 shard bytes + 3GiB; frozen input <=1153tokens, output<=96"
+  },
+  "freeze_sha256": "b75a1e1ffb3a3c11b29e8e1a87050352cf680cee62b588202e550cc2db4598c3",
+  "source_sha256": {
+    "experiments/interface_anchor_v4/run.py": "d40c7dc3a111e2b1711143955cbad83fbc502a1ba7ff6f91416109f933d7e5df",
+    "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+    "experiments/model_scale_v4/run.py": "ad3528b5ef050d2d4c05e21f396e59df443a2d66e851cc13e9ee3fcbb913357b",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/progress.py": "8f685eb440790b817ce54731edb26019fd24d855ea6df24a9512d57a681637f7"
+  },
+  "interpretation": "事后接口锚定诊断，不是结构留出；format_only移除示例语义并改变token长度，不能归因单一词token。"
+}

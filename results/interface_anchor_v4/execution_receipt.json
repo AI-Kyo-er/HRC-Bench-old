@@ -1,0 +1,23 @@
+{
+  "freeze_sha256": "b75a1e1ffb3a3c11b29e8e1a87050352cf680cee62b588202e550cc2db4598c3",
+  "calls_sha256": "074c1f6ea410001bb3b63fb6c7bbe62968e6c0f704806c124dc10d3f99b444a4",
+  "summary_sha256": "77fa4964adde608971a866e756848bc1054b2ff5ee53657ea05b102717820994",
+  "paired_sha256": "138d4d95a154edcb18ceed9df79d32567a9c8727a91c7c1695e920537ae4ce0f",
+  "sessions": {
+    "anchor_evaluation": {
+      "id": 75488,
+      "exit_code": 0
+    },
+    "tests": {
+      "id": 49743,
+      "exit_code": 0,
+      "tests_passed": 19
+    }
+  },
+  "tests_log_sha256": "daaa7f578d34c688386d32dde443fa32630eb648b777a71fb9bd3c69a37df5ba",
+  "next_model_download": {
+    "id": 61969,
+    "status": "仍在进行，未重启"
+  },
+  "larger_model_inference_performed": false
+}

@@ -1,0 +1,266 @@
+[
+  {
+    "fixture": "dev_after_red_0_0",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_red_left",
+      "example_red_right": "careful_red_right",
+      "example_blue_left": "careful_blue_left",
+      "example_blue_right": "careful_blue_right",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_red_left"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": false,
+      "example_blue_right": true,
+      "example_green_left": true,
+      "example_green_right": true,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_red_0_1",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_green_left",
+      "example_blue_left": "careful_green_right",
+      "example_blue_right": "careful_green_right",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_right"
+    },
+    "acceptable": {
+      "example_red_left": true,
+      "example_red_right": true,
+      "example_blue_left": false,
+      "example_blue_right": false,
+      "example_green_left": true,
+      "example_green_right": true,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_red_1_0",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_red_left",
+      "example_red_right": "careful_red_left",
+      "example_blue_left": "careful_blue_left",
+      "example_blue_right": "careful_blue_right",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_red_right"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": true,
+      "example_blue_right": false,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_red_1_1",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_green_left",
+      "example_blue_left": "careful_green_right",
+      "example_blue_right": "careful_green_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_right"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": true,
+      "example_blue_right": false,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": true
+    }
+  },
+  {
+    "fixture": "dev_after_blue_0_0",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_red_left",
+      "example_red_right": "careful_red_left",
+      "example_blue_left": "careful_blue_left",
+      "example_blue_right": "careful_blue_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_left"
+    },
+    "acceptable": {
+      "example_red_left": true,
+      "example_red_right": true,
+      "example_blue_left": false,
+      "example_blue_right": false,
+      "example_green_left": true,
+      "example_green_right": true,
+      "format_only": true
+    }
+  },
+  {
+    "fixture": "dev_after_blue_0_1",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_green_left",
+      "example_blue_left": "careful_green_left",
+      "example_blue_right": "careful_green_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_left"
+    },
+    "acceptable": {
+      "example_red_left": true,
+      "example_red_right": true,
+      "example_blue_left": true,
+      "example_blue_right": true,
+      "example_green_left": true,
+      "example_green_right": true,
+      "format_only": true
+    }
+  },
+  {
+    "fixture": "dev_after_blue_1_0",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_red_right",
+      "example_blue_left": "careful_blue_left",
+      "example_blue_right": "careful_blue_right",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_left"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": true,
+      "example_blue_left": false,
+      "example_blue_right": false,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_blue_1_1",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_right",
+      "example_red_right": "careful_green_right",
+      "example_blue_left": "careful_green_right",
+      "example_blue_right": "careful_green_right",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_right"
+    },
+    "acceptable": {
+      "example_red_left": true,
+      "example_red_right": true,
+      "example_blue_left": true,
+      "example_blue_right": true,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": true
+    }
+  },
+  {
+    "fixture": "dev_after_green_0_0",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_green_left",
+      "example_blue_left": "careful_blue_left",
+      "example_blue_right": "careful_green_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_left"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": false,
+      "example_blue_right": false,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_green_0_1",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_green_left",
+      "example_blue_left": "careful_green_left",
+      "example_blue_right": "careful_green_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_left"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": false,
+      "example_blue_right": false,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_green_1_0",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_green_left",
+      "example_blue_left": "careful_blue_left",
+      "example_blue_right": "careful_blue_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_left"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": true,
+      "example_blue_right": true,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": false
+    }
+  },
+  {
+    "fixture": "dev_after_green_1_1",
+    "old_choice": "careful_green_left",
+    "choices": {
+      "example_red_left": "careful_green_left",
+      "example_red_right": "careful_blue_right",
+      "example_blue_left": "careful_green_left",
+      "example_blue_right": "careful_green_left",
+      "example_green_left": "careful_green_left",
+      "example_green_right": "careful_green_left",
+      "format_only": "careful_green_right"
+    },
+    "acceptable": {
+      "example_red_left": false,
+      "example_red_right": false,
+      "example_blue_left": false,
+      "example_blue_right": false,
+      "example_green_left": false,
+      "example_green_right": false,
+      "format_only": false
+    }
+  }
+]
