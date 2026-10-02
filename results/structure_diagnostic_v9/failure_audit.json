@@ -1,0 +1,36 @@
+{
+  "failure_count": 6,
+  "stage": 5,
+  "ids": [
+    "B_neutral_right_60_normal__d05__full_history",
+    "B_neutral_left_60_reverse__d05__full_history",
+    "B_neutral_right_60_reverse__d05__full_history",
+    "B_neutral_right_61_normal__d05__full_history",
+    "B_neutral_left_61_reverse__d05__full_history",
+    "B_neutral_right_61_reverse__d05__full_history"
+  ],
+  "by_target_menu": {
+    "right_normal": 2,
+    "left_reverse": 2,
+    "right_reverse": 2
+  },
+  "by_seed": {
+    "60": 3,
+    "61": 3
+  },
+  "full_choices": {
+    "finish_guidance": 6
+  },
+  "aid_choices": {
+    "place_blue_right": 4,
+    "place_blue_left": 2
+  },
+  "all_aid_protocol_progress": true,
+  "actual_model_physics_ticks": 0,
+  "predictions_applied_to_environment": false,
+  "conclusion": "6次均已结束作用域再次finish/未推进，不能称6个blue目标记忆错误；公开aid同时增加目标/作用域/进度/义务等信息，非单因素归因。",
+  "canonical_failure_pairs_path": "results/structure_diagnostic_v9/raw/failure_pairs.json",
+  "canonical_failure_pairs_sha256": "1a2d92e02d55762e97f6c5b69666153eca552d6cf8286e6ee4916d0c1a2bd179",
+  "calls_sha256": "413a28f1480aa8680d1ae2dfe4527d0af5098285a2b875fa8cf7722107ecf459",
+  "postfreeze_archiver_sha256": "8a407da89e4b082797328773a715087c6d516c2f32cbfb0dcf8de0978cf73acd"
+}
