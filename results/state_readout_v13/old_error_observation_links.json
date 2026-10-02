@@ -1,0 +1,434 @@
+{
+  "total_old_rows": 8,
+  "old_full": 4,
+  "old_aid": 4,
+  "links": [
+    {
+      "old_v12_id": "B_update_before_child_rejected_right_60__d05__normal__full_history",
+      "old_view": "full_history",
+      "old_wrong_choice": "place_blue_left",
+      "v13_action_source_id": "B_update_before_child_rejected_right_60__d05__normal__full_history",
+      "new_action_choice": "place_blue_left",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        "errors": [
+          "wrong_target"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": false,
+        "illegal_choice": true,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_during_child_rejected_left_60__d05__reverse__public_scope_aid",
+      "old_view": "public_scope_aid",
+      "old_wrong_choice": "place_blue_right",
+      "v13_action_source_id": "B_update_during_child_rejected_left_60__d05__reverse__full_history",
+      "new_action_choice": "finish_guidance",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        "errors": [
+          "no_active_guidance_or_duplicate_finish"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": false,
+        "blue_direction_correct": null,
+        "illegal_choice": true,
+        "duplicate_finish": true,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_during_child_rejected_right_60__d05__normal__full_history",
+      "old_view": "full_history",
+      "old_wrong_choice": "place_blue_left",
+      "v13_action_source_id": "B_update_during_child_rejected_right_60__d05__normal__full_history",
+      "new_action_choice": "place_blue_left",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        "errors": [
+          "wrong_target"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": false,
+        "illegal_choice": true,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_during_child_rejected_right_60__d05__normal__public_scope_aid",
+      "old_view": "public_scope_aid",
+      "old_wrong_choice": "place_blue_left",
+      "v13_action_source_id": "B_update_during_child_rejected_right_60__d05__normal__full_history",
+      "new_action_choice": "place_blue_left",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        "errors": [
+          "wrong_target"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": false,
+        "illegal_choice": true,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_before_child_rejected_right_61__d05__normal__full_history",
+      "old_view": "full_history",
+      "old_wrong_choice": "place_blue_left",
+      "v13_action_source_id": "B_update_before_child_rejected_right_61__d05__normal__full_history",
+      "new_action_choice": "place_blue_left",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        "errors": [
+          "wrong_target"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": false,
+        "illegal_choice": true,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_during_child_rejected_left_61__d05__reverse__public_scope_aid",
+      "old_view": "public_scope_aid",
+      "old_wrong_choice": "place_blue_right",
+      "v13_action_source_id": "B_update_during_child_rejected_left_61__d05__reverse__full_history",
+      "new_action_choice": "finish_guidance",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        "errors": [
+          "no_active_guidance_or_duplicate_finish"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": false,
+        "blue_direction_correct": null,
+        "illegal_choice": true,
+        "duplicate_finish": true,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_during_child_rejected_right_61__d05__normal__full_history",
+      "old_view": "full_history",
+      "old_wrong_choice": "place_blue_left",
+      "v13_action_source_id": "B_update_during_child_rejected_right_61__d05__normal__full_history",
+      "new_action_choice": "place_blue_left",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        "errors": [
+          "wrong_target"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": false,
+        "illegal_choice": true,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    },
+    {
+      "old_v12_id": "B_update_during_child_rejected_right_61__d05__normal__public_scope_aid",
+      "old_view": "public_scope_aid",
+      "old_wrong_choice": "place_blue_left",
+      "v13_action_source_id": "B_update_during_child_rejected_right_61__d05__normal__full_history",
+      "new_action_choice": "place_blue_left",
+      "new_action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_right",
+          "careful_blue_right"
+        ],
+        "errors": [
+          "wrong_target"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": false,
+        "illegal_choice": true,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "state_value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "state_truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "state_score": {
+        "schema_valid": true,
+        "field_correct": {
+          "outer_blue_destination": true,
+          "guidance_active": true,
+          "current_blue_destination": false
+        },
+        "joint_state_correct": false,
+        "parse_error": null,
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "独立state query显式任务报告，不是action的内在知识读出；格式错误按未合法作答计各字段错误。"
+      },
+      "note": "只关联原full观察；旧aid错误不当作本轮action重放错误，aid旧query不重跑。"
+    }
+  ],
+  "old_calls_sha256": "6f30edaf02b79924186781f5823085f3d26a2c6c19d6b316fecdf44860033b3d",
+  "current_calls_sha256": "912a783afaac0682a333b0913ce12e22654e41eae22074ec3ff88f271c97ee14",
+  "main_scoring_covers_all_64": true
+}

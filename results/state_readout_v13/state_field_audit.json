@@ -1,0 +1,143 @@
+{
+  "state_queries": 64,
+  "field_output_distributions": {
+    "outer_blue_destination": {
+      "\"right\"": 35,
+      "\"left\"": 29
+    },
+    "guidance_active": {
+      "false": 64
+    },
+    "current_blue_destination": {
+      "\"neutral\"": 64
+    }
+  },
+  "outer_correct_action_cross": {
+    "outer_correct_action_correct": 31,
+    "outer_correct_action_incorrect": 30,
+    "outer_incorrect_action_correct": 1,
+    "outer_incorrect_action_incorrect": 2
+  },
+  "joint_state_action_cross": {
+    "state_incorrect_action_correct": 32,
+    "state_incorrect_action_incorrect": 32
+  },
+  "outer_errors": [
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "initial_blue": "right",
+      "effective_blue": "left",
+      "seed": 60,
+      "reverse_menu": false,
+      "state_truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "action_choice": "place_blue_left",
+      "action_score": {
+        "protocol_progress": true,
+        "protocol_admissible": true,
+        "legal_no_op": false,
+        "reference_action_hit": true,
+        "acceptable_progress_choices": [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        "errors": [],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": true,
+        "blue_direction_correct": true,
+        "illegal_choice": false,
+        "duplicate_finish": false,
+        "help_authorization_error": false
+      }
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "initial_blue": "right",
+      "effective_blue": "left",
+      "seed": 60,
+      "reverse_menu": true,
+      "state_truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "action_choice": "finish_guidance",
+      "action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        "errors": [
+          "no_active_guidance_or_duplicate_finish"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": false,
+        "blue_direction_correct": null,
+        "illegal_choice": true,
+        "duplicate_finish": true,
+        "help_authorization_error": false
+      }
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "initial_blue": "right",
+      "effective_blue": "left",
+      "seed": 61,
+      "reverse_menu": true,
+      "state_truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "state_response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "action_choice": "finish_guidance",
+      "action_score": {
+        "protocol_progress": false,
+        "protocol_admissible": false,
+        "legal_no_op": false,
+        "reference_action_hit": false,
+        "acceptable_progress_choices": [
+          "place_blue_left",
+          "careful_blue_left"
+        ],
+        "errors": [
+          "no_active_guidance_or_duplicate_finish"
+        ],
+        "physical_execution": false,
+        "physical_success": null,
+        "interpretation": "未执行的候选只评分协议推进意图；替代动作不保证真实物理成功。",
+        "blue_placement_attempted": false,
+        "blue_direction_correct": null,
+        "illegal_choice": true,
+        "duplicate_finish": true,
+        "help_authorization_error": false
+      }
+    }
+  ],
+  "frozen_vs_semantic_score_differences": 0,
+  "independent_queries": true,
+  "state_answer_not_supplied_to_action": true,
+  "note": "外层目标字段正确不代表联合状态正确；独立报告任务不等价于模型内在知识，字段理解尚未校准成功。"
+}
