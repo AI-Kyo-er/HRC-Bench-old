@@ -1,0 +1,134 @@
+[
+  {
+    "id": "dev_after_red_0_0",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": true,
+    "progress_aid_choice": "careful_green_left",
+    "progress_aid_progress": true,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_red_0_1",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": true,
+    "progress_aid_choice": "careful_green_left",
+    "progress_aid_progress": true,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_red_1_0",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_green_right",
+    "progress_aid_progress": true,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_red_1_1",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_green_left",
+    "progress_aid_progress": false,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_blue_0_0",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": true,
+    "progress_aid_choice": "careful_green_right",
+    "progress_aid_progress": false,
+    "input_tokens": {
+      "full_history": 1059,
+      "public_progress_aid": 1153
+    }
+  },
+  {
+    "id": "dev_after_blue_0_1",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": true,
+    "progress_aid_choice": "careful_green_right",
+    "progress_aid_progress": false,
+    "input_tokens": {
+      "full_history": 1059,
+      "public_progress_aid": 1153
+    }
+  },
+  {
+    "id": "dev_after_blue_1_0",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_green_right",
+    "progress_aid_progress": true,
+    "input_tokens": {
+      "full_history": 1059,
+      "public_progress_aid": 1153
+    }
+  },
+  {
+    "id": "dev_after_blue_1_1",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_green_left",
+    "progress_aid_progress": false,
+    "input_tokens": {
+      "full_history": 1059,
+      "public_progress_aid": 1153
+    }
+  },
+  {
+    "id": "dev_after_green_0_0",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_blue_left",
+    "progress_aid_progress": false,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_green_0_1",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_green_left",
+    "progress_aid_progress": false,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_green_1_0",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_blue_left",
+    "progress_aid_progress": true,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  },
+  {
+    "id": "dev_after_green_1_1",
+    "full_history_choice": "careful_green_left",
+    "full_history_progress": false,
+    "progress_aid_choice": "careful_blue_left",
+    "progress_aid_progress": true,
+    "input_tokens": {
+      "full_history": 1044,
+      "public_progress_aid": 1138
+    }
+  }
+]

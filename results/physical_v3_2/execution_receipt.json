@@ -1,0 +1,30 @@
+{
+  "v3_1_freeze_sha256_unchanged": "0910eae2657ca7f2de4cbd8de4076c70b4f6c3f8c0594bad7b52930895db7373",
+  "dev_freeze_sha256": "d8514921c96140bb9a8d06c7bb79a79d130138e232fa24e47c3e8a83a81291f4",
+  "canonical_old_message_audit_sha256": "48f2a5bab5b485901e3a493ec0bece1e741f41ab00d28578f668706d208f38e6",
+  "canonical_input_physics_audit_sha256": "6497e0893e0ee61deb02e96b6f40ce0cc0aa9fe122b36cf991ab4a19cf6cf25c",
+  "control_summary_sha256": "5196ab576a66b90f1710ef64801a89449c95fc78bf6fe8214d9288426bf2e1b2",
+  "trajectory_audit_sha256": "764885f77da5a0c63ef6d68dd3d09dd55f9d6d38bb94d9f4ce2adafa4e040560",
+  "progress_dev_summary_sha256": "e24ce056ece731135149eb1d64360fa2a5a6df2887f6828df33ce95bae37a08a",
+  "calls_sha256": "d75cb98b2e630d66388631236911fc59c31daf328919cc6b2b50c1d9630bdd8f",
+  "analysis_source_sha256": "a8f76d9e859595e23192b08e52e21daa8d8516b0eeb8c920fa2f8a633498c029",
+  "sessions": {
+    "parking_probe": 68767,
+    "initial_control_with_old_logging": 53401,
+    "controls_immutable": 63158,
+    "progress_dev": 63476
+  },
+  "scope": "开发控制与单调用诊断；未增加3B正式连续实验。",
+  "all_listed_sessions_exit_code": 0,
+  "report_session_exit0": 65938,
+  "tests": {
+    "session": 15536,
+    "count": 15,
+    "exit_code": 0,
+    "log_sha256": "85b83a4bd532d221d66700114c4e3655fdb06f0719203aedc4d69d81333de9e6"
+  },
+  "gpu3_released": true,
+  "active_project_python_processes_at_completion": [],
+  "v3_1_source_freeze_verified": true,
+  "canonical_representative_sha256": "9e254bc5409c7e6f47aeb4664b8ba79ef48dcbd5a26504b621e95f5c500f3457"
+}

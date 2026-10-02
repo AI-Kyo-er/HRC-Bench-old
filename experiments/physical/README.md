@@ -78,3 +78,9 @@ CUDA_VISIBLE_DEVICES=3 .venv-llm/bin/python -m experiments.physical.run formal -
 - `representative_calls.json`保留一条规则成功和一条模型失败的原始输入、输出、反馈和末态；`trajectory_audit.json`包括所有case的轨迹校验、动作类型、伙伴运动到位与实际接触。
 
 规则句柄51603与模型17294均exit0；只读分析25077 exit0。GPU3在模型退出后恢复约48GB空闲。未重跑覆写原始神经轨迹，不声明模型输出已独立验证完全确定性。
+
+## 记录勘误：以原始messages为规范输入
+
+后续逐步消息审计发现v3.1日志缺陷：`row.observation.history`引用Episode共享events列表，保存时96步的此字段均变成该episode最终历史，不能用来表示该步实际输入。**传给模型的`row.messages`在每步立即序列化，是规范原始输入，未受此别名缺陷影响。** 原始文件与包含该字段的`representative_calls.json`保持不变；派生 `canonical_representative_calls.json` 从真实messages恢复规范观察，不覆写原始数据。
+
+v3.2消息审计对96次原始messages检查历史前缀保留、上一反馈出现、固定system、全部20候选和物理区域与原始位姿/速度一致，传入检查违规0；96项日志差异均仅在存储的history字段。新日志使用deepcopy，并加入针对后续事件追加和区域修改不会污染既有记录的永久回归测试。该缺陷影响日志阅读和事后分析，不是模型重复green的历史传入原因。审计细节在 `results/physical_v3_2/message_audit.json`。

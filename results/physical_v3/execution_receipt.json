@@ -33,5 +33,7 @@
       "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
     }
   },
-  "model_weights_match_v2": true
+  "model_weights_match_v2": true,
+  "observation_history_errata": "row.observation.history共享events列表而变成最终历史；原始messages为规范输入。canonical_representative_calls为派生恢复，不覆写原始。",
+  "input_audit": "96步原始messages审计违规0；96处存储obs仅history字段不一致。results/physical_v3_2/message_audit.json"
 }

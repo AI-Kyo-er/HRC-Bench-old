@@ -1,0 +1,1298 @@
+[
+  {
+    "case": {
+      "id": "dev_after_red_0_0",
+      "completed_item": "red",
+      "flip": false,
+      "reverse": false,
+      "observation": {
+        "history": [
+          "已接受初始指令：{\"red\": \"left\", \"blue\": \"right\", \"green\": \"left\"}。",
+          "未接受建议：green改放另一边。此建议没有被接受。",
+          "伙伴：共享通道已清空，无需请求协助。",
+          "机器人选择careful_red_left。反馈：物品静止在目标槽。",
+          "机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。"
+        ],
+        "physical": {
+          "objects": {
+            "red": {
+              "position": [
+                0.59,
+                -0.25,
+                0.032
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "blue": {
+              "position": [
+                0.42,
+                0.0,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "green": {
+              "position": [
+                0.42,
+                0.16,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "partner_position": [
+            0.54,
+            0.6,
+            0.24
+          ],
+          "direct_path_blocked": false
+        },
+        "physical_placements": {
+          "red": [
+            "left"
+          ],
+          "blue": [],
+          "green": []
+        },
+        "remaining_decisions": 8,
+        "candidates": [
+          {
+            "id": "place_red_left",
+            "meaning": "独立沿共享通道抓放 red 到 left"
+          },
+          {
+            "id": "careful_red_left",
+            "meaning": "独立绕行抓放 red 到 left"
+          },
+          {
+            "id": "assisted_red_left",
+            "meaning": "利用已接受的清道协助抓放 red 到 left"
+          },
+          {
+            "id": "place_red_right",
+            "meaning": "独立沿共享通道抓放 red 到 right"
+          },
+          {
+            "id": "careful_red_right",
+            "meaning": "独立绕行抓放 red 到 right"
+          },
+          {
+            "id": "assisted_red_right",
+            "meaning": "利用已接受的清道协助抓放 red 到 right"
+          },
+          {
+            "id": "place_blue_left",
+            "meaning": "独立沿共享通道抓放 blue 到 left"
+          },
+          {
+            "id": "careful_blue_left",
+            "meaning": "独立绕行抓放 blue 到 left"
+          },
+          {
+            "id": "assisted_blue_left",
+            "meaning": "利用已接受的清道协助抓放 blue 到 left"
+          },
+          {
+            "id": "place_blue_right",
+            "meaning": "独立沿共享通道抓放 blue 到 right"
+          },
+          {
+            "id": "careful_blue_right",
+            "meaning": "独立绕行抓放 blue 到 right"
+          },
+          {
+            "id": "assisted_blue_right",
+            "meaning": "利用已接受的清道协助抓放 blue 到 right"
+          },
+          {
+            "id": "place_green_left",
+            "meaning": "独立沿共享通道抓放 green 到 left"
+          },
+          {
+            "id": "careful_green_left",
+            "meaning": "独立绕行抓放 green 到 left"
+          },
+          {
+            "id": "assisted_green_left",
+            "meaning": "利用已接受的清道协助抓放 green 到 left"
+          },
+          {
+            "id": "place_green_right",
+            "meaning": "独立沿共享通道抓放 green 到 right"
+          },
+          {
+            "id": "careful_green_right",
+            "meaning": "独立绕行抓放 green 到 right"
+          },
+          {
+            "id": "assisted_green_right",
+            "meaning": "利用已接受的清道协助抓放 green 到 right"
+          },
+          {
+            "id": "request_clear",
+            "meaning": "请求伙伴释放共享通道；不放置任何物品"
+          },
+          {
+            "id": "yield",
+            "meaning": "让伙伴先撤离占位物；不放置任何物品"
+          }
+        ]
+      },
+      "allowed_progress_choices": [
+        "place_blue_right",
+        "careful_blue_right",
+        "place_green_left",
+        "careful_green_left"
+      ],
+      "type": "独立人工接口fixture；不是物理执行轨迹，不来自v3.1 formal状态。"
+    },
+    "view": "full_history",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你控制桌面整理机器人。只输出一个JSON对象：{\"choice\":\"候选ID\"}，不要解释。\n从公开候选选下一动作，使所有物品符合最新已接受指令，并遵守伙伴明确的先让行要求。\n放置前先读取该物品已接受的目标字符串left或right，所选ID末尾必须匹配它；菜单顺序不改变目标。\n候选列表只是通用能力菜单，包含错误目标和暂不可执行动作，不是正确答案列表。\nplace独立直接放置；careful独立绕开共享通道；assisted使用已接受的协助直接放置。\nrequest_clear只请求伙伴移开占位物，不执行放置，不是通用的搬运命令；已清空时重复请求无帮助。\nyield只停在安全位置让伙伴撤离占位物，不完成任何物品。拒绝后可用careful绕行。\n额外请求、无效选择和失败会给反馈并消耗1步，可重试。自主选择下一未完成物品。\n示例：选择把green独立绕行放到right，输出{\"choice\":\"careful_green_right\"}。\n"
+      },
+      {
+        "role": "user",
+        "content": "{\"history\": [\"已接受初始指令：{\\\"red\\\": \\\"left\\\", \\\"blue\\\": \\\"right\\\", \\\"green\\\": \\\"left\\\"}。\", \"未接受建议：green改放另一边。此建议没有被接受。\", \"伙伴：共享通道已清空，无需请求协助。\", \"机器人选择careful_red_left。反馈：物品静止在目标槽。\", \"机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。\"], \"physical\": {\"objects\": {\"red\": {\"position\": [0.59, -0.25, 0.032], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"blue\": {\"position\": [0.42, 0.0, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"green\": {\"position\": [0.42, 0.16, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}}, \"partner_position\": [0.54, 0.6, 0.24], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"left\"], \"blue\": [], \"green\": []}, \"remaining_decisions\": 8, \"candidates\": [{\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}]}"
+      }
+    ],
+    "prediction": {
+      "response": "{\"choice\":\"careful_green_left\"}",
+      "input_tokens": 1044,
+      "output_tokens": 9,
+      "generation_hit_limit": false,
+      "seconds": 0.6869653709582053
+    },
+    "choice": "careful_green_left",
+    "parse_error": null,
+    "progress_choice": true,
+    "derived_public_progress": {
+      "current_goals_from_public_history": {
+        "red": "left",
+        "blue": "right",
+        "green": "left"
+      },
+      "done_under_public_goals": {
+        "red": "left"
+      },
+      "remaining_items": [
+        "blue",
+        "green"
+      ],
+      "must_yield": false,
+      "accepted_clearance_help": false,
+      "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+    }
+  },
+  {
+    "case": {
+      "id": "dev_after_red_0_0",
+      "completed_item": "red",
+      "flip": false,
+      "reverse": false,
+      "observation": {
+        "history": [
+          "已接受初始指令：{\"red\": \"left\", \"blue\": \"right\", \"green\": \"left\"}。",
+          "未接受建议：green改放另一边。此建议没有被接受。",
+          "伙伴：共享通道已清空，无需请求协助。",
+          "机器人选择careful_red_left。反馈：物品静止在目标槽。",
+          "机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。"
+        ],
+        "physical": {
+          "objects": {
+            "red": {
+              "position": [
+                0.59,
+                -0.25,
+                0.032
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "blue": {
+              "position": [
+                0.42,
+                0.0,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "green": {
+              "position": [
+                0.42,
+                0.16,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "partner_position": [
+            0.54,
+            0.6,
+            0.24
+          ],
+          "direct_path_blocked": false
+        },
+        "physical_placements": {
+          "red": [
+            "left"
+          ],
+          "blue": [],
+          "green": []
+        },
+        "remaining_decisions": 8,
+        "candidates": [
+          {
+            "id": "place_red_left",
+            "meaning": "独立沿共享通道抓放 red 到 left"
+          },
+          {
+            "id": "careful_red_left",
+            "meaning": "独立绕行抓放 red 到 left"
+          },
+          {
+            "id": "assisted_red_left",
+            "meaning": "利用已接受的清道协助抓放 red 到 left"
+          },
+          {
+            "id": "place_red_right",
+            "meaning": "独立沿共享通道抓放 red 到 right"
+          },
+          {
+            "id": "careful_red_right",
+            "meaning": "独立绕行抓放 red 到 right"
+          },
+          {
+            "id": "assisted_red_right",
+            "meaning": "利用已接受的清道协助抓放 red 到 right"
+          },
+          {
+            "id": "place_blue_left",
+            "meaning": "独立沿共享通道抓放 blue 到 left"
+          },
+          {
+            "id": "careful_blue_left",
+            "meaning": "独立绕行抓放 blue 到 left"
+          },
+          {
+            "id": "assisted_blue_left",
+            "meaning": "利用已接受的清道协助抓放 blue 到 left"
+          },
+          {
+            "id": "place_blue_right",
+            "meaning": "独立沿共享通道抓放 blue 到 right"
+          },
+          {
+            "id": "careful_blue_right",
+            "meaning": "独立绕行抓放 blue 到 right"
+          },
+          {
+            "id": "assisted_blue_right",
+            "meaning": "利用已接受的清道协助抓放 blue 到 right"
+          },
+          {
+            "id": "place_green_left",
+            "meaning": "独立沿共享通道抓放 green 到 left"
+          },
+          {
+            "id": "careful_green_left",
+            "meaning": "独立绕行抓放 green 到 left"
+          },
+          {
+            "id": "assisted_green_left",
+            "meaning": "利用已接受的清道协助抓放 green 到 left"
+          },
+          {
+            "id": "place_green_right",
+            "meaning": "独立沿共享通道抓放 green 到 right"
+          },
+          {
+            "id": "careful_green_right",
+            "meaning": "独立绕行抓放 green 到 right"
+          },
+          {
+            "id": "assisted_green_right",
+            "meaning": "利用已接受的清道协助抓放 green 到 right"
+          },
+          {
+            "id": "request_clear",
+            "meaning": "请求伙伴释放共享通道；不放置任何物品"
+          },
+          {
+            "id": "yield",
+            "meaning": "让伙伴先撤离占位物；不放置任何物品"
+          }
+        ]
+      },
+      "allowed_progress_choices": [
+        "place_blue_right",
+        "careful_blue_right",
+        "place_green_left",
+        "careful_green_left"
+      ],
+      "type": "独立人工接口fixture；不是物理执行轨迹，不来自v3.1 formal状态。"
+    },
+    "view": "public_progress_aid",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你控制桌面整理机器人。只输出一个JSON对象：{\"choice\":\"候选ID\"}，不要解释。\n从公开候选选下一动作，使所有物品符合最新已接受指令，并遵守伙伴明确的先让行要求。\n放置前先读取该物品已接受的目标字符串left或right，所选ID末尾必须匹配它；菜单顺序不改变目标。\n候选列表只是通用能力菜单，包含错误目标和暂不可执行动作，不是正确答案列表。\nplace独立直接放置；careful独立绕开共享通道；assisted使用已接受的协助直接放置。\nrequest_clear只请求伙伴移开占位物，不执行放置，不是通用的搬运命令；已清空时重复请求无帮助。\nyield只停在安全位置让伙伴撤离占位物，不完成任何物品。拒绝后可用careful绕行。\n额外请求、无效选择和失败会给反馈并消耗1步，可重试。自主选择下一未完成物品。\n示例：选择把green独立绕行放到right，输出{\"choice\":\"careful_green_right\"}。\n"
+      },
+      {
+        "role": "user",
+        "content": "{\"history\": [\"已接受初始指令：{\\\"red\\\": \\\"left\\\", \\\"blue\\\": \\\"right\\\", \\\"green\\\": \\\"left\\\"}。\", \"未接受建议：green改放另一边。此建议没有被接受。\", \"伙伴：共享通道已清空，无需请求协助。\", \"机器人选择careful_red_left。反馈：物品静止在目标槽。\", \"机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。\"], \"physical\": {\"objects\": {\"red\": {\"position\": [0.59, -0.25, 0.032], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"blue\": {\"position\": [0.42, 0.0, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"green\": {\"position\": [0.42, 0.16, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}}, \"partner_position\": [0.54, 0.6, 0.24], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"left\"], \"blue\": [], \"green\": []}, \"remaining_decisions\": 8, \"candidates\": [{\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}], \"external_public_progress_aid\": {\"current_goals_from_public_history\": {\"red\": \"left\", \"blue\": \"right\", \"green\": \"left\"}, \"done_under_public_goals\": {\"red\": \"left\"}, \"remaining_items\": [\"blue\", \"green\"], \"must_yield\": false, \"accepted_clearance_help\": false, \"source\": \"确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。\"}}"
+      }
+    ],
+    "prediction": {
+      "response": "{\"choice\":\"careful_green_left\"}",
+      "input_tokens": 1138,
+      "output_tokens": 9,
+      "generation_hit_limit": false,
+      "seconds": 0.20647159998770803
+    },
+    "choice": "careful_green_left",
+    "parse_error": null,
+    "progress_choice": true,
+    "derived_public_progress": {
+      "current_goals_from_public_history": {
+        "red": "left",
+        "blue": "right",
+        "green": "left"
+      },
+      "done_under_public_goals": {
+        "red": "left"
+      },
+      "remaining_items": [
+        "blue",
+        "green"
+      ],
+      "must_yield": false,
+      "accepted_clearance_help": false,
+      "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+    }
+  },
+  {
+    "case": {
+      "id": "dev_after_red_0_1",
+      "completed_item": "red",
+      "flip": false,
+      "reverse": true,
+      "observation": {
+        "history": [
+          "已接受初始指令：{\"red\": \"left\", \"blue\": \"right\", \"green\": \"left\"}。",
+          "未接受建议：green改放另一边。此建议没有被接受。",
+          "伙伴：共享通道已清空，无需请求协助。",
+          "机器人选择careful_red_left。反馈：物品静止在目标槽。",
+          "机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。"
+        ],
+        "physical": {
+          "objects": {
+            "red": {
+              "position": [
+                0.59,
+                -0.25,
+                0.032
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "blue": {
+              "position": [
+                0.42,
+                0.0,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "green": {
+              "position": [
+                0.42,
+                0.16,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "partner_position": [
+            0.54,
+            0.6,
+            0.24
+          ],
+          "direct_path_blocked": false
+        },
+        "physical_placements": {
+          "red": [
+            "left"
+          ],
+          "blue": [],
+          "green": []
+        },
+        "remaining_decisions": 8,
+        "candidates": [
+          {
+            "id": "yield",
+            "meaning": "让伙伴先撤离占位物；不放置任何物品"
+          },
+          {
+            "id": "request_clear",
+            "meaning": "请求伙伴释放共享通道；不放置任何物品"
+          },
+          {
+            "id": "assisted_green_right",
+            "meaning": "利用已接受的清道协助抓放 green 到 right"
+          },
+          {
+            "id": "careful_green_right",
+            "meaning": "独立绕行抓放 green 到 right"
+          },
+          {
+            "id": "place_green_right",
+            "meaning": "独立沿共享通道抓放 green 到 right"
+          },
+          {
+            "id": "assisted_green_left",
+            "meaning": "利用已接受的清道协助抓放 green 到 left"
+          },
+          {
+            "id": "careful_green_left",
+            "meaning": "独立绕行抓放 green 到 left"
+          },
+          {
+            "id": "place_green_left",
+            "meaning": "独立沿共享通道抓放 green 到 left"
+          },
+          {
+            "id": "assisted_blue_right",
+            "meaning": "利用已接受的清道协助抓放 blue 到 right"
+          },
+          {
+            "id": "careful_blue_right",
+            "meaning": "独立绕行抓放 blue 到 right"
+          },
+          {
+            "id": "place_blue_right",
+            "meaning": "独立沿共享通道抓放 blue 到 right"
+          },
+          {
+            "id": "assisted_blue_left",
+            "meaning": "利用已接受的清道协助抓放 blue 到 left"
+          },
+          {
+            "id": "careful_blue_left",
+            "meaning": "独立绕行抓放 blue 到 left"
+          },
+          {
+            "id": "place_blue_left",
+            "meaning": "独立沿共享通道抓放 blue 到 left"
+          },
+          {
+            "id": "assisted_red_right",
+            "meaning": "利用已接受的清道协助抓放 red 到 right"
+          },
+          {
+            "id": "careful_red_right",
+            "meaning": "独立绕行抓放 red 到 right"
+          },
+          {
+            "id": "place_red_right",
+            "meaning": "独立沿共享通道抓放 red 到 right"
+          },
+          {
+            "id": "assisted_red_left",
+            "meaning": "利用已接受的清道协助抓放 red 到 left"
+          },
+          {
+            "id": "careful_red_left",
+            "meaning": "独立绕行抓放 red 到 left"
+          },
+          {
+            "id": "place_red_left",
+            "meaning": "独立沿共享通道抓放 red 到 left"
+          }
+        ]
+      },
+      "allowed_progress_choices": [
+        "place_blue_right",
+        "careful_blue_right",
+        "place_green_left",
+        "careful_green_left"
+      ],
+      "type": "独立人工接口fixture；不是物理执行轨迹，不来自v3.1 formal状态。"
+    },
+    "view": "full_history",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你控制桌面整理机器人。只输出一个JSON对象：{\"choice\":\"候选ID\"}，不要解释。\n从公开候选选下一动作，使所有物品符合最新已接受指令，并遵守伙伴明确的先让行要求。\n放置前先读取该物品已接受的目标字符串left或right，所选ID末尾必须匹配它；菜单顺序不改变目标。\n候选列表只是通用能力菜单，包含错误目标和暂不可执行动作，不是正确答案列表。\nplace独立直接放置；careful独立绕开共享通道；assisted使用已接受的协助直接放置。\nrequest_clear只请求伙伴移开占位物，不执行放置，不是通用的搬运命令；已清空时重复请求无帮助。\nyield只停在安全位置让伙伴撤离占位物，不完成任何物品。拒绝后可用careful绕行。\n额外请求、无效选择和失败会给反馈并消耗1步，可重试。自主选择下一未完成物品。\n示例：选择把green独立绕行放到right，输出{\"choice\":\"careful_green_right\"}。\n"
+      },
+      {
+        "role": "user",
+        "content": "{\"history\": [\"已接受初始指令：{\\\"red\\\": \\\"left\\\", \\\"blue\\\": \\\"right\\\", \\\"green\\\": \\\"left\\\"}。\", \"未接受建议：green改放另一边。此建议没有被接受。\", \"伙伴：共享通道已清空，无需请求协助。\", \"机器人选择careful_red_left。反馈：物品静止在目标槽。\", \"机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。\"], \"physical\": {\"objects\": {\"red\": {\"position\": [0.59, -0.25, 0.032], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"blue\": {\"position\": [0.42, 0.0, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"green\": {\"position\": [0.42, 0.16, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}}, \"partner_position\": [0.54, 0.6, 0.24], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"left\"], \"blue\": [], \"green\": []}, \"remaining_decisions\": 8, \"candidates\": [{\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}]}"
+      }
+    ],
+    "prediction": {
+      "response": "{\"choice\":\"careful_green_left\"}",
+      "input_tokens": 1044,
+      "output_tokens": 9,
+      "generation_hit_limit": false,
+      "seconds": 0.20318477001274005
+    },
+    "choice": "careful_green_left",
+    "parse_error": null,
+    "progress_choice": true,
+    "derived_public_progress": {
+      "current_goals_from_public_history": {
+        "red": "left",
+        "blue": "right",
+        "green": "left"
+      },
+      "done_under_public_goals": {
+        "red": "left"
+      },
+      "remaining_items": [
+        "blue",
+        "green"
+      ],
+      "must_yield": false,
+      "accepted_clearance_help": false,
+      "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+    }
+  },
+  {
+    "case": {
+      "id": "dev_after_red_0_1",
+      "completed_item": "red",
+      "flip": false,
+      "reverse": true,
+      "observation": {
+        "history": [
+          "已接受初始指令：{\"red\": \"left\", \"blue\": \"right\", \"green\": \"left\"}。",
+          "未接受建议：green改放另一边。此建议没有被接受。",
+          "伙伴：共享通道已清空，无需请求协助。",
+          "机器人选择careful_red_left。反馈：物品静止在目标槽。",
+          "机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。"
+        ],
+        "physical": {
+          "objects": {
+            "red": {
+              "position": [
+                0.59,
+                -0.25,
+                0.032
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "blue": {
+              "position": [
+                0.42,
+                0.0,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "green": {
+              "position": [
+                0.42,
+                0.16,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "partner_position": [
+            0.54,
+            0.6,
+            0.24
+          ],
+          "direct_path_blocked": false
+        },
+        "physical_placements": {
+          "red": [
+            "left"
+          ],
+          "blue": [],
+          "green": []
+        },
+        "remaining_decisions": 8,
+        "candidates": [
+          {
+            "id": "yield",
+            "meaning": "让伙伴先撤离占位物；不放置任何物品"
+          },
+          {
+            "id": "request_clear",
+            "meaning": "请求伙伴释放共享通道；不放置任何物品"
+          },
+          {
+            "id": "assisted_green_right",
+            "meaning": "利用已接受的清道协助抓放 green 到 right"
+          },
+          {
+            "id": "careful_green_right",
+            "meaning": "独立绕行抓放 green 到 right"
+          },
+          {
+            "id": "place_green_right",
+            "meaning": "独立沿共享通道抓放 green 到 right"
+          },
+          {
+            "id": "assisted_green_left",
+            "meaning": "利用已接受的清道协助抓放 green 到 left"
+          },
+          {
+            "id": "careful_green_left",
+            "meaning": "独立绕行抓放 green 到 left"
+          },
+          {
+            "id": "place_green_left",
+            "meaning": "独立沿共享通道抓放 green 到 left"
+          },
+          {
+            "id": "assisted_blue_right",
+            "meaning": "利用已接受的清道协助抓放 blue 到 right"
+          },
+          {
+            "id": "careful_blue_right",
+            "meaning": "独立绕行抓放 blue 到 right"
+          },
+          {
+            "id": "place_blue_right",
+            "meaning": "独立沿共享通道抓放 blue 到 right"
+          },
+          {
+            "id": "assisted_blue_left",
+            "meaning": "利用已接受的清道协助抓放 blue 到 left"
+          },
+          {
+            "id": "careful_blue_left",
+            "meaning": "独立绕行抓放 blue 到 left"
+          },
+          {
+            "id": "place_blue_left",
+            "meaning": "独立沿共享通道抓放 blue 到 left"
+          },
+          {
+            "id": "assisted_red_right",
+            "meaning": "利用已接受的清道协助抓放 red 到 right"
+          },
+          {
+            "id": "careful_red_right",
+            "meaning": "独立绕行抓放 red 到 right"
+          },
+          {
+            "id": "place_red_right",
+            "meaning": "独立沿共享通道抓放 red 到 right"
+          },
+          {
+            "id": "assisted_red_left",
+            "meaning": "利用已接受的清道协助抓放 red 到 left"
+          },
+          {
+            "id": "careful_red_left",
+            "meaning": "独立绕行抓放 red 到 left"
+          },
+          {
+            "id": "place_red_left",
+            "meaning": "独立沿共享通道抓放 red 到 left"
+          }
+        ]
+      },
+      "allowed_progress_choices": [
+        "place_blue_right",
+        "careful_blue_right",
+        "place_green_left",
+        "careful_green_left"
+      ],
+      "type": "独立人工接口fixture；不是物理执行轨迹，不来自v3.1 formal状态。"
+    },
+    "view": "public_progress_aid",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你控制桌面整理机器人。只输出一个JSON对象：{\"choice\":\"候选ID\"}，不要解释。\n从公开候选选下一动作，使所有物品符合最新已接受指令，并遵守伙伴明确的先让行要求。\n放置前先读取该物品已接受的目标字符串left或right，所选ID末尾必须匹配它；菜单顺序不改变目标。\n候选列表只是通用能力菜单，包含错误目标和暂不可执行动作，不是正确答案列表。\nplace独立直接放置；careful独立绕开共享通道；assisted使用已接受的协助直接放置。\nrequest_clear只请求伙伴移开占位物，不执行放置，不是通用的搬运命令；已清空时重复请求无帮助。\nyield只停在安全位置让伙伴撤离占位物，不完成任何物品。拒绝后可用careful绕行。\n额外请求、无效选择和失败会给反馈并消耗1步，可重试。自主选择下一未完成物品。\n示例：选择把green独立绕行放到right，输出{\"choice\":\"careful_green_right\"}。\n"
+      },
+      {
+        "role": "user",
+        "content": "{\"history\": [\"已接受初始指令：{\\\"red\\\": \\\"left\\\", \\\"blue\\\": \\\"right\\\", \\\"green\\\": \\\"left\\\"}。\", \"未接受建议：green改放另一边。此建议没有被接受。\", \"伙伴：共享通道已清空，无需请求协助。\", \"机器人选择careful_red_left。反馈：物品静止在目标槽。\", \"机器人选择careful_red_left。反馈：该物品已物理完成，请选择其他未完成物品。\"], \"physical\": {\"objects\": {\"red\": {\"position\": [0.59, -0.25, 0.032], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"blue\": {\"position\": [0.42, 0.0, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"green\": {\"position\": [0.42, 0.16, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}}, \"partner_position\": [0.54, 0.6, 0.24], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"left\"], \"blue\": [], \"green\": []}, \"remaining_decisions\": 8, \"candidates\": [{\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}], \"external_public_progress_aid\": {\"current_goals_from_public_history\": {\"red\": \"left\", \"blue\": \"right\", \"green\": \"left\"}, \"done_under_public_goals\": {\"red\": \"left\"}, \"remaining_items\": [\"blue\", \"green\"], \"must_yield\": false, \"accepted_clearance_help\": false, \"source\": \"确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。\"}}"
+      }
+    ],
+    "prediction": {
+      "response": "{\"choice\":\"careful_green_left\"}",
+      "input_tokens": 1138,
+      "output_tokens": 9,
+      "generation_hit_limit": false,
+      "seconds": 0.20696296001551673
+    },
+    "choice": "careful_green_left",
+    "parse_error": null,
+    "progress_choice": true,
+    "derived_public_progress": {
+      "current_goals_from_public_history": {
+        "red": "left",
+        "blue": "right",
+        "green": "left"
+      },
+      "done_under_public_goals": {
+        "red": "left"
+      },
+      "remaining_items": [
+        "blue",
+        "green"
+      ],
+      "must_yield": false,
+      "accepted_clearance_help": false,
+      "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+    }
+  },
+  {
+    "case": {
+      "id": "dev_after_red_1_0",
+      "completed_item": "red",
+      "flip": true,
+      "reverse": false,
+      "observation": {
+        "history": [
+          "已接受初始指令：{\"red\": \"right\", \"blue\": \"left\", \"green\": \"right\"}。",
+          "未接受建议：green改放另一边。此建议没有被接受。",
+          "伙伴：共享通道已清空，无需请求协助。",
+          "机器人选择careful_red_right。反馈：物品静止在目标槽。",
+          "机器人选择careful_red_right。反馈：该物品已物理完成，请选择其他未完成物品。"
+        ],
+        "physical": {
+          "objects": {
+            "red": {
+              "position": [
+                0.59,
+                0.25,
+                0.032
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "blue": {
+              "position": [
+                0.42,
+                0.0,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "green": {
+              "position": [
+                0.42,
+                0.16,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "partner_position": [
+            0.54,
+            0.6,
+            0.24
+          ],
+          "direct_path_blocked": false
+        },
+        "physical_placements": {
+          "red": [
+            "right"
+          ],
+          "blue": [],
+          "green": []
+        },
+        "remaining_decisions": 8,
+        "candidates": [
+          {
+            "id": "place_red_left",
+            "meaning": "独立沿共享通道抓放 red 到 left"
+          },
+          {
+            "id": "careful_red_left",
+            "meaning": "独立绕行抓放 red 到 left"
+          },
+          {
+            "id": "assisted_red_left",
+            "meaning": "利用已接受的清道协助抓放 red 到 left"
+          },
+          {
+            "id": "place_red_right",
+            "meaning": "独立沿共享通道抓放 red 到 right"
+          },
+          {
+            "id": "careful_red_right",
+            "meaning": "独立绕行抓放 red 到 right"
+          },
+          {
+            "id": "assisted_red_right",
+            "meaning": "利用已接受的清道协助抓放 red 到 right"
+          },
+          {
+            "id": "place_blue_left",
+            "meaning": "独立沿共享通道抓放 blue 到 left"
+          },
+          {
+            "id": "careful_blue_left",
+            "meaning": "独立绕行抓放 blue 到 left"
+          },
+          {
+            "id": "assisted_blue_left",
+            "meaning": "利用已接受的清道协助抓放 blue 到 left"
+          },
+          {
+            "id": "place_blue_right",
+            "meaning": "独立沿共享通道抓放 blue 到 right"
+          },
+          {
+            "id": "careful_blue_right",
+            "meaning": "独立绕行抓放 blue 到 right"
+          },
+          {
+            "id": "assisted_blue_right",
+            "meaning": "利用已接受的清道协助抓放 blue 到 right"
+          },
+          {
+            "id": "place_green_left",
+            "meaning": "独立沿共享通道抓放 green 到 left"
+          },
+          {
+            "id": "careful_green_left",
+            "meaning": "独立绕行抓放 green 到 left"
+          },
+          {
+            "id": "assisted_green_left",
+            "meaning": "利用已接受的清道协助抓放 green 到 left"
+          },
+          {
+            "id": "place_green_right",
+            "meaning": "独立沿共享通道抓放 green 到 right"
+          },
+          {
+            "id": "careful_green_right",
+            "meaning": "独立绕行抓放 green 到 right"
+          },
+          {
+            "id": "assisted_green_right",
+            "meaning": "利用已接受的清道协助抓放 green 到 right"
+          },
+          {
+            "id": "request_clear",
+            "meaning": "请求伙伴释放共享通道；不放置任何物品"
+          },
+          {
+            "id": "yield",
+            "meaning": "让伙伴先撤离占位物；不放置任何物品"
+          }
+        ]
+      },
+      "allowed_progress_choices": [
+        "place_blue_left",
+        "careful_blue_left",
+        "place_green_right",
+        "careful_green_right"
+      ],
+      "type": "独立人工接口fixture；不是物理执行轨迹，不来自v3.1 formal状态。"
+    },
+    "view": "full_history",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你控制桌面整理机器人。只输出一个JSON对象：{\"choice\":\"候选ID\"}，不要解释。\n从公开候选选下一动作，使所有物品符合最新已接受指令，并遵守伙伴明确的先让行要求。\n放置前先读取该物品已接受的目标字符串left或right，所选ID末尾必须匹配它；菜单顺序不改变目标。\n候选列表只是通用能力菜单，包含错误目标和暂不可执行动作，不是正确答案列表。\nplace独立直接放置；careful独立绕开共享通道；assisted使用已接受的协助直接放置。\nrequest_clear只请求伙伴移开占位物，不执行放置，不是通用的搬运命令；已清空时重复请求无帮助。\nyield只停在安全位置让伙伴撤离占位物，不完成任何物品。拒绝后可用careful绕行。\n额外请求、无效选择和失败会给反馈并消耗1步，可重试。自主选择下一未完成物品。\n示例：选择把green独立绕行放到right，输出{\"choice\":\"careful_green_right\"}。\n"
+      },
+      {
+        "role": "user",
+        "content": "{\"history\": [\"已接受初始指令：{\\\"red\\\": \\\"right\\\", \\\"blue\\\": \\\"left\\\", \\\"green\\\": \\\"right\\\"}。\", \"未接受建议：green改放另一边。此建议没有被接受。\", \"伙伴：共享通道已清空，无需请求协助。\", \"机器人选择careful_red_right。反馈：物品静止在目标槽。\", \"机器人选择careful_red_right。反馈：该物品已物理完成，请选择其他未完成物品。\"], \"physical\": {\"objects\": {\"red\": {\"position\": [0.59, 0.25, 0.032], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"blue\": {\"position\": [0.42, 0.0, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"green\": {\"position\": [0.42, 0.16, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}}, \"partner_position\": [0.54, 0.6, 0.24], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"right\"], \"blue\": [], \"green\": []}, \"remaining_decisions\": 8, \"candidates\": [{\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}]}"
+      }
+    ],
+    "prediction": {
+      "response": "{\"choice\":\"careful_green_left\"}",
+      "input_tokens": 1044,
+      "output_tokens": 9,
+      "generation_hit_limit": false,
+      "seconds": 0.20388231304241344
+    },
+    "choice": "careful_green_left",
+    "parse_error": null,
+    "progress_choice": false,
+    "derived_public_progress": {
+      "current_goals_from_public_history": {
+        "red": "right",
+        "blue": "left",
+        "green": "right"
+      },
+      "done_under_public_goals": {
+        "red": "right"
+      },
+      "remaining_items": [
+        "blue",
+        "green"
+      ],
+      "must_yield": false,
+      "accepted_clearance_help": false,
+      "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+    }
+  },
+  {
+    "case": {
+      "id": "dev_after_red_1_0",
+      "completed_item": "red",
+      "flip": true,
+      "reverse": false,
+      "observation": {
+        "history": [
+          "已接受初始指令：{\"red\": \"right\", \"blue\": \"left\", \"green\": \"right\"}。",
+          "未接受建议：green改放另一边。此建议没有被接受。",
+          "伙伴：共享通道已清空，无需请求协助。",
+          "机器人选择careful_red_right。反馈：物品静止在目标槽。",
+          "机器人选择careful_red_right。反馈：该物品已物理完成，请选择其他未完成物品。"
+        ],
+        "physical": {
+          "objects": {
+            "red": {
+              "position": [
+                0.59,
+                0.25,
+                0.032
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "blue": {
+              "position": [
+                0.42,
+                0.0,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            },
+            "green": {
+              "position": [
+                0.42,
+                0.16,
+                0.022
+              ],
+              "orientation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "velocity": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "partner_position": [
+            0.54,
+            0.6,
+            0.24
+          ],
+          "direct_path_blocked": false
+        },
+        "physical_placements": {
+          "red": [
+            "right"
+          ],
+          "blue": [],
+          "green": []
+        },
+        "remaining_decisions": 8,
+        "candidates": [
+          {
+            "id": "place_red_left",
+            "meaning": "独立沿共享通道抓放 red 到 left"
+          },
+          {
+            "id": "careful_red_left",
+            "meaning": "独立绕行抓放 red 到 left"
+          },
+          {
+            "id": "assisted_red_left",
+            "meaning": "利用已接受的清道协助抓放 red 到 left"
+          },
+          {
+            "id": "place_red_right",
+            "meaning": "独立沿共享通道抓放 red 到 right"
+          },
+          {
+            "id": "careful_red_right",
+            "meaning": "独立绕行抓放 red 到 right"
+          },
+          {
+            "id": "assisted_red_right",
+            "meaning": "利用已接受的清道协助抓放 red 到 right"
+          },
+          {
+            "id": "place_blue_left",
+            "meaning": "独立沿共享通道抓放 blue 到 left"
+          },
+          {
+            "id": "careful_blue_left",
+            "meaning": "独立绕行抓放 blue 到 left"
+          },
+          {
+            "id": "assisted_blue_left",
+            "meaning": "利用已接受的清道协助抓放 blue 到 left"
+          },
+          {
+            "id": "place_blue_right",
+            "meaning": "独立沿共享通道抓放 blue 到 right"
+          },
+          {
+            "id": "careful_blue_right",
+            "meaning": "独立绕行抓放 blue 到 right"
+          },
+          {
+            "id": "assisted_blue_right",
+            "meaning": "利用已接受的清道协助抓放 blue 到 right"
+          },
+          {
+            "id": "place_green_left",
+            "meaning": "独立沿共享通道抓放 green 到 left"
+          },
+          {
+            "id": "careful_green_left",
+            "meaning": "独立绕行抓放 green 到 left"
+          },
+          {
+            "id": "assisted_green_left",
+            "meaning": "利用已接受的清道协助抓放 green 到 left"
+          },
+          {
+            "id": "place_green_right",
+            "meaning": "独立沿共享通道抓放 green 到 right"
+          },
+          {
+            "id": "careful_green_right",
+            "meaning": "独立绕行抓放 green 到 right"
+          },
+          {
+            "id": "assisted_green_right",
+            "meaning": "利用已接受的清道协助抓放 green 到 right"
+          },
+          {
+            "id": "request_clear",
+            "meaning": "请求伙伴释放共享通道；不放置任何物品"
+          },
+          {
+            "id": "yield",
+            "meaning": "让伙伴先撤离占位物；不放置任何物品"
+          }
+        ]
+      },
+      "allowed_progress_choices": [
+        "place_blue_left",
+        "careful_blue_left",
+        "place_green_right",
+        "careful_green_right"
+      ],
+      "type": "独立人工接口fixture；不是物理执行轨迹，不来自v3.1 formal状态。"
+    },
+    "view": "public_progress_aid",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你控制桌面整理机器人。只输出一个JSON对象：{\"choice\":\"候选ID\"}，不要解释。\n从公开候选选下一动作，使所有物品符合最新已接受指令，并遵守伙伴明确的先让行要求。\n放置前先读取该物品已接受的目标字符串left或right，所选ID末尾必须匹配它；菜单顺序不改变目标。\n候选列表只是通用能力菜单，包含错误目标和暂不可执行动作，不是正确答案列表。\nplace独立直接放置；careful独立绕开共享通道；assisted使用已接受的协助直接放置。\nrequest_clear只请求伙伴移开占位物，不执行放置，不是通用的搬运命令；已清空时重复请求无帮助。\nyield只停在安全位置让伙伴撤离占位物，不完成任何物品。拒绝后可用careful绕行。\n额外请求、无效选择和失败会给反馈并消耗1步，可重试。自主选择下一未完成物品。\n示例：选择把green独立绕行放到right，输出{\"choice\":\"careful_green_right\"}。\n"
+      },
+      {
+        "role": "user",
+        "content": "{\"history\": [\"已接受初始指令：{\\\"red\\\": \\\"right\\\", \\\"blue\\\": \\\"left\\\", \\\"green\\\": \\\"right\\\"}。\", \"未接受建议：green改放另一边。此建议没有被接受。\", \"伙伴：共享通道已清空，无需请求协助。\", \"机器人选择careful_red_right。反馈：物品静止在目标槽。\", \"机器人选择careful_red_right。反馈：该物品已物理完成，请选择其他未完成物品。\"], \"physical\": {\"objects\": {\"red\": {\"position\": [0.59, 0.25, 0.032], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"blue\": {\"position\": [0.42, 0.0, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}, \"green\": {\"position\": [0.42, 0.16, 0.022], \"orientation\": [0, 0, 0, 1], \"velocity\": [0, 0, 0]}}, \"partner_position\": [0.54, 0.6, 0.24], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"right\"], \"blue\": [], \"green\": []}, \"remaining_decisions\": 8, \"candidates\": [{\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}], \"external_public_progress_aid\": {\"current_goals_from_public_history\": {\"red\": \"right\", \"blue\": \"left\", \"green\": \"right\"}, \"done_under_public_goals\": {\"red\": \"right\"}, \"remaining_items\": [\"blue\", \"green\"], \"must_yield\": false, \"accepted_clearance_help\": false, \"source\": \"确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。\"}}"
+      }
+    ],
+    "prediction": {
+      "response": "{\"choice\":\"careful_green_right\"}",
+      "input_tokens": 1138,
+      "output_tokens": 9,
+      "generation_hit_limit": false,
+      "seconds": 0.2093868640367873
+    },
+    "choice": "careful_green_right",
+    "parse_error": null,
+    "progress_choice": true,
+    "derived_public_progress": {
+      "current_goals_from_public_history": {
+        "red": "right",
+        "blue": "left",
+        "green": "right"
+      },
+      "done_under_public_goals": {
+        "red": "right"
+      },
+      "remaining_items": [
+        "blue",
+        "green"
+      ],
+      "must_yield": false,
+      "accepted_clearance_help": false,
+      "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+    }
+  }
+]

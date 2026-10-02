@@ -1,0 +1,486 @@
+{
+  "calls": 96,
+  "all_matched": true,
+  "checks": [
+    {
+      "case": "formal_revision_10_0",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_0",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_10_1",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_0",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_revision_11_1",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_0",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_10_1",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_0",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 1,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 2,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 3,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 4,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 5,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 6,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 7,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 8,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 9,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 10,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 11,
+      "exact_recorded_physics_match": true
+    },
+    {
+      "case": "formal_upfront_11_1",
+      "step": 12,
+      "exact_recorded_physics_match": true
+    }
+  ]
+}
