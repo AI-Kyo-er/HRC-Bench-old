@@ -1,0 +1,739 @@
+{
+  "total": 80,
+  "passed": 80,
+  "freeze_sha256": "a6bad34bef9eb7ea9f47d89350f3debd1ce0d158735a58575a32c76298eecb7a",
+  "source_freeze_sha256": "3903965c71e7c6d1b82ac86420a5e659a65be3e2b7bbadd64701d3c2dd39f6b8",
+  "checks": [
+    {
+      "id": "thinking__single_dev_solo_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 463
+    },
+    {
+      "id": "thinking__single_dev_solo_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 463
+    },
+    {
+      "id": "thinking__single_dev_solo_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 463
+    },
+    {
+      "id": "thinking__single_dev_solo_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 463
+    },
+    {
+      "id": "thinking__single_dev_assisted_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "thinking__single_dev_assisted_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "thinking__single_dev_assisted_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "thinking__single_dev_assisted_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "thinking__single_dev_yield_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 468
+    },
+    {
+      "id": "thinking__single_dev_yield_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 468
+    },
+    {
+      "id": "thinking__single_dev_yield_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 468
+    },
+    {
+      "id": "thinking__single_dev_yield_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 468
+    },
+    {
+      "id": "thinking__single_dev_refusal_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 476
+    },
+    {
+      "id": "thinking__single_dev_refusal_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 476
+    },
+    {
+      "id": "thinking__single_dev_refusal_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 476
+    },
+    {
+      "id": "thinking__single_dev_refusal_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 476
+    },
+    {
+      "id": "thinking__multi_dev_after_red_0_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_red_0_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_red_0_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_red_0_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_red_1_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_red_1_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_red_1_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_red_1_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_0_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1059
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_0_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1153
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_0_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1059
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_0_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1153
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_1_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1059
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_1_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1153
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_1_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1059
+    },
+    {
+      "id": "thinking__multi_dev_after_blue_1_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1153
+    },
+    {
+      "id": "thinking__multi_dev_after_green_0_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_green_0_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_green_0_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_green_0_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_green_1_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_green_1_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "thinking__multi_dev_after_green_1_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1044
+    },
+    {
+      "id": "thinking__multi_dev_after_green_1_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1138
+    },
+    {
+      "id": "nonthinking__single_dev_solo_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "nonthinking__single_dev_solo_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "nonthinking__single_dev_solo_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "nonthinking__single_dev_solo_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 467
+    },
+    {
+      "id": "nonthinking__single_dev_assisted_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 471
+    },
+    {
+      "id": "nonthinking__single_dev_assisted_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 471
+    },
+    {
+      "id": "nonthinking__single_dev_assisted_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 471
+    },
+    {
+      "id": "nonthinking__single_dev_assisted_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 471
+    },
+    {
+      "id": "nonthinking__single_dev_yield_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 472
+    },
+    {
+      "id": "nonthinking__single_dev_yield_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 472
+    },
+    {
+      "id": "nonthinking__single_dev_yield_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 472
+    },
+    {
+      "id": "nonthinking__single_dev_yield_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 472
+    },
+    {
+      "id": "nonthinking__single_dev_refusal_left_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 480
+    },
+    {
+      "id": "nonthinking__single_dev_refusal_left_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 480
+    },
+    {
+      "id": "nonthinking__single_dev_refusal_right_0",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 480
+    },
+    {
+      "id": "nonthinking__single_dev_refusal_right_1",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 480
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_0_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_0_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_0_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_0_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_1_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_1_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_1_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_red_1_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_0_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1063
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_0_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1157
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_0_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1063
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_0_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1157
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_1_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1063
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_1_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1157
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_1_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1063
+    },
+    {
+      "id": "nonthinking__multi_dev_after_blue_1_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1157
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_0_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_0_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_0_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_0_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_1_0_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_1_0_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_1_1_full_history",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1048
+    },
+    {
+      "id": "nonthinking__multi_dev_after_green_1_1_public_progress_aid",
+      "checks": {
+        "record_exact": true,
+        "messages_hash": true,
+        "seed_exact": true
+      },
+      "input_tokens": 1142
+    }
+  ],
+  "memory_estimate": {
+    "maximum_input_tokens": 1157,
+    "maximum_output_tokens": 8192,
+    "maximum_total_tokens": 9349,
+    "bf16_weight_bytes": 29536665640,
+    "kv_cache_bytes": 1531740160,
+    "workspace_margin_bytes": 3221225472,
+    "required_free_mib": 32702,
+    "kv_basis": "2(K,V)*layers*KVheads*head_dim*2(BF16)*max(input+output),batch1;额外3GiB工作区/上下文裕量"
+  },
+  "no_model_generation": true
+}

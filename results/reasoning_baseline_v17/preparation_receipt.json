@@ -1,0 +1,50 @@
+{
+  "stage": "已冻结、未生成，下载进行中",
+  "freeze_sha256": "a6bad34bef9eb7ea9f47d89350f3debd1ce0d158735a58575a32c76298eecb7a",
+  "superseded_unexecuted_freeze_sha256": "5252b7e29b0d178028052354c32f24b17ea5f21c5570aa043b105aa016f58c3d",
+  "source_sha256": {
+    "experiments/reasoning_baseline_v17/assets.py": "9c302bd2fefa5565e0ada38b7606ef8ec454295d5a4d79ced1856e1b98adeee6",
+    "experiments/reasoning_baseline_v17/adapter.py": "cbcf7566b12a92cbd98da01ea7288e7d2aa9169d1575a6d5d24a2b4de8b03a99",
+    "experiments/reasoning_baseline_v17/run.py": "e4e9b0e9bd2d253e48d56d20dc4344cf0794f683ab902d2e086d47a93e485d5d",
+    "experiments/model_scale_v4/run.py": "ad3528b5ef050d2d4c05e21f396e59df443a2d66e851cc13e9ee3fcbb913357b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/progress.py": "8f685eb440790b817ce54731edb26019fd24d855ea6df24a9512d57a681637f7",
+    "tests/test_reasoning_baseline_v17.py": "a07f8a95ab1ac733b62f04bbaeeb16e3687fe29f58f463c0f1c2f0465de435a5"
+  },
+  "input_audit_sha256": "b9334e7869b635c94d9a4017848bfe9fbd3934672de4d10acd30bc3e62b3fd87",
+  "official_revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+  "official_weights_bytes": 29536665640,
+  "gpu_generation_started": false,
+  "download_handle": 71063,
+  "download_pid": 82422,
+  "download_last_real_sample": {
+    "unix": 1790976852.5288563,
+    "complete_weights_bytes": 0,
+    "partial_bytes": 13799260160,
+    "total_weights_downloaded_bytes": 13799260160,
+    "pid": 82422,
+    "pid_alive": true
+  },
+  "tests": {
+    "prefreeze_adapter": 6,
+    "prefreeze_adapter_exit_code": 0,
+    "full_permanent": 110,
+    "full_handle": 50033,
+    "full_exit_code": 0,
+    "full_log_sha256": "e4224a0a13e2e3845d919f715b0fff5a32a61480fb0ac9738898cea07b47db50"
+  },
+  "cpu_first_freeze_failure": "错误假设thinking模板开<think>，assert失败exit1；官方实际只开assistant。源/log保留，不涉及生成。",
+  "cpu_final_freeze_handle": 72519,
+  "cpu_final_freeze_exit_code": 0,
+  "memory_estimate": {
+    "maximum_input_tokens": 1157,
+    "maximum_output_tokens": 8192,
+    "maximum_total_tokens": 9349,
+    "bf16_weight_bytes": 29536665640,
+    "kv_cache_bytes": 1531740160,
+    "workspace_margin_bytes": 3221225472,
+    "required_free_mib": 32702,
+    "kv_basis": "2(K,V)*layers*KVheads*head_dim*2(BF16)*max(input+output),batch1;额外3GiB工作区/上下文裕量"
+  },
+  "download_complete_verified": false
+}
