@@ -1,0 +1,15 @@
+{
+  "recorded_utc": "2026-10-02T16:54:00.644166+00:00",
+  "session": 52816,
+  "exit_code": 1,
+  "cause": "运行内contact位置tuple vs 旧JSON读回list，比较器直接dict==拒绝；保存后两份JSON checkpoint精确相同。",
+  "serialized_checkpoint_exact_match": true,
+  "first_episode_physical_success": true,
+  "first_episode_robot_partner_ticks": 0,
+  "first_episode_object_partner_ticks": 0,
+  "old_freeze_sha256": "fc166b357dc086aa8f4a965557589f52f5550c66e7b254c78f0ea3a7a7fe3945",
+  "failed_source_sha256": "5ab7ee93756e017646df8553bf77cbf7423f4ad8ce2e8ea1013b960134cf59ca",
+  "preserved_first_episode": "results/structure_diagnostic_v6/raw/episodes/A_exclusive_40",
+  "new_version_changes": "v6.1仅JSON规范化checkpoint比较、新freeze/run_v1输出目录与版本；策略、任务、菜单、评分、物理不变。",
+  "v6_1_results_will_not_mix_failed_attempt_episode": true
+}
