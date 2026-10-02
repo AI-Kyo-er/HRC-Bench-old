@@ -89,3 +89,11 @@ Sol核查现有world的左右端点接口可复用，但运输后right无同来�
 句柄83074真实exit0。主控读取`raw/thinking/summary.json`：single16/16、full_history12/12、public_progress_aid12/12，原门槛gate_passed=true，各组parse_errors与truncated均0。冻结SHA保持`a6bad34bef9eb7ea9f47d89350f3debd1ce0d158735a58575a32c76298eecb7a`，官方revision及原输入不变；BF16、单GPU2、SDPA、无量化/卸载，峰值分配29,990,195,200字节。
 
 这是原固定小集上的基础资格，不是新增接口、持续闭环、结构泛化或内部机制证据。相比旧模型同时改变了模型、模板、采样和输出预算，不能把差异纯归因于思考模式。旧模型失败与该次新模型通过均原样保留。nonthinking按预设、重新核验GPU空闲48,494MiB后顺序启动，句柄14588；完整80项事后审计仍待回收。下一模型实验方向转向新接口局部校准与持续闭环，不自动追加旧教师强制检查点。
+
+## 两模式与完整80项审计完成
+
+nonthinking句柄14588、PID111387真实exit0：single15/16、full_history12/12、public_progress_aid12/12，原gate=false；无解析或截断失败。唯一错误为`single_dev_yield_left_1`：公开输入明确当前禁止抓放、须先让行，模型输出`careful_blue_left`，原允许集只有yield，故保留`yield_requirement_ignored`。不能因最终目标方向正确或可绕行而放宽先让行要求，也不补采样。
+
+独立审计42752真实exit0；主控读取并汇总全部80条检查，原记录/messages/标签/候选、渲染token、原始解码、最终答复边界、评分、seed和输出预算均一致，无失败检查。审计源SHA`9dd51ac9490365997b8318beedc9329ea2fbd6e3e473fbcc9ca56aaf48dc37b1`与冻结运行源分开记录，冻结源未改。nonthinking峰值分配29,905,044,992字节。两模式各自报告，不逐题取最优；该单次小集差异不证明思考机制的因果效应或统计稳健提升。
+
+研究判断更新：已有一个通过旧基础门槛的本地配置，因此“所有受测模型基础不足”不再成立。下一步可用明确合格的配置推进新接口校准及闭环检验；仍不能将旧任务通过推广到新请求、完成声明或六类结构。其他模型既有失败不变，也不将旧失败继续累加为组合缺口证据。
