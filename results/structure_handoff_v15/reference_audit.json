@@ -1,0 +1,1901 @@
+{
+  "all_passed": true,
+  "total": 16,
+  "episodes": [
+    {
+      "id": "B_handoff_before_child_accepted_left_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006",
+      "original_summary_sha256": "d0e00bcc5a2eca4702d5e3aaff9ba7b80539d5f96e04d0aa37e4b6b47ae261e6",
+      "decisions_sha256": "2e1e62230c870bc4af506918b6e5c04dec5ff1712fac30b268380782eacebfbb",
+      "ticks_sha256": "96b571d8e42295b6f7c65c58c7b5f075c11025d6131eea876fefa204a5661e51"
+    },
+    {
+      "id": "B_handoff_before_child_accepted_right_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c",
+      "original_summary_sha256": "e27d381fa3c67db7595d1ae33ba09568c8a2a89cb2e81a42fc65cc8659054c8d",
+      "decisions_sha256": "58b9e55cf809b1d81b88358074f65f44a7259c699cb4af60db585b53069056ed",
+      "ticks_sha256": "d80b728c19b203bc1d741519dc97593c5444a8deb41525a090c12a457a7729f3"
+    },
+    {
+      "id": "B_handoff_before_child_rejected_left_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c",
+      "original_summary_sha256": "e7bbd45395239283e6c93dba6cdeb73a07e3f4cc04c7c653a65b85291b7537a2",
+      "decisions_sha256": "7e875d8ae8d9516397d8fb3ce6cf10db863672e773ed89e64a81473bfa390ce8",
+      "ticks_sha256": "d7ce2fa52f6f5ce7bf9467453e16037ce489955b95f12f3e8fab905419ffd48c"
+    },
+    {
+      "id": "B_handoff_before_child_rejected_right_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006",
+      "original_summary_sha256": "b317cd55377509323a7a6f6abf8b2329e09146c9b3bef4f6d1e07e663e3e35cc",
+      "decisions_sha256": "5768676e6b40b7388aaf9627a6dad3e65fc1a4df949b291c99df7b001ee7a152",
+      "ticks_sha256": "a87048a4506869639cf6d7f0b01f8f69d6623c07e38bed4dc835f2f205ab4d90"
+    },
+    {
+      "id": "B_handoff_during_child_accepted_left_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006",
+      "original_summary_sha256": "59944b2f18705c860acd5e6db403e2205da1d4fe57548837c76b8cbb334f0593",
+      "decisions_sha256": "f113dfe2b460abc5464b8db74c4afc02b62f52f5d06f13d41daa728137157c57",
+      "ticks_sha256": "64f81c169d5a0a7ff8ccb3f63711e15d4d03d3cf8ac9966c6dc5612b2359ca62"
+    },
+    {
+      "id": "B_handoff_during_child_accepted_right_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c",
+      "original_summary_sha256": "6813a22aa07d673cd76c6ad04d83f714d463458faed89e027d67f54b67b134dd",
+      "decisions_sha256": "a3da86af630ebd9249d9aed5cf96207be2185ff7da28df254e7d8feff1e813d0",
+      "ticks_sha256": "5e002286ce88f5641670b8d18314fad31f293898d0c9ddae35d21c1f6f45ac32"
+    },
+    {
+      "id": "B_handoff_during_child_rejected_left_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149778,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "1a23a030f489bf1c26724cb16b9533c61935cda7db547a5ed8ce3e144acf797c",
+      "original_summary_sha256": "e278b52a88d3c40e1c4d4d273fe406e3411b66c67aaa40bee934a7fa842ed31e",
+      "decisions_sha256": "e772bb1291b55a85dc421c3bad250a1a25491e6a0abe0ea74a8b6907bb1613a7",
+      "ticks_sha256": "75230ca8cb2185f3827a7237335756bddd5e21bd62359380c1cd24f0c22dc7e8"
+    },
+    {
+      "id": "B_handoff_during_child_rejected_right_60",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 149597,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "d54d7902b83bb6efc086731b644b82db4134eb31c3aa2fd1ea4f0854b40cd13d",
+      "full_canonical_sha256": "29f45474782fd9b1c5baffd915cdfcbf092c2c06e32ef39d10d0526e281ac006",
+      "original_summary_sha256": "5516fcc6709ae286bf7f1ea8b8e42f84ed5fa921adfc2bef3bf74ef0506c7d7b",
+      "decisions_sha256": "5c6056dfbe17429b919f3635eabe1fd8fb2060245c5abc9c2e2df1cacbf68394",
+      "ticks_sha256": "dce93e8688fb0a658e2077163ac8b482966b06bc88fabf676c1675f286938436"
+    },
+    {
+      "id": "B_handoff_before_child_accepted_left_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba",
+      "original_summary_sha256": "eeeb1a1b2c0afa8ca3d6229a60e3d22b06042c8bc7e26cca1bb52df7700a1bd5",
+      "decisions_sha256": "1d88b2ac287e310314cb33d1f7a2650a1abe5c0814ef1df3c622da1f453adcd8",
+      "ticks_sha256": "1dc84802b5d5a24e774eff6e48618df96dbec9829960113f6d77b8fb612bb03d"
+    },
+    {
+      "id": "B_handoff_before_child_accepted_right_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575",
+      "original_summary_sha256": "4f7dc8ebf6dcbd590d48830f8248119db87eebd1f053f6c471d9a18b839a0346",
+      "decisions_sha256": "656ffb9aa798940dca178c1e34f4816e083e1885b5be33db4a4f513b773f4a0a",
+      "ticks_sha256": "a59e3441071100ec0b68837da489031cea0e0a2aa1ba5897591ca0fef7cacf2c"
+    },
+    {
+      "id": "B_handoff_before_child_rejected_left_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575",
+      "original_summary_sha256": "6050c971de4255ae5dd54bf286344d616ef38c62a0b14ab843ead989d34a9383",
+      "decisions_sha256": "573a7f3da289fcb17b215bced8f868288a6272a727916a4bbdd3e9e7273a77c8",
+      "ticks_sha256": "2e070f0f3d126c8a965b3cb552821d3959182ec25b546865757a9794a930be26"
+    },
+    {
+      "id": "B_handoff_before_child_rejected_right_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba",
+      "original_summary_sha256": "21493a1c67c24f45746d1ab2a5a6ce104d53007345b57b558ecb4e132c2adc46",
+      "decisions_sha256": "7573f033b3f4fa8da9a89d3917df33ea0c1ce3ae3b1c2db3301f2ed77ed01094",
+      "ticks_sha256": "43da747d09e98f4454ae6dede84fda66d316a08f43dc43d3298abd686f092668"
+    },
+    {
+      "id": "B_handoff_during_child_accepted_left_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba",
+      "original_summary_sha256": "a0711b66d5ef9e8d39404b8dfaeb519ed39e759b67406b5b82922a1c08ad712c",
+      "decisions_sha256": "b3adceb26a2775e5dbb53fc5e800fa6b24c06bd3404819972766171bafca3373",
+      "ticks_sha256": "577ad3aaef60ae1ec7a65315c6df6a6d3817cd65da07a9e4a596af64873625a7"
+    },
+    {
+      "id": "B_handoff_during_child_accepted_right_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575",
+      "original_summary_sha256": "5f76490e2db9925bedd822544535c0ca9ca408ce975dfb0384f7028dff8485af",
+      "decisions_sha256": "b72c9bd4b6f27f71da6f29341f5217c5fa5eb05d0b1a330fa69b2dad709d2f94",
+      "ticks_sha256": "4ac0071c09059e17e89731c8aa51f2be7890e11b6228c102c013e61fe6c98ec6"
+    },
+    {
+      "id": "B_handoff_during_child_rejected_left_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "5b5505d086ea8f0c62c444fccd9cc3d247f23bcef2b4af60768d4c41d0c13575",
+      "original_summary_sha256": "7e1112cf5e543749a46c17987d82ae9ebab449d7b7ff4c3b4217c36569d749fa",
+      "decisions_sha256": "7cae37544d9a41b82ae6251292c90c22c2a2044e692e188b1c3dd879db738179",
+      "ticks_sha256": "9b30fae196c8b31059dc45544b758fb32d31634a6ac0aa00a93f7b94d333f67d"
+    },
+    {
+      "id": "B_handoff_during_child_rejected_right_61",
+      "passed": true,
+      "original_run_passed": false,
+      "original_false_checks": {
+        "old_d5_physical_exact": false,
+        "final_physical_exact": false
+      },
+      "normalized_restored_checks": {
+        "old_d5_physical_exact": true,
+        "final_physical_exact": true
+      },
+      "checks": [
+        {
+          "decision": 1,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 2,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 3,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        },
+        {
+          "decision": 4,
+          "messages_exact": true,
+          "geometry_exact": true,
+          "region_exact": true,
+          "candidates_exact": true,
+          "only_public_keys": true,
+          "budget_actual": true,
+          "immutable_history_prefix": true,
+          "feedback_once": true,
+          "mechanical_observation_matches_old": true,
+          "handoff_not_future_leaked": true
+        }
+      ],
+      "extra": {
+        "contact_audit_exact": true,
+        "all_zero_record": true,
+        "handoff_state_matches_actual_tick": true,
+        "partner_really_withdrawn": true,
+        "green_done_preserved": true,
+        "blue_real_neutral": true,
+        "public_child_ended": true,
+        "latest_outer_restored": true,
+        "history_only_documented_changes": true,
+        "old_new_prefix_equal": true,
+        "old_new_full_trace_equal": true,
+        "old_new_updates_same_tick": true,
+        "old_new_update_block_exact": true,
+        "handoff_no_target_fields": true
+      },
+      "contacts": {
+        "total_ticks": 12780,
+        "all_contact_records": 150033,
+        "all_missing_distance_records": 0,
+        "robot_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "object_partner": {
+          "ticks": 0,
+          "records": 0,
+          "max_normal_force": 0,
+          "phases": {},
+          "missing_distance_records": 0,
+          "negative_distance_records": 0,
+          "near_zero_distance_records": 0,
+          "positive_distance_records": 0,
+          "min_contact_distance": null,
+          "max_contact_distance": null
+        },
+        "zero_record_passed": true
+      },
+      "prefix_canonical_sha256": "ba38b3ebf3425a8fb82dc79dd9e94da04f5dde72bf4a641f3c3884ccdd9bd595",
+      "full_canonical_sha256": "7a8d7cf0d29f07a8fac331a69bf697a1ad492a94acffa6dfa098b5990b4d80ba",
+      "original_summary_sha256": "d55d49f745e9c09c627a60c34164c4595cc63387f370f02087a9f47eca97f31c",
+      "decisions_sha256": "7eaacd8c4f11f475733652bf5b6b7e4b30f8bd01c7a7506774c4895dbb7b5425",
+      "ticks_sha256": "53c150e11c59c2871053f73de3997bf1f6d56f3e12a83712bbf6816b8f32915f"
+    }
+  ],
+  "total_ticks": 204480,
+  "original_run_passed": 0,
+  "original_run_exit_code": 1,
+  "comparator_errata": "冻结run对live接触tuple与旧JSON list做直接==，两state字段误false；保存JSON全字段及全tick规范轨迹完全匹配。此派生仅规范容器，无字段/精度/接触删减，不修改原passed/freeze/trace，也不重跑。",
+  "freeze_sha256": "563625ee6cacac965aa31fc780360f8d48d9519472425cdc1a09e81f35af5ae0",
+  "postfreeze_audit_sha256": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+  "runtime_sources_unchanged": true
+}

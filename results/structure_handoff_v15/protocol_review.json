@@ -1,0 +1,39 @@
+{
+  "old_system": "你控制持续桌面任务。只输出{\"choice\":\"候选ID\"}。\n公开历史中的已接受约定由脚本共同背景预置，不表示你亲自协商。\n局部blue指导要求真实暂存到neutral检查盘；伙伴进入检查后先yield让其撤离。\n外层blue投递调整只有对应提议被接受才生效，拒绝保留原约定。指导期间的已接受外层调整不取消neutral检查，终止指导后按最新有效外层约定投递；red/green约定及物理进度保留。\nstage_blue_neutral执行上述暂存。检查通过后finish_guidance终止局部指导并恢复当时有效外层blue约定，不移动物品；red/green约定与已实现进度保留。\nplace直接抓放；careful绕行；assisted需已接受清道协助；request_clear只求清道；yield让行，可合法但不推进物品。\n全部22候选是公开通用能力集合，包含当前错误或不可执行动作，拒绝与额外动作计决策成本并提供反馈。\n依据公开原始历史和真实区域继续任务，自主选择尚未满足约定的物品。\n输出格式：{\"choice\":\"候选ID\"}。\n",
+  "new_system": "你控制持续桌面任务。只输出{\"choice\":\"候选ID\"}。\n公开历史中的已接受约定由脚本共同背景预置，不表示你亲自协商。\n局部blue指导要求真实暂存到neutral检查盘；伙伴进入检查后先yield让其撤离。\n外层blue投递调整只有对应提议被接受才生效，拒绝保留原约定。指导期间的已接受外层调整不取消neutral检查，终止指导后按最新有效外层约定投递；red/green约定及物理进度保留。\nstage_blue_neutral执行上述暂存。局部指导活动且实际检查通过、伙伴已撤离时，伙伴公开交还blue即终止局部指导并恢复当时有效外层blue约定，不移动物品；不需机器人再finish_guidance。机器人也可在满足检查条件时用finish_guidance主动终止；已终止后重复finish_guidance无效。red/green约定与已实现进度保留。\nplace直接抓放；careful绕行；assisted需已接受清道协助；request_clear只求清道；yield让行，可合法但不推进物品。\n全部22候选是公开通用能力集合，包含当前错误或不可执行动作，拒绝与额外动作计决策成本并提供反馈。\n依据公开原始历史和真实区域继续任务，自主选择尚未满足约定的物品。\n输出格式：{\"choice\":\"候选ID\"}。\n",
+  "system_diff": "--- v11\n+++ v15\n@@ -2,7 +2,7 @@\n 公开历史中的已接受约定由脚本共同背景预置，不表示你亲自协商。\n 局部blue指导要求真实暂存到neutral检查盘；伙伴进入检查后先yield让其撤离。\n 外层blue投递调整只有对应提议被接受才生效，拒绝保留原约定。指导期间的已接受外层调整不取消neutral检查，终止指导后按最新有效外层约定投递；red/green约定及物理进度保留。\n-stage_blue_neutral执行上述暂存。检查通过后finish_guidance终止局部指导并恢复当时有效外层blue约定，不移动物品；red/green约定与已实现进度保留。\n+stage_blue_neutral执行上述暂存。局部指导活动且实际检查通过、伙伴已撤离时，伙伴公开交还blue即终止局部指导并恢复当时有效外层blue约定，不移动物品；不需机器人再finish_guidance。机器人也可在满足检查条件时用finish_guidance主动终止；已终止后重复finish_guidance无效。red/green约定与已实现进度保留。\n place直接抓放；careful绕行；assisted需已接受清道协助；request_clear只求清道；yield让行，可合法但不推进物品。\n 全部22候选是公开通用能力集合，包含当前错误或不可执行动作，拒绝与额外动作计决策成本并提供反馈。\n 依据公开原始历史和真实区域继续任务，自主选择尚未满足约定的物品。\n",
+  "history_content_changes": [
+    {
+      "kind": "accepted_child",
+      "old": "已接受blue局部指导：暂存neutral，伙伴检查并撤离后可finish_guidance终止，恢复当时有效外层blue约定；red/green继续原约定。",
+      "new": "已接受blue局部指导：暂存neutral，实际检查通过且伙伴已撤离后，伙伴明确交还或机器人finish_guidance均可终止，恢复当时有效外层blue约定；red/green继续原约定。"
+    }
+  ],
+  "unchanged_local_check_passed": {
+    "kind": "local_check_passed",
+    "content": "伙伴脚本依据实际blue在neutral的位姿完成检查，可终止指导。"
+  },
+  "new_handoff_event": {
+    "kind": "partner_handoff",
+    "content": "局部检查已结束，现在交还blue，按当前有效外层约定继续。"
+  },
+  "sample_proposed_messages": [
+    {
+      "role": "system",
+      "content": "你控制持续桌面任务。只输出{\"choice\":\"候选ID\"}。\n公开历史中的已接受约定由脚本共同背景预置，不表示你亲自协商。\n局部blue指导要求真实暂存到neutral检查盘；伙伴进入检查后先yield让其撤离。\n外层blue投递调整只有对应提议被接受才生效，拒绝保留原约定。指导期间的已接受外层调整不取消neutral检查，终止指导后按最新有效外层约定投递；red/green约定及物理进度保留。\nstage_blue_neutral执行上述暂存。局部指导活动且实际检查通过、伙伴已撤离时，伙伴公开交还blue即终止局部指导并恢复当时有效外层blue约定，不移动物品；不需机器人再finish_guidance。机器人也可在满足检查条件时用finish_guidance主动终止；已终止后重复finish_guidance无效。red/green约定与已实现进度保留。\nplace直接抓放；careful绕行；assisted需已接受清道协助；request_clear只求清道；yield让行，可合法但不推进物品。\n全部22候选是公开通用能力集合，包含当前错误或不可执行动作，拒绝与额外动作计决策成本并提供反馈。\n依据公开原始历史和真实区域继续任务，自主选择尚未满足约定的物品。\n输出格式：{\"choice\":\"候选ID\"}。\n"
+    },
+    {
+      "role": "user",
+      "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本预置初始共同接受背景，非模型协商。\"}, {\"kind\": \"accepted_outer\", \"goals\": {\"red\": \"left\", \"blue\": \"left\", \"green\": \"right\"}, \"content\": \"已共同接受外层目标，允许自主物品顺序。\"}, {\"kind\": \"prefix_action\", \"content\": \"red已真实放到left并停车。\"}, {\"kind\": \"update_proposed\", \"proposal_id\": \"u1\", \"item\": \"blue\", \"destination\": \"right\", \"content\": \"只调整blue检查结束后的外层投递；neutral检查与red/green约定不变。\"}, {\"kind\": \"proposal_reply\", \"proposal_id\": \"u1\", \"decision\": \"accept\", \"content\": \"对该提议：接受。\"}, {\"kind\": \"accepted_child\", \"content\": \"已接受blue局部指导：暂存neutral，实际检查通过且伙伴已撤离后，伙伴明确交还或机器人finish_guidance均可终止，恢复当时有效外层blue约定；red/green继续原约定。\"}, {\"kind\": \"inspection_started\", \"content\": \"伙伴真实进入共享通道进行脚本检查，已接受顺序要求先yield令其撤离。\"}, {\"kind\": \"action_feedback\", \"choice\": \"stage_blue_neutral\", \"content\": \"物品静止在目标槽\"}, {\"kind\": \"partner_released\", \"by\": \"yield\", \"content\": \"伙伴实际撤离共享通道。\"}, {\"kind\": \"local_check_passed\", \"content\": \"伙伴脚本依据实际blue在neutral的位姿完成检查，可终止指导。\"}, {\"kind\": \"action_feedback\", \"choice\": \"yield\", \"content\": \"伙伴已撤离，现有物品约定继续有效。\"}, {\"kind\": \"action_feedback\", \"choice\": \"place_green_right\", \"content\": \"物品静止在目标槽\"}, {\"kind\": \"partner_handoff\", \"content\": \"局部检查已结束，现在交还blue，按当前有效外层约定继续。\"}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.5899921206461188, -0.26275781642267054, 0.03198968394268547], \"orientation\": [1.1962187364335458e-06, -8.8741653420904e-06, 2.114021058839467e-06, 0.9999999999576746], \"velocity\": [2.737222411788818e-20, 1.9920303273456026e-20, 2.1510571102112408e-16]}, \"blue\": {\"position\": [0.6499946172556871, 0.006002705111145996, 0.03198967453031567], \"orientation\": [1.2889962343917688e-06, -9.146004928375628e-06, -4.7478892502586335e-06, 0.9999999999460732], \"velocity\": [8.57593021307037e-21, 7.552122975182265e-21, 6.938893903907228e-18]}, \"green\": {\"position\": [0.7098194679391788, 0.26253938366188556, 0.03198966335748448], \"orientation\": [1.0148163784152402e-06, -9.417928658542072e-06, -4.408053019625649e-06, 0.9999999999454209], \"velocity\": [-4.495898062208016e-13, 1.479242899608212e-13, -4.2058023730362493e-13]}}, \"partner_position\": [0.5400000214576721, 0.6000000238418579, 0.23999999463558197], \"direct_path_blocked\": false}, \"physical_placements\": {\"red\": [\"left\"], \"blue\": [\"neutral\"], \"green\": [\"right\"]}, \"remaining_decisions\": 9, \"candidates\": [{\"id\": \"place_red_left\", \"meaning\": \"独立沿共享通道抓放 red 到 left\"}, {\"id\": \"careful_red_left\", \"meaning\": \"独立绕行抓放 red 到 left\"}, {\"id\": \"assisted_red_left\", \"meaning\": \"利用已接受的清道协助抓放 red 到 left\"}, {\"id\": \"place_red_right\", \"meaning\": \"独立沿共享通道抓放 red 到 right\"}, {\"id\": \"careful_red_right\", \"meaning\": \"独立绕行抓放 red 到 right\"}, {\"id\": \"assisted_red_right\", \"meaning\": \"利用已接受的清道协助抓放 red 到 right\"}, {\"id\": \"place_blue_left\", \"meaning\": \"独立沿共享通道抓放 blue 到 left\"}, {\"id\": \"careful_blue_left\", \"meaning\": \"独立绕行抓放 blue 到 left\"}, {\"id\": \"assisted_blue_left\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"独立沿共享通道抓放 blue 到 right\"}, {\"id\": \"careful_blue_right\", \"meaning\": \"独立绕行抓放 blue 到 right\"}, {\"id\": \"assisted_blue_right\", \"meaning\": \"利用已接受的清道协助抓放 blue 到 right\"}, {\"id\": \"place_green_left\", \"meaning\": \"独立沿共享通道抓放 green 到 left\"}, {\"id\": \"careful_green_left\", \"meaning\": \"独立绕行抓放 green 到 left\"}, {\"id\": \"assisted_green_left\", \"meaning\": \"利用已接受的清道协助抓放 green 到 left\"}, {\"id\": \"place_green_right\", \"meaning\": \"独立沿共享通道抓放 green 到 right\"}, {\"id\": \"careful_green_right\", \"meaning\": \"独立绕行抓放 green 到 right\"}, {\"id\": \"assisted_green_right\", \"meaning\": \"利用已接受的清道协助抓放 green 到 right\"}, {\"id\": \"request_clear\", \"meaning\": \"请求伙伴释放共享通道；不放置任何物品\"}, {\"id\": \"yield\", \"meaning\": \"让伙伴先撤离占位物；不放置任何物品\"}, {\"id\": \"finish_guidance\", \"meaning\": \"报告局部检查完成并终止当前指导/操作，不抓放\"}, {\"id\": \"stage_blue_neutral\", \"meaning\": \"真实抓放blue到独立neutral检查盘，触发伙伴脚本检查\"}]}"
+    }
+  ],
+  "source_path": "results/structure_v11/raw/reference/B_update_before_child_accepted_left_60/decisions.json",
+  "source_sha256": "57f1c8c17f52a3beec3ca198b8c4ac97ac42ca9caaf35157187398be29074798",
+  "planned_observation_not_new_physical_rollout": true,
+  "robot_budget": 12,
+  "old_d5_remaining": 8,
+  "new_handoff_remaining": 9,
+  "old_history_events": 15,
+  "new_history_events": 13,
+  "green_completion_is_sampling_time_not_handoff_precondition": true
+}

@@ -1,0 +1,350 @@
+{
+  "total": 16,
+  "passed": 0,
+  "success": 16,
+  "ticks": 204480,
+  "robot_partner_ticks": 0,
+  "object_partner_ticks": 0,
+  "robot_decisions": 64,
+  "partner_handoffs": 16,
+  "physical_attempts_including_red_prefix": 64,
+  "episodes": [
+    {
+      "id": "B_handoff_before_child_accepted_left_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_accepted_right_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_rejected_left_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_rejected_right_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_accepted_left_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_accepted_right_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_rejected_left_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_rejected_right_60",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_accepted_left_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_accepted_right_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_rejected_left_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_before_child_rejected_right_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_accepted_left_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_accepted_right_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_rejected_left_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    },
+    {
+      "id": "B_handoff_during_child_rejected_right_61",
+      "passed": false,
+      "checks": {
+        "handoff_zero_tick": true,
+        "old_d5_physical_exact": false,
+        "full_prefix_trace_exact": true,
+        "complete_trace_exact": true,
+        "final_physical_exact": false,
+        "primitive_choices_except_zero_finish_exact": true,
+        "robot_decisions_four": true,
+        "green_preserved": true,
+        "child_ended": true,
+        "blue_still_neutral": true,
+        "budget_nine": true,
+        "event_count_thirteen": true,
+        "whole_task_not_done_at_handoff": true,
+        "first_return_correct_without_prior_feedback": true,
+        "zero_contact_records": true
+      }
+    }
+  ],
+  "freeze_sha256": "563625ee6cacac965aa31fc780360f8d48d9519472425cdc1a09e81f35af5ae0"
+}
