@@ -1,0 +1,13 @@
+{
+  "protocol_version": "2.1",
+  "frozen_at_utc": "2026-10-02T13:58:05.121026+00:00",
+  "revision_reason": "\u76ee\u6807\u53d8\u4f53\u4e0e\u4f19\u4f34\u63a5\u53d7/\u62d2\u7edd\u8f74\u72ec\u7acb\u4ea4\u53c9\uff1b2.0\u8349\u6848\u7ed1\u5b9a\uff0c\u4e0d\u4fdd\u7559\u4f5c\u5b9e\u9a8c\u8f93\u5165\u3002",
+  "hashes": {
+    "dev.jsonl": "c80beab8dee107e466a0eb4db36deeeec526a2d8c06c76ca71a1e2aee4bcfea5",
+    "formal.jsonl": "a6a984daffd31c0da9c57e8d7f9bad9f383df44ddd848f05236488b817c4c5c6"
+  },
+  "dev_instances": 12,
+  "formal_instances": 60,
+  "heldout_structure": "nested_reentry",
+  "frozen_before_dev_inference": true
+}
