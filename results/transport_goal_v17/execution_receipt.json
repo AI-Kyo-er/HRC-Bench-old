@@ -1,0 +1,42 @@
+{
+  "physics_handle": 28785,
+  "physics_exit_code": 0,
+  "original_audit_handle": 6755,
+  "original_audit_exit_code": 1,
+  "first_fixed_audit_handle": 65663,
+  "first_fixed_audit_exit_code": 0,
+  "final_audit_handle": 27540,
+  "freeze_sha256": "d967b4d3637abd61460e8b596963d320281c497da41814b78330a14cd69e2090",
+  "frozen_runtime_source_unchanged": true,
+  "physical_command_success": 16,
+  "declared_goal_compliant": 8,
+  "total_ticks": 111280,
+  "tests": {
+    "prefreeze_protocol": 5,
+    "postfreeze_region_and_annotation": 2,
+    "final_focused": 7,
+    "full_suite_not_rerun": true
+  },
+  "files_sha256": {
+    "control_summary.json": "a28b7a37b207bd6375a1bdc01506718597ffafd4a27a53876fe97ee87e3b672b",
+    "raw/run.log": "fdbe1a45252206fc4dd79feb94d984332abb258a98c18bd85c71c3223367b454",
+    "raw/tests_prefreeze.log": "07ab8eab7fe1e3211279c991c0dd0173563929e432c5658c0bdc54693e287426",
+    "raw/tests_final.log": "80855ff377c7e64388020a524be87ee5d978210af52bd62e0dc06707c934b142",
+    "raw/audit_dev0/control_audit.json": "35f1b4f0e00dce70cf6e72488b78c21c67e82f5b7f97f620dc39443633598a30",
+    "raw/audit_v1_sources/control_audit.json": "5acfd58468786347505fb1c9650418a1d28dec144bac1f23c874d781107fb8ee"
+  },
+  "raw_real_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/transport_goal_v17",
+  "raw_bytes": 81969532,
+  "no_model_or_gpu_run": true,
+  "original_legacy_goal_first_ticks": "仅旧左侧诊断；通用左右评分和首次满足由audit逐tick重算",
+  "limitations": "指定控制非自主成功；只解除blue目标门，其他语义过滤及result.success保留。",
+  "final_audit_exit_code": 0,
+  "final_audit_sha256": "507653d2cd7da36380cc9832cf3a1797bcb0180bbad6c92eacdbe697afcd23cd",
+  "final_audit_source_sha256": {
+    "experiments/transport_goal_v17/audit.py": "6f908904dbf4a33d8e2dcf0d6d69b7496d92c5004b74e0119c8e0011ec5394b5",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be"
+  },
+  "live_physics_handles": [],
+  "audit_only_comparator_revision": "初始化注解来自构造后已存快照；无物理源变动。"
+}

@@ -1,0 +1,460 @@
+{
+  "total": 16,
+  "passed": 16,
+  "physical_command_success": 16,
+  "declared_goal_compliant": 8,
+  "total_ticks": 111280,
+  "pairs": [
+    {
+      "seed": 90,
+      "command": "left",
+      "mode": "direct",
+      "ids": [
+        "Control_declared_left_command_left_direct_90",
+        "Control_declared_right_command_left_direct_90"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 90,
+      "command": "left",
+      "mode": "careful",
+      "ids": [
+        "Control_declared_left_command_left_careful_90",
+        "Control_declared_right_command_left_careful_90"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 90,
+      "command": "right",
+      "mode": "direct",
+      "ids": [
+        "Control_declared_left_command_right_direct_90",
+        "Control_declared_right_command_right_direct_90"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 90,
+      "command": "right",
+      "mode": "careful",
+      "ids": [
+        "Control_declared_left_command_right_careful_90",
+        "Control_declared_right_command_right_careful_90"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 91,
+      "command": "left",
+      "mode": "direct",
+      "ids": [
+        "Control_declared_left_command_left_direct_91",
+        "Control_declared_right_command_left_direct_91"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 91,
+      "command": "left",
+      "mode": "careful",
+      "ids": [
+        "Control_declared_left_command_left_careful_91",
+        "Control_declared_right_command_left_careful_91"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 91,
+      "command": "right",
+      "mode": "direct",
+      "ids": [
+        "Control_declared_left_command_right_direct_91",
+        "Control_declared_right_command_right_direct_91"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    },
+    {
+      "seed": 91,
+      "command": "right",
+      "mode": "careful",
+      "ids": [
+        "Control_declared_left_command_right_careful_91",
+        "Control_declared_right_command_right_careful_91"
+      ],
+      "initial_physical_equal": true,
+      "full_physical_equal": true,
+      "goal_compliance_opposite": true
+    }
+  ],
+  "freeze_sha256": "d967b4d3637abd61460e8b596963d320281c497da41814b78330a14cd69e2090",
+  "episodes": [
+    {
+      "id": "Control_declared_left_command_left_direct_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_left_command_left_careful_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_left_command_right_direct_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_left_command_right_careful_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_right_command_left_direct_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_right_command_left_careful_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_right_command_right_direct_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_right_command_right_careful_90",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_left_command_left_direct_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_left_command_left_careful_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_left_command_right_direct_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_left_command_right_careful_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_right_command_left_direct_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_right_command_left_careful_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": false,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    },
+    {
+      "id": "Control_declared_right_command_right_direct_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 6835
+    },
+    {
+      "id": "Control_declared_right_command_right_careful_91",
+      "passed": true,
+      "physical_command_success": true,
+      "declared_goal_compliant": true,
+      "cost": {
+        "decisions": 4,
+        "wait_ready_ticks": 0,
+        "wait_delivery_ticks": 535,
+        "requests": 1,
+        "accepted_requests": 1,
+        "rejected_requests": 0,
+        "duplicate_requests": 0,
+        "clear_requests": 0,
+        "yields": 1,
+        "invalid": 0,
+        "wait_ticks": 535,
+        "physical_attempts": 2,
+        "physical_failures": 0
+      },
+      "end_tick": 7075
+    }
+  ]
+}
