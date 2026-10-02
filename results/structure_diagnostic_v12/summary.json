@@ -1,0 +1,6963 @@
+{
+  "total": 128,
+  "by_stage_view": {
+    "d04_full_history": {
+      "total": 32,
+      "protocol_progress": 28,
+      "protocol_admissible": 28,
+      "legal_no_op": 0,
+      "reference_action_hit": 28,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "wrong_target": 4
+      },
+      "actions": {
+        "finish_guidance": 28,
+        "place_blue_left": 3,
+        "place_blue_right": 1
+      },
+      "action_classes": {
+        "finish_guidance": 28,
+        "place_blue": 4
+      },
+      "illegal_choices": 4,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 4,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 4,
+      "help_authorization_errors": 0
+    },
+    "d04_public_scope_aid": {
+      "total": 32,
+      "protocol_progress": 30,
+      "protocol_admissible": 30,
+      "legal_no_op": 0,
+      "reference_action_hit": 30,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "wrong_target": 2
+      },
+      "actions": {
+        "finish_guidance": 30,
+        "place_blue_left": 2
+      },
+      "action_classes": {
+        "finish_guidance": 30,
+        "place_blue": 2
+      },
+      "illegal_choices": 2,
+      "duplicate_finish": 0,
+      "blue_placement_attempts": 2,
+      "blue_direction_correct": 0,
+      "blue_direction_wrong": 2,
+      "help_authorization_errors": 0
+    },
+    "d05_full_history": {
+      "total": 32,
+      "protocol_progress": 4,
+      "protocol_admissible": 4,
+      "legal_no_op": 0,
+      "reference_action_hit": 4,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 24,
+        "wrong_target": 4
+      },
+      "actions": {
+        "finish_guidance": 24,
+        "place_blue_left": 8
+      },
+      "action_classes": {
+        "finish_guidance": 24,
+        "place_blue": 8
+      },
+      "illegal_choices": 28,
+      "duplicate_finish": 24,
+      "blue_placement_attempts": 8,
+      "blue_direction_correct": 4,
+      "blue_direction_wrong": 4,
+      "help_authorization_errors": 0
+    },
+    "d05_public_scope_aid": {
+      "total": 32,
+      "protocol_progress": 21,
+      "protocol_admissible": 21,
+      "legal_no_op": 0,
+      "reference_action_hit": 21,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {
+        "no_active_guidance_or_duplicate_finish": 7,
+        "wrong_target": 4
+      },
+      "actions": {
+        "place_blue_right": 13,
+        "finish_guidance": 7,
+        "place_blue_left": 12
+      },
+      "action_classes": {
+        "place_blue": 25,
+        "finish_guidance": 7
+      },
+      "illegal_choices": 11,
+      "duplicate_finish": 7,
+      "blue_placement_attempts": 25,
+      "blue_direction_correct": 21,
+      "blue_direction_wrong": 4,
+      "help_authorization_errors": 0
+    }
+  },
+  "by_condition": [
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 1,
+        "protocol_admissible": 1,
+        "legal_no_op": 0,
+        "reference_action_hit": 1,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 1
+        },
+        "actions": {
+          "finish_guidance": 1,
+          "place_blue_right": 1
+        },
+        "action_classes": {
+          "finish_guidance": 1,
+          "place_blue": 1
+        },
+        "illegal_choices": 1,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 1,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 1,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 2
+        },
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 2,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 1,
+        "protocol_admissible": 1,
+        "legal_no_op": 0,
+        "reference_action_hit": 1,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 1
+        },
+        "actions": {
+          "finish_guidance": 1,
+          "place_blue_left": 1
+        },
+        "action_classes": {
+          "finish_guidance": 1,
+          "place_blue": 1
+        },
+        "illegal_choices": 1,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 1,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 1,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 2
+        },
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 2,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 2
+        },
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 2,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 2
+        },
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 2,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_right": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 2
+        },
+        "actions": {
+          "finish_guidance": 2
+        },
+        "action_classes": {
+          "finish_guidance": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 2,
+        "blue_placement_attempts": 0,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_right": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "before_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 1,
+        "protocol_admissible": 1,
+        "legal_no_op": 0,
+        "reference_action_hit": 1,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "no_active_guidance_or_duplicate_finish": 1
+        },
+        "actions": {
+          "place_blue_right": 1,
+          "finish_guidance": 1
+        },
+        "action_classes": {
+          "place_blue": 1,
+          "finish_guidance": 1
+        },
+        "illegal_choices": 1,
+        "duplicate_finish": 1,
+        "blue_placement_attempts": 1,
+        "blue_direction_correct": 1,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_right": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_right": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "effective_blue": "left",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 2
+        },
+        "actions": {
+          "place_blue_right": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 2,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": false
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 0,
+        "protocol_admissible": 0,
+        "legal_no_op": 0,
+        "reference_action_hit": 0,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {
+          "wrong_target": 2
+        },
+        "actions": {
+          "place_blue_left": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 2,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 0,
+        "blue_direction_wrong": 2,
+        "help_authorization_errors": 0
+      }
+    },
+    {
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "timing": "during_child",
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "effective_blue": "right",
+        "reverse_menu": true
+      },
+      "metrics": {
+        "total": 2,
+        "protocol_progress": 2,
+        "protocol_admissible": 2,
+        "legal_no_op": 0,
+        "reference_action_hit": 2,
+        "parse_errors": 0,
+        "truncated": 0,
+        "errors": {},
+        "actions": {
+          "place_blue_right": 2
+        },
+        "action_classes": {
+          "place_blue": 2
+        },
+        "illegal_choices": 0,
+        "duplicate_finish": 0,
+        "blue_placement_attempts": 2,
+        "blue_direction_correct": 2,
+        "blue_direction_wrong": 0,
+        "help_authorization_errors": 0
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__normal__full_history",
+        "B_update_during_child_accepted_left_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__reverse__full_history",
+        "B_update_during_child_accepted_left_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__normal__full_history",
+        "B_update_during_child_accepted_right_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__reverse__full_history",
+        "B_update_during_child_accepted_right_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d04__normal__full_history",
+        "B_update_during_child_rejected_left_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d04__reverse__full_history",
+        "B_update_during_child_rejected_left_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d04__normal__full_history",
+        "B_update_during_child_rejected_right_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d04__reverse__full_history",
+        "B_update_during_child_rejected_right_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__normal__full_history",
+        "B_update_during_child_accepted_left_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__reverse__full_history",
+        "B_update_during_child_accepted_left_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__normal__full_history",
+        "B_update_during_child_accepted_right_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__reverse__full_history",
+        "B_update_during_child_accepted_right_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d04__normal__full_history",
+        "B_update_during_child_rejected_left_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d04__reverse__full_history",
+        "B_update_during_child_rejected_left_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d04__normal__full_history",
+        "B_update_during_child_rejected_right_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d04__reverse__full_history",
+        "B_update_during_child_rejected_right_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__normal__public_scope_aid",
+        "B_update_during_child_accepted_left_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__reverse__public_scope_aid",
+        "B_update_during_child_accepted_left_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__normal__public_scope_aid",
+        "B_update_during_child_accepted_right_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__reverse__public_scope_aid",
+        "B_update_during_child_accepted_right_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__normal__public_scope_aid",
+        "B_update_during_child_accepted_left_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__reverse__public_scope_aid",
+        "B_update_during_child_accepted_left_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__normal__public_scope_aid",
+        "B_update_during_child_accepted_right_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__reverse__public_scope_aid",
+        "B_update_during_child_accepted_right_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__normal__full_history",
+        "B_update_during_child_accepted_left_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__reverse__full_history",
+        "B_update_during_child_accepted_left_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__normal__full_history",
+        "B_update_during_child_accepted_right_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__reverse__full_history",
+        "B_update_during_child_accepted_right_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d05__normal__full_history",
+        "B_update_during_child_rejected_left_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d05__reverse__full_history",
+        "B_update_during_child_rejected_left_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d05__normal__full_history",
+        "B_update_during_child_rejected_right_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d05__reverse__full_history",
+        "B_update_during_child_rejected_right_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__normal__full_history",
+        "B_update_during_child_accepted_left_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__reverse__full_history",
+        "B_update_during_child_accepted_left_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__normal__full_history",
+        "B_update_during_child_accepted_right_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__reverse__full_history",
+        "B_update_during_child_accepted_right_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d05__normal__full_history",
+        "B_update_during_child_rejected_left_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d05__reverse__full_history",
+        "B_update_during_child_rejected_left_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d05__normal__full_history",
+        "B_update_during_child_rejected_right_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d05__reverse__full_history",
+        "B_update_during_child_rejected_right_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__normal__public_scope_aid",
+        "B_update_during_child_accepted_left_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__reverse__public_scope_aid",
+        "B_update_during_child_accepted_left_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__normal__public_scope_aid",
+        "B_update_during_child_accepted_right_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__reverse__public_scope_aid",
+        "B_update_during_child_accepted_right_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_60__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_60__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__normal__public_scope_aid",
+        "B_update_during_child_accepted_left_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__reverse__public_scope_aid",
+        "B_update_during_child_accepted_left_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__normal__public_scope_aid",
+        "B_update_during_child_accepted_right_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "accepted",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__reverse__public_scope_aid",
+        "B_update_during_child_accepted_right_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_left_61__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "timing",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "acceptance": "rejected",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "before_child",
+        "during_child"
+      ],
+      "ids": [
+        "B_update_before_child_rejected_right_61__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__normal__full_history",
+        "B_update_before_child_rejected_left_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__reverse__full_history",
+        "B_update_before_child_rejected_left_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__normal__full_history",
+        "B_update_before_child_rejected_right_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__reverse__full_history",
+        "B_update_before_child_rejected_right_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d04__normal__full_history",
+        "B_update_during_child_rejected_left_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d04__reverse__full_history",
+        "B_update_during_child_rejected_left_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d04__normal__full_history",
+        "B_update_during_child_rejected_right_60__d04__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d04__reverse__full_history",
+        "B_update_during_child_rejected_right_60__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__normal__full_history",
+        "B_update_before_child_rejected_left_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__reverse__full_history",
+        "B_update_before_child_rejected_left_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__normal__full_history",
+        "B_update_before_child_rejected_right_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__reverse__full_history",
+        "B_update_before_child_rejected_right_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d04__normal__full_history",
+        "B_update_during_child_rejected_left_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_right",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d04__reverse__full_history",
+        "B_update_during_child_rejected_left_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d04__normal__full_history",
+        "B_update_during_child_rejected_right_61__d04__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d04__reverse__full_history",
+        "B_update_during_child_rejected_right_61__d04__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__normal__public_scope_aid",
+        "B_update_before_child_rejected_left_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d04__reverse__public_scope_aid",
+        "B_update_before_child_rejected_left_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__normal__public_scope_aid",
+        "B_update_before_child_rejected_right_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d04__reverse__public_scope_aid",
+        "B_update_before_child_rejected_right_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__normal__public_scope_aid",
+        "B_update_before_child_rejected_left_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d04__reverse__public_scope_aid",
+        "B_update_before_child_rejected_left_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__normal__public_scope_aid",
+        "B_update_before_child_rejected_right_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d04__reverse__public_scope_aid",
+        "B_update_before_child_rejected_right_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d04__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d04__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 4,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d04__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d04__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__normal__full_history",
+        "B_update_before_child_rejected_left_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__reverse__full_history",
+        "B_update_before_child_rejected_left_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__normal__full_history",
+        "B_update_before_child_rejected_right_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__reverse__full_history",
+        "B_update_before_child_rejected_right_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d05__normal__full_history",
+        "B_update_during_child_rejected_left_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d05__reverse__full_history",
+        "B_update_during_child_rejected_left_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d05__normal__full_history",
+        "B_update_during_child_rejected_right_60__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d05__reverse__full_history",
+        "B_update_during_child_rejected_right_60__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__normal__full_history",
+        "B_update_before_child_rejected_left_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__reverse__full_history",
+        "B_update_before_child_rejected_left_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__normal__full_history",
+        "B_update_before_child_rejected_right_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__reverse__full_history",
+        "B_update_before_child_rejected_right_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d05__normal__full_history",
+        "B_update_during_child_rejected_left_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d05__reverse__full_history",
+        "B_update_during_child_rejected_left_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d05__normal__full_history",
+        "B_update_during_child_rejected_right_61__d05__normal__full_history"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "full_history",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d05__reverse__full_history",
+        "B_update_during_child_rejected_right_61__d05__reverse__full_history"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__normal__public_scope_aid",
+        "B_update_before_child_rejected_left_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_60__d05__reverse__public_scope_aid",
+        "B_update_before_child_rejected_left_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__normal__public_scope_aid",
+        "B_update_before_child_rejected_right_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_60__d05__reverse__public_scope_aid",
+        "B_update_before_child_rejected_right_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        true
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_60__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 60,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_60__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_60__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__normal__public_scope_aid",
+        "B_update_before_child_rejected_left_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_left_61__d05__reverse__public_scope_aid",
+        "B_update_before_child_rejected_left_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__normal__public_scope_aid",
+        "B_update_before_child_rejected_right_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "before_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_before_child_accepted_right_61__d05__reverse__public_scope_aid",
+        "B_update_before_child_rejected_right_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "finish_guidance",
+        "finish_guidance"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        false,
+        false
+      ],
+      "outcome": "none_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "left",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_left_61__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_left_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_right",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "right",
+        "left"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": false
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d05__normal__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d05__normal__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_left"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        false
+      ],
+      "outcome": "one_correct"
+    },
+    {
+      "dimension": "acceptance",
+      "group": {
+        "stage": 5,
+        "view": "public_scope_aid",
+        "seed": 61,
+        "timing": "during_child",
+        "initial_blue": "right",
+        "reverse_menu": true
+      },
+      "levels": [
+        "accepted",
+        "rejected"
+      ],
+      "ids": [
+        "B_update_during_child_accepted_right_61__d05__reverse__public_scope_aid",
+        "B_update_during_child_rejected_right_61__d05__reverse__public_scope_aid"
+      ],
+      "choices": [
+        "place_blue_left",
+        "place_blue_right"
+      ],
+      "effective_blue": [
+        "left",
+        "right"
+      ],
+      "progress": [
+        true,
+        true
+      ],
+      "outcome": "two_correct"
+    }
+  ],
+  "pair_outcomes": {
+    "timing": {
+      "two_correct": 35,
+      "one_correct": 13,
+      "none_correct": 16
+    },
+    "acceptance": {
+      "two_correct": 35,
+      "one_correct": 13,
+      "none_correct": 16
+    }
+  },
+  "full_to_aid": [
+    {
+      "source_case_id": "B_update_before_child_accepted_left_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_60",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_60",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_60",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_60",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_left_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_accepted_right_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_left_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_before_child_rejected_right_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "place_blue_right",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_left_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_accepted_right_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_left_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_61",
+      "stage": 4,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "finish_guidance",
+      "outcome": "incorrect_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_61",
+      "stage": 4,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "finish_guidance",
+      "outcome": "correct_to_correct"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_61",
+      "stage": 5,
+      "reverse_menu": false,
+      "full_choice": "place_blue_left",
+      "aid_choice": "place_blue_left",
+      "outcome": "incorrect_to_incorrect"
+    },
+    {
+      "source_case_id": "B_update_during_child_rejected_right_61",
+      "stage": 5,
+      "reverse_menu": true,
+      "full_choice": "finish_guidance",
+      "aid_choice": "place_blue_right",
+      "outcome": "incorrect_to_correct"
+    }
+  ],
+  "full_to_aid_outcomes": {
+    "correct_to_correct": 32,
+    "incorrect_to_correct": 19,
+    "incorrect_to_incorrect": 13
+  },
+  "physical_actions_executed": 0,
+  "no_new_gate": true,
+  "interpretation_note": "独立参考检查点，不是模型闭环；timing位置亦改变新近程度，同seed/模板非独立结构样本，无显著性推断。",
+  "model": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.49.0",
+      "huggingface-hub": "0.29.3",
+      "accelerate": "1.4.0"
+    },
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "visible_device": 2,
+    "seed": 0,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "peak_allocated_bytes": 30421236736,
+    "model_id": "Qwen/Qwen2.5-14B-Instruct",
+    "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+    "parameter_count": 14770033664,
+    "dtype": "torch.bfloat16",
+    "logical_device": "cuda:0",
+    "cuda_visible_devices": "2",
+    "attention_implementation": "sdpa",
+    "quantization": null,
+    "offload": false
+  },
+  "gpu_preflight": {
+    "checked_utc": "2026-10-02T19:13:32.936184+00:00",
+    "physical_gpu": 2,
+    "name": "NVIDIA GeForce RTX 4090",
+    "memory_total_mib": 49140,
+    "memory_used_mib": 16231,
+    "memory_free_mib": 32278,
+    "required_free_mib": 31244,
+    "max_input_tokens": 2234,
+    "raw_gpu_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 16231, 32278\n3, NVIDIA GeForce RTX 4090, 49140, 17, 48492\n"
+  },
+  "freeze_sha256": "eef5663d8e8d036f43184208184d50ca3a3fb20473daa10af0dfac4f8316b9ab",
+  "source_sha256": {
+    "experiments/structure_diagnostic_v12/dataset.py": "8d26c3712b6a45893d0312cadd8038f2ddecc18c3e04f2c7f6edadcea7af900f",
+    "experiments/structure_diagnostic_v12/scoring.py": "a163aa5f4f62b04ba8a9b26739fe77f231cee7705544877d042a31f7b4582f4b",
+    "experiments/structure_diagnostic_v12/run.py": "863b818cc3e04827650bc688e289897d8e89e9cde356ce1906e7cce0305ed415",
+    "experiments/structure_diagnostic_v12/analysis.py": "22630d1aac5ffbcd69a4dcc80ad05c6b98e518f1a671b7a8e35db619a9ec63c5",
+    "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/structure_v11/protocol.py": "315d2a4c9614742133bd7a554540e0b10b64dcaf06825c9383b5b42117bab004",
+    "experiments/structure_diagnostic_v9/analysis.py": "c4af59668be4157eaf6f12f770a8f4d088b2913e01817d129d9a9abb20a921ab"
+  },
+  "inputs_sha256": "6f34a939ebf801a6c2c84860c485de3414db040c96999c45d8ddef4a47a83339",
+  "interpretation": "v11全条件真实D4/D5离线检查点；reverse为候选反序变体、aid是公开ledger辅助，不执行动作/闭环/独立结构泛化/显著性推断。"
+}

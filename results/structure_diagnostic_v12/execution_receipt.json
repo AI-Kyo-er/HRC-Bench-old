@@ -1,0 +1,138 @@
+{
+  "finished_utc": "2026-10-02T19:22:06.926166+00:00",
+  "sessions": {
+    "focused_tests": {
+      "exit_code": 0,
+      "passed": 5
+    },
+    "full_tests": {
+      "id": 2466,
+      "exit_code": 0,
+      "passed": 57
+    },
+    "freeze": {
+      "id": 83444,
+      "exit_code": 0
+    },
+    "model": {
+      "id": 5426,
+      "pid": 23429,
+      "exit_code": 0
+    },
+    "final_audit": {
+      "id": null,
+      "exit_code": 0
+    }
+  },
+  "actual_calls": 128,
+  "source_checkpoints": 32,
+  "physics_actions_executed": 0,
+  "no_new_downloads": true,
+  "no_new_gate": true,
+  "old_14b_gate_passed": false,
+  "live_task_handles": [],
+  "own_model_pid_absent": true,
+  "own_pid_absent_from_gpu_processes": true,
+  "gpu_after_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 15, 48494\n3, NVIDIA GeForce RTX 4090, 49140, 17, 48492\n",
+  "started": {
+    "pid": 23429,
+    "utc": "2026-10-02T19:13:32.936489+00:00",
+    "freeze_sha256": "eef5663d8e8d036f43184208184d50ca3a3fb20473daa10af0dfac4f8316b9ab",
+    "inputs_sha256": "6f34a939ebf801a6c2c84860c485de3414db040c96999c45d8ddef4a47a83339",
+    "source_sha256": {
+      "experiments/structure_diagnostic_v12/dataset.py": "8d26c3712b6a45893d0312cadd8038f2ddecc18c3e04f2c7f6edadcea7af900f",
+      "experiments/structure_diagnostic_v12/scoring.py": "a163aa5f4f62b04ba8a9b26739fe77f231cee7705544877d042a31f7b4582f4b",
+      "experiments/structure_diagnostic_v12/run.py": "863b818cc3e04827650bc688e289897d8e89e9cde356ce1906e7cce0305ed415",
+      "experiments/structure_diagnostic_v12/analysis.py": "22630d1aac5ffbcd69a4dcc80ad05c6b98e518f1a671b7a8e35db619a9ec63c5",
+      "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+      "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+      "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+      "experiments/structure_v11/protocol.py": "315d2a4c9614742133bd7a554540e0b10b64dcaf06825c9383b5b42117bab004",
+      "experiments/structure_diagnostic_v9/analysis.py": "c4af59668be4157eaf6f12f770a8f4d088b2913e01817d129d9a9abb20a921ab"
+    },
+    "gpu_preflight": {
+      "checked_utc": "2026-10-02T19:13:32.936184+00:00",
+      "physical_gpu": 2,
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_total_mib": 49140,
+      "memory_used_mib": 16231,
+      "memory_free_mib": 32278,
+      "required_free_mib": 31244,
+      "max_input_tokens": 2234,
+      "raw_gpu_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 16231, 32278\n3, NVIDIA GeForce RTX 4090, 49140, 17, 48492\n"
+    }
+  },
+  "model": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.49.0",
+      "huggingface-hub": "0.29.3",
+      "accelerate": "1.4.0"
+    },
+    "cuda": "12.4",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "visible_device": 2,
+    "seed": 0,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "peak_allocated_bytes": 30421236736,
+    "model_id": "Qwen/Qwen2.5-14B-Instruct",
+    "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+    "parameter_count": 14770033664,
+    "dtype": "torch.bfloat16",
+    "logical_device": "cuda:0",
+    "cuda_visible_devices": "2",
+    "attention_implementation": "sdpa",
+    "quantization": null,
+    "offload": false
+  },
+  "official_weight_receipt_path": "results/model_scale_v4/download_receipt.json",
+  "official_weight_receipt_sha256": "c852ffdbf5e4abc8ca87bc0ec5ab7177986658bb80a4079a18ca6840e48fba65",
+  "eight_shard_official_sha_verification_reused": true,
+  "model_config_tokenizer_sha256": {
+    "model.safetensors.index.json": "46627f7a9e851d9cede6a7a4c49999082148ced9c22d2b9cfaaa5ba8b65dc68f",
+    "generation_config.json": "ea35dfb6fc5051b01114f9b995820d55dab01ed33ee490f6378b442af82c09f9",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "config.json": "0f2085dbbe2ee251bd6a6a0797d84a6ce34436044d629aa3cba793b43d311a9e",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  },
+  "freeze_sha256": "eef5663d8e8d036f43184208184d50ca3a3fb20473daa10af0dfac4f8316b9ab",
+  "inputs_sha256": "6f34a939ebf801a6c2c84860c485de3414db040c96999c45d8ddef4a47a83339",
+  "model_spec_sha256": "c272cc1a2630821fae8837d51df261a8421cb80e29c274edf35d3e17740f3db1",
+  "postfreeze_changes": "仅新增audit.py/receipt.py派生审计与归档文档；冻结运行源/评分/输入保持原样。",
+  "postfreeze_receipt_writer_sha256": "d9b82845cce4242fa9f1a63a153e45deb0e398740b3ba6ce9d03977bbe5cc911",
+  "all_audit_checks_passed": true,
+  "normal_full_exact_count": 32,
+  "pairs_audited": 128,
+  "validation": {
+    "focused_command": ".venv-llm/bin/python -m unittest tests.test_structure_diagnostic_v12",
+    "focused_passed": 5,
+    "full_command": ".venv-llm/bin/python -m unittest discover -s tests",
+    "full_passed": 57,
+    "permanent_tests": true
+  },
+  "artifacts_sha256": {
+    "summary.json": "0b8da2d77c9938cbc2cfa1fc1fc0d4931c55caa432b6a788858b8e791441d695",
+    "audit.json": "c7d1685426dee3f28b26edbe028629266ceac2b6210947111ae146e43182990d",
+    "failure_audit.json": "ee5ae594d57c3821a6f81536d3334a644cf6b81a281fbfe69285fe82ec0f1f7f",
+    "direction_error_audit.json": "c51ef52496c6a0e243fcb764a18d8a9d0dd6440183bd2adb344d59c239c01fc6"
+  },
+  "raw_artifacts_sha256": {
+    "frozen_inputs.json": "6f34a939ebf801a6c2c84860c485de3414db040c96999c45d8ddef4a47a83339",
+    "model/calls.json": "6f30edaf02b79924186781f5823085f3d26a2c6c19d6b316fecdf44860033b3d",
+    "model/started.json": "f733e15f1e63e8f008074a7dd4c61690dff209b319f7b5628bff99e856666c43",
+    "model/finished.json": "2a2382b50e7d5983022ec45400e68f1b8698088cdd52d405f4ae48bb3d3f315f",
+    "model/gpu_preflight.json": "468ca28ebf0c4eb4f1c1eedf365f0e9e48f6e4f3913e21a759ae08a3c795341f",
+    "model.log": "4dbea82c85741bd92f108a31cbc681219ef9a44acc81f7ec0377190715eb383b",
+    "freeze.log": "54eceec1bc30a3c58b770cb2ead057aefe00fa82639f7daa2d77cc1f4fca9d7d",
+    "focused_tests.log": "066e59ff53d8680048582c601c09802b778015caee17e68370ff254fb1deba6a",
+    "tests.log": "762d9aa9c6c9fad0de89af611aaec43ef726b100133542c0fb07ad891c529c92",
+    "audit.log": "18fe7100d0be1ab77cdb12f236398ec7b8eab1fb1c78b12956e12413d0ce1ac1",
+    "nonprogress_calls.json": "f212997e1701fa946dd13ea742cd4db47cce2044dca4e3ff6d1039eea96557c4"
+  },
+  "raw_storage_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_diagnostic_v12",
+  "raw_total_bytes": 3391630
+}
