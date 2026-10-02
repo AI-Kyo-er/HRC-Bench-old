@@ -1,0 +1,11 @@
+{
+  "kind": "执行前源码与输入校验补充",
+  "source_hashes": {
+    "experiments/language/freeze.py": "2c748f202fb9544b22bc15df5a9ed041e666ccae0d6aea773b4429667c84c130",
+    "experiments/language/download.py": "f3607da4487360784508c2824c2ca68f68300bef08e81d7f3affd95d6942b95c",
+    "experiments/language/run.py": "3f9fe9fe0e41cb63b457cb1e5bfc0d58fde9b810200659f29862aeca4636e71c",
+    "experiments/language/analyze.py": "f5acca2e9d0078157c3242e4d2cf78f1093e13e1b4e47e0faf329572e2643d40",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/language/environment.py": "985819d390925212c18a0756977e09fd13c90a6ddc2288420e8a31ff031c1312"
+  }
+}
