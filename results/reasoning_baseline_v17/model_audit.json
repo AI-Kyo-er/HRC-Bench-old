@@ -1,0 +1,1341 @@
+{
+  "total": 80,
+  "passed": 80,
+  "modes": {
+    "thinking": {
+      "total": 40,
+      "passed": 40,
+      "checks": [
+        {
+          "id": "thinking__single_dev_solo_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_solo_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_solo_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_solo_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_assisted_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_assisted_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_assisted_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_assisted_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_yield_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_yield_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_yield_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_yield_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_refusal_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_refusal_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_refusal_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__single_dev_refusal_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_0_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_0_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_0_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_0_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_1_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_1_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_1_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_red_1_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_0_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_0_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_0_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_0_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_1_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_1_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_1_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_blue_1_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_0_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_0_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_0_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_0_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_1_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_1_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_1_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "thinking__multi_dev_after_green_1_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        }
+      ],
+      "groups": {
+        "single": {
+          "total": 16,
+          "acceptable": 16,
+          "parse_errors": 0,
+          "truncated": 0,
+          "errors": {}
+        },
+        "full_history": {
+          "total": 12,
+          "acceptable": 12,
+          "parse_errors": 0,
+          "truncated": 0,
+          "errors": {}
+        },
+        "public_progress_aid": {
+          "total": 12,
+          "acceptable": 12,
+          "parse_errors": 0,
+          "truncated": 0,
+          "errors": {}
+        }
+      },
+      "gate_passed": true,
+      "metadata": {
+        "model_id": "Qwen/Qwen3-14B",
+        "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+        "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+        "mode": "thinking",
+        "parameters": {
+          "do_sample": true,
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0
+        },
+        "max_new_tokens": 8192,
+        "packages": {
+          "torch": "2.6.0+cu124",
+          "transformers": "4.57.1",
+          "tokenizers": "0.22.2",
+          "huggingface-hub": "0.36.0",
+          "accelerate": "1.4.0"
+        },
+        "parameter_count": 14768307200,
+        "dtype": "torch.bfloat16",
+        "cuda": "12.4",
+        "device": "NVIDIA GeForce RTX 4090",
+        "physical_gpu": 2,
+        "attention": "sdpa",
+        "quantization": null,
+        "offload": false,
+        "peak_allocated_bytes": 29990195200,
+        "peak_reserved_bytes": 30347886592
+      },
+      "calls_sha256": "158c8fd0c1bd7d7c874caeb4428cf23d10c6e047ea8d7fe313d26397c833e6da",
+      "summary_sha256": "6b1f5f8a02135544e0db8fa0e9559520e47d80522f7038abcc5fe155347975f2"
+    },
+    "nonthinking": {
+      "total": 40,
+      "passed": 40,
+      "checks": [
+        {
+          "id": "nonthinking__single_dev_solo_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_solo_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_solo_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_solo_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_assisted_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_assisted_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_assisted_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_assisted_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_yield_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_yield_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_yield_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_yield_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_refusal_left_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_refusal_left_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_refusal_right_0",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__single_dev_refusal_right_1",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_0_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_0_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_0_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_0_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_1_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_1_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_1_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_red_1_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_0_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_0_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_0_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_0_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_1_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_1_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_1_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_blue_1_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_0_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_0_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_0_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_0_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_1_0_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_1_0_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_1_1_full_history",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        },
+        {
+          "id": "nonthinking__multi_dev_after_green_1_1_public_progress_aid",
+          "checks": {
+            "frozen_record_exact": true,
+            "original_messages_labels_menu_exact": true,
+            "original_messages_hash": true,
+            "rendered_and_ids_exact": true,
+            "raw_decodes_exact": true,
+            "final_token_boundary_matches": true,
+            "score_exact": true,
+            "seed_exact": true,
+            "token_count_budget": true
+          },
+          "passed": true
+        }
+      ],
+      "groups": {
+        "single": {
+          "total": 16,
+          "acceptable": 15,
+          "parse_errors": 0,
+          "truncated": 0,
+          "errors": {
+            "yield_requirement_ignored": 1
+          }
+        },
+        "full_history": {
+          "total": 12,
+          "acceptable": 12,
+          "parse_errors": 0,
+          "truncated": 0,
+          "errors": {}
+        },
+        "public_progress_aid": {
+          "total": 12,
+          "acceptable": 12,
+          "parse_errors": 0,
+          "truncated": 0,
+          "errors": {}
+        }
+      },
+      "gate_passed": false,
+      "metadata": {
+        "model_id": "Qwen/Qwen3-14B",
+        "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+        "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+        "mode": "nonthinking",
+        "parameters": {
+          "do_sample": true,
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0.0
+        },
+        "max_new_tokens": 8192,
+        "packages": {
+          "torch": "2.6.0+cu124",
+          "transformers": "4.57.1",
+          "tokenizers": "0.22.2",
+          "huggingface-hub": "0.36.0",
+          "accelerate": "1.4.0"
+        },
+        "parameter_count": 14768307200,
+        "dtype": "torch.bfloat16",
+        "cuda": "12.4",
+        "device": "NVIDIA GeForce RTX 4090",
+        "physical_gpu": 2,
+        "attention": "sdpa",
+        "quantization": null,
+        "offload": false,
+        "peak_allocated_bytes": 29905044992,
+        "peak_reserved_bytes": 30303846400
+      },
+      "calls_sha256": "946697aa187cea25fa96d7702f0bdf4e813f77e0dd3adb4b8ce95cd808ee5c1d",
+      "summary_sha256": "1174ee6e1ef8427ffd689ce9381ff9b41d1622dbaeebbc7d614e25711bf8eff7"
+    }
+  },
+  "source_freeze_sha256": "3903965c71e7c6d1b82ac86420a5e659a65be3e2b7bbadd64701d3c2dd39f6b8",
+  "freeze_sha256": "a6bad34bef9eb7ea9f47d89350f3debd1ce0d158735a58575a32c76298eecb7a",
+  "frozen_run_source_unchanged": true,
+  "audit_source_sha256": {
+    "experiments/reasoning_baseline_v17/audit.py": "9dd51ac9490365997b8318beedc9329ea2fbd6e3e473fbcc9ca56aaf48dc37b1"
+  },
+  "interpretation": "固定旧40输入的两模式采样工程门槛；非纯thinking/规模因果，不执行物理，不以aid替代full gate。"
+}

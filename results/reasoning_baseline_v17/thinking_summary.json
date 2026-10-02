@@ -1,0 +1,68 @@
+{
+  "groups": {
+    "single": {
+      "total": 16,
+      "acceptable": 16,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {}
+    },
+    "full_history": {
+      "total": 12,
+      "acceptable": 12,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {}
+    },
+    "public_progress_aid": {
+      "total": 12,
+      "acceptable": 12,
+      "parse_errors": 0,
+      "truncated": 0,
+      "errors": {}
+    }
+  },
+  "gate_passed": true,
+  "metadata": {
+    "model_id": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+    "mode": "thinking",
+    "parameters": {
+      "do_sample": true,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0
+    },
+    "max_new_tokens": 8192,
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.1",
+      "tokenizers": "0.22.2",
+      "huggingface-hub": "0.36.0",
+      "accelerate": "1.4.0"
+    },
+    "parameter_count": 14768307200,
+    "dtype": "torch.bfloat16",
+    "cuda": "12.4",
+    "device": "NVIDIA GeForce RTX 4090",
+    "physical_gpu": 2,
+    "attention": "sdpa",
+    "quantization": null,
+    "offload": false,
+    "peak_allocated_bytes": 29990195200,
+    "peak_reserved_bytes": 30347886592
+  },
+  "freeze_sha256": "a6bad34bef9eb7ea9f47d89350f3debd1ce0d158735a58575a32c76298eecb7a",
+  "source_sha256": {
+    "experiments/reasoning_baseline_v17/assets.py": "9c302bd2fefa5565e0ada38b7606ef8ec454295d5a4d79ced1856e1b98adeee6",
+    "experiments/reasoning_baseline_v17/adapter.py": "cbcf7566b12a92cbd98da01ea7288e7d2aa9169d1575a6d5d24a2b4de8b03a99",
+    "experiments/reasoning_baseline_v17/run.py": "e4e9b0e9bd2d253e48d56d20dc4344cf0794f683ab902d2e086d47a93e485d5d",
+    "experiments/model_scale_v4/run.py": "ad3528b5ef050d2d4c05e21f396e59df443a2d66e851cc13e9ee3fcbb913357b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/progress.py": "8f685eb440790b817ce54731edb26019fd24d855ea6df24a9512d57a681637f7",
+    "tests/test_reasoning_baseline_v17.py": "a07f8a95ab1ac733b62f04bbaeeb16e3687fe29f58f463c0f1c2f0465de435a5"
+  },
+  "download_receipt_sha256": "70a3fd8c73dd77dfadfe401ad7b7970e94a74cfb8021f08c4eb11af27f450910"
+}

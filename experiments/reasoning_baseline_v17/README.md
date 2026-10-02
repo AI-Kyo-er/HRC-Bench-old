@@ -1,8 +1,8 @@
 # v17：固定Qwen3-14B两模式基础参照
 
-当前为准备阶段，已完成固定官方revision、80条原封输入冻结及永久测试，权重仍在同一进程下载；尚无模型生成或成绩。准备回执中的live状态是所列采样时刻的实查，不保证未来仍活。
+本轮固定80调用已全部结束并独立审计：thinking单动作16/16、完整历史12/12、进度辅助12/12，原工程门槛通过；nonthinking单动作15/16、完整历史12/12、辅助12/12，门槛未通过。无格式错误或截断。旧模型与旧结果保持。
 
-模型为官方文本`Qwen/Qwen3-14B`，固定revision `40c069824f4251a91eefaf281ebe4c544efd3e18`，8片共29,536,665,640bytes。官方逐LFS SHA记录在model_spec，完整下载后必须全部大小/SHA一致才可生成；不能将当前partial视为完整验证。权重/缓存在数据盘，通过`models/Qwen3-14B`引用，不升级旧环境。复用`.venv-qwen3-v14`的transformers4.57.1。
+模型为官方文本`Qwen/Qwen3-14B`，固定revision `40c069824f4251a91eefaf281ebe4c544efd3e18`，8片共29,536,665,640bytes。官方逐LFS SHA记录在model_spec；8片完整大小/SHA及metadata均已通过，真实下载句柄71063 exit0，全程保持同一下载进程，无重启。权重/缓存在数据盘，通过`models/Qwen3-14B`引用，不升级旧环境。复用`.venv-qwen3-v14`的transformers4.57.1。
 
 ## 固定设计
 
@@ -32,4 +32,17 @@ CUDA_VISIBLE_DEVICES=2 .venv-qwen3-v14/bin/python -m experiments.reasoning_basel
 .venv-qwen3-v14/bin/python -m experiments.reasoning_baseline_v17.audit
 ```
 
-示例GPU编号需按启动时足够free的卡选择，两模式顺序单卡运行；不得直接照编号占用已不足的卡。入口拒绝覆写已有mode输出。`assets.py`固定revision下载，缓存锁/partial保留，不因观察超时重启。原始轨迹、完整生成及下载日志通过`results/reasoning_baseline_v17/raw`软链存数据盘。当前真实下载句柄71063/PID82422，后续须以write_stdin/PID实查续接；最终退出/完整SHA/GPU峰值/成绩另写执行回执，准备阶段不预写结果。
+示例GPU编号需按启动时足够free的卡选择，两模式顺序单卡运行；不得直接照编号占用已不足的卡。入口拒绝覆写已有mode输出。`assets.py`固定revision下载，缓存锁/partial保留，不因观察超时重启。原始轨迹、完整生成及下载日志通过`results/reasoning_baseline_v17/raw`软链存数据盘。准备回执保留当时下载中的真实采样；最终`execution_receipt.json`记录71063、thinking83074/PID101226、nonthinking14588/PID111387、audit42752均真实exit0，GPU和下载进程已退出、显存已释放。
+
+## 最终结果与限制
+
+| 模式 | 单动作 | full_history | public_progress_aid | 原gate |
+|---|---:|---:|---:|---|
+| thinking | 16/16 | 12/12 | 12/12 | true |
+| nonthinking | 15/16 | 12/12 | 12/12 | false |
+
+唯一失败是nonthinking `single_dev_yield_left_1`：公开输入要求下一步先yield，生成`{"choice":"careful_blue_left"}`，allowed仅yield；thinking对应为yield。原始输入、两模式原输出/最终答复/seed存`mode_failure_pairs.json`，错误分类为yield_requirement_ignored。没有因格式或截断造成失败；thinking累计27028输出tokens，nonthinking348，全部保留。
+
+独立`model_audit.json`80/80检查：原40输入/候选/labels、渲染模板/IDs、完整输出IDs解码、官方最后token边界、原评分、每例seed与额度全部一致。CPU准备阶段110项全套通过；没有为成绩新增测试变体或生成。两模式每次启动都在GPU2实查free48494MiB≥32702要求；实际peak allocated分别29,990,195,200与29,905,044,992bytes，metadata另存reserved峰值。
+
+这是更强本地文本模型在旧接口有限fixture的基础参照，修正了“旧模型全历史总失败必然是交互结构困难”的预期，不能证明六结构能力或闭环泛化。thinking/nonthinking的采样参数和模板不同、旧模型参数亦不同，不能将成绩差归因某单个因素。v18 CPU实现/恢复控制与thinking末段及nonthinking加载/生成重叠，模型墙钟不能作速度比较。本轮不执行模型动作、不追加旧v9–v15探针或新组合模型调用。
