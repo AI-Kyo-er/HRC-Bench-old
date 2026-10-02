@@ -1,0 +1,62 @@
+{
+  "checked_utc": "2026-10-02T16:02:19.762245+00:00",
+  "sessions": {
+    "original": {
+      "id": 61969,
+      "pid": 3708671,
+      "exit_code": 1
+    },
+    "helper": {
+      "id": 73855,
+      "pid": 3769979,
+      "exit_code": 1
+    }
+  },
+  "cause": "requests.exceptions.ChunkedEncodingError / urllib3 IncompleteRead；实际流断开，不是工具观察timeout",
+  "complete_weight_shards": 0,
+  "incomplete_files": 6,
+  "downloaded_weight_bytes": 8472494080,
+  "files": [
+    {
+      "file": "kWKIu8gS4RO6oPIX4oh3Bgg-Q5A=.b477be7572f0ab3ae3cbba38d508cc33e70600b2045669c4ad848051c3432094.incomplete",
+      "bytes": 1918894080
+    },
+    {
+      "file": "-vH6cOyDWwSz9eriTyl87vkLn44=.a77f603d8368749c19d3ac9cf2a300e476edcc794ea41af8e473ee12935eadb8.incomplete",
+      "bytes": 1101004800
+    },
+    {
+      "file": "aESknW7TOKEmfryZ2OONv6DRGfk=.f7ac652aa101717c97cfeccf5109985cca5b04529b57d3f4d2ec7a802266296b.incomplete",
+      "bytes": 1101004800
+    },
+    {
+      "file": "0h2PhEN4wf4qC6Njm74VvfC6t1E=.eb356aacae443e30f52712b1e98fadf206976365e2f5ee886321b0bb38c7cea8.incomplete",
+      "bytes": 2327838720
+    },
+    {
+      "file": "6g1A1Sffu6ppCoytuuyE76A1WOI=.fbbda3cdee31895d0c57d617449af5579d219df34f3d63f7a23acbfe7fb0a647.incomplete",
+      "bytes": 1090519040
+    },
+    {
+      "file": "sXoMdGKE4Flr20prmlhvMqJ3A08=.e9115e615b575acb6e8b3a06524b32cbf7f680f07517125e4334f62c3f4acb0d.incomplete",
+      "bytes": 933232640
+    }
+  ],
+  "logs": {
+    "download": {
+      "sha256": "0b85e119c330fdda4711980b5536e3d0c6857706009a52570b8d4d8a0fc27cf3",
+      "last_exception": "requests.exceptions.ChunkedEncodingError: ('Connection broken: IncompleteRead(1921503226 bytes read, 1963651590 more expected)', IncompleteRead(1921503226 bytes read, 1963651590 more expected))",
+      "log_last_modified_utc": "2026-10-02T16:00:15.529652+00:00"
+    },
+    "helper_download": {
+      "sha256": "ceb28a26e784abbec7b603229789202e2d5ea4d4829d7f922d026dd505d3ecbd",
+      "last_exception": "requests.exceptions.ChunkedEncodingError: ('Connection broken: IncompleteRead(1097965490 bytes read, 2881659334 more expected)', IncompleteRead(1097965490 bytes read, 2881659334 more expected))",
+      "log_last_modified_utc": "2026-10-02T16:00:15.522651+00:00"
+    }
+  },
+  "partial_files_preserved": true,
+  "agent_did_not_terminate_processes": true,
+  "not_restarted_during_neutral_diagnostic": true,
+  "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+  "note": "早期helper_receipt/原VL execution_receipt中running为其采样时刻真实状态；本文件为后续退出审计，不覆盖旧快照。未下载完整、未核验全权重、14B未运行。"
+}

@@ -1,0 +1,74 @@
+{
+  "checked_utc": "2026-10-02T16:05:30.692966+00:00",
+  "attempt": "002",
+  "sessions": {
+    "original": {
+      "id": 7241,
+      "status": "running"
+    },
+    "helper": {
+      "id": 2960,
+      "status": "running"
+    }
+  },
+  "live_processes": [
+    {
+      "pid": 3823858,
+      "command": ".venv-llm/bin/python -m experiments.model_scale_v4.download"
+    },
+    {
+      "pid": 3823971,
+      "command": ".venv-llm/bin/python -m experiments.model_scale_v4.resume_helper --attempt-dir results/model_scale_v4/raw/recovery_attempt_002"
+    }
+  ],
+  "bytes_before_resume": 8472494080,
+  "downloaded_weight_bytes": 9542041600,
+  "elapsed_since_startup_seconds": 129.754293,
+  "actual_gained_bytes": 1069547520,
+  "aggregate_mib_per_second_since_startup": 7.861011581327795,
+  "complete_shards": 0,
+  "incomplete_files": 6,
+  "partial_file_growth": [
+    {
+      "file": "kWKIu8gS4RO6oPIX4oh3Bgg-Q5A=.b477be7572f0ab3ae3cbba38d508cc33e70600b2045669c4ad848051c3432094.incomplete",
+      "before_bytes": 1918894080,
+      "after_bytes": 2118123520,
+      "grew_bytes": 199229440
+    },
+    {
+      "file": "-vH6cOyDWwSz9eriTyl87vkLn44=.a77f603d8368749c19d3ac9cf2a300e476edcc794ea41af8e473ee12935eadb8.incomplete",
+      "before_bytes": 1101004800,
+      "after_bytes": 1268776960,
+      "grew_bytes": 167772160
+    },
+    {
+      "file": "aESknW7TOKEmfryZ2OONv6DRGfk=.f7ac652aa101717c97cfeccf5109985cca5b04529b57d3f4d2ec7a802266296b.incomplete",
+      "before_bytes": 1101004800,
+      "after_bytes": 1268776960,
+      "grew_bytes": 167772160
+    },
+    {
+      "file": "0h2PhEN4wf4qC6Njm74VvfC6t1E=.eb356aacae443e30f52712b1e98fadf206976365e2f5ee886321b0bb38c7cea8.incomplete",
+      "before_bytes": 2327838720,
+      "after_bytes": 2506096640,
+      "grew_bytes": 178257920
+    },
+    {
+      "file": "6g1A1Sffu6ppCoytuuyE76A1WOI=.fbbda3cdee31895d0c57d617449af5579d219df34f3d63f7a23acbfe7fb0a647.incomplete",
+      "before_bytes": 1090519040,
+      "after_bytes": 1279262720,
+      "grew_bytes": 188743680
+    },
+    {
+      "file": "sXoMdGKE4Flr20prmlhvMqJ3A08=.e9115e615b575acb6e8b3a06524b32cbf7f680f07517125e4334f62c3f4acb0d.incomplete",
+      "before_bytes": 933232640,
+      "after_bytes": 1101004800,
+      "grew_bytes": 167772160
+    }
+  ],
+  "all_original_partials_preserved_without_shrink": true,
+  "startup_sha256": "dc3482bead6bed2cd819647a6bdae07e5426dc4c659434e1eeafdc7035032450",
+  "failure_receipt_sha256": "78ae5f88f48c3a8924c448aac8d9ce97aadcbc1fbbda01a7be38cc5427cea649",
+  "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+  "not_ready_for_inference": true
+}

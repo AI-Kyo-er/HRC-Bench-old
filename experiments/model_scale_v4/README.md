@@ -31,3 +31,5 @@ CUDA_VISIBLE_DEVICES=2 .venv-llm/bin/python -m experiments.model_scale_v4.run ev
 仅在用户自己的惯用models/cache目录核验，发现完整Qwen2.5-VL-7B-Instruct约15.45GiB及Qwen3-VL-8B-Instruct约16.33GiB；后者当前transformers4.49不支持，不升级环境试跑。VL7B通过独立`local_vl_v4`纯文本基线复用，不修改本目录冻结输入/代码或替换14B模型身份。本地搜索记录见`results/model_scale_v4/local_model_search.json`。
 
 原14B下载61969保持正常，新增73855一个辅助进程最多4线程，只选尚未存在partial的官方分片5–8；同local_dir、官方固定revision、`force_download=False`，复用HF逐文件锁，原下载后续命中已完成文件。122.43秒总吞吐实测6.70MiB/s，比此前两worker测量1.21MiB/s提高5.53倍，因此按预先条件保留辅助。结果是短时间网络测量，不保证后续恒定。`helper_rate_start.json`、`helper_rate_result.json`、`helper_receipt.json`保留证据；两个活进程均未重启。14B完整权重与官方哈希全部通过前不会启动推理。
+
+后续状态勘误：61969和73855实际均因`requests.ChunkedEncodingError / IncompleteRead`退出1，没有被代理终止；之前running回执仅表示其采样时刻状态。退出审计`download_failure_receipt.json`记录保留8,472,494,080字节、6个partial、0个完整分片及原日志SHA。本轮收到一次恢复授权后确认旧PID消失、调用clashon并核验同官方revision，使用`raw/recovery_attempt_002`独立日志恢复原2worker（7241）和仅分片5–8的4worker（2960），未删除partial、未覆写原日志。`resume_helper.py`专用于继续已有partial，与原snapshot共用文件锁和`force_download=False`；HF按incomplete字节偏移发Range请求。新状态与实测字节增长见`recovery_attempt_002_status.json`；未把旧句柄当作仍活，也不无上限自动重启。

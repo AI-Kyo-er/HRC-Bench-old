@@ -1,0 +1,362 @@
+[
+  {
+    "id": "single_dev_solo_left_0",
+    "view": "single",
+    "original_choice": "place_blue_left",
+    "neutral_choice": "place_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_solo_left_1",
+    "view": "single",
+    "original_choice": "careful_blue_left",
+    "neutral_choice": "place_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "single_dev_solo_right_0",
+    "view": "single",
+    "original_choice": "place_blue_right",
+    "neutral_choice": "place_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_solo_right_1",
+    "view": "single",
+    "original_choice": "careful_blue_right",
+    "neutral_choice": "place_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "single_dev_assisted_left_0",
+    "view": "single",
+    "original_choice": "assisted_blue_left",
+    "neutral_choice": "place_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "single_dev_assisted_left_1",
+    "view": "single",
+    "original_choice": "careful_blue_left",
+    "neutral_choice": "assisted_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "single_dev_assisted_right_0",
+    "view": "single",
+    "original_choice": "place_blue_right",
+    "neutral_choice": "place_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_assisted_right_1",
+    "view": "single",
+    "original_choice": "assisted_blue_right",
+    "neutral_choice": "assisted_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_yield_left_0",
+    "view": "single",
+    "original_choice": "yield",
+    "neutral_choice": "yield",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_yield_left_1",
+    "view": "single",
+    "original_choice": "yield",
+    "neutral_choice": "assisted_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "single_dev_yield_right_0",
+    "view": "single",
+    "original_choice": "yield",
+    "neutral_choice": "yield",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_yield_right_1",
+    "view": "single",
+    "original_choice": "yield",
+    "neutral_choice": "yield",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_refusal_left_0",
+    "view": "single",
+    "original_choice": "careful_blue_left",
+    "neutral_choice": "careful_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_refusal_left_1",
+    "view": "single",
+    "original_choice": "careful_blue_left",
+    "neutral_choice": "careful_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_refusal_right_0",
+    "view": "single",
+    "original_choice": "careful_blue_right",
+    "neutral_choice": "careful_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "single_dev_refusal_right_1",
+    "view": "single",
+    "original_choice": "careful_blue_right",
+    "neutral_choice": "careful_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_red_0_0_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "place_red_left",
+    "original_acceptable": true,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_red_0_0_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "place_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_red_0_1_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "careful_green_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_red_0_1_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "careful_green_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_red_1_0_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_red_left",
+    "original_acceptable": true,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_red_1_0_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_red_1_1_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_green_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_red_1_1_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_green_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_blue_0_0_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "place_red_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_blue_0_0_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "place_red_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_blue_0_1_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "careful_green_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_blue_0_1_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_left",
+    "neutral_choice": "careful_green_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_blue_1_0_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "place_blue_left",
+    "original_acceptable": true,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_blue_1_0_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "place_red_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_blue_1_1_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_green_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_blue_1_1_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_green_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_green_0_0_full_history",
+    "view": "full_history",
+    "original_choice": "careful_red_left",
+    "neutral_choice": "place_red_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_green_0_0_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_red_left",
+    "neutral_choice": "place_red_left",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_green_0_1_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_green_left",
+    "original_acceptable": false,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_green_0_1_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_blue_right",
+    "neutral_choice": "careful_blue_right",
+    "original_acceptable": true,
+    "neutral_acceptable": true,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_green_1_0_full_history",
+    "view": "full_history",
+    "original_choice": "careful_red_left",
+    "neutral_choice": "place_red_left",
+    "original_acceptable": false,
+    "neutral_acceptable": false,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_green_1_0_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_red_left",
+    "neutral_choice": "place_red_right",
+    "original_acceptable": false,
+    "neutral_acceptable": true,
+    "choice_changed": true
+  },
+  {
+    "id": "multi_dev_after_green_1_1_full_history",
+    "view": "full_history",
+    "original_choice": "careful_green_right",
+    "neutral_choice": "careful_green_right",
+    "original_acceptable": false,
+    "neutral_acceptable": false,
+    "choice_changed": false
+  },
+  {
+    "id": "multi_dev_after_green_1_1_public_progress_aid",
+    "view": "public_progress_aid",
+    "original_choice": "careful_blue_right",
+    "neutral_choice": "careful_blue_right",
+    "original_acceptable": false,
+    "neutral_acceptable": false,
+    "choice_changed": false
+  }
+]

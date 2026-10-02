@@ -1,0 +1,90 @@
+{
+  "finished_utc": "2026-10-02T16:02:19.760514+00:00",
+  "sessions": {
+    "evaluate": {
+      "id": 2783,
+      "exit_code": 0
+    },
+    "tests": {
+      "id": 56616,
+      "exit_code": 0,
+      "count": 22
+    }
+  },
+  "only_system_fixed_format_only_line_changed": true,
+  "all40_other_record_fields_unchanged": true,
+  "generation_and_gate_unchanged": true,
+  "only_text_input_keys": [
+    "input_ids",
+    "attention_mask"
+  ],
+  "original_vl_results_preserved": true,
+  "freeze_sha256": "15deca4241851af8f8bae0f7a5e928d8706e1412a77aa1ac03f2b03bc30affb3",
+  "calls_sha256": "eeba7542aa53f4e5098e516818c77d3f333010b61ec656e296ffb6169a75f958",
+  "source_sha256": {
+    "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+    "experiments/model_scale_v4/run.py": "ad3528b5ef050d2d4c05e21f396e59df443a2d66e851cc13e9ee3fcbb913357b",
+    "experiments/model_scale_v4/download.py": "8182395c57ece8ed0fdf5b8c7195978337c856485b85bf6ce34d77b5e0059ad8",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/progress.py": "8f685eb440790b817ce54731edb26019fd24d855ea6df24a9512d57a681637f7",
+    "experiments/local_vl_v4/backend.py": "38355293bf69edc84a883269e9476184ee5c75fdaca989b839c92ef13cf510f0",
+    "experiments/local_vl_v4/run.py": "bbafe353decb3eb105bf41cc9f2dc192ad879bdd8dd4bf2e04f7bd9b5b861a10",
+    "experiments/interface_anchor_v4/run.py": "d40c7dc3a111e2b1711143955cbad83fbc502a1ba7ff6f91416109f933d7e5df",
+    "experiments/neutral_vl_v4/run.py": "786d1cdd5f430267b22c62411653e4d3acbc95f09bba23853e135206fffcb454"
+  },
+  "paired_stats": {
+    "single": {
+      "choice_changed": 5,
+      "improved": 0,
+      "worsened": 1,
+      "both_acceptable": 15,
+      "both_failed": 0
+    },
+    "full_history": {
+      "choice_changed": 7,
+      "improved": 0,
+      "worsened": 3,
+      "both_acceptable": 6,
+      "both_failed": 3
+    },
+    "public_progress_aid": {
+      "choice_changed": 6,
+      "improved": 1,
+      "worsened": 1,
+      "both_acceptable": 9,
+      "both_failed": 1
+    }
+  },
+  "choice_distribution": {
+    "single": {
+      "place_blue_left": 3,
+      "place_blue_right": 3,
+      "assisted_blue_left": 2,
+      "assisted_blue_right": 1,
+      "yield": 3,
+      "careful_blue_left": 2,
+      "careful_blue_right": 2
+    },
+    "full_history": {
+      "place_red_left": 4,
+      "careful_green_left": 3,
+      "careful_red_left": 1,
+      "careful_green_right": 3,
+      "place_blue_left": 1
+    },
+    "public_progress_aid": {
+      "place_blue_left": 1,
+      "careful_green_left": 2,
+      "careful_blue_left": 1,
+      "careful_green_right": 2,
+      "place_red_left": 2,
+      "place_red_right": 2,
+      "careful_blue_right": 2
+    }
+  },
+  "gpu2_after_program_exit_index_used_free_mib": "2, 18097, 30412",
+  "preflight_wording_erratum": "继承estimate_basis中official文字；本次用已核验本地VL字节，未核验HF固定revision。",
+  "next_step": "门槛false，本轮停止改VL提示/不启动物理pilot；等待更强模型与主控研究决策。",
+  "reference_3b_note": "继承reference_3b字段来自旧green/right提示，仅描述旧3B结果；中性3B单动作/aid未补跑，不能作同中性协议跨模型比较。3B旧锚定format_only仅12全历史4/12。"
+}
