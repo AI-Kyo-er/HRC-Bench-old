@@ -59,3 +59,9 @@ H参考4条：初始blue L/R ×将blue改交伙伴随载返回的提议接受/�
 统一固定11候选：原v18六动作，加`place_blue_inspection`、`request_check`、`careful_green_left`、`careful_green_right`、`request_return`。N/H菜单相同，没有finish或presence控制候选；通信受理依据公开承诺、伙伴能力与真实几何，不读取私有case目标。额外但合法的动作不自动构成语义错误。blue在远端或仍运输中不能仅凭旧delivery标志视为已可抓取，该限制属于当前真实几何前提，须在接口中披露。
 
 检查沿v20实际支撑距离≤1e-4米、法向力>0.001牛及blue速度<0.04米/秒，原检查位姿容差不改；另要求无robot–blue接触、presence近端稳定且没有进行中的presence运动。物理轨迹和同tick贡献账本分别保存，独立审计重建资格与累计值，不在事后给原物理记录补伪装成在线观测的字段。H配对额外核对交付检查点的真实物理前缀和当前状态一致，公开分工不同。
+
+## C控制冻结与启动
+
+20项定向事件/协议反例及全套166项永久测试通过，全套句柄24762真实exit0；主控读取正式日志确认。首次协议测试有一项事实替身未提供公开运输接受历史，失败源和回执保存在`raw/prefreeze_test_failure`；修正测试fixture后通过，没有以该替身失败冒充真实物理问题。
+
+C8正式冻结为`experiments/sustained_structure_v21/cases/C_freeze_dev0.json`，SHA`222815b02477bee2fe17c9850f7f56fa8370f95bc35d131d367bd76d1b36b722`。主控直接读取并核对8条件、原240/60/480/1920tick参数、32预算、11候选、公开信息边界与物理资产哈希。真实句柄32322/PID158174已启动，主控ps确认运行；仅CPU物理控制，无新GPU或模型调用。当前无完整C审计结论，C独立审计合格后才冻结并执行N/H参考。
