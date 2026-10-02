@@ -1,0 +1,138 @@
+{
+  "dev1_total": 28,
+  "dev1_passed": 26,
+  "dev1_total_ticks": 340678,
+  "groups": {
+    "A": {
+      "total": 4,
+      "passed": 4,
+      "ticks": 39340
+    },
+    "BCD": {
+      "total": 16,
+      "passed": 14,
+      "ticks": 199358
+    },
+    "E": {
+      "total": 4,
+      "passed": 4,
+      "ticks": 51100
+    },
+    "F": {
+      "total": 4,
+      "passed": 4,
+      "ticks": 50880
+    }
+  },
+  "dev0": {
+    "total": 4,
+    "passed": 0,
+    "ticks": 39340,
+    "robot_inspection_records": 1832,
+    "robot_inspection_ticks": 920,
+    "max_force": 150.19733409050596
+  },
+  "contacts_records": {
+    "expected_blue_carrier": 841424,
+    "expected_blue_inspection": 196560,
+    "expected_target_robot": 237401,
+    "expected_objects_static_support": 2638541,
+    "forbidden_robot_carrier": 884,
+    "forbidden_other_object_carrier": 5449,
+    "forbidden_carrier_static": 0,
+    "forbidden_robot_inspection": 0,
+    "forbidden_other_object_inspection": 0,
+    "forbidden_presence_contacts": 0,
+    "forbidden_non_target_robot": 0,
+    "forbidden_robot_static": 0,
+    "forbidden_object_object": 0
+  },
+  "physical_attempts": 92,
+  "zero_tick_repeats": 10,
+  "all_runtime_sources_match_freezes": true,
+  "source_checks": {
+    "A": true,
+    "BCD": true,
+    "E": true,
+    "F": true
+  },
+  "scheduling_comparisons": [
+    {
+      "seed": 120,
+      "first_goal": "left",
+      "red_first": {
+        "passed": true,
+        "duration_ticks": 12480,
+        "physical_attempts": 4
+      },
+      "original_during": {
+        "passed": true,
+        "episode_until_end_ticks": 12480,
+        "success_duration_ticks": 12480
+      },
+      "original_after": {
+        "passed": true,
+        "duration_ticks": 16195
+      },
+      "comparison": "F与B_during动作多重集合相同，仅red提前。成功left-during与F均12480tick；失败right-during提前终止时长不是完成时间，不能据此比较效率。"
+    },
+    {
+      "seed": 120,
+      "first_goal": "right",
+      "red_first": {
+        "passed": true,
+        "duration_ticks": 12480,
+        "physical_attempts": 4
+      },
+      "original_during": {
+        "passed": false,
+        "episode_until_end_ticks": 3180,
+        "success_duration_ticks": null
+      },
+      "original_after": {
+        "passed": true,
+        "duration_ticks": 16195
+      },
+      "comparison": "F与B_during动作多重集合相同，仅red提前。成功left-during与F均12480tick；失败right-during提前终止时长不是完成时间，不能据此比较效率。"
+    },
+    {
+      "seed": 121,
+      "first_goal": "left",
+      "red_first": {
+        "passed": true,
+        "duration_ticks": 12480,
+        "physical_attempts": 4
+      },
+      "original_during": {
+        "passed": true,
+        "episode_until_end_ticks": 12480,
+        "success_duration_ticks": 12480
+      },
+      "original_after": {
+        "passed": true,
+        "duration_ticks": 16195
+      },
+      "comparison": "F与B_during动作多重集合相同，仅red提前。成功left-during与F均12480tick；失败right-during提前终止时长不是完成时间，不能据此比较效率。"
+    },
+    {
+      "seed": 121,
+      "first_goal": "right",
+      "red_first": {
+        "passed": true,
+        "duration_ticks": 12480,
+        "physical_attempts": 4
+      },
+      "original_during": {
+        "passed": false,
+        "episode_until_end_ticks": 3180,
+        "success_duration_ticks": null
+      },
+      "original_after": {
+        "passed": true,
+        "duration_ticks": 16195
+      },
+      "comparison": "F与B_during动作多重集合相同，仅red提前。成功left-during与F均12480tick；失败right-during提前终止时长不是完成时间，不能据此比较效率。"
+    }
+  ],
+  "interpretation": "指定物理控制26/28通过、原2动态碰撞不改判。F简单统一red-first安全4/4且无额外成本，当前冲突不支持必须复杂上下文调度。presence仅真实运动、职责退出协议尚未实现；承载返回与空载运动严格分列，非自主/六结构成功。"
+}

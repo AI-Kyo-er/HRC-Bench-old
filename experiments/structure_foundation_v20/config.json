@@ -1,0 +1,20 @@
+{
+  "version": "structure-foundation-v20-dev0",
+  "inspection_center": [0.42, 0, 0.005],
+  "inspection_half_extents": [0.06, 0.06, 0.005],
+  "inspection_blue_release": [0.42, 0, 0.036],
+  "presence_base": [0.85, 0, 0.08],
+  "presence_half_extents": [0.025, 0.025, 0.06],
+  "presence_near_joint": 0.45,
+  "presence_far_joint": 1.05,
+  "presence_velocity_m_s": 0.08,
+  "presence_ramp_seconds": 0.5,
+  "position_tolerance_m": 0.005,
+  "stable_speed_m_s": 0.005,
+  "support_contact_max_distance_m": 0.0001,
+  "support_contact_min_force_n": 0.001,
+  "inspection_xy_tolerance_m": 0.035,
+  "inspection_z_range_m": [0.025, 0.055],
+  "inspection_speed_m_s": 0.04,
+  "wait_budget_ticks": 6000
+}

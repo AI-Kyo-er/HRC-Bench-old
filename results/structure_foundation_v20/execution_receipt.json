@@ -1,0 +1,94 @@
+{
+  "utc": "2026-10-02T23:23:13.599384+00:00",
+  "handles": {
+    "dev0_A": {
+      "run": 80708,
+      "pid": 128998,
+      "run_exit": 0,
+      "audit": 64772,
+      "audit_pid": 130137,
+      "audit_exit": 1
+    },
+    "A": {
+      "run": 7182,
+      "pid": 132009,
+      "run_exit": 0,
+      "audit": 76401,
+      "audit_exit": 0
+    },
+    "BCD": {
+      "run": 7943,
+      "pid": 133641,
+      "run_exit": 1,
+      "audit": 48135,
+      "audit_pid": 137127,
+      "audit_exit": 1
+    },
+    "E": {
+      "run": 37641,
+      "pid": 138218,
+      "run_exit": 0,
+      "audit": 49556,
+      "audit_pid": 138979,
+      "audit_exit": 0
+    },
+    "F": {
+      "run": 93279,
+      "pid": 140183,
+      "run_exit": 0,
+      "audit": 80410,
+      "audit_pid": 141056,
+      "audit_exit": 0
+    }
+  },
+  "freeze_sha256": {
+    "A": "b243cd20b5c540207c858585f07c2c8d39e36f0439ae83121644d5fd30226471",
+    "BCD": "11adc1f6a98471ffda7b0a123038155be2a03c8fc0d412a9361295cc6f314d3d",
+    "E": "a97be6298d6b1bc425a3aae5ebf808050179da3789ed4acc4f58bf560df996b2",
+    "F": "782ba614f3922ef1f923fd256b1f2c2e9658158e9ddedb8f14661455376a6c05"
+  },
+  "audit_source_sha256": {
+    "A": "f7bbd1029d3c5976d6625d19b1e527ca8cda15343f2913543bdaeffc48eb6c01",
+    "BCD": "cf51fcaf7ee917b15b516af18df8cc6006fed7889372f55660e9e34b031b7ab7",
+    "E": "4b1241ffdd2ac3f5e4996b7e807dfda8cdfb141fd5b333f28b33bbe4b76b00f2",
+    "F": "d9d1064ce0c0552d678833bdfca7aa87c25517a4ce211ce05aa12e2b37b2ed4e"
+  },
+  "diagnostic_source_sha256": "0481aa59d8e1459cf37693e406dd52a7ae51db961e34c9bae70dd83028f7d389",
+  "report_source_sha256": "b07de467d20623ff1048627ee196b6a174a87617821558504463757983bebfa9",
+  "artifact_sha256": {
+    "A_audit_dev0.json": "61ddddabd59205a4e0a415091de0303880d448a92bf811ed6a5dbbe49eb6b7b7",
+    "A_audit_dev1.json": "b78aba12124129f073226aad6ddc9c6b37cad9c956fa4ae3b004c42f272d8af5",
+    "BCD_audit_dev1.json": "3a6be19930fc876cb1782b36dcd9012596d71dd9a36bb2413e93295011088f85",
+    "E_audit_dev1.json": "5c2b46de22b0880c38ef6eae2d5faa5b1b056d128a8be41d2e8dac776dc4d66b",
+    "F_audit_dev1.json": "e02cb2531392de5063b8dd2f23f1cb18cb782333b31757bea9ebd669bb42bf05",
+    "timing_contact_diagnostic.json": "2e3b65f9101a44b06b3ed47d8acd82b8029a4cc39135b80dd2653d351fa893b2",
+    "final_summary.json": "4dbae53b944fe29061cb63a9dc40b1dc6ba1adc1a775e13a3847efee9a15135c",
+    "dev0_failure_receipt.json": "46f870c2ff59ee780dfdf1631d55d5a33e94d8cac5a3f5bf0460b7603757d18d"
+  },
+  "tests": {
+    "dev0_focused": 6,
+    "dev1_focused": 4,
+    "E_focused": 3,
+    "F_focused": 2,
+    "focused_exit": 0,
+    "preF_full": 142,
+    "preF_full_handle": 93966,
+    "preF_full_exit": 0,
+    "final_full": 146,
+    "final_full_handle": 17124,
+    "final_full_exit": 0,
+    "final_full_log_sha256": "2bc63551e8ab9dd118b6e90a8a625bfa93d6214f87677e8a6af1bd6c6d8066fc"
+  },
+  "unexecuted_E_initial": {
+    "freeze_sha256": "1b7a2c6b440a113dd8b0bfda4149d65b18a320fcf1076497e3e37cf7b994c8b5",
+    "source_location": "raw/unexecuted_E_initial",
+    "reason": "首次CPU冻结后、未运行物理前把字段存在测试换为实际中间状态反例；旧源/test/freeze保留，实际独立r1冻结。"
+  },
+  "after_freeze_preservation_audit": "A_dev1首次独立审计前加入非目标连续非操纵区间最大位移<.01m；依据既有green保护尺度推广。属于事后派生审计定义，未加入运行gate/未放宽零contact。已执行A audit_v1源存raw/dev1_A_audit_sources，BCD派生audit_v2仅支持真实失败的截短序列。",
+  "raw_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_foundation_v20",
+  "raw_bytes": 282510738,
+  "all_runtime_sources_unchanged": true,
+  "concurrency": "所有新控制仅CPU；与固定v19 GPU运行98899/PID121752及部分独立CPU审计重叠，不据墙钟比较速度。",
+  "no_new_model_or_download": true,
+  "caution": "几何静态净隙只估算，安全依据全tick实测；实际presence到位≠已实现贡献可用/职责退出协议；错误/短路终止时长不当任务完成效率。"
+}
