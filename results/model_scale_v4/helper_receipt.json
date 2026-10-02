@@ -1,0 +1,16 @@
+{
+  "pid": 3769979,
+  "started_utc": "2026-10-02T15:45:50Z",
+  "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+  "files": [
+    "model-00005-of-00008.safetensors",
+    "model-00006-of-00008.safetensors",
+    "model-00007-of-00008.safetensors",
+    "model-00008-of-00008.safetensors"
+  ],
+  "max_workers": 4,
+  "local_dir": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+  "force_download": false,
+  "huggingface-hub": "0.29.3",
+  "lock_safety": "相同local_dir、逐文件WeakFileLock，锁内已存在完整目标时跳过传输；原snapshot正常继续。"
+}

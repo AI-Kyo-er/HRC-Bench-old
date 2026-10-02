@@ -1,0 +1,85 @@
+{
+  "finished_utc": "2026-10-02T15:58:20.905058+00:00",
+  "sessions": {
+    "prepare": {
+      "id": 56389,
+      "exit_code": 0
+    },
+    "evaluate": {
+      "id": 79644,
+      "exit_code": 0
+    },
+    "tests": {
+      "id": 11402,
+      "exit_code": 0,
+      "count": 21
+    },
+    "original_14b_download": {
+      "id": 61969,
+      "status": "running"
+    },
+    "helper_download": {
+      "id": 73855,
+      "status": "running"
+    }
+  },
+  "all_40_records_exactly_equal_original_frozen": true,
+  "messages_candidates_scoring_unchanged": true,
+  "only_text_tokenizer_keys": [
+    "input_ids",
+    "attention_mask"
+  ],
+  "image_inputs": false,
+  "freeze_sha256": "b2ce923d6d84845adf61db459b6a90804690372683b3edf4c043c9107ef4348b",
+  "calls_sha256": "29d932a1353417ed9c3e4000994aa15d74aa4c3bd48d720f0d2d6264b049d0fa",
+  "summary_sha256": "5ec9732852bddcc7709c57b3a555db50a8e79f5e936b78875e36bd65b2cc1f13",
+  "source_sha256": {
+    "experiments/model_scale_v4/backend.py": "6b3f64d5121f88b229609dec90650130b91b502ee69a4d88c1b6011d81f6cfc6",
+    "experiments/model_scale_v4/run.py": "ad3528b5ef050d2d4c05e21f396e59df443a2d66e851cc13e9ee3fcbb913357b",
+    "experiments/model_scale_v4/download.py": "8182395c57ece8ed0fdf5b8c7195978337c856485b85bf6ce34d77b5e0059ad8",
+    "experiments/language/backend.py": "afaf583fc6b634add301b803aa5c8165b756f3661d6d1dd4e40dabdf56313229",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical_v3_2/progress.py": "8f685eb440790b817ce54731edb26019fd24d855ea6df24a9512d57a681637f7",
+    "experiments/local_vl_v4/backend.py": "38355293bf69edc84a883269e9476184ee5c75fdaca989b839c92ef13cf510f0",
+    "experiments/local_vl_v4/run.py": "bbafe353decb3eb105bf41cc9f2dc192ad879bdd8dd4bf2e04f7bd9b5b861a10"
+  },
+  "generation_and_gate_exactly_equal_original": true,
+  "weights_revision": null,
+  "weights_receipt_sha256": "b5f90d4ca6274163d2df5815f66770133fffe37eb057c854178ebacc962b38ad",
+  "choice_distribution": {
+    "single": {
+      "place_blue_left": 1,
+      "careful_blue_left": 4,
+      "place_blue_right": 2,
+      "careful_blue_right": 3,
+      "assisted_blue_left": 1,
+      "assisted_blue_right": 1,
+      "yield": 4
+    },
+    "full_history": {
+      "careful_green_left": 4,
+      "careful_green_right": 6,
+      "careful_red_left": 2
+    },
+    "public_progress_aid": {
+      "careful_green_left": 4,
+      "careful_green_right": 4,
+      "careful_red_left": 2,
+      "careful_blue_right": 2
+    }
+  },
+  "gpu2_after_program_exit_index_used_free_mib": "2, 18097, 30412",
+  "owned_live_processes": [
+    {
+      "pid": 3708671,
+      "command": ".venv-llm/bin/python -m experiments.model_scale_v4.download"
+    },
+    {
+      "pid": 3769979,
+      "command": ".venv-llm/bin/python -m experiments.model_scale_v4.assist_download"
+    }
+  ],
+  "gpu_program_exited_and_vram_returned_to_preflight": true,
+  "preflight_wording_erratum": "复用预检函数estimate_basis中的official是原14B文字，本次数值实际来自本地VL分片字节，不表示官方HF来源已验证。",
+  "next_step": "门槛false，不启动物理pilot。保留原始错误及14B活下载，主控评估下一研究步骤。"
+}

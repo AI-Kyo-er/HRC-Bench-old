@@ -1,0 +1,167 @@
+{
+  "cases": [
+    {
+      "id": "multi_dev_after_green_0_1_full_history",
+      "view": "full_history",
+      "choice": "careful_green_right",
+      "response": "{\"choice\":\"careful_green_right\"}",
+      "allowed": [
+        "place_red_left",
+        "careful_red_left",
+        "place_blue_right",
+        "careful_blue_right"
+      ],
+      "errors": [
+        "already_completed_item",
+        "wrong_destination"
+      ],
+      "public_progress": {
+        "current_goals_from_public_history": {
+          "red": "left",
+          "blue": "right",
+          "green": "left"
+        },
+        "done_under_public_goals": {
+          "green": "left"
+        },
+        "remaining_items": [
+          "red",
+          "blue"
+        ],
+        "must_yield": false,
+        "accepted_clearance_help": false,
+        "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+      }
+    },
+    {
+      "id": "multi_dev_after_green_1_0_full_history",
+      "view": "full_history",
+      "choice": "careful_red_left",
+      "response": "{\"choice\":\"careful_red_left\"}",
+      "allowed": [
+        "place_red_right",
+        "careful_red_right",
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "errors": [
+        "wrong_destination"
+      ],
+      "public_progress": {
+        "current_goals_from_public_history": {
+          "red": "right",
+          "blue": "left",
+          "green": "right"
+        },
+        "done_under_public_goals": {
+          "green": "right"
+        },
+        "remaining_items": [
+          "red",
+          "blue"
+        ],
+        "must_yield": false,
+        "accepted_clearance_help": false,
+        "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+      }
+    },
+    {
+      "id": "multi_dev_after_green_1_0_public_progress_aid",
+      "view": "public_progress_aid",
+      "choice": "careful_red_left",
+      "response": "{\"choice\":\"careful_red_left\"}",
+      "allowed": [
+        "place_red_right",
+        "careful_red_right",
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "errors": [
+        "wrong_destination"
+      ],
+      "public_progress": {
+        "current_goals_from_public_history": {
+          "red": "right",
+          "blue": "left",
+          "green": "right"
+        },
+        "done_under_public_goals": {
+          "green": "right"
+        },
+        "remaining_items": [
+          "red",
+          "blue"
+        ],
+        "must_yield": false,
+        "accepted_clearance_help": false,
+        "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+      }
+    },
+    {
+      "id": "multi_dev_after_green_1_1_full_history",
+      "view": "full_history",
+      "choice": "careful_green_right",
+      "response": "{\"choice\":\"careful_green_right\"}",
+      "allowed": [
+        "place_red_right",
+        "careful_red_right",
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "errors": [
+        "already_completed_item"
+      ],
+      "public_progress": {
+        "current_goals_from_public_history": {
+          "red": "right",
+          "blue": "left",
+          "green": "right"
+        },
+        "done_under_public_goals": {
+          "green": "right"
+        },
+        "remaining_items": [
+          "red",
+          "blue"
+        ],
+        "must_yield": false,
+        "accepted_clearance_help": false,
+        "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+      }
+    },
+    {
+      "id": "multi_dev_after_green_1_1_public_progress_aid",
+      "view": "public_progress_aid",
+      "choice": "careful_blue_right",
+      "response": "{\"choice\":\"careful_blue_right\"}",
+      "allowed": [
+        "place_red_right",
+        "careful_red_right",
+        "place_blue_left",
+        "careful_blue_left"
+      ],
+      "errors": [
+        "wrong_destination"
+      ],
+      "public_progress": {
+        "current_goals_from_public_history": {
+          "red": "right",
+          "blue": "left",
+          "green": "right"
+        },
+        "done_under_public_goals": {
+          "green": "right"
+        },
+        "remaining_items": [
+          "red",
+          "blue"
+        ],
+        "must_yield": false,
+        "accepted_clearance_help": false,
+        "source": "确定性归约公开历史与物理区域；显式外部进度辅助，不是裸模型输出。"
+      }
+    }
+  ],
+  "all_40_records_exactly_equal_original_frozen": true,
+  "explanation": "错误分类来自原集合评分；公开归约用于只读诊断，不改原始输入。错误均在completed-green组，样例锚定/目标表述仍是替代解释，不能凭关联确定根因。"
+}

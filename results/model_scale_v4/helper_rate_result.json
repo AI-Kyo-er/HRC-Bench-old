@@ -1,0 +1,17 @@
+{
+  "start": {
+    "utc": "2026-10-02T15:45:49Z",
+    "time_unix": 1790955949.951403,
+    "downloaded_weight_bytes": 2191523840
+  },
+  "end": {
+    "utc": "2026-10-02T15:47:52Z",
+    "time_unix": 1790956072.3860657,
+    "downloaded_weight_bytes": 3051356160
+  },
+  "elapsed_seconds": 122.43466281890869,
+  "aggregate_mib_per_second": 6.697449734580884,
+  "old_two_worker_mib_per_second": 1.2106606703167992,
+  "improvement_ratio": 5.532061872323259,
+  "retain_helpers": true
+}
