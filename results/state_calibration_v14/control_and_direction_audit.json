@@ -1,0 +1,2499 @@
+{
+  "control_rows": [
+    {
+      "id": "qwen2_5_14b__direct_left_inactive_source",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前不活动。blue当前应执行的规范目标是left。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__direct_left_inactive_neutral",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前不活动。blue当前应执行的规范目标是left。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__direct_left_active_source",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__direct_left_active_neutral",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_started_neutral",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_started_left",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "left"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_ended_neutral",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_ended_left",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "place_blue_left",
+          "content": "指导终止后blue已投递到left。"
+        }
+      ],
+      "blue_actual_regions": [
+        "left"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__update_left_accepted_source",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__update_left_accepted_neutral",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__update_left_rejected_source",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__update_left_rejected_neutral",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_inactive_source",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前不活动。blue当前应执行的规范目标是right。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"right\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_inactive_neutral",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前不活动。blue当前应执行的规范目标是right。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"right\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_active_source",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_active_neutral",
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_started_neutral",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_started_right",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "right"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_ended_neutral",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_ended_right",
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "place_blue_right",
+          "content": "指导终止后blue已投递到right。"
+        }
+      ],
+      "blue_actual_regions": [
+        "right"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"right\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__update_right_accepted_source",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__update_right_accepted_neutral",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen2_5_14b__update_right_rejected_source",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen2_5_14b__update_right_rejected_neutral",
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_inactive_source",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前不活动。blue当前应执行的规范目标是left。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_inactive_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前不活动。blue当前应执行的规范目标是left。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_active_source",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_active_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是left。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_started_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_started_left",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "left"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_ended_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_ended_left",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "place_blue_left",
+          "content": "指导终止后blue已投递到left。"
+        }
+      ],
+      "blue_actual_regions": [
+        "left"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_accepted_source",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_accepted_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_rejected_source",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"left\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_rejected_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "left",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "right",
+          "content": "提议将blue的有效外层投递目标调整为right；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_inactive_source",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前不活动。blue当前应执行的规范目标是right。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"right\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_inactive_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前不活动。blue当前应执行的规范目标是right。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_active_source",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_active_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "public_state_statement",
+          "content": "有效外层blue投递目标是right。局部blue指导当前活动。blue当前应执行的规范目标是neutral。上述目标是规范要求，实际所在区域不改变该目标。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_started_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_started_right",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。当前尚未检查，也尚未终止；blue实际区域可能仍在原外层盘或已在neutral。"
+        }
+      ],
+      "blue_actual_regions": [
+        "right"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": true, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": true,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_ended_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_ended_right",
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "accepted_child",
+          "content": "已接受blue局部指导并开始：暂存neutral；伙伴检查撤离后可finish_guidance终止。局部指导开始不取消外层约定。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "stage_blue_neutral",
+          "content": "blue已暂存到neutral。"
+        },
+        {
+          "kind": "inspection_started",
+          "content": "伙伴检查进入共享通道，需要先yield。"
+        },
+        {
+          "kind": "partner_released",
+          "by": "yield",
+          "content": "伙伴已撤离共享通道。"
+        },
+        {
+          "kind": "local_check_passed",
+          "content": "blue在neutral，局部检查通过，可终止指导。"
+        },
+        {
+          "kind": "child_finished",
+          "content": "finish_guidance已执行，当前局部指导明确终止。"
+        },
+        {
+          "kind": "outer_resumed",
+          "content": "恢复当时有效外层blue约定，其他分工与进度保留。"
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "place_blue_right",
+          "content": "指导终止后blue已投递到right。"
+        }
+      ],
+      "blue_actual_regions": [
+        "right"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"right\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": true
+      },
+      "joint_correct": true,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_accepted_source",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_accepted_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "accept",
+          "content": "对该提议：接受。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "left"
+      },
+      "response": "{\"outer_blue_destination\": \"left\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "left",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_rejected_source",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": false
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_rejected_neutral",
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "公开事实合成的纯文本字段控制；未运行机器人或伙伴，不是实际物理轨迹。"
+        },
+        {
+          "kind": "accepted_outer",
+          "goals": {
+            "red": "left",
+            "blue": "right",
+            "green": "right"
+          },
+          "content": "已共同接受blue外层投递目标；当前没有活动的局部blue指导。"
+        },
+        {
+          "kind": "update_proposed",
+          "proposal_id": "u1",
+          "item": "blue",
+          "destination": "left",
+          "content": "提议将blue的有效外层投递目标调整为left；只调整blue外层投递，red/green约定不变。"
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "u1",
+          "decision": "reject",
+          "content": "对该提议：拒绝。"
+        },
+        {
+          "kind": "public_context",
+          "content": "本例始终没有开始局部blue指导；只处理这一次外层提议与回应。"
+        }
+      ],
+      "blue_actual_regions": [
+        "neutral"
+      ],
+      "truth": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "right"
+      },
+      "response": "{\"outer_blue_destination\": \"right\", \"guidance_active\": false, \"current_blue_destination\": \"neutral\"}",
+      "value": {
+        "outer_blue_destination": "right",
+        "guidance_active": false,
+        "current_blue_destination": "neutral"
+      },
+      "field_correct": {
+        "outer_blue_destination": true,
+        "guidance_active": true,
+        "current_blue_destination": false
+      },
+      "joint_correct": false,
+      "current_output_matches_actual_region": true
+    }
+  ],
+  "current_only_control_errors": 20,
+  "v13_wrong_blue_rows": [
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d05__normal__full_history__action_replay",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "initial_blue": "left",
+      "proposed_blue": "right",
+      "effective_outer_blue": "left",
+      "current_blue_goal": "left",
+      "choice": "place_blue_right",
+      "matches_initial": false,
+      "matches_proposal": true,
+      "no_physical_action_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d05__normal__full_history__action_replay",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "initial_blue": "right",
+      "proposed_blue": "left",
+      "effective_outer_blue": "right",
+      "current_blue_goal": "right",
+      "choice": "place_blue_left",
+      "matches_initial": false,
+      "matches_proposal": true,
+      "no_physical_action_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d05__normal__full_history__action_replay",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "initial_blue": "right",
+      "proposed_blue": "left",
+      "effective_outer_blue": "left",
+      "current_blue_goal": "left",
+      "choice": "place_blue_right",
+      "matches_initial": true,
+      "matches_proposal": false,
+      "no_physical_action_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d05__normal__full_history__action_replay",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "initial_blue": "left",
+      "proposed_blue": "right",
+      "effective_outer_blue": "left",
+      "current_blue_goal": "left",
+      "choice": "place_blue_right",
+      "matches_initial": false,
+      "matches_proposal": true,
+      "no_physical_action_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d05__normal__full_history__action_replay",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "initial_blue": "right",
+      "proposed_blue": "left",
+      "effective_outer_blue": "right",
+      "current_blue_goal": "right",
+      "choice": "place_blue_left",
+      "matches_initial": false,
+      "matches_proposal": true,
+      "no_physical_action_executed": true
+    }
+  ],
+  "all_control_truth_from_public_input": true,
+  "position_match_is_descriptive_not_causal": true
+}

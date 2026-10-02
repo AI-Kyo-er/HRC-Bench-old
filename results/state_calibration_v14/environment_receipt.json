@@ -1,0 +1,47 @@
+{
+  "new_environment": "/data1/sieniwgroup/sieniw/HRC-Bench/venv-qwen3-v14",
+  "old_environment": "/data1/sieniwgroup/sieniw/HRC-Bench/venv-llm",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.1",
+    "tokenizers": "0.22.2",
+    "huggingface-hub": "0.36.0",
+    "accelerate": "1.4.0",
+    "safetensors": "0.8.0"
+  },
+  "old_packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.49.0",
+    "huggingface-hub": "0.29.3",
+    "accelerate": "1.4.0"
+  },
+  "old_packages_match_v13_receipt": true,
+  "copied_site_packages_without_hardlinks": true,
+  "copy_probe": {
+    "torch/__init__.py": {
+      "old_sha256": "5a190666c3853aa236c4d48ed64e2d4bbcd23bd32c21e64c0867646a6852e43f",
+      "new_sha256": "5a190666c3853aa236c4d48ed64e2d4bbcd23bd32c21e64c0867646a6852e43f",
+      "same_inode": false
+    },
+    "transformers/__init__.py": {
+      "old_sha256": "be46187d22bb6a6f9dc087f204ce2a18370093b30a0ddf0c3a3d8caf39dca164",
+      "new_sha256": "4ef5187b5f66c564aa575ddab9ce94342630d40fe874d0464d790c6f6b748647",
+      "same_inode": false
+    },
+    "tokenizers/__init__.py": {
+      "old_sha256": "644e596a052fa1b05272b1c141d1286e1c78c2a3346ecabd17d68b62404d8d84",
+      "new_sha256": "148ecb122f3fee03be9abb1fe213dd85fbc691bf2ad2b437ff531533781a6a3a",
+      "same_inode": false
+    }
+  },
+  "api_class": "Qwen3VLForConditionalGeneration",
+  "config_class": "Qwen3VLConfig",
+  "tokenizer_class": "Qwen2TokenizerFast",
+  "text_template_rendered": "<|im_start|>system\n只报告公开状态。<|im_end|>\n<|im_start|>user\n当前物品在neutral。<|im_end|>\n<|im_start|>assistant\n",
+  "text_test_tokens": 23,
+  "pip_check_exit": 0,
+  "pip_check_output": "No broken requirements found.\n",
+  "model_forward_calls": 0,
+  "model_weight_loads": 0,
+  "gpu_initializations": 0
+}

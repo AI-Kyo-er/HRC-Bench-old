@@ -1,0 +1,1926 @@
+{
+  "control_region_pairs": [
+    {
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__direct_left_inactive_source",
+        "qwen2_5_14b__direct_left_inactive_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "initial_or_outer": "left",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__direct_left_active_source",
+        "qwen2_5_14b__direct_left_active_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__direct_right_inactive_source",
+        "qwen2_5_14b__direct_right_inactive_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "right"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "right"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "direct",
+      "initial_or_outer": "right",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__direct_right_active_source",
+        "qwen2_5_14b__direct_right_active_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__scope_left_ended_neutral",
+        "qwen2_5_14b__scope_left_ended_left"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "left"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        }
+      ],
+      "joint_correct": [
+        false,
+        true
+      ],
+      "response_changed": true,
+      "semantic_value_changed": true,
+      "correctness_changed": true,
+      "public_history_equal": false,
+      "scope_ended_outer_has_added_delivery_feedback": true
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "initial_or_outer": "left",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__scope_left_started_neutral",
+        "qwen2_5_14b__scope_left_started_left"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "left"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__scope_right_ended_neutral",
+        "qwen2_5_14b__scope_right_ended_right"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "right"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "right"
+        }
+      ],
+      "joint_correct": [
+        false,
+        true
+      ],
+      "response_changed": true,
+      "semantic_value_changed": true,
+      "correctness_changed": true,
+      "public_history_equal": false,
+      "scope_ended_outer_has_added_delivery_feedback": true
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "scope",
+      "initial_or_outer": "right",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen2_5_14b__scope_right_started_neutral",
+        "qwen2_5_14b__scope_right_started_right"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "right"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": "accept",
+      "ids": [
+        "qwen2_5_14b__update_left_accepted_source",
+        "qwen2_5_14b__update_left_accepted_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": "reject",
+      "ids": [
+        "qwen2_5_14b__update_left_rejected_source",
+        "qwen2_5_14b__update_left_rejected_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": "accept",
+      "ids": [
+        "qwen2_5_14b__update_right_accepted_source",
+        "qwen2_5_14b__update_right_accepted_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen2_5_14b",
+      "group": "update",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": "reject",
+      "ids": [
+        "qwen2_5_14b__update_right_rejected_source",
+        "qwen2_5_14b__update_right_rejected_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__direct_left_inactive_source",
+        "qwen3_vl_8b__direct_left_inactive_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        false
+      ],
+      "response_changed": true,
+      "semantic_value_changed": true,
+      "correctness_changed": true,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "initial_or_outer": "left",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__direct_left_active_source",
+        "qwen3_vl_8b__direct_left_active_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__direct_right_inactive_source",
+        "qwen3_vl_8b__direct_right_inactive_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "right"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        false
+      ],
+      "response_changed": true,
+      "semantic_value_changed": true,
+      "correctness_changed": true,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "direct",
+      "initial_or_outer": "right",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__direct_right_active_source",
+        "qwen3_vl_8b__direct_right_active_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__scope_left_ended_neutral",
+        "qwen3_vl_8b__scope_left_ended_left"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "left"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": false,
+      "scope_ended_outer_has_added_delivery_feedback": true
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "initial_or_outer": "left",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__scope_left_started_neutral",
+        "qwen3_vl_8b__scope_left_started_left"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "left"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__scope_right_ended_neutral",
+        "qwen3_vl_8b__scope_right_ended_right"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "right"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "right"
+        }
+      ],
+      "joint_correct": [
+        false,
+        true
+      ],
+      "response_changed": true,
+      "semantic_value_changed": true,
+      "correctness_changed": true,
+      "public_history_equal": false,
+      "scope_ended_outer_has_added_delivery_feedback": true
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "scope",
+      "initial_or_outer": "right",
+      "active": true,
+      "reply": null,
+      "ids": [
+        "qwen3_vl_8b__scope_right_started_neutral",
+        "qwen3_vl_8b__scope_right_started_right"
+      ],
+      "actual_regions": [
+        [
+          "neutral"
+        ],
+        [
+          "right"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": true,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        true
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": "accept",
+      "ids": [
+        "qwen3_vl_8b__update_left_accepted_source",
+        "qwen3_vl_8b__update_left_accepted_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "initial_or_outer": "left",
+      "active": false,
+      "reply": "reject",
+      "ids": [
+        "qwen3_vl_8b__update_left_rejected_source",
+        "qwen3_vl_8b__update_left_rejected_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "left"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        true,
+        false
+      ],
+      "response_changed": true,
+      "semantic_value_changed": true,
+      "correctness_changed": true,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": "accept",
+      "ids": [
+        "qwen3_vl_8b__update_right_accepted_source",
+        "qwen3_vl_8b__update_right_accepted_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "left",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    },
+    {
+      "model": "qwen3_vl_8b",
+      "group": "update",
+      "initial_or_outer": "right",
+      "active": false,
+      "reply": "reject",
+      "ids": [
+        "qwen3_vl_8b__update_right_rejected_source",
+        "qwen3_vl_8b__update_right_rejected_neutral"
+      ],
+      "actual_regions": [
+        [],
+        [
+          "neutral"
+        ]
+      ],
+      "values": [
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        },
+        {
+          "outer_blue_destination": "right",
+          "guidance_active": false,
+          "current_blue_destination": "neutral"
+        }
+      ],
+      "joint_correct": [
+        false,
+        false
+      ],
+      "response_changed": false,
+      "semantic_value_changed": false,
+      "correctness_changed": false,
+      "public_history_equal": true,
+      "scope_ended_outer_has_added_delivery_feedback": false
+    }
+  ],
+  "control_pair_counts": {
+    "qwen2_5_14b": {
+      "direct": {
+        "pairs": 4,
+        "correctness_changes": 0
+      },
+      "scope": {
+        "pairs": 4,
+        "correctness_changes": 2
+      },
+      "update": {
+        "pairs": 4,
+        "correctness_changes": 0
+      }
+    },
+    "qwen3_vl_8b": {
+      "direct": {
+        "pairs": 4,
+        "correctness_changes": 2
+      },
+      "scope": {
+        "pairs": 4,
+        "correctness_changes": 1
+      },
+      "update": {
+        "pairs": 4,
+        "correctness_changes": 1
+      }
+    }
+  },
+  "v13_cross_rows": [
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_60__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_60__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_60__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_60__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_left_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_accepted_right_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_left_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": true
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_before_child_rejected_right_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "before_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_left_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_accepted_right_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "accepted",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": false,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_left_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "left",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_61__d04__normal__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_61__d04__reverse__full_history",
+      "stage": 4,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": true,
+      "outer_correct": true,
+      "current_correct": true,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_61__d05__normal__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": false,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    },
+    {
+      "source_v12_id": "B_update_during_child_rejected_right_61__d05__reverse__full_history",
+      "stage": 5,
+      "timing": "during_child",
+      "acceptance": "rejected",
+      "reverse_menu": true,
+      "initial_blue": "right",
+      "action_correct": false,
+      "outer_correct": true,
+      "current_correct": false,
+      "joint_correct": false
+    }
+  ],
+  "v13_all_cross": {
+    "outer_correct": {
+      "state_correct_action_correct": 35,
+      "state_correct_action_incorrect": 18,
+      "state_incorrect_action_incorrect": 9,
+      "state_incorrect_action_correct": 2
+    },
+    "current_correct": {
+      "state_correct_action_correct": 32,
+      "state_incorrect_action_incorrect": 27,
+      "state_incorrect_action_correct": 5
+    },
+    "joint_correct": {
+      "state_incorrect_action_correct": 36,
+      "state_incorrect_action_incorrect": 27,
+      "state_correct_action_correct": 1
+    }
+  },
+  "v13_cross_by_group": {
+    "stage": {
+      "4": {
+        "outer_correct": {
+          "state_correct_action_correct": 32
+        },
+        "current_correct": {
+          "state_correct_action_correct": 32
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 31,
+          "state_correct_action_correct": 1
+        }
+      },
+      "5": {
+        "outer_correct": {
+          "state_correct_action_incorrect": 18,
+          "state_incorrect_action_incorrect": 9,
+          "state_correct_action_correct": 3,
+          "state_incorrect_action_correct": 2
+        },
+        "current_correct": {
+          "state_incorrect_action_incorrect": 27,
+          "state_incorrect_action_correct": 5
+        },
+        "joint_correct": {
+          "state_incorrect_action_incorrect": 27,
+          "state_incorrect_action_correct": 5
+        }
+      }
+    },
+    "timing": {
+      "before_child": {
+        "outer_correct": {
+          "state_correct_action_correct": 17,
+          "state_correct_action_incorrect": 10,
+          "state_incorrect_action_incorrect": 5
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 15,
+          "state_incorrect_action_correct": 1
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 16,
+          "state_incorrect_action_incorrect": 15,
+          "state_correct_action_correct": 1
+        }
+      },
+      "during_child": {
+        "outer_correct": {
+          "state_correct_action_correct": 18,
+          "state_incorrect_action_correct": 2,
+          "state_incorrect_action_incorrect": 4,
+          "state_correct_action_incorrect": 8
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_correct": 4,
+          "state_incorrect_action_incorrect": 12
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 20,
+          "state_incorrect_action_incorrect": 12
+        }
+      }
+    },
+    "acceptance": {
+      "accepted": {
+        "outer_correct": {
+          "state_correct_action_correct": 18,
+          "state_correct_action_incorrect": 3,
+          "state_incorrect_action_incorrect": 9,
+          "state_incorrect_action_correct": 2
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 12,
+          "state_incorrect_action_correct": 4
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 20,
+          "state_incorrect_action_incorrect": 12
+        }
+      },
+      "rejected": {
+        "outer_correct": {
+          "state_correct_action_correct": 17,
+          "state_correct_action_incorrect": 15
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 15,
+          "state_incorrect_action_correct": 1
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 16,
+          "state_incorrect_action_incorrect": 15,
+          "state_correct_action_correct": 1
+        }
+      }
+    },
+    "reverse_menu": {
+      "False": {
+        "outer_correct": {
+          "state_correct_action_correct": 19,
+          "state_correct_action_incorrect": 9,
+          "state_incorrect_action_incorrect": 2,
+          "state_incorrect_action_correct": 2
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 11,
+          "state_incorrect_action_correct": 5
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 21,
+          "state_incorrect_action_incorrect": 11
+        }
+      },
+      "True": {
+        "outer_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 7,
+          "state_correct_action_incorrect": 9
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 16
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 15,
+          "state_incorrect_action_incorrect": 16,
+          "state_correct_action_correct": 1
+        }
+      }
+    },
+    "initial_blue": {
+      "left": {
+        "outer_correct": {
+          "state_correct_action_correct": 16,
+          "state_correct_action_incorrect": 11,
+          "state_incorrect_action_incorrect": 3,
+          "state_incorrect_action_correct": 2
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 14,
+          "state_incorrect_action_correct": 2
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 18,
+          "state_incorrect_action_incorrect": 14
+        }
+      },
+      "right": {
+        "outer_correct": {
+          "state_correct_action_correct": 19,
+          "state_incorrect_action_incorrect": 6,
+          "state_correct_action_incorrect": 7
+        },
+        "current_correct": {
+          "state_correct_action_correct": 16,
+          "state_incorrect_action_incorrect": 13,
+          "state_incorrect_action_correct": 3
+        },
+        "joint_correct": {
+          "state_incorrect_action_correct": 18,
+          "state_incorrect_action_incorrect": 13,
+          "state_correct_action_correct": 1
+        }
+      }
+    }
+  },
+  "scope_feedback_difference_is_confound": true,
+  "independent_queries_not_internal_knowledge": true
+}

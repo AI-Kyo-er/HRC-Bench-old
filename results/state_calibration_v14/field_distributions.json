@@ -1,0 +1,60 @@
+[
+  {
+    "model": "qwen2_5_14b",
+    "suite": "control",
+    "total": 24,
+    "distributions": {
+      "outer_blue_destination": {
+        "\"left\"": 12,
+        "\"right\"": 12
+      },
+      "guidance_active": {
+        "false": 16,
+        "true": 8
+      },
+      "current_blue_destination": {
+        "\"left\"": 3,
+        "\"neutral\"": 18,
+        "\"right\"": 3
+      }
+    }
+  },
+  {
+    "model": "qwen3_vl_8b",
+    "suite": "control",
+    "total": 24,
+    "distributions": {
+      "outer_blue_destination": {
+        "\"left\"": 12,
+        "\"right\"": 12
+      },
+      "guidance_active": {
+        "false": 16,
+        "true": 8
+      },
+      "current_blue_destination": {
+        "\"left\"": 4,
+        "\"neutral\"": 18,
+        "\"right\"": 2
+      }
+    }
+  },
+  {
+    "model": "qwen3_vl_8b",
+    "suite": "v13",
+    "total": 64,
+    "distributions": {
+      "outer_blue_destination": {
+        "\"right\"": 33,
+        "\"left\"": 31
+      },
+      "guidance_active": {
+        "false": 63,
+        "true": 1
+      },
+      "current_blue_destination": {
+        "\"neutral\"": 64
+      }
+    }
+  }
+]

@@ -1,6 +1,7 @@
 __pycache__/
 results/*/episodes.csv
 .venv-llm
+.venv-qwen3-v14
 models/
 results/language_v2/dev
 results/language_v2/formal

@@ -1,0 +1,195 @@
+{
+  "utc": "2026-10-02T20:06:28.329492+00:00",
+  "actual_calls": 216,
+  "sessions": {
+    "environment_copy": {
+      "id": 96008,
+      "exit_code": 0
+    },
+    "environment_install": {
+      "id": 55836,
+      "exit_code": 0
+    },
+    "cpu_api": {
+      "id": 7897,
+      "exit_code": 0
+    },
+    "assets": {
+      "id": 37933,
+      "exit_code": 0
+    },
+    "focused_tests": {
+      "passed": 10,
+      "exit_code": 0
+    },
+    "full_tests": {
+      "id": 44781,
+      "passed": 73,
+      "exit_code": 0
+    },
+    "freeze": {
+      "id": 51925,
+      "exit_code": 0
+    },
+    "qwen2_5_14b": {
+      "id": 94898,
+      "pid": 45166,
+      "calls": 24,
+      "exit_code": 0
+    },
+    "qwen3_vl_8b": {
+      "id": 67541,
+      "pid": 45899,
+      "calls": 192,
+      "exit_code": 0
+    },
+    "audit": {
+      "exit_code": 0
+    }
+  },
+  "model_finished": {
+    "qwen2_5_14b": {
+      "pid": 45166,
+      "utc": "2026-10-02T20:00:53.970120+00:00",
+      "calls": 24,
+      "model": {
+        "packages": {
+          "torch": "2.6.0+cu124",
+          "transformers": "4.49.0",
+          "huggingface-hub": "0.29.3",
+          "accelerate": "1.4.0"
+        },
+        "cuda": "12.4",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "visible_device": 2,
+        "seed": 0,
+        "do_sample": false,
+        "max_new_tokens": 96,
+        "peak_allocated_bytes": 30156950016,
+        "model_id": "Qwen/Qwen2.5-14B-Instruct",
+        "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+        "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+        "parameter_count": 14770033664,
+        "dtype": "torch.bfloat16",
+        "logical_device": "cuda:0",
+        "cuda_visible_devices": "2",
+        "attention_implementation": "sdpa",
+        "quantization": null,
+        "offload": false
+      }
+    },
+    "qwen3_vl_8b": {
+      "pid": 45899,
+      "utc": "2026-10-02T20:03:51.584051+00:00",
+      "calls": 192,
+      "model": {
+        "packages": {
+          "torch": "2.6.0+cu124",
+          "transformers": "4.57.1",
+          "huggingface-hub": "0.36.0",
+          "accelerate": "1.4.0"
+        },
+        "cuda": "12.4",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "visible_device": 2,
+        "seed": 0,
+        "do_sample": false,
+        "max_new_tokens": 96,
+        "peak_allocated_bytes": 18105767936,
+        "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+        "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+        "model_path": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-VL-8B-Instruct",
+        "parameter_count": 8767123696,
+        "dtype": "torch.bfloat16",
+        "logical_device": "cuda:0",
+        "cuda_visible_devices": "2",
+        "attention_implementation": "sdpa",
+        "quantization": null,
+        "offload": false,
+        "model_class": "Qwen3VLForConditionalGeneration",
+        "input_modality": "text_only",
+        "pixel_inputs": false,
+        "visual_capability_evaluated": false
+      }
+    }
+  },
+  "freeze_sha256": "71cb6b75cd3b9a98b209f801c4b3dd18985573c413374f9026e49d2401d49fb5",
+  "inputs_sha256": "5edd8c604dfe749f4c6961e6d0d5cacfd6e971332ded0db9b901cb00ea7270a7",
+  "frozen_sources_unchanged": true,
+  "all_audit_checks_passed": true,
+  "old_env_packages_after": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.49.0",
+    "huggingface-hub": "0.29.3",
+    "accelerate": "1.4.0"
+  },
+  "old_env_version_and_probe_hashes_unchanged": true,
+  "own_model_pids_absent": true,
+  "own_pids_absent_from_gpu_processes": true,
+  "gpu_after_query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 15, 48494\n3, NVIDIA GeForce RTX 4090, 49140, 17, 48492\n",
+  "live_task_handles": [],
+  "physics_actions_executed": 0,
+  "new_model_weights_downloaded": false,
+  "external_inference_apis_called": false,
+  "prefreeze_corrections": "保留review_v0并修改无child更新提议的条件措辞；首次测试捕获v4单动作user非JSON的adapter错误，保存原源/失败日志后修复。未推理时完成。",
+  "postfreeze_changes": "仅新增audit/receipt与README派生审计归档；未修改冻结输入/评分/生成代码。",
+  "postfreeze_source_sha256": {
+    "audit.py": "cc3d53a5e96f78583a987fe0cf0f201a8431e62bfc57ad0aaf3d3ee3be95823b",
+    "receipt.py": "a5efd0c1c9a02ba03e8eb00ee0b839276846785cbd5322a41cc2e7faa0e550c5"
+  },
+  "validation": {
+    "focused_command": ".venv-llm/bin/python -m unittest tests.test_state_calibration_v14",
+    "focused_passed": 10,
+    "full_command": ".venv-llm/bin/python -m unittest discover -s tests",
+    "full_passed": 73,
+    "permanent_tests": true,
+    "not_physical_or_neural_success_evidence": true
+  },
+  "artifacts_sha256": {
+    "summary.json": "6e6a14e2f0f4e753c917b14df5242b6b1911281cd93edac1930b7c0b1e27b8e4",
+    "audit.json": "e4e50a6bb12d1a4b4558c762edca39e47d2d29e0e714d6b5a8ad96970c8e6688",
+    "failure_audit.json": "b52483e57dbdc75836e4d6c44bce61b511f8d9d0c1330984e13248993d12a70c",
+    "field_distributions.json": "436d500e468c9fcb2518ff606d25e83e71ccaae37db36801efff3bd84d0343cc",
+    "control_and_direction_audit.json": "c5a68fcda64eb9d656e47dc582fe94bcbec1ee5fe7ce8d9aed7e43259fe8e269",
+    "paired_field_audit.json": "97890c76071735b031e24ef74bb7bbc661080a32cb2adf20ff303ec2e4f78d04",
+    "model_receipt.json": "5edb85ef8b8958236b212f057f74721973129aa8f24bcb24367ad288fcda0cb8",
+    "environment_receipt.json": "9402e66cfa249ded6306eba56b4cdb8bea139eaba3681ceb04037c7e453e26c4",
+    "control_review.md": "b3feaf541ebba44842ce4ae210ed61f8d862d7ce647a9170bcc3e51a1f685dc9"
+  },
+  "raw_artifacts_sha256": {
+    "prepared_inputs.json": "1e8d3d4ce8ec44cca5bab3dc622a04eec026642b3e03f62b3e99d1405315b8fb",
+    "incorrect_calls.json": "d9a315e78971b36199b08f95ec4b9ebe22cfcc8dbcfd0e407af2e9b42fd65680",
+    "model_qwen3_vl_8b.log": "6082c0af4d552faeaccfd3422118e45f308933978f3b1f67b21c4dbb2bf62076",
+    "tests.log": "b3b581d1269929c8b4c5b1a8b83e6a9c6a005a6835806f141ee6594158a228e8",
+    "environment_api.log": "262f6f2a92e67aa6997d9ce20457594634b07fdae94e5da8f215b607e439c676",
+    "frozen_inputs.json": "5edd8c604dfe749f4c6961e6d0d5cacfd6e971332ded0db9b901cb00ea7270a7",
+    "audit.log": "6673ddb325ac8675fb190ab98c730a682847663f92eaed4ae97fc2b6f890a4ef",
+    "focused_tests.log": "f686846cd320629046220c781889f619f4389bd1f3680488b08380d9f7095f33",
+    "control_review_prefreeze_v0.md": "f3bdfbc1a7eee9854d8ea76ec0f8fad22c58373fde60436b2cb501943e15951f",
+    "scoring_prefreeze_failure.py": "b4b3a548514d2b0962ccae60150fca13336e03ccbe2628b6007c1af961e60a1f",
+    "assets.log": "432dfa83febba5ab72b180c0a1d9c918589a0e04b07ebd8966fd879077cbd70d",
+    "model_qwen2_5_14b.log": "66f5762ff2b3b39bb64b581ba492046de42439c68bdf1bb8579864c51ce48d71",
+    "focused_tests_prefreeze_failure.log": "61538a2e3c102dfb7f0c12a7e34302f2d4643b65ac20a5fd817fb653191a2d45",
+    "control_tests.log": "a25b5619af971eae96a8c9d37ebc69133b4c28e990455e210be0507206df182c",
+    "control_inputs_prefreeze_v0.json": "eb4af6fc9fb612469947de759a590d128fe7ef4eec9b2a2b3e1a9041c2d4aa37",
+    "environment_install.log": "4138de01074be7fcc08a3bd00a29f71195a856eab87c1f7552cdaf8ef1e03629",
+    "control_inputs_for_review.json": "0736391f543036aaf204b8161f3bc06a5932e8f5f48f0ff156e516a9efa73ce9",
+    "tokens_qwen3_vl_8b.json": "828d17e988998efe23a8d7df020e024b8c59790cea47367472c800b40237ee5a",
+    "dataset_prefreeze_v0.py": "eda6e369a1ed670d8231c6e6a7ee3005a46e88c693777dfa0c9b69d8f0aad60b",
+    "tokens_qwen2_5_14b.json": "67513391c718550570bf3364b3b914c7fc36bf5a8669101281537860d2391977",
+    "tests_prefreeze_failure.log": "86eadf72e8396ab2162550e3040cf717cb1415142f0c8a5e1419ed939b75b58e",
+    "freeze.log": "00ac3985ee2e3fd4e889af6382166c52838888aec5b499368be58f042cd916f5",
+    "model_qwen2_5_14b/finished.json": "8ede93b239b6e5e43ccee27e93d0c663c78d2597ab14ecd83a48b1fc2cdc3a4b",
+    "model_qwen2_5_14b/gpu_preflight.json": "f5eb423c977f27a8b1da1f1a4355f0c875aae152af3a5fa67b6637a880c3ca6e",
+    "model_qwen2_5_14b/summary.json": "bfbd62883644d5ad50a85b4763474d0d3a72126b3f0124b8c8a569a0ba10bb4a",
+    "model_qwen2_5_14b/calls.json": "558d4920b2e53feeaa1278157be9617724216dbb3e5db431fdd4dd51ef944666",
+    "model_qwen2_5_14b/started.json": "2f8d5792eabe6d74123383b62fd2015f3bf749e0b73d8bc5d8695a51451fb832",
+    "model_qwen3_vl_8b/finished.json": "49969fa234e05fc0d913347ae2f0de116c11461c0119dde9b0a32d3f3d31a6b1",
+    "model_qwen3_vl_8b/gpu_preflight.json": "3d5c0e667ee8efe1a1041fc05b8d9be9b36f2cd85ef6dae29478ddb7f8c8695d",
+    "model_qwen3_vl_8b/summary.json": "eb160412e36e78ae75b26cbd9d75a7728a9a3072fad04cb6c5dfd06b0c402af6",
+    "model_qwen3_vl_8b/calls.json": "05b80ddc4444f111ee4425c2a8d06a640938d12ed4c4b25c37c0ac5442bb5c32",
+    "model_qwen3_vl_8b/started.json": "d7c26f0adcc8d308ea700dfe357201cccd7f1ab7c694a3a50a871666730ee60d"
+  },
+  "raw_storage_path": "/data1/sieniwgroup/sieniw/HRC-Bench/results/state_calibration_v14",
+  "raw_total_bytes": 7603233
+}

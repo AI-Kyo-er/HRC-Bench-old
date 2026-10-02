@@ -1,0 +1,1963 @@
+{
+  "all_passed": true,
+  "total_calls": 216,
+  "checks": [
+    {
+      "id": "qwen2_5_14b__direct_left_inactive_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_left_inactive_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_left_active_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_left_active_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_started_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_started_left",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_ended_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_left_ended_left",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_left_accepted_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_left_accepted_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_left_rejected_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_left_rejected_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_inactive_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_inactive_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_active_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__direct_right_active_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_started_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_started_right",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_ended_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__scope_right_ended_right",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_right_accepted_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_right_accepted_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_right_rejected_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen2_5_14b__update_right_rejected_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_inactive_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_inactive_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_active_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_left_active_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_started_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_started_left",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_ended_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_left_ended_left",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_accepted_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_accepted_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_rejected_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_left_rejected_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_inactive_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_inactive_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_active_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__direct_right_active_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_started_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_started_right",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_ended_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__scope_right_ended_right",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_accepted_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_accepted_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_rejected_source",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__update_right_rejected_neutral",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_60__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_left_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_accepted_right_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_left_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_before_child_rejected_right_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_left_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_accepted_right_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_left_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d04__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d04__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d04__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d04__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d05__normal__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d05__normal__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d05__reverse__full_history__action_replay",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__B_update_during_child_rejected_right_61__d05__reverse__full_history__state_readout",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_solo_left_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_solo_left_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_solo_right_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_solo_right_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_assisted_left_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_assisted_left_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_assisted_right_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_assisted_right_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_yield_left_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_yield_left_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_yield_right_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_yield_right_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_refusal_left_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_refusal_left_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_refusal_right_0",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__single_dev_refusal_right_1",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_0_0_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_0_0_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_0_1_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_0_1_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_1_0_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_1_0_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_1_1_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_red_1_1_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_0_0_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_0_0_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_0_1_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_0_1_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_1_0_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_1_0_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_1_1_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_blue_1_1_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_0_0_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_0_0_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_0_1_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_0_1_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_1_0_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_1_0_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_1_1_full_history",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    },
+    {
+      "id": "qwen3_vl_8b__multi_dev_after_green_1_1_public_progress_aid",
+      "record_exact": true,
+      "source_exact": true,
+      "token_exact": true,
+      "score_parse_exact": true,
+      "truncation_exact": true,
+      "physical_not_executed": true
+    }
+  ],
+  "v13_source_exact": 128,
+  "v4_source_exact": 40,
+  "controls": 48,
+  "physics_actions_executed": 0,
+  "source_sha256_unchanged": true,
+  "freeze_sha256": "71cb6b75cd3b9a98b209f801c4b3dd18985573c413374f9026e49d2401d49fb5",
+  "inputs_sha256": "5edd8c604dfe749f4c6961e6d0d5cacfd6e971332ded0db9b901cb00ea7270a7",
+  "calls_sha256": {
+    "qwen2_5_14b": "558d4920b2e53feeaa1278157be9617724216dbb3e5db431fdd4dd51ef944666",
+    "qwen3_vl_8b": "05b80ddc4444f111ee4425c2a8d06a640938d12ed4c4b25c37c0ac5442bb5c32"
+  },
+  "postfreeze_audit_source_sha256": "cc3d53a5e96f78583a987fe0cf0f201a8431e62bfc57ad0aaf3d3ee3be95823b",
+  "json_order_separate_from_semantics": true
+}
