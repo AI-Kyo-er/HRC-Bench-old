@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "markdown_only_iteration_links_changed": true,
+    "full_body_text_identical": true,
+    "valid_local_links": 68,
+    "iteration_row_links_exact": 26,
+    "experiment_rows": 26,
+    "valid_toc": true,
+    "no_external_runtime_dependencies": true,
+    "inline_js_syntax_passed": true,
+    "stage_snapshot_warning": true,
+    "manifest_entry": true
+  },
+  "browser_validation_performed": false,
+  "browser_validation_limitation": "未提供browser工具；本地无Chromium/Playwright/Puppeteer。仅静态验证，不声称实际桌面/手机渲染、点击交互、控制台或打印预览已浏览。",
+  "responsive_css_present": true,
+  "print_styles_and_beforeprint_expand_present": true,
+  "source_markdown_original_sha256": "2bca639feec1714535575a66fc822d81702fbf4e7a8650a7d882569e4a818b8e",
+  "artifacts_sha256": {
+    "codex_content/reports/report_实验阶段快照_20261003_165341.md": "7f3d52296fdb3f5d147d04bb5d6300b79513604aa568db684895c7bc7b17e00d",
+    "codex_content/reports/html/report_实验阶段快照_20261003_165341.html": "bdd6b04fddd422a64fe44d7058559080867f78b8d7b9338032ccff78d4aceabe",
+    "codex_content/reports/html/manifest.json": "f59b0c3787b915dbf355c22f142152d38bae479d6b5cc517779c1af63a225fda",
+    "codex_content/reports/build_report.py": "10bb09dca592933aa690b26eeba439ca088924172c928fafef6ea9572f1a1905"
+  },
+  "skill_template_sha256": "9e1fa0953980cdfe6bc666650dfd70df49c47a77830c43dff74ecbeb4c35d58d",
+  "snapshot_fixed_at": "2026-10-03 16:54 Asia/Shanghai",
+  "snapshot_terminated_count": 38,
+  "not_final_report": true,
+  "no_experiment_runs_or_frozen_source_edits": true,
+  "publish_registration": "技能脚本--draft登记，仅手动stage报告文件并中文commit，无push/发布。",
+  "generation_correction": "首个生成调用因BeautifulSoup.select是方法而非tag失败；改find(select)后成功，无实验调用。",
+  "validation_correction": "首次静态检查把正文另有001/026入口链接计入总数，28链接不等于26索引行；改为逐行精确核对001至026，正文/HTML事实未修改。"
+}

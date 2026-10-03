@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>持续协作实验阶段快照</title>
+  <meta name="description" content="截至2026年10月3日16:54的第1–26轮实验快照；当前批次仍运行，终止不等于任务成功。">
+  <meta property="og:title" content="持续协作实验阶段快照">
+  <meta property="og:description" content="截至2026年10月3日16:54的第1–26轮实验快照；当前批次仍运行，终止不等于任务成功。">
+  <meta property="og:type" content="article">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+
+  <style>
+:root{color-scheme:light;--bg:#f5f6f8;--paper:#fff;--ink:#182132;--muted:#596478;--line:#dce2eb;--accent:#225cb8;--soft:#eaf1ff;--warning:#8b4a00;--warning-bg:#fff4df}
+:root.dark{color-scheme:dark;--bg:#101722;--paper:#192332;--ink:#edf1f8;--muted:#b0bdcf;--line:#344156;--accent:#9fc4ff;--soft:#213553;--warning:#ffd497;--warning-bg:#352b20}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:2rem}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:.2em}a:hover{text-decoration-thickness:2px}button,input,select{font:inherit;color:inherit}button,select{cursor:pointer}button{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:.4rem .8rem}button:hover{background:var(--soft)}:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.report-shell{max-width:1460px;margin:auto;padding:32px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px}.toc{position:sticky;top:28px;align-self:start;max-height:calc(100vh - 56px);overflow:auto;font-size:14px}.toc strong{display:block;margin-bottom:12px}.toc a{display:block;text-decoration:none;padding:6px 8px;border-left:2px solid transparent;color:var(--muted)}.toc a:hover,.toc a.active{background:var(--soft);color:var(--accent);border-left-color:var(--accent)}
+main{min-width:0}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end;margin-bottom:20px}.status{color:var(--warning);background:var(--warning-bg);border:1px solid var(--line);padding:7px 14px;border-radius:8px;font-weight:700;display:inline-block}.eyebrow{font-size:14px;color:var(--muted);margin-top:18px}h1{font-size:clamp(28px,4vw,43px);line-height:1.25;margin:12px 0 20px;letter-spacing:-.02em}h2{font-size:24px;line-height:1.45;margin:0 0 20px}h3{font-size:20px}p{margin:0 0 16px}blockquote{margin:0 0 28px;border-left:4px solid var(--accent);background:var(--soft);padding:18px 22px;border-radius:0 8px 8px 0}blockquote p:last-child{margin:0}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:24px 0}.metric-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px}.metric-card small{display:block;color:var(--muted)}.metric-card strong{display:block;font-size:28px;line-height:1.4;margin:6px 0}.section-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px;margin:22px 0}.section-card details>summary{font-size:24px;font-weight:700;cursor:pointer;line-height:1.45;margin-bottom:18px}.section-card details:not([open])>summary{margin-bottom:0}.section-card li{margin-bottom:10px}.section-card ol,.section-card ul{padding-left:24px}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88em;overflow-wrap:anywhere;word-break:break-word;padding:.12em .35em;background:var(--soft);border-radius:4px}pre{overflow:auto;background:var(--soft);border-radius:8px;padding:18px;position:relative}pre code{padding:0}.copy-btn{position:absolute;right:8px;top:8px;font-size:12px}.kw{color:var(--accent);font-weight:700}
+.table-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0 10px}.table-tools label{font-size:14px;color:var(--muted)}.table-tools input{flex:1;min-width:190px;padding:9px 12px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.table-tools select{max-width:100%;padding:9px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.table-count{font-size:13px;color:var(--muted)}.table-wrap{width:100%;max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.7}table.experiments{min-width:960px}table.structure{min-width:650px}th,td{padding:13px 14px;vertical-align:top;text-align:left;border-bottom:1px solid var(--line)}thead{background:var(--soft)}thead th{font-weight:700}th button{border:0;padding:0;background:transparent;text-align:left;font-weight:700}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:var(--soft)}td:first-child{font-weight:600}table.experiments td:nth-child(2){width:19%}table.experiments td:nth-child(3){width:32%}table.experiments td:nth-child(4){width:23%}td[hidden],tr[hidden]{display:none}footer{font-size:13px;color:var(--muted);padding:24px 0 50px;overflow-wrap:anywhere}
+@media(max-width:1000px){.report-shell{grid-template-columns:1fr;padding:20px;gap:10px}.toc{position:relative;top:0;max-height:none;display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}.toc strong{width:100%;margin-bottom:0}.toc a{padding:4px 8px;font-size:12px;border-left:0}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.section-card{padding:22px}}
+@media(max-width:520px){body{font-size:15px}.report-shell{padding:12px}.section-card{padding:18px 14px}.actions{justify-content:flex-start}.metrics{gap:8px}.metric-card{padding:14px}.metric-card strong{font-size:25px}.table-tools{display:block}.table-tools input,.table-tools select{width:100%;margin:6px 0;min-width:0}blockquote{padding:16px}.section-card details>summary,h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.no-print,.toc,.actions,.table-tools{display:none!important}:root,:root.dark{--bg:#fff;--paper:#fff;--ink:#000;--muted:#333;--line:#aaa;--accent:#000;--soft:#fff;--warning:#000;--warning-bg:#fff}body{font-size:10pt}.report-shell{display:block;padding:0;max-width:none}.section-card{border:0;padding:10px 0;border-radius:0}.metrics{grid-template-columns:repeat(4,1fr)}h1{font-size:24pt}h2,.section-card details>summary{font-size:15pt}.table-wrap{overflow:visible;border:0}table.experiments,table.structure{min-width:0;table-layout:fixed;font-size:8pt}th,td{padding:5px;overflow-wrap:anywhere}thead{display:table-header-group}tr{break-inside:avoid}tr[hidden]{display:table-row!important}.section-card details:not([open])>*:not(summary){display:block!important}a{color:#000}.status{border:1px solid #000}footer{padding-bottom:0}}
+</style>
+<script>try{if(localStorage.getItem('report-theme')==='dark'||(!localStorage.getItem('report-theme')&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(_){}</script></head>
+
+<body>
+<div class="report-shell"><nav class="toc no-print" aria-label="报告目录"><strong>报告目录</strong><a href="#section-1">基本信息与研究目标</a><a href="#section-2">当前判断</a><a href="#section-3">如何读这些数字</a><a href="#section-4">全部实验索引</a><a href="#section-5">正在运行的第26轮：设计、阶段结果与剩余工作</a><a href="#section-6">哪些发现改变了研究路线</a><a href="#section-7">原始六类结构目前覆盖到哪里</a><a href="#section-8">验证情况与产物</a><a href="#section-9">风险、结论边界与后续建议</a></nav><main>
+<div class="actions no-print"><a href="../report_实验阶段快照_20261003_165341.md" download>下载配套Markdown</a><button id="theme-toggle" type="button" aria-pressed="false">切换明暗</button><button id="print-report" type="button">打印 / 存为PDF</button></div>
+<header><span class="status">阶段快照 · 当前实验进行中</span><p class="eyebrow">HRC-Bench · 2026年10月3日16:54（北京时间）</p><h1>持续协作实验阶段快照</h1></header>
+
+<blockquote>
+<p>快照时间：2026年10月3日16:54（北京时间）。本报告覆盖第1–26轮，前25轮已归档，第26轮正在运行。当前80条中38条已终止（16条局部、22条完整），终止不等于成功；独立阶段审计覆盖16条局部及前8条完整。用户已要求先交付此快照，当前批次全部结束并审计后另生成完整阶段报告，保留本版。</p>
+</blockquote>
+<div class="metrics" aria-label="固定快照摘要"><div class="metric-card"><small>已归档轮次</small><strong>25轮</strong><small>第26轮继续执行</small></div><div class="metric-card"><small>已终止回合</small><strong>38 / 80</strong><small>16局部 + 22完整；非成功数</small></div><div class="metric-card"><small>局部审计</small><strong>16 / 16</strong><small>安全成功14；全部安全16</small></div><div class="metric-card"><small>完整阶段审计</small><strong>8 / 64</strong><small>任务0；安全5；非全量成绩</small></div></div><section class="section-card" id="section-1"><h2>基本信息与研究目标</h2>
+<p>项目为HRC-Bench。研究对象是同一共同活动中交互关系的组合与变化：接力、局部嵌套、同时约束、历史赋义、机器人主动引发变化，以及暂离后的重返。用户确定先以仿真为主，真机验证后续安排。</p>
+<p>起点是本地<a href="../../../.codex/mds/idea.md"><code>idea.md</code></a>与Liu等2026年HRIBench论文。本地PDF为11页，不含正文所指全部附录；此前分享对话链接只返回登录页。因此当前工作不是原HRIBench的完整复现，也不能假定已读到分享对话内容。</p>
+<p>核心问题逐渐明确为：在基础操作可行、信息与任务难度得到控制时，跨片段依赖是否给持续协作带来额外困难？这种困难能否由普通状态追踪、提示形式或简单调度解释？</p>
+</section><section class="section-card" id="section-2"><h2>当前判断</h2>
+<p>已经建立有实际抓放、接触、载台运输、检查贡献、公开约定和终止判断的仿真原型。规则参考能完成多个组合条件；较强模型在基础持续任务上已出现可复查的遗漏和提前声明。公开账本是有效且允许参与比较的基线。</p>
+<p>目前仍不能宣称已经证明“局部能力强但交互组合泛化弱”，也不能宣称已有足以支持顶会论文的核心实证。主要缺口是严格匹配的组合对照、未见结构、强模型之间的稳健性，以及与普通状态维护任务的区分。当前许多实验属于开发、测量验收或离线诊断。</p>
+</section><section class="section-card" id="section-3"><h2>如何读这些数字</h2>
+<ul>
+<li><strong>规则参考</strong>：程序按公开事实选择动作，证明环境与计划可执行，不代表神经模型会做。</li>
+<li><strong>模型单步诊断</strong>：给模型某个真实或构造的检查点，只评价一次选择；即使下一检查点正确，也不能当作模型自主完成整段活动。</li>
+<li><strong>自主闭环</strong>：模型输出实际推进环境，后续输入包含其自身行为后果。</li>
+<li><strong>任务成功</strong>：终止时满足全部当前义务；<strong>全程安全</strong>另检查整个运动过程。最终物品到位、动作返回成功都不能覆盖途中碰撞。</li>
+<li><strong>审计通过</strong>：必须说明检查范围。重建一致不等于安全，符合预期的负例也可能是任务失败。</li>
+<li><strong>物理tick</strong>：仿真时钟。模型推理时物理暂停，不能把仿真时长称作真实人机团队流畅度。</li>
+<li>各轮条件、接口与分母不同，下表不能绘制为同一测试集上的单调性能提升曲线。</li>
+</ul>
+</section><section class="section-card" id="section-4"><h2>全部实验索引</h2>
+<p>下列每轮对应<code>.codex/mds/iteration-NNN.md</code>，其中保留预设、开发失败、审计与产物链接；结果目录给出便于核查的入口。修订子版本在同一行列出，不用新版本的成绩覆盖旧失败。</p>
+<div class="table-tools no-print"><label for="search-0">搜索</label><input data-table-filter="experiment-table" id="search-0" placeholder="输入模型、轮次、结果或关键词…" type="search"/><select aria-label="按研究阶段筛选" data-table-stage="experiment-table"><option value="">全部26轮</option><option value="early">01–08：早期开发</option><option value="interface">09–17：接口与参照</option><option value="sustained">18–26：持续活动</option></select><span aria-live="polite" class="table-count" data-table-count="experiment-table" role="status"></span></div><div aria-label="实验索引表" class="table-wrap" role="region" tabindex="0"><table class="experiments" data-sortable="" id="experiment-table">
+<thead>
+<tr>
+<th><button title="点击排序" type="button">轮次</button></th>
+<th><button title="点击排序" type="button">类型与要回答的问题</button></th>
+<th><button title="点击排序" type="button">实际结果与情况</button></th>
+<th><button title="点击排序" type="button">对研究的影响</button></th>
+<th><button title="点击排序" type="button">主要结果目录</button></th>
+</tr>
+</thead>
+<tbody>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-001.md">01</a></td>
+<td>符号机制：历史依赖与伙伴响应能否表达</td>
+<td>单模板1000个seed、各两反事实；完整状态与<code>solo_robust</code>强基线完成率均100%（不代表所有替代策略）；人/机器来源标签置换后行为相同</td>
+<td>可构造依赖，但不支持HRI特异性；seed数量不是任务多样性</td>
+<td><a href="../../../results/symbolic_v1"><code>results/symbolic_v1</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-002.md">02</a></td>
+<td>Qwen2.5-3B语言连续决策及接口校准</td>
+<td>完整历史0/60、Oracle状态摘要3/60；两视图步骤完成均38/180。独立校准有效动作6/12、立即完成3/12</td>
+<td>基础接口已失败，不能把组合低分解释为结构缺口</td>
+<td><a href="../../../results/language_v2"><code>results/language_v2</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-003.md">03</a></td>
+<td>真实物理闭环与停车修复</td>
+<td>v3.1规则任务8/8、模型0/8，但规则只有4/8满足无伙伴接触。v3.2修复后20条物理控制通过，123600tick零伙伴接触；24次单步诊断完整历史4/12、进度辅助6/12</td>
+<td>建立物理执行，发现任务完成与安全分离；日志快照问题及旧碰撞保留</td>
+<td><a href="../../../results/physical_v3"><code>results/physical_v3</code></a>、<a href="../../../results/physical_v3_2"><code>physical_v3_2</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-004.md">04</a></td>
+<td>提示锚定、VL模型基础参照</td>
+<td>3B做84次格式示例诊断，去具体示例未修复。VL-7B原提示单动作16/16、历史9/12、辅助10/12；中性格式15/16、6/12、10/12</td>
+<td>两套VL提示均未过原工程门槛；使用文本输入，不是视觉策略实验</td>
+<td><a href="../../../results/interface_anchor_v4"><code>results/interface_anchor_v4</code></a>、<a href="../../../results/local_vl_v4"><code>local_vl_v4</code></a>、<a href="../../../results/neutral_vl_v4"><code>neutral_vl_v4</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-005.md">05</a></td>
+<td>单层指导与返工的物理可行性</td>
+<td>最终返工4/4、初始来源回归6/6、规则任务10/10；最终验收160080tick。早期占位返工发生接触，分版本修复</td>
+<td>局部结束保留其他进度可以实现；不是模型组合成绩</td>
+<td><a href="../../../results/structure_v5"><code>results/structure_v5</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-006.md">06</a></td>
+<td>更强模型初筛与环境捷径</td>
+<td>Qwen2.5-14B单动作16/16、历史9/12、辅助12/12，原40项门槛未通过；统一保守规则6/6。发现blue所在盘可反推外层目标</td>
+<td>否定用当时任务成功率识别历史理解的设计，推动中性检查位置</td>
+<td><a href="../../../results/model_scale_v4"><code>results/model_scale_v4</code></a>、<a href="../../../results/structure_diagnostic_v6"><code>structure_diagnostic_v6</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-007.md">07</a></td>
+<td>同物理状态、不同历史要求不同返回</td>
+<td>中性来源控制4/4，规则参考8/8；四组配对物理前缀和去历史观察一致、正确目标不同；总153840tick</td>
+<td>排除该版本的位置反推捷径，仍没有神经或结构留出证据</td>
+<td><a href="../../../results/structure_v7"><code>results/structure_v7</code></a></td>
+</tr>
+<tr data-stage="early">
+<td><a href="../../../.codex/mds/iteration-008.md">08</a></td>
+<td>真实运输贡献与并行成本</td>
+<td>六条参考全部完成；shared并行6655tick、保守9835tick，差3180tick=13.25秒；正式53730tick</td>
+<td>有真实协调后果，但普通并行调度即可解释收益</td>
+<td><a href="../../../results/structure_v8"><code>results/structure_v8</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-009.md">09</a></td>
+<td>14B真实参考检查点的接口诊断</td>
+<td>80次离线调用；结束前D1–D4两视图各8/8推进；结束后D5完整历史2/8、辅助8/8，错误为重复finish</td>
+<td>观察到结束后不推进，不能据此断言遗忘目标或闭环失败率</td>
+<td><a href="../../../results/structure_diagnostic_v9"><code>results/structure_diagnostic_v9</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-010.md">10</a></td>
+<td>拆分活动状态、目标、进度帮助</td>
+<td>160次调用；D5原始2/8，状态4/8，目标5/8，进度6/8，目标+进度7/8，完整辅助8/8；仅包装文字也4/8</td>
+<td>提示形式和一般显著性是重要替代解释，状态字段没有独占性证据</td>
+<td><a href="../../../results/structure_ablation_v10"><code>results/structure_ablation_v10</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-011.md">11</a></td>
+<td>外层约定更新时机与物理配对</td>
+<td>16条规则参考全部完成，204480tick；八组时机配对全物理轨迹相同，最终输入长度相同</td>
+<td>构造更强对照，但时机同时改变新近程度，不能称纯作用域因果实验</td>
+<td><a href="../../../results/structure_v11"><code>results/structure_v11</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-012.md">12</a></td>
+<td>14B在更新时机对照上的选择</td>
+<td>128次离线调用；D4历史28/32、辅助30/32；D5历史4/32、辅助21/32。D5两个时机历史均2/16</td>
+<td>未出现预想的结束后时机计数差异；实际错误不吻合人为旧快照策略</td>
+<td><a href="../../../results/structure_diagnostic_v12"><code>results/structure_diagnostic_v12</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-013.md">13</a></td>
+<td>状态报告能否解释动作错误</td>
+<td>128次调用；外层目标字段61/64，但三字段联合0/64；外层目标单字段与动作正确会双向分离（不指联合状态）</td>
+<td>未校准的状态问答不能当作内部状态读出</td>
+<td><a href="../../../results/state_readout_v13"><code>results/state_readout_v13</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-014.md">14</a></td>
+<td>第二模型与短状态控制</td>
+<td>216次调用；两模型短控制当前目标均14/24；Qwen3-VL-8B复杂状态联合1/64，原工程门槛未过</td>
+<td>主要诊断接口本身有基础问题，不能据此定位认知机制</td>
+<td><a href="../../../results/state_calibration_v14"><code>results/state_calibration_v14</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-015.md">15</a></td>
+<td>自然交还代替机器人显式finish</td>
+<td>16条物理参考实际完成并与旧轨迹一致；原runner容器比较失败另存，独立审计通过。两模型256次离线调用，交还条件推进为6/32和10/32</td>
+<td>自然交还没有解决重复结束，预算匹配也未改变推进数量</td>
+<td><a href="../../../results/structure_handoff_v15"><code>results/structure_handoff_v15</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-016.md">16</a></td>
+<td>请求驱动运输与伙伴可用性</td>
+<td>10控制及16规则参考通过，184280tick；busy时等待可用再请求，比先做red少5.25秒</td>
+<td>请求产生真实后果；局部推进未必最小化共同完成时间，仍非最优性证明</td>
+<td><a href="../../../results/responsive_transport_v16"><code>results/responsive_transport_v16</code></a></td>
+</tr>
+<tr data-stage="interface">
+<td><a href="../../../.codex/mds/iteration-017.md">17</a></td>
+<td>放开错误目标执行、建立较强模型基础</td>
+<td>16物理控制均执行成功，目标符合8/16，另8例为安全错误目标；Qwen3-14B thinking原40项全对；nonthinking单项15/16，历史及辅助各12/12</td>
+<td>评分与安全解耦；获得可用于后续闭环的基础模型，不能把差异纯归因为thinking</td>
+<td><a href="../../../results/transport_goal_v17"><code>results/transport_goal_v17</code></a>、<a href="../../../results/reasoning_baseline_v17"><code>reasoning_baseline_v17</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-018.md">18</a></td>
+<td>同一World内恢复、固定菜单与自主声明</td>
+<td>56条控制/参考严格符合预设且安全，52条任务成功、4条故意错误声明；483750tick</td>
+<td>错误可实际发生并恢复，环境不替策略自动完成；仍是规则执行</td>
+<td><a href="../../../results/sustained_activity_v18"><code>results/sustained_activity_v18</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-019.md">19</a></td>
+<td>Qwen3-14B自主持续活动</td>
+<td>识别12/12；24条闭环完整历史安全成功9/12、账本12/12；132调用、215040tick审计通过。三次失败均漏blue后声明</td>
+<td>第一个较强模型的真实闭环遗漏证据；账本有帮助，不证明结构组合缺口</td>
+<td><a href="../../../results/sustained_model_v19"><code>results/sustained_model_v19</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-020.md">20</a></td>
+<td>检查台、green工作、presence离返与返回物理基础</td>
+<td>dev1共28条中26条严格通过，两次运输中green-right发生真实碰撞；另有dev0检查台侧墙碰撞。red-first四条新控制安全且不增加等待</td>
+<td>动态冲突真实存在，但简单调度可避免，不能凭碰撞制造结构必要性</td>
+<td><a href="../../../results/structure_foundation_v20"><code>results/structure_foundation_v20</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-021.md">21</a></td>
+<td>检查、约定更新、暂离重返与职责赋义</td>
+<td>原36条严格34/36、任务32/36；原两次返程碰撞保留。额外两条修订负例安全但任务失败。合计38条549672tick</td>
+<td>可保持检查进度、区分暂停/撤销，并让相同物理前缀承担不同职责；尚是分族规则控制</td>
+<td><a href="../../../results/sustained_structure_v21"><code>results/sustained_structure_v21</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-022.md">22</a></td>
+<td>重装与循环运输</td>
+<td>8/8控制通过，165251tick、26行程；四个空载行程未继承旧载荷成功</td>
+<td>当前状态与历史完成事件分开，为检查后伙伴接回提供能力</td>
+<td><a href="../../../results/transport_cycle_v22"><code>results/transport_cycle_v22</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-023.md">23</a></td>
+<td>同活动连接检查与最新交付职责</td>
+<td>24参考及8控制全程安全、严格符合预设；任务28/32，四条为预设缺义务负例；638418tick</td>
+<td>真实组合可执行；单次公开职责事务仍可由简单账本处理</td>
+<td><a href="../../../results/sustained_combination_v23"><code>results/sustained_combination_v23</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-024.md">24</a></td>
+<td>共盘放置与恢复</td>
+<td>8/8控制安全通过，158408tick、40次抓放；共同前缀一致</td>
+<td>补齐双目标物理前提，不是新模型能力实验</td>
+<td><a href="../../../results/shared_slots_v24"><code>results/shared_slots_v24</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-025.md">25</a></td>
+<td>双目标关系、直接表达和更新时机的参考</td>
+<td>48条严格符合且安全，任务46/48，两条为预设U4负例；821448tick；36组指定参考配对物理轨迹及成本相同</td>
+<td>双目标依赖有真实返工后果；匹配成立于指定参考，不自动成立于模型自主轨迹</td>
+<td><a href="../../../results/dual_goal_v25"><code>results/dual_goal_v25</code></a></td>
+</tr>
+<tr data-stage="sustained">
+<td><a href="../../../.codex/mds/iteration-026.md">26</a></td>
+<td>Qwen3-14B局部与完整双目标闭环</td>
+<td>冻结80条：局部16、完整64。已终止38/80；局部16条及前8条完整已阶段审计，其余结果待全量审计</td>
+<td>不能以首组结果替代全条件，也不能将局部/完整差值直接命名为组合效应</td>
+<td><a href="../../../results/dual_goal_model_v26"><code>results/dual_goal_model_v26</code></a></td>
+</tr>
+</tbody>
+</table></div>
+</section><section class="section-card" id="section-5"><h2>正在运行的第26轮：设计、阶段结果与剩余工作</h2>
+<p>模型是本地Qwen3-14B thinking，使用文本形式的公开历史和物理状态选择动作，不是图像输入策略，也没有进行模型训练。机械臂动作真正推进PyBullet物理仿真；模型推理期间物理暂停。完整任务最多48次决策，局部任务最多12次决策。</p>
+<p>典型流程是：请求载台前送blue → 放blue到检查台 → 请求检查并等待实际完成 → 处理目标修改的接受/拒绝 → 整理red、blue、green并让载台返回 → 自主声明结束。合法动作不只这一顺序；简单等待、先做red等策略允许参与比较。</p>
+<p>直接条件例如“green放右边”；关系条件例如“green与blue同边”。若后来接受blue改到左边，关系条件下green也应改到左边，可能需要返工；直接条件下green仍保持原目标。拒绝提议则不更新blue。完整64条为初始blue左右×接受/拒绝×same/opposite×更新时机×直接/关系表达×完整历史/账本，共六个二值因素；直接臂的same/opposite只用于离线配对，不作为隐含关系指令输入模型。</p>
+<p>局部16条先由规则参考完成真实运输/检查前缀，再由模型接手最后双目标整理；该前缀不是模型自主完成。因此不能简单相减局部和完整成功率，就宣称得到纯组合效应。伙伴确认回应和检查贡献由脚本/物理代理实现，本轮presence保持在场，没有真人参与，也没有把原六类结构全部作为本轮因素。</p>
+<p>截至快照，原模型PID253762和等待全量结果的审计监视器PID286338仍存活。16:49的速度测量显示，已完成完整回合平均15.6分钟，最近8条平均18.8分钟；当时外推模型运行还需11–14小时，后续审计与报告暂预留1–3小时。这是估计，不是运行截止时刻或保证。</p>
+<p>当前冻结比较包含直接目标/关系目标、完整历史/公开账本、接受/拒绝、更新时机及左右目标。局部16条已经独立审计：安全成功14/16，其中完整历史6/8、账本8/8。两个失败均漏green后声明，分别来自不同表达条件。</p>
+<p>前八条完整条件阶段审计为任务0/8、安全5/8；这只是相同初始方向、接受回应、same关系下的两个时机组。失败包括提前声明、实际物理失败与预算耗尽。直接账本after_handoff案例虽然四次抓放没有返回技能失败，全程仍有green与载台接触和非目标物位移；因此“技能无失败”不能替代安全审计。</p>
+<p>后续完整阶段报告将补齐：原运行真实退出码、全部80条终态、输入与物理全量审计、完整64条按因素和成对比较、首次错误与恢复、失败类型、成功完成时间与失败终止耗时、冻结与结果校验、最终测试证据和Git提交。不得用少数成功轨迹替换全条件分母。</p>
+</section><section class="section-card" id="section-6"><h2>哪些发现改变了研究路线</h2>
+<ol>
+<li><strong>更低的模型分数不自动意味着更好的研究任务。</strong>早期3B及若干14B/VL接口连基础控制也失败，因此扩大题量不能支持“局部强、组合弱”。后续转向先验证基本接口和实际执行。</li>
+<li><strong>任务可能有不需要历史的捷径。</strong>v6发现位置反推和统一保守策略足以完成，v7改用同物理状态、不同有效历史的配对。后来仍允许简单账本与调度基线，避免人为排除正确方案。</li>
+<li><strong>辅助有效不等于找到了内部机制。</strong>v10连只有来源声明的包装都有帮助；v13–14的状态问答本身不可靠。报告只主张可见行为差异。</li>
+<li><strong>真实物理后果不可省略。</strong>停车、返工、检查台和移动载台均出现过实际接触；有些轨迹终态正确却不安全。后续采用逐tick接触、载荷支持和非目标保持审计。</li>
+<li><strong>声明与完成必须分开。</strong>v18以后允许任何时点声明终止，环境事后检查；v19及v26因此暴露真实遗漏，而不是由私有评分器替模型决定何时结束。</li>
+<li><strong>增加结构组件还不等于证明结构贡献。</strong>v21–25逐步连接职责、检查、离返、重装和关系目标，但规则可解、物理可行与模型泛化是不同层面的证据。</li>
+</ol>
+</section><section class="section-card" id="section-7"><details open><summary>原始六类结构目前覆盖到哪里</summary>
+<div class="table-tools no-print"><label for="search-1">搜索</label><input data-table-filter="structure-table" id="search-1" placeholder="输入模型、轮次、结果或关键词…" type="search"/><span aria-live="polite" class="table-count" data-table-count="structure-table" role="status"></span></div><div aria-label="六类结构证据表" class="table-wrap" role="region" tabindex="0"><table class="structure" data-sortable="" id="structure-table">
+<thead>
+<tr>
+<th><button title="点击排序" type="button">要求</button></th>
+<th><button title="点击排序" type="button">当前证据</button></th>
+<th><button title="点击排序" type="button">尚缺证据</button></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>接力转换</td>
+<td>指导、运输与机器人接手能连接在持续活动中</td>
+<td>跨关系类型的依赖控制与泛化</td>
+</tr>
+<tr>
+<td>局部嵌套</td>
+<td>检查child、外层更新、自然交还已真实实现</td>
+<td>多层与不同作用域、匹配比较及结构留出</td>
+</tr>
+<tr>
+<td>同时约束</td>
+<td>整理与运输实际重叠，物理成本可测</td>
+<td>指导、互补操作、干预联合产生的特定结构效应</td>
+</tr>
+<tr>
+<td>历史赋义</td>
+<td>相同物理前缀因公开职责而要求取走或留载</td>
+<td>跨模板神经策略与非人类同构对照</td>
+</tr>
+<tr>
+<td>机器人引发关系变化</td>
+<td>请求会引发真实运输、检查；拒绝不排队</td>
+<td>自主分工修改与双向协商；当前outer回应多为脚本事务</td>
+</tr>
+<tr>
+<td>暂离和重返连续性</td>
+<td>presence真实离返、进度保留、暂停/撤销后重接</td>
+<td>神经闭环完整覆盖、行为多样性与真人验证</td>
+</tr>
+</tbody>
+</table></div>
+</details></section><section class="section-card" id="section-8"><details open><summary>验证情况与产物</summary>
+<p>每轮的运行源、条件冻结、模型输入输出、摘要和派生审计分别保留；首次失败不会被后续修复覆盖。审计器出现过tuple/list、初始化注解及汇总比较问题，修复记录与物理故障区分，不能把每个exit1都叫模型失败。</p>
+<p>第26轮报告实现阶段最近一次全套测试为236项通过；这是程序验证，不是236条模型实验，更不证明研究假设。此前各轮测试数量是当时版本的累计快照，不应跨轮相加。当前报告的页面验证另列于交付回执；后续完整阶段报告还需核对是否有新增实现变更及适用测试。</p>
+<p>入口为<a href="../../../.codex/mds/iteration-001.md"><code>.codex/mds/iteration-001.md</code></a>至<a href="../../../.codex/mds/iteration-026.md"><code>iteration-026.md</code></a>、<a href="../../../.codex/mds/research-evidence-status.md"><code>research-evidence-status.md</code></a>、<a href="../../../.codex/mds/study-design.md"><code>study-design.md</code></a>与<a href="../../../.codex/mds/structure-split-draft.md"><code>structure-split-draft.md</code></a>。实现位于<a href="../../../experiments"><code>experiments/</code></a>，摘要与审计位于<a href="../../../results"><code>results/</code></a>。大体积权重和原始轨迹存放于<a href="../../../../../../../../data1/sieniwgroup/sieniw"><code>/data1/sieniwgroup/sieniw/</code></a>，项目以软链接访问；仅复制报告不会同时复制这些大文件。</p>
+</details></section><section class="section-card" id="section-9"><details open><summary>风险、结论边界与后续建议</summary>
+<p>当前主要数据来自少量开发模板及固定几何；左右反平衡、菜单顺序、seed数量都不等于未见结构。已多轮查看的v24–26模板应明确视为开发暴露，不能再包装成隐藏测试。</p>
+<p>公开账本是由同一公开历史计算出的额外帮助；直接表达也减少了目标推导负担。它们是有价值的比较，但不是信息处理负担完全相同的纯结构干预。时机移动还改变新近程度、pending持续时间与可提前工作机会。</p>
+<p>此前文献核验已表明，长期协作、任务图、约定管理、双向协商、历史追踪和组合评测均有相关工作。当前可追求的贡献应是可反驳、可匹配的关系依赖评测与真实协调后果，而非给既有概念重新命名。具体核验范围与一手链接保留在各轮研究记录及<a href="../../../.codex/mds/study-design.md"><code>study-design.md</code></a>；本报告不把文献阅读当作新颖性认证。</p>
+<p>本快照先交付；当前批次结束并完成审计后，再另交付完整HTML与Markdown阶段报告，不自动启动新实验。供用户评估的后续优先项是：根据全量v26失败分类判断测量瓶颈，建立局部—串接—依赖的可行匹配，加入一般状态更新/非人类同构控制，按结构图留出新模板，再验证多个基础能力合格的模型。先仿真，之后再安排真人伙伴或真机外部有效性验证。</p></details></section>
+<footer>正文完整来自配套Markdown；页面基于markdown-work-report模板生成，无外部脚本、字体或网络依赖。<br>正文SHA256：<code>7f3d52296fdb3f5d147d04bb5d6300b79513604aa568db684895c7bc7b17e00d</code></footer>
+</main></div><script>
+(()=>{
+const root=document.documentElement;
+const theme=document.getElementById('theme-toggle');
+theme.addEventListener('click',()=>{const dark=root.classList.toggle('dark');theme.setAttribute('aria-pressed',String(dark));try{localStorage.setItem('report-theme',dark?'dark':'light')}catch(_){}});
+document.getElementById('print-report').addEventListener('click',()=>window.print());
+document.querySelectorAll('table[data-sortable]').forEach(table=>{
+ const body=table.tBodies[0],query=document.querySelector('[data-table-filter="'+table.id+'"]'),stage=document.querySelector('[data-table-stage="'+table.id+'"]'),count=document.querySelector('[data-table-count="'+table.id+'"]');
+ const filter=()=>{let n=0;const q=(query?.value||'').trim().toLocaleLowerCase('zh-CN'),s=stage?.value||'';[...body.rows].forEach(row=>{row.hidden=!(row.textContent.toLocaleLowerCase('zh-CN').includes(q)&&(!s||row.dataset.stage===s));if(!row.hidden)n++});if(count)count.textContent='显示 '+n+' / '+body.rows.length+' 条';};
+ query?.addEventListener('input',filter);stage?.addEventListener('change',filter);
+ table.querySelectorAll('thead button').forEach((button,i)=>{let asc=true;button.addEventListener('click',()=>{const rows=[...body.rows];rows.sort((a,b)=>a.cells[i].textContent.trim().localeCompare(b.cells[i].textContent.trim(),'zh-CN',{numeric:true})*(asc?1:-1));table.querySelectorAll('th').forEach(th=>th.removeAttribute('aria-sort'));button.closest('th').setAttribute('aria-sort',asc?'ascending':'descending');rows.forEach(row=>body.appendChild(row));asc=!asc;filter()})});filter();
+});
+document.querySelectorAll('pre>code').forEach(code=>{const button=document.createElement('button');button.type='button';button.className='copy-btn no-print';button.textContent='复制';button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(code.textContent);button.textContent='已复制'}catch(_){button.textContent='请手动复制'}setTimeout(()=>button.textContent='复制',1600)});code.parentElement.appendChild(button)});
+const details=[...document.querySelectorAll('details')];let openBeforePrint=[];
+addEventListener('beforeprint',()=>{openBeforePrint=details.map(d=>d.open);details.forEach(d=>d.open=true)});
+addEventListener('afterprint',()=>details.forEach((d,i)=>d.open=openBeforePrint[i]??d.open));
+const links=[...document.querySelectorAll('.toc a')];
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id))})},{rootMargin:'-5% 0px -70% 0px'});links.forEach(a=>{const el=document.getElementById(a.hash.slice(1));if(el)observer.observe(el)})}
+document.querySelectorAll('.toc a').forEach(a=>a.addEventListener('click',()=>{const target=document.getElementById(a.hash.slice(1));const d=target?.querySelector('details');if(d)d.open=true}));
+})();
+</script></body></html>
