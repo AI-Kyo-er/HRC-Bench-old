@@ -1,0 +1,704 @@
+{
+  "modified_files": [
+    {
+      "file": ".codex/codex-gen-content/mds/iteration-004.md",
+      "before_sha256": "8fe470fbec5f67ead857355f0a7c70a8922c201f45c556310190396837fbbaf3",
+      "after_sha256": "4b6b312b72402a633a992dc0df8babc63359beabd46e52673bbe4863dcea3dfd",
+      "links": [
+        {
+          "old": "../../results/interface_anchor_v4/summary.json",
+          "new": "../../../results/interface_anchor_v4/summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/local_vl_v4/basic_summary.json",
+          "new": "../../../results/local_vl_v4/basic_summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/neutral_vl_v4/basic_summary.json",
+          "new": "../../../results/neutral_vl_v4/basic_summary.json",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "file": ".codex/codex-gen-content/mds/iteration-001.md",
+      "before_sha256": "56d187f842e1e420b8c074989153c0f4493e6b6258344c2c82062d2fc8ae81cc",
+      "after_sha256": "ff9f59f2439f3fe64e9c34a5abf748fa7618c88bdb2104483587ccc0fc6f5997",
+      "links": [
+        {
+          "old": "idea.md",
+          "new": "../../mds/idea.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/symbolic_v1/summary.json",
+          "new": "../../../results/symbolic_v1/summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/symbolic_v1/episodes.csv",
+          "new": "../../../results/symbolic_v1/episodes.csv",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/symbolic_v1/traces.jsonl",
+          "new": "../../../results/symbolic_v1/traces.jsonl",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/symbolic_v1/reproducibility.json",
+          "new": "../../../results/symbolic_v1/reproducibility.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../experiments/symbolic/README.md",
+          "new": "../../../experiments/symbolic/README.md",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "file": ".codex/codex-gen-content/mds/iteration-002.md",
+      "before_sha256": "02ddafc1ed886f41f25e6a51bc838178d68bb03b5505749c981718373c121349",
+      "after_sha256": "b47059d89a3bdd74a4507dc4d76e8e523cfddec3c5d1ec8ed9076b68601d70a5",
+      "links": [
+        {
+          "old": "../../results/language_v2/formal_summary.json",
+          "new": "../../../results/language_v2/formal_summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/language_v2/calibration_summary.json",
+          "new": "../../../results/language_v2/calibration_summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/language_v2/formal_analysis.json",
+          "new": "../../../results/language_v2/formal_analysis.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/language_v2/execution_receipt.json",
+          "new": "../../../results/language_v2/execution_receipt.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../experiments/language/README.md",
+          "new": "../../../experiments/language/README.md",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "file": ".codex/codex-gen-content/mds/iteration-003.md",
+      "before_sha256": "b0a9d5c7772b2138723b867fb9025fe012045eadffad9c129c0260b57a85928b",
+      "after_sha256": "374069ed0a846a6a1627496f38adf4c8b46948c3d9fdb094f358ecd5b4d2ffc9",
+      "links": [
+        {
+          "old": "idea.md",
+          "new": "../../mds/idea.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../experiments/physical/README.md",
+          "new": "../../../experiments/physical/README.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../experiments/physical/cases/freeze.json",
+          "new": "../../../experiments/physical/cases/freeze.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3/formal_model_summary.json",
+          "new": "../../../results/physical_v3/formal_model_summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3/formal_reference_summary.json",
+          "new": "../../../results/physical_v3/formal_reference_summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3/trajectory_audit.json",
+          "new": "../../../results/physical_v3/trajectory_audit.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3/representative_calls.json",
+          "new": "../../../results/physical_v3/representative_calls.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3_2/message_audit.json",
+          "new": "../../../results/physical_v3_2/message_audit.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3_2/control_summary.json",
+          "new": "../../../results/physical_v3_2/control_summary.json",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/contact_sheet.png",
+          "new": "../../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/contact_sheet.png",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/rollout.mp4",
+          "new": "../../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/rollout.mp4",
+          "occurrences": 1
+        },
+        {
+          "old": "../../results/physical_v3_2/progress_dev_summary.json",
+          "new": "../../../results/physical_v3_2/progress_dev_summary.json",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "file": ".codex/codex-gen-content/reports/report_实验阶段快照_20261003_165341.md",
+      "before_sha256": "7f3d52296fdb3f5d147d04bb5d6300b79513604aa568db684895c7bc7b17e00d",
+      "after_sha256": "ee25b37a2ec23f387a1658d649d924765c0c1663331ad20393e78f2898edbc76",
+      "links": [
+        {
+          "old": "../../.codex/mds/iteration-001.md",
+          "new": "../mds/iteration-001.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-002.md",
+          "new": "../mds/iteration-002.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-003.md",
+          "new": "../mds/iteration-003.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-004.md",
+          "new": "../mds/iteration-004.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-005.md",
+          "new": "../mds/iteration-005.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-006.md",
+          "new": "../mds/iteration-006.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-007.md",
+          "new": "../mds/iteration-007.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-008.md",
+          "new": "../mds/iteration-008.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-009.md",
+          "new": "../mds/iteration-009.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-010.md",
+          "new": "../mds/iteration-010.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-011.md",
+          "new": "../mds/iteration-011.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-012.md",
+          "new": "../mds/iteration-012.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-013.md",
+          "new": "../mds/iteration-013.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-014.md",
+          "new": "../mds/iteration-014.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-015.md",
+          "new": "../mds/iteration-015.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-016.md",
+          "new": "../mds/iteration-016.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-017.md",
+          "new": "../mds/iteration-017.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-018.md",
+          "new": "../mds/iteration-018.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-019.md",
+          "new": "../mds/iteration-019.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-020.md",
+          "new": "../mds/iteration-020.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-021.md",
+          "new": "../mds/iteration-021.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-022.md",
+          "new": "../mds/iteration-022.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-023.md",
+          "new": "../mds/iteration-023.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-024.md",
+          "new": "../mds/iteration-024.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-025.md",
+          "new": "../mds/iteration-025.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../.codex/mds/iteration-026.md",
+          "new": "../mds/iteration-026.md",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "file": ".codex/codex-gen-content/reports/html/report_实验阶段快照_20261003_165341.html",
+      "before_sha256": "bdd6b04fddd422a64fe44d7058559080867f78b8d7b9338032ccff78d4aceabe",
+      "after_sha256": "9b089e9e377812502202d0968b37213ee1f31a7e3554f1e850d6337f1e6e6e62",
+      "links": [
+        {
+          "old": "../../../.codex/mds/idea.md",
+          "new": "../../../mds/idea.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-001.md",
+          "new": "../../mds/iteration-001.md",
+          "occurrences": 2
+        },
+        {
+          "old": "../../../results/symbolic_v1",
+          "new": "../../../../results/symbolic_v1",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-002.md",
+          "new": "../../mds/iteration-002.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/language_v2",
+          "new": "../../../../results/language_v2",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-003.md",
+          "new": "../../mds/iteration-003.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/physical_v3",
+          "new": "../../../../results/physical_v3",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/physical_v3_2",
+          "new": "../../../../results/physical_v3_2",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-004.md",
+          "new": "../../mds/iteration-004.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/interface_anchor_v4",
+          "new": "../../../../results/interface_anchor_v4",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/local_vl_v4",
+          "new": "../../../../results/local_vl_v4",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/neutral_vl_v4",
+          "new": "../../../../results/neutral_vl_v4",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-005.md",
+          "new": "../../mds/iteration-005.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_v5",
+          "new": "../../../../results/structure_v5",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-006.md",
+          "new": "../../mds/iteration-006.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/model_scale_v4",
+          "new": "../../../../results/model_scale_v4",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_diagnostic_v6",
+          "new": "../../../../results/structure_diagnostic_v6",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-007.md",
+          "new": "../../mds/iteration-007.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_v7",
+          "new": "../../../../results/structure_v7",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-008.md",
+          "new": "../../mds/iteration-008.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_v8",
+          "new": "../../../../results/structure_v8",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-009.md",
+          "new": "../../mds/iteration-009.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_diagnostic_v9",
+          "new": "../../../../results/structure_diagnostic_v9",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-010.md",
+          "new": "../../mds/iteration-010.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_ablation_v10",
+          "new": "../../../../results/structure_ablation_v10",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-011.md",
+          "new": "../../mds/iteration-011.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_v11",
+          "new": "../../../../results/structure_v11",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-012.md",
+          "new": "../../mds/iteration-012.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_diagnostic_v12",
+          "new": "../../../../results/structure_diagnostic_v12",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-013.md",
+          "new": "../../mds/iteration-013.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/state_readout_v13",
+          "new": "../../../../results/state_readout_v13",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-014.md",
+          "new": "../../mds/iteration-014.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/state_calibration_v14",
+          "new": "../../../../results/state_calibration_v14",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-015.md",
+          "new": "../../mds/iteration-015.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_handoff_v15",
+          "new": "../../../../results/structure_handoff_v15",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-016.md",
+          "new": "../../mds/iteration-016.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/responsive_transport_v16",
+          "new": "../../../../results/responsive_transport_v16",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-017.md",
+          "new": "../../mds/iteration-017.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/transport_goal_v17",
+          "new": "../../../../results/transport_goal_v17",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/reasoning_baseline_v17",
+          "new": "../../../../results/reasoning_baseline_v17",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-018.md",
+          "new": "../../mds/iteration-018.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/sustained_activity_v18",
+          "new": "../../../../results/sustained_activity_v18",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-019.md",
+          "new": "../../mds/iteration-019.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/sustained_model_v19",
+          "new": "../../../../results/sustained_model_v19",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-020.md",
+          "new": "../../mds/iteration-020.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/structure_foundation_v20",
+          "new": "../../../../results/structure_foundation_v20",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-021.md",
+          "new": "../../mds/iteration-021.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/sustained_structure_v21",
+          "new": "../../../../results/sustained_structure_v21",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-022.md",
+          "new": "../../mds/iteration-022.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/transport_cycle_v22",
+          "new": "../../../../results/transport_cycle_v22",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-023.md",
+          "new": "../../mds/iteration-023.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/sustained_combination_v23",
+          "new": "../../../../results/sustained_combination_v23",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-024.md",
+          "new": "../../mds/iteration-024.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/shared_slots_v24",
+          "new": "../../../../results/shared_slots_v24",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-025.md",
+          "new": "../../mds/iteration-025.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results/dual_goal_v25",
+          "new": "../../../../results/dual_goal_v25",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/iteration-026.md",
+          "new": "../../mds/iteration-026.md",
+          "occurrences": 2
+        },
+        {
+          "old": "../../../results/dual_goal_model_v26",
+          "new": "../../../../results/dual_goal_model_v26",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/research-evidence-status.md",
+          "new": "../../mds/research-evidence-status.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../.codex/mds/study-design.md",
+          "new": "../../mds/study-design.md",
+          "occurrences": 2
+        },
+        {
+          "old": "../../../.codex/mds/structure-split-draft.md",
+          "new": "../../mds/structure-split-draft.md",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../experiments",
+          "new": "../../../../experiments",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../results",
+          "new": "../../../../results",
+          "occurrences": 1
+        },
+        {
+          "old": "../../../../../../../../data1/sieniwgroup/sieniw",
+          "new": "../../../../../../../../../data1/sieniwgroup/sieniw",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "file": ".codex/mds/idea.md",
+      "before_sha256": "e952f1aca1e749d0c401dc4ea4ffc717090a56ea4919530bf33b7240e31c4d7c",
+      "after_sha256": "0a0c40d2317b2e2e8f21dc7ab5dd586c646126efd564edad9037729940e7b874",
+      "links": [
+        {
+          "old": "iteration-001.md",
+          "new": "../codex-gen-content/mds/iteration-001.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-025.md",
+          "new": "../codex-gen-content/mds/iteration-025.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-026.md",
+          "new": "../codex-gen-content/mds/iteration-026.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-019.md",
+          "new": "../codex-gen-content/mds/iteration-019.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-018.md",
+          "new": "../codex-gen-content/mds/iteration-018.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-020.md",
+          "new": "../codex-gen-content/mds/iteration-020.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-021.md",
+          "new": "../codex-gen-content/mds/iteration-021.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-022.md",
+          "new": "../codex-gen-content/mds/iteration-022.md",
+          "occurrences": 1
+        },
+        {
+          "old": "iteration-023.md",
+          "new": "../codex-gen-content/mds/iteration-023.md",
+          "occurrences": 1
+        },
+        {
+          "old": "research-evidence-status.md",
+          "new": "../codex-gen-content/mds/research-evidence-status.md",
+          "occurrences": 1
+        },
+        {
+          "old": "integration-plan.md",
+          "new": "../codex-gen-content/mds/integration-plan.md",
+          "occurrences": 1
+        },
+        {
+          "old": "study-design.md",
+          "new": "../codex-gen-content/mds/study-design.md",
+          "occurrences": 1
+        }
+      ]
+    }
+  ],
+  "total_link_replacements": 131,
+  "unresolved": [],
+  "only_link_targets_changed": true,
+  "protected_files_unchanged": {
+    ".codex/mds/idea-conversation.md": "a1d4a1e7cb0e9d52f4e120e72e7689e7a78a2fc93105732e5770e8a886b52e07",
+    ".codex/codex-gen-content/reports/report_实验阶段快照_20261003_165341_validation.json": "ed03b96448806a3e61efd08eb321fb2b9992a42f7687a644f8f18c4d3363e60f"
+  },
+  "script_sha256": "987bd6e7fda9eef8fe6359f3e6849c87f7fcce521cc52b1784ee21dfaa6305d0",
+  "historical_validation_note": "旧验证JSON及旧HTML内正文SHA保留原值，对应原制作时点产物；本回执只重新核对迁移后的链接，不覆盖旧实验事实或声称旧SHA匹配修链后的文件。",
+  "no_old_skill_or_generator_invoked": true,
+  "no_experiment_source_or_runtime_changes": true
+}

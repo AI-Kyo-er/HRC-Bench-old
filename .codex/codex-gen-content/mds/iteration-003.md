@@ -3,7 +3,7 @@
 ## 材料与阶段
 
 - 日期：2026-10-02。
-- 输入：[第二轮研究记录](iteration-002.md)、原始 [idea](idea.md)、用户“先以仿真为主，后续再安排真机”的选择。
+- 输入：[第二轮研究记录](iteration-002.md)、原始 [idea](../../mds/idea.md)、用户“先以仿真为主，后续再安排真机”的选择。
 - 首次写入时状态：已委派 Sol high 进行代码探索与仿真集成；尚无本轮实测结果。
 - 上一目标回合分类：有进展。真实模型与事后接口校准已完成并提交，证据排除了将当前低分直接叙述为交互组合缺口的做法。
 - 研究范围不变：持续共同活动中的交互结构组合与演化。本轮是补齐测量与具身承载层，不以成功运行仿真器替代论文主张的验证。
@@ -74,7 +74,7 @@ Work Agreements 又说明上述约定概念本身已有形式化与实现。更�
 
 ### 冻结与解释范围
 
-8 个实例已在代码提交 `f4dad6a` 前冻结：目标从起点明确/中途局部修正 × 清道请求接受/拒绝 × seed10/11。每例最多 12 次高层决策。冻结文件 SHA256 为 `0910eae2657ca7f2de4cbd8de4076c70b4f6c3f8c0594bad7b52930895db7373`，见 [协议说明](../../experiments/physical/README.md) 和 [冻结输入](../../experiments/physical/cases/freeze.json)。
+8 个实例已在代码提交 `f4dad6a` 前冻结：目标从起点明确/中途局部修正 × 清道请求接受/拒绝 × seed10/11。每例最多 12 次高层决策。冻结文件 SHA256 为 `0910eae2657ca7f2de4cbd8de4076c70b4f6c3f8c0594bad7b52930895db7373`，见 [协议说明](../../../experiments/physical/README.md) 和 [冻结输入](../../../experiments/physical/cases/freeze.json)。
 
 此处“冻结”表示不再调整测试输入与实现，并不将探索性诊断升级为论文主实验。seed 与目标反转、候选逆序耦合；自主选择物品还可能改变修正后的返工量，故不满足严格长度/信息/操作匹配。接口会拒绝错误目标并提供计费反馈，须分别统计协议拒绝、物理失败与最终完成；结果属于带此反馈帮助的系统。
 
@@ -97,19 +97,19 @@ Work Agreements 又说明上述约定概念本身已有形式化与实现。更�
 
 **低层审计发现未解决的实际接触。**规则参照的四个拒绝清道案例，各在 `park` 阶段有 4 个物理 tick 的 robot–partner 接触，仿真记录最大法向力约 911–1075 N；接受分支未记录此接触。因此 8/8 仅指落点任务完成，满足“完成且无 robot–partner 接触”的只有 4/8，不能称碰撞安全。抓放目标判定失败为 0 也不表示整段运动无缺陷。仿真力值不作真实人体伤害估计。
 
-产物：[模型摘要](../../results/physical_v3/formal_model_summary.json)、[规则摘要](../../results/physical_v3/formal_reference_summary.json)、[逐轨迹接触与拒绝审计](../../results/physical_v3/trajectory_audit.json)、[代表调用](../../results/physical_v3/representative_calls.json)。完整逐 tick 轨迹和视频位于数据盘链接 `results/physical_v3/raw`。
+产物：[模型摘要](../../../results/physical_v3/formal_model_summary.json)、[规则摘要](../../../results/physical_v3/formal_reference_summary.json)、[逐轨迹接触与拒绝审计](../../../results/physical_v3/trajectory_audit.json)、[代表调用](../../../results/physical_v3/representative_calls.json)。完整逐 tick 轨迹和视频位于数据盘链接 `results/physical_v3/raw`。
 
-**日志勘误（后续审计发现）**：v3.1 每行保存的 `observation.history` 引用了共享事件列表，落盘时已包含后续事件，因此不能据此重建当步模型输入。实际 `messages` 在各步即时序列化，是规范输入证据。96 次原始消息的历史、反馈与物理区域核验未发现输入违规；96 处落盘观察差异均仅在 history。独立 v3.2 已修复深复制快照并加入回归测试。旧冻结与原始日志不覆盖；这一缺陷影响观察快照的可追溯性，不能将污染的落盘历史误当作模型真实收到未来信息的证据。[消息审计](../../results/physical_v3_2/message_audit.json)
+**日志勘误（后续审计发现）**：v3.1 每行保存的 `observation.history` 引用了共享事件列表，落盘时已包含后续事件，因此不能据此重建当步模型输入。实际 `messages` 在各步即时序列化，是规范输入证据。96 次原始消息的历史、反馈与物理区域核验未发现输入违规；96 处落盘观察差异均仅在 history。独立 v3.2 已修复深复制快照并加入回归测试。旧冻结与原始日志不覆盖；这一缺陷影响观察快照的可追溯性，不能将污染的落盘历史误当作模型真实收到未来信息的证据。[消息审计](../../../results/physical_v3_2/message_audit.json)
 
 后续处理已交给同一 Sol high 执行者：保留 v3.1 的冻结与失败结果，新版本修复停车路径并审查全段 robot–partner 接触；检查原始 prompt 和历史传递，排除重复选择的实现缺陷，再在独立开发任务诊断进度使用。由公开历史归约的显式进度辅助若被采用，必须单列为辅助基线，不称为无额外帮助的模型能力。暂不扩大当前 3B 的冻结测试规模。
 
 ### v3.2 独立开发诊断
 
-新版本不修改 v3.1 冻结代码。修复日志快照后的完整控制进程 `63158` 正常退出：完成 12/12 基础操作与 8/8 连续任务；审计 123,600 个物理 tick，robot–partner 接触为 0，伙伴移动不到位为 0，停车航点最大误差约 0.219 mm。测试进程 `15536` 正常退出，15/15 通过，包括日志不可变性回归。上述结果只覆盖当前开发几何与路径，不是任意场景的安全保证。[控制摘要](../../results/physical_v3_2/control_summary.json)
+新版本不修改 v3.1 冻结代码。修复日志快照后的完整控制进程 `63158` 正常退出：完成 12/12 基础操作与 8/8 连续任务；审计 123,600 个物理 tick，robot–partner 接触为 0，伙伴移动不到位为 0，停车航点最大误差约 0.219 mm。测试进程 `15536` 正常退出，15/15 通过，包括日志不可变性回归。上述结果只覆盖当前开发几何与路径，不是任意场景的安全保证。[控制摘要](../../../results/physical_v3_2/control_summary.json)
 
-收尾只读复核再次确认逐 tick 数量与零接触，96 条规范模型输入中的物理状态也全部在 v3.1 原始 tick 轨迹中精确匹配。主控查看修正版 [关键帧](../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/contact_sheet.png)，完整 [视频](../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/rollout.mp4) 同目录保留。图像用于几何与流程检查，零接触判断仍依赖全部物理步日志。
+收尾只读复核再次确认逐 tick 数量与零接触，96 条规范模型输入中的物理状态也全部在 v3.1 原始 tick 轨迹中精确匹配。主控查看修正版 [关键帧](../../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/contact_sheet.png)，完整 [视频](../../../results/physical_v3_2/raw/controls_immutable/control_revision_21_0/rollout.mp4) 同目录保留。图像用于几何与流程检查，零接触判断仍依赖全部物理步日志。
 
-另冻结 12 个独立单调用开发情境：不同已完成物品（red/blue/green）× 目标反转 × 菜单顺序，分别输入完整历史或添加从公开事件和物理区域归约的进度辅助，共 24 次调用，进程 `63476` 正常退出。完整历史选择能够推进未完成任务的动作 **4/12**，进度辅助 **6/12**，均无 JSON 错误或截断。这里是人工构造的决策情境，**不是物理闭环成功率**；不能把两次正确选择之差当作稳健提升或结构效应。[开发摘要](../../results/physical_v3_2/progress_dev_summary.json)
+另冻结 12 个独立单调用开发情境：不同已完成物品（red/blue/green）× 目标反转 × 菜单顺序，分别输入完整历史或添加从公开事件和物理区域归约的进度辅助，共 24 次调用，进程 `63476` 正常退出。完整历史选择能够推进未完成任务的动作 **4/12**，进度辅助 **6/12**，均无 JSON 错误或截断。这里是人工构造的决策情境，**不是物理闭环成功率**；不能把两次正确选择之差当作稳健提升或结构效应。[开发摘要](../../../results/physical_v3_2/progress_dev_summary.json)
 
 进度辅助仍不足以使当前 3B 稳定执行基础多物品选择。下一阶段应先使用更强模型或明确的执行基线建立局部能力参照，再进入匹配结构对照；继续扩大当前失败模式的样本不会直接增加论文证据。原始 messages 审计排除了已检查的传入状态错漏，但没有揭示模型内部为何偏好 green，不能据此宣称已证明特定认知机制。
 
