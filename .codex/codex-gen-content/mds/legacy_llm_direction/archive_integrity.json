@@ -1,0 +1,29 @@
+{
+  "archive": "legacy_llm_direction",
+  "date": "2026-10-03T10:59:24.770197+00:00",
+  "pre_archive_commit": "39f4fa8",
+  "top_level_entries": {
+    "experiments": 31,
+    "results": 31,
+    "tests": 40,
+    ".codex/codex-gen-content/mds": 34
+  },
+  "unchanged_files_verified": 792,
+  "unchanged_symlink_targets_and_availability_verified": 33,
+  "comparison_records_sha256": "1a619006763eca27fca8619f232cbe686f81eb021e8d48a486d527cd39bbc0a7",
+  "four_parent_directories_contain_only_archive": true,
+  "archive_readme_links_verified": true,
+  "archived_code_tests_freezes_results_modified": false,
+  "new_model_or_physics_runs": false,
+  "v26": {
+    "terminal_summaries": 44,
+    "local": 16,
+    "full": 28,
+    "planned": 80,
+    "original_pids_present": false,
+    "original_session_handles_available": false,
+    "final_exit_codes_known": false,
+    "all80_audit_completed": false
+  },
+  "verification_scope": "全部移动文件及链接的移动前后比较；包括未跟踪缓存。未重跑旧实验或测试。"
+}

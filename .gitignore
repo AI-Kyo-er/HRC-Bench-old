@@ -6,3 +6,7 @@ models/
 results/language_v2/dev
 results/language_v2/formal
 results/language_v2/calibration
+results/legacy_llm_direction/*/episodes.csv
+results/legacy_llm_direction/language_v2/dev
+results/legacy_llm_direction/language_v2/formal
+results/legacy_llm_direction/language_v2/calibration
