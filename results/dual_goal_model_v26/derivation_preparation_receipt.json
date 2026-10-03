@@ -1,0 +1,33 @@
+{
+  "freeze_sha256": "62996089023f72de804f31bf2fc64662a3cbfb11f59ce6ed8b1d9af61d597b4e",
+  "frozen_sources_unchanged": true,
+  "independent_derivation_sha256": {
+    "experiments/dual_goal_model_v26/stage_audit.py": "3ec48bac0608aa3682065ffc7356991c3d14203b994b44914661a0e660d2d6cc",
+    "experiments/dual_goal_model_v26/report.py": "f567f24f5b42156ce9245d3bd3cf4f3175f335d7ff83db5e92df216cc6fca193",
+    "experiments/dual_goal_model_v26/finalize.py": "e915e64507dfc4ac9997adab4da99484799300fd25e78bfb8166433fc1d917a4",
+    "tests/test_dual_goal_model_report_v26.py": "1c31406d4dce6191787615b0a8c67754d9c6481e69e30652d26936c79ad7368d"
+  },
+  "first_episode_report_sha256": "53156b7bfce2a26e7016c799033b6243b840e3ca71e657e07ea47f77de578e02",
+  "first_preaudit": {
+    "first_handle": 6235,
+    "first_pid": 258008,
+    "first_exit": 1,
+    "error": "ModuleNotFoundError experiments；直接raw脚本缺项目包路径，尚未读取审计数据。",
+    "corrected_handle": 49173,
+    "corrected_pid": 264345,
+    "corrected_exit": 0,
+    "fix": "仅进程PYTHONPATH，不改audit/runner，不重做物理或生成。"
+  },
+  "focused_report_tests": {
+    "passed": 4,
+    "exit": 0,
+    "log_sha256": "875209dbbea0e37e9cd70b89b97897027af14f9adb27a1fb1bc24664d8db6ced"
+  },
+  "active_at_recording": {
+    "run_handle": 7815,
+    "run_pid": 253762,
+    "local_audit_handle": 78765,
+    "local_audit_pid": 273826
+  },
+  "scope": "正式80运行中；仅派生准备及首例审计证据，不是完整成绩。"
+}
