@@ -15,7 +15,9 @@
 
 ## 内容与路径约定
 
-归档只改变上述旧文件的位置，不改实验代码、测试、冻结条件、评分或结果内容。大体积原始数据仍位于`/data1/sieniwgroup/sieniw/`，33个软链接的目标及可访问状态在移动前后保持一致。模型和虚拟环境继续保留在既有位置，作为可共享的资源。
+归档只改变上述旧文件的位置，不改实验代码、测试、冻结条件、评分或结果内容。归档时，大体积原始数据仍位于`/data1/sieniwgroup/sieniw/`，33个软链接的目标及可访问状态在归档前后保持一致，模型和虚拟环境保留在当时位置。
+
+随后按用户的全局目录规则，模型统一至`/data1/sieniwgroup/sieniw/models/Qwen/`，原始结果、虚拟环境和缓存迁至`/data1/sieniwgroup/sieniw/projects/HRC-Bench/`，仓库软链接同步更新。当前目录与历史路径映射见[数据盘目录约定](../../../storage-layout.md)。`archive_integrity.json`记录的是此前归档时的核验，不是本次数据盘迁移记录。
 
 旧源文件、回执和研究记录中的`experiments/...`、`results/...`、`tests/...`等路径，是运行时的历史目录。直接查找文件时，在相应一级目录后补入`legacy_llm_direction/`即可。历史记录中的源码哈希不因为归档而重新计算成另一套实验。
 
@@ -32,7 +34,7 @@
 旧程序在模块导入、项目根目录和冻结路径中依赖原布局，因此不应直接在重命名后的包路径运行并覆盖旧结果。要复现旧版本，可以从归档前提交`39f4fa8`建立独立工作树，例如：
 
 ```bash
-git worktree add --detach /data1/sieniwgroup/sieniw/HRC-Bench/legacy_reproduction 39f4fa8
+git worktree add --detach /data1/sieniwgroup/sieniw/projects/HRC-Bench/legacy_reproduction 39f4fa8
 ```
 
-该提交保留原目录布局和源码。使用独立工作树时再连接需要的模型与环境；历史raw软链接指向已有原始数据，复现实验应使用新的输出目录。此处仅提供复查入口，归档时没有执行这些复现实验。
+该提交保留原仓库目录布局和源码。使用独立工作树时，按上述数据盘目录约定连接需要的模型与环境，并更新该旧提交的历史raw软链接至当前原始数据位置；复现实验应使用新的输出目录。此处仅提供复查入口，没有执行这些复现实验。

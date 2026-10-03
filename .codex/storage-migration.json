@@ -1,0 +1,226 @@
+{
+  "old_project_storage": "/data1/sieniwgroup/sieniw/HRC-Bench",
+  "project_storage": "/data1/sieniwgroup/sieniw/projects/HRC-Bench",
+  "shared_model_storage": "/data1/sieniwgroup/sieniw/models/Qwen",
+  "models_moved": [
+    "Qwen2.5-14B-Instruct",
+    "Qwen2.5-3B-Instruct",
+    "Qwen3-14B"
+  ],
+  "same_filesystem_rename": true,
+  "entries_identity_size_mtime_verified_before_environment_repairs": 147787,
+  "regular_files": 129269,
+  "regular_file_bytes": 89726869172,
+  "symlinks_updated": [
+    {
+      "link": ".venv-qwen3-v14",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/venv-qwen3-v14",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/venv-qwen3-v14"
+    },
+    {
+      "link": ".venv-llm",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/venv-llm",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/venv-llm"
+    },
+    {
+      "link": "models/Qwen2.5-3B-Instruct",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-3B-Instruct",
+      "new_target": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen2.5-3B-Instruct"
+    },
+    {
+      "link": "models/Qwen3-14B",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+      "new_target": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B"
+    },
+    {
+      "link": "models/Qwen2.5-14B-Instruct",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen2.5-14B-Instruct",
+      "new_target": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen2.5-14B-Instruct"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_diagnostic_v6/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_diagnostic_v6",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_diagnostic_v6"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_v7/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_v7",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_v7"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_ablation_v10/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_ablation_v10",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_ablation_v10"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_v5/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_v5",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_v5"
+    },
+    {
+      "link": "results/legacy_llm_direction/local_vl_v4/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/local_vl_v4",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/local_vl_v4"
+    },
+    {
+      "link": "results/legacy_llm_direction/state_calibration_v14/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/state_calibration_v14",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/state_calibration_v14"
+    },
+    {
+      "link": "results/legacy_llm_direction/shared_slots_v24/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/shared_slots_v24",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/shared_slots_v24"
+    },
+    {
+      "link": "results/legacy_llm_direction/state_readout_v13/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/state_readout_v13",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/state_readout_v13"
+    },
+    {
+      "link": "results/legacy_llm_direction/sustained_structure_v21/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/sustained_structure_v21",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/sustained_structure_v21"
+    },
+    {
+      "link": "results/legacy_llm_direction/sustained_combination_v23/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/sustained_combination_v23",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/sustained_combination_v23"
+    },
+    {
+      "link": "results/legacy_llm_direction/reasoning_baseline_v17/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/reasoning_baseline_v17",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/reasoning_baseline_v17"
+    },
+    {
+      "link": "results/legacy_llm_direction/model_scale_v4/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/model_scale_v4",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/model_scale_v4"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_v11/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_v11",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_v11"
+    },
+    {
+      "link": "results/legacy_llm_direction/transport_cycle_v22/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/transport_cycle_v22",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/transport_cycle_v22"
+    },
+    {
+      "link": "results/legacy_llm_direction/language_v2/formal",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/language_v2/formal",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/language_v2/formal"
+    },
+    {
+      "link": "results/legacy_llm_direction/language_v2/calibration",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/language_v2/calibration",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/language_v2/calibration"
+    },
+    {
+      "link": "results/legacy_llm_direction/language_v2/dev",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/language_v2/dev",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/language_v2/dev"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_diagnostic_v12/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_diagnostic_v12",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_diagnostic_v12"
+    },
+    {
+      "link": "results/legacy_llm_direction/responsive_transport_v16/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/responsive_transport_v16",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/responsive_transport_v16"
+    },
+    {
+      "link": "results/legacy_llm_direction/physical_v3/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/physical_v3",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/physical_v3"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_v8/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_v8",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_v8"
+    },
+    {
+      "link": "results/legacy_llm_direction/transport_goal_v17/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/transport_goal_v17",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/transport_goal_v17"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_foundation_v20/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_foundation_v20",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_foundation_v20"
+    },
+    {
+      "link": "results/legacy_llm_direction/sustained_activity_v18/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/sustained_activity_v18",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/sustained_activity_v18"
+    },
+    {
+      "link": "results/legacy_llm_direction/neutral_vl_v4/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/neutral_vl_v4",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/neutral_vl_v4"
+    },
+    {
+      "link": "results/legacy_llm_direction/interface_anchor_v4/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/interface_anchor_v4",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/interface_anchor_v4"
+    },
+    {
+      "link": "results/legacy_llm_direction/physical_v3_2/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/physical_v3_2",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/physical_v3_2"
+    },
+    {
+      "link": "results/legacy_llm_direction/dual_goal_model_v26/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/dual_goal_model_v26/raw",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/dual_goal_model_v26/raw"
+    },
+    {
+      "link": "results/legacy_llm_direction/symbolic_v1/episodes.csv",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/symbolic_v1/episodes.csv",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/symbolic_v1/episodes.csv"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_diagnostic_v9/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_diagnostic_v9",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_diagnostic_v9"
+    },
+    {
+      "link": "results/legacy_llm_direction/structure_handoff_v15/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/structure_handoff_v15",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/structure_handoff_v15"
+    },
+    {
+      "link": "results/legacy_llm_direction/dual_goal_v25/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/dual_goal_v25",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/dual_goal_v25"
+    },
+    {
+      "link": "results/legacy_llm_direction/sustained_model_v19/raw",
+      "old_target": "/data1/sieniwgroup/sieniw/HRC-Bench/results/sustained_model_v19",
+      "new_target": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/sustained_model_v19"
+    }
+  ],
+  "environment_files_repaired": [
+    "venv-qwen3-v14/bin/activate",
+    "venv-qwen3-v14/bin/pip3",
+    "venv-qwen3-v14/bin/activate.csh",
+    "venv-qwen3-v14/bin/pip",
+    "venv-qwen3-v14/bin/activate.fish",
+    "venv-qwen3-v14/bin/pip3.12",
+    "venv-qwen3-v14/pyvenv.cfg"
+  ],
+  "historical_code_freezes_receipts_and_reports_rewritten": false,
+  "verified_at_utc": "2026-10-03T11:27:21.208875+00:00",
+  "validation": {
+    "all_40_project_symlinks_resolve": true,
+    "no_project_symlink_targets_old_storage": true,
+    "all_5_model_configs_and_indexed_shards_present": true,
+    "both_environments_import_torch_transformers_pybullet": true,
+    "qwen3_pip_and_bash_activation_work": true,
+    "old_top_level_project_directory_removed": true,
+    "new_gpu_experiments_or_downloads": false
+  }
+}
