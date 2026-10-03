@@ -1,0 +1,8 @@
+{
+  "report_handle": 34914,
+  "report_exit": 0,
+  "reference_audit_handle": 7452,
+  "reference_audit_exit": 0,
+  "source": "实际write_stdin终态，非从PID缺失推断",
+  "no_live_handles": true
+}

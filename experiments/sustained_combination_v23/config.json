@@ -1,0 +1,15 @@
+{
+  "version": "sustained-combination-v23-dev0",
+  "seeds": [120,121],
+  "decision_budget": 48,
+  "yield_limit_ticks": 1920,
+  "inspection_required_ticks": 240,
+  "leave_after_qualified_ticks": 60,
+  "far_dwell_ticks": 480,
+  "non_target_interval_limit_m": 0.01,
+  "geometry_and_profile": "原v20 dev1+v22 dev0，重装[.65,0,.073]，carrier0.04m/s/0.5s、presence0.08m/s/0.5s",
+  "role_update": "首个检查请求实际接受且child已开放后，脚本提议partner_return及绑定accept/reject；检查义务/原LR/redgreen不变。",
+  "terminal": "真实检查完成、无活动child、redleft、greenright、carrier当前稳定far、最新partner为当前blue随载far支撑+实际本行程载荷返回/robot为blue在公开LR。",
+  "runtime_reset_or_attachment": false,
+  "policy_reads_future": false
+}

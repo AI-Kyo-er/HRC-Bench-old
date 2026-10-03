@@ -1,0 +1,821 @@
+{
+  "total": 32,
+  "strict_passed": 32,
+  "task_success": 28,
+  "physically_safe": 32,
+  "total_ticks": 638418,
+  "stages": {
+    "control": {
+      "total": 8,
+      "passed": 8,
+      "task_success": 4,
+      "physically_safe": 8,
+      "total_ticks": 161658
+    },
+    "reference": {
+      "total": 24,
+      "passed": 24,
+      "task_success": 24,
+      "physically_safe": 24,
+      "total_ticks": 476760
+    }
+  },
+  "contact_groups": {
+    "expected_blue_carrier": {
+      "records": 1282520,
+      "ticks": 320630,
+      "negative_distance_records": 1271992
+    },
+    "expected_blue_inspection": {
+      "records": 782616,
+      "ticks": 195654,
+      "negative_distance_records": 782488
+    },
+    "expected_target_robot": {
+      "records": 321843,
+      "ticks": 161024,
+      "negative_distance_records": 321376
+    },
+    "expected_objects_static_support": {
+      "records": 5039368,
+      "ticks": 638322,
+      "negative_distance_records": 5039368
+    },
+    "forbidden_robot_carrier": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_other_object_carrier": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_carrier_static": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_robot_inspection": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_other_object_inspection": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_presence_contacts": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_non_target_robot": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_robot_static": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_object_object": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    }
+  },
+  "loaded_motion_ticks": 208364,
+  "loaded_supported_ticks": 208364,
+  "reference_costs": [
+    {
+      "initial_blue": "left",
+      "role": "partner_return",
+      "presence": "stay",
+      "episodes": 2,
+      "makespan_ticks": [
+        16741,
+        16742
+      ],
+      "decisions": [
+        12,
+        12
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        4501,
+        4502
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "left",
+      "role": "partner_return",
+      "presence": "retain",
+      "episodes": 2,
+      "makespan_ticks": [
+        21067,
+        21067
+      ],
+      "decisions": [
+        18,
+        18
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8827,
+        8827
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "left",
+      "role": "partner_return",
+      "presence": "withdraw",
+      "episodes": 2,
+      "makespan_ticks": [
+        21068,
+        21067
+      ],
+      "decisions": [
+        19,
+        19
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8828,
+        8827
+      ],
+      "requests_check": [
+        2,
+        2
+      ]
+    },
+    {
+      "initial_blue": "left",
+      "role": "robot",
+      "presence": "stay",
+      "episodes": 2,
+      "makespan_ticks": [
+        16741,
+        16741
+      ],
+      "decisions": [
+        12,
+        12
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        4501,
+        4501
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "left",
+      "role": "robot",
+      "presence": "retain",
+      "episodes": 2,
+      "makespan_ticks": [
+        21066,
+        21066
+      ],
+      "decisions": [
+        18,
+        18
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8826,
+        8826
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "left",
+      "role": "robot",
+      "presence": "withdraw",
+      "episodes": 2,
+      "makespan_ticks": [
+        21067,
+        21067
+      ],
+      "decisions": [
+        19,
+        19
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8827,
+        8827
+      ],
+      "requests_check": [
+        2,
+        2
+      ]
+    },
+    {
+      "initial_blue": "right",
+      "role": "partner_return",
+      "presence": "stay",
+      "episodes": 2,
+      "makespan_ticks": [
+        16741,
+        16742
+      ],
+      "decisions": [
+        12,
+        12
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        4501,
+        4502
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "right",
+      "role": "partner_return",
+      "presence": "retain",
+      "episodes": 2,
+      "makespan_ticks": [
+        21067,
+        21067
+      ],
+      "decisions": [
+        18,
+        18
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8827,
+        8827
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "right",
+      "role": "partner_return",
+      "presence": "withdraw",
+      "episodes": 2,
+      "makespan_ticks": [
+        21068,
+        21067
+      ],
+      "decisions": [
+        19,
+        19
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8828,
+        8827
+      ],
+      "requests_check": [
+        2,
+        2
+      ]
+    },
+    {
+      "initial_blue": "right",
+      "role": "robot",
+      "presence": "stay",
+      "episodes": 2,
+      "makespan_ticks": [
+        16741,
+        16741
+      ],
+      "decisions": [
+        12,
+        12
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        4501,
+        4501
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "right",
+      "role": "robot",
+      "presence": "retain",
+      "episodes": 2,
+      "makespan_ticks": [
+        21066,
+        21066
+      ],
+      "decisions": [
+        18,
+        18
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8826,
+        8826
+      ],
+      "requests_check": [
+        1,
+        1
+      ]
+    },
+    {
+      "initial_blue": "right",
+      "role": "robot",
+      "presence": "withdraw",
+      "episodes": 2,
+      "makespan_ticks": [
+        21067,
+        21067
+      ],
+      "decisions": [
+        19,
+        19
+      ],
+      "physical_attempts": [
+        4,
+        4
+      ],
+      "wait_ticks": [
+        8827,
+        8827
+      ],
+      "requests_check": [
+        2,
+        2
+      ]
+    }
+  ],
+  "role_pairs": [
+    {
+      "initial_blue": "left",
+      "presence": "stay",
+      "seed": 120,
+      "ids": [
+        "ref_left_accepted_stay_120",
+        "ref_left_rejected_stay_120"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "9aded0a7600b2c97775134be8d0f2a4cbf5ce86168c0eb593991b533c7654a1e"
+        },
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "9aded0a7600b2c97775134be8d0f2a4cbf5ce86168c0eb593991b533c7654a1e"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "left",
+      "presence": "stay",
+      "seed": 121,
+      "ids": [
+        "ref_left_accepted_stay_121",
+        "ref_left_rejected_stay_121"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "ce8e70addbdf4655dfe2bb09e5c0344e5f2e0a0f8905d9347cb8578b2a566bcd"
+        },
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "ce8e70addbdf4655dfe2bb09e5c0344e5f2e0a0f8905d9347cb8578b2a566bcd"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "left",
+      "presence": "retain",
+      "seed": 120,
+      "ids": [
+        "ref_left_accepted_retain_120",
+        "ref_left_rejected_retain_120"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "f56c529afb24acc2997492c3d5a08b8c7af822aa0dc6ce89357194312b81dcd7"
+        },
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "f56c529afb24acc2997492c3d5a08b8c7af822aa0dc6ce89357194312b81dcd7"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "left",
+      "presence": "retain",
+      "seed": 121,
+      "ids": [
+        "ref_left_accepted_retain_121",
+        "ref_left_rejected_retain_121"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "55e15c1bc9d817e08b9f31b21c5676f8aab8f7c68f1f116787e3e0e204095681"
+        },
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "55e15c1bc9d817e08b9f31b21c5676f8aab8f7c68f1f116787e3e0e204095681"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "left",
+      "presence": "withdraw",
+      "seed": 120,
+      "ids": [
+        "ref_left_accepted_withdraw_120",
+        "ref_left_rejected_withdraw_120"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "57e1c735a143ca9b403062db00d791e278257360b73b02152b1f78fa9a6c2f09"
+        },
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "57e1c735a143ca9b403062db00d791e278257360b73b02152b1f78fa9a6c2f09"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "left",
+      "presence": "withdraw",
+      "seed": 121,
+      "ids": [
+        "ref_left_accepted_withdraw_121",
+        "ref_left_rejected_withdraw_121"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "e330f23481479c3d6be2d27e386f1dcb163435bc05a271bb630f1c0b8238d1da"
+        },
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "e330f23481479c3d6be2d27e386f1dcb163435bc05a271bb630f1c0b8238d1da"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "right",
+      "presence": "stay",
+      "seed": 120,
+      "ids": [
+        "ref_right_accepted_stay_120",
+        "ref_right_rejected_stay_120"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "9aded0a7600b2c97775134be8d0f2a4cbf5ce86168c0eb593991b533c7654a1e"
+        },
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "9aded0a7600b2c97775134be8d0f2a4cbf5ce86168c0eb593991b533c7654a1e"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "right",
+      "presence": "stay",
+      "seed": 121,
+      "ids": [
+        "ref_right_accepted_stay_121",
+        "ref_right_rejected_stay_121"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "ce8e70addbdf4655dfe2bb09e5c0344e5f2e0a0f8905d9347cb8578b2a566bcd"
+        },
+        {
+          "tick": 7141,
+          "ticks": 7141,
+          "sha256": "ce8e70addbdf4655dfe2bb09e5c0344e5f2e0a0f8905d9347cb8578b2a566bcd"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "right",
+      "presence": "retain",
+      "seed": 120,
+      "ids": [
+        "ref_right_accepted_retain_120",
+        "ref_right_rejected_retain_120"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "f56c529afb24acc2997492c3d5a08b8c7af822aa0dc6ce89357194312b81dcd7"
+        },
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "f56c529afb24acc2997492c3d5a08b8c7af822aa0dc6ce89357194312b81dcd7"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "right",
+      "presence": "retain",
+      "seed": 121,
+      "ids": [
+        "ref_right_accepted_retain_121",
+        "ref_right_rejected_retain_121"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "55e15c1bc9d817e08b9f31b21c5676f8aab8f7c68f1f116787e3e0e204095681"
+        },
+        {
+          "tick": 11466,
+          "ticks": 11466,
+          "sha256": "55e15c1bc9d817e08b9f31b21c5676f8aab8f7c68f1f116787e3e0e204095681"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "right",
+      "presence": "withdraw",
+      "seed": 120,
+      "ids": [
+        "ref_right_accepted_withdraw_120",
+        "ref_right_rejected_withdraw_120"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "57e1c735a143ca9b403062db00d791e278257360b73b02152b1f78fa9a6c2f09"
+        },
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "57e1c735a143ca9b403062db00d791e278257360b73b02152b1f78fa9a6c2f09"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    },
+    {
+      "initial_blue": "right",
+      "presence": "withdraw",
+      "seed": 121,
+      "ids": [
+        "ref_right_accepted_withdraw_121",
+        "ref_right_rejected_withdraw_121"
+      ],
+      "handoff_prefixes": [
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "e330f23481479c3d6be2d27e386f1dcb163435bc05a271bb630f1c0b8238d1da"
+        },
+        {
+          "tick": 11467,
+          "ticks": 11467,
+          "sha256": "e330f23481479c3d6be2d27e386f1dcb163435bc05a271bb630f1c0b8238d1da"
+        }
+      ],
+      "full_physical_prefix_exact": true
+    }
+  ],
+  "max_non_target_interval_displacement_m": 0.00010687466122117788,
+  "control_outcomes": [
+    {
+      "id": "C0_120",
+      "passed": true,
+      "task_success": false,
+      "actual_score": {
+        "facts": {
+          "check_completed": false,
+          "no_active_child": false,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": true,
+          "blue_role_completed": true
+        },
+        "task_success": false
+      },
+      "qualified_ticks": 60,
+      "makespan_ticks": 18485
+    },
+    {
+      "id": "C0_121",
+      "passed": true,
+      "task_success": false,
+      "actual_score": {
+        "facts": {
+          "check_completed": false,
+          "no_active_child": false,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": true,
+          "blue_role_completed": true
+        },
+        "task_success": false
+      },
+      "qualified_ticks": 60,
+      "makespan_ticks": 18485
+    },
+    {
+      "id": "C1_120",
+      "passed": true,
+      "task_success": false,
+      "actual_score": {
+        "facts": {
+          "check_completed": true,
+          "no_active_child": true,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": false,
+          "blue_role_completed": false
+        },
+        "task_success": false
+      },
+      "qualified_ticks": 240,
+      "makespan_ticks": 13021
+    },
+    {
+      "id": "C1_121",
+      "passed": true,
+      "task_success": false,
+      "actual_score": {
+        "facts": {
+          "check_completed": true,
+          "no_active_child": true,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": false,
+          "blue_role_completed": false
+        },
+        "task_success": false
+      },
+      "qualified_ticks": 240,
+      "makespan_ticks": 13021
+    },
+    {
+      "id": "R2_120",
+      "passed": true,
+      "task_success": true,
+      "actual_score": {
+        "facts": {
+          "check_completed": true,
+          "no_active_child": true,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": true,
+          "blue_role_completed": true
+        },
+        "task_success": true
+      },
+      "qualified_ticks": 240,
+      "makespan_ticks": 24182
+    },
+    {
+      "id": "R2_121",
+      "passed": true,
+      "task_success": true,
+      "actual_score": {
+        "facts": {
+          "check_completed": true,
+          "no_active_child": true,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": true,
+          "blue_role_completed": true
+        },
+        "task_success": true
+      },
+      "qualified_ticks": 240,
+      "makespan_ticks": 24182
+    },
+    {
+      "id": "R3_120",
+      "passed": true,
+      "task_success": true,
+      "actual_score": {
+        "facts": {
+          "check_completed": true,
+          "no_active_child": true,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": true,
+          "blue_role_completed": true
+        },
+        "task_success": true
+      },
+      "qualified_ticks": 240,
+      "makespan_ticks": 24181
+    },
+    {
+      "id": "R3_121",
+      "passed": true,
+      "task_success": true,
+      "actual_score": {
+        "facts": {
+          "check_completed": true,
+          "no_active_child": true,
+          "red_left": true,
+          "green_right": true,
+          "carrier_current_far": true,
+          "blue_role_completed": true
+        },
+        "task_success": true
+      },
+      "qualified_ticks": 240,
+      "makespan_ticks": 24181
+    }
+  ],
+  "no_model_or_structural_generalization": true,
+  "report_source_sha256": "c702c7e1b5842e18372b6b241d56bad9c29c9fd0c9db530dff6a88a293669333"
+}
