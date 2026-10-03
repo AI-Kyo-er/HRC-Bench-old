@@ -56,3 +56,13 @@ CPU冻结16231/PID247069、最终全套95774/PID251544及非任务容量探针92
 局部阶段现已全部独立验收：审计78765/PID273826真实exit0，16/16重建与物理约束通过、14/16任务完成，272356个全轨迹tick、51次模型调用，无禁止接触/解析/容量失败。两例full_history（direct左/左、relation右/左）遗漏green后提前声明，失败终止时长单列。四格推进为direct-full3/4、direct-aid4/4、relation-full3/4、relation-aid4/4，单模板四目标条件的描述结果，不能当作自主局部能力充分证明。
 
 `local_stage_summary.json`保留8组表达配对、8组视图配对、成功条件及共同成功子集成本、拒绝/多余等待/真实返工。完整阶段仍沿同一进程运行，尚无64回合终态成绩。派生源码稳定后已完成一次全套236项/2.273s/OK/exit0（包括新增报告4项）；此前容量阶段232仍对应其当时版本，未重复无改动测试或推理。局部归档源存raw/local_archive_source.py并单独SHA，原freeze/在线评分不变。
+
+## 首完整四臂组阶段证据
+
+按冻结顺序完成首组I=left/accepted/same/before_check的全部四臂后，复用现有episode_audit做一次整组CPU预审计，40557/PID295264真实exit0。原passed/strict为2/4、任务0/4、规定接触安全2/4，58923个trace tick、51次调用，parse/trunc均0；全部调用神经重建checks及contact字段完整性为真。该组不是完整64成绩，统一80终态审计仍全部覆盖，未依据阶段结果更改/重抽条件。
+
+direct-full与relation-aid均提前声明，仍有检查和目标/载台义务未完成。direct-aid及relation-full因真实技能失败结束，并分别实际违反禁止接触+非目标保持、禁止接触+载荷连续支撑，保留原passed=false。首full单例预审计29833/PID289196也已真实exit0，只是此前通路核对，不能重复算新模型回合。
+
+`first_full_group_preaudit.json`保留原checks/failed_checks/passed，`first_full_group_evidence.json`给两次执行失败的原lift/finger/EE误差、接触第一/峰值力与位置/距离、实际动作区间和载荷支持损失。direct-aid的green–carrier在yield内首接触16228、峰16835（108.538N），后抓取失败期间robot–carrier峰391.752N；relation-full的green–carrier首7280/峰7288（133.760N），robot–carrier峰338.549N，robot–blue保留记录7860、载荷支持首次丢失7863，返程支持2522/3180tick。正距离/零力保留记录、正距离有力记录和负距离接触均给模拟器原值，既定零记录标准不放宽；时序关联不单独证明全部因果，不从物品区域为空推断碰撞。
+
+新增“reconstruction_consistent”仅为既有24项输入/事件/成本/服务/规范轨迹的一致性分项，明确排除successful_grasp_places_verified、all_forbidden_zero、loaded_support_all、non_target_preserved、contact_fields_complete五项，定义完整列于`first_group_reconstruction_definition.json`。它不是原整体审计通过、安全或任务完成；原passed/strict和五项逐例值不变。successful_grasp_places_verified仅核对声称成功的动作，不能因该项true就把另存的失败抓取说成成功。所有派生入口/source SHA单独保存，不改冻结评分、原auditor或运行源码。

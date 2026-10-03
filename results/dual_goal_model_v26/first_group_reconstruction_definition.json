@@ -1,0 +1,41 @@
+{
+  "included_checks": [
+    "runtime_source_unchanged",
+    "no_infrastructure_failure",
+    "all_inputs",
+    "requests_exact",
+    "cycle_recomputed",
+    "current_facts_recomputed",
+    "cycle_public_events",
+    "service_samples",
+    "service_trace_count",
+    "service_events",
+    "service_final",
+    "presence_recomputed",
+    "presence_same_tick_FK",
+    "carrier_same_tick_FK",
+    "presence_profile",
+    "carrier_profile",
+    "confirmation_generation_exact",
+    "actual_queue_generation",
+    "start_and_during_updates",
+    "task_score_exact",
+    "after_terminal_immutable",
+    "full_canonical",
+    "final_physics_exact",
+    "neural_inputs_outputs_costs"
+  ],
+  "excluded_checks": [
+    "all_forbidden_zero",
+    "loaded_support_all",
+    "non_target_preserved",
+    "successful_grasp_places_verified",
+    "contact_fields_complete"
+  ],
+  "definition": "仅既有report五项物理契约之外的24项输入/事件/成本/服务/轨迹重建一致性；并不覆盖物理契约、contact字段完整性、任务成功或原审计整体通过。原episode_audit.passed、checks、failed_checks及strict_passed全部原样保留。",
+  "original_predicates_unchanged": true,
+  "reference_check_names_source_sha256": "721760f7b3f62f7cc222fd3006ef8101a09e944d0ea6bc7df1f2e4bcf6b19060",
+  "report_physical_partition_source_sha256": "f567f24f5b42156ce9245d3bd3cf4f3175f335d7ff83db5e92df216cc6fca193",
+  "active_group_script_sha256": "9ac9150b91aab4e75db8f688e0b14c5956a48f56b34c482e282771e55661fec8",
+  "scope": "事后派生列的显式定义，不修改冻结评分、既有audit判据或正在运行的组入口源码。"
+}

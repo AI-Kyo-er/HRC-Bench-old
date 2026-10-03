@@ -1,0 +1,1164 @@
+{
+  "total": 4,
+  "reconstruction_consistent": 4,
+  "original_strict_passed": 2,
+  "task_success": 0,
+  "physically_safe": 2,
+  "total_ticks": 58923,
+  "total_calls": 51,
+  "episodes": [
+    {
+      "id": "full_00_direct_full_history",
+      "original_passed": true,
+      "reconstruction_consistent": true,
+      "task_success": false,
+      "physically_safe": true,
+      "failed_checks": [],
+      "excluded_check_values": {
+        "all_forbidden_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "successful_grasp_places_verified": true,
+        "contact_fields_complete": true
+      },
+      "neural_checks": {
+        "all_predictions": true,
+        "call_count": true,
+        "cost_exact": true,
+        "parse_counts": true,
+        "capacity_failure_exact": true,
+        "first_model_input_exact": true
+      },
+      "all_call_checks_true": true,
+      "model_calls": 10,
+      "parse_failures": 0,
+      "generation_hit_limit": 0,
+      "termination_reason": "declared_done",
+      "cost": {
+        "decisions": 10,
+        "invalid": 3,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 2,
+        "yields": 2,
+        "wait_ticks": 3721,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "terminal_facts": {
+        "confirmation_closed": true,
+        "check_completed": false,
+        "no_active_child": false,
+        "red_left": false,
+        "blue_current_goal": false,
+        "green_current_goal": false,
+        "carrier_current_far": false
+      },
+      "body_ids": {
+        "robot": 1,
+        "carrier": 11,
+        "inspection": 12,
+        "inspection_walls": [
+          13,
+          14
+        ],
+        "presence": 15,
+        "objects": {
+          "red": 2,
+          "blue": 3,
+          "green": 4
+        },
+        "trays": {
+          "left": 5,
+          "right": 8
+        }
+      },
+      "contact_evidence": {},
+      "skill_failures": [],
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        }
+      },
+      "first_loaded_support_loss": null,
+      "max_non_target_interval_displacement_m": 1.0936200557447211e-11
+    },
+    {
+      "id": "full_00_direct_public_ledger_aid",
+      "original_passed": false,
+      "reconstruction_consistent": true,
+      "task_success": false,
+      "physically_safe": false,
+      "failed_checks": [
+        "all_forbidden_zero",
+        "non_target_preserved"
+      ],
+      "excluded_check_values": {
+        "all_forbidden_zero": false,
+        "loaded_support_all": true,
+        "non_target_preserved": false,
+        "successful_grasp_places_verified": true,
+        "contact_fields_complete": true
+      },
+      "neural_checks": {
+        "all_predictions": true,
+        "call_count": true,
+        "cost_exact": true,
+        "parse_counts": true,
+        "capacity_failure_exact": true,
+        "first_model_input_exact": true
+      },
+      "all_call_checks_true": true,
+      "model_calls": 16,
+      "parse_failures": 0,
+      "generation_hit_limit": 0,
+      "termination_reason": "physical_failure",
+      "cost": {
+        "decisions": 16,
+        "invalid": 4,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 3,
+        "yields": 5,
+        "wait_ticks": 7801,
+        "physical_attempts": 4,
+        "physical_failures": 1,
+        "no_ops": 1,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "terminal_facts": {
+        "confirmation_closed": true,
+        "check_completed": true,
+        "no_active_child": true,
+        "red_left": true,
+        "blue_current_goal": false,
+        "green_current_goal": false,
+        "carrier_current_far": false
+      },
+      "body_ids": {
+        "robot": 1,
+        "carrier": 11,
+        "inspection": 12,
+        "inspection_walls": [
+          13,
+          14
+        ],
+        "presence": 15,
+        "objects": {
+          "red": 2,
+          "blue": 3,
+          "green": 4
+        },
+        "trays": {
+          "left": 5,
+          "right": 8
+        }
+      },
+      "contact_evidence": {
+        "forbidden_other_object_carrier": {
+          "statistics": {
+            "records": 3340,
+            "ticks": 1121,
+            "max_normal_force": 108.53752513449288,
+            "negative_distance_records": 2608
+          },
+          "first": {
+            "tick": 16228,
+            "contact": {
+              "body_a": 4,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6878314347595931,
+                0.22282987239441612,
+                0.04999999999194639
+              ],
+              "position_b": [
+                0.6878314347927885,
+                0.22283333333333336,
+                0.049999999999999996
+              ],
+              "contact_distance": -3.4609389174009924e-06,
+              "normal_force": 0.5803605593591046
+            },
+            "phase": "park_home",
+            "robot_target_item": null,
+            "carrier_joint": 0.1629999987280409,
+            "carrier_velocity": 0.03999969472981405,
+            "object_positions": {
+              "red": [
+                0.5899949654435316,
+                -0.23501386899209503,
+                0.0319896793129853
+              ],
+              "blue": [
+                0.41994379161864354,
+                9.901052311193962e-05,
+                0.03198969672322852
+              ],
+              "green": [
+                0.7098319398309401,
+                0.24498997053963484,
+                0.03198962819635195
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 14,
+                "choice": "yield",
+                "before_tick": 15421,
+                "after_tick": 17341
+              }
+            ]
+          },
+          "peak": {
+            "tick": 16835,
+            "contact": {
+              "body_a": 4,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6839509839548186,
+                0.2775869643173536,
+                0.04863776681825614
+              ],
+              "position_b": [
+                0.6839509839548186,
+                0.2806268074511804,
+                0.04863776681825615
+              ],
+              "contact_distance": -0.003039843133826825,
+              "normal_force": 108.53752513449288
+            },
+            "phase": "park_home",
+            "robot_target_item": null,
+            "carrier_joint": 0.22051850385977056,
+            "carrier_velocity": -0.025992861938365447,
+            "object_positions": {
+              "red": [
+                0.5899949654435316,
+                -0.23501386899209503,
+                0.0319896793129853
+              ],
+              "blue": [
+                0.41994379161864354,
+                9.901052311193962e-05,
+                0.03198969672322852
+              ],
+              "green": [
+                0.7061875460872956,
+                0.3084052431552199,
+                0.045918349526056626
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 14,
+                "choice": "yield",
+                "before_tick": 15421,
+                "after_tick": 17341
+              }
+            ]
+          }
+        },
+        "forbidden_robot_carrier": {
+          "statistics": {
+            "records": 1269,
+            "ticks": 697,
+            "max_normal_force": 391.75222659137836,
+            "negative_distance_records": 1169
+          },
+          "first": {
+            "tick": 17905,
+            "contact": {
+              "body_a": 1,
+              "body_b": 11,
+              "link_a": 10,
+              "link_b": 0,
+              "position_a": [
+                0.7107639995842824,
+                0.40885880731128027,
+                0.049123548017172274
+              ],
+              "position_b": [
+                0.7099975562858903,
+                0.40885880731128116,
+                0.04906986742073957
+              ],
+              "contact_distance": 0.0007683208549059686,
+              "normal_force": 0.0
+            },
+            "phase": "descend",
+            "robot_target_item": "green",
+            "carrier_joint": 0.39798009473335755,
+            "carrier_velocity": 0.04,
+            "object_positions": {
+              "red": [
+                0.5899949654435316,
+                -0.23501386899209503,
+                0.0319896793129853
+              ],
+              "blue": [
+                0.41994379161864354,
+                9.901052311193962e-05,
+                0.03198969672322852
+              ],
+              "green": [
+                0.7328295877256398,
+                0.3640403315343712,
+                0.02198937445391593
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 15,
+                "choice": "careful_green_right",
+                "before_tick": 17341,
+                "after_tick": 18601
+              }
+            ]
+          },
+          "peak": {
+            "tick": 18213,
+            "contact": {
+              "body_a": 1,
+              "body_b": 11,
+              "link_a": 10,
+              "link_b": 0,
+              "position_a": [
+                0.6983575302273121,
+                0.40471456269418404,
+                0.048352065892221636
+              ],
+              "position_b": [
+                0.7099981387000599,
+                0.4047176917046809,
+                0.04906098471482828
+              ],
+              "contact_distance": -0.011662175021069181,
+              "normal_force": 391.75222659137836
+            },
+            "phase": "lift",
+            "robot_target_item": "green",
+            "carrier_joint": 0.403483430927141,
+            "carrier_velocity": -0.10508654169743803,
+            "object_positions": {
+              "red": [
+                0.5899949654435316,
+                -0.23501386899209503,
+                0.0319896793129853
+              ],
+              "blue": [
+                0.41994379161864354,
+                9.901052311193962e-05,
+                0.03198969672322852
+              ],
+              "green": [
+                0.7328294825868461,
+                0.36404019453204983,
+                0.021989537340235343
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 15,
+                "choice": "careful_green_right",
+                "before_tick": 17341,
+                "after_tick": 18601
+              }
+            ]
+          }
+        },
+        "forbidden_robot_static": {
+          "statistics": {
+            "records": 527,
+            "ticks": 417,
+            "max_normal_force": 51.95901865640562,
+            "negative_distance_records": 527
+          },
+          "first": {
+            "tick": 18006,
+            "contact": {
+              "body_a": 1,
+              "body_b": 10,
+              "link_a": 9,
+              "link_b": -1,
+              "position_a": [
+                0.7268078313180948,
+                0.33193921758160205,
+                0.021996579033939805
+              ],
+              "position_b": [
+                0.7268078313180948,
+                0.33,
+                0.021996579033939805
+              ],
+              "contact_distance": -0.0019392175816020372,
+              "normal_force": 51.95901865640562
+            },
+            "phase": "grasp",
+            "robot_target_item": "green",
+            "carrier_joint": 0.40906715360264356,
+            "carrier_velocity": -0.006809703239153253,
+            "object_positions": {
+              "red": [
+                0.5899949654435316,
+                -0.23501386899209503,
+                0.0319896793129853
+              ],
+              "blue": [
+                0.41994379161864354,
+                9.901052311193962e-05,
+                0.03198969672322852
+              ],
+              "green": [
+                0.7328294825868461,
+                0.36404019453204983,
+                0.021989537340236842
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 15,
+                "choice": "careful_green_right",
+                "before_tick": 17341,
+                "after_tick": 18601
+              }
+            ]
+          },
+          "peak": {
+            "tick": 18006,
+            "contact": {
+              "body_a": 1,
+              "body_b": 10,
+              "link_a": 9,
+              "link_b": -1,
+              "position_a": [
+                0.7268078313180948,
+                0.33193921758160205,
+                0.021996579033939805
+              ],
+              "position_b": [
+                0.7268078313180948,
+                0.33,
+                0.021996579033939805
+              ],
+              "contact_distance": -0.0019392175816020372,
+              "normal_force": 51.95901865640562
+            },
+            "phase": "grasp",
+            "robot_target_item": "green",
+            "carrier_joint": 0.40906715360264356,
+            "carrier_velocity": -0.006809703239153253,
+            "object_positions": {
+              "red": [
+                0.5899949654435316,
+                -0.23501386899209503,
+                0.0319896793129853
+              ],
+              "blue": [
+                0.41994379161864354,
+                9.901052311193962e-05,
+                0.03198969672322852
+              ],
+              "green": [
+                0.7328294825868461,
+                0.36404019453204983,
+                0.021989537340236842
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 15,
+                "choice": "careful_green_right",
+                "before_tick": 17341,
+                "after_tick": 18601
+              }
+            ]
+          }
+        }
+      },
+      "skill_failures": [
+        {
+          "call": 16,
+          "sequence": 15,
+          "choice": "careful_green_right",
+          "before_tick": 17341,
+          "after_tick": 18601,
+          "reason": "摩擦抓取未抬起物品",
+          "finger_contacts": 0,
+          "lifted_z": 0.022286080675333306,
+          "ee_errors": [
+            0.025152726162688283,
+            0.01670106711216157,
+            0.2377628668936106
+          ],
+          "source_regions": [],
+          "object_before": {
+            "position": [
+              0.7328299317988228,
+              0.36404068857239025,
+              0.021988892085593802
+            ],
+            "orientation": [
+              -0.7071240984437628,
+              -2.5139041136103964e-05,
+              4.464902145731754e-05,
+              0.7070894616486582
+            ],
+            "velocity": [
+              3.7856321849047586e-11,
+              3.200598673745452e-11,
+              -3.176885143840735e-11
+            ]
+          },
+          "object_after": {
+            "position": [
+              0.732896615554917,
+              0.36122679519102807,
+              0.02217380150545358
+            ],
+            "orientation": [
+              -0.7168936246148924,
+              -0.007181338072553123,
+              0.01975008532888638,
+              0.696865764333068
+            ],
+            "velocity": [
+              -0.00029988796272547474,
+              -0.0005881978904780648,
+              -0.0005888176531334208
+            ]
+          }
+        }
+      ],
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3420,
+          "supported_ticks": 0,
+          "loaded": false
+        }
+      },
+      "first_loaded_support_loss": null,
+      "max_non_target_interval_displacement_m": 0.12471885987835293
+    },
+    {
+      "id": "full_00_relation_full_history",
+      "original_passed": false,
+      "reconstruction_consistent": true,
+      "task_success": false,
+      "physically_safe": false,
+      "failed_checks": [
+        "all_forbidden_zero",
+        "loaded_support_all"
+      ],
+      "excluded_check_values": {
+        "all_forbidden_zero": false,
+        "loaded_support_all": false,
+        "non_target_preserved": true,
+        "successful_grasp_places_verified": true,
+        "contact_fields_complete": true
+      },
+      "neural_checks": {
+        "all_predictions": true,
+        "call_count": true,
+        "cost_exact": true,
+        "parse_counts": true,
+        "capacity_failure_exact": true,
+        "first_model_input_exact": true
+      },
+      "all_call_checks_true": true,
+      "model_calls": 10,
+      "parse_failures": 0,
+      "generation_hit_limit": 0,
+      "termination_reason": "physical_failure",
+      "cost": {
+        "decisions": 10,
+        "invalid": 5,
+        "requests_transport": 2,
+        "requests_return": 2,
+        "requests_check": 0,
+        "yields": 1,
+        "wait_ticks": 1920,
+        "physical_attempts": 2,
+        "physical_failures": 1,
+        "no_ops": 1,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "terminal_facts": {
+        "confirmation_closed": true,
+        "check_completed": false,
+        "no_active_child": true,
+        "red_left": true,
+        "blue_current_goal": false,
+        "green_current_goal": false,
+        "carrier_current_far": false
+      },
+      "body_ids": {
+        "robot": 1,
+        "carrier": 11,
+        "inspection": 12,
+        "inspection_walls": [
+          13,
+          14
+        ],
+        "presence": 15,
+        "objects": {
+          "red": 2,
+          "blue": 3,
+          "green": 4
+        },
+        "trays": {
+          "left": 5,
+          "right": 8
+        }
+      },
+      "contact_evidence": {
+        "forbidden_other_object_carrier": {
+          "statistics": {
+            "records": 575,
+            "ticks": 262,
+            "max_normal_force": 133.76005844618243,
+            "negative_distance_records": 423
+          },
+          "first": {
+            "tick": 7280,
+            "contact": {
+              "body_a": 4,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6879931493490014,
+                0.2516666666668829,
+                0.04899469574962027
+              ],
+              "position_b": [
+                0.6879931493490014,
+                0.2516666666668829,
+                0.049999999999999996
+              ],
+              "contact_distance": -0.0010053042503797224,
+              "normal_force": 55.24355779793379
+            },
+            "phase": "place",
+            "robot_target_item": "green",
+            "carrier_joint": 0.31183338532767774,
+            "carrier_velocity": 0.04001247859075223,
+            "object_positions": {
+              "red": [
+                0.5899915183719527,
+                -0.23647214805428332,
+                0.031989687571130666
+              ],
+              "blue": [
+                0.6500003469552146,
+                0.31183347194506295,
+                0.07198964115146769
+              ],
+              "green": [
+                0.7099766548709785,
+                0.23656161783753407,
+                0.07049591198916019
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 9,
+                "choice": "careful_green_right",
+                "before_tick": 5340,
+                "after_tick": 8520
+              }
+            ]
+          },
+          "peak": {
+            "tick": 7288,
+            "contact": {
+              "body_a": 4,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6879750910663244,
+                0.25340710966869706,
+                0.04855107790970864
+              ],
+              "position_b": [
+                0.6879750910663244,
+                0.2530422473084356,
+                0.049999999999999996
+              ],
+              "contact_distance": -0.0014941552013327905,
+              "normal_force": 133.76005844618243
+            },
+            "phase": "place",
+            "robot_target_item": "green",
+            "carrier_joint": 0.3132204418504053,
+            "carrier_velocity": 0.04276669007272648,
+            "object_positions": {
+              "red": [
+                0.5899915183719527,
+                -0.23647214805428332,
+                0.031989687571130666
+              ],
+              "blue": [
+                0.6500003591012308,
+                0.31316871259896484,
+                0.07198960997012968
+              ],
+              "green": [
+                0.7100106005130133,
+                0.23354587009172395,
+                0.06620445915885777
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 9,
+                "choice": "careful_green_right",
+                "before_tick": 5340,
+                "after_tick": 8520
+              }
+            ]
+          }
+        },
+        "forbidden_robot_carrier": {
+          "statistics": {
+            "records": 1556,
+            "ticks": 573,
+            "max_normal_force": 338.5485438278874,
+            "negative_distance_records": 1555
+          },
+          "first": {
+            "tick": 7289,
+            "contact": {
+              "body_a": 1,
+              "body_b": 11,
+              "link_a": 10,
+              "link_b": 0,
+              "position_a": [
+                0.709005319604287,
+                0.27374400271040555,
+                0.0503390170383204
+              ],
+              "position_b": [
+                0.709003972736833,
+                0.27374400271040555,
+                0.04999999210864989
+              ],
+              "contact_distance": 0.00033902760505604253,
+              "normal_force": 230.61237992328424
+            },
+            "phase": "place",
+            "robot_target_item": "green",
+            "carrier_joint": 0.31339386878629594,
+            "carrier_velocity": 0.041622464613748994,
+            "object_positions": {
+              "red": [
+                0.5899915183719527,
+                -0.23647214805428332,
+                0.031989687571130666
+              ],
+              "blue": [
+                0.6500003609622061,
+                0.3133358933788627,
+                0.07198959416235368
+              ],
+              "green": [
+                0.7099948897582019,
+                0.23342404050262885,
+                0.06565901411060059
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 9,
+                "choice": "careful_green_right",
+                "before_tick": 5340,
+                "after_tick": 8520
+              }
+            ]
+          },
+          "peak": {
+            "tick": 7292,
+            "contact": {
+              "body_a": 1,
+              "body_b": 11,
+              "link_a": 10,
+              "link_b": 0,
+              "position_a": [
+                0.7089894825409601,
+                0.27424180710291135,
+                0.047051012767407197
+              ],
+              "position_b": [
+                0.709003972736833,
+                0.27426409193041174,
+                0.04999999210864989
+              ],
+              "contact_distance": -0.0029490136355491085,
+              "normal_force": 338.5485438278874
+            },
+            "phase": "place",
+            "robot_target_item": "green",
+            "carrier_joint": 0.31391573947646606,
+            "carrier_velocity": 0.04205001745309258,
+            "object_positions": {
+              "red": [
+                0.5899915183719527,
+                -0.23647214805428332,
+                0.031989687571130666
+              ],
+              "blue": [
+                0.6500003255721333,
+                0.3138364209611395,
+                0.07198956019625825
+              ],
+              "green": [
+                0.7100513760523632,
+                0.23337076943737903,
+                0.06435562648703869
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 9,
+                "choice": "careful_green_right",
+                "before_tick": 5340,
+                "after_tick": 8520
+              }
+            ]
+          }
+        },
+        "forbidden_non_target_robot": {
+          "statistics": {
+            "records": 15,
+            "ticks": 10,
+            "max_normal_force": 22.394787181951386,
+            "negative_distance_records": 8
+          },
+          "first": {
+            "tick": 7860,
+            "contact": {
+              "body_a": 1,
+              "body_b": 3,
+              "link_a": 8,
+              "link_b": -1,
+              "position_a": [
+                0.6712808101793482,
+                0.28146041728983434,
+                0.09460578323126777
+              ],
+              "position_b": [
+                0.6711948680167245,
+                0.2814603696351525,
+                0.09397995642899504
+              ],
+              "contact_distance": 0.0006317002802202307,
+              "normal_force": 0.0
+            },
+            "phase": "park_side_lift",
+            "robot_target_item": "green",
+            "carrier_joint": 0.2975566905803404,
+            "carrier_velocity": 0.039999807447901894,
+            "object_positions": {
+              "red": [
+                0.5899915183719527,
+                -0.23647214805428332,
+                0.031989687571130666
+              ],
+              "blue": [
+                0.6452209965592083,
+                0.30047479403032373,
+                0.0732395456328463
+              ],
+              "green": [
+                0.7140736603997342,
+                0.2133480965951896,
+                0.03198778509119074
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 9,
+                "choice": "careful_green_right",
+                "before_tick": 5340,
+                "after_tick": 8520
+              }
+            ]
+          },
+          "peak": {
+            "tick": 7860,
+            "contact": {
+              "body_a": 1,
+              "body_b": 3,
+              "link_a": 10,
+              "link_b": -1,
+              "position_a": [
+                0.6713045654150538,
+                0.2754784042743227,
+                0.09305312999961934
+              ],
+              "position_b": [
+                0.6712183643621886,
+                0.2759973463814391,
+                0.09303131682516698
+              ],
+              "contact_distance": 0.000526504840085212,
+              "normal_force": 22.394787181951386
+            },
+            "phase": "park_side_lift",
+            "robot_target_item": "green",
+            "carrier_joint": 0.2975566905803404,
+            "carrier_velocity": 0.039999807447901894,
+            "object_positions": {
+              "red": [
+                0.5899915183719527,
+                -0.23647214805428332,
+                0.031989687571130666
+              ],
+              "blue": [
+                0.6452209965592083,
+                0.30047479403032373,
+                0.0732395456328463
+              ],
+              "green": [
+                0.7140736603997342,
+                0.2133480965951896,
+                0.03198778509119074
+              ]
+            },
+            "actual_action_intervals": [
+              {
+                "sequence": 9,
+                "choice": "careful_green_right",
+                "before_tick": 5340,
+                "after_tick": 8520
+              }
+            ]
+          }
+        }
+      },
+      "skill_failures": [
+        {
+          "call": 10,
+          "sequence": 9,
+          "choice": "careful_green_right",
+          "before_tick": 5340,
+          "after_tick": 8520,
+          "reason": "落点/速度未满足目标",
+          "finger_contacts": 2,
+          "lifted_z": 0.25997435574556127,
+          "ee_errors": [
+            8.708877110364376e-06,
+            2.29134308923448e-05,
+            8.761960111350371e-06,
+            3.223313307694149e-05,
+            0.012200627179310756,
+            0.00030856887409202923,
+            0.016555566245092714
+          ],
+          "source_regions": [],
+          "object_before": {
+            "position": [
+              0.4209317916154908,
+              0.16075146160850332,
+              0.02198921828403764
+            ],
+            "orientation": [
+              2.4839503141075192e-06,
+              -2.1886044104997696e-05,
+              -2.113606030844918e-06,
+              0.9999999997551818
+            ],
+            "velocity": [
+              -1.8545680889471283e-13,
+              8.923669282053697e-14,
+              -1.385280778976039e-13
+            ]
+          },
+          "object_after": {
+            "position": [
+              0.7140732625399279,
+              0.21334831648484404,
+              0.03198969511641962
+            ],
+            "orientation": [
+              0.7031517118839006,
+              0.07474249738798519,
+              0.0747392630895952,
+              0.7031395819549425
+            ],
+            "velocity": [
+              5.786643809655123e-20,
+              -1.569210590720118e-20,
+              8.257283745649602e-16
+            ]
+          }
+        }
+      ],
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3180,
+          "supported_ticks": 2522,
+          "loaded": true
+        }
+      },
+      "first_loaded_support_loss": {
+        "tick": 7863,
+        "leg_id": 2,
+        "facts": {
+          "tick": 7863,
+          "joint": 0.2980566875196349,
+          "velocity": 0.04,
+          "profile_finished": false,
+          "near": false,
+          "far": false,
+          "payload_stable": false,
+          "relative_position": [
+            -0.018336152644472525,
+            0.011768949840639586,
+            0.03345158295677292
+          ],
+          "relative_speed": 1.37813874057119,
+          "blue_speed": 1.4005336570312907,
+          "supported": false,
+          "support_records": 0,
+          "min_distance": null,
+          "support_force": 0
+        },
+        "blue": {
+          "position": [
+            0.6316638473555275,
+            0.30982563736027446,
+            0.07845158295677292
+          ],
+          "orientation": [
+            -0.15958821148322697,
+            0.001372093805434855,
+            -0.0901025778755455,
+            0.9830621778780604
+          ],
+          "velocity": [
+            -1.06874535747966,
+            0.79785170267869,
+            0.42744654154154776
+          ]
+        },
+        "robot_target_item": "green"
+      },
+      "max_non_target_interval_displacement_m": 9.618716564677064e-05
+    },
+    {
+      "id": "full_00_relation_public_ledger_aid",
+      "original_passed": true,
+      "reconstruction_consistent": true,
+      "task_success": false,
+      "physically_safe": true,
+      "failed_checks": [],
+      "excluded_check_values": {
+        "all_forbidden_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "successful_grasp_places_verified": true,
+        "contact_fields_complete": true
+      },
+      "neural_checks": {
+        "all_predictions": true,
+        "call_count": true,
+        "cost_exact": true,
+        "parse_counts": true,
+        "capacity_failure_exact": true,
+        "first_model_input_exact": true
+      },
+      "all_call_checks_true": true,
+      "model_calls": 15,
+      "parse_failures": 0,
+      "generation_hit_limit": 0,
+      "termination_reason": "declared_done",
+      "cost": {
+        "decisions": 15,
+        "invalid": 1,
+        "requests_transport": 2,
+        "requests_return": 0,
+        "requests_check": 3,
+        "yields": 5,
+        "wait_ticks": 9481,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 2,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "terminal_facts": {
+        "confirmation_closed": true,
+        "check_completed": false,
+        "no_active_child": false,
+        "red_left": true,
+        "blue_current_goal": false,
+        "green_current_goal": true,
+        "carrier_current_far": false
+      },
+      "body_ids": {
+        "robot": 1,
+        "carrier": 11,
+        "inspection": 12,
+        "inspection_walls": [
+          13,
+          14
+        ],
+        "presence": 15,
+        "objects": {
+          "red": 2,
+          "blue": 3,
+          "green": 4
+        },
+        "trays": {
+          "left": 5,
+          "right": 8
+        }
+      },
+      "contact_evidence": {},
+      "skill_failures": [],
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        }
+      },
+      "first_loaded_support_loss": null,
+      "max_non_target_interval_displacement_m": 9.618716564677064e-05
+    }
+  ],
+  "source_preaudit_sha256": "dd502900015794c3fce9b23192e0306aaeee543e8339baeeb3adaa5aa5a55948",
+  "definition_sha256": "bf28f076443f68c70869ee3415de5569c0babdfc3751bbc0593a1f949f9732b6",
+  "script_sha256": "885770015d056485811f4bc1456e27beda85b5246f98c91aa6f8fee6dd5910ba",
+  "group_lifecycle": {
+    "handle": 40557,
+    "pid": 295264,
+    "exit_code": 0
+  },
+  "scope": "仅既有全tick独立预审计与原始行的紧凑证据，不更改冻结/原passed/物理安全/任务判据；接触第一与峰值逐项保留距离/力/位置和实际执行区间，不从区域空推断碰撞，时序关联不单独证明全部因果。",
+  "contact_records": "正距离/零力保留记录与负距离/有力接触分别给原值；既定零记录标准不事后放宽。",
+  "successful_grasp_predicate": "仅核对执行声称成功的抓放，失败尝试另外由physical_failures与skill_failures保留；该项true不能改称全部尝试成功。"
+}
