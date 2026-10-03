@@ -1,0 +1,18 @@
+{
+  "version": "shared_slots_v24_dev0",
+  "seeds": [120, 121],
+  "wait_limit_ticks": 6000,
+  "non_target_interval_limit_m": 0.01,
+  "support_contact_max_distance_m": 0.0001,
+  "support_contact_min_force_n": 0.001,
+  "blue_route": "direct",
+  "green_route": "careful",
+  "presence": "stay",
+  "check_requests": false,
+  "sequences": {
+    "A": ["place_blue_left", "careful_green_left"],
+    "B": ["careful_green_left", "place_blue_left"],
+    "C": ["place_blue_left", "careful_green_left", "careful_green_right", "careful_green_left"],
+    "D": ["careful_green_left", "place_blue_left", "place_blue_right", "place_blue_left"]
+  }
+}
