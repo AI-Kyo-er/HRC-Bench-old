@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "checks": {
+    "input_exact": true,
+    "decode_budget": true,
+    "peak_margin": true,
+    "free_after_probe": true
+  },
+  "preflight": {
+    "utc": "2026-10-03T02:25:29.025064+00:00",
+    "pid": 247870,
+    "physical_gpu": 3,
+    "query": "0, NVIDIA GeForce RTX 4090, 49140, 41971, 6538\n1, NVIDIA GeForce RTX 4090, 49140, 41973, 6536\n2, NVIDIA GeForce RTX 4090, 49140, 40725, 7784\n3, NVIDIA GeForce RTX 4090, 49140, 17, 48492\n",
+    "free_mib": 48492,
+    "required_free_mib": 45000
+  },
+  "metadata": {
+    "model_id": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "model_path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.1",
+      "tokenizers": "0.22.2",
+      "huggingface-hub": "0.36.0",
+      "accelerate": "1.4.0"
+    },
+    "parameters": {
+      "do_sample": true,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0
+    },
+    "max_new_tokens": 8192,
+    "dtype": "torch.bfloat16",
+    "attention": "sdpa",
+    "generation_flags": {
+      "logits_to_keep": 1,
+      "return_dict_in_generate": false,
+      "output_scores": false,
+      "output_logits": false,
+      "output_attentions": false,
+      "output_hidden_states": false
+    },
+    "quantization": null,
+    "offload": false,
+    "cuda": "12.4",
+    "device": "NVIDIA GeForce RTX 4090",
+    "loaded_memory": {
+      "allocated_bytes": 29536897536,
+      "reserved_bytes": 29540483072,
+      "peak_allocated_bytes": 29536897536,
+      "peak_reserved_bytes": 29540483072
+    },
+    "allocated_bytes": 29545417216,
+    "reserved_bytes": 38476447744,
+    "peak_allocated_bytes": 37159064064,
+    "peak_reserved_bytes": 38476447744
+  },
+  "peak_reserved_mib": 36694.0,
+  "margin_to_initial_free_mib": 11798.0,
+  "free_mib_after_probe": 11326,
+  "nvidia_query_after": "0, 6538\n1, 6536\n2, 7784\n3, 11326\n",
+  "freeze_sha256": "62996089023f72de804f31bf2fc64662a3cbfb11f59ce6ed8b1d9af61d597b4e",
+  "call_sha256": "b7e8b4aee0bfca60d4039bc69f21cd7b4e1710cb92f8d61730049ed6ee279248",
+  "scope": "最大输入/输出预算路径覆盖；return_dict=False，不获取缓存精确长度，32768仅保守KV上界。min_new8192仅非任务，正式不带。"
+}
