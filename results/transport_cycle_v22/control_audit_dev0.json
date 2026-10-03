@@ -1,0 +1,3708 @@
+{
+  "total": 8,
+  "passed": 8,
+  "physically_safe": 8,
+  "total_ticks": 165251,
+  "episodes": [
+    {
+      "id": "A_inspection_120",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 20221,
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 56884,
+          "ticks": 14221,
+          "max_normal_force": 1.7817063339230153,
+          "negative_distance_records": 56547
+        },
+        "expected_blue_inspection": {
+          "records": 7900,
+          "ticks": 1975,
+          "max_normal_force": 1.5778057711223596,
+          "negative_distance_records": 7896
+        },
+        "expected_target_robot": {
+          "records": 9781,
+          "ticks": 4993,
+          "max_normal_force": 46.88453020402405,
+          "negative_distance_records": 9766
+        },
+        "expected_objects_static_support": {
+          "records": 161058,
+          "ticks": 20218,
+          "max_normal_force": 1.7311510974357063,
+          "negative_distance_records": 161058
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 3,
+          "kind": "payload_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 9841,
+          "origin": 5.194634810598428e-16,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "payload_event": {
+            "sequence": 3,
+            "kind": "payload_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "completed_tick": 13561
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 13561,
+          "origin": 0.5998812503834735,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "completed_tick": 17281
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997609391427584,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_inspection",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25999541292459516,
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599855777933344,
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954660815241,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.2769620013810126e-11,
+      "max_non_target_interval_displacement_m": 2.2768614363933533e-11,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9797662559616356e-08
+    },
+    {
+      "id": "A_inspection_121",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 20221,
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 56884,
+          "ticks": 14221,
+          "max_normal_force": 1.7817968675534508,
+          "negative_distance_records": 56547
+        },
+        "expected_blue_inspection": {
+          "records": 7900,
+          "ticks": 1975,
+          "max_normal_force": 1.5778057760432438,
+          "negative_distance_records": 7896
+        },
+        "expected_target_robot": {
+          "records": 9777,
+          "ticks": 4989,
+          "max_normal_force": 46.88453208403712,
+          "negative_distance_records": 9763
+        },
+        "expected_objects_static_support": {
+          "records": 161058,
+          "ticks": 20218,
+          "max_normal_force": 1.8335186582658636,
+          "negative_distance_records": 161058
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 3,
+          "kind": "payload_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 9841,
+          "origin": 1.6668592734093192e-21,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "payload_event": {
+            "sequence": 3,
+            "kind": "payload_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "completed_tick": 13561
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 13561,
+          "origin": 0.5998812503831727,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "completed_tick": 17281
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997392307657413,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_inspection",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954128932715,
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599855778502218,
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954659077317,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.2769620013810126e-11,
+      "max_non_target_interval_displacement_m": 2.2768614363933533e-11,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9799602563329586e-08
+    },
+    {
+      "id": "A_left_120",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 20221,
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 56884,
+          "ticks": 14221,
+          "max_normal_force": 1.7819161969428117,
+          "negative_distance_records": 56547
+        },
+        "expected_blue_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "expected_target_robot": {
+          "records": 9584,
+          "ticks": 4799,
+          "max_normal_force": 46.884503556167665,
+          "negative_distance_records": 9567
+        },
+        "expected_objects_static_support": {
+          "records": 169352,
+          "ticks": 20218,
+          "max_normal_force": 1.601026594663865,
+          "negative_distance_records": 169348
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 3,
+          "kind": "payload_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 9841,
+          "origin": 6.82147554101556e-17,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "payload_event": {
+            "sequence": 3,
+            "kind": "payload_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "completed_tick": 13561
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 13561,
+          "origin": 0.5998812503834731,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "completed_tick": 17281
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997609391427584,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25999541292459516,
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599775856299035,
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954618210458,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.2769620013810126e-11,
+      "max_non_target_interval_displacement_m": 2.2768614363933533e-11,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.980173885447357e-08
+    },
+    {
+      "id": "A_left_121",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 20222,
+      "makespan_ticks": 19982,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7982
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 56888,
+          "ticks": 14222,
+          "max_normal_force": 1.785619000621355,
+          "negative_distance_records": 56551
+        },
+        "expected_blue_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "expected_target_robot": {
+          "records": 9580,
+          "ticks": 4795,
+          "max_normal_force": 46.88917141833215,
+          "negative_distance_records": 9564
+        },
+        "expected_objects_static_support": {
+          "records": 169360,
+          "ticks": 20219,
+          "max_normal_force": 1.6483222943700204,
+          "negative_distance_records": 169356
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13562
+        },
+        {
+          "sequence": 3,
+          "kind": "payload_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13562
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17282
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17282
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 9841,
+          "origin": -3.967300042592169e-15,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13562
+          },
+          "payload_event": {
+            "sequence": 3,
+            "kind": "payload_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13562
+          },
+          "completed_tick": 13562
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 13562,
+          "origin": 0.5998931253451247,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17282
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17282
+          },
+          "completed_tick": 17282
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997392307657413,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954128932715,
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997758563305834,
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954625120464,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.2770691997206722e-11,
+      "max_non_target_interval_displacement_m": 2.2769686346813145e-11,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9797662559616356e-08
+    },
+    {
+      "id": "A_right_120",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 20221,
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 56470,
+          "ticks": 14221,
+          "max_normal_force": 1.7648719043343,
+          "negative_distance_records": 55836
+        },
+        "expected_blue_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "expected_target_robot": {
+          "records": 9967,
+          "ticks": 5003,
+          "max_normal_force": 46.88494234436748,
+          "negative_distance_records": 9812
+        },
+        "expected_objects_static_support": {
+          "records": 169352,
+          "ticks": 20218,
+          "max_normal_force": 1.601026594663865,
+          "negative_distance_records": 169346
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 3,
+          "kind": "payload_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 9841,
+          "origin": 2.7752008166495367e-19,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "payload_event": {
+            "sequence": 3,
+            "kind": "payload_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "completed_tick": 13561
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 13561,
+          "origin": 0.5998812503834731,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "completed_tick": 17281
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997609391427584,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_right",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25999541292459516,
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599783573313797,
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599953960825629,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.2769620013810126e-11,
+      "max_non_target_interval_displacement_m": 2.2768614363933533e-11,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9797662559616356e-08
+    },
+    {
+      "id": "A_right_121",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 20221,
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 56470,
+          "ticks": 14221,
+          "max_normal_force": 1.765329934488474,
+          "negative_distance_records": 55886
+        },
+        "expected_blue_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "expected_target_robot": {
+          "records": 10144,
+          "ticks": 5001,
+          "max_normal_force": 46.86638516033307,
+          "negative_distance_records": 9987
+        },
+        "expected_objects_static_support": {
+          "records": 169352,
+          "ticks": 20218,
+          "max_normal_force": 1.6483222943700204,
+          "negative_distance_records": 169346
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 3720,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 3,
+          "kind": "payload_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 13561
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 17281
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 9841,
+          "origin": 2.8381993707310297e-19,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "payload_event": {
+            "sequence": 3,
+            "kind": "payload_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 13561
+          },
+          "completed_tick": 13561
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 13561,
+          "origin": 0.5998812503834297,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 17281
+          },
+          "completed_tick": 17281
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997392307657413,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_right",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954128932715,
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599783569557905,
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "choice": "place_blue_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25999539574906877,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.2769620013810126e-11,
+      "max_non_target_interval_displacement_m": 2.2768614363933533e-11,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9797662559616356e-08
+    },
+    {
+      "id": "B_empty_120",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 21962,
+      "makespan_ticks": 21722,
+      "cost": {
+        "decisions": 19,
+        "physical_attempts": 3,
+        "wait_ticks": 12662
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 38636,
+          "ticks": 9659,
+          "max_normal_force": 1.4936687982179606,
+          "negative_distance_records": 38307
+        },
+        "expected_blue_inspection": {
+          "records": 41500,
+          "ticks": 10375,
+          "max_normal_force": 1.5778057711223596,
+          "negative_distance_records": 41496
+        },
+        "expected_target_robot": {
+          "records": 7305,
+          "ticks": 3655,
+          "max_normal_force": 46.86638516037365,
+          "negative_distance_records": 7293
+        },
+        "expected_objects_static_support": {
+          "records": 170848,
+          "ticks": 21959,
+          "max_normal_force": 1.601026594663865,
+          "negative_distance_records": 170848
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 0,
+          "loaded": false
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 0,
+          "loaded": false
+        },
+        "4": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 10621
+        },
+        {
+          "sequence": 3,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 14821
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 4,
+          "direction": "return",
+          "first_tick": 21962
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 4,
+          "direction": "return",
+          "first_tick": 21962
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 6901,
+          "origin": -2.0033638865511215e-104,
+          "target": 0.6,
+          "loaded_at_start": false,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 10621
+          },
+          "payload_event": null,
+          "completed_tick": 10621
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 11101,
+          "origin": 0.5999999999999994,
+          "target": 0.0,
+          "loaded_at_start": false,
+          "carrier_event": {
+            "sequence": 3,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 14821
+          },
+          "payload_event": null,
+          "completed_tick": 14821
+        },
+        {
+          "id": 4,
+          "direction": "return",
+          "start_tick": 18241,
+          "origin": -3.063187221759022e-16,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 4,
+            "direction": "return",
+            "first_tick": 21962
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 4,
+            "direction": "return",
+            "first_tick": 21962
+          },
+          "completed_tick": 21962
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 10,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 11,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 12,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 13,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 14,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 15,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 16,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 17,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 18,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997609391427584,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_inspection",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25999541292459516,
+          "passed": true
+        },
+        {
+          "sequence": 16,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25998558034806796,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.4755207174149575e-11,
+      "max_non_target_interval_displacement_m": 7.759053881316916e-09,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9797662559616356e-08
+    },
+    {
+      "id": "B_empty_121",
+      "passed": true,
+      "physically_safe": true,
+      "checks": {
+        "source_freeze_unchanged": true,
+        "no_runtime_failure": true,
+        "original_sequence_completed": true,
+        "all_inputs_physics_exact": true,
+        "all_grasp_places_actual": true,
+        "requests_exact": true,
+        "cycle_events_exact": true,
+        "current_carrier_facts_recomputed": true,
+        "legacy_first_events_retained": true,
+        "same_tick_FK": true,
+        "command_profile_exact": true,
+        "full_canonical": true,
+        "final_physics_exact": true,
+        "final_ledger_exact": true,
+        "leg_ids": true,
+        "directions": true,
+        "loaded_at_start": true,
+        "payload_events": true,
+        "all_actual_arrivals": true,
+        "contact_fields_complete": true,
+        "forbidden_contacts_zero": true,
+        "loaded_support_all": true,
+        "non_target_preserved": true,
+        "green_preserved": true
+      },
+      "total_ticks": 21962,
+      "makespan_ticks": 21722,
+      "cost": {
+        "decisions": 19,
+        "physical_attempts": 3,
+        "wait_ticks": 12662
+      },
+      "groups": {
+        "expected_blue_carrier": {
+          "records": 38636,
+          "ticks": 9659,
+          "max_normal_force": 1.4936687914313107,
+          "negative_distance_records": 38307
+        },
+        "expected_blue_inspection": {
+          "records": 41500,
+          "ticks": 10375,
+          "max_normal_force": 1.5778057760432438,
+          "negative_distance_records": 41496
+        },
+        "expected_target_robot": {
+          "records": 7301,
+          "ticks": 3651,
+          "max_normal_force": 46.86638516033307,
+          "negative_distance_records": 7290
+        },
+        "expected_objects_static_support": {
+          "records": 170848,
+          "ticks": 21959,
+          "max_normal_force": 1.6483222943700204,
+          "negative_distance_records": 170848
+        },
+        "forbidden_robot_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_carrier": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_carrier_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_other_object_inspection": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_presence_contacts": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_non_target_robot": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_robot_static": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        },
+        "forbidden_object_object": {
+          "records": 0,
+          "ticks": 0,
+          "max_normal_force": 0,
+          "negative_distance_records": 0
+        }
+      },
+      "contact_evidence": {},
+      "leg_support": {
+        "1": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        },
+        "2": {
+          "ticks": 3720,
+          "supported_ticks": 0,
+          "loaded": false
+        },
+        "3": {
+          "ticks": 3720,
+          "supported_ticks": 0,
+          "loaded": false
+        },
+        "4": {
+          "ticks": 3721,
+          "supported_ticks": 3721,
+          "loaded": true
+        }
+      },
+      "events": [
+        {
+          "sequence": 0,
+          "kind": "carrier_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 1,
+          "kind": "payload_arrived",
+          "leg_id": 1,
+          "direction": "forward",
+          "first_tick": 3961
+        },
+        {
+          "sequence": 2,
+          "kind": "carrier_arrived",
+          "leg_id": 2,
+          "direction": "return",
+          "first_tick": 10621
+        },
+        {
+          "sequence": 3,
+          "kind": "carrier_arrived",
+          "leg_id": 3,
+          "direction": "forward",
+          "first_tick": 14821
+        },
+        {
+          "sequence": 4,
+          "kind": "carrier_arrived",
+          "leg_id": 4,
+          "direction": "return",
+          "first_tick": 21962
+        },
+        {
+          "sequence": 5,
+          "kind": "payload_arrived",
+          "leg_id": 4,
+          "direction": "return",
+          "first_tick": 21962
+        }
+      ],
+      "legs": [
+        {
+          "id": 1,
+          "direction": "forward",
+          "start_tick": 240,
+          "origin": 0.6000000000135194,
+          "target": 0.0,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 0,
+            "kind": "carrier_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "payload_event": {
+            "sequence": 1,
+            "kind": "payload_arrived",
+            "leg_id": 1,
+            "direction": "forward",
+            "first_tick": 3961
+          },
+          "completed_tick": 3961
+        },
+        {
+          "id": 2,
+          "direction": "return",
+          "start_tick": 6901,
+          "origin": -2.0033639181224785e-104,
+          "target": 0.6,
+          "loaded_at_start": false,
+          "carrier_event": {
+            "sequence": 2,
+            "kind": "carrier_arrived",
+            "leg_id": 2,
+            "direction": "return",
+            "first_tick": 10621
+          },
+          "payload_event": null,
+          "completed_tick": 10621
+        },
+        {
+          "id": 3,
+          "direction": "forward",
+          "start_tick": 11101,
+          "origin": 0.5999999999999994,
+          "target": 0.0,
+          "loaded_at_start": false,
+          "carrier_event": {
+            "sequence": 3,
+            "kind": "carrier_arrived",
+            "leg_id": 3,
+            "direction": "forward",
+            "first_tick": 14821
+          },
+          "payload_event": null,
+          "completed_tick": 14821
+        },
+        {
+          "id": 4,
+          "direction": "return",
+          "start_tick": 18241,
+          "origin": -4.691583599631086e-16,
+          "target": 0.6,
+          "loaded_at_start": true,
+          "carrier_event": {
+            "sequence": 4,
+            "kind": "carrier_arrived",
+            "leg_id": 4,
+            "direction": "return",
+            "first_tick": 21962
+          },
+          "payload_event": {
+            "sequence": 5,
+            "kind": "payload_arrived",
+            "leg_id": 4,
+            "direction": "return",
+            "first_tick": 21962
+          },
+          "completed_tick": 21962
+        }
+      ],
+      "input_checks": [
+        {
+          "sequence": 0,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 1,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 2,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 4,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 5,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 6,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 7,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 8,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 9,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 10,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 11,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 12,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 13,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 14,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 15,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 16,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 17,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        },
+        {
+          "sequence": 18,
+          "checks": {
+            "before_physics": true,
+            "after_physics": true,
+            "observation_state_exact": true,
+            "observation_history_exact": true,
+            "observation_workspace": true,
+            "observation_menu": true,
+            "messages_exact": true
+          },
+          "passed": true
+        }
+      ],
+      "placements": [
+        {
+          "sequence": 1,
+          "choice": "careful_red_left",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.25997392307657413,
+          "passed": true
+        },
+        {
+          "sequence": 3,
+          "choice": "place_blue_inspection",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599954128932715,
+          "passed": true
+        },
+        {
+          "sequence": 16,
+          "choice": "reload_blue",
+          "actual_destination_met": true,
+          "physical_attempt": true,
+          "finger_contacts": 2,
+          "lifted_z": 0.2599855803105837,
+          "passed": true
+        }
+      ],
+      "green_max_displacement_m": 2.4755207174149575e-11,
+      "max_non_target_interval_displacement_m": 7.75905495972405e-09,
+      "profile_command_max_error": 0.0,
+      "carrier_FK_max_error": 2.9797662559616356e-08
+    }
+  ],
+  "freeze_sha256": "802b3bbb41db84b989770b6a448e05bdc2b0be0a46b7c18425f17936768d4dd2",
+  "runtime_source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+    "experiments/responsive_transport_v16/world.py": "dc8c1ecaa16bd356c782c1b2f6eb28bffe060168d4f2883b5ccb396bf3894a09",
+    "experiments/responsive_transport_v16/protocol.py": "35c441cfbc02e7407973fe7326b5ad2adca5b5d579cb3e761e5641f3ed642197",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/responsive_transport_v16/measure.py": "44baeb80224a1c5ec4d3804ae3c96b3459faa6f6344c89737f25f2b0a58639c6",
+    "experiments/responsive_transport_v16/run.py": "3af8711ae0efa35527a4fb943fbfdc3f05ee35049443b0eb4214e2ff5997e30b",
+    "experiments/structure_handoff_v15/reference_audit.py": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+    "tests/test_responsive_transport_v16.py": "1bf005ecab9c6360f74fcc80326495da3bb1b032a6e87e94cd40415084838bc0",
+    "experiments/sustained_activity_v18/protocol.py": "ec810c04af2410c156a0a6f0155624b3646c55c72c7b47b4c4a98e5e12d12363",
+    "experiments/sustained_activity_v18/run.py": "01cef485e123c58992e13555f6d7c384b9eb9c9493d0794d4d56e5e00c16b904",
+    "tests/test_sustained_activity_v18.py": "e84d8d5a6d0bcb1c9fd8505e64a7dca9773fb6161ee05176ee5c8df79cfe58d4",
+    "experiments/structure_foundation_v20/world_v1.py": "53132f4b37bd692f34483ea730f5eba10c4d43417c78287780595a6ffc5dcb57",
+    "experiments/structure_foundation_v20/canonical.py": "b314eaa26f010978091f5237f09e9a5f24bd95e2a59abcf90cb4c9bb4f178c12",
+    "experiments/structure_foundation_v20/run_v1.py": "0da19ecb8da4fa95da131a7b5b39f3dd973d98832f4ce0b740c4a4e00ffac2a4",
+    "experiments/structure_foundation_v20/config_v1.json": "6d94f151cd4b9a5c08973b2743673617363dd3519fefdd780a6bd2c72186ec02",
+    "experiments/structure_foundation_v20/world.py": "9ca0a69c270e60f05d4c9048b8460c59bdbc7c50b2ec6ecf2909258f04047fcb",
+    "experiments/structure_foundation_v20/run.py": "f339daf5be6ad77c700ea7a018d3823eda2580f552626e135ea6f8aff0e872f2",
+    "experiments/structure_foundation_v20/config.json": "85f15882abf5e09dc5b85fb3c06464eefd51c1da79d18314e666d3822fdd0b60",
+    "tests/test_structure_foundation_v20.py": "6d0915fc95a189c4cffbdfac53a910203b1dbb2736ec2dffc33c47a7357b4599",
+    "tests/test_structure_foundation_v20_v1.py": "9af7a392f8916ea79853631eba0e073cefbf11089315bd587480f02978051ccf",
+    "experiments/structure_foundation_v20/audit_v2.py": "cf51fcaf7ee917b15b516af18df8cc6006fed7889372f55660e9e34b031b7ab7",
+    "experiments/sustained_structure_v21/config.json": "50bd8ad42fbce9566149e92418e63bc897d9b11814c2d8188b0d1865a4d9184f",
+    "experiments/sustained_structure_v21/cases.py": "2918573cd9bd6ab8e3b13f37b0d96b46588c11dda093a179a2c59b5f970ca3a7",
+    "experiments/sustained_structure_v21/service.py": "05e0746de125112ff070efe7ace37bb3a060ed1c7938e3be4a5024325f6a1ad8",
+    "experiments/sustained_structure_v21/world.py": "c6b350e428c7216255dc80459145aa833a0dd1f2c0ff23c02306f4175dd30ebf",
+    "experiments/sustained_structure_v21/protocol.py": "ea2ba907092cb45018e59c16efbe2fdfd4f2245f66cd1a469505c8e5470bbf01",
+    "experiments/sustained_structure_v21/run.py": "3a9d6b4f52cecd40791326176513a6cd07693e363877c03917086bafc69e5ca4",
+    "tests/test_sustained_structure_v21.py": "eb7ace5455ca8473d173d968d7e2fefc4afe669bfd0d83b0304ad8f230b98fc5",
+    "experiments/transport_cycle_v22/config.json": "8a5d20af5076dc852123866d7f36da9d5cb81bd6b14c6c0b2b85e8d560b1abb4",
+    "experiments/transport_cycle_v22/cycle.py": "f7a6de1052e0df60bf4918d5ff9c62fb0e578bab3534f6eded857022c525728d",
+    "experiments/transport_cycle_v22/world.py": "dfca6057c8ca9a45d5582b71397ec7d79a09aa3bc4ab3c8ad1fe63b86058f67c",
+    "experiments/transport_cycle_v22/canonical.py": "9d1c18aa736ede31a4ad1b09cff088d98d038e9565ab90a0e2db5d8768483a67",
+    "experiments/transport_cycle_v22/run.py": "1551e87587d70c9e9f2643d3a9f7bb31b8376e5949dd2e11c24c698f7a54037f",
+    "tests/test_transport_cycle_v22.py": "43295dfe7c5887e6c32e02234d5a147ad7ee12dacf69a833b79aea006cfb32b5"
+  },
+  "audit_source_sha256": "490e76d0fdd96648a50544b949269629f3a97f245acb48b5846710ed277c9cb8"
+}

@@ -1,0 +1,159 @@
+{
+  "total": 8,
+  "strict_passed": 8,
+  "physically_safe": 8,
+  "total_ticks": 165251,
+  "decisions": 98,
+  "physical_attempts": 30,
+  "leg_count": 26,
+  "carrier_arrivals": 26,
+  "payload_arrivals": 22,
+  "loaded_motion_ticks": 81851,
+  "loaded_supported_ticks": 81851,
+  "loaded_support_fraction": 1.0,
+  "contact_groups": {
+    "expected_blue_carrier": {
+      "records": 417752,
+      "ticks": 104645,
+      "negative_distance_records": 414528
+    },
+    "expected_blue_inspection": {
+      "records": 98800,
+      "ticks": 24700,
+      "negative_distance_records": 98784
+    },
+    "expected_target_robot": {
+      "records": 73439,
+      "ticks": 36886,
+      "negative_distance_records": 73042
+    },
+    "expected_objects_static_support": {
+      "records": 1341228,
+      "ticks": 165227,
+      "negative_distance_records": 1341208
+    },
+    "forbidden_robot_carrier": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_other_object_carrier": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_carrier_static": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_robot_inspection": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_other_object_inspection": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_presence_contacts": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_non_target_robot": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_robot_static": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    },
+    "forbidden_object_object": {
+      "records": 0,
+      "ticks": 0,
+      "negative_distance_records": 0
+    }
+  },
+  "green_max_displacement_m": 2.4755207174149575e-11,
+  "costs": [
+    {
+      "id": "A_inspection_120",
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      }
+    },
+    {
+      "id": "A_inspection_121",
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      }
+    },
+    {
+      "id": "A_left_120",
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      }
+    },
+    {
+      "id": "A_left_121",
+      "makespan_ticks": 19982,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7982
+      }
+    },
+    {
+      "id": "A_right_120",
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      }
+    },
+    {
+      "id": "A_right_121",
+      "makespan_ticks": 19981,
+      "cost": {
+        "decisions": 10,
+        "physical_attempts": 4,
+        "wait_ticks": 7981
+      }
+    },
+    {
+      "id": "B_empty_120",
+      "makespan_ticks": 21722,
+      "cost": {
+        "decisions": 19,
+        "physical_attempts": 3,
+        "wait_ticks": 12662
+      }
+    },
+    {
+      "id": "B_empty_121",
+      "makespan_ticks": 21722,
+      "cost": {
+        "decisions": 19,
+        "physical_attempts": 3,
+        "wait_ticks": 12662
+      }
+    }
+  ],
+  "freeze_sha256": "802b3bbb41db84b989770b6a448e05bdc2b0be0a46b7c18425f17936768d4dd2",
+  "not_strategy_task_or_combination_success": true,
+  "report_source_sha256": "335dc3fb259ad1f6442a6ea14df815b6363b3687e446a9ac85527461581d0216"
+}

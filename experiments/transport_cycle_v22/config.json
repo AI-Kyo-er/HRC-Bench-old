@@ -1,0 +1,21 @@
+{
+  "version": "transport-cycle-v22-dev0",
+  "seeds": [
+    120,
+    121
+  ],
+  "reload_release": [
+    0.65,
+    0.0,
+    0.073
+  ],
+  "wait_budget_ticks": 6000,
+  "in_motion_probe_ticks": 1000,
+  "no_queue_wait_ticks": 480,
+  "non_target_interval_limit_m": 0.01,
+  "profile": "原v20 distance，速度0.04m/s、ramp0.5s、端点joint0/0.6",
+  "arrival": "整段原平滑profile已走完且实际端点abs误差<0.005m、速度<0.005m/s；载荷还需原支撑/相对位姿速度共同满足。空载行程不继承旧载荷事件。",
+  "motion_completion": "载台实际到位，若请求时有合格支撑载荷则等本行程载荷到位；motion结束后原行程事件不再追加。",
+  "loaded_start": "当前支撑接触、blue相对XY<0.025m、相对Z在(0.025,0.035)m、世界/相对速度<0.01m/s",
+  "runtime_reset_or_attachment": false
+}
