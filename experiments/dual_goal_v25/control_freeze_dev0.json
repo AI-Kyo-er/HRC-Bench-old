@@ -1,0 +1,443 @@
+{
+  "version": "dual_goal_v25_dev0",
+  "stage": "control",
+  "config": {
+    "version": "dual_goal_v25_dev0",
+    "seed": 120,
+    "decision_budget": 48,
+    "local_decision_budget": 12,
+    "yield_limit_ticks": 1920,
+    "wait_limit_ticks": 6000,
+    "inspection_required_ticks": 240,
+    "presence": "stay",
+    "non_target_interval_limit_m": 0.01,
+    "confirmation_id": "blue_confirmation_1",
+    "after_update_generation": "partner_check_handoff同一实际tick生成，下一高层边界补observed_tick；declare仅sync已发生事件。",
+    "blue_route": "direct",
+    "green_route": "careful",
+    "runtime_reset_or_attachment": false,
+    "source_initial_state": "results/shared_slots_v24/raw/dev0/A_120/summary.json"
+  },
+  "cases": [
+    {
+      "id": "U1_left",
+      "control": "U1",
+      "initial_blue": "left",
+      "reply": "accepted",
+      "timing": "after_handoff",
+      "expression": "relation",
+      "q": "same",
+      "direct_green": "left",
+      "seed": 120
+    },
+    {
+      "id": "U2_left",
+      "control": "U2",
+      "initial_blue": "left",
+      "reply": "rejected",
+      "timing": "after_handoff",
+      "expression": "relation",
+      "q": "same",
+      "direct_green": "left",
+      "seed": 120
+    },
+    {
+      "id": "U3_left",
+      "control": "U3",
+      "initial_blue": "left",
+      "reply": "accepted",
+      "timing": "after_handoff",
+      "expression": "direct",
+      "q": "same",
+      "direct_green": "left",
+      "seed": 120
+    },
+    {
+      "id": "U4_left",
+      "control": "U4",
+      "initial_blue": "left",
+      "reply": "accepted",
+      "timing": "after_handoff",
+      "expression": "relation",
+      "q": "same",
+      "direct_green": "left",
+      "seed": 120
+    },
+    {
+      "id": "U1_right",
+      "control": "U1",
+      "initial_blue": "right",
+      "reply": "accepted",
+      "timing": "after_handoff",
+      "expression": "relation",
+      "q": "same",
+      "direct_green": "right",
+      "seed": 120
+    },
+    {
+      "id": "U2_right",
+      "control": "U2",
+      "initial_blue": "right",
+      "reply": "rejected",
+      "timing": "after_handoff",
+      "expression": "relation",
+      "q": "same",
+      "direct_green": "right",
+      "seed": 120
+    },
+    {
+      "id": "U3_right",
+      "control": "U3",
+      "initial_blue": "right",
+      "reply": "accepted",
+      "timing": "after_handoff",
+      "expression": "direct",
+      "q": "same",
+      "direct_green": "right",
+      "seed": 120
+    },
+    {
+      "id": "U4_right",
+      "control": "U4",
+      "initial_blue": "right",
+      "reply": "accepted",
+      "timing": "after_handoff",
+      "expression": "relation",
+      "q": "same",
+      "direct_green": "right",
+      "seed": 120
+    }
+  ],
+  "source_sha256": {
+    "experiments/dual_goal_v25/audit.py": "619e56a53d2f338363af3acf5213d3ad8cfc1e8f6441cd9c9477b44191a957c2",
+    "experiments/dual_goal_v25/config.json": "fcff83f531a48fec5c9c386809b436c7774941354aea628a09dbefb8f0d8cec5",
+    "experiments/dual_goal_v25/protocol.py": "bc76416fc2c3707bd2b3b8a1a6e230397d14dde3454e6147ae3c527eff7e2d47",
+    "experiments/dual_goal_v25/run.py": "45c79068fc07becaffcfee1a87df6ea82a2b5487de2ade2a7f6382c3bd18978d",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/responsive_transport_v16/measure.py": "44baeb80224a1c5ec4d3804ae3c96b3459faa6f6344c89737f25f2b0a58639c6",
+    "experiments/responsive_transport_v16/protocol.py": "35c441cfbc02e7407973fe7326b5ad2adca5b5d579cb3e761e5641f3ed642197",
+    "experiments/responsive_transport_v16/run.py": "3af8711ae0efa35527a4fb943fbfdc3f05ee35049443b0eb4214e2ff5997e30b",
+    "experiments/responsive_transport_v16/world.py": "dc8c1ecaa16bd356c782c1b2f6eb28bffe060168d4f2883b5ccb396bf3894a09",
+    "experiments/structure_foundation_v20/audit_v2.py": "cf51fcaf7ee917b15b516af18df8cc6006fed7889372f55660e9e34b031b7ab7",
+    "experiments/structure_foundation_v20/canonical.py": "b314eaa26f010978091f5237f09e9a5f24bd95e2a59abcf90cb4c9bb4f178c12",
+    "experiments/structure_foundation_v20/config.json": "85f15882abf5e09dc5b85fb3c06464eefd51c1da79d18314e666d3822fdd0b60",
+    "experiments/structure_foundation_v20/config_v1.json": "6d94f151cd4b9a5c08973b2743673617363dd3519fefdd780a6bd2c72186ec02",
+    "experiments/structure_foundation_v20/run.py": "f339daf5be6ad77c700ea7a018d3823eda2580f552626e135ea6f8aff0e872f2",
+    "experiments/structure_foundation_v20/run_v1.py": "0da19ecb8da4fa95da131a7b5b39f3dd973d98832f4ce0b740c4a4e00ffac2a4",
+    "experiments/structure_foundation_v20/world.py": "9ca0a69c270e60f05d4c9048b8460c59bdbc7c50b2ec6ecf2909258f04047fcb",
+    "experiments/structure_foundation_v20/world_v1.py": "53132f4b37bd692f34483ea730f5eba10c4d43417c78287780595a6ffc5dcb57",
+    "experiments/structure_handoff_v15/reference_audit.py": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/sustained_activity_v18/protocol.py": "ec810c04af2410c156a0a6f0155624b3646c55c72c7b47b4c4a98e5e12d12363",
+    "experiments/sustained_activity_v18/run.py": "01cef485e123c58992e13555f6d7c384b9eb9c9493d0794d4d56e5e00c16b904",
+    "experiments/sustained_combination_v23/audit.py": "36ead872ef75accf65bf2355a3dfcf11e2527ff7e3e44045a4aa229c686d209c",
+    "experiments/sustained_combination_v23/config.json": "237f2a47cea8edf0947673a26f36509ae72d686a8c1f964d048066739caa12bd",
+    "experiments/sustained_combination_v23/protocol.py": "00a71240599c74dc356e63aac788c2af8d03b439be2935c92df87ca971273aba",
+    "experiments/sustained_combination_v23/run.py": "2b9693dfbd8c8438022dc82b25114ad02a1cc073a5c2018893dd610e458395f2",
+    "experiments/sustained_combination_v23/world.py": "0c6c10ab4f4a0a9d61f401dcd773a4ab07a966c38a73663f727f04e93f7c9763",
+    "experiments/sustained_structure_v21/audit.py": "0fe24cf8dbda0cb1234b85c2801db461b674a51eb76606aa271a5c4dd2f26e85",
+    "experiments/sustained_structure_v21/cases.py": "2918573cd9bd6ab8e3b13f37b0d96b46588c11dda093a179a2c59b5f970ca3a7",
+    "experiments/sustained_structure_v21/config.json": "50bd8ad42fbce9566149e92418e63bc897d9b11814c2d8188b0d1865a4d9184f",
+    "experiments/sustained_structure_v21/protocol.py": "ea2ba907092cb45018e59c16efbe2fdfd4f2245f66cd1a469505c8e5470bbf01",
+    "experiments/sustained_structure_v21/run.py": "3a9d6b4f52cecd40791326176513a6cd07693e363877c03917086bafc69e5ca4",
+    "experiments/sustained_structure_v21/service.py": "05e0746de125112ff070efe7ace37bb3a060ed1c7938e3be4a5024325f6a1ad8",
+    "experiments/sustained_structure_v21/world.py": "c6b350e428c7216255dc80459145aa833a0dd1f2c0ff23c02306f4175dd30ebf",
+    "experiments/transport_cycle_v22/audit.py": "490e76d0fdd96648a50544b949269629f3a97f245acb48b5846710ed277c9cb8",
+    "experiments/transport_cycle_v22/canonical.py": "9d1c18aa736ede31a4ad1b09cff088d98d038e9565ab90a0e2db5d8768483a67",
+    "experiments/transport_cycle_v22/config.json": "8a5d20af5076dc852123866d7f36da9d5cb81bd6b14c6c0b2b85e8d560b1abb4",
+    "experiments/transport_cycle_v22/cycle.py": "f7a6de1052e0df60bf4918d5ff9c62fb0e578bab3534f6eded857022c525728d",
+    "experiments/transport_cycle_v22/run.py": "1551e87587d70c9e9f2643d3a9f7bb31b8376e5949dd2e11c24c698f7a54037f",
+    "experiments/transport_cycle_v22/world.py": "dfca6057c8ca9a45d5582b71397ec7d79a09aa3bc4ab3c8ad1fe63b86058f67c",
+    "tests/test_dual_goal_v25.py": "f15e28f85493d1ac6c0270b4fb0d778c0bdaf211765aa5e986c4ca6cfbd7251a",
+    "tests/test_responsive_transport_v16.py": "1bf005ecab9c6360f74fcc80326495da3bb1b032a6e87e94cd40415084838bc0",
+    "tests/test_structure_foundation_v20.py": "6d0915fc95a189c4cffbdfac53a910203b1dbb2736ec2dffc33c47a7357b4599",
+    "tests/test_structure_foundation_v20_v1.py": "9af7a392f8916ea79853631eba0e073cefbf11089315bd587480f02978051ccf",
+    "tests/test_sustained_activity_v18.py": "e84d8d5a6d0bcb1c9fd8505e64a7dca9773fb6161ee05176ee5c8df79cfe58d4",
+    "tests/test_sustained_combination_v23.py": "7539d8a313e3ce59e23cd452c81915a6be38eed3a2cfc3b962c03fefabd75745",
+    "tests/test_sustained_structure_v21.py": "eb7ace5455ca8473d173d968d7e2fefc4afe669bfd0d83b0304ad8f230b98fc5",
+    "tests/test_transport_cycle_v22.py": "43295dfe7c5887e6c32e02234d5a147ad7ee12dacf69a833b79aea006cfb32b5"
+  },
+  "assets_sha256": {
+    "franka_panda/LICENSE.txt": "59899c6091b540582ed617e8eeaac4919dc985ccfc35459ee9752b699be5205b",
+    "franka_panda/meshes/collision/finger.obj": "c05dee2e2770ac3d45a097cec4a9d758e279ebdb7dc550eb249571c4690a6476",
+    "franka_panda/meshes/collision/hand.obj": "a216bedc742a736f2c6cab010c6014475fe5f7b5ed53e371509adf885df618a2",
+    "franka_panda/meshes/collision/link0.obj": "d29233f03537b6ee92a6861d4139290960325c2bacf9a640ab7935a5539c653f",
+    "franka_panda/meshes/collision/link1.obj": "0879335b20930eccccdc7d2565553895589f9125d4c8c0d462ad0f74f17e7472",
+    "franka_panda/meshes/collision/link2.obj": "cfca62e5846d3ba6db8be3740fc2219454401f1048db11a78bd9ec8f30cdc128",
+    "franka_panda/meshes/collision/link3.obj": "22235fb3676b5cb45a2f512065fab94fecf052a767cddfaed62cbb6d1efcf1f8",
+    "franka_panda/meshes/collision/link4.obj": "64b5914ef159149f87b767ff0eae4db41b9c267aecdddf2816ff25726fa0e6f2",
+    "franka_panda/meshes/collision/link5.obj": "ff8d4bb5ab506b8cf621f44b928be7714dff86b669a92909b8d4f71c5b01597e",
+    "franka_panda/meshes/collision/link6.mtl": "569f88e12d5672c190e2aa14526fcc16b609c25bd5ade907ddb83106ac61e78c",
+    "franka_panda/meshes/collision/link6.obj": "e1dc8bbca8690944e6331f5a108d49c363eeec179b56a9f913541a541e6a2cfc",
+    "franka_panda/meshes/collision/link7.obj": "675a784e949b2b47894f1965016bd56b992b136bd90e1a62e832f49b4a55b240",
+    "franka_panda/meshes/visual/colors.png": "bc8c81d8e9723de374dd718a1ddcd91dfe6dfe1e371b18383f6d084a13fe525b",
+    "franka_panda/meshes/visual/finger.mtl": "525d16f9a1338ebc2f3c062b30e462a279356aa4fe242617d39e05fa6926c27b",
+    "franka_panda/meshes/visual/finger.obj": "c6959401c281e6d5b4486f08072140b6fdb3461678face301ac448cec06322d3",
+    "franka_panda/meshes/visual/hand.mtl": "da2fb08fb2efec231cfd38b710e657b3ef04d3d3cf18082d3d043080dd6c79df",
+    "franka_panda/meshes/visual/hand.obj": "3c95c6f99024842a8b9e73629dacc30ac5ee459feb0dbcc16df765fd27620584",
+    "franka_panda/meshes/visual/link1.mtl": "8c6e1b7fe3a382b872c986cfb3601e79b701afb7b4bfc72dcd6abd4b31f9d0f5",
+    "franka_panda/meshes/visual/link1.obj": "e0ec1bec9432a46f797e912cd8165798e62ebfd85c0807dce142bd6b9a768cd7",
+    "franka_panda/meshes/visual/link2.mtl": "e7821edf4876534ddeb9cdc789453e6473e2f1b9d33747f036005788b83199da",
+    "franka_panda/meshes/visual/link2.obj": "a1a41ada6d6cb8c51a8d0d19db9cadea101493842a52db75529e7ba0d4592904",
+    "franka_panda/meshes/visual/link3.mtl": "c2648eae04bf57f48100234ada9400156b1867d0fc2dbda2606bb786d6cfec51",
+    "franka_panda/meshes/visual/link3.obj": "82f81c15c236a41918dade0241ce40e59c4a0ee7fb08985f3a934380a8f7f594",
+    "franka_panda/meshes/visual/link4.mtl": "aa5e228aca4026e34e69dc9eb80bed96cc7d81dae5595984c16b464de5ba5963",
+    "franka_panda/meshes/visual/link4.obj": "91f36ecba40ecce6c169ede6d152a6c8853ee886e2b145ef6c5865cc9d5516b8",
+    "franka_panda/meshes/visual/link5.mtl": "1d44e731edacef0b66d7813468107877d05a12893f363ce3a0985c8305f404f3",
+    "franka_panda/meshes/visual/link5.obj": "10d084e6f728af7d291403f0359373c121e87785b177e5c6df8a7e1e88077f11",
+    "franka_panda/meshes/visual/link6.mtl": "78299752f3c28e87c19f5456e851423de647fbb065f8d88332c1f72ba5729b4c",
+    "franka_panda/meshes/visual/link6.obj": "7d6c29421e8066761c993a519474eb58f851885387cc2ad5a606f96eb428f059",
+    "franka_panda/panda.urdf": "9c27cf846302e26a1d3a44ccfd4dd2dbba89cccc9f17b96b6bd1f8bceedd1ff0",
+    "plane.urdf": "0854ed06ba0b15079ba05396b4138f366dc784d670583d96230f3b5a4105bae2",
+    "plane100.obj": "0ef1366701af4d234af4f98789249ec6e9383914d9497c85d8113d9a445bf4da",
+    "checker_blue.png": "266d8e7010b8d615c873c27dccb4eca37e79035bd24efdca0b54eeb74a9fa419"
+  },
+  "packages": {
+    "pybullet": "3.2.7",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "mani_skill": "3.0.1",
+    "sapien": "3.0.3",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.1"
+  },
+  "system": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n",
+  "candidates": [
+    {
+      "id": "request_transport",
+      "meaning": "请求一次实际前送；仅远端稳定无运动接受，可空载或载blue"
+    },
+    {
+      "id": "yield",
+      "meaning": "真实等待下一条新公开里程碑，或至1920tick上限"
+    },
+    {
+      "id": "careful_red_left",
+      "meaning": "真实整理red到left并停车"
+    },
+    {
+      "id": "place_blue_left",
+      "meaning": "从已核验稳定来源实际抓放blue到left"
+    },
+    {
+      "id": "place_blue_right",
+      "meaning": "从已核验稳定来源实际抓放blue到right"
+    },
+    {
+      "id": "declare_done",
+      "meaning": "声明整个活动完成并立即终止，也可能过早或错误"
+    },
+    {
+      "id": "place_blue_inspection",
+      "meaning": "真实抓放blue到独立检查支撑"
+    },
+    {
+      "id": "request_check",
+      "meaning": "请求伙伴检查；真实检查前提及在场条件满足才接受"
+    },
+    {
+      "id": "careful_green_left",
+      "meaning": "真实整理green到left并停车"
+    },
+    {
+      "id": "careful_green_right",
+      "meaning": "真实整理green到right并停车"
+    },
+    {
+      "id": "request_return",
+      "meaning": "请求一次实际返程；仅近端稳定无运动接受，可空载或载blue"
+    },
+    {
+      "id": "reload_blue",
+      "meaning": "从核验稳定盘/检查台真实重装当前近端稳定载台"
+    }
+  ],
+  "workspace": {
+    "carrier_endpoints": [
+      [
+        0.65,
+        0.6,
+        0.045
+      ],
+      [
+        0.65,
+        0,
+        0.045
+      ]
+    ],
+    "carrier_half_extents": [
+      0.06,
+      0.06,
+      0.005
+    ],
+    "trays": {
+      "left": {
+        "center": [
+          0.65,
+          -0.25,
+          0.005
+        ],
+        "half_extents": [
+          0.1,
+          0.085,
+          0.005
+        ]
+      },
+      "right": {
+        "center": [
+          0.65,
+          0.25,
+          0.005
+        ],
+        "half_extents": [
+          0.1,
+          0.085,
+          0.005
+        ]
+      }
+    },
+    "inspection_center": [
+      0.42,
+      0,
+      0.005
+    ],
+    "inspection_half_extents": [
+      0.06,
+      0.085,
+      0.005
+    ],
+    "notes": "right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。"
+  },
+  "initial_messages": [
+    {
+      "id": "U1_left",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"left\"}, \"green_requirement\": {\"mode\": \"relation\", \"relation\": \"same\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U2_left",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"left\"}, \"green_requirement\": {\"mode\": \"relation\", \"relation\": \"same\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U3_left",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"left\"}, \"green_requirement\": {\"mode\": \"direct\", \"destination\": \"left\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U4_left",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"left\"}, \"green_requirement\": {\"mode\": \"relation\", \"relation\": \"same\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U1_right",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"right\"}, \"green_requirement\": {\"mode\": \"relation\", \"relation\": \"same\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U2_right",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"right\"}, \"green_requirement\": {\"mode\": \"relation\", \"relation\": \"same\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U3_right",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"right\"}, \"green_requirement\": {\"mode\": \"direct\", \"destination\": \"right\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    },
+    {
+      "id": "U4_right",
+      "messages": [
+        {
+          "role": "system",
+          "content": "这是一个同一World/物理时钟中的持续共同活动，已经完成的工作和公开历史保留。机器人负责blue，red-left、真实检查贡献、载台当前远端稳定和blue/green当前有效要求都需满足。\n初始公开blue目标和green要求见已接受历史。本活动有一次blue目标确认，确认pending时尚未结束；拒绝也关闭确认但不改变blue目标，只有绑定该提议的接受才更新有效blue约定。green直接目标固定不联动；same/opposite关系始终按最新已生效blue约定求值。未回应提议不能生效，也不要把检查交还当成取消或回滚外层约定。\n确认在公开约定的检查前或实际检查交还时发送。检查后消息在handoff同一真实tick生成，技能不可打断，下一动作边界观察。动作开始后才发生的更新不当作此前已经可知；此前符合约定的green放置因新约定失效需重新整理，不追溯称违规。最终目标不是全程位置禁令，暂存和移动允许，检查合格采样前提不满足时暂停。\nrequest_check仅blue实际稳定支撑检查台、presence实际近端稳定无运动且机器人不再接触blue时接受；合格支持/速度/在场条件累计240真实tick才公开交还，不需要finish。presence本轮stay。请求过早拒绝不排队，重复不清零。职责及目标更新不免检查、不清已有进度。\n12能力菜单所有条件相同。request_transport只在当前载台far稳定且无active时接受前送，request_return只在near稳定且无active时接受返程；可空载，重复同向不重启、运动反向拒绝不排队。blue抓放只按核验稳定来源和无活动载台，reload还需当前near，不能按正确目标/检查完成筛动作。workspace公开轨道/支撑/槽位和right扫掠，允许简单等待/red-first/暂存。\nyield只推进实际物理至新公共里程碑或1920tick，不自动请求；旧事件不造成零tick循环。反馈仅实际区域/支撑/公开响应，不给正确下一步。declare_done随时真终止、不纠错；只同步已发生事件，不生成未来确认。终止后独立验收pending关闭、检查完成、red-left、当前far和blue/green要求。预算见remaining_decisions，所有拒绝/非法/声明耗一步，技能停车/等待实际计时，交流无模拟时长。局部测量前缀由实验参考真实执行，后续12步另列，前缀不是局部策略自主工作。只输出唯一字符串字段choice的JSON对象。\n"
+        },
+        {
+          "role": "user",
+          "content": "{\"history\": [{\"kind\": \"background_source\", \"content\": \"脚本共同接受/确认提议回应、运动代理及240tick模拟检查贡献，非真人；策略动作另记。\", \"actual_tick\": 240, \"event_sequence\": 0, \"observed_tick\": 240}, {\"kind\": \"accepted_activity\", \"goals\": {\"red\": \"left\", \"blue\": \"right\"}, \"green_requirement\": {\"mode\": \"relation\", \"relation\": \"same\"}, \"inspection_required\": true, \"carrier_return_required\": true, \"blue_role\": \"robot\", \"content\": \"共同接受物品要求、模拟检查和当前载台最终far稳定；已有进展保留。\", \"actual_tick\": 240, \"event_sequence\": 1, \"observed_tick\": 240}, {\"kind\": \"accepted_presence_clause\", \"clause\": \"stay\", \"content\": \"当前presence留近端提供模拟检查。\", \"actual_tick\": 240, \"event_sequence\": 2, \"observed_tick\": 240}, {\"kind\": \"confirmation_announced\", \"confirmation_id\": \"blue_confirmation_1\", \"timing\": \"after_handoff\", \"content\": \"本活动还有一次blue目标确认；完成检查、等待确认关闭并满足物品要求后再声明。\", \"actual_tick\": 240, \"event_sequence\": 3, \"observed_tick\": 240}], \"physical\": {\"objects\": {\"red\": {\"position\": [0.4242439605126395, -0.16531497062846684, 0.021989218287864147], \"orientation\": [2.4839805199926036e-06, -2.188594256919718e-05, -2.1135909195168554e-06, 0.999999999755184], \"velocity\": [-1.8529041071556442e-13, 8.915664561454289e-14, -1.50039702884186e-13]}, \"blue\": {\"position\": [0.6500003160728474, 0.6000001313220669, 0.07198967086071438], \"orientation\": [-3.7192757487141015e-06, 7.306985323616071e-06, -2.8753480834950237e-07, 0.9999999999663461], \"velocity\": [1.4154279027406588e-08, 5.793716123608095e-09, -1.5019578754327245e-08]}, \"green\": {\"position\": [0.4209317916194543, 0.16075146160666312, 0.02198921828786415], \"orientation\": [2.4839805199928565e-06, -2.1885942569197946e-05, -2.113590919516833e-06, 0.999999999755184], \"velocity\": [-1.8529041562361953e-13, 8.915664576435641e-14, -1.50039702884186e-13]}}, \"carrier\": {\"tick\": 240, \"joint\": 0.6000000000135194, \"velocity\": -1.0872213630356206e-11, \"profile_finished\": true, \"near\": false, \"far\": true, \"payload_stable\": true, \"relative_position\": [3.1607284733947694e-07, 1.3130854747966936e-07, 0.026989670860714382], \"relative_speed\": 2.1438857397443666e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": true, \"support_records\": 4, \"min_distance\": -1.081413717007873e-05, \"support_force\": 0.5885999999313773}, \"presence\": {\"joint\": 0.45, \"velocity\": 0.0, \"position\": [0.85, 0.45, 0.08], \"target\": 0.45, \"near\": true, \"far\": false}, \"presence_motion\": null, \"inspection\": {\"relative_position\": [0.23000031607284738, 0.6000001313220669, 0.06698967086071438], \"relative_speed\": 2.1435916291683843e-08, \"blue_speed\": 2.1435916291683843e-08, \"supported\": false, \"support_records\": 0, \"min_distance\": null, \"support_force\": 0, \"satisfied\": false}}, \"physical_placements\": {\"red\": [], \"blue\": [], \"green\": []}, \"motion\": {\"active\": null, \"legs\": [], \"events\": []}, \"workspace\": {\"carrier_endpoints\": [[0.65, 0.6, 0.045], [0.65, 0, 0.045]], \"carrier_half_extents\": [0.06, 0.06, 0.005], \"trays\": {\"left\": {\"center\": [0.65, -0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}, \"right\": {\"center\": [0.65, 0.25, 0.005], \"half_extents\": [0.1, 0.085, 0.005]}}, \"inspection_center\": [0.42, 0, 0.005], \"inspection_half_extents\": [0.06, 0.085, 0.005], \"notes\": \"right盘位于载台扫掠方向；green保持源处直到本控制循环结束。远端blue不能直接抓，需实际前送到近端。来源/职责不按私有目标筛。\"}, \"candidates\": [{\"id\": \"request_transport\", \"meaning\": \"请求一次实际前送；仅远端稳定无运动接受，可空载或载blue\"}, {\"id\": \"yield\", \"meaning\": \"真实等待下一条新公开里程碑，或至1920tick上限\"}, {\"id\": \"careful_red_left\", \"meaning\": \"真实整理red到left并停车\"}, {\"id\": \"place_blue_left\", \"meaning\": \"从已核验稳定来源实际抓放blue到left\"}, {\"id\": \"place_blue_right\", \"meaning\": \"从已核验稳定来源实际抓放blue到right\"}, {\"id\": \"declare_done\", \"meaning\": \"声明整个活动完成并立即终止，也可能过早或错误\"}, {\"id\": \"place_blue_inspection\", \"meaning\": \"真实抓放blue到独立检查支撑\"}, {\"id\": \"request_check\", \"meaning\": \"请求伙伴检查；真实检查前提及在场条件满足才接受\"}, {\"id\": \"careful_green_left\", \"meaning\": \"真实整理green到left并停车\"}, {\"id\": \"careful_green_right\", \"meaning\": \"真实整理green到right并停车\"}, {\"id\": \"request_return\", \"meaning\": \"请求一次实际返程；仅近端稳定无运动接受，可空载或载blue\"}, {\"id\": \"reload_blue\", \"meaning\": \"从核验稳定盘/检查台真实重装当前近端稳定载台\"}], \"remaining_decisions\": 48}"
+        }
+      ]
+    }
+  ],
+  "initial_state_source": {
+    "path": "results/shared_slots_v24/raw/dev0/A_120/summary.json",
+    "sha256": "946bf201b70c8cb505c3399c289eb8693a103f972bbd21a6333f46b603aa9bea",
+    "kind": "v24真实初始化，正式第一观察逐字核对；未来及局部边界输入按冻结源动态构造、事后重建。"
+  },
+  "sequences": {
+    "control": "forward/redfirst/actual delivery/blueinspection/emptyreturn actualfar/greenI/checkrequest/actualhandoff+同tick事务/U1-U4/declare",
+    "reference": "forward/redfirst/delivery/blueinspection/checkrequest/handoff/emptyreturn actualfar/bluecurrent/greencurrent/declare",
+    "local": "reference实际公共前缀至check完成和空返far；记录前缀cost，begin_local公开有效目标表达且预算12，从同World继续blue/green/declare"
+  },
+  "visibility": "直接臂初始只公开G不公开生成q；脚本回复仅生成后进入可观察队列，无case/F/未来标签；声明不产生更新。",
+  "expected_task": "control U4两条失败其余成功；reference32与local8均成功，严格/安全另报。"
+}

@@ -1,0 +1,20 @@
+{
+  "model": "Qwen/Qwen3-14B",
+  "path": "/data1/sieniwgroup/sieniw/HRC-Bench/models/Qwen3-14B",
+  "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+  "layers": 40,
+  "kv_heads": 8,
+  "head_dim": 128,
+  "max_position_embeddings": 40960,
+  "input_cap": 24576,
+  "output_cap": 8192,
+  "total_context": 32768,
+  "within_native_context": true,
+  "weight_bytes": 29536665640,
+  "kv_bytes": 5368709120,
+  "workspace_margin_bytes": 3221225472,
+  "required_free_mib": 36361,
+  "basis": "batch1/BF16：2*layers*KVheads*head_dim*2bytes*(input+output)，3GiB工作区仅规划裕量，实际长prefill/SDPA/碎片峰值需后续实测。",
+  "not_a_proof_all_48_step_histories_fit": true,
+  "no_model_loading_gpu_or_generation": true
+}

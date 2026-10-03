@@ -1,0 +1,36 @@
+{
+  "transformers_version": "4.57.1",
+  "paths_sha256": {
+    "runner": {
+      "path": "experiments/sustained_model_v19/backend.py",
+      "sha256": "875ba81f727eb63297858b9ca9941e8b9a56184782c72fa05ecb1bd89de04062"
+    },
+    "generation": {
+      "path": ".venv-qwen3-v14/lib/python3.12/site-packages/transformers/generation/utils.py",
+      "sha256": "a20024b1e82ed5361a524d238d2197be5407abc91297dd9888c57e8284d63fef"
+    },
+    "model": {
+      "path": ".venv-qwen3-v14/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py",
+      "sha256": "4b95c371fd26d40c69083dab36ac1eafd8cf82b415a0bb827275097c5ad2305b"
+    },
+    "config": {
+      "path": "models/Qwen3-14B/generation_config.json",
+      "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+    }
+  },
+  "generation_defaults": {
+    "return_dict_in_generate": false,
+    "output_scores": false,
+    "output_logits": null,
+    "output_attentions": false,
+    "output_hidden_states": false
+  },
+  "source_lines": {
+    "supports_logits_to_keep": "generation/utils.py:2047-2052",
+    "generate_default_last_logits": "generation/utils.py:2508-2512",
+    "qwen3_forward_slice": "models/qwen3/modeling_qwen3.py:455,493-494"
+  },
+  "conclusion": "v19标准generate未覆盖logits_to_keep，4.57.1按forward签名自动置1，prefill仅末token lm_head logits；没有保存全步scores/logits/hidden/attention输出。裸forward默认0不同。",
+  "limitations": "不能由此保证3GiB工作区：prefill MLP中间值、SDPA实现、动态KV扩容与allocator碎片仍需未来正式峰值实测。",
+  "no_model_load_gpu_generation": true
+}

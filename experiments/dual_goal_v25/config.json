@@ -1,0 +1,17 @@
+{
+  "version": "dual_goal_v25_dev0",
+  "seed": 120,
+  "decision_budget": 48,
+  "local_decision_budget": 12,
+  "yield_limit_ticks": 1920,
+  "wait_limit_ticks": 6000,
+  "inspection_required_ticks": 240,
+  "presence": "stay",
+  "non_target_interval_limit_m": 0.01,
+  "confirmation_id": "blue_confirmation_1",
+  "after_update_generation": "partner_check_handoff同一实际tick生成，下一高层边界补observed_tick；declare仅sync已发生事件。",
+  "blue_route": "direct",
+  "green_route": "careful",
+  "runtime_reset_or_attachment": false,
+  "source_initial_state": "results/shared_slots_v24/raw/dev0/A_120/summary.json"
+}

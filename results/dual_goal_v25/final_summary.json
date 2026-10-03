@@ -1,0 +1,4332 @@
+{
+  "total": 48,
+  "strict_passed": 48,
+  "task_success": 46,
+  "physically_safe": 48,
+  "total_ticks": 821448,
+  "total_decisions": 578,
+  "physical_attempts": 194,
+  "stages": {
+    "control": {
+      "total": 8,
+      "passed": 8,
+      "task_success": 6,
+      "physically_safe": 8,
+      "total_ticks": 142208,
+      "freeze_sha256": "a7f35f0947153e2abc2a41ae58ed16f2c1177c44ecb4d41f1e16c16144b32f03",
+      "audit_source_sha256": "619e56a53d2f338363af3acf5213d3ad8cfc1e8f6441cd9c9477b44191a957c2"
+    },
+    "reference": {
+      "total": 32,
+      "passed": 32,
+      "task_success": 32,
+      "physically_safe": 32,
+      "total_ticks": 543392,
+      "freeze_sha256": "21d3681862ba39187692ae5a1ac813e4078cb98c98fa36023505ecb5bd41440f",
+      "audit_source_sha256": "619e56a53d2f338363af3acf5213d3ad8cfc1e8f6441cd9c9477b44191a957c2"
+    },
+    "local": {
+      "total": 8,
+      "passed": 8,
+      "task_success": 8,
+      "physically_safe": 8,
+      "total_ticks": 135848,
+      "freeze_sha256": "a348eedf3e9aea7333b205d18aa5bc22c648749852404792e3648a27a752df9c",
+      "audit_source_sha256": "619e56a53d2f338363af3acf5213d3ad8cfc1e8f6441cd9c9477b44191a957c2"
+    }
+  },
+  "groups": {
+    "expected_blue_carrier": {
+      "records": 921792,
+      "ticks": 230448,
+      "max_normal_force": 1.4936687982179606
+    },
+    "expected_blue_inspection": {
+      "records": 1241280,
+      "ticks": 310320,
+      "max_normal_force": 1.5778057711223596
+    },
+    "expected_target_robot": {
+      "records": 488411,
+      "ticks": 244459,
+      "max_normal_force": 46.86638516037365
+    },
+    "expected_objects_static_support": {
+      "records": 6849464,
+      "ticks": 821304,
+      "max_normal_force": 2.187320242590971
+    },
+    "forbidden_robot_carrier": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_other_object_carrier": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_carrier_static": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_robot_inspection": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_other_object_inspection": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_presence_contacts": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_non_target_robot": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_robot_static": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    },
+    "forbidden_object_object": {
+      "records": 0,
+      "ticks": 0,
+      "max_normal_force": 0
+    }
+  },
+  "loaded_motion_ticks": 178608,
+  "loaded_supported_ticks": 178608,
+  "max_non_target_interval_displacement_m": 7.757687861966678e-09,
+  "costs": [
+    {
+      "id": "U1_left",
+      "stage": "control",
+      "task_success": true,
+      "makespan_ticks": 19921,
+      "cost": {
+        "decisions": 13,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 5,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U2_left",
+      "stage": "control",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U3_left",
+      "stage": "control",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U4_left",
+      "stage": "control",
+      "task_success": false,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U1_right",
+      "stage": "control",
+      "task_success": true,
+      "makespan_ticks": 19921,
+      "cost": {
+        "decisions": 13,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 5,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U2_right",
+      "stage": "control",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U3_right",
+      "stage": "control",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "U4_right",
+      "stage": "control",
+      "task_success": false,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_same_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_same_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_same_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_same_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_opposite_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_opposite_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_opposite_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_accepted_opposite_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_same_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_same_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_same_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_same_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_opposite_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_opposite_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_opposite_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_left_rejected_opposite_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_same_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_same_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_same_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_same_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_opposite_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_opposite_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_opposite_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_accepted_opposite_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_same_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_same_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_same_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_same_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_opposite_direct_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_opposite_direct_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_opposite_relation_before_check",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "ref_right_rejected_opposite_relation_after_handoff",
+      "stage": "reference",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": null,
+      "local_cost": null,
+      "local_makespan_ticks": null
+    },
+    {
+      "id": "local_left_left_direct",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_left_left_relation",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_left_right_direct",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_left_right_relation",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_right_left_direct",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_right_left_relation",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_right_right_direct",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    },
+    {
+      "id": "local_right_right_relation",
+      "stage": "local",
+      "task_success": true,
+      "makespan_ticks": 16741,
+      "cost": {
+        "decisions": 12,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 4,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "prefix_cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_return": 1,
+        "requests_check": 1,
+        "yields": 4,
+        "wait_ticks": 4501,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 0,
+        "reloads": 0
+      },
+      "local_cost": {
+        "decisions": 3,
+        "invalid": 0,
+        "requests_transport": 0,
+        "requests_return": 0,
+        "requests_check": 0,
+        "yields": 0,
+        "wait_ticks": 0,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1,
+        "reloads": 0
+      },
+      "local_makespan_ticks": 6120
+    }
+  ],
+  "pairs": {
+    "reference_expression": [
+      {
+        "ids": [
+          "ref_left_accepted_same_direct_before_check",
+          "ref_left_accepted_same_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_accepted_same_direct_after_handoff",
+          "ref_left_accepted_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_accepted_opposite_direct_before_check",
+          "ref_left_accepted_opposite_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_accepted_opposite_direct_after_handoff",
+          "ref_left_accepted_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_same_direct_before_check",
+          "ref_left_rejected_same_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_same_direct_after_handoff",
+          "ref_left_rejected_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_opposite_direct_before_check",
+          "ref_left_rejected_opposite_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_opposite_direct_after_handoff",
+          "ref_left_rejected_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_same_direct_before_check",
+          "ref_right_accepted_same_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_same_direct_after_handoff",
+          "ref_right_accepted_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_opposite_direct_before_check",
+          "ref_right_accepted_opposite_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_opposite_direct_after_handoff",
+          "ref_right_accepted_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_same_direct_before_check",
+          "ref_right_rejected_same_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_same_direct_after_handoff",
+          "ref_right_rejected_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_opposite_direct_before_check",
+          "ref_right_rejected_opposite_relation_before_check"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_opposite_direct_after_handoff",
+          "ref_right_rejected_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      }
+    ],
+    "reference_timing": [
+      {
+        "ids": [
+          "ref_left_accepted_same_direct_before_check",
+          "ref_left_accepted_same_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_accepted_same_relation_before_check",
+          "ref_left_accepted_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_accepted_opposite_direct_before_check",
+          "ref_left_accepted_opposite_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_accepted_opposite_relation_before_check",
+          "ref_left_accepted_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_same_direct_before_check",
+          "ref_left_rejected_same_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_same_relation_before_check",
+          "ref_left_rejected_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_opposite_direct_before_check",
+          "ref_left_rejected_opposite_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_left_rejected_opposite_relation_before_check",
+          "ref_left_rejected_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_same_direct_before_check",
+          "ref_right_accepted_same_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_same_relation_before_check",
+          "ref_right_accepted_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_opposite_direct_before_check",
+          "ref_right_accepted_opposite_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_accepted_opposite_relation_before_check",
+          "ref_right_accepted_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_same_direct_before_check",
+          "ref_right_rejected_same_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_same_relation_before_check",
+          "ref_right_rejected_same_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_opposite_direct_before_check",
+          "ref_right_rejected_opposite_direct_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "ref_right_rejected_opposite_relation_before_check",
+          "ref_right_rejected_opposite_relation_after_handoff"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      }
+    ],
+    "local_expression": [
+      {
+        "ids": [
+          "local_left_left_direct",
+          "local_left_left_relation"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true,
+          "local_checkpoint": true,
+          "prefix_cost": true,
+          "local_cost": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "18384ec1593d278a72dfc77d886b5411e547519439f04b408476252f13b46d47",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "local_left_right_direct",
+          "local_left_right_relation"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true,
+          "local_checkpoint": true,
+          "prefix_cost": true,
+          "local_cost": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "6215cb5e90ee1cbd6b97f08eca069338c5bb36e0943aa409bb74432b022b9ffc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "local_right_left_direct",
+          "local_right_left_relation"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true,
+          "local_checkpoint": true,
+          "prefix_cost": true,
+          "local_cost": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "c738f92713c036dc0fcefda634cf699cd533059596c25ad4d9e3e710d96151dc",
+          "ticks": 16981
+        }
+      },
+      {
+        "ids": [
+          "local_right_right_direct",
+          "local_right_right_relation"
+        ],
+        "checks": {
+          "full_physics": true,
+          "initial_physics": true,
+          "final_physics": true,
+          "actions": true,
+          "decision_ticks": true,
+          "cost": true,
+          "final_public_goals": true,
+          "local_checkpoint": true,
+          "prefix_cost": true,
+          "local_cost": true
+        },
+        "passed": true,
+        "canonical_physics": {
+          "sha256": "01502dd29bc24a261bac9526b242c230e14b41646e3712603f2840ce12badf7d",
+          "ticks": 16981
+        }
+      }
+    ]
+  },
+  "queue_generation": [
+    {
+      "id": "U1_left",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 14041,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 14041,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U2_left",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 14041,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 14041,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U3_left",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 14041,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 14041,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U4_left",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 14041,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 14041,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U1_right",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 14041,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 14041,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U2_right",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 14041,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 14041,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U3_right",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 14041,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 14041,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "U4_right",
+      "passed": true,
+      "first_queue": {
+        "tick": 14041,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 14041,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 14041,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14041,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 14041,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 14041,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 20,
+          "observed_tick": 14041
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 14041,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 21,
+          "observed_tick": 14041
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_same_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_same_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_same_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_same_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_opposite_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_opposite_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_opposite_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_accepted_opposite_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_same_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_same_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_same_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_same_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_opposite_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_opposite_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_opposite_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_left_rejected_opposite_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "right",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_same_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_same_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_same_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_same_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_opposite_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_opposite_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_opposite_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 240,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_accepted_opposite_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "accept",
+            "actual_tick": 7141,
+            "content": "接受该blue目标提议。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "accept",
+          "actual_tick": 7141,
+          "content": "接受该blue目标提议。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_same_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_same_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_same_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_same_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_opposite_direct_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_opposite_direct_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_opposite_relation_before_check",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "ref_right_rejected_opposite_relation_after_handoff",
+      "passed": true,
+      "first_queue": {
+        "tick": 7141,
+        "queued": [
+          {
+            "kind": "proposal",
+            "proposal_id": "blue_confirmation_1",
+            "binding": "outer_blue",
+            "destination": "left",
+            "actual_tick": 7141,
+            "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。"
+          },
+          {
+            "kind": "proposal_reply",
+            "proposal_id": "blue_confirmation_1",
+            "decision": "reject",
+            "actual_tick": 7141,
+            "content": "拒绝该blue目标提议，保留现有效约定。"
+          }
+        ],
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 7141,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        }
+      },
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 7141,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 14,
+          "observed_tick": 7141
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 7141,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 15,
+          "observed_tick": 7141
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_left_left_direct",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_left_left_relation",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_left_right_direct",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_left_right_relation",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "right",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为right；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_right_left_direct",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_right_left_relation",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_right_right_direct",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    },
+    {
+      "id": "local_right_right_relation",
+      "passed": true,
+      "first_queue": null,
+      "first_actual_service_completed_tick": 7141,
+      "public_update": [
+        {
+          "kind": "proposal",
+          "proposal_id": "blue_confirmation_1",
+          "binding": "outer_blue",
+          "destination": "left",
+          "actual_tick": 240,
+          "content": "提议将blue有效外层投递目标调整为left；检查义务和其他已接受要求保留。",
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "blue_confirmation_1",
+          "decision": "reject",
+          "actual_tick": 240,
+          "content": "拒绝该blue目标提议，保留现有效约定。",
+          "event_sequence": 5,
+          "observed_tick": 240
+        }
+      ],
+      "queued_before_completed_ticks": 0,
+      "kind": "事后只读队列生成核验，补充已冻结audit的时间戳/公开历史核验"
+    }
+  ],
+  "checks": {
+    "all_stages_strict": true,
+    "all_queue_generation": true,
+    "all_pairs_exact": true,
+    "runtime_sources_unchanged": true
+  },
+  "report_source_sha256": "67ed1eb418017ed218e76919677ff34ae53a47b5fe02761daf262a84a778c9e1",
+  "limitations": "单seed指定公开账本规则参考；直接目标/关系计算帮助不同，时机也改变新近程度与pending持续。局部前缀由参考真实执行，非模型自主。无神经、纯结构因果或泛化主张。"
+}
