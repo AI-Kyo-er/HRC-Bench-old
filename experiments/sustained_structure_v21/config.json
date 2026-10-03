@@ -1,0 +1,22 @@
+{
+  "version": "sustained-structure-v21-dev0",
+  "physics_parent": "experiments/structure_foundation_v20/world_v1.py",
+  "seed": 120,
+  "decision_budget": 32,
+  "inspection_required_ticks": 240,
+  "leave_after_qualified_ticks": 60,
+  "far_dwell_ticks": 480,
+  "yield_limit_ticks": 1920,
+  "support_max_distance_m": 0.0001,
+  "support_min_force_n": 0.001,
+  "inspection_blue_speed_max_m_s": 0.04,
+  "inspection_requires_no_robot_blue_contact": true,
+  "inspection_requires_near_stable_presence": true,
+  "inspection_requires_no_presence_motion": true,
+  "non_target_interval_displacement_limit_m": 0.01,
+  "initial_presence": "near",
+  "initial_availability": "ready",
+  "runtime_reset_or_attachment": false,
+  "policy_reads_future_schedule": false,
+  "physics_and_service_trace": "同一tick物理记录及其后贡献事件记录分别保存，逐tick独立重建；不修改旧物理轨迹字段。"
+}

@@ -1,0 +1,3049 @@
+{
+  "stage": "C_return",
+  "total": 2,
+  "runner_expected_matches": 2,
+  "task_success": 0,
+  "episodes": [
+    {
+      "case": {
+        "id": "C6_partner_role_wrong_pickup_r1_120",
+        "family": "C",
+        "control": 6,
+        "initial_blue": "left",
+        "reply": "accepted",
+        "presence": "stay",
+        "policy": "fixed_control",
+        "seed": 120
+      },
+      "initial_state": {
+        "tick": 240,
+        "time": 1.0,
+        "phase": "new_geometry_initialization",
+        "joint_positions": [
+          6.096386903565465e-06,
+          -0.3999997225789701,
+          9.035018104045868e-22,
+          -2.4999999317285777,
+          -2.461917185049636e-06,
+          2.099998583820469,
+          0.8000021110913945,
+          0.0,
+          0.0,
+          0.03999974055217562,
+          0.040000266123276854,
+          0.0
+        ],
+        "ee": [
+          0.4140532612800598,
+          2.183064907512744e-06,
+          0.32153594493865967
+        ],
+        "objects": {
+          "red": {
+            "position": [
+              0.4242439605126395,
+              -0.16531497062846684,
+              0.021989218287864147
+            ],
+            "orientation": [
+              2.4839805199926036e-06,
+              -2.188594256919718e-05,
+              -2.1135909195168554e-06,
+              0.999999999755184
+            ],
+            "velocity": [
+              -1.8529041071556442e-13,
+              8.915664561454289e-14,
+              -1.50039702884186e-13
+            ]
+          },
+          "blue": {
+            "position": [
+              0.6500003160728474,
+              0.6000001313220669,
+              0.07198967086071438
+            ],
+            "orientation": [
+              -3.7192757487141015e-06,
+              7.306985323616071e-06,
+              -2.8753480834950237e-07,
+              0.9999999999663461
+            ],
+            "velocity": [
+              1.4154279027406588e-08,
+              5.793716123608095e-09,
+              -1.5019578754327245e-08
+            ]
+          },
+          "green": {
+            "position": [
+              0.4209317916194543,
+              0.16075146160666312,
+              0.02198921828786415
+            ],
+            "orientation": [
+              2.4839805199928565e-06,
+              -2.1885942569197946e-05,
+              -2.113590919516833e-06,
+              0.999999999755184
+            ],
+            "velocity": [
+              -1.8529041562361953e-13,
+              8.915664576435641e-14,
+              -1.50039702884186e-13
+            ]
+          }
+        },
+        "partner_position": [
+          0.6499999761581421,
+          0.6000000238418579,
+          0.04500000178813934
+        ],
+        "partner_joint": 0.6000000000135194,
+        "contacts": [
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6720000072115395,
+              0.6219999550315713,
+              0.049989185862829924
+            ],
+            "position_b": [
+              0.6720000072115395,
+              0.6219999550315713,
+              0.05
+            ],
+            "contact_distance": -1.081413717007873e-05,
+            "normal_force": 0.17879004038321028
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6719999819153565,
+              0.5779999550327954,
+              0.049989513093721294
+            ],
+            "position_b": [
+              0.6719999819153565,
+              0.5779999550327954,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.0486906278701913e-05,
+            "normal_force": 0.1138647437790276
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6279999819200605,
+              0.5779999803337597,
+              0.049990155989675586
+            ],
+            "position_b": [
+              0.6279999819200605,
+              0.5779999803337597,
+              0.05
+            ],
+            "contact_distance": -9.844010324416841e-06,
+            "normal_force": 0.17829170583622048
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6280000072162435,
+              0.6219999803325356,
+              0.0499898287587842
+            ],
+            "position_b": [
+              0.6280000072162435,
+              0.6219999803325356,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.0171241215793658e-05,
+            "normal_force": 0.11765350993291895
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.39893266162682206,
+              0.1387516639006309,
+              0.0
+            ],
+            "position_b": [
+              0.39893266162682206,
+              0.1387516639006309,
+              -1.1853969207109571e-05
+            ],
+            "contact_distance": -1.1853969207109571e-05,
+            "normal_force": 0.18591175849556715
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.3989328476180386,
+              0.1827516638996948,
+              0.0
+            ],
+            "position_b": [
+              0.3989328476180386,
+              0.1827516638996948,
+              -1.1635374850271774e-05
+            ],
+            "contact_distance": -1.1635374850271774e-05,
+            "normal_force": 0.11998320113142237
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.442932847575494,
+              0.18275147789891014,
+              0.0
+            ],
+            "position_b": [
+              0.442932847575494,
+              0.18275147789891014,
+              -9.709412369222209e-06
+            ],
+            "contact_distance": -9.709412369222209e-06,
+            "normal_force": 0.16875654913600613
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.44293266158427747,
+              0.13875147789984624,
+              0.0
+            ],
+            "position_b": [
+              0.44293266158427747,
+              0.13875147789984624,
+              -9.928006726060007e-06
+            ],
+            "contact_distance": -9.928006726060007e-06,
+            "normal_force": 0.11394849123727774
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.40224483052000726,
+              -0.18731476833449906,
+              0.0
+            ],
+            "position_b": [
+              0.40224483052000726,
+              -0.18731476833449906,
+              -1.1853969207109571e-05
+            ],
+            "contact_distance": -1.1853969207109571e-05,
+            "normal_force": 0.18591175849556715
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.4022450165112238,
+              -0.14331476833543516,
+              0.0
+            ],
+            "position_b": [
+              0.4022450165112238,
+              -0.14331476833543516,
+              -1.1635374850271774e-05
+            ],
+            "contact_distance": -1.1635374850271774e-05,
+            "normal_force": 0.11998320113142236
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.4462450164686792,
+              -0.14331495433621982,
+              0.0
+            ],
+            "position_b": [
+              0.4462450164686792,
+              -0.14331495433621982,
+              -9.709412369222209e-06
+            ],
+            "contact_distance": -9.709412369222209e-06,
+            "normal_force": 0.16875654913600613
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.44624483047746266,
+              -0.18731495433528372,
+              0.0
+            ],
+            "position_b": [
+              0.44624483047746266,
+              -0.18731495433528372,
+              -9.928006726060007e-06
+            ],
+            "contact_distance": -9.928006726060007e-06,
+            "normal_force": 0.11394849123727771
+          }
+        ],
+        "partner_velocity": -1.0872213630356206e-11,
+        "partner_command": 0.6,
+        "delivery_start_tick": null,
+        "delivery_event": null,
+        "delivery_facts": {
+          "carrier_joint": 0.6000000000135194,
+          "carrier_speed": -1.0872213630356206e-11,
+          "relative_position": [
+            3.1607284733947694e-07,
+            1.3130854747966936e-07,
+            0.026989670860714382
+          ],
+          "blue_speed": 2.1435916291683843e-08,
+          "relative_speed": 2.1438857397443666e-08,
+          "supported": true,
+          "support_records": 4,
+          "support_force": 0.5885999999313773,
+          "support_min_distance": -1.081413717007873e-05,
+          "satisfied": false
+        },
+        "robot_target_item": null,
+        "availability": {
+          "status": "ready",
+          "common_start_tick": 240,
+          "physics_tick": 240,
+          "elapsed_seconds": 0.0,
+          "ready_event": {
+            "kind": "partner_ready",
+            "availability_actual_tick": 240,
+            "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。"
+          }
+        },
+        "inspection_facts": {
+          "relative_position": [
+            0.23000031607284738,
+            0.6000001313220669,
+            0.06698967086071438
+          ],
+          "relative_speed": 2.1435916291683843e-08,
+          "blue_speed": 2.1435916291683843e-08,
+          "supported": false,
+          "support_records": 0,
+          "min_distance": null,
+          "support_force": 0,
+          "satisfied": false
+        },
+        "presence": {
+          "joint": 0.45,
+          "velocity": 0.0,
+          "position": [
+            0.85,
+            0.45,
+            0.08
+          ],
+          "target": 0.45,
+          "near": true,
+          "far": false
+        },
+        "presence_motion": null,
+        "presence_events": [],
+        "return_start_tick": null,
+        "return_origin": null,
+        "return_event": null,
+        "payload_return_event": null,
+        "return_facts": null
+      },
+      "final_state": {
+        "tick": 15710,
+        "time": 65.45833333333333,
+        "phase": "park_home",
+        "joint_positions": [
+          6.0963869035534185e-06,
+          -0.3999997225789704,
+          1.5565374442585257e-19,
+          -2.4999999317285777,
+          -2.461917184968608e-06,
+          2.0999985838204664,
+          0.8000021110913991,
+          0.0,
+          0.0,
+          0.03999974055214312,
+          0.04000026612331,
+          0.0
+        ],
+        "ee": [
+          0.4140532612800598,
+          2.183064907512744e-06,
+          0.32153594493865967
+        ],
+        "objects": {
+          "red": {
+            "position": [
+              0.5899920566396946,
+              -0.23611832323221504,
+              0.03198967942199899
+            ],
+            "orientation": [
+              1.0470766700478603e-06,
+              -8.979161907785872e-06,
+              -4.709145408323393e-06,
+              0.9999999999480511
+            ],
+            "velocity": [
+              2.7218772099948913e-20,
+              2.1638498042427573e-20,
+              2.706168622523819e-16
+            ]
+          },
+          "blue": {
+            "position": [
+              0.6499219233314755,
+              -0.2627906464033424,
+              0.03198981556992043
+            ],
+            "orientation": [
+              4.748752418795819e-06,
+              2.4897904045728197e-07,
+              6.475463903977782e-08,
+              0.9999999999886916
+            ],
+            "velocity": [
+              -4.141323053428896e-13,
+              2.728728501014135e-13,
+              3.0397906414236786e-13
+            ]
+          },
+          "green": {
+            "position": [
+              0.7098315673791006,
+              0.2407864560884829,
+              0.031989660298786464
+            ],
+            "orientation": [
+              1.3191951239177483e-06,
+              -9.54246882959505e-06,
+              -4.81383585662962e-06,
+              0.9999999999420139
+            ],
+            "velocity": [
+              4.629647195912145e-21,
+              1.2296944486647118e-21,
+              7.840950111415168e-16
+            ]
+          }
+        },
+        "partner_position": [
+          0.6499999761581421,
+          0.6000000238418579,
+          0.04500000178813934
+        ],
+        "partner_joint": 0.5999999999999994,
+        "contacts": [
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6878317754448109,
+              0.2187867259414749,
+              0.009989182387913926
+            ],
+            "position_b": [
+              0.6878317754448109,
+              0.2187867259414749,
+              0.009999999999999997
+            ],
+            "contact_distance": -1.0817612086070835e-05,
+            "normal_force": 0.18528464882819734
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6878321990612585,
+              0.26278672593928254,
+              0.009989298481127184
+            ],
+            "position_b": [
+              0.6878321990612585,
+              0.26278672593928254,
+              0.009999999999999997
+            ],
+            "contact_distance": -1.0701518872812885e-05,
+            "normal_force": 0.1145355904333563
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.7318321990512061,
+              0.2627863023206194,
+              0.009990138217825306
+            ],
+            "position_b": [
+              0.7318321990512061,
+              0.2627863023206194,
+              0.009999999999999997
+            ],
+            "contact_distance": -9.861782174691233e-06,
+            "normal_force": 0.17610573881295064
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.7318317754347585,
+              0.2187863023228118,
+              0.009990022124612048
+            ],
+            "position_b": [
+              0.7318317754347585,
+              0.2187863023228118,
+              0.009999999999999997
+            ],
+            "contact_distance": -9.977875387949184e-06,
+            "normal_force": 0.11267402192549533
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.5679922445255744,
+              -0.25811806995886644,
+              0.009989238269453804
+            ],
+            "position_b": [
+              0.5679922445255744,
+              -0.25811806995886644,
+              0.009999999999999998
+            ],
+            "contact_distance": -1.0761730546194476e-05,
+            "normal_force": 0.18491311398203972
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.567992658929543,
+              -0.21411806996091443,
+              0.00998933041592177
+            ],
+            "position_b": [
+              0.567992658929543,
+              -0.21411806996091443,
+              0.009999999999999998
+            ],
+            "contact_distance": -1.06695840782281e-05,
+            "normal_force": 0.11440392898232779
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6119926589204965,
+              -0.2141184843665377,
+              0.009990120581735693
+            ],
+            "position_b": [
+              0.6119926589204965,
+              -0.2141184843665377,
+              0.009999999999999998
+            ],
+            "contact_distance": -9.879418264305967e-06,
+            "normal_force": 0.17746223524679455
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6119922445165279,
+              -0.2581184843644897,
+              0.00999002843526773
+            ],
+            "position_b": [
+              0.6119922445165279,
+              -0.2581184843644897,
+              0.009999999999999998
+            ],
+            "contact_distance": -9.971564732268873e-06,
+            "normal_force": 0.11182072178883787
+          },
+          {
+            "body_a": 3,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6279219152255393,
+              -0.2847904403065009,
+              0.009989617580872346
+            ],
+            "position_b": [
+              0.6279219152255393,
+              -0.2847904403065009,
+              0.009999999999999997
+            ],
+            "contact_distance": -1.0382419127650741e-05,
+            "normal_force": 0.18235112960698574
+          },
+          {
+            "body_a": 3,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6279219095272344,
+              -0.2407904403084858,
+              0.009990035471088395
+            ],
+            "position_b": [
+              0.6279219095272344,
+              -0.2407904403084858,
+              0.009999999999999998
+            ],
+            "contact_distance": -9.96452891160321e-06,
+            "normal_force": 0.10738421381267223
+          },
+          {
+            "body_a": 3,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6719219095272286,
+              -0.24079043460997282,
+              0.009990013560955888
+            ],
+            "position_b": [
+              0.6719219095272286,
+              -0.24079043460997282,
+              0.009999999999999997
+            ],
+            "contact_distance": -9.986439044108383e-06,
+            "normal_force": 0.18711438410454373
+          },
+          {
+            "body_a": 3,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6719219152255335,
+              -0.284790434607988,
+              0.009989595670739843
+            ],
+            "position_b": [
+              0.6719219152255335,
+              -0.284790434607988,
+              0.009999999999999998
+            ],
+            "contact_distance": -1.0404329260155915e-05,
+            "normal_force": 0.11175027247579856
+          }
+        ],
+        "partner_velocity": 1.3322676295501878e-14,
+        "partner_command": 0.6,
+        "delivery_start_tick": 240,
+        "delivery_event": {
+          "first_tick": 3955,
+          "time_since_start": 15.479166666666666,
+          "facts": {
+            "carrier_joint": 0.00019861046176455771,
+            "carrier_speed": -0.0048333160156366975,
+            "relative_position": [
+              3.420034283552198e-07,
+              1.3823572664819366e-07,
+              0.02698964537809974
+            ],
+            "blue_speed": 0.004833316008075089,
+            "relative_speed": 2.973210419135441e-10,
+            "supported": true,
+            "support_records": 4,
+            "support_force": 0.5885999999995377,
+            "support_min_distance": -1.08770638498068e-05,
+            "satisfied": true
+          },
+          "content": "实际承载、相对位姿/速度及载台到位共同首次满足交付。"
+        },
+        "delivery_facts": {
+          "carrier_joint": 0.5999999999999994,
+          "carrier_speed": 1.3322676295501878e-14,
+          "relative_position": [
+            -7.807666852455153e-05,
+            -0.8627906464033418,
+            -0.01301018443007957
+          ],
+          "blue_speed": 5.816944473587096e-13,
+          "relative_speed": 5.755650532200206e-13,
+          "supported": false,
+          "support_records": 0,
+          "support_force": 0,
+          "support_min_distance": null,
+          "satisfied": false
+        },
+        "robot_target_item": null,
+        "availability": {
+          "status": "ready",
+          "common_start_tick": 240,
+          "physics_tick": 15710,
+          "elapsed_seconds": 64.45833333333333,
+          "ready_event": {
+            "kind": "partner_ready",
+            "availability_actual_tick": 240,
+            "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。"
+          }
+        },
+        "inspection_facts": {
+          "relative_position": [
+            0.2299219233314755,
+            -0.2627906464033424,
+            0.026989815569920427
+          ],
+          "relative_speed": 5.816944473587096e-13,
+          "blue_speed": 5.816944473587096e-13,
+          "supported": false,
+          "support_records": 0,
+          "min_distance": null,
+          "support_force": 0,
+          "satisfied": false
+        },
+        "presence": {
+          "joint": 0.45,
+          "velocity": 0.0,
+          "position": [
+            0.85,
+            0.45,
+            0.08
+          ],
+          "target": 0.45,
+          "near": true,
+          "far": false
+        },
+        "presence_motion": null,
+        "presence_events": [],
+        "return_start_tick": 6895,
+        "return_origin": -1.9912324015482083e-104,
+        "return_event": {
+          "first_tick": 10610,
+          "facts": {
+            "carrier_joint": 0.5998013895383036,
+            "carrier_velocity": 0.004833316015607103,
+            "carrier_returned": true,
+            "payload_returned": false,
+            "relative_position": [
+              -7.807665946513165e-05,
+              -0.8625920359474304,
+              -0.013010184436559769
+            ],
+            "relative_speed": 0.0048333160153337835,
+            "blue_speed": 5.855143573152673e-13,
+            "supported": false,
+            "support_records": 0,
+            "min_distance": null,
+            "support_force": 0
+          }
+        },
+        "payload_return_event": null,
+        "return_facts": {
+          "carrier_joint": 0.5999999999999994,
+          "carrier_velocity": 1.3322676295501878e-14,
+          "carrier_returned": true,
+          "payload_returned": false,
+          "relative_position": [
+            -7.807666852455153e-05,
+            -0.8627906464033418,
+            -0.01301018443007957
+          ],
+          "relative_speed": 5.755650532200206e-13,
+          "blue_speed": 5.816944473587096e-13,
+          "supported": false,
+          "support_records": 0,
+          "min_distance": null,
+          "support_force": 0
+        }
+      },
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "脚本共同背景、资源代理及模拟观测服务，非自然人。",
+          "actual_tick": 240,
+          "event_sequence": 0,
+          "observed_tick": 240
+        },
+        {
+          "kind": "accepted_activity",
+          "goals": {
+            "red": "left",
+            "green": "right",
+            "blue": "left"
+          },
+          "blue_role": "robot",
+          "inspection_required": false,
+          "carrier_return_required": true,
+          "content": "共同接受整理目标与blue接手职责。",
+          "actual_tick": 240,
+          "event_sequence": 1,
+          "observed_tick": 240
+        },
+        {
+          "kind": "accepted_presence_clause",
+          "clause": "stay",
+          "content": "当前检查可用。",
+          "actual_tick": 240,
+          "event_sequence": 2,
+          "observed_tick": 240
+        },
+        {
+          "kind": "public_capabilities",
+          "transport": true,
+          "inspection": true,
+          "carrier_return": true,
+          "content": "伙伴代理具备请求运输、在场模拟检查及载台返回能力，具体响应依据真实当前前提。",
+          "actual_tick": 240,
+          "event_sequence": 3,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal",
+          "proposal_id": "role1",
+          "binding": "blue_role",
+          "blue_role": "partner_return",
+          "content": "提议blue交给伙伴留载返回；red/green及其他约定保留。",
+          "actual_tick": 240,
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "role1",
+          "decision": "accept",
+          "content": "接受该分工提议。",
+          "actual_tick": 240,
+          "event_sequence": 5,
+          "observed_tick": 240
+        },
+        {
+          "kind": "transport_request_reply",
+          "decision": "accepted",
+          "content": "接受运输请求，实际启动固定曲线。",
+          "actual_tick": 240,
+          "event_sequence": 6,
+          "observed_tick": 240
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "request_transport",
+          "content": "接受运输请求，实际启动固定曲线。",
+          "actual_tick": 240,
+          "event_sequence": 7,
+          "observed_tick": 240
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "careful_red_left",
+          "content": "物理执行结果：物品静止在目标槽；red实际区域['left']。",
+          "actual_tick": 3420,
+          "event_sequence": 8,
+          "observed_tick": 3420
+        },
+        {
+          "kind": "physical_delivery",
+          "actual_tick": 3955,
+          "event": {
+            "first_tick": 3955,
+            "time_since_start": 15.479166666666666,
+            "facts": {
+              "carrier_joint": 0.00019861046176455771,
+              "carrier_speed": -0.0048333160156366975,
+              "relative_position": [
+                3.420034283552198e-07,
+                1.3823572664819366e-07,
+                0.02698964537809974
+              ],
+              "blue_speed": 0.004833316008075089,
+              "relative_speed": 2.973210419135441e-10,
+              "supported": true,
+              "support_records": 4,
+              "support_force": 0.5885999999995377,
+              "support_min_distance": -1.08770638498068e-05,
+              "satisfied": true
+            },
+            "content": "实际承载、相对位姿/速度及载台到位共同首次满足交付。"
+          },
+          "content": "真实稳定交付已发生。",
+          "event_sequence": 9,
+          "observed_tick": 3955
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "等待期间已观察新的实际公共里程碑。",
+          "actual_tick": 3955,
+          "event_sequence": 10,
+          "observed_tick": 3955
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "place_blue_left",
+          "content": "物理执行结果：物品静止在目标槽；blue实际区域['left']。",
+          "actual_tick": 6895,
+          "event_sequence": 11,
+          "observed_tick": 6895
+        },
+        {
+          "kind": "return_request_accepted",
+          "motion": {
+            "start_tick": 6895,
+            "origin": -1.9912324015482083e-104
+          },
+          "content": "接受返回请求，开始实际返程；载荷事实由实际承载判断。",
+          "actual_tick": 6895,
+          "event_sequence": 12,
+          "observed_tick": 6895
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "request_return",
+          "content": "接受返回请求，开始实际返程；载荷事实由实际承载判断。",
+          "actual_tick": 6895,
+          "event_sequence": 13,
+          "observed_tick": 6895
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "实际等待窗口结束，未出现新的公共里程碑。",
+          "actual_tick": 8815,
+          "event_sequence": 14,
+          "observed_tick": 8815
+        },
+        {
+          "kind": "physical_carrier_return",
+          "actual_tick": 10610,
+          "event": {
+            "first_tick": 10610,
+            "facts": {
+              "carrier_joint": 0.5998013895383036,
+              "carrier_velocity": 0.004833316015607103,
+              "carrier_returned": true,
+              "payload_returned": false,
+              "relative_position": [
+                -7.807665946513165e-05,
+                -0.8625920359474304,
+                -0.013010184436559769
+              ],
+              "relative_speed": 0.0048333160153337835,
+              "blue_speed": 5.855143573152673e-13,
+              "supported": false,
+              "support_records": 0,
+              "min_distance": null,
+              "support_force": 0
+            }
+          },
+          "content": "载台已实际返回；载荷返回另以实际承载观测判断。",
+          "event_sequence": 15,
+          "observed_tick": 10610
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "等待期间已观察新的实际公共里程碑。",
+          "actual_tick": 10610,
+          "event_sequence": 16,
+          "observed_tick": 10610
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "实际等待窗口结束，未出现新的公共里程碑。",
+          "actual_tick": 12530,
+          "event_sequence": 17,
+          "observed_tick": 12530
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "careful_green_right",
+          "content": "物理执行结果：物品静止在目标槽；green实际区域['right']。",
+          "actual_tick": 15710,
+          "event_sequence": 18,
+          "observed_tick": 15710
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "declare_done",
+          "content": "收到完成声明，活动已结束。",
+          "actual_tick": 15710,
+          "event_sequence": 19,
+          "observed_tick": 15710
+        }
+      ],
+      "cost": {
+        "decisions": 10,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_check": 0,
+        "requests_return": 1,
+        "yields": 4,
+        "wait_ticks": 6170,
+        "physical_attempts": 3,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1
+      },
+      "service": {
+        "committed": false,
+        "completed": false,
+        "qualified_ticks": 0,
+        "last_tick": 15710,
+        "departed_once": false,
+        "far_arrival_tick": null,
+        "return_started": false,
+        "returned": false,
+        "acceptances": 0,
+        "request_rejections": 0,
+        "duplicate_requests": 0
+      },
+      "checkpoints": {
+        "handoff_delivery": {
+          "tick": 3955,
+          "time": 16.479166666666668,
+          "phase": "park_home",
+          "joint_positions": [
+            6.096386903565445e-06,
+            -0.3999997225789701,
+            7.543010318469604e-22,
+            -2.499999931728576,
+            -2.461917185049468e-06,
+            2.099998583820469,
+            0.8000021110913945,
+            0.0,
+            0.0,
+            0.03999974055217562,
+            0.040000266123276854,
+            0.0
+          ],
+          "ee": [
+            0.4140532612800598,
+            2.183064907512744e-06,
+            0.32153594493865967
+          ],
+          "objects": {
+            "red": {
+              "position": [
+                0.5899920566396946,
+                -0.23611832323221504,
+                0.031989679421998984
+              ],
+              "orientation": [
+                1.0470766700778825e-06,
+                -8.979161907819618e-06,
+                -4.709145408323393e-06,
+                0.9999999999480511
+              ],
+              "velocity": [
+                2.9383796799207064e-20,
+                2.2787971776966457e-20,
+                8.049116928532385e-16
+              ]
+            },
+            "blue": {
+              "position": [
+                0.6500003420034284,
+                0.0001987486974912059,
+                0.07198964537809974
+              ],
+              "orientation": [
+                -3.961938757648922e-06,
+                7.911863673718182e-06,
+                -3.221286894152935e-07,
+                0.9999999999608008
+              ],
+              "velocity": [
+                2.2906547313139108e-10,
+                -0.0048333160080750795,
+                -1.8939808055229435e-10
+              ]
+            },
+            "green": {
+              "position": [
+                0.4209317916165672,
+                0.16075146160800358,
+                0.021989218285077033
+              ],
+              "orientation": [
+                2.4839585197599718e-06,
+                -2.1886016522043157e-05,
+                -2.1136019257403505e-06,
+                0.9999999997551824
+              ],
+              "velocity": [
+                -1.854116491768077e-13,
+                8.921496601026667e-14,
+                -1.5286383270307624e-13
+              ]
+            }
+          },
+          "partner_position": [
+            0.6499999761581421,
+            0.00019861046166624874,
+            0.04500000178813934
+          ],
+          "partner_joint": 0.00019861046176455771,
+          "contacts": [
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6720000080508636,
+                0.022218699013517623,
+                0.04998912293615019
+              ],
+              "position_b": [
+                0.6720000080508636,
+                0.022218699013517623,
+                0.049999999999999996
+              ],
+              "contact_distance": -1.08770638498068e-05,
+              "normal_force": 0.17729426365644507
+            },
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.671999979706474,
+                -0.021781300985091897,
+                0.0499894715866495
+              ],
+              "position_b": [
+                0.671999979706474,
+                -0.021781300985091897,
+                0.049999999999999996
+              ],
+              "contact_distance": -1.0528413350495425e-05,
+              "normal_force": 0.1161921372842586
+            },
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6279999797119916,
+                -0.02178127263518534,
+                0.04999016782851749
+              ],
+              "position_b": [
+                0.6279999797119916,
+                -0.021781272635185343,
+                0.049999999999999996
+              ],
+              "contact_distance": -9.832171482503094e-06,
+              "normal_force": 0.17761116682314937
+            },
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6280000080563812,
+                0.022218727363424177,
+                0.04998981917801818
+              ],
+              "position_b": [
+                0.6280000080563812,
+                0.022218727363424177,
+                0.049999999999999996
+              ],
+              "contact_distance": -1.018082198181447e-05,
+              "normal_force": 0.11750243223568464
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.39893266162670477,
+                0.13875166390148758,
+                0.0
+              ],
+              "position_b": [
+                0.39893266162670477,
+                0.13875166390148758,
+                -1.1853974280384705e-05
+              ],
+              "contact_distance": -1.1853974280384705e-05,
+              "normal_force": 0.1859117954643589
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.39893284761888986,
+                0.18275166390055148,
+                0.0
+              ],
+              "position_b": [
+                0.39893284761888986,
+                0.18275166390055148,
+                -1.1635381859772392e-05
+              ],
+              "contact_distance": -1.1635381859772392e-05,
+              "normal_force": 0.11998323989876375
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.44293284757634493,
+                0.1827514778987983,
+                0.0
+              ],
+              "position_b": [
+                0.44293284757634493,
+                0.1827514778987983,
+                -9.709412870147899e-06
+              ],
+              "contact_distance": -9.709412870147899e-06,
+              "normal_force": 0.16875659934510412
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.44293266158415984,
+                0.1387514778997344,
+                0.0
+              ],
+              "position_b": [
+                0.44293266158415984,
+                0.1387514778997344,
+                -9.928005290760211e-06
+              ],
+              "contact_distance": -9.928005290760211e-06,
+              "normal_force": 0.11394836529203775
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.5679922445255744,
+                -0.25811806995886644,
+                0.00998923826945379
+              ],
+              "position_b": [
+                0.5679922445255744,
+                -0.25811806995886644,
+                0.009999999999999998
+              ],
+              "contact_distance": -1.0761730546208353e-05,
+              "normal_force": 0.18491311398196283
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.567992658929543,
+                -0.21411806996091443,
+                0.009989330415921763
+              ],
+              "position_b": [
+                0.567992658929543,
+                -0.21411806996091443,
+                0.009999999999999998
+              ],
+              "contact_distance": -1.066958407823504e-05,
+              "normal_force": 0.11440392898220829
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.6119926589204965,
+                -0.2141184843665377,
+                0.009990120581735693
+              ],
+              "position_b": [
+                0.6119926589204965,
+                -0.2141184843665377,
+                0.009999999999999998
+              ],
+              "contact_distance": -9.879418264305967e-06,
+              "normal_force": 0.17746223524657287
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.6119922445165279,
+                -0.2581184843644897,
+                0.009990028435267723
+              ],
+              "position_b": [
+                0.6119922445165279,
+                -0.2581184843644897,
+                0.009999999999999998
+              ],
+              "contact_distance": -9.971564732275812e-06,
+              "normal_force": 0.11182072178925542
+            }
+          ],
+          "partner_velocity": -0.0048333160156366975,
+          "partner_command": 1.7361111111058314e-05,
+          "delivery_start_tick": 240,
+          "delivery_event": {
+            "first_tick": 3955,
+            "time_since_start": 15.479166666666666,
+            "facts": {
+              "carrier_joint": 0.00019861046176455771,
+              "carrier_speed": -0.0048333160156366975,
+              "relative_position": [
+                3.420034283552198e-07,
+                1.3823572664819366e-07,
+                0.02698964537809974
+              ],
+              "blue_speed": 0.004833316008075089,
+              "relative_speed": 2.973210419135441e-10,
+              "supported": true,
+              "support_records": 4,
+              "support_force": 0.5885999999995377,
+              "support_min_distance": -1.08770638498068e-05,
+              "satisfied": true
+            },
+            "content": "实际承载、相对位姿/速度及载台到位共同首次满足交付。"
+          },
+          "delivery_facts": {
+            "carrier_joint": 0.00019861046176455771,
+            "carrier_speed": -0.0048333160156366975,
+            "relative_position": [
+              3.420034283552198e-07,
+              1.3823572664819366e-07,
+              0.02698964537809974
+            ],
+            "blue_speed": 0.004833316008075089,
+            "relative_speed": 2.973210419135441e-10,
+            "supported": true,
+            "support_records": 4,
+            "support_force": 0.5885999999995377,
+            "support_min_distance": -1.08770638498068e-05,
+            "satisfied": true
+          },
+          "robot_target_item": null,
+          "availability": {
+            "status": "ready",
+            "common_start_tick": 240,
+            "physics_tick": 3955,
+            "elapsed_seconds": 15.479166666666666,
+            "ready_event": {
+              "kind": "partner_ready",
+              "availability_actual_tick": 240,
+              "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。"
+            }
+          },
+          "inspection_facts": {
+            "relative_position": [
+              0.2300003420034284,
+              0.0001987486974912059,
+              0.06698964537809973
+            ],
+            "relative_speed": 0.004833316008075089,
+            "blue_speed": 0.004833316008075089,
+            "supported": false,
+            "support_records": 0,
+            "min_distance": null,
+            "support_force": 0,
+            "satisfied": false
+          },
+          "presence": {
+            "joint": 0.45,
+            "velocity": 0.0,
+            "position": [
+              0.85,
+              0.45,
+              0.08
+            ],
+            "target": 0.45,
+            "near": true,
+            "far": false
+          },
+          "presence_motion": null,
+          "presence_events": [],
+          "return_start_tick": null,
+          "return_origin": null,
+          "return_event": null,
+          "payload_return_event": null,
+          "return_facts": null
+        },
+        "handoff_prefix_decisions": 3
+      },
+      "termination_reason": "declared_done",
+      "terminal_score": {
+        "facts": {
+          "red_actual_left": true,
+          "green_actual_right": true,
+          "check_contribution_completed": true,
+          "no_active_child": true,
+          "carrier_return_completed": true,
+          "blue_role_completed": false
+        },
+        "task_compliant": false,
+        "declared_task_success": false
+      },
+      "expected_task_success": false,
+      "runner_expected_match": true,
+      "after_terminal_immutable": true,
+      "infrastructure_failure": null,
+      "common_start_tick": 240,
+      "end_tick": 15710,
+      "makespan_ticks": 15470,
+      "body_ids": {
+        "robot": 1,
+        "carrier": 11,
+        "inspection": 12,
+        "inspection_walls": [
+          13,
+          14
+        ],
+        "presence": 15,
+        "objects": {
+          "red": 2,
+          "blue": 3,
+          "green": 4
+        }
+      },
+      "canonical_physics": {
+        "sha256": "fb3020d78da7f65ad6ae8a109049ec582803e63fc3cfb48648e3e84c7fe1a146",
+        "ticks": 15710
+      },
+      "pid": 164504
+    },
+    {
+      "case": {
+        "id": "C7_robot_role_wrong_leave_r1_120",
+        "family": "C",
+        "control": 7,
+        "initial_blue": "left",
+        "reply": "rejected",
+        "presence": "stay",
+        "policy": "fixed_control",
+        "seed": 120
+      },
+      "initial_state": {
+        "tick": 240,
+        "time": 1.0,
+        "phase": "new_geometry_initialization",
+        "joint_positions": [
+          6.096386903565465e-06,
+          -0.3999997225789701,
+          9.035018104045868e-22,
+          -2.4999999317285777,
+          -2.461917185049636e-06,
+          2.099998583820469,
+          0.8000021110913945,
+          0.0,
+          0.0,
+          0.03999974055217562,
+          0.040000266123276854,
+          0.0
+        ],
+        "ee": [
+          0.4140532612800598,
+          2.183064907512744e-06,
+          0.32153594493865967
+        ],
+        "objects": {
+          "red": {
+            "position": [
+              0.4242439605126395,
+              -0.16531497062846684,
+              0.021989218287864147
+            ],
+            "orientation": [
+              2.4839805199926036e-06,
+              -2.188594256919718e-05,
+              -2.1135909195168554e-06,
+              0.999999999755184
+            ],
+            "velocity": [
+              -1.8529041071556442e-13,
+              8.915664561454289e-14,
+              -1.50039702884186e-13
+            ]
+          },
+          "blue": {
+            "position": [
+              0.6500003160728474,
+              0.6000001313220669,
+              0.07198967086071438
+            ],
+            "orientation": [
+              -3.7192757487141015e-06,
+              7.306985323616071e-06,
+              -2.8753480834950237e-07,
+              0.9999999999663461
+            ],
+            "velocity": [
+              1.4154279027406588e-08,
+              5.793716123608095e-09,
+              -1.5019578754327245e-08
+            ]
+          },
+          "green": {
+            "position": [
+              0.4209317916194543,
+              0.16075146160666312,
+              0.02198921828786415
+            ],
+            "orientation": [
+              2.4839805199928565e-06,
+              -2.1885942569197946e-05,
+              -2.113590919516833e-06,
+              0.999999999755184
+            ],
+            "velocity": [
+              -1.8529041562361953e-13,
+              8.915664576435641e-14,
+              -1.50039702884186e-13
+            ]
+          }
+        },
+        "partner_position": [
+          0.6499999761581421,
+          0.6000000238418579,
+          0.04500000178813934
+        ],
+        "partner_joint": 0.6000000000135194,
+        "contacts": [
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6720000072115395,
+              0.6219999550315713,
+              0.049989185862829924
+            ],
+            "position_b": [
+              0.6720000072115395,
+              0.6219999550315713,
+              0.05
+            ],
+            "contact_distance": -1.081413717007873e-05,
+            "normal_force": 0.17879004038321028
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6719999819153565,
+              0.5779999550327954,
+              0.049989513093721294
+            ],
+            "position_b": [
+              0.6719999819153565,
+              0.5779999550327954,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.0486906278701913e-05,
+            "normal_force": 0.1138647437790276
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6279999819200605,
+              0.5779999803337597,
+              0.049990155989675586
+            ],
+            "position_b": [
+              0.6279999819200605,
+              0.5779999803337597,
+              0.05
+            ],
+            "contact_distance": -9.844010324416841e-06,
+            "normal_force": 0.17829170583622048
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6280000072162435,
+              0.6219999803325356,
+              0.0499898287587842
+            ],
+            "position_b": [
+              0.6280000072162435,
+              0.6219999803325356,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.0171241215793658e-05,
+            "normal_force": 0.11765350993291895
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.39893266162682206,
+              0.1387516639006309,
+              0.0
+            ],
+            "position_b": [
+              0.39893266162682206,
+              0.1387516639006309,
+              -1.1853969207109571e-05
+            ],
+            "contact_distance": -1.1853969207109571e-05,
+            "normal_force": 0.18591175849556715
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.3989328476180386,
+              0.1827516638996948,
+              0.0
+            ],
+            "position_b": [
+              0.3989328476180386,
+              0.1827516638996948,
+              -1.1635374850271774e-05
+            ],
+            "contact_distance": -1.1635374850271774e-05,
+            "normal_force": 0.11998320113142237
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.442932847575494,
+              0.18275147789891014,
+              0.0
+            ],
+            "position_b": [
+              0.442932847575494,
+              0.18275147789891014,
+              -9.709412369222209e-06
+            ],
+            "contact_distance": -9.709412369222209e-06,
+            "normal_force": 0.16875654913600613
+          },
+          {
+            "body_a": 0,
+            "body_b": 4,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.44293266158427747,
+              0.13875147789984624,
+              0.0
+            ],
+            "position_b": [
+              0.44293266158427747,
+              0.13875147789984624,
+              -9.928006726060007e-06
+            ],
+            "contact_distance": -9.928006726060007e-06,
+            "normal_force": 0.11394849123727774
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.40224483052000726,
+              -0.18731476833449906,
+              0.0
+            ],
+            "position_b": [
+              0.40224483052000726,
+              -0.18731476833449906,
+              -1.1853969207109571e-05
+            ],
+            "contact_distance": -1.1853969207109571e-05,
+            "normal_force": 0.18591175849556715
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.4022450165112238,
+              -0.14331476833543516,
+              0.0
+            ],
+            "position_b": [
+              0.4022450165112238,
+              -0.14331476833543516,
+              -1.1635374850271774e-05
+            ],
+            "contact_distance": -1.1635374850271774e-05,
+            "normal_force": 0.11998320113142236
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.4462450164686792,
+              -0.14331495433621982,
+              0.0
+            ],
+            "position_b": [
+              0.4462450164686792,
+              -0.14331495433621982,
+              -9.709412369222209e-06
+            ],
+            "contact_distance": -9.709412369222209e-06,
+            "normal_force": 0.16875654913600613
+          },
+          {
+            "body_a": 0,
+            "body_b": 2,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.44624483047746266,
+              -0.18731495433528372,
+              0.0
+            ],
+            "position_b": [
+              0.44624483047746266,
+              -0.18731495433528372,
+              -9.928006726060007e-06
+            ],
+            "contact_distance": -9.928006726060007e-06,
+            "normal_force": 0.11394849123727771
+          }
+        ],
+        "partner_velocity": -1.0872213630356206e-11,
+        "partner_command": 0.6,
+        "delivery_start_tick": null,
+        "delivery_event": null,
+        "delivery_facts": {
+          "carrier_joint": 0.6000000000135194,
+          "carrier_speed": -1.0872213630356206e-11,
+          "relative_position": [
+            3.1607284733947694e-07,
+            1.3130854747966936e-07,
+            0.026989670860714382
+          ],
+          "blue_speed": 2.1435916291683843e-08,
+          "relative_speed": 2.1438857397443666e-08,
+          "supported": true,
+          "support_records": 4,
+          "support_force": 0.5885999999313773,
+          "support_min_distance": -1.081413717007873e-05,
+          "satisfied": false
+        },
+        "robot_target_item": null,
+        "availability": {
+          "status": "ready",
+          "common_start_tick": 240,
+          "physics_tick": 240,
+          "elapsed_seconds": 0.0,
+          "ready_event": {
+            "kind": "partner_ready",
+            "availability_actual_tick": 240,
+            "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。"
+          }
+        },
+        "inspection_facts": {
+          "relative_position": [
+            0.23000031607284738,
+            0.6000001313220669,
+            0.06698967086071438
+          ],
+          "relative_speed": 2.1435916291683843e-08,
+          "blue_speed": 2.1435916291683843e-08,
+          "supported": false,
+          "support_records": 0,
+          "min_distance": null,
+          "support_force": 0,
+          "satisfied": false
+        },
+        "presence": {
+          "joint": 0.45,
+          "velocity": 0.0,
+          "position": [
+            0.85,
+            0.45,
+            0.08
+          ],
+          "target": 0.45,
+          "near": true,
+          "far": false
+        },
+        "presence_motion": null,
+        "presence_events": [],
+        "return_start_tick": null,
+        "return_origin": null,
+        "return_event": null,
+        "payload_return_event": null,
+        "return_facts": null
+      },
+      "final_state": {
+        "tick": 12769,
+        "time": 53.204166666666666,
+        "phase": "park_home",
+        "joint_positions": [
+          6.096386903553415e-06,
+          -0.3999997225789704,
+          1.5601567427336408e-19,
+          -2.4999999317285777,
+          -2.4619171849685137e-06,
+          2.0999985838204664,
+          0.8000021110913991,
+          0.0,
+          0.0,
+          0.03999974055214312,
+          0.04000026612331,
+          0.0
+        ],
+        "ee": [
+          0.4140532612800598,
+          2.183064907512744e-06,
+          0.32153594493865967
+        ],
+        "objects": {
+          "red": {
+            "position": [
+              0.5899920566396946,
+              -0.23611832323221504,
+              0.03198967942199899
+            ],
+            "orientation": [
+              1.0470766700553548e-06,
+              -8.97916190779347e-06,
+              -4.709145408323393e-06,
+              0.9999999999480511
+            ],
+            "velocity": [
+              2.975483439750179e-20,
+              2.249069538371596e-20,
+              4.85722573273506e-17
+            ]
+          },
+          "blue": {
+            "position": [
+              0.6500003520297218,
+              0.6000001387640783,
+              0.07198963696352706
+            ],
+            "orientation": [
+              -4.006520506104809e-06,
+              8.152712546562397e-06,
+              -3.4256013292897165e-07,
+              0.9999999999586818
+            ],
+            "velocity": [
+              1.37542686455022e-10,
+              -2.60030313474131e-12,
+              -1.0928160459888758e-10
+            ]
+          },
+          "green": {
+            "position": [
+              0.7098314570847866,
+              0.23908467507783981,
+              0.03198966975103423
+            ],
+            "orientation": [
+              1.3761713140879205e-06,
+              -9.289317038799277e-06,
+              -4.601957445087437e-06,
+              0.9999999999453183
+            ],
+            "velocity": [
+              3.1783213431049326e-21,
+              2.4238672346141026e-21,
+              1.249000902703301e-16
+            ]
+          }
+        },
+        "partner_position": [
+          0.6499999761581421,
+          0.6000000238418579,
+          0.04500000178813934
+        ],
+        "partner_joint": 0.6000000000000287,
+        "contacts": [
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6720000083785695,
+              0.6219999474026434,
+              0.04998910196197885
+            ],
+            "position_b": [
+              0.6720000083785695,
+              0.6219999474026434,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.089803802114403e-05,
+            "normal_force": 0.17935188629440754
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6719999782362669,
+              0.5779999474040663,
+              0.04998945453588749
+            ],
+            "position_b": [
+              0.6719999782362669,
+              0.5779999474040663,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.0545464112506064e-05,
+            "normal_force": 0.11412333375860008
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6279999782421263,
+              0.5779999775521178,
+              0.04999017197324762
+            ],
+            "position_b": [
+              0.6279999782421263,
+              0.5779999775521178,
+              0.049999999999999996
+            ],
+            "contact_distance": -9.828026752374541e-06,
+            "normal_force": 0.17713375861968605
+          },
+          {
+            "body_a": 3,
+            "body_b": 11,
+            "link_a": -1,
+            "link_b": 0,
+            "position_a": [
+              0.6280000083844289,
+              0.6219999775506949,
+              0.04998981939933898
+            ],
+            "position_b": [
+              0.6280000083844289,
+              0.6219999775506949,
+              0.049999999999999996
+            ],
+            "contact_distance": -1.0180600661012507e-05,
+            "normal_force": 0.11799102132703906
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6878316633341784,
+              0.2170849381152019,
+              0.009989200471824576
+            ],
+            "position_b": [
+              0.6878316633341784,
+              0.2170849381152019,
+              0.009999999999999997
+            ],
+            "contact_distance": -1.0799528175420639e-05,
+            "normal_force": 0.18515953597234316
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6878320683053086,
+              0.26108493811317157,
+              0.009989321578662124
+            ],
+            "position_b": [
+              0.6878320683053086,
+              0.26108493811317157,
+              0.009999999999999997
+            ],
+            "contact_distance": -1.0678421337872654e-05,
+            "normal_force": 0.11440980070868956
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.7318320682958513,
+              0.26108453313979146,
+              0.009990139038004182
+            ],
+            "position_b": [
+              0.7318320682958513,
+              0.26108453313979146,
+              0.009999999999999997
+            ],
+            "contact_distance": -9.860961995815029e-06,
+            "normal_force": 0.17600340416558694
+          },
+          {
+            "body_a": 4,
+            "body_b": 8,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.7318316633247212,
+              0.21708453314182177,
+              0.009990017931166637
+            ],
+            "position_b": [
+              0.7318316633247212,
+              0.21708453314182177,
+              0.009999999999999997
+            ],
+            "contact_distance": -9.982068833359545e-06,
+            "normal_force": 0.11302725915338056
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.5679922445255744,
+              -0.25811806995886644,
+              0.009989238269453797
+            ],
+            "position_b": [
+              0.5679922445255744,
+              -0.25811806995886644,
+              0.009999999999999997
+            ],
+            "contact_distance": -1.076173054619968e-05,
+            "normal_force": 0.18491311398203708
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.567992658929543,
+              -0.21411806996091443,
+              0.00998933041592177
+            ],
+            "position_b": [
+              0.567992658929543,
+              -0.21411806996091443,
+              0.009999999999999998
+            ],
+            "contact_distance": -1.06695840782281e-05,
+            "normal_force": 0.1144039289823938
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6119926589204965,
+              -0.2141184843665377,
+              0.009990120581735696
+            ],
+            "position_b": [
+              0.6119926589204965,
+              -0.2141184843665377,
+              0.009999999999999997
+            ],
+            "contact_distance": -9.879418264300763e-06,
+            "normal_force": 0.1774622352465302
+          },
+          {
+            "body_a": 2,
+            "body_b": 5,
+            "link_a": -1,
+            "link_b": -1,
+            "position_a": [
+              0.6119922445165279,
+              -0.2581184843644897,
+              0.00999002843526773
+            ],
+            "position_b": [
+              0.6119922445165279,
+              -0.2581184843644897,
+              0.009999999999999998
+            ],
+            "contact_distance": -9.971564732268873e-06,
+            "normal_force": 0.11182072178903961
+          }
+        ],
+        "partner_velocity": -1.0226981784945175e-14,
+        "partner_command": 0.6,
+        "delivery_start_tick": 240,
+        "delivery_event": {
+          "first_tick": 3955,
+          "time_since_start": 15.479166666666666,
+          "facts": {
+            "carrier_joint": 0.00019861046176455771,
+            "carrier_speed": -0.0048333160156366975,
+            "relative_position": [
+              3.420034283552198e-07,
+              1.3823572664819366e-07,
+              0.02698964537809974
+            ],
+            "blue_speed": 0.004833316008075089,
+            "relative_speed": 2.973210419135441e-10,
+            "supported": true,
+            "support_records": 4,
+            "support_force": 0.5885999999995377,
+            "support_min_distance": -1.08770638498068e-05,
+            "satisfied": true
+          },
+          "content": "实际承载、相对位姿/速度及载台到位共同首次满足交付。"
+        },
+        "delivery_facts": {
+          "carrier_joint": 0.6000000000000287,
+          "carrier_speed": -1.0226981784945175e-14,
+          "relative_position": [
+            3.520297218173596e-07,
+            1.3876404958423905e-07,
+            0.02698963696352706
+          ],
+          "blue_speed": 1.756906977542199e-10,
+          "relative_speed": 1.7569054668777776e-10,
+          "supported": true,
+          "support_records": 4,
+          "support_force": 0.5885999999997328,
+          "support_min_distance": -1.089803802114403e-05,
+          "satisfied": false
+        },
+        "robot_target_item": null,
+        "availability": {
+          "status": "ready",
+          "common_start_tick": 240,
+          "physics_tick": 12769,
+          "elapsed_seconds": 52.204166666666666,
+          "ready_event": {
+            "kind": "partner_ready",
+            "availability_actual_tick": 240,
+            "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。"
+          }
+        },
+        "inspection_facts": {
+          "relative_position": [
+            0.23000035202972186,
+            0.6000001387640783,
+            0.06698963696352705
+          ],
+          "relative_speed": 1.756906977542199e-10,
+          "blue_speed": 1.756906977542199e-10,
+          "supported": false,
+          "support_records": 0,
+          "min_distance": null,
+          "support_force": 0,
+          "satisfied": false
+        },
+        "presence": {
+          "joint": 0.45,
+          "velocity": 0.0,
+          "position": [
+            0.85,
+            0.45,
+            0.08
+          ],
+          "target": 0.45,
+          "near": true,
+          "far": false
+        },
+        "presence_motion": null,
+        "presence_events": [],
+        "return_start_tick": 3955,
+        "return_origin": 0.00019861046176455771,
+        "return_event": {
+          "first_tick": 7669,
+          "facts": {
+            "carrier_joint": 0.5998050907914205,
+            "carrier_velocity": 0.004769428771447516,
+            "carrier_returned": true,
+            "payload_returned": true,
+            "relative_position": [
+              3.4741834487039824e-07,
+              1.386374267609014e-07,
+              0.02698964076464852
+            ],
+            "relative_speed": 5.238292744778525e-10,
+            "blue_speed": 0.004769428804413666,
+            "supported": true,
+            "support_records": 4,
+            "min_distance": -1.0888559086964789e-05,
+            "support_force": 0.5885999999991539
+          }
+        },
+        "payload_return_event": {
+          "first_tick": 7669,
+          "facts": {
+            "carrier_joint": 0.5998050907914205,
+            "carrier_velocity": 0.004769428771447516,
+            "carrier_returned": true,
+            "payload_returned": true,
+            "relative_position": [
+              3.4741834487039824e-07,
+              1.386374267609014e-07,
+              0.02698964076464852
+            ],
+            "relative_speed": 5.238292744778525e-10,
+            "blue_speed": 0.004769428804413666,
+            "supported": true,
+            "support_records": 4,
+            "min_distance": -1.0888559086964789e-05,
+            "support_force": 0.5885999999991539
+          }
+        },
+        "return_facts": {
+          "carrier_joint": 0.6000000000000287,
+          "carrier_velocity": -1.0226981784945175e-14,
+          "carrier_returned": true,
+          "payload_returned": true,
+          "relative_position": [
+            3.520297218173596e-07,
+            1.3876404958423905e-07,
+            0.02698963696352706
+          ],
+          "relative_speed": 1.7569054668777776e-10,
+          "blue_speed": 1.756906977542199e-10,
+          "supported": true,
+          "support_records": 4,
+          "min_distance": -1.089803802114403e-05,
+          "support_force": 0.5885999999997328
+        }
+      },
+      "public_history": [
+        {
+          "kind": "background_source",
+          "content": "脚本共同背景、资源代理及模拟观测服务，非自然人。",
+          "actual_tick": 240,
+          "event_sequence": 0,
+          "observed_tick": 240
+        },
+        {
+          "kind": "accepted_activity",
+          "goals": {
+            "red": "left",
+            "green": "right",
+            "blue": "left"
+          },
+          "blue_role": "robot",
+          "inspection_required": false,
+          "carrier_return_required": true,
+          "content": "共同接受整理目标与blue接手职责。",
+          "actual_tick": 240,
+          "event_sequence": 1,
+          "observed_tick": 240
+        },
+        {
+          "kind": "accepted_presence_clause",
+          "clause": "stay",
+          "content": "当前检查可用。",
+          "actual_tick": 240,
+          "event_sequence": 2,
+          "observed_tick": 240
+        },
+        {
+          "kind": "public_capabilities",
+          "transport": true,
+          "inspection": true,
+          "carrier_return": true,
+          "content": "伙伴代理具备请求运输、在场模拟检查及载台返回能力，具体响应依据真实当前前提。",
+          "actual_tick": 240,
+          "event_sequence": 3,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal",
+          "proposal_id": "role1",
+          "binding": "blue_role",
+          "blue_role": "partner_return",
+          "content": "提议blue交给伙伴留载返回；red/green及其他约定保留。",
+          "actual_tick": 240,
+          "event_sequence": 4,
+          "observed_tick": 240
+        },
+        {
+          "kind": "proposal_reply",
+          "proposal_id": "role1",
+          "decision": "reject",
+          "content": "拒绝该分工提议。",
+          "actual_tick": 240,
+          "event_sequence": 5,
+          "observed_tick": 240
+        },
+        {
+          "kind": "transport_request_reply",
+          "decision": "accepted",
+          "content": "接受运输请求，实际启动固定曲线。",
+          "actual_tick": 240,
+          "event_sequence": 6,
+          "observed_tick": 240
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "request_transport",
+          "content": "接受运输请求，实际启动固定曲线。",
+          "actual_tick": 240,
+          "event_sequence": 7,
+          "observed_tick": 240
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "careful_red_left",
+          "content": "物理执行结果：物品静止在目标槽；red实际区域['left']。",
+          "actual_tick": 3420,
+          "event_sequence": 8,
+          "observed_tick": 3420
+        },
+        {
+          "kind": "physical_delivery",
+          "actual_tick": 3955,
+          "event": {
+            "first_tick": 3955,
+            "time_since_start": 15.479166666666666,
+            "facts": {
+              "carrier_joint": 0.00019861046176455771,
+              "carrier_speed": -0.0048333160156366975,
+              "relative_position": [
+                3.420034283552198e-07,
+                1.3823572664819366e-07,
+                0.02698964537809974
+              ],
+              "blue_speed": 0.004833316008075089,
+              "relative_speed": 2.973210419135441e-10,
+              "supported": true,
+              "support_records": 4,
+              "support_force": 0.5885999999995377,
+              "support_min_distance": -1.08770638498068e-05,
+              "satisfied": true
+            },
+            "content": "实际承载、相对位姿/速度及载台到位共同首次满足交付。"
+          },
+          "content": "真实稳定交付已发生。",
+          "event_sequence": 9,
+          "observed_tick": 3955
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "等待期间已观察新的实际公共里程碑。",
+          "actual_tick": 3955,
+          "event_sequence": 10,
+          "observed_tick": 3955
+        },
+        {
+          "kind": "return_request_accepted",
+          "motion": {
+            "start_tick": 3955,
+            "origin": 0.00019861046176455771
+          },
+          "content": "接受返回请求，开始实际返程；载荷事实由实际承载判断。",
+          "actual_tick": 3955,
+          "event_sequence": 11,
+          "observed_tick": 3955
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "request_return",
+          "content": "接受返回请求，开始实际返程；载荷事实由实际承载判断。",
+          "actual_tick": 3955,
+          "event_sequence": 12,
+          "observed_tick": 3955
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "实际等待窗口结束，未出现新的公共里程碑。",
+          "actual_tick": 5875,
+          "event_sequence": 13,
+          "observed_tick": 5875
+        },
+        {
+          "kind": "physical_carrier_return",
+          "actual_tick": 7669,
+          "event": {
+            "first_tick": 7669,
+            "facts": {
+              "carrier_joint": 0.5998050907914205,
+              "carrier_velocity": 0.004769428771447516,
+              "carrier_returned": true,
+              "payload_returned": true,
+              "relative_position": [
+                3.4741834487039824e-07,
+                1.386374267609014e-07,
+                0.02698964076464852
+              ],
+              "relative_speed": 5.238292744778525e-10,
+              "blue_speed": 0.004769428804413666,
+              "supported": true,
+              "support_records": 4,
+              "min_distance": -1.0888559086964789e-05,
+              "support_force": 0.5885999999991539
+            }
+          },
+          "content": "载台已实际返回；载荷返回另以实际承载观测判断。",
+          "event_sequence": 14,
+          "observed_tick": 7669
+        },
+        {
+          "kind": "physical_payload_return",
+          "actual_tick": 7669,
+          "event": {
+            "first_tick": 7669,
+            "facts": {
+              "carrier_joint": 0.5998050907914205,
+              "carrier_velocity": 0.004769428771447516,
+              "carrier_returned": true,
+              "payload_returned": true,
+              "relative_position": [
+                3.4741834487039824e-07,
+                1.386374267609014e-07,
+                0.02698964076464852
+              ],
+              "relative_speed": 5.238292744778525e-10,
+              "blue_speed": 0.004769428804413666,
+              "supported": true,
+              "support_records": 4,
+              "min_distance": -1.0888559086964789e-05,
+              "support_force": 0.5885999999991539
+            }
+          },
+          "content": "实际blue承载、相对位姿及速度首次共同满足返回。",
+          "event_sequence": 15,
+          "observed_tick": 7669
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "等待期间已观察新的实际公共里程碑。",
+          "actual_tick": 7669,
+          "event_sequence": 16,
+          "observed_tick": 7669
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "yield",
+          "content": "实际等待窗口结束，未出现新的公共里程碑。",
+          "actual_tick": 9589,
+          "event_sequence": 17,
+          "observed_tick": 9589
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "careful_green_right",
+          "content": "物理执行结果：物品静止在目标槽；green实际区域['right']。",
+          "actual_tick": 12769,
+          "event_sequence": 18,
+          "observed_tick": 12769
+        },
+        {
+          "kind": "action_feedback",
+          "choice": "declare_done",
+          "content": "收到完成声明，活动已结束。",
+          "actual_tick": 12769,
+          "event_sequence": 19,
+          "observed_tick": 12769
+        }
+      ],
+      "cost": {
+        "decisions": 9,
+        "invalid": 0,
+        "requests_transport": 1,
+        "requests_check": 0,
+        "requests_return": 1,
+        "yields": 4,
+        "wait_ticks": 6169,
+        "physical_attempts": 2,
+        "physical_failures": 0,
+        "no_ops": 0,
+        "declarations": 1
+      },
+      "service": {
+        "committed": false,
+        "completed": false,
+        "qualified_ticks": 0,
+        "last_tick": 12769,
+        "departed_once": false,
+        "far_arrival_tick": null,
+        "return_started": false,
+        "returned": false,
+        "acceptances": 0,
+        "request_rejections": 0,
+        "duplicate_requests": 0
+      },
+      "checkpoints": {
+        "handoff_delivery": {
+          "tick": 3955,
+          "time": 16.479166666666668,
+          "phase": "park_home",
+          "joint_positions": [
+            6.096386903565445e-06,
+            -0.3999997225789701,
+            7.543010318469604e-22,
+            -2.499999931728576,
+            -2.461917185049468e-06,
+            2.099998583820469,
+            0.8000021110913945,
+            0.0,
+            0.0,
+            0.03999974055217562,
+            0.040000266123276854,
+            0.0
+          ],
+          "ee": [
+            0.4140532612800598,
+            2.183064907512744e-06,
+            0.32153594493865967
+          ],
+          "objects": {
+            "red": {
+              "position": [
+                0.5899920566396946,
+                -0.23611832323221504,
+                0.031989679421998984
+              ],
+              "orientation": [
+                1.0470766700778825e-06,
+                -8.979161907819618e-06,
+                -4.709145408323393e-06,
+                0.9999999999480511
+              ],
+              "velocity": [
+                2.9383796799207064e-20,
+                2.2787971776966457e-20,
+                8.049116928532385e-16
+              ]
+            },
+            "blue": {
+              "position": [
+                0.6500003420034284,
+                0.0001987486974912059,
+                0.07198964537809974
+              ],
+              "orientation": [
+                -3.961938757648922e-06,
+                7.911863673718182e-06,
+                -3.221286894152935e-07,
+                0.9999999999608008
+              ],
+              "velocity": [
+                2.2906547313139108e-10,
+                -0.0048333160080750795,
+                -1.8939808055229435e-10
+              ]
+            },
+            "green": {
+              "position": [
+                0.4209317916165672,
+                0.16075146160800358,
+                0.021989218285077033
+              ],
+              "orientation": [
+                2.4839585197599718e-06,
+                -2.1886016522043157e-05,
+                -2.1136019257403505e-06,
+                0.9999999997551824
+              ],
+              "velocity": [
+                -1.854116491768077e-13,
+                8.921496601026667e-14,
+                -1.5286383270307624e-13
+              ]
+            }
+          },
+          "partner_position": [
+            0.6499999761581421,
+            0.00019861046166624874,
+            0.04500000178813934
+          ],
+          "partner_joint": 0.00019861046176455771,
+          "contacts": [
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6720000080508636,
+                0.022218699013517623,
+                0.04998912293615019
+              ],
+              "position_b": [
+                0.6720000080508636,
+                0.022218699013517623,
+                0.049999999999999996
+              ],
+              "contact_distance": -1.08770638498068e-05,
+              "normal_force": 0.17729426365644507
+            },
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.671999979706474,
+                -0.021781300985091897,
+                0.0499894715866495
+              ],
+              "position_b": [
+                0.671999979706474,
+                -0.021781300985091897,
+                0.049999999999999996
+              ],
+              "contact_distance": -1.0528413350495425e-05,
+              "normal_force": 0.1161921372842586
+            },
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6279999797119916,
+                -0.02178127263518534,
+                0.04999016782851749
+              ],
+              "position_b": [
+                0.6279999797119916,
+                -0.021781272635185343,
+                0.049999999999999996
+              ],
+              "contact_distance": -9.832171482503094e-06,
+              "normal_force": 0.17761116682314937
+            },
+            {
+              "body_a": 3,
+              "body_b": 11,
+              "link_a": -1,
+              "link_b": 0,
+              "position_a": [
+                0.6280000080563812,
+                0.022218727363424177,
+                0.04998981917801818
+              ],
+              "position_b": [
+                0.6280000080563812,
+                0.022218727363424177,
+                0.049999999999999996
+              ],
+              "contact_distance": -1.018082198181447e-05,
+              "normal_force": 0.11750243223568464
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.39893266162670477,
+                0.13875166390148758,
+                0.0
+              ],
+              "position_b": [
+                0.39893266162670477,
+                0.13875166390148758,
+                -1.1853974280384705e-05
+              ],
+              "contact_distance": -1.1853974280384705e-05,
+              "normal_force": 0.1859117954643589
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.39893284761888986,
+                0.18275166390055148,
+                0.0
+              ],
+              "position_b": [
+                0.39893284761888986,
+                0.18275166390055148,
+                -1.1635381859772392e-05
+              ],
+              "contact_distance": -1.1635381859772392e-05,
+              "normal_force": 0.11998323989876375
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.44293284757634493,
+                0.1827514778987983,
+                0.0
+              ],
+              "position_b": [
+                0.44293284757634493,
+                0.1827514778987983,
+                -9.709412870147899e-06
+              ],
+              "contact_distance": -9.709412870147899e-06,
+              "normal_force": 0.16875659934510412
+            },
+            {
+              "body_a": 0,
+              "body_b": 4,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.44293266158415984,
+                0.1387514778997344,
+                0.0
+              ],
+              "position_b": [
+                0.44293266158415984,
+                0.1387514778997344,
+                -9.928005290760211e-06
+              ],
+              "contact_distance": -9.928005290760211e-06,
+              "normal_force": 0.11394836529203775
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.5679922445255744,
+                -0.25811806995886644,
+                0.00998923826945379
+              ],
+              "position_b": [
+                0.5679922445255744,
+                -0.25811806995886644,
+                0.009999999999999998
+              ],
+              "contact_distance": -1.0761730546208353e-05,
+              "normal_force": 0.18491311398196283
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.567992658929543,
+                -0.21411806996091443,
+                0.009989330415921763
+              ],
+              "position_b": [
+                0.567992658929543,
+                -0.21411806996091443,
+                0.009999999999999998
+              ],
+              "contact_distance": -1.066958407823504e-05,
+              "normal_force": 0.11440392898220829
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.6119926589204965,
+                -0.2141184843665377,
+                0.009990120581735693
+              ],
+              "position_b": [
+                0.6119926589204965,
+                -0.2141184843665377,
+                0.009999999999999998
+              ],
+              "contact_distance": -9.879418264305967e-06,
+              "normal_force": 0.17746223524657287
+            },
+            {
+              "body_a": 2,
+              "body_b": 5,
+              "link_a": -1,
+              "link_b": -1,
+              "position_a": [
+                0.6119922445165279,
+                -0.2581184843644897,
+                0.009990028435267723
+              ],
+              "position_b": [
+                0.6119922445165279,
+                -0.2581184843644897,
+                0.009999999999999998
+              ],
+              "contact_distance": -9.971564732275812e-06,
+              "normal_force": 0.11182072178925542
+            }
+          ],
+          "partner_velocity": -0.0048333160156366975,
+          "partner_command": 1.7361111111058314e-05,
+          "delivery_start_tick": 240,
+          "delivery_event": {
+            "first_tick": 3955,
+            "time_since_start": 15.479166666666666,
+            "facts": {
+              "carrier_joint": 0.00019861046176455771,
+              "carrier_speed": -0.0048333160156366975,
+              "relative_position": [
+                3.420034283552198e-07,
+                1.3823572664819366e-07,
+                0.02698964537809974
+              ],
+              "blue_speed": 0.004833316008075089,
+              "relative_speed": 2.973210419135441e-10,
+              "supported": true,
+              "support_records": 4,
+              "support_force": 0.5885999999995377,
+              "support_min_distance": -1.08770638498068e-05,
+              "satisfied": true
+            },
+            "content": "实际承载、相对位姿/速度及载台到位共同首次满足交付。"
+          },
+          "delivery_facts": {
+            "carrier_joint": 0.00019861046176455771,
+            "carrier_speed": -0.0048333160156366975,
+            "relative_position": [
+              3.420034283552198e-07,
+              1.3823572664819366e-07,
+              0.02698964537809974
+            ],
+            "blue_speed": 0.004833316008075089,
+            "relative_speed": 2.973210419135441e-10,
+            "supported": true,
+            "support_records": 4,
+            "support_force": 0.5885999999995377,
+            "support_min_distance": -1.08770638498068e-05,
+            "satisfied": true
+          },
+          "robot_target_item": null,
+          "availability": {
+            "status": "ready",
+            "common_start_tick": 240,
+            "physics_tick": 3955,
+            "elapsed_seconds": 15.479166666666666,
+            "ready_event": {
+              "kind": "partner_ready",
+              "availability_actual_tick": 240,
+              "content": "伙伴资源现在可接受新的运输请求；不会自动执行此前拒绝的请求。"
+            }
+          },
+          "inspection_facts": {
+            "relative_position": [
+              0.2300003420034284,
+              0.0001987486974912059,
+              0.06698964537809973
+            ],
+            "relative_speed": 0.004833316008075089,
+            "blue_speed": 0.004833316008075089,
+            "supported": false,
+            "support_records": 0,
+            "min_distance": null,
+            "support_force": 0,
+            "satisfied": false
+          },
+          "presence": {
+            "joint": 0.45,
+            "velocity": 0.0,
+            "position": [
+              0.85,
+              0.45,
+              0.08
+            ],
+            "target": 0.45,
+            "near": true,
+            "far": false
+          },
+          "presence_motion": null,
+          "presence_events": [],
+          "return_start_tick": null,
+          "return_origin": null,
+          "return_event": null,
+          "payload_return_event": null,
+          "return_facts": null
+        },
+        "handoff_prefix_decisions": 3
+      },
+      "termination_reason": "declared_done",
+      "terminal_score": {
+        "facts": {
+          "red_actual_left": true,
+          "green_actual_right": true,
+          "check_contribution_completed": true,
+          "no_active_child": true,
+          "carrier_return_completed": true,
+          "blue_role_completed": false
+        },
+        "task_compliant": false,
+        "declared_task_success": false
+      },
+      "expected_task_success": false,
+      "runner_expected_match": true,
+      "after_terminal_immutable": true,
+      "infrastructure_failure": null,
+      "common_start_tick": 240,
+      "end_tick": 12769,
+      "makespan_ticks": 12529,
+      "body_ids": {
+        "robot": 1,
+        "carrier": 11,
+        "inspection": 12,
+        "inspection_walls": [
+          13,
+          14
+        ],
+        "presence": 15,
+        "objects": {
+          "red": 2,
+          "blue": 3,
+          "green": 4
+        }
+      },
+      "canonical_physics": {
+        "sha256": "bcea2eceab1b15471bd7da664c473b755074e57e24da30a20259227d3b84d8e9",
+        "ticks": 12769
+      },
+      "pid": 164504
+    }
+  ],
+  "source_sha256": {
+    "experiments/physical/world.py": "11e568bb9da8d9f6db3f4b4749c8e7673c8a04a242ceb6c0a552155b650a275b",
+    "experiments/physical/protocol.py": "11f69f8abd7c7e02d937ee1e00c25c2fbfb7857a58e2155767907d249b9e2490",
+    "experiments/physical/run.py": "dfb45ace803251e55f54ae332332fce055d2dc474c218d649cd5ee109591ea30",
+    "experiments/physical_v3_2/world.py": "c1eb50b952a9b8807a50844fb5243464ac0f26507c2f1769ce93673418661f20",
+    "experiments/structure_v5/world.py": "25ff3a7c8b1d47a0057ef8dc1f00bdfbd56ad30b73d735476f03ff90a7b32761",
+    "experiments/structure_v5/world_v2.py": "6a7ac588b40e6ff8fda5cd2a6780dd7380a14e9bb4efce6e8f9b647472bfe192",
+    "experiments/structure_v5/world_v3.py": "4d3b98028bd0921892f47749a04a85e56fca869b4be2893e0d5c3a29434dbe10",
+    "experiments/structure_v5/run.py": "5ff15a712b687367a50e9efff8a85a674f0680f5f3de40c9277512468f789872",
+    "experiments/structure_v5/audit.py": "794c7b3134992b8e6a24121fa4481fb8d2555f63be203f2e11645c58fd434d0c",
+    "experiments/structure_v8/world_v2.py": "1274550ae4e9325c188cb729e6aa84e4123087576da3a331d4124b5ff18e0669",
+    "experiments/structure_v8/controls_v2.py": "6d2cd5f7e7165e8a35a0a369215e0e01553687c6720f73779d03166e7f4fc55a",
+    "experiments/structure_v8/protocol.py": "b13656af56a25b5b3b27459628ee6e080030438feda353c58487f45c16641190",
+    "experiments/structure_v8/audit.py": "7e16a8a981f99d8676f3ed15c98a1b509000b62850d8aed6e1ea0498405e96be",
+    "experiments/structure_v8/run.py": "193fcb08f755e558dab03c22a00e22a84d2565e7fcdbc78b4b8c07054033b744",
+    "experiments/structure_v8/transport_config_v1.json": "88d3701e84c6ec8d6263e96305a979da27c7adf5727a617155fbc3ed3395ebc1",
+    "experiments/responsive_transport_v16/world.py": "dc8c1ecaa16bd356c782c1b2f6eb28bffe060168d4f2883b5ccb396bf3894a09",
+    "experiments/responsive_transport_v16/protocol.py": "35c441cfbc02e7407973fe7326b5ad2adca5b5d579cb3e761e5641f3ed642197",
+    "experiments/responsive_transport_v16/canonical.py": "2f688916d9b3a315f25b2f4076b70ae48898f42fa88d19d191257cb48bf98b75",
+    "experiments/responsive_transport_v16/measure.py": "44baeb80224a1c5ec4d3804ae3c96b3459faa6f6344c89737f25f2b0a58639c6",
+    "experiments/responsive_transport_v16/run.py": "3af8711ae0efa35527a4fb943fbfdc3f05ee35049443b0eb4214e2ff5997e30b",
+    "experiments/structure_handoff_v15/reference_audit.py": "3f99918a12f5c9aa42cd932d50200bd7ebb3daa87aa5e0ccbf3cef2e1814899d",
+    "tests/test_responsive_transport_v16.py": "1bf005ecab9c6360f74fcc80326495da3bb1b032a6e87e94cd40415084838bc0",
+    "experiments/sustained_activity_v18/protocol.py": "ec810c04af2410c156a0a6f0155624b3646c55c72c7b47b4c4a98e5e12d12363",
+    "experiments/sustained_activity_v18/run.py": "01cef485e123c58992e13555f6d7c384b9eb9c9493d0794d4d56e5e00c16b904",
+    "tests/test_sustained_activity_v18.py": "e84d8d5a6d0bcb1c9fd8505e64a7dca9773fb6161ee05176ee5c8df79cfe58d4",
+    "experiments/structure_foundation_v20/world_v1.py": "53132f4b37bd692f34483ea730f5eba10c4d43417c78287780595a6ffc5dcb57",
+    "experiments/structure_foundation_v20/canonical.py": "b314eaa26f010978091f5237f09e9a5f24bd95e2a59abcf90cb4c9bb4f178c12",
+    "experiments/structure_foundation_v20/run_v1.py": "0da19ecb8da4fa95da131a7b5b39f3dd973d98832f4ce0b740c4a4e00ffac2a4",
+    "experiments/structure_foundation_v20/config_v1.json": "6d94f151cd4b9a5c08973b2743673617363dd3519fefdd780a6bd2c72186ec02",
+    "experiments/structure_foundation_v20/world.py": "9ca0a69c270e60f05d4c9048b8460c59bdbc7c50b2ec6ecf2909258f04047fcb",
+    "experiments/structure_foundation_v20/run.py": "f339daf5be6ad77c700ea7a018d3823eda2580f552626e135ea6f8aff0e872f2",
+    "experiments/structure_foundation_v20/config.json": "85f15882abf5e09dc5b85fb3c06464eefd51c1da79d18314e666d3822fdd0b60",
+    "tests/test_structure_foundation_v20.py": "6d0915fc95a189c4cffbdfac53a910203b1dbb2736ec2dffc33c47a7357b4599",
+    "tests/test_structure_foundation_v20_v1.py": "9af7a392f8916ea79853631eba0e073cefbf11089315bd587480f02978051ccf",
+    "experiments/structure_foundation_v20/audit_v2.py": "cf51fcaf7ee917b15b516af18df8cc6006fed7889372f55660e9e34b031b7ab7",
+    "experiments/sustained_structure_v21/config.json": "50bd8ad42fbce9566149e92418e63bc897d9b11814c2d8188b0d1865a4d9184f",
+    "experiments/sustained_structure_v21/cases.py": "2918573cd9bd6ab8e3b13f37b0d96b46588c11dda093a179a2c59b5f970ca3a7",
+    "experiments/sustained_structure_v21/service.py": "05e0746de125112ff070efe7ace37bb3a060ed1c7938e3be4a5024325f6a1ad8",
+    "experiments/sustained_structure_v21/world.py": "c6b350e428c7216255dc80459145aa833a0dd1f2c0ff23c02306f4175dd30ebf",
+    "experiments/sustained_structure_v21/protocol.py": "ea2ba907092cb45018e59c16efbe2fdfd4f2245f66cd1a469505c8e5470bbf01",
+    "experiments/sustained_structure_v21/run.py": "3a9d6b4f52cecd40791326176513a6cd07693e363877c03917086bafc69e5ca4",
+    "tests/test_sustained_structure_v21.py": "eb7ace5455ca8473d173d968d7e2fefc4afe669bfd0d83b0304ad8f230b98fc5",
+    "experiments/sustained_structure_v21/run_r1.py": "aeabcf90deae85dfc021aa12eafd4f20b3574c483ea8153e66ad9359060ab7b1",
+    "tests/test_sustained_structure_v21_r1.py": "d8601134a9c3e7e1ad1a1152616fb2e6df4162fecd31292fbf32912d14bd6c53"
+  },
+  "freeze_sha256": "56c040c8648dda851d901ff878059ffe0f83e1d4178ede2a606a7a23b88a8006"
+}
