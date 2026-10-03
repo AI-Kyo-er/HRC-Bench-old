@@ -1,0 +1,27 @@
+diff --git a/vico/modules/__init__.py b/vico/modules/__init__.py
+--- a/vico/modules/__init__.py
++++ b/vico/modules/__init__.py
+@@ -1,9 +1,14 @@
+-from .bus import Bus
+-from .shared_bicycles import SharedBicycles
+-from .indoor_scenes.load_indoor_room import load_indoor_room, load_default_room
+-from .outdoor_objects import *
+-from .avatar import *
+-from .vehicle import *
+-from .traffic_manager import *
+-from .MapTool import *
+-from .robot import ROBOT_CONTROLLERS, ROBOT_POSITION_OFFSETS, ROBOT_CONFIGS
++import os
++
++if os.environ.get("VICO_PILOT_MINIMAL_IMPORTS") == "1":
++    from .avatar import *
++else:
++    from .bus import Bus
++    from .shared_bicycles import SharedBicycles
++    from .indoor_scenes.load_indoor_room import load_indoor_room, load_default_room
++    from .outdoor_objects import *
++    from .avatar import *
++    from .vehicle import *
++    from .traffic_manager import *
++    from .MapTool import *
++    from .robot import ROBOT_CONTROLLERS, ROBOT_POSITION_OFFSETS, ROBOT_CONFIGS

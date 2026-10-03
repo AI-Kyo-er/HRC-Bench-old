@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hrc-progressively-rebalanced-pilot"
+version = "0.1.0"
+description = "VC/Genesis embodied pilot for progressively rebalanced human-robot collaboration"
+requires-python = ">=3.11,<3.12"
+dependencies = ["numpy==1.26.4", "Pillow>=11", "imageio[ffmpeg]>=2.37"]
+
+[project.scripts]
+hrc-pilot = "hrc_pilot.run:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
