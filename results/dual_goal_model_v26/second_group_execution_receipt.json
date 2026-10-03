@@ -1,0 +1,38 @@
+{
+  "audit_job": {
+    "session_id": 72534,
+    "pid": 485881,
+    "exit_code": 0,
+    "exit_evidence": "write_stdin(72534)真实返回exit_code=0；原log保留。"
+  },
+  "freeze_sha256": "62996089023f72de804f31bf2fc64662a3cbfb11f59ce6ed8b1d9af61d597b4e",
+  "frozen_source_unchanged": true,
+  "independent_sources_sha256": {
+    "audit.py": "f99c5a5af93678cf176f25ce5a1bf824243caf779324832518caee97f2912642",
+    "report.py": "f567f24f5b42156ce9245d3bd3cf4f3175f335d7ff83db5e92df216cc6fca193",
+    "timing_stage_audit.py": "fde2b3d4bde4e501f71ff3e9ba3560e322f85257a489230205b2af3632acf5e5"
+  },
+  "receipt_source_sha256": "9368e7f59840ef5abfa7f88ce834bfd3062d3181e278ef5daccd49bc3e1f43e9",
+  "artifacts_sha256": {
+    "second_full_group_preaudit.json": "2bc88cfcfc271c849e77a49d1c190e772fc80b257fe6fa5adfe21a5aec82f77d",
+    "first_two_groups_timing_preaudit.json": "e3af6d154d2ec59921fe66cd26d164923aeb4005757db7190a0b8f729a8c0868",
+    "first_full_group_preaudit.json": "dd502900015794c3fce9b23192e0306aaeee543e8339baeeb3adaa5aa5a55948",
+    "first_group_reconstruction_definition.json": "bf28f076443f68c70869ee3415de5569c0babdfc3751bbc0593a1f949f9732b6"
+  },
+  "audit_log_sha256": "df76c50d53e5d98320da21640645c3abe8be0361bdb494b03ea1c456b0ad96e9",
+  "summary": {
+    "total": 4,
+    "reconstruction_consistent": 4,
+    "strict_passed": 3,
+    "task_success": 0,
+    "physically_safe": 3,
+    "total_ticks": 115089
+  },
+  "model_calls": 85,
+  "active_original_jobs_at_receipt": "    PID     ELAPSED STAT COMMAND\n 253762    02:27:46 Rl   .venv-qwen3-v14/bin/python -u -m experiments.dual_goal_model_v26.run run\n 286338    01:42:32 Sl   .venv-qwen3-v14/bin/python -u results/dual_goal_model_v26/raw/full_completion_watch_source.py\n",
+  "unchanged_predicates": true,
+  "first_group_trace_not_reaudited": true,
+  "additional_model_or_physical_runs": 0,
+  "tests": "此次仅新增只读派生入口及数据断言；无新业务风险，不重复已通过的236项全套。",
+  "scope": "阶段审计exit0表示派生程序正常完成，不等于四任务成功或四例原strict/安全全通过。全80终态审计仍待原运行完成。"
+}

@@ -1,0 +1,1317 @@
+{
+  "total": 8,
+  "pairs": [
+    {
+      "expression": "direct",
+      "view": "full_history",
+      "before_check": {
+        "id": "full_00_direct_full_history",
+        "original_passed": true,
+        "failed_checks": [],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": true,
+        "physical_contract_ok": true,
+        "physical_contract_checks": {
+          "all_forbidden_zero": true,
+          "loaded_support_all": true,
+          "non_target_preserved": true,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "declared_done",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": true,
+            "check_completed": false,
+            "no_active_child": false,
+            "red_left": false,
+            "blue_current_goal": false,
+            "green_current_goal": false,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": true,
+          "completed": false,
+          "qualified_ticks": 0,
+          "last_tick": 9841,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 1,
+          "duplicate_requests": 0
+        },
+        "qualified_ticks": 0,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 19204,
+            "ticks": 4801,
+            "max_normal_force": 1.4936687982064158,
+            "negative_distance_records": 18875
+          },
+          "expected_blue_inspection": {
+            "records": 4532,
+            "ticks": 1133,
+            "max_normal_force": 1.5419368137920217,
+            "negative_distance_records": 4532
+          },
+          "expected_target_robot": {
+            "records": 4550,
+            "ticks": 2278,
+            "max_normal_force": 46.86638516037536,
+            "negative_distance_records": 4543
+          },
+          "expected_objects_static_support": {
+            "records": 86604,
+            "ticks": 9838,
+            "max_normal_force": 1.5746238879914058,
+            "negative_distance_records": 86598
+          },
+          "forbidden_robot_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 10,
+        "cost": {
+          "decisions": 10,
+          "invalid": 3,
+          "requests_transport": 1,
+          "requests_return": 1,
+          "requests_check": 2,
+          "yields": 2,
+          "wait_ticks": 3721,
+          "physical_attempts": 2,
+          "physical_failures": 0,
+          "no_ops": 0,
+          "declarations": 1,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 9601,
+        "successful_completion_ticks": null
+      },
+      "after_handoff": {
+        "id": "full_01_direct_full_history",
+        "original_passed": true,
+        "failed_checks": [],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": true,
+        "physical_contract_ok": true,
+        "physical_contract_checks": {
+          "all_forbidden_zero": true,
+          "loaded_support_all": true,
+          "non_target_preserved": true,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "declared_done",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": false,
+            "check_completed": false,
+            "no_active_child": true,
+            "red_left": false,
+            "blue_current_goal": true,
+            "green_current_goal": true,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": false,
+          "completed": false,
+          "qualified_ticks": 0,
+          "last_tick": 15841,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 0,
+          "request_rejections": 1,
+          "duplicate_requests": 0
+        },
+        "qualified_ticks": 0,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 19204,
+            "ticks": 4801,
+            "max_normal_force": 1.4936687982064158,
+            "negative_distance_records": 18875
+          },
+          "expected_blue_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "expected_target_robot": {
+            "records": 5030,
+            "ticks": 2518,
+            "max_normal_force": 46.86638516037536,
+            "negative_distance_records": 5023
+          },
+          "expected_objects_static_support": {
+            "records": 162172,
+            "ticks": 15838,
+            "max_normal_force": 1.5817714858815146,
+            "negative_distance_records": 162172
+          },
+          "forbidden_robot_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 11,
+        "cost": {
+          "decisions": 11,
+          "invalid": 2,
+          "requests_transport": 1,
+          "requests_return": 0,
+          "requests_check": 1,
+          "yields": 5,
+          "wait_ticks": 9481,
+          "physical_attempts": 2,
+          "physical_failures": 0,
+          "no_ops": 0,
+          "declarations": 1,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 15601,
+        "successful_completion_ticks": null
+      },
+      "both_task_success": false
+    },
+    {
+      "expression": "direct",
+      "view": "public_ledger_aid",
+      "before_check": {
+        "id": "full_00_direct_public_ledger_aid",
+        "original_passed": false,
+        "failed_checks": [
+          "all_forbidden_zero",
+          "non_target_preserved"
+        ],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": false,
+        "physical_contract_ok": false,
+        "physical_contract_checks": {
+          "all_forbidden_zero": false,
+          "loaded_support_all": true,
+          "non_target_preserved": false,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "physical_failure",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": true,
+            "check_completed": true,
+            "no_active_child": true,
+            "red_left": true,
+            "blue_current_goal": false,
+            "green_current_goal": false,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 18601,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 1,
+          "duplicate_requests": 1
+        },
+        "qualified_ticks": 240,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          },
+          "2": {
+            "ticks": 3420,
+            "supported_ticks": 0,
+            "loaded": false
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 44644,
+            "ticks": 11161,
+            "max_normal_force": 1.529375518628346,
+            "negative_distance_records": 44313
+          },
+          "expected_blue_inspection": {
+            "records": 25892,
+            "ticks": 6473,
+            "max_normal_force": 1.578809710545929,
+            "negative_distance_records": 25892
+          },
+          "expected_target_robot": {
+            "records": 8817,
+            "ticks": 4281,
+            "max_normal_force": 143.50290556599566,
+            "negative_distance_records": 8803
+          },
+          "expected_objects_static_support": {
+            "records": 138896,
+            "ticks": 18598,
+            "max_normal_force": 160.4137862487853,
+            "negative_distance_records": 138170
+          },
+          "forbidden_robot_carrier": {
+            "records": 1269,
+            "ticks": 697,
+            "max_normal_force": 391.75222659137836,
+            "negative_distance_records": 1169
+          },
+          "forbidden_other_object_carrier": {
+            "records": 3340,
+            "ticks": 1121,
+            "max_normal_force": 108.53752513449288,
+            "negative_distance_records": 2608
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 527,
+            "ticks": 417,
+            "max_normal_force": 51.95901865640562,
+            "negative_distance_records": 527
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 16,
+        "cost": {
+          "decisions": 16,
+          "invalid": 4,
+          "requests_transport": 1,
+          "requests_return": 1,
+          "requests_check": 3,
+          "yields": 5,
+          "wait_ticks": 7801,
+          "physical_attempts": 4,
+          "physical_failures": 1,
+          "no_ops": 1,
+          "declarations": 0,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 18361,
+        "successful_completion_ticks": null
+      },
+      "after_handoff": {
+        "id": "full_01_direct_public_ledger_aid",
+        "original_passed": false,
+        "failed_checks": [
+          "all_forbidden_zero",
+          "non_target_preserved"
+        ],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": false,
+        "physical_contract_ok": false,
+        "physical_contract_checks": {
+          "all_forbidden_zero": false,
+          "loaded_support_all": true,
+          "non_target_preserved": false,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "budget_exhausted",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": false,
+            "check_completed": false,
+            "no_active_child": true,
+            "red_left": true,
+            "blue_current_goal": true,
+            "green_current_goal": true,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": false,
+          "completed": false,
+          "qualified_ticks": 0,
+          "last_tick": 58687,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 0,
+          "request_rejections": 5,
+          "duplicate_requests": 0
+        },
+        "qualified_ticks": 0,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          },
+          "2": {
+            "ticks": 3720,
+            "supported_ticks": 3720,
+            "loaded": true
+          },
+          "3": {
+            "ticks": 3966,
+            "supported_ticks": 3966,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 85708,
+            "ticks": 21427,
+            "max_normal_force": 1.7379310531024474,
+            "negative_distance_records": 84953
+          },
+          "expected_blue_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "expected_target_robot": {
+            "records": 14887,
+            "ticks": 5483,
+            "max_normal_force": 47.5766189477596,
+            "negative_distance_records": 14778
+          },
+          "expected_objects_static_support": {
+            "records": 596564,
+            "ticks": 58684,
+            "max_normal_force": 126.45856889089727,
+            "negative_distance_records": 596101
+          },
+          "forbidden_robot_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_carrier": {
+            "records": 3737,
+            "ticks": 1598,
+            "max_normal_force": 107.45617100258487,
+            "negative_distance_records": 3582
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 48,
+        "cost": {
+          "decisions": 48,
+          "invalid": 14,
+          "requests_transport": 3,
+          "requests_return": 6,
+          "requests_check": 5,
+          "yields": 25,
+          "wait_ticks": 45967,
+          "physical_attempts": 4,
+          "physical_failures": 0,
+          "no_ops": 2,
+          "declarations": 0,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 58447,
+        "successful_completion_ticks": null
+      },
+      "both_task_success": false
+    },
+    {
+      "expression": "relation",
+      "view": "full_history",
+      "before_check": {
+        "id": "full_00_relation_full_history",
+        "original_passed": false,
+        "failed_checks": [
+          "all_forbidden_zero",
+          "loaded_support_all"
+        ],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": false,
+        "physical_contract_ok": false,
+        "physical_contract_checks": {
+          "all_forbidden_zero": false,
+          "loaded_support_all": false,
+          "non_target_preserved": true,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "physical_failure",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": true,
+            "check_completed": false,
+            "no_active_child": true,
+            "red_left": true,
+            "blue_current_goal": false,
+            "green_current_goal": false,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": false,
+          "completed": false,
+          "qualified_ticks": 0,
+          "last_tick": 8520,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 0,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        },
+        "qualified_ticks": 0,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          },
+          "2": {
+            "ticks": 3180,
+            "supported_ticks": 2522,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 31430,
+            "ticks": 7859,
+            "max_normal_force": 14.596507245695445,
+            "negative_distance_records": 31419
+          },
+          "expected_blue_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "expected_target_robot": {
+            "records": 5809,
+            "ticks": 2861,
+            "max_normal_force": 137.52255928126485,
+            "negative_distance_records": 5785
+          },
+          "expected_objects_static_support": {
+            "records": 60239,
+            "ticks": 8517,
+            "max_normal_force": 16.329395540116522,
+            "negative_distance_records": 60213
+          },
+          "forbidden_robot_carrier": {
+            "records": 1556,
+            "ticks": 573,
+            "max_normal_force": 338.5485438278874,
+            "negative_distance_records": 1555
+          },
+          "forbidden_other_object_carrier": {
+            "records": 575,
+            "ticks": 262,
+            "max_normal_force": 133.76005844618243,
+            "negative_distance_records": 423
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 15,
+            "ticks": 10,
+            "max_normal_force": 22.394787181951386,
+            "negative_distance_records": 8
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 10,
+        "cost": {
+          "decisions": 10,
+          "invalid": 5,
+          "requests_transport": 2,
+          "requests_return": 2,
+          "requests_check": 0,
+          "yields": 1,
+          "wait_ticks": 1920,
+          "physical_attempts": 2,
+          "physical_failures": 1,
+          "no_ops": 1,
+          "declarations": 0,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 8280,
+        "successful_completion_ticks": null
+      },
+      "after_handoff": {
+        "id": "full_01_relation_full_history",
+        "original_passed": true,
+        "failed_checks": [],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": true,
+        "physical_contract_ok": true,
+        "physical_contract_checks": {
+          "all_forbidden_zero": true,
+          "loaded_support_all": true,
+          "non_target_preserved": true,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "declared_done",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": true,
+            "check_completed": true,
+            "no_active_child": true,
+            "red_left": true,
+            "blue_current_goal": true,
+            "green_current_goal": false,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 14160,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 0,
+          "duplicate_requests": 0
+        },
+        "qualified_ticks": 240,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 24720,
+            "ticks": 6180,
+            "max_normal_force": 1.5356930675963423,
+            "negative_distance_records": 24389
+          },
+          "expected_blue_inspection": {
+            "records": 7900,
+            "ticks": 1975,
+            "max_normal_force": 1.5790599964372656,
+            "negative_distance_records": 7896
+          },
+          "expected_target_robot": {
+            "records": 9580,
+            "ticks": 4795,
+            "max_normal_force": 46.352213205802485,
+            "negative_distance_records": 9565
+          },
+          "expected_objects_static_support": {
+            "records": 120864,
+            "ticks": 14157,
+            "max_normal_force": 1.6335152595636395,
+            "negative_distance_records": 120860
+          },
+          "forbidden_robot_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 9,
+        "cost": {
+          "decisions": 9,
+          "invalid": 1,
+          "requests_transport": 1,
+          "requests_return": 0,
+          "requests_check": 1,
+          "yields": 1,
+          "wait_ticks": 1920,
+          "physical_attempts": 4,
+          "physical_failures": 0,
+          "no_ops": 0,
+          "declarations": 1,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 13920,
+        "successful_completion_ticks": null
+      },
+      "both_task_success": false
+    },
+    {
+      "expression": "relation",
+      "view": "public_ledger_aid",
+      "before_check": {
+        "id": "full_00_relation_public_ledger_aid",
+        "original_passed": true,
+        "failed_checks": [],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": true,
+        "physical_contract_ok": true,
+        "physical_contract_checks": {
+          "all_forbidden_zero": true,
+          "loaded_support_all": true,
+          "non_target_preserved": true,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "declared_done",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": true,
+            "check_completed": false,
+            "no_active_child": false,
+            "red_left": true,
+            "blue_current_goal": false,
+            "green_current_goal": true,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": true,
+          "completed": false,
+          "qualified_ticks": 0,
+          "last_tick": 21961,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 1,
+          "duplicate_requests": 1
+        },
+        "qualified_ticks": 0,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 31924,
+            "ticks": 7981,
+            "max_normal_force": 1.533902156886034,
+            "negative_distance_records": 31593
+          },
+          "expected_blue_inspection": {
+            "records": 4532,
+            "ticks": 1133,
+            "max_normal_force": 1.5299423541455508,
+            "negative_distance_records": 4532
+          },
+          "expected_target_robot": {
+            "records": 10059,
+            "ticks": 5035,
+            "max_normal_force": 46.35623017454996,
+            "negative_distance_records": 10045
+          },
+          "expected_objects_static_support": {
+            "records": 209676,
+            "ticks": 21958,
+            "max_normal_force": 1.603449369654456,
+            "negative_distance_records": 209672
+          },
+          "forbidden_robot_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 15,
+        "cost": {
+          "decisions": 15,
+          "invalid": 1,
+          "requests_transport": 2,
+          "requests_return": 0,
+          "requests_check": 3,
+          "yields": 5,
+          "wait_ticks": 9481,
+          "physical_attempts": 4,
+          "physical_failures": 0,
+          "no_ops": 2,
+          "declarations": 1,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 21721,
+        "successful_completion_ticks": null
+      },
+      "after_handoff": {
+        "id": "full_01_relation_public_ledger_aid",
+        "original_passed": true,
+        "failed_checks": [],
+        "reconstruction_consistent": true,
+        "task_success": false,
+        "physically_safe": true,
+        "physical_contract_ok": true,
+        "physical_contract_checks": {
+          "all_forbidden_zero": true,
+          "loaded_support_all": true,
+          "non_target_preserved": true,
+          "successful_grasp_places_verified": true,
+          "contact_fields_complete": true
+        },
+        "termination_reason": "declared_done",
+        "actual_score": {
+          "facts": {
+            "confirmation_closed": true,
+            "check_completed": true,
+            "no_active_child": true,
+            "red_left": true,
+            "blue_current_goal": true,
+            "green_current_goal": true,
+            "carrier_current_far": false
+          },
+          "task_success": false
+        },
+        "service": {
+          "committed": false,
+          "completed": true,
+          "qualified_ticks": 240,
+          "last_tick": 26401,
+          "departed_once": false,
+          "far_arrival_tick": null,
+          "return_started": false,
+          "returned": false,
+          "acceptances": 1,
+          "request_rejections": 1,
+          "duplicate_requests": 0
+        },
+        "qualified_ticks": 240,
+        "leg_support": {
+          "1": {
+            "ticks": 3721,
+            "supported_ticks": 3721,
+            "loaded": true
+          }
+        },
+        "contact_groups": {
+          "expected_blue_carrier": {
+            "records": 19204,
+            "ticks": 4801,
+            "max_normal_force": 1.4936687982064158,
+            "negative_distance_records": 18875
+          },
+          "expected_blue_inspection": {
+            "records": 21580,
+            "ticks": 5395,
+            "max_normal_force": 1.6277542495963029,
+            "negative_distance_records": 21576
+          },
+          "expected_target_robot": {
+            "records": 15089,
+            "ticks": 7552,
+            "max_normal_force": 46.86638516037536,
+            "negative_distance_records": 15067
+          },
+          "expected_objects_static_support": {
+            "records": 249948,
+            "ticks": 26398,
+            "max_normal_force": 2.1877475729070763,
+            "negative_distance_records": 249940
+          },
+          "forbidden_robot_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_carrier": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_carrier_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_other_object_inspection": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_presence_contacts": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_non_target_robot": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_robot_static": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          },
+          "forbidden_object_object": {
+            "records": 0,
+            "ticks": 0,
+            "max_normal_force": 0,
+            "negative_distance_records": 0
+          }
+        },
+        "neural_checks": {
+          "all_predictions": true,
+          "call_count": true,
+          "cost_exact": true,
+          "parse_counts": true,
+          "capacity_failure_exact": true,
+          "first_model_input_exact": true
+        },
+        "parse_failures": 0,
+        "generation_hit_limit": 0,
+        "model_calls": 17,
+        "cost": {
+          "decisions": 17,
+          "invalid": 2,
+          "requests_transport": 2,
+          "requests_return": 0,
+          "requests_check": 2,
+          "yields": 5,
+          "wait_ticks": 7801,
+          "physical_attempts": 6,
+          "physical_failures": 0,
+          "no_ops": 1,
+          "declarations": 1,
+          "reloads": 0
+        },
+        "failed_termination_ticks": 26161,
+        "successful_completion_ticks": null
+      },
+      "both_task_success": false
+    }
+  ],
+  "first_group_source_sha256": "dd502900015794c3fce9b23192e0306aaeee543e8339baeeb3adaa5aa5a55948",
+  "second_group_source_sha256": "2bc88cfcfc271c849e77a49d1c190e772fc80b257fe6fa5adfe21a5aec82f77d",
+  "script_sha256": "fde2b3d4bde4e501f71ff3e9ba3560e322f85257a489230205b2af3632acf5e5",
+  "task_success": 0,
+  "physically_safe": 5,
+  "cost_interpretation": "逐例失败终止耗时保留，不作为任务完成效率；阶段配对不构成总体时机效应或显著性证据。",
+  "scope": "固定前两组八例描述配对；首组不重复全trace审计；统一80终态仍覆盖全部。"
+}
