@@ -69,3 +69,11 @@
 首例独立预审计现已生成`first_episode_preaudit.json`：输入token/消息/公开事件、两次原生输出与严格解析、seed和成本重建全部一致，全13801tick物理安全；任务仍仅因green未完成失败。主控逐项核读审计，确认审计通过没有将任务失败改成成功。审计源仍为`f99c5a5af93678cf176f25ce5a1bf824243caf779324832518caee97f2912642`，单例入口脚本SHA为`a9539ddc0323e1874a8fe1f67aa42ae28aca7a7411eda599f7fccc2942ebcbe9`。
 
 首次预审计6235真实exit1，原因是从raw路径直接执行脚本缺少项目包搜索路径，尚未进入数据审计；原源与日志保留。同一脚本使用显式进程级PYTHONPATH后49173生成上述通过报告，未修改冻结runner或重跑任何模型决策。原正式7815继续运行。
+
+## 全部局部条件运行结束，阶段审计进行中
+
+主控读取16个局部真实summary：完整历史6/8任务成功、公开账本8/8，共51次调用，解析失败与输出截断均0。失败为`local_00_direct_full_history`和`local_02_relation_full_history`，均仅green目标未完成，blue放置后提前声明。它们分别出现在直接/关系表达，不能归结为关系表达独有缺陷。
+
+完整历史共25个局部决策、14次实际抓放，账本共26个决策、17次抓放；总数差异包含失败漏做，不能直接作效率排名。账本`local_01_relation_public_ledger_aid`有一次far上的reload前提拒绝，0tick/无实际抓放，之后完成；`local_02_relation_public_ledger_aid`实际green-right→green-left→blue-right，3抓放/9300tick后完成，比指定参考多1抓放/3180tick。完整历史`local_02_direct_full_history`多一次被拒返程及1920tick等待后完成；`local_03_direct_full_history`亦有1920tick额外等待。这些成本均保留，中间非最终目标位置不自动判违规。
+
+局部自动审计78765/PID273826已由等待转为真实审计，主控核实进程及首例输出；原正式7815/PID253762仍存活并继续64完整条件。上述为运行终态汇总，尚未取得全部16条独立安全/输入结论。派生审计/报告准备已独立提交`0aff5fc`，其新增报告反例后全套236项通过（主控核读`tests_full_post_derivation236.log`），未改原冻结执行源。
