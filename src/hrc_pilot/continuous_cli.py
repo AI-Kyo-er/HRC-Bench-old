@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from .continuous import generate_scenarios, run_catalog
+from .continuous import generate_benchmark_suite, generate_scenarios, run_catalog
 from .continuous_report import write_continuous_report
 
 
@@ -19,18 +19,30 @@ def main() -> None:
                         help="生成多少个随机任务实例；0 表示运行六个参考条件")
     parser.add_argument("--scenario-seed", type=int, default=None,
                         help="任务实例生成种子，默认沿用 --seed")
+    parser.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive"),
+                        default="adaptive", help="人类伙伴条件")
+    parser.add_argument("--suite", action="store_true",
+                        help="生成 isolated/matched_serial/compositional/held_out 条件集合")
+    parser.add_argument("--count-per-condition", type=int, default=2,
+                        help="--suite 每个结构条件生成多少实例")
     args = parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error("输出目录已有内容，请使用新的目录，避免覆盖已有实验。")
-    scenarios = generate_scenarios(args.generated,
-                                   seed=args.seed if args.scenario_seed is None else args.scenario_seed)
+    scenario_seed = args.seed if args.scenario_seed is None else args.scenario_seed
+    if args.suite:
+        scenarios = generate_benchmark_suite(count_per_condition=args.count_per_condition,
+                                             seed=scenario_seed, include_reference=False)
+    else:
+        scenarios = generate_scenarios(args.generated, seed=scenario_seed)
     results = run_catalog(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
-                          scenarios=scenarios or None)
+                          scenarios=scenarios or None, partner_mode=args.partner_mode)
     (args.output_dir / "provenance.json").write_text(json.dumps({
         "runtime": "hrc_pilot.continuous", "backend": "ContinuousWorld",
         "policy": args.policy, "seed": args.seed,
-        "generated": args.generated,
-        "scenario_seed": args.seed if args.scenario_seed is None else args.scenario_seed,
+        "generated": args.generated, "suite": args.suite,
+        "count_per_condition": args.count_per_condition,
+        "partner_mode": args.partner_mode,
+        "scenario_seed": scenario_seed,
         "observation_boundary": "public_observation_only", "scenario_count": len(results),
     }, ensure_ascii=False, indent=2))
     print(f"[continuous] 结果：{write_continuous_report(args.output_dir, results, scenarios or None)}")

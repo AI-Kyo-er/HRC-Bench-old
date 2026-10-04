@@ -18,6 +18,12 @@
 - `generate_scenarios(count, seed)` 会生成不同布局、目标区域、公开分工和伙伴
   可用性的实例；实例不携带固定的事件时间表，伙伴根据观测、距离、负载和
   机器人占用连续地改变行为。
+- `generate_benchmark_suite` 生成 `isolated`、`matched_serial`、`compositional`
+  和 `held_out` 四类结构条件；`InteractionStructure` 记录作用片段、跨片段
+  依赖、并发关系和 train/dev/test 划分。它用于组织数据和评测，不是逐步
+  触发器。
+- `--partner-mode` 可选 `fixed_replay`、`reactive`、`adaptive`。三者分别
+  对应固定回放、只根据当前公开行为反应、以及保留公开历史后的适应式伙伴。
 - `ModelPolicy` 接受 VLA 的 RGB 加结构化输入或 WLA 的文本/状态输入，并把
   JSON 动作统一解码为 `Action`。`GreedyPublicPolicy` 仅用于检查协议，不是模型
   能力结果。
@@ -42,6 +48,16 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
   --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/generated \
   --generated 20 --scenario-seed 42
 ```
+
+运行结构对照集合：
+
+```bash
+PYTHONPATH=src python scripts/run_continuous_benchmark.py \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/suite \
+  --suite --count-per-condition 5 --partner-mode adaptive
+```
+
+完整的研究设计和字段约束见 `design.md` 与 `benchmark_schema.md`。
 
 每个 episode 目录是一个独立数据单元。`scenario.json` 保存实例条件，
 `public_observations.jsonl` 和 `policy_io.jsonl` 保存模型可见输入及动作，

@@ -8,7 +8,10 @@ from hrc_pilot.continuous import (
     AdaptivePartner,
     CONTINUOUS_SCENARIOS,
     ContinuousWorld,
+    FixedReplayPartner,
     GreedyPublicPolicy,
+    ReactivePartner,
+    generate_benchmark_suite,
     run_catalog,
 )
 from hrc_pilot.protocol import Action, Message
@@ -35,6 +38,30 @@ class ContinuousRuntimeTests(unittest.TestCase):
         occupied = partner.step(world.observe()).command
         self.assertNotEqual(idle.intent, "yield")
         self.assertEqual(occupied.intent, "yield")
+
+    def test_partner_modes_have_distinct_information_boundaries(self):
+        scenario = CONTINUOUS_SCENARIOS["concurrent_overlay"]
+        world = ContinuousWorld(scenario)
+        world.reset(0)
+        for message in scenario.initial_messages():
+            world.say(message)
+        world.start_action(Action("transfer", "blue", "keep_blue"))
+        fixed = FixedReplayPartner(scenario)
+        reactive = ReactivePartner(scenario)
+        fixed.reset(0)
+        reactive.reset(0)
+        self.assertEqual(fixed.step(world.observe()).command.intent, "approach")
+        self.assertEqual(reactive.step(world.observe()).command.intent, "yield")
+
+    def test_suite_has_structure_split_without_manifest(self):
+        scenarios = generate_benchmark_suite(count_per_condition=2, seed=11, include_reference=False)
+        self.assertEqual([scenario.condition for scenario in scenarios],
+                         ["isolated", "isolated", "matched_serial", "matched_serial",
+                          "compositional", "compositional", "held_out", "held_out"])
+        self.assertEqual(scenarios[-1].structure.split, "test")
+        self.assertTrue(scenarios[-1].structure.dependencies)
+        self.assertEqual(scenarios[0].objects, scenarios[2].objects)
+        self.assertEqual(scenarios[1].regions, scenarios[7].regions)
 
     def test_public_observation_does_not_leak_private_goals(self):
         world = ContinuousWorld(CONTINUOUS_SCENARIOS["history_reinterpretation"])
@@ -96,6 +123,9 @@ class ContinuousRuntimeTests(unittest.TestCase):
             self.assertTrue((output / "public_observations.jsonl").exists())
             self.assertTrue((output / "policy_io.jsonl").exists())
             self.assertTrue((output / "scenario.json").exists())
+            metrics = (output / "metrics.json").read_text()
+            self.assertIn("structure_family", metrics)
+            self.assertIn("partner_mode", metrics)
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@
 
 - [实验设计、接口与运行说明](experiments/pilot_v1/README.md)
 - [持续运行时、六类场景与当前边界](experiments/continuous_v2/README.md)
+- [v2 实验设计与数据契约](experiments/continuous_v2/design.md)
 - [已经生成的正式展示页](results/pilot_v1/formal/index.html)
 - [运行脚本](scripts/run_pilot_demo.sh)
 
@@ -36,3 +37,5 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 这次 v2 报告验证的是连续协议、动态伙伴和独立记录逻辑；它使用 `ContinuousWorld` 参考后端，不把参考伙伴的成功率当作模型结果。`continuous_genesis.py` 和 `VCWorkspace` 已提供逐 tick Genesis 接缝，完整六场景 Genesis 资产、真实 VLA/WLA 推理和接触安全评测仍需后续实现。
 
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ModelPolicy` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
+
+可以用 `--suite` 生成 isolated、matched_serial、compositional 和 held_out 结构条件，并用 `--partner-mode fixed_replay|reactive|adaptive` 做伙伴信息边界对照。held-out 的依赖关系写在每个 episode 的 `scenario.json` 中，不依赖 `manifest.json`。

@@ -7,7 +7,7 @@ Genesis 后端只需要实现同样的 `observe/start_action/tick` 适配面即�
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 import importlib
 import json
 import math
@@ -27,6 +27,22 @@ class ObjectSpec:
 
 
 @dataclass(frozen=True)
+class InteractionStructure:
+    """描述交互作用之间的关系，而不是规定逐步事件脚本。
+
+    ``segments`` 是可观察的作用类型，``dependencies`` 表示后一作用需要
+    保留前一作用形成的公开约定，``concurrency`` 表示两个作用可以在同一
+    时间窗内成立。它们是数据集划分和评测标签，不是驱动世界的状态机。
+    """
+
+    family: str
+    segments: tuple[str, ...]
+    dependencies: tuple[tuple[str, str], ...] = ()
+    concurrency: tuple[tuple[str, str], ...] = ()
+    split: str = "dev"
+
+
+@dataclass(frozen=True)
 class ContinuousScenario:
     name: str
     description: str
@@ -43,6 +59,9 @@ class ContinuousScenario:
     leave_trigger: str | None = None
     leave_probability: float = 0.0
     leave_duration_steps: int = 12
+    structure: InteractionStructure = field(
+        default_factory=lambda: InteractionStructure("isolated", ("joint_execution",)))
+    condition: str = "compositional"
 
     def initial_messages(self) -> tuple[Message, ...]:
         messages = []
@@ -58,7 +77,9 @@ class ContinuousScenario:
 def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, str],
            availability: float = 0.75, max_steps: int = 260, *,
            leave_trigger: str | None = None, leave_probability: float = 0.0,
-           leave_duration_steps: int = 12) -> ContinuousScenario:
+           leave_duration_steps: int = 12,
+           structure: InteractionStructure | None = None,
+           condition: str = "compositional") -> ContinuousScenario:
     return ContinuousScenario(
         name=name,
         description=description,
@@ -82,25 +103,45 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
         leave_trigger=leave_trigger,
         leave_probability=leave_probability,
         leave_duration_steps=leave_duration_steps,
+        structure=structure or InteractionStructure("isolated", ("joint_execution",)),
+        condition=condition,
     )
 
 
 CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
     "relay": _scene("relay", "人先整理红杯，机器人在公开进度后接力蓝杯。",
-                     {"red": "tray_red"}, {"blue": "tray_blue"}),
+                     {"red": "tray_red"}, {"blue": "tray_blue"},
+                     structure=InteractionStructure("matched_serial",
+                                                     ("guidance", "joint_execution"),
+                                                     (("guidance", "joint_execution"),))),
     "nested_support": _scene("nested_support", "机器人处理主任务时，人插入一个局部支持贡献。",
-                               {"green": "keep_green"}, {"red": "tray_red", "blue": "tray_blue"}),
+                               {"green": "keep_green"}, {"red": "tray_red", "blue": "tray_blue"},
+                               structure=InteractionStructure("nested",
+                                                               ("joint_execution", "guidance", "joint_execution"),
+                                                               (("joint_execution", "guidance"), ("guidance", "joint_execution")))),
     "concurrent_overlay": _scene("concurrent_overlay", "两边并行处理不同物体，靠持续可见行为避免占用冲突。",
-                                  {"blue": "keep_blue"}, {"red": "tray_red", "green": "tray_green"}),
+                                  {"blue": "keep_blue"}, {"red": "tray_red", "green": "tray_green"},
+                                  structure=InteractionStructure("concurrent",
+                                                                  ("joint_execution", "intervention"),
+                                                                  concurrency=(("joint_execution", "intervention"),))),
     "history_reinterpretation": _scene("history_reinterpretation", "共同活动中保留公开约定，同时允许新的用途信息改变分工。",
-                                        {"red": "keep_red"}, {"blue": "tray_blue", "green": "tray_green"}),
+                                        {"red": "keep_red"}, {"blue": "tray_blue", "green": "tray_green"},
+                                        structure=InteractionStructure("reinterpretation",
+                                                                        ("guidance", "intervention", "guidance"),
+                                                                        (("guidance", "intervention"), ("intervention", "guidance")))),
     "robot_induced_rebalance": _scene("robot_induced_rebalance", "机器人出现延迟后，伙伴根据可见进度接手未完成贡献。",
                                        {"blue": "tray_blue"}, {"red": "tray_red", "green": "tray_green"},
-                                       availability=0.9, max_steps=300),
+                                       availability=0.9, max_steps=300,
+                                       structure=InteractionStructure("robot_initiated_rebalance",
+                                                                       ("joint_execution", "guidance", "joint_execution"),
+                                                                       (("joint_execution", "guidance"),))),
     "leave_and_return": _scene("leave_and_return", "伙伴暂时离开工作区，返回后依据剩余工作恢复协作。",
                                 {"red": "keep_red", "blue": "tray_blue"}, {"green": "tray_green"},
                                 availability=0.55, max_steps=320,
-                                leave_trigger="human:red:keep_red", leave_probability=1.0),
+                                leave_trigger="human:red:keep_red", leave_probability=1.0,
+                                structure=InteractionStructure("leave_return",
+                                                                ("joint_execution", "intervention", "joint_execution"),
+                                                                (("joint_execution", "intervention"), ("intervention", "joint_execution")))),
 }
 
 
@@ -116,6 +157,21 @@ def generate_scenarios(count: int, *, seed: int = 0) -> list[ContinuousScenario]
     rng = np.random.default_rng(seed)
     names = ("red", "blue", "green")
     generated: list[ContinuousScenario] = []
+    structure_catalog = (
+        InteractionStructure("isolated", ("joint_execution",), split="train"),
+        InteractionStructure("matched_serial", ("guidance", "joint_execution"),
+                             (("guidance", "joint_execution"),), split="train"),
+        InteractionStructure("nested", ("joint_execution", "guidance", "joint_execution"),
+                             (("joint_execution", "guidance"), ("guidance", "joint_execution")), split="dev"),
+        InteractionStructure("concurrent", ("joint_execution", "intervention"),
+                             concurrency=(("joint_execution", "intervention"),), split="dev"),
+        InteractionStructure("reinterpretation", ("guidance", "intervention", "guidance"),
+                             (("guidance", "intervention"), ("intervention", "guidance")), split="test"),
+        InteractionStructure("robot_initiated_rebalance", ("joint_execution", "guidance", "joint_execution"),
+                             (("joint_execution", "guidance"),), split="test"),
+        InteractionStructure("leave_return", ("joint_execution", "intervention", "joint_execution"),
+                             (("joint_execution", "intervention"), ("intervention", "joint_execution")), split="test"),
+    )
     for index in range(count):
         table_xy = rng.uniform([-0.06, -0.04], [0.06, 0.04])
         object_xy = np.array([(0.42, 0.12), (0.35, -0.08), (0.25, 0.16)], dtype=float)
@@ -143,6 +199,11 @@ def generate_scenarios(count: int, *, seed: int = 0) -> list[ContinuousScenario]
             trigger_object, trigger_destination = next(iter(human.items()))
             leave_trigger = f"human:{trigger_object}:{trigger_destination}"
             leave_probability = 0.65
+        structure = structure_catalog[index % len(structure_catalog)]
+        condition = {
+            "isolated": "isolated",
+            "matched_serial": "matched_serial",
+        }.get(structure.family, "compositional")
         generated.append(ContinuousScenario(
             name=f"generated_{index:03d}",
             description="随机布局、分工和伙伴可用性下的持续共同整理实例。",
@@ -154,8 +215,48 @@ def generate_scenarios(count: int, *, seed: int = 0) -> list[ContinuousScenario]
             max_steps=360,
             leave_trigger=leave_trigger,
             leave_probability=leave_probability,
+            structure=structure,
+            condition=condition,
         ))
     return generated
+
+
+def generate_benchmark_suite(*, count_per_condition: int = 2, seed: int = 0,
+                             include_reference: bool = True) -> list[ContinuousScenario]:
+    """生成可比较的结构条件集合。
+
+    每个条件共享同一种物体布局和动作接口，但通过结构标签和分工生成
+    不同的交互关系。``held_out`` 只出现在测试结构中，加载器可依据
+    ``scenario.json`` 的 ``structure.split`` 做划分，不需要 manifest。
+    """
+    if count_per_condition < 1:
+        return list(CONTINUOUS_SCENARIOS.values()) if include_reference else []
+    rng = np.random.default_rng(seed)
+    conditions = ("isolated", "matched_serial", "compositional", "held_out")
+    scenarios: list[ContinuousScenario] = []
+    base_scenarios = generate_scenarios(
+        count_per_condition,
+        seed=int(rng.integers(0, 2**31 - 1)),
+    )
+    for condition in conditions:
+        for base_index, base in enumerate(base_scenarios):
+            if condition == "isolated":
+                structure = InteractionStructure("isolated", ("joint_execution",), split="train")
+            elif condition == "matched_serial":
+                structure = InteractionStructure("matched_serial", ("guidance", "joint_execution"),
+                                                 (("guidance", "joint_execution"),), split="train")
+            elif condition == "compositional":
+                structure = InteractionStructure("nested", ("joint_execution", "guidance", "joint_execution"),
+                                                 (("joint_execution", "guidance"), ("guidance", "joint_execution")), split="dev")
+            else:
+                structure = InteractionStructure("held_out_reinterpretation",
+                                                 ("guidance", "intervention", "joint_execution"),
+                                                 (("guidance", "intervention"), ("intervention", "joint_execution")), split="test")
+            scenarios.append(replace(base, name=f"{condition}_{base_index:03d}",
+                                     condition=condition, structure=structure))
+    if include_reference:
+        scenarios.extend(CONTINUOUS_SCENARIOS.values())
+    return scenarios
 
 
 @dataclass(frozen=True)
@@ -287,6 +388,100 @@ class AdaptivePartner:
         target = (float(target_position[0]), float(target_position[1]), 0.0)
         intent = "carry" if object_id in observation.held_by_human else "approach"
         return PartnerOutput(HumanCommand(intent, object_id, destination, target), tuple(messages))
+
+
+class FixedReplayPartner:
+    """不读取机器人行为的固定回放对照。
+
+    它只按初始的人类分工依次完成贡献，仍然使用连续几何推进，因而可作为
+    与反应式伙伴长度匹配的控制条件。它不会根据求助、占用、延迟或历史
+    重新分配贡献。
+    """
+
+    def __init__(self, scenario: ContinuousScenario):
+        self.scenario = scenario
+        self.reset(0)
+
+    def reset(self, seed: int) -> None:
+        self.order = list(self.scenario.human_targets.items())
+        self.index = 0
+
+    def initial_messages(self) -> tuple[Message, ...]:
+        return self.scenario.initial_messages()
+
+    def step(self, observation: Observation) -> PartnerOutput:
+        while self.index < len(self.order):
+            object_id, destination = self.order[self.index]
+            if f"human:{object_id}:{destination}" in observation.completed_skills:
+                self.index += 1
+            else:
+                break
+        if self.index >= len(self.order):
+            return PartnerOutput(HumanCommand("observe", target=observation.human_position))
+        object_id, destination = self.order[self.index]
+        if object_id in observation.held_by_human:
+            target = observation.regions[destination]
+            return PartnerOutput(HumanCommand("carry", object_id, destination,
+                                              (float(target[0]), float(target[1]), 0.0)))
+        target = observation.objects[object_id]
+        return PartnerOutput(HumanCommand("approach", object_id, destination,
+                                          (float(target[0]), float(target[1]), 0.0)))
+
+
+class ReactivePartner(FixedReplayPartner):
+    """只依据当前公开行为反应的伙伴，不保留信任和长期负载状态。"""
+
+    def reset(self, seed: int) -> None:
+        super().reset(seed)
+        self.seen_messages = 0
+        self.commitments = dict(self.scenario.human_targets)
+        self.accepted_requests: dict[str, str] = {}
+
+    def _messages(self, observation: Observation) -> list[Message]:
+        outgoing: list[Message] = []
+        for message in observation.messages[self.seen_messages:]:
+            if message.speaker == "robot" and message.kind == "request_help" and message.object_id:
+                accepted = self.scenario.human_availability >= 0.5 and not observation.held_by_human
+                if accepted:
+                    destination = message.destination or f"tray_{message.object_id}"
+                    self.accepted_requests[message.object_id] = destination
+                    self.commitments[message.object_id] = destination
+                    outgoing.append(Message("human", "help_reply", "我可以接手这个贡献。",
+                                             message.object_id, "accept", destination))
+                else:
+                    outgoing.append(Message("human", "help_reply", "我现在无法接手。",
+                                             message.object_id, "decline"))
+        self.seen_messages = len(observation.messages)
+        return outgoing
+
+    def step(self, observation: Observation) -> PartnerOutput:
+        messages = self._messages(observation)
+        if observation.active_robot_action.startswith("transfer:"):
+            object_id = observation.active_robot_action.split(":", 1)[1]
+            if object_id in self.commitments and object_id not in observation.held_by_human:
+                return PartnerOutput(HumanCommand("yield", target=(0.50, 0.78, 0.0)), tuple(messages))
+        for object_id, destination in self.accepted_requests.items():
+            if f"human:{object_id}:{destination}" not in observation.completed_skills:
+                if object_id in observation.held_by_human:
+                    target = observation.regions[destination]
+                    return PartnerOutput(HumanCommand("carry", object_id, destination,
+                                                      (float(target[0]), float(target[1]), 0.0)), tuple(messages))
+                target = observation.objects[object_id]
+                return PartnerOutput(HumanCommand("approach", object_id, destination,
+                                                  (float(target[0]), float(target[1]), 0.0)), tuple(messages))
+        output = super().step(observation)
+        return PartnerOutput(output.command, tuple(messages) + output.messages)
+
+
+def make_partner(scenario: ContinuousScenario, mode: str = "adaptive") -> ContinuousPartner:
+    """按实验条件构造伙伴；模式只改变伙伴信息使用边界。"""
+    if mode == "fixed_replay":
+        return FixedReplayPartner(scenario)
+    if mode == "reactive":
+        return ReactivePartner(scenario)
+    if mode == "adaptive":
+        return AdaptivePartner(scenario)
+    raise ValueError(f"未知伙伴模式: {mode}")
 
 
 @dataclass
@@ -531,7 +726,8 @@ class ContinuousBackend(Protocol):
 def run_continuous_episode(scenario: ContinuousScenario, policy, partner: ContinuousPartner,
                            *, seed: int = 0, output: Path | None = None,
                            decision_interval: int = 3,
-                           backend_factory=ContinuousWorld) -> dict[str, Any]:
+                           backend_factory=ContinuousWorld,
+                           partner_mode: str | None = None) -> dict[str, Any]:
     """在任意连续 backend 上运行一个 episode。
 
     `backend_factory` 只需要实现 `ContinuousBackend`。因此真实 Genesis、
@@ -590,9 +786,29 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
     human_success = world.finished_human()
     events = list(getattr(world, "events", ()))
     completed_skills = list(getattr(world, "completed_skills", ()))
+    mode = partner_mode or {
+        "FixedReplayPartner": "fixed_replay",
+        "ReactivePartner": "reactive",
+        "AdaptivePartner": "adaptive",
+    }.get(type(partner).__name__, type(partner).__name__)
+    requests = [event for event in events if event.get("kind") == "public_message"
+                and event.get("speaker") == "robot" and event.get("message_kind") == "request_help"]
+    replies = [event for event in events if event.get("kind") == "public_message"
+               and event.get("speaker") == "human" and event.get("message_kind") == "help_reply"]
+    response_latencies = []
+    for request in requests:
+        matching = [reply for reply in replies if reply["step"] >= request["step"]
+                    and (request.get("object_id") is None or reply.get("object_id") == request.get("object_id"))]
+        if matching:
+            response_latencies.append(matching[0]["step"] - request["step"])
+    human_actions = [row["human_action"] for row in trace]
+    adaptation_events = sum(event.get("kind") in {
+        "robot_action_preempted", "proximity_warning"} for event in events)
     result = {
         "scenario": scenario.name, "seed": seed, "robot_success": robot_success,
         "human_success": human_success, "task_success": bool(robot_success and human_success),
+        "condition": scenario.condition, "structure_family": scenario.structure.family,
+        "structure_split": scenario.structure.split, "partner_mode": mode,
         "steps": len(trace), "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
         "preemptions": int(getattr(world, "interruptions", 0)),
         "proximity_warnings": int(getattr(world, "near_misses", 0)),
@@ -600,6 +816,15 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "action_chunks": len(policy_io),
         "completion_time_s": trace[-1]["time_s"] if trace else 0.0,
         "completed_skills": completed_skills, "events": len(events),
+        "response_latency_steps": (sum(response_latencies) / len(response_latencies)
+                                    if response_latencies else None),
+        "human_corrections": sum(event.get("message_kind") == "correction" for event in events),
+        "human_yield_steps": human_actions.count("yield"),
+        "human_idle_ratio": (human_actions.count("observe") / len(human_actions)
+                              if human_actions else 0.0),
+        "adaptation_events": adaptation_events,
+        "coordination_cost": float(len(policy_io) + 2 * len(response_latencies)
+                                    + 3 * result_preemptions(events)),
     }
     if output is not None:
         output.mkdir(parents=True, exist_ok=True)
@@ -612,7 +837,13 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
                         "max_steps": scenario.max_steps, "tick_hz": scenario.tick_hz,
                         "leave_trigger": scenario.leave_trigger,
                         "leave_probability": scenario.leave_probability,
-                        "leave_duration_steps": scenario.leave_duration_steps},
+                        "leave_duration_steps": scenario.leave_duration_steps,
+                        "condition": scenario.condition,
+                        "structure": {"family": scenario.structure.family,
+                                      "segments": scenario.structure.segments,
+                                      "dependencies": scenario.structure.dependencies,
+                                      "concurrency": scenario.structure.concurrency,
+                                      "split": scenario.structure.split}},
                        ensure_ascii=False, indent=2))
         (output / "trace.jsonl").write_text("\n".join(json.dumps(row, ensure_ascii=False) for row in trace) + "\n")
         (output / "public_observations.jsonl").write_text(
@@ -624,16 +855,21 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
     return result
 
 
+def result_preemptions(events: list[dict[str, Any]]) -> int:
+    return sum(event.get("kind") == "robot_action_preempted" for event in events)
+
+
 def run_catalog(*, policy_spec: str = "greedy_public", seed: int = 0,
                 output: Path | None = None, scenarios: list[ContinuousScenario] | None = None,
-                backend_factory=ContinuousWorld) -> list[dict[str, Any]]:
+                backend_factory=ContinuousWorld, partner_mode: str = "adaptive") -> list[dict[str, Any]]:
     policy = load_continuous_policy(policy_spec)
     results = []
     scenario_list = scenarios or list(CONTINUOUS_SCENARIOS.values())
     for scenario in scenario_list:
         episode_output = output / scenario.name if output else None
-        results.append(run_continuous_episode(scenario, policy, AdaptivePartner(scenario), seed=seed,
-                                              output=episode_output, backend_factory=backend_factory))
+        results.append(run_continuous_episode(scenario, policy, make_partner(scenario, partner_mode), seed=seed,
+                                              output=episode_output, backend_factory=backend_factory,
+                                              partner_mode=partner_mode))
     if output:
         output.mkdir(parents=True, exist_ok=True)
         (output / "summary.json").write_text(json.dumps({"episodes": results,
