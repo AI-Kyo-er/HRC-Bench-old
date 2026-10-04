@@ -34,7 +34,15 @@
   "objects": [],
   "regions": {},
   "robot_targets": {},
-  "human_targets": {}
+  "human_targets": {},
+  "dynamics": {
+    "robot_delay_probability": 0.0,
+    "robot_failure_probability": 0.0,
+    "max_delay_steps": 0,
+    "human_replan_sensitivity": 0.65,
+    "leave_pressure": 0.0,
+    "return_on_robot_idle": true
+  }
 }
 ```
 
@@ -46,7 +54,18 @@
 
 允许的动作包括 `transfer`、`request_help`、`acknowledge`、`wait`、`joint_position` 和 `finish`。`finish` 只表示模型的声明，终态成功由后端独立计算。
 
+公开消息还可以报告 `action_delayed`、`action_failed`、`reassignment`、
+`correction`、`temporarily_away` 和 `returned`。这些是 episode 中双方
+发送的协作信号；模型需要根据它们重新规划。`DynamicsSpec` 中的概率参数
+属于实例条件，不进入模型观测。
+
 ## 结构划分
 
 训练/开发/测试的划分按 `structure.split` 执行。测试集可以包含训练中见过的局部作用，但不能复用同一依赖关系。例如训练可见 `guidance -> joint_execution`，测试使用 `guidance -> intervention -> joint_execution`。对象布局和初始分工仍需做 seed 与几何去重，避免模型只记住坐标。
 
+## 配对实验
+
+`run_paired_benchmark` 在同一组场景、同一 seed 和同一公开协议下依次运行
+`fixed_replay`、`reactive`、`adaptive`。结果目录使用
+`<partner_mode>/<scenario_name>/`，加载器用目录名、场景名和 seed 配对，
+不需要额外的 `manifest.json`。

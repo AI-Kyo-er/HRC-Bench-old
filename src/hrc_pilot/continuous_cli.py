@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from .continuous import generate_benchmark_suite, generate_scenarios, run_catalog
+from .continuous import generate_benchmark_suite, generate_scenarios, run_catalog, run_paired_benchmark
 from .continuous_report import write_continuous_report
 
 
@@ -23,6 +23,8 @@ def main() -> None:
                         default="adaptive", help="人类伙伴条件")
     parser.add_argument("--suite", action="store_true",
                         help="生成 isolated/matched_serial/compositional/held_out 条件集合")
+    parser.add_argument("--paired", action="store_true",
+                        help="在同一场景和 seed 上运行 fixed/reactive/adaptive 三种伙伴")
     parser.add_argument("--count-per-condition", type=int, default=2,
                         help="--suite 每个结构条件生成多少实例")
     args = parser.parse_args()
@@ -34,14 +36,19 @@ def main() -> None:
                                              seed=scenario_seed, include_reference=False)
     else:
         scenarios = generate_scenarios(args.generated, seed=scenario_seed)
-    results = run_catalog(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
-                          scenarios=scenarios or None, partner_mode=args.partner_mode)
+    if args.paired:
+        results = run_paired_benchmark(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
+                                       scenarios=scenarios or None)
+    else:
+        results = run_catalog(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
+                              scenarios=scenarios or None, partner_mode=args.partner_mode)
     (args.output_dir / "provenance.json").write_text(json.dumps({
         "runtime": "hrc_pilot.continuous", "backend": "ContinuousWorld",
         "policy": args.policy, "seed": args.seed,
         "generated": args.generated, "suite": args.suite,
         "count_per_condition": args.count_per_condition,
-        "partner_mode": args.partner_mode,
+        "partner_mode": "paired" if args.paired else args.partner_mode,
+        "paired": args.paired,
         "scenario_seed": scenario_seed,
         "observation_boundary": "public_observation_only", "scenario_count": len(results),
     }, ensure_ascii=False, indent=2))

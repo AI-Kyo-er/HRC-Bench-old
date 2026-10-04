@@ -1,6 +1,6 @@
 """持续运行时的机制测试。"""
 import unittest
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -8,11 +8,13 @@ from hrc_pilot.continuous import (
     AdaptivePartner,
     CONTINUOUS_SCENARIOS,
     ContinuousWorld,
+    DynamicsSpec,
     FixedReplayPartner,
     GreedyPublicPolicy,
     ReactivePartner,
     generate_benchmark_suite,
     run_catalog,
+    run_paired_benchmark,
 )
 from hrc_pilot.protocol import Action, Message
 from hrc_pilot.benchmark import ModelPolicy, decode_action, public_observation_dict
@@ -126,6 +128,29 @@ class ContinuousRuntimeTests(unittest.TestCase):
             metrics = (output / "metrics.json").read_text()
             self.assertIn("structure_family", metrics)
             self.assertIn("partner_mode", metrics)
+
+    def test_robot_failure_is_public_and_causes_reassignment(self):
+        from hrc_pilot.continuous import run_continuous_episode
+        scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="forced_failure",
+                           dynamics=DynamicsSpec(robot_failure_probability=1.0,
+                                                 robot_delay_probability=1.0,
+                                                 max_delay_steps=2,
+                                                 human_replan_sensitivity=1.0))
+        result = run_continuous_episode(scenario, GreedyPublicPolicy(),
+                                        AdaptivePartner(scenario), seed=5)
+        self.assertGreaterEqual(result["robot_failures"], 1)
+        self.assertGreaterEqual(result["robot_delay_steps"], 1)
+        self.assertGreaterEqual(result["human_reassignments"], 1)
+        self.assertIn("human:blue:tray_blue", result["completed_skills"])
+
+    def test_paired_runner_keeps_scenario_seed_and_mode_directories(self):
+        scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="paired_relay")
+        with TemporaryDirectory() as directory:
+            results = run_paired_benchmark(seed=7, output=Path(directory), scenarios=[scenario])
+            self.assertEqual({result["partner_mode"] for result in results},
+                             {"fixed_replay", "reactive", "adaptive"})
+            self.assertTrue((Path(directory) / "adaptive" / "paired_relay" / "scenario.json").exists())
+            self.assertEqual({result["seed"] for result in results}, {7})
 
 
 if __name__ == "__main__":

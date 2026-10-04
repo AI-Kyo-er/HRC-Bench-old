@@ -43,6 +43,22 @@ class InteractionStructure:
 
 
 @dataclass(frozen=True)
+class DynamicsSpec:
+    """场景的潜在动力学与伙伴适应参数。
+
+    参数描述概率、阈值和可观察的恢复规则，不描述某个固定时间点要发生的
+    事件。具体结果在动作开始、公开消息到达和当前几何状态下在线采样。
+    """
+
+    robot_delay_probability: float = 0.0
+    robot_failure_probability: float = 0.0
+    max_delay_steps: int = 0
+    human_replan_sensitivity: float = 0.65
+    leave_pressure: float = 0.0
+    return_on_robot_idle: bool = True
+
+
+@dataclass(frozen=True)
 class ContinuousScenario:
     name: str
     description: str
@@ -59,6 +75,7 @@ class ContinuousScenario:
     leave_trigger: str | None = None
     leave_probability: float = 0.0
     leave_duration_steps: int = 12
+    dynamics: DynamicsSpec = field(default_factory=DynamicsSpec)
     structure: InteractionStructure = field(
         default_factory=lambda: InteractionStructure("isolated", ("joint_execution",)))
     condition: str = "compositional"
@@ -78,6 +95,7 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
            availability: float = 0.75, max_steps: int = 260, *,
            leave_trigger: str | None = None, leave_probability: float = 0.0,
            leave_duration_steps: int = 12,
+           dynamics: DynamicsSpec | None = None,
            structure: InteractionStructure | None = None,
            condition: str = "compositional") -> ContinuousScenario:
     return ContinuousScenario(
@@ -103,6 +121,7 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
         leave_trigger=leave_trigger,
         leave_probability=leave_probability,
         leave_duration_steps=leave_duration_steps,
+        dynamics=dynamics or DynamicsSpec(),
         structure=structure or InteractionStructure("isolated", ("joint_execution",)),
         condition=condition,
     )
@@ -132,6 +151,10 @@ CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
     "robot_induced_rebalance": _scene("robot_induced_rebalance", "机器人出现延迟后，伙伴根据可见进度接手未完成贡献。",
                                        {"blue": "tray_blue"}, {"red": "tray_red", "green": "tray_green"},
                                        availability=0.9, max_steps=300,
+                                       dynamics=DynamicsSpec(robot_delay_probability=0.45,
+                                                             robot_failure_probability=0.18,
+                                                             max_delay_steps=8,
+                                                             human_replan_sensitivity=0.85),
                                        structure=InteractionStructure("robot_initiated_rebalance",
                                                                        ("joint_execution", "guidance", "joint_execution"),
                                                                        (("joint_execution", "guidance"),))),
@@ -139,6 +162,8 @@ CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
                                 {"red": "keep_red", "blue": "tray_blue"}, {"green": "tray_green"},
                                 availability=0.55, max_steps=320,
                                 leave_trigger="human:red:keep_red", leave_probability=1.0,
+                                dynamics=DynamicsSpec(leave_pressure=0.9,
+                                                      human_replan_sensitivity=0.8),
                                 structure=InteractionStructure("leave_return",
                                                                 ("joint_execution", "intervention", "joint_execution"),
                                                                 (("joint_execution", "intervention"), ("intervention", "joint_execution")))),
@@ -200,6 +225,17 @@ def generate_scenarios(count: int, *, seed: int = 0) -> list[ContinuousScenario]
             leave_trigger = f"human:{trigger_object}:{trigger_destination}"
             leave_probability = 0.65
         structure = structure_catalog[index % len(structure_catalog)]
+        dynamics = DynamicsSpec(
+            robot_delay_probability=float(rng.uniform(0.0, 0.35)
+                                         if structure.family in {"robot_initiated_rebalance", "held_out_reinterpretation"}
+                                         else 0.0),
+            robot_failure_probability=float(rng.uniform(0.0, 0.12)
+                                           if structure.family in {"robot_initiated_rebalance", "held_out_reinterpretation"}
+                                           else 0.0),
+            max_delay_steps=int(rng.integers(2, 9)),
+            human_replan_sensitivity=float(rng.uniform(0.55, 0.9)),
+            leave_pressure=float(rng.uniform(0.2, 0.8) if human else 0.0),
+        )
         condition = {
             "isolated": "isolated",
             "matched_serial": "matched_serial",
@@ -215,6 +251,7 @@ def generate_scenarios(count: int, *, seed: int = 0) -> list[ContinuousScenario]
             max_steps=360,
             leave_trigger=leave_trigger,
             leave_probability=leave_probability,
+            dynamics=dynamics,
             structure=structure,
             condition=condition,
         ))
@@ -304,6 +341,8 @@ class AdaptivePartner:
         self.left_until = 0
         self.has_left = False
         self.last_robot_progress = 0.0
+        self.last_robot_action = "idle"
+        self.reassignments = 0
         self.messages_sent: list[Message] = []
 
     def initial_messages(self) -> tuple[Message, ...]:
@@ -314,7 +353,9 @@ class AdaptivePartner:
         for message in observation.messages[self.seen_messages:]:
             if message.speaker == "robot" and message.kind == "request_help" and message.object_id:
                 load = self.workload + 0.25 * len(self.commitments)
-                probability = np.clip(self.scenario.human_availability * self.trust - load * 0.08, 0.0, 1.0)
+                probability = np.clip(self.scenario.human_availability * self.trust
+                                      + self.scenario.dynamics.human_replan_sensitivity * 0.12
+                                      - load * 0.08, 0.0, 1.0)
                 accepted = bool(self.rng.random() < probability) if self.stochastic else probability >= 0.35
                 if accepted:
                     destination = message.destination or f"tray_{message.object_id}"
@@ -326,6 +367,15 @@ class AdaptivePartner:
                     outgoing.append(Message("human", "help_reply", "我现在无法接手，请你继续完成。",
                                              message.object_id, "decline"))
                 self.workload = min(1.0, self.workload + 0.08)
+            elif message.speaker == "robot" and message.kind == "action_failed" and message.object_id:
+                destination = message.destination or f"tray_{message.object_id}"
+                self.commitments[message.object_id] = destination
+                self.trust = max(0.0, self.trust - 0.12)
+                self.reassignments += 1
+                outgoing.append(Message("human", "reassignment", "机器人未完成，我接手这个贡献。",
+                                         message.object_id, "accept", destination))
+            elif message.speaker == "robot" and message.kind == "action_delayed":
+                self.trust = max(0.0, self.trust - 0.025)
             elif message.speaker == "robot" and message.kind == "acknowledge":
                 self.trust = min(1.0, self.trust + 0.015)
         self.seen_messages = len(observation.messages)
@@ -350,13 +400,31 @@ class AdaptivePartner:
 
     def step(self, observation: Observation) -> PartnerOutput:
         messages = self._process_messages(observation)
+        self.last_robot_action = observation.active_robot_action
         if self.left_until > 0:
             self.left_until -= 1
+            if self.left_until == 0 and self.scenario.dynamics.return_on_robot_idle:
+                messages.append(Message("human", "returned", "我回来了，依据当前进度继续。"))
             return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages))
+        if (not self.has_left and self.scenario.dynamics.leave_pressure > 0.0
+                and observation.active_robot_action != "idle"):
+            stress = min(1.0, self.workload + (1.0 - self.trust)
+                         + (0.35 if observation.action_phase == "delayed" else 0.0))
+            leave_score = self.scenario.dynamics.leave_pressure * (0.45 + 0.55 * stress)
+            if self.scenario.leave_probability > 0.0:
+                leave_score = max(leave_score, self.scenario.leave_probability * stress)
+            should_leave = bool(self.rng.random() < leave_score) if self.stochastic else leave_score >= 0.5
+            if should_leave:
+                self.has_left = True
+                self.left_until = self.scenario.leave_duration_steps
+                messages.append(Message("human", "temporarily_away", "我暂时离开一下，稍后依据进度回来。"))
+                return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages))
         if observation.active_robot_action.startswith("transfer:"):
             target_object = observation.active_robot_action.split(":", 1)[1]
             if target_object in self.commitments and target_object not in observation.held_by_human:
                 self.trust = max(0.0, self.trust - 0.001)
+                messages.append(Message("human", "correction", "这个贡献由我处理，请让行。",
+                                        target_object, "yield", self.commitments[target_object]))
                 return PartnerOutput(HumanCommand("yield", target=(0.50, 0.78, 0.0)), tuple(messages))
         if observation.held_by_human:
             held_object = observation.held_by_human[0]
@@ -374,16 +442,6 @@ class AdaptivePartner:
         self.current_destination = destination
         object_position = np.asarray(observation.objects[object_id])
         region_position = np.asarray(observation.regions[destination])
-        trigger = self.scenario.leave_trigger
-        if (trigger and trigger in observation.completed_skills and not self.has_left
-                and self.scenario.leave_probability > 0.0):
-            leave_score = self.scenario.leave_probability * self.trust
-            should_leave = bool(self.rng.random() < leave_score) if self.stochastic else leave_score >= 0.5
-            if should_leave:
-                self.has_left = True
-                self.left_until = self.scenario.leave_duration_steps
-                messages.append(Message("human", "temporarily_away", "我暂时离开一下，稍后回来继续。"))
-                return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages))
         target_position = region_position if object_id in observation.held_by_human else object_position
         target = (float(target_position[0]), float(target_position[1]), 0.0)
         intent = "carry" if object_id in observation.held_by_human else "approach"
@@ -451,6 +509,12 @@ class ReactivePartner(FixedReplayPartner):
                 else:
                     outgoing.append(Message("human", "help_reply", "我现在无法接手。",
                                              message.object_id, "decline"))
+            elif message.speaker == "robot" and message.kind == "action_failed" and message.object_id:
+                destination = message.destination or f"tray_{message.object_id}"
+                self.accepted_requests[message.object_id] = destination
+                self.commitments[message.object_id] = destination
+                outgoing.append(Message("human", "reassignment", "我接手未完成贡献。",
+                                         message.object_id, "accept", destination))
         self.seen_messages = len(observation.messages)
         return outgoing
 
@@ -491,6 +555,9 @@ class _RobotExecution:
     object_id: str | None = None
     destination: str | None = None
     progress: float = 0.0
+    delay_remaining: int = 0
+    failed: bool = False
+    status_reported: bool = False
 
 
 class ContinuousWorld:
@@ -524,6 +591,8 @@ class ContinuousWorld:
         self.completed_skills: list[str] = []
         self.step_count = 0
         self.robot_action_count = 0
+        self.robot_failures = 0
+        self.robot_delay_steps = 0
         self.interruptions = 0
         self.near_misses = 0
 
@@ -574,8 +643,14 @@ class ContinuousWorld:
         elif action.kind == "transfer":
             if action.object_id not in self.objects or action.destination not in self.regions:
                 raise ValueError(f"连续场景中的动作目标不存在: {action}")
+            dynamics = self.scenario.dynamics
+            delay = (int(self.rng.integers(1, dynamics.max_delay_steps + 1))
+                     if dynamics.max_delay_steps > 0
+                     and self.rng.random() < dynamics.robot_delay_probability else 0)
+            failed = bool(self.rng.random() < dynamics.robot_failure_probability)
             self.robot_execution = _RobotExecution(action, phase="approach", object_id=action.object_id,
-                                                    destination=action.destination, progress=0.0)
+                                                    destination=action.destination, progress=0.0,
+                                                    delay_remaining=delay, failed=failed)
         elif action.kind in {"wait", "joint_position", "finish"}:
             self.robot_execution = _RobotExecution(action, phase="execute", progress=0.0)
         else:
@@ -599,6 +674,29 @@ class ContinuousWorld:
         if execution is None:
             return
         action = execution.action
+        if execution.delay_remaining > 0:
+            execution.phase = "delayed"
+            execution.delay_remaining -= 1
+            self.robot_delay_steps += 1
+            if not execution.status_reported:
+                self.say(Message("robot", "action_delayed", "当前动作出现可见延迟。",
+                                 execution.object_id, "delay", execution.destination))
+                self.events.append({"step": self.step_count, "kind": "robot_action_delayed",
+                                    "object_id": execution.object_id,
+                                    "destination": execution.destination})
+                execution.status_reported = True
+            return
+        if execution.failed:
+            self.robot_failures += 1
+            self.say(Message("robot", "action_failed", "当前动作未完成，需要重新分工。",
+                             execution.object_id, "failed", execution.destination))
+            self.events.append({"step": self.step_count, "kind": "robot_action_failed",
+                                "object_id": execution.object_id,
+                                "destination": execution.destination})
+            self.robot_execution = None
+            return
+        if execution.phase == "delayed":
+            execution.phase = "approach"
         if action.kind == "transfer":
             source = self.objects[execution.object_id]
             destination = self.regions[execution.destination]
@@ -694,8 +792,11 @@ class GreedyPublicPolicy:
             if message.kind == "assignment" and message.object_id:
                 self.assignments[message.object_id] = (message.value or "robot",
                                                        message.destination or f"tray_{message.object_id}")
-            if message.kind == "help_reply" and message.object_id and message.value == "decline":
-                self.assignments[message.object_id] = ("robot", f"tray_{message.object_id}")
+            if message.kind in {"help_reply", "reassignment"} and message.object_id:
+                if message.value == "decline":
+                    self.assignments[message.object_id] = ("robot", message.destination or f"tray_{message.object_id}")
+                elif message.value == "accept":
+                    self.assignments[message.object_id] = ("human", message.destination or f"tray_{message.object_id}")
         self.seen_messages = len(observation.messages)
         candidates = []
         for object_id, (assignment, destination) in self.assignments.items():
@@ -760,7 +861,9 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         world.apply_human_command(partner_output.command)
         public_observation = world.observe()
         new_public_messages = public_observation.messages[policy_seen_messages:]
-        public_reaction = any(message.kind in {"help_reply", "temporarily_away", "correction"}
+        public_reaction = any(message.kind in {"help_reply", "temporarily_away", "returned",
+                                              "correction", "reassignment",
+                                              "action_failed"}
                               for message in new_public_messages)
         can_decide = public_observation.active_robot_action == "idle" or public_reaction
         if can_decide:
@@ -803,7 +906,8 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
             response_latencies.append(matching[0]["step"] - request["step"])
     human_actions = [row["human_action"] for row in trace]
     adaptation_events = sum(event.get("kind") in {
-        "robot_action_preempted", "proximity_warning"} for event in events)
+        "robot_action_preempted", "proximity_warning", "robot_action_delayed",
+        "robot_action_failed"} for event in events)
     result = {
         "scenario": scenario.name, "seed": seed, "robot_success": robot_success,
         "human_success": human_success, "task_success": bool(robot_success and human_success),
@@ -811,6 +915,8 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "structure_split": scenario.structure.split, "partner_mode": mode,
         "steps": len(trace), "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
         "preemptions": int(getattr(world, "interruptions", 0)),
+        "robot_failures": int(getattr(world, "robot_failures", 0)),
+        "robot_delay_steps": int(getattr(world, "robot_delay_steps", 0)),
         "proximity_warnings": int(getattr(world, "near_misses", 0)),
         "public_messages": len(getattr(world, "messages", ())),
         "action_chunks": len(policy_io),
@@ -819,6 +925,7 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "response_latency_steps": (sum(response_latencies) / len(response_latencies)
                                     if response_latencies else None),
         "human_corrections": sum(event.get("message_kind") == "correction" for event in events),
+        "human_reassignments": sum(event.get("message_kind") == "reassignment" for event in events),
         "human_yield_steps": human_actions.count("yield"),
         "human_idle_ratio": (human_actions.count("observe") / len(human_actions)
                               if human_actions else 0.0),
@@ -838,6 +945,12 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
                         "leave_trigger": scenario.leave_trigger,
                         "leave_probability": scenario.leave_probability,
                         "leave_duration_steps": scenario.leave_duration_steps,
+                        "dynamics": {"robot_delay_probability": scenario.dynamics.robot_delay_probability,
+                                      "robot_failure_probability": scenario.dynamics.robot_failure_probability,
+                                      "max_delay_steps": scenario.dynamics.max_delay_steps,
+                                      "human_replan_sensitivity": scenario.dynamics.human_replan_sensitivity,
+                                      "leave_pressure": scenario.dynamics.leave_pressure,
+                                      "return_on_robot_idle": scenario.dynamics.return_on_robot_idle},
                         "condition": scenario.condition,
                         "structure": {"family": scenario.structure.family,
                                       "segments": scenario.structure.segments,
@@ -876,4 +989,33 @@ def run_catalog(*, policy_spec: str = "greedy_public", seed: int = 0,
                                                           "scope": "continuous_benchmark_runtime",
                                                           "scenario_count": len(scenario_list)},
                                                          ensure_ascii=False, indent=2))
+    return results
+
+
+def run_paired_benchmark(*, policy_spec: str = "greedy_public", seed: int = 0,
+                         output: Path | None = None,
+                         scenarios: list[ContinuousScenario] | None = None,
+                         backend_factory=ContinuousWorld,
+                         partner_modes: tuple[str, ...] = ("fixed_replay", "reactive", "adaptive")) -> list[dict[str, Any]]:
+    """在同一批场景和 seed 上运行伙伴条件配对实验。
+
+    输出目录按 ``<partner_mode>/<scenario_name>`` 组织，配对关系由稳定的
+    场景名、seed 和 scenario.json 表达，不需要额外 manifest。
+    """
+    invalid = set(partner_modes) - {"fixed_replay", "reactive", "adaptive"}
+    if invalid:
+        raise ValueError(f"未知伙伴模式: {sorted(invalid)}")
+    scenario_list = scenarios or list(CONTINUOUS_SCENARIOS.values())
+    results: list[dict[str, Any]] = []
+    for mode in partner_modes:
+        mode_output = output / mode if output else None
+        results.extend(run_catalog(policy_spec=policy_spec, seed=seed, output=mode_output,
+                                   scenarios=scenario_list, backend_factory=backend_factory,
+                                   partner_mode=mode))
+    if output:
+        output.mkdir(parents=True, exist_ok=True)
+        (output / "paired_summary.json").write_text(
+            json.dumps({"episodes": results, "partner_modes": list(partner_modes),
+                        "scenario_count": len(scenario_list), "seed": seed},
+                       ensure_ascii=False, indent=2))
     return results

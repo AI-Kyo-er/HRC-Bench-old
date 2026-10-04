@@ -39,3 +39,13 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ModelPolicy` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 
 可以用 `--suite` 生成 isolated、matched_serial、compositional 和 held_out 结构条件，并用 `--partner-mode fixed_replay|reactive|adaptive` 做伙伴信息边界对照。held-out 的依赖关系写在每个 episode 的 `scenario.json` 中，不依赖 `manifest.json`。
+
+要在完全相同的场景实例和 seed 上配对三种伙伴条件，可运行：
+
+```bash
+PYTHONPATH=src python scripts/run_continuous_benchmark.py \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/paired \
+  --suite --count-per-condition 5 --paired
+```
+
+运行时会在动作启动后在线采样场景动力学中的延迟或失败；公开的 `action_delayed`、`action_failed`、`reassignment` 等消息会进入下一轮模型决策。这样可以测量机器人是否能承认未完成、求助并与伙伴重新分工，而不依赖固定的第 N 步脚本。
