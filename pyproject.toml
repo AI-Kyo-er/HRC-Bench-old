@@ -11,6 +11,7 @@ dependencies = ["numpy==1.26.4", "Pillow>=11", "imageio[ffmpeg]>=2.37"]
 
 [project.scripts]
 hrc-pilot = "hrc_pilot.run:main"
+hrc-continuous = "hrc_pilot.continuous_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

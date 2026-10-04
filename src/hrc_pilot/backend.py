@@ -14,12 +14,12 @@ import imageio.v2 as imageio
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-from .protocol import EventLog, Message, Observation
+from .protocol import Action, EventLog, Message, Observation
 
 
 class VCWorkspace:
     def __init__(self, *, assets: Path, backend: str = "gpu", resolution: int = 800,
-                 render_stride: int = 3, viewer: bool = False):
+                 render_stride: int = 3, viewer: bool = False, scenario=None):
         import genesis as gs
         from vico.modules.avatar.avatar_controller import AvatarController
         from .assets import mug_mesh
@@ -46,8 +46,10 @@ class VCWorkspace:
                 self.add_entity("structure", "leg", gs.morphs.Box(size=(0.06, 0.06, 0.69),
                                 pos=(x, y, 0.345), fixed=True),
                                 surface=gs.surfaces.Default(color=(0.28, 0.31, 0.35)))
-        self.regions = {"tray_red": (0.55, -0.28, 0.82), "tray_blue": (0.37, -0.32, 0.82),
-                        "keep_red": (0.53, 0.24, 0.82)}
+        self.scenario = scenario
+        self.regions = (dict(scenario.regions) if scenario is not None else
+                        {"tray_red": (0.55, -0.28, 0.82), "tray_blue": (0.37, -0.32, 0.82),
+                         "keep_red": (0.53, 0.24, 0.82)})
         self.add_entity("region", "tray", gs.morphs.Box(size=(0.43, 0.24, 0.012),
                         pos=(0.46, -0.30, 0.765), fixed=True, collision=False),
                         surface=gs.surfaces.Default(color=(0.25, 0.43, 0.72)))
@@ -56,10 +58,15 @@ class VCWorkspace:
                         surface=gs.surfaces.Default(color=(0.37, 0.68, 0.48)))
         self.objects = {}
         mug_file = str(mug_mesh(assets))
-        for name, pos, color in [
-            ("red", (0.42, 0.12, 0.82), (0.86, 0.18, 0.19)),
-            ("blue", (0.35, -0.08, 0.82), (0.16, 0.48, 0.84)),
-        ]:
+        default_objects = [("red", (0.42, 0.12, 0.82), (0.86, 0.18, 0.19)),
+                           ("blue", (0.35, -0.08, 0.82), (0.16, 0.48, 0.84))]
+        object_specs = ([(spec.name, spec.position,
+                          tuple(float(x) for x in ((0.86, 0.18, 0.19) if i % 3 == 0
+                                                   else (0.16, 0.48, 0.84) if i % 3 == 1
+                                                   else (0.22, 0.65, 0.35))))
+                        for i, spec in enumerate(scenario.objects)]
+                       if scenario is not None else default_objects)
+        for name, pos, color in object_specs:
             # Fixed collision-free props explicitly implement the abstract grasp layer.
             self.objects[name] = self.add_entity("object", name,
                 gs.morphs.Mesh(file=mug_file, pos=pos, fixed=True, collision=False,
@@ -96,6 +103,12 @@ class VCWorkspace:
         self.attachment = None
         self.trace = []
         self.output = None
+        self.continuous_execution = None
+        self.continuous_human_command = None
+        self.continuous_human_phase = None
+        self.active_scenario = self.scenario
+        self.last_observation_path = None
+        self.observation_index = 0
 
     def add_entity(self, type, name, morph, material=None, surface=None, **kwargs):
         entity = self.scene.add_entity(morph=morph, material=material, surface=surface, **kwargs)
@@ -113,13 +126,24 @@ class VCWorkspace:
         self.log, self.messages, self.completed_skills, self.trace = EventLog(), [], [], []
         self.step_count = 0
         self.attachment = None
+        self.continuous_execution = None
+        self.continuous_human_command = None
+        self.continuous_human_phase = None
+        self.last_observation_path = None
+        self.observation_index = 0
         self.current_robot_action = "观察共同工作空间"
         self.title = f"{scenario} · {policy} · seed {seed}"
         self.writer = imageio.get_writer(str(output / "demo.mp4"), fps=60 // self.stride,
                                         codec="libx264", quality=7, macro_block_size=2)
         jitter = np.random.default_rng(seed).uniform(-0.015, 0.015, 2)
-        self.initial_positions = {"red": (0.42 + jitter[0], 0.12 + jitter[1], 0.82),
-                                  "blue": (0.35 + jitter[0], -0.08 + jitter[1], 0.82)}
+        if self.scenario is not None:
+            self.initial_positions = {
+                spec.name: (spec.position[0] + jitter[0], spec.position[1] + jitter[1], spec.position[2])
+                for spec in self.scenario.objects
+            }
+        else:
+            self.initial_positions = {"red": (0.42 + jitter[0], 0.12 + jitter[1], 0.82),
+                                      "blue": (0.35 + jitter[0], -0.08 + jitter[1], 0.82)}
         for name, pos in self.initial_positions.items():
             self.objects[name].set_pos(np.array(pos))
             self.objects[name].set_quat(np.array([1., 0., 0., 0.]))
@@ -142,9 +166,14 @@ class VCWorkspace:
                      if any(held is obj for held in self.avatar.robot.attached_object))
 
     def observe(self) -> Observation:
-        image_path = self.output / f"observation_{len(self.completed_skills):02d}_{len(self.messages):02d}.png"
+        image_path = self.output / f"observation_{self.step_count:06d}_{self.observation_index:06d}.png"
+        self.observation_index += 1
         rgb = self.robot_camera.render(rgb=True)[0]
         Image.fromarray(np.asarray(rgb, dtype=np.uint8)).save(image_path)
+        self.last_observation_path = image_path.name
+        execution = self.continuous_execution
+        active_action = "idle" if execution is None else execution["action"].kind
+        phase = "idle" if execution is None else execution.get("phase", "execute")
         return Observation(
             objects={k: tuple(v) for k, v in self.positions().items()}, regions=dict(self.regions),
             messages=tuple(self.messages), robot_ee=tuple(self.ee.get_pos().cpu().numpy().tolist()),
@@ -152,6 +181,11 @@ class VCWorkspace:
             held_by_human=self.held_by_human(), completed_skills=tuple(self.completed_skills),
             robot_qpos=tuple(self.robot.get_qpos().cpu().numpy().tolist()),
             rgb=np.asarray(rgb, dtype=np.uint8).copy(),
+            time_s=float(self.step_count) / 60.0,
+            active_robot_action=active_action,
+            action_phase=phase,
+            visible_human_action=(getattr(self.continuous_human_command, "intent", "observe")
+                                  if self.continuous_human_command is not None else "observe"),
         )
 
     def joint_position_step(self, joints):
@@ -163,8 +197,114 @@ class VCWorkspace:
         self.robot.control_dofs_position(values)
         self.tick(6)
 
+    def continuous_start_action(self, action: Action):
+        """启动一个可被逐 tick 推进或被新公开观测打断的动作块。"""
+        if self.continuous_execution is not None:
+            self.log.add(self.step_count, "robot_action_preempted",
+                         previous=self.continuous_execution["action"].kind, next=action.kind)
+        if action.kind == "transfer":
+            if action.object_id not in self.objects or action.destination not in self.regions:
+                raise ValueError(f"连续搬运目标不存在: {action}")
+            source = np.asarray(self.positions()[action.object_id])
+            destination = np.asarray(self.regions[action.destination])
+            self.continuous_execution = {"action": action, "phase": "approach", "source": source,
+                                         "destination": destination, "qgoal": None, "progress": 0}
+            self.current_robot_action = f"连续搬运 {action.object_id} 到 {action.destination}"
+        elif action.kind == "joint_position":
+            values = np.asarray(action.joints, dtype=float)
+            if values.shape != (9,) or not np.isfinite(values).all():
+                raise ValueError("joint_position 需要 9 个有限关节值。")
+            self.continuous_execution = {"action": action, "phase": "execute", "qgoal": values,
+                                         "progress": 0}
+        elif action.kind in {"request_help", "acknowledge"}:
+            self.say(Message("robot", action.kind, action.text, action.object_id, None, action.destination))
+            self.continuous_execution = {"action": action, "phase": "communicate", "progress": 0}
+        elif action.kind in {"wait", "finish"}:
+            self.continuous_execution = {"action": action, "phase": "execute", "progress": 0}
+        else:
+            raise ValueError(f"未知连续动作: {action.kind}")
+
+    def continuous_apply_human_command(self, command):
+        """把伙伴的当前意图映射到 AvatarController 的非阻塞动作。"""
+        self.continuous_human_command = command
+        try:
+            from vico.modules.avatar.utils import AvatarState
+        except ImportError:
+            return
+        if self.avatar.robot.action_state != AvatarState.NO_ACTION or not command.object_id:
+            return
+        held = self.held_by_human()
+        if command.intent == "approach" and not held and command.object_id in self.objects:
+            self.avatar.pick(1, self.objects[command.object_id])
+            self.continuous_human_phase = "picking"
+        elif command.intent == "carry" and command.object_id in held and command.destination in self.regions:
+            self.avatar.put(1, np.asarray(self.regions[command.destination]), rotation=np.eye(3, dtype=float))
+            self.continuous_human_phase = "placing"
+
+    def _continuous_robot_step(self):
+        execution = self.continuous_execution
+        if execution is None:
+            return
+        action = execution["action"]
+        execution["progress"] += 1
+        if action.kind == "transfer":
+            phase = execution["phase"]
+            source = execution["source"]
+            destination = execution["destination"]
+            if phase == "approach":
+                target = source + [0, 0, 0.20]
+                execution["qgoal"] = self._continuous_ik(target, 0.04)
+                if self._continuous_at(target):
+                    execution["phase"] = "grasp"
+                    execution["progress"] = 0
+            elif phase == "grasp":
+                target = source + [0, 0, 0.10]
+                execution["qgoal"] = self._continuous_ik(target, 0.025)
+                if execution["progress"] >= 10:
+                    self.attachment = (action.object_id, source - self.ee.get_pos().cpu().numpy())
+                    execution["phase"] = "carry"
+                    execution["progress"] = 0
+                    self.log.add(self.step_count, "abstract_grasp_attached", object_id=action.object_id)
+            elif phase == "carry":
+                target = destination + [0, 0, 0.14]
+                execution["qgoal"] = self._continuous_ik(target, 0.025)
+                if self._continuous_at(target):
+                    execution["phase"] = "release"
+                    execution["progress"] = 0
+            elif phase == "release":
+                self.attachment = None
+                self.objects[action.object_id].set_pos(destination)
+                self.completed_skills.append(f"robot:{action.object_id}:{action.destination}")
+                self.log.add(self.step_count, "robot_transfer_completed", object_id=action.object_id,
+                             destination=action.destination, measured_position=self.positions()[action.object_id])
+                execution["phase"] = "retreat"
+                execution["progress"] = 0
+            elif phase == "retreat":
+                target = destination + [0, 0, 0.30]
+                execution["qgoal"] = self._continuous_ik(target, 0.04)
+                if self._continuous_at(target) or execution["progress"] >= 80:
+                    self.continuous_execution = None
+            if execution.get("qgoal") is not None:
+                self.robot.control_dofs_position(execution["qgoal"])
+        elif action.kind == "joint_position":
+            self.robot.control_dofs_position(execution["qgoal"])
+            if execution["progress"] >= max(1, action.duration_steps):
+                self.continuous_execution = None
+        elif execution["progress"] >= max(1, action.duration_steps):
+            self.continuous_execution = None
+
+    def _continuous_ik(self, target, fingers):
+        qgoal = self.robot.inverse_kinematics(link=self.ee, pos=np.asarray(target),
+                                              quat=np.array([0., 1., 0., 0.])).cpu().numpy()
+        qgoal[-2:] = fingers
+        return qgoal
+
+    def _continuous_at(self, target):
+        return float(np.linalg.norm(self.ee.get_pos().cpu().numpy() - np.asarray(target))) < 0.065
+
     def tick(self, steps=1):
         for _ in range(steps):
+            self._continuous_robot_step()
             self.avatar.step()
             self.avatar.robot.update()
             self.scene.step()

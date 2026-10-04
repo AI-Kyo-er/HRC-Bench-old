@@ -12,6 +12,7 @@ class Message:
     text: str
     object_id: str | None = None
     value: str | None = None
+    destination: str | None = None
 
 
 @dataclass(frozen=True)
@@ -27,6 +28,12 @@ class Observation:
     robot_qpos: tuple[float, ...] = ()
     # Pass pixels, not an artifact path that could reveal the experimental condition.
     rgb: Any = None
+    # Continuous benchmark fields. They expose execution timing and public action
+    # status, while keeping scenario goals and partner latent state private.
+    time_s: float = 0.0
+    active_robot_action: str = ""
+    action_phase: str = "idle"
+    visible_human_action: str = ""
 
 
 @dataclass(frozen=True)
@@ -36,6 +43,10 @@ class Action:
     destination: str | None = None
     text: str = ""
     joints: tuple[float, ...] = ()
+    # A model may hold a control target for several simulator ticks. The runtime
+    # can preempt it when a new public observation changes the decision.
+    duration_steps: int = 1
+    control_mode: str = "semantic"
 
 
 class Policy(Protocol):
