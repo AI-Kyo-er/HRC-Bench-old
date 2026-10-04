@@ -82,6 +82,24 @@ class GenesisContinuousAdapter:
                            for i in range(3)) ** 0.5 < 0.065
                    for object_id, destination in self.scenario.human_targets.items())
 
+    def finished_activity(self) -> bool:
+        """按 ActivityContract 的工作项检查真实后端终态。
+
+        不能把机器人和人类的初始角色目标当作活动成功；失败后的接管
+        仍然应该被计为成功，只要每个声明的工作项达到了其目标区域。
+        """
+        if self.scenario is None:
+            return False
+        positions = self.workspace.positions()
+        for item in self.scenario.resolved_activity().work_items:
+            if item.object_id not in positions or item.destination not in self.workspace.regions:
+                return False
+            distance = sum((positions[item.object_id][i] - self.workspace.regions[item.destination][i]) ** 2
+                           for i in range(3)) ** 0.5
+            if distance >= 0.065:
+                return False
+        return True
+
 
 def make_genesis_backend_factory(*, assets: Path, output_root: Path, backend: str = "gpu",
                                  resolution: int = 800, render_stride: int = 3,

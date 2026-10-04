@@ -34,6 +34,12 @@ class Observation:
     active_robot_action: str = ""
     action_phase: str = "idle"
     visible_human_action: str = ""
+    # Public task semantics supplied by the scenario, never private goals or
+    # evaluator state.  These fields let a VLA/WLA distinguish task families
+    # without reverse-engineering a hard-coded benchmark name.
+    task_family: str = "object_transport"
+    task_description: str = ""
+    scene_id: str = ""
 
 
 @dataclass(frozen=True)

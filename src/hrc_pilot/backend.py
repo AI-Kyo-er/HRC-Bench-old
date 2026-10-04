@@ -186,6 +186,9 @@ class VCWorkspace:
             action_phase=phase,
             visible_human_action=(getattr(self.continuous_human_command, "intent", "observe")
                                   if self.continuous_human_command is not None else "observe"),
+            task_family=getattr(self.scenario, "task_family", "object_transport"),
+            task_description=getattr(self.scenario, "description", ""),
+            scene_id=getattr(self.scenario, "name", ""),
         )
 
     def joint_position_step(self, joints):

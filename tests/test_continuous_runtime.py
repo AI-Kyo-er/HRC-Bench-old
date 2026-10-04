@@ -14,12 +14,14 @@ from hrc_pilot.continuous import (
     GreedyPublicPolicy,
     ReactivePartner,
     generate_benchmark_suite,
+    load_scenario_catalog,
     run_catalog,
     run_counterfactual_benchmark,
     run_paired_benchmark,
 )
 from hrc_pilot.protocol import Action, Message
 from hrc_pilot.benchmark import ModelPolicy, decode_action, public_observation_dict
+from hrc_pilot.dataset import aggregate_results, evaluate_dataset, generate_dataset, iter_dataset
 
 
 class ContinuousRuntimeTests(unittest.TestCase):
@@ -127,6 +129,11 @@ class ContinuousRuntimeTests(unittest.TestCase):
             self.assertTrue((output / "public_observations.jsonl").exists())
             self.assertTrue((output / "policy_io.jsonl").exists())
             self.assertTrue((output / "scenario.json").exists())
+            public = json.loads((output / "public_scenario.json").read_text())
+            self.assertEqual(public["task_family"], scenario.task_family)
+            self.assertNotIn("human_targets", public)
+            self.assertNotIn("robot_targets", public)
+            self.assertNotIn("dynamics", public)
             metrics = (output / "metrics.json").read_text()
             self.assertIn("structure_family", metrics)
             self.assertIn("partner_mode", metrics)
@@ -185,6 +192,18 @@ class ContinuousRuntimeTests(unittest.TestCase):
                          original.resolved_activity().work_items)
         self.assertEqual(restored.initial_messages(), original.initial_messages())
 
+    def test_custom_task_family_round_trip_and_catalog_order(self):
+        from hrc_pilot.continuous import scenario_to_dict
+        first = replace(CONTINUOUS_SCENARIOS["relay"], name="z_task", task_family="handoff_sort")
+        second = replace(CONTINUOUS_SCENARIOS["relay"], name="a_task", task_family="handoff_sort")
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "z.json").write_text(json.dumps(scenario_to_dict(first), ensure_ascii=False))
+            (root / "a.json").write_text(json.dumps(scenario_to_dict(second), ensure_ascii=False))
+            catalog = load_scenario_catalog(root)
+        self.assertEqual([scenario.name for scenario in catalog], ["a_task", "z_task"])
+        self.assertEqual([scenario.task_family for scenario in catalog], ["handoff_sort"] * 2)
+
     def test_activity_contract_round_trips_interaction_acts(self):
         from hrc_pilot.continuous import scenario_from_dict, scenario_to_dict
         original = CONTINUOUS_SCENARIOS["nested_support"]
@@ -221,6 +240,70 @@ class ContinuousRuntimeTests(unittest.TestCase):
                          {"counterfactual_relay:seed=9:partner=adaptive"})
         self.assertEqual({result["policy_name"] for result in results},
                          {"greedy_public", "hrc_pilot.continuous_GreedyPublicPolicy"})
+
+    def test_dataset_generation_and_model_evaluation_preserve_episode_identity(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory) / "dataset"
+            metadata = generate_dataset(output=root, count_per_condition=1, repeats=1, seed=13)
+            episodes = iter_dataset(root)
+            self.assertEqual(metadata["episode_count"], 4)
+            self.assertEqual(len(episodes), 4)
+            result_root = Path(directory) / "evaluation"
+            summary = evaluate_dataset(dataset=root, output=result_root,
+                                       policy_spec="greedy_public", split="test")
+            self.assertEqual(summary["episode_count"], 1)
+            self.assertTrue((result_root / "greedy_public" / "test").exists())
+            self.assertIn("conflict_rate", summary["overall"])
+
+    def test_dataset_generation_accepts_custom_scenario_directory(self):
+        from hrc_pilot.continuous import scenario_to_dict
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            scenario_dir = root / "scenarios"
+            scenario_dir.mkdir()
+            scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="custom_task",
+                               task_family="tool_handoff")
+            (scenario_dir / "custom.json").write_text(
+                json.dumps(scenario_to_dict(scenario), ensure_ascii=False))
+            metadata = generate_dataset(output=root / "dataset", scenario_dir=scenario_dir,
+                                        suite=False, repeats=1, seed=3)
+            episodes = iter_dataset(root / "dataset")
+        self.assertEqual(metadata["episode_count"], 1)
+        self.assertEqual(episodes[0][1].task_family, "tool_handoff")
+
+    def test_genesis_activity_evaluator_uses_work_items(self):
+        from hrc_pilot.continuous_genesis import GenesisContinuousAdapter
+        scenario = CONTINUOUS_SCENARIOS["relay"]
+
+        class FakeWorkspace:
+            def __init__(self):
+                self.scenario = scenario
+                self.regions = dict(scenario.regions)
+                self._positions = {spec.name: list(spec.position) for spec in scenario.objects}
+
+            def positions(self):
+                return self._positions
+
+        workspace = FakeWorkspace()
+        adapter = GenesisContinuousAdapter(workspace, scenario=scenario)
+        self.assertFalse(adapter.finished_activity())
+        for item in scenario.resolved_activity().work_items:
+            workspace._positions[item.object_id] = list(workspace.regions[item.destination])
+        self.assertTrue(adapter.finished_activity())
+
+    def test_aggregate_exposes_adaptation_metrics(self):
+        summary = aggregate_results([{
+            "task_success": True, "activity_success": True, "robot_success": True,
+            "human_success": True, "robot_role_success": True, "human_role_success": True,
+            "completion_time_s": 1.0, "coordination_cost": 2.0, "conflict_rate": 0.1,
+            "human_reassignments": 1, "public_replans": 1, "recovery_time_steps": 3,
+            "human_trust_delta": -0.1, "human_reliability_delta": -0.2,
+            "human_workload_delta": 0.1, "human_dependency_delta": 0.2,
+            "structure_split": "test", "condition": "held_out", "structure_family": "x",
+            "partner_mode": "adaptive", "policy_name": "p",
+        }])
+        self.assertEqual(summary["overall"]["episodes"], 1)
+        self.assertEqual(summary["overall"]["recovery_time_steps"], 3.0)
 
 
 if __name__ == "__main__":

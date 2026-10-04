@@ -74,14 +74,29 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 
 完整的研究设计和字段约束见 `design.md` 与 `benchmark_schema.md`。
 
-每个 episode 目录是一个独立数据单元。`scenario.json` 保存实例条件，
-`public_observations.jsonl` 和 `policy_io.jsonl` 保存模型可见输入及动作，
+每个 episode 目录是一个独立数据单元。`scenario.json` 保存 evaluator 私有实例条件，
+`public_scenario.json`、`public_observations.jsonl` 和 `policy_io.jsonl` 保存模型可见输入及动作，
 `trace.jsonl`/`events.jsonl` 保存审计轨迹，`metrics.json` 保存独立评测结果。
+`public_scenario.json` 只含任务语义和几何，不含角色目标、伙伴动力学、活动契约或资产引用。
 Genesis 后端的 RGB 文件按 `observation_<step>_<index>.png` 命名，可依据
 JSONL 中的 `rgb_artifact` 稳定配对；不依赖 `manifest.json`。
 
 `metrics.json` 另外记录 `activity_success` 和 `blocked_transfers`：前者按活动
 契约的工作项终态评分，后者帮助区分单纯操作失败和跨贡献依赖带来的协调成本。
+
+除了内置 suite，也可以直接从场景契约目录生成数据集。目录中的每个 JSON 是一个
+场景，文件名和 `name` 必须稳定且唯一；场景只声明工作项、前置关系和可重规划边界，
+不需要预写逐步事件脚本：
+
+```bash
+PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
+  --scenario-dir path/to/scenarios \
+  --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/my_tasks \
+  --repeats 3 --partner-mode adaptive
+```
+
+随后用 `hrc-dataset evaluate` 对同一批 episode 运行任意 VLA/WLA 适配器，
+评测器仍从私有 `scenario.json` 独立计算活动终态、接管、重规划、冲突和伙伴状态变化。
 
 ## 证据边界
 

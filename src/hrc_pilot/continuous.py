@@ -153,6 +153,11 @@ class ContinuousScenario:
         default_factory=lambda: InteractionStructure("isolated", ("joint_execution",)))
     condition: str = "compositional"
     activity: ActivityContract | None = None
+    # Public task metadata and backend asset references.  Asset paths are
+    # resolved by the selected backend; the reference backend only needs the
+    # geometry above.
+    task_family: str = "object_transport"
+    assets: dict[str, Any] = field(default_factory=dict)
 
     def resolved_activity(self) -> ActivityContract:
         if self.activity is not None:
@@ -182,7 +187,9 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
            dynamics: DynamicsSpec | None = None,
            structure: InteractionStructure | None = None,
            condition: str = "compositional",
-           activity: ActivityContract | None = None) -> ContinuousScenario:
+           activity: ActivityContract | None = None,
+           task_family: str = "object_transport",
+           assets: dict[str, Any] | None = None) -> ContinuousScenario:
     return ContinuousScenario(
         name=name,
         description=description,
@@ -210,6 +217,8 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
         structure=structure or InteractionStructure("isolated", ("joint_execution",)),
         condition=condition,
         activity=activity,
+        task_family=task_family,
+        assets=assets or {},
     )
 
 
@@ -291,6 +300,8 @@ def scenario_to_dict(scenario: ContinuousScenario) -> dict[str, Any]:
             "success_policy": activity.success_policy,
         },
         "condition": scenario.condition,
+        "task_family": scenario.task_family,
+        "assets": scenario.assets,
         "structure": {
             "family": scenario.structure.family,
             "segments": scenario.structure.segments,
@@ -354,13 +365,41 @@ def scenario_from_dict(data: dict[str, Any]) -> ContinuousScenario:
         leave_trigger=data.get("leave_trigger"), leave_probability=float(data.get("leave_probability", 0.0)),
         leave_duration_steps=int(data.get("leave_duration_steps", 12)), dynamics=dynamics,
         structure=structure, condition=data.get("condition", "compositional"), activity=activity,
+        task_family=data.get("task_family", "object_transport"),
+        assets=dict(data.get("assets", {})),
     )
 
 
 def load_scenario(path: str | Path) -> ContinuousScenario:
     """从单个 JSON 文件读取用户定义场景。"""
     source = Path(path)
-    return scenario_from_dict(json.loads(source.read_text(encoding="utf-8")))
+    scenario = scenario_from_dict(json.loads(source.read_text(encoding="utf-8")))
+    if not scenario.name or scenario.name in {".", ".."} or Path(scenario.name).name != scenario.name:
+        raise ValueError("场景 name 必须是非空且不包含路径分隔符的目录名")
+    return scenario
+
+
+def load_scenario_catalog(path: str | Path) -> list[ContinuousScenario]:
+    """加载一个场景文件或目录中的 JSON 场景契约。
+
+    场景目录是 benchmark 作者扩展任务的入口：只需提供对象、区域、
+    ActivityContract 和结构划分，运行器不会要求为每个任务再写一份
+    固定事件脚本。聚合文件和隐藏文件会被跳过，排序保证实例顺序稳定。
+    """
+    source = Path(path)
+    if source.is_file():
+        return [load_scenario(source)]
+    if not source.is_dir():
+        raise FileNotFoundError(f"场景文件或目录不存在：{source}")
+    paths = sorted(candidate for candidate in source.glob("*.json")
+                   if not candidate.name.startswith(("_", "dataset", "summary")))
+    if not paths:
+        raise ValueError(f"场景目录没有可加载的 JSON 文件：{source}")
+    scenarios = [load_scenario(candidate) for candidate in paths]
+    names = [scenario.name for scenario in scenarios]
+    if len(names) != len(set(names)):
+        raise ValueError("场景目录中的 name 必须唯一")
+    return scenarios
 
 
 CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
@@ -1017,6 +1056,9 @@ class ContinuousWorld:
             completed_skills=tuple(self.completed_skills), robot_qpos=tuple(self.robot_qpos.tolist()), rgb=rgb,
             time_s=self.time_s, active_robot_action=active, action_phase=phase,
             visible_human_action=visible_action,
+            task_family=self.scenario.task_family,
+            task_description=self.scenario.description,
+            scene_id=self.scenario.name,
         )
 
     def apply_human_command(self, command: HumanCommand) -> None:
@@ -1256,6 +1298,7 @@ class ContinuousBackend(Protocol):
     def tick(self) -> None: ...
     def finished_robot(self) -> bool: ...
     def finished_human(self) -> bool: ...
+    def finished_activity(self) -> bool: ...
 
 
 def run_continuous_episode(scenario: ContinuousScenario, policy, partner: ContinuousPartner,
@@ -1325,9 +1368,7 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
             break
     robot_success = world.finished_robot()
     human_success = world.finished_human()
-    activity_success = bool(getattr(
-        world, "finished_activity", lambda: robot_success and human_success
-    )())
+    activity_success = bool(world.finished_activity())
     events = list(getattr(world, "events", ()))
     completed_skills = list(getattr(world, "completed_skills", ()))
     mode = partner_mode or {
@@ -1346,6 +1387,30 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         if matching:
             response_latencies.append(matching[0]["step"] - request["step"])
     human_actions = [row["human_action"] for row in trace]
+    state_updates = [event for event in events if event.get("kind") == "human_state_update"]
+    state_by_field: dict[str, list[dict[str, Any]]] = {}
+    for update in state_updates:
+        state_by_field.setdefault(str(update.get("field")), []).append(update)
+    def state_delta(field_name: str) -> float | None:
+        updates = state_by_field.get(field_name, [])
+        if not updates:
+            return None
+        first = updates[0].get("before", {}).get(field_name)
+        last = updates[-1].get("after", {}).get(field_name)
+        if first is None or last is None:
+            return None
+        return round(float(last) - float(first), 6)
+
+    failure_steps = [int(event["step"]) for event in events
+                     if event.get("kind") in {"robot_action_failed", "robot_action_delayed"}]
+    reassignment_steps = [int(event["step"]) for event in events
+                          if event.get("kind") == "public_message"
+                          and event.get("message_kind") == "reassignment"]
+    recovery_steps = [step - failure_steps[0] for step in reassignment_steps
+                      if failure_steps and step >= failure_steps[0]]
+    public_replans = sum(event.get("kind") == "public_message" and
+                         event.get("message_kind") in {"reassignment", "correction", "returned"}
+                         for event in events)
     adaptation_events = sum(event.get("kind") in {
         "robot_action_preempted", "proximity_warning", "robot_action_delayed",
         "robot_action_failed"} for event in events)
@@ -1354,6 +1419,8 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "human_success": human_success, "task_success": activity_success,
         "condition": scenario.condition, "structure_family": scenario.structure.family,
         "structure_split": scenario.structure.split, "partner_mode": mode,
+        "task_family": scenario.task_family,
+        "backend": type(world).__name__,
         "steps": len(trace), "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
         "preemptions": int(getattr(world, "interruptions", 0)),
         "robot_failures": int(getattr(world, "robot_failures", 0)),
@@ -1375,7 +1442,20 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
                                     if response_latencies else None),
         "human_corrections": sum(event.get("message_kind") == "correction" for event in events),
         "human_reassignments": sum(event.get("message_kind") == "reassignment" for event in events),
-        "human_state_updates": sum(event.get("kind") == "human_state_update" for event in events),
+        "human_state_updates": len(state_updates),
+        "human_trust_delta": state_delta("trust"),
+        "human_reliability_delta": state_delta("reliability_belief"),
+        "human_workload_delta": state_delta("workload"),
+        "human_dependency_delta": state_delta("robot_dependency"),
+        "human_available_min": (min(update.get("after", {}).get("available", 1.0)
+                                  for update in state_updates)
+                                if state_updates else 1.0),
+        "public_replans": int(public_replans),
+        "recovery_time_steps": (min(recovery_steps) if recovery_steps else None),
+        "handoff_success": bool(any("human:" in skill for skill in completed_skills)
+                                and activity_success),
+        "conflict_rate": (float(sum(event.get("kind") == "proximity_warning" for event in events))
+                          / max(1, len(trace))),
         "human_yield_steps": human_actions.count("yield"),
         "human_idle_ratio": (human_actions.count("observe") / len(human_actions)
                               if human_actions else 0.0),
@@ -1383,6 +1463,9 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "coordination_cost": float(len(policy_io) + 2 * len(response_latencies)
                                     + 3 * result_preemptions(events)),
         "activity_success": activity_success,
+        "finish_declared": any(row.get("action", {}).get("kind") == "finish"
+                                for row in policy_io),
+        "public_observation_count": len(public_observations),
         "blocked_transfers": sum(event.get("kind") in {"robot_transfer_blocked", "robot_blocked_by_human"}
                                  for event in events),
     }
@@ -1391,6 +1474,17 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         (output / "scenario.json").write_text(
             json.dumps(scenario_to_dict(scenario),
                        ensure_ascii=False, indent=2))
+        public_scenario = {
+            "name": scenario.name,
+            "description": scenario.description,
+            "task_family": scenario.task_family,
+            "objects": [spec.__dict__ for spec in scenario.objects],
+            "regions": scenario.regions,
+            "tick_hz": scenario.tick_hz,
+            "max_steps": scenario.max_steps,
+        }
+        (output / "public_scenario.json").write_text(
+            json.dumps(public_scenario, ensure_ascii=False, indent=2))
         (output / "trace.jsonl").write_text("\n".join(json.dumps(row, ensure_ascii=False) for row in trace) + "\n")
         (output / "public_observations.jsonl").write_text(
             "\n".join(json.dumps(row, ensure_ascii=False) for row in public_observations) + "\n")

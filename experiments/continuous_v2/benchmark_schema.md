@@ -7,6 +7,7 @@
 ```text
 <output>/<episode-name>/
   scenario.json
+  public_scenario.json
   public_observations.jsonl
   policy_io.jsonl
   trace.jsonl
@@ -47,6 +48,11 @@
 ```
 
 `robot_targets` 和 `human_targets` 是评测端的私有目标，不应送入模型。公开 assignment 消息是模型可以使用的任务信息；如果需要研究目标歧义，应在消息协议中显式记录，而不是把目标藏在私有字段后要求模型猜测。
+
+`public_scenario.json` 是给模型或数据发布方的脱敏场景描述，只保留
+`name`、`description`、`task_family`、物体与区域几何、`tick_hz` 和 `max_steps`。
+它不包含 `robot_targets`、`human_targets`、`dynamics`、`human_availability`、
+`activity` 或 `assets`；这些字段仅用于 evaluator 和后端复现。
 
 `activity` 是场景的活动契约，保存任务目标和可执行工作项：
 
@@ -112,3 +118,24 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 输出按 `<policy_name>/<scenario_name>` 保存，`counterfactual_group` 标记
 配对单元。策略造成的延迟、失败、求助和公开承诺差异会进入同一套事件与
 状态更新记录。
+
+## 数据集级工作流
+
+`hrc_pilot.dataset` 提供正式的数据集生成和批量评测入口：
+
+```bash
+PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
+  --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/continuous_v1 \
+  --count-per-condition 10 --repeats 3
+PYTHONPATH=src python scripts/run_hrc_dataset.py evaluate \
+  --dataset /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/continuous_v1 \
+  --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v1/model \
+  --policy package.module:factory --split test
+```
+
+生成器将 episode 放在 `<split>/<episode_id>/`，并写入 `dataset.json` 和
+`summary.json`；它们是版本和聚合信息，不承担 episode 配对。评测器重新读取
+每个 `scenario.json`，沿用 episode 的 seed，在相同活动契约和伙伴条件下运行
+模型。结果目录使用 `<policy>/<split>/<episode_id>/`，因此多个模型可以对同一
+场景直接按稳定路径配对。聚合指标包括活动成功、机器人/人类角色成功、重分工
+恢复时间、公共重规划、冲突率和伙伴隐藏状态的变化。
