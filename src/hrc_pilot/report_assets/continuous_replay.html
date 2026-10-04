@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRC-Continuous v2 · 中场实验复盘与动画</title>
+<style>__REPORT_CSS__</style>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到报告内容</a>
+<header class="masthead">
+  <p class="eyebrow">HRC-CONTINUOUS V2 / 实验中场复盘</p>
+  <h1 id="report-title">看清人和机器人实际怎样协作</h1>
+  <p class="lead">围绕你的 motivation：机器人行为会改变人的后续协作方式，机器人也需要据此重新组织自己的贡献。</p>
+  <p class="notice"><strong>动画来自已保存的参考仿真轨迹。</strong>这是桌面俯视的几何回放；显示人位置、机器人末端和物体移动，没有机械臂关节、人体姿态或接触力的三维画面。没有重新运行实验，也没有生成额外的动作。</p>
+  <div class="stat-grid" id="headline-stats"></div>
+  <nav aria-label="报告导航"><a href="#motivation">研究问题</a><a href="#replay">看动画</a><a href="#findings">看结果</a><a href="#implementation">做了什么</a><a href="#limits">下一步判断</a></nav>
+</header>
+<main id="main">
+<section id="motivation">
+  <p class="eyebrow">01 / 从研究动机读这次实验</p>
+  <h2>任务完成之外，我们关心协作关系有没有改变</h2>
+  <p>你的设想是：人机协作不会永远保持最初分工。机器人表现可靠、反复失败、过度求助或占用工作空间，都可能改变人愿意等待、委托、监督和接管的方式。我们要测机器人能否从公开行为和历史中发现这种变化，并重新协调双方贡献。</p>
+  <div class="loop" aria-label="预期研究闭环"><span>机器人行为</span><b>→</b><span>人更新判断</span><b>→</b><span>人改变协作方式</span><b>→</b><span>机器人重新协调</span></div>
+  <p>本阶段先搭建可以替换伙伴和策略、保存整个过程的运行框架。它还没有完成这一闭环的充分研究验证。关于 PARTNER、HRIBench 对伙伴变化处理不足的判断，在这里作为研究动机；本报告不声称已完成全面文献或原实现审计。</p>
+</section>
+<section id="setup">
+  <p class="eyebrow">02 / 本次真正运行的设置</p>
+  <h2>设置与版本来自保存的文件</h2>
+  <div id="setup-description"></div>
+  <p class="notice">本页展示历史运行快照。后续代码增加的活动契约、失败处理或状态指标，不会被补写进旧实验。下面所有成功标记都沿用当时的评分，不使用现在的代码重新评分。</p>
+  <details><summary>展开运行来源与版本设置</summary><pre id="provenance"></pre></details>
+</section>
+<section id="replay" class="replay-section">
+  <p class="eyebrow">03 / 逐步观察同一段共同活动</p>
+  <h2>轨迹动画与公开协作事件</h2>
+  <p>先选择场景，再播放或逐帧检查。配对实验会把三种伙伴并排显示，使用同一时间轴。图中 x、y 坐标以米为单位；所有位置直接取自记录，不插值、不推测关节动作。</p>
+  <div class="toolbar">
+    <label>场景<select id="scenario-select"></select></label>
+    <label>播放速度<select id="speed-select"><option value="0.25">0.25 倍</option><option value="0.5">0.5 倍</option><option value="1" selected>1 倍</option><option value="2">2 倍</option></select></label>
+    <label class="check-label"><input id="trail-toggle" type="checkbox" checked>显示末端与人位置轨迹</label>
+  </div>
+  <div id="scenario-explanation" class="explanation"></div>
+  <div class="controls">
+    <button id="play-toggle" type="button">播放</button><button id="restart" type="button">回到开头</button>
+    <button id="previous-frame" type="button">上一帧</button><button id="next-frame" type="button">下一帧</button>
+    <output id="clock" aria-label="当前回放时间"></output>
+  </div>
+  <label class="timeline-label" for="timeline">时间轴（方向键可逐帧调整）</label>
+  <input id="timeline" type="range" min="0" max="0" value="0" step="1" aria-label="轨迹时间轴">
+  <p class="muted" id="motion-note">默认暂停；可按自己的节奏查看。</p>
+  <div class="legend"><span><i class="human-key"></i>人位置</span><span><i class="robot-key"></i>机器人末端</span><span>○ 带名字的物体</span><span>□ 目标区域</span></div>
+  <div id="replay-panels" class="replay-grid"></div>
+  <p class="notice">记录帧是每个 tick 推进前的观测。完成事件可能发生在同一 tick 推进后；最后一张图不是额外记录的最终物理状态。回放停在最后保存帧，不会为了匹配成功评分而补造终态。</p>
+  <noscript><p class="notice">启用浏览器 JavaScript 后可播放动画；以下研究说明仍可阅读。</p></noscript>
+</section>
+<section id="findings">
+  <p class="eyebrow">04 / 什么结论有证据</p>
+  <h2>结果与区分能力</h2>
+  <div id="findings-description"></div>
+  <div class="table-wrap" tabindex="0" aria-label="实验结果表，可横向滚动">
+    <table><caption>保存的 episode 指标；“未记录”不表示零</caption><thead><tr><th scope="col">场景</th><th scope="col">伙伴</th><th scope="col">结构 / split</th><th scope="col">旧版任务评分</th><th scope="col">记录帧</th><th scope="col">失败</th><th scope="col">延迟步</th><th scope="col">人接管</th><th scope="col">接近警告</th><th scope="col">伙伴状态更新</th></tr></thead><tbody id="metrics-rows"></tbody></table>
+  </div>
+  <p>成功率说明运行流程和原评分能够工作。要判断 benchmark 是否有效，还需要让不同协作能力的机器人出现可解释的差异，并排除任务长度、动作能力和几何难度的影响。全部通过也可能意味着场景太容易或伙伴变化没有被触发。</p>
+</section>
+<section id="implementation">
+  <p class="eyebrow">05 / 把实现、意图和证据分开</p>
+  <h2>这段工作搭建了哪些东西</h2>
+  <ol class="reading-list">
+    <li><strong>场景与执行分开。</strong>对象、区域、初始分工和伙伴条件来自场景；双方依据公开观测推进动作。后续代码增加工作项及前置约束，但只有旧场景文件实际记录的内容才展示在本次回放中。</li>
+    <li><strong>伙伴可以替换。</strong>固定贡献顺序、即时响应、保留适应变量三种条件用于机制对照。它们由手写规则驱动，不是学到的真人行为模型。</li>
+    <li><strong>机器人可以替换。</strong>当前运行的 <code>greedy_public</code> 根据公开分工和几何距离选择搬运，并在空闲时等待。它没有加载具身模型权重。</li>
+    <li><strong>过程可以审计。</strong>轨迹保存位置；公开观测保存模型可见信息；策略记录保存输入输出；事件保存消息和完成情况。后来增加的数据集入口可组织稳定 episode 并重跑策略。</li>
+    <li><strong>本次新增可视化。</strong>把已有轨迹嵌入单个 HTML，提供播放、暂停、逐帧、速度、事件跳转和伙伴并排比较。重建报告保留原始数据和旧版页面。</li>
+  </ol>
+  <h3>三种伙伴条件究竟有什么区别</h3>
+  <div class="three-columns">
+    <article><h4>固定贡献顺序</h4><p>按初始分工推进自己的贡献，不因机器人表现重新组织分工。它仍读取物体位置和完成进度，并非逐帧录像回放。</p></article>
+    <article><h4>即时响应</h4><p>响应当前占用、求助或失败，可让行或接管。保留必要的协议状态，但没有持续更新信任和可靠性判断的模型。</p></article>
+    <article><h4>适应式伙伴</h4><p>手工更新信任、负载等变量，影响部分求助和暂离决策。失败接管等行为仍有预设规则；有状态变化不等于已验证长期协作方式变化。</p></article>
+  </div>
+  <p class="notice">人的内部适应变量属于评测分析信息，不是机器人输入。若本次事件没有记录状态更新，页面会明确显示“未记录”；不会根据动作反推或填入信任曲线。</p>
+</section>
+<section id="limits">
+  <p class="eyebrow">06 / 基于这些结果决定下一步</p>
+  <h2>距离目标 benchmark 还差什么</h2>
+  <p>当前保留实验运行在 <code>ContinuousWorld</code>，是简化几何与操作抽象。Genesis 适配代码和模型接口已有工程入口，但这些结果没有验证真实接触抓取、安全量、先进 VLA/WLA 推理或真人协作。</p>
+  <p>下一轮最关键的是做出一个能产生差异的场景：连续几次机器人失误让人从等待转为监督或接管；即使当前物体位置相同，不同历史也影响人后续如何协作。机器人必须观察这种变化，在继续、求助和主动承担之间作出有效选择。</p>
+  <ul><li>验证人的内部变化确实影响后续行为，而不只是日志中的状态数字。</li><li>比较实质不同的机器人策略，检验谁能发现和处理伙伴变化。</li><li>分别评分活动完成、双方负担和重新协调，避免把人替机器人做完等同于良好协作。</li><li>再把经过机制检查的任务落实到物理后端，接入真实具身模型。</li></ul>
+  <p>本页不能据此证明已有模型缺乏 cobalance 能力，也不能证明你的研究假设已成立。它让我们看到实际执行了什么，以及下一轮应当改变哪些设置。</p>
+</section>
+<section id="sources">
+  <p class="eyebrow">07 / 回到原始证据</p>
+  <h2>文件、复现与核查</h2>
+  <p>每个动画面板都有原始轨迹、事件和评分链接。页面内嵌数据，直接双击 HTML 即可使用，无需服务器或网络。<code>replay_verification.json</code> 保存输入文件 SHA-256、帧数和伙伴轨迹一致性检查；它用于检查回放来源，不是 episode 配对清单。</p>
+  <div class="source-links"><a href="replay_verification.json">回放来源核查</a><a id="original-report" href="index.before-replay.html">重建前的报告</a><a id="related-report" hidden>另一组实验报告</a></div>
+  <details><summary>查看本次哪些记录存在，哪些机制没有证据</summary><div id="artifact-audit"></div></details>
+</section>
+</main>
+<footer>HRC-Continuous v2 · 实验记录与研究判断分开呈现 · 轨迹回放，无物理重跑</footer>
+<script id="report-data" type="application/json">__REPORT_DATA__</script>
+<script>__REPORT_JS__</script>
+</body>
+</html>

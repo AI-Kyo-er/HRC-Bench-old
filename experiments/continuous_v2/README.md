@@ -74,6 +74,34 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 
 完整的研究设计和字段约束见 `design.md` 与 `benchmark_schema.md`。
 
+## 动画与中场报告
+
+报告现在包含来自 `trace.jsonl` 的桌面俯视动画、事件跳转、逐帧检查、播放速度，
+配对实验使用同一时间轴并排展示伙伴。动画内嵌在 `index.html`，无需联网或启动服务器。
+它只回放保存的位置和动作，没有补造关节轨迹、人体姿态、接触过程或最后终态。
+输入缺失字段显示“未记录”，历史场景未记录的活动契约不会从当前代码补入。
+
+已有两组报告已重建，结果仍位于外部存储：
+
+- `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal_v6/index.html`
+- `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/paired_v8/index.html`
+
+报告围绕研究动机解释机器人如何驱动、伙伴如何变化、哪些变化实际被触发，
+并区分当时运行证据、后续工程能力与尚未验证的研究假设。原页面保存在
+`index.before-replay.html`；源文件哈希和逐帧伙伴比较保存在 `replay_verification.json`。
+这些核查文件不承担 episode 配对。
+
+只读取原始结果重建报告，不重新运行仿真：
+
+```bash
+PYTHONPATH=src python scripts/rebuild_continuous_report.py \
+  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal_v6
+PYTHONPATH=src python scripts/rebuild_continuous_report.py \
+  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/paired_v8
+```
+
+详细的回放方法与证据边界见 `replay_report.md`。
+
 每个 episode 目录是一个独立数据单元。`scenario.json` 保存 evaluator 私有实例条件，
 `public_scenario.json`、`public_observations.jsonl` 和 `policy_io.jsonl` 保存模型可见输入及动作，
 `trace.jsonl`/`events.jsonl` 保存审计轨迹，`metrics.json` 保存独立评测结果。

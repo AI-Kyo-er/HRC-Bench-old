@@ -16,3 +16,6 @@ hrc-dataset = "hrc_pilot.dataset_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+hrc_pilot = ["report_assets/*.html", "report_assets/*.css", "report_assets/*.js"]

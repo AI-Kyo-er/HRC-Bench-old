@@ -1,101 +1,132 @@
-"""持续 benchmark 的独立、可审计 HTML 报告。"""
+"""从保存的实验产物生成离线动画与研究复盘报告。"""
 from __future__ import annotations
 
-import html
+from collections import defaultdict
+from hashlib import sha256
 import json
 from pathlib import Path
+import shutil
 from typing import Any
 
-from .continuous import CONTINUOUS_SCENARIOS, ContinuousScenario
+from .continuous import ContinuousScenario
+
+
+ARTIFACT_NAMES = (
+    "metrics.json", "scenario.json", "trace.jsonl", "events.jsonl",
+    "public_observations.jsonl", "policy_io.jsonl", "public_scenario.json",
+)
+
+
+def _json_lines(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip()]
+
+
+def _identity(row: dict[str, Any]) -> tuple[Any, ...]:
+    return row.get("scenario"), row.get("seed"), row.get("partner_mode"), row.get("policy_name")
+
+
+def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[str, Any]:
+    output = Path(output)
+    candidates: dict[tuple[Any, ...], list[Path]] = defaultdict(list)
+    for metrics_path in sorted(output.rglob("metrics.json")):
+        metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+        candidates[_identity(metrics)].append(metrics_path.parent)
+    provenance_path = output / "provenance.json"
+    provenance = (json.loads(provenance_path.read_text(encoding="utf-8"))
+                  if provenance_path.exists() else {})
+    episodes = []
+    source_hashes = {}
+    for result in results:
+        matches = candidates.get(_identity(result), [])
+        if len(matches) != 1:
+            raise ValueError(f"无法唯一匹配 episode 产物：{_identity(result)}")
+        directory = matches[0]
+        scenario_path = directory / "scenario.json"
+        scenario = (json.loads(scenario_path.read_text(encoding="utf-8"))
+                    if scenario_path.exists() else {})
+        trace = _json_lines(directory / "trace.jsonl")
+        if not trace:
+            raise ValueError(f"episode 缺少可回放轨迹：{directory}")
+        for previous, current in zip(trace, trace[1:]):
+            if current["time_s"] <= previous["time_s"]:
+                raise ValueError(f"轨迹时间必须严格递增：{directory}")
+        observations = _json_lines(directory / "public_observations.jsonl")
+        events = _json_lines(directory / "events.jsonl")
+        source = directory.relative_to(output).as_posix()
+        artifacts = [name for name in ARTIFACT_NAMES if (directory / name).exists()]
+        for name in artifacts:
+            path = directory / name
+            source_hashes[f"{source}/{name}"] = sha256(path.read_bytes()).hexdigest()
+        episodes.append({
+            "id": source, "metrics": result, "scenario": scenario,
+            "trace": trace, "observations": observations, "events": events,
+            "artifacts": artifacts,
+        })
+    for name in ("summary.json", "paired_summary.json", "provenance.json"):
+        path = output / name
+        if path.exists():
+            source_hashes[name] = sha256(path.read_bytes()).hexdigest()
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for episode in episodes:
+        grouped[episode["metrics"]["scenario"]].append(episode)
+    comparisons = []
+    for name, group in grouped.items():
+        modes = {episode["metrics"].get("partner_mode") for episode in group}
+        if len(group) > 1 and len(modes) == len(group):
+            keys = ("time_s", "objects", "human_position", "robot_position",
+                    "active_robot_action", "human_action")
+            traces = [[{key: frame.get(key) for key in keys} for frame in episode["trace"]]
+                      for episode in group]
+            comparisons.append({
+                "scenario": name,
+                "trajectory_equal": all(trace == traces[0] for trace in traces[1:]),
+                "steps": [len(episode["trace"]) for episode in group],
+                "modes": [episode["metrics"].get("partner_mode") for episode in group],
+            })
+    return {
+        "report_version": "continuous-replay-1", "run_name": output.name,
+        "provenance": provenance, "episodes": episodes, "comparisons": comparisons,
+        "source_hashes": source_hashes,
+    }
 
 
 def write_continuous_report(output: Path, results: list[dict[str, Any]],
                             scenarios: list[ContinuousScenario] | None = None) -> Path:
-    success_count = sum(bool(result["task_success"]) for result in results)
-    total_steps = sum(int(result["steps"]) for result in results)
-    rows = []
-    for result in results:
-        rows.append(
-            "<tr>"
-            f"<td>{html.escape(result['scenario'])}</td>"
-            f"<td>{html.escape(result.get('task_family', ''))}</td>"
-            f"<td>{html.escape(result.get('policy_name', result.get('policy_spec', '')))}</td>"
-            f"<td>{html.escape(result.get('condition', ''))}</td>"
-            f"<td>{html.escape(result.get('structure_family', ''))}</td>"
-            f"<td>{html.escape(result.get('partner_mode', ''))}</td>"
-            f"<td>{'通过' if result['task_success'] else '未通过'}</td>"
-            f"<td>{result['steps']}</td><td>{result['robot_actions']}</td>"
-            f"<td>{result['robot_failures']}</td><td>{result['robot_delay_steps']}</td>"
-            f"<td>{result['human_reassignments']}</td><td>{result['preemptions']}</td>"
-            f"<td>{result['proximity_warnings']}</td>"
-            f"<td>{result.get('response_latency_steps') if result.get('response_latency_steps') is not None else '—'}</td>"
-            f"<td>{result.get('coordination_cost', 0):.1f}</td>"
-            f"<td>{'通过' if result.get('activity_success', result['task_success']) else '未通过'}</td>"
-            f"<td>{result.get('blocked_transfers', 0)}</td>"
-            f"<td>{result.get('human_state_updates', 0)}</td>"
-            f"<td>{html.escape(', '.join(result['completed_skills']))}</td>"
-            "</tr>"
-        )
-    scenario_cards = []
-    scenario_catalog = scenarios or list(CONTINUOUS_SCENARIOS.values())
-    for scenario in scenario_catalog:
-        scenario_cards.append(
-            f"<article><h3>{html.escape(scenario.name)}</h3>"
-            f"<p>任务族：<code>{html.escape(scenario.task_family)}</code></p>"
-            f"<p>{html.escape(scenario.description)}</p>"
-            f"<p>物体数：{len(scenario.objects)}；人的初始贡献："
-            f"{html.escape(json.dumps(scenario.human_targets, ensure_ascii=False))}；"
-            f"机器人收到的公开分工：{html.escape(json.dumps(scenario.robot_targets, ensure_ascii=False))}</p>"
-            f"<p>结构：<code>{html.escape(scenario.structure.family)}</code>；"
-            f"片段：{html.escape(' → '.join(scenario.structure.segments))}；"
-            f"划分：<code>{html.escape(scenario.structure.split)}</code>；"
-            f"条件：<code>{html.escape(scenario.condition)}</code></p>"
-            f"<p>活动契约：{len(scenario.resolved_activity().work_items)} 个工作项；"
-            f"交互作用 {len(scenario.resolved_activity().interaction_acts)} 个（"
-            f"{html.escape(', '.join(act.kind for act in scenario.resolved_activity().interaction_acts))}）；"
-            f"前置承诺 {sum(bool(item.prerequisites) for item in scenario.resolved_activity().work_items)} 个；"
-            f"重规划触发：{html.escape(', '.join(scenario.resolved_activity().replanning_triggers))}。</p>"
-            f"<p class='note'>伙伴可用性是隐藏条件（{scenario.human_availability:.2f}）；"
-            f"动作延迟概率 {scenario.dynamics.robot_delay_probability:.2f}，失败概率 "
-            f"{scenario.dynamics.robot_failure_probability:.2f}，离返压力 "
-            f"{scenario.dynamics.leave_pressure:.2f}。扰动在动作开始后在线采样，"
-            f"不绑定固定时间步。</p></article>"
-        )
-    body = f"""<!doctype html>
-<html lang="zh-CN"><meta charset="utf-8"><title>HRC-Continuous v2</title>
-<style>
-body {{ font-family: system-ui, 'Noto Sans CJK SC', sans-serif; max-width: 1180px; margin: 36px auto; padding: 0 24px; color: #172033; background: #f6f8fb; }}
-header, article, section {{ background: white; border: 1px solid #dbe2ed; border-radius: 12px; padding: 20px; margin: 14px 0; }}
-h1 {{ margin: 0 0 8px; color: #153b68; }} h2 {{ color: #1e527e; }} h3 {{ margin: 0 0 8px; color: #175c62; }}
-table {{ border-collapse: collapse; width: 100%; background: white; }} th, td {{ border-bottom: 1px solid #e2e8f0; padding: 9px; text-align: left; font-size: 14px; }} th {{ background: #edf4fa; }}
-code {{ background: #eef2f7; padding: 2px 5px; border-radius: 4px; }} .note {{ color: #56657a; }}
-</style>
-<header><h1>HRC-Continuous v2：持续共同活动参考运行时</h1>
-<p>本页记录的是可复现的 benchmark 运行和场景实例，不把参考伙伴的结果外推为 VLA 能力结论。结构条件与伙伴条件是实验变量，不能用一个固定状态机替代。</p>
-<p class="note">同一 episode 中人和机器人逐 tick 同时推进；模型只能看到公开观测、RGB（若后端提供）和公开消息，不能读取场景目标、伙伴信任或可用性。</p></header>
-<section><h2>实验目的</h2>
-<p>这个 benchmark 测试机器人能否在同一个持续共同活动中保留公开约定、观察伙伴行为、执行自己的动作，并在指导、共同执行、干预、暂离和重新分工交织时重新组织双方贡献。测试单位是双方共同推进的 episode，而不是孤立的“听懂一句话”或单个抓取技能。</p>
-<p>参考后端的成功率只用于检查协议和评测器能否工作；真正的模型比较应把同一场景实例和同一公开观测接口交给不同 VLA/WLA，再比较任务进展、依赖保留、协调代价和安全结果。固定回放、反应式和适应式伙伴用于区分“只完成预录动作”“响应当前公开行为”和“根据历史可靠性重组分工”。</p></section>
-<section><h2>运行闭环</h2>
-<ol><li>场景实例提供物体、区域、初始公开分工和隐藏伙伴条件；隐藏条件不会进入 <code>Observation</code>。</li>
-<li>每个 tick 先推进伙伴的当前意图，再把公开消息、几何状态、RGB（若后端提供）和机器人动作阶段交给策略。</li>
-<li>策略输出一个可持续的动作块（语义搬运、关节目标、求助、确认、等待或结束）；新公开消息可以在动作完成前打断它。</li>
-<li>后端在动作启动时按场景动力学采样延迟或失败；失败、延迟、占用冲突和伙伴接管都通过公开消息与几何结果进入下一次决策。</li>
-<li>后端同时推进人和机器人，并记录真实物体位置、动作阶段、消息、接近事件和完成事件。</li>
-<li>独立评测器根据终态和全程事件计算结果，模型不能通过输出 <code>finish</code> 伪造任务完成。</li></ol></section>
-<section><h2>这版具体改变了什么</h2>
-<ul><li>这不是按“第 N 步发生事件”的固定状态机：任务实例定义活动目标、工作项、前置承诺、共享资源和重规划触发条件，双方每个 tick 根据当前公开观测重新选择下一步。</li>
-<li>动作是可持续的 action chunk，执行中可以因公开消息或伙伴靠近而重新决策。</li>
-<li>伙伴使用冻结参数的连续效用模型，根据距离、负载、信任、动作延迟/失败和机器人当前占用选择目标；它会并行移动、抓取、放置、接管、暂离和返回。</li>
-<li>场景由物体、区域、公开分工、活动契约、交互结构和私有伙伴参数组合而成；<code>generate_scenarios</code> 与 <code>generate_benchmark_suite</code> 可以改变布局、分工、依赖、结构划分和离返条件，不依靠预写的“第 N 步触发事件”推进。</li>
-<li>每个 tick 保存公开观测、双方动作、物体位置、动作打断、接近警告和技能完成事件，便于接入真实 VLA/WLA 后复算同一指标。</li></ul></section>
-<section><h2>场景目录</h2>{''.join(scenario_cards)}</section>
-<section><h2>本次运行</h2><p>完成 {success_count}/{len(results)} 个 episode，共记录 {total_steps} 个 benchmark tick。若运行的是反事实集合，表中的策略列对应同一场景、同一 seed 和同一伙伴初始状态；差异来自机器人行为引起的公开历史与伙伴状态更新。</p><table><thead><tr><th>场景</th><th>任务族</th><th>策略</th><th>条件</th><th>结构</th><th>伙伴</th><th>任务</th><th>仿真步</th><th>机器人动作</th><th>机器人失败</th><th>延迟步</th><th>人接管</th><th>打断</th><th>接近警告</th><th>响应步数</th><th>协调代价</th><th>活动终态</th><th>阻塞搬运</th><th>状态更新</th><th>完成技能</th></tr></thead><tbody>{''.join(rows)}</tbody></table></section>
-<section><h2>可用于数据集的产物</h2><p>每个场景目录包含 <code>scenario.json</code>（私有实例、交互作用组合、结构条件和评测目标）、<code>public_scenario.json</code>（脱敏任务语义和几何）、<code>public_observations.jsonl</code>（模型可见输入）、<code>policy_io.jsonl</code>（策略输入输出）、<code>trace.jsonl</code>（逐 tick 几何轨迹）、<code>events.jsonl</code>（事件审计）和 <code>metrics.json</code>（独立评分）。<code>events.jsonl</code> 中的 <code>human_state_update</code> 保留伙伴信任、负载、承诺稳定性和依赖度的 evaluator trace，但这些字段不会进入模型观测。训练或评测加载器应按 episode 目录和文件 stem 配对，不需要额外关系清单。<code>held_out</code> 结构只依据 <code>scenario.json</code> 的 split 进入测试集。</p></section>
-<section><h2>模型接入边界</h2><p><code>ModelPolicy</code> 将 VLA 的 RGB 加结构化观测或 WLA 的文本/状态观测转换成同一个动作协议。模型可以返回 JSON 字符串、JSON 对象或 <code>Action</code>；运行时检查动作类型、目标字段、关节维度和持续步数，再交给后端执行。参考的 <code>GreedyPublicPolicy</code> 只是协议基线，不能代表先进具身模型。</p></section>
-<section><h2>证据边界</h2><p>参考后端用于验证协议、动态伙伴和评测逻辑；真实模型通过公开观测到动作的适配器接入，Genesis 后端仍需在相同场景实例和记录格式下完成接触动力学验证。当前结果不能当作真实 VLA/WLA 排行榜。</p></section>
-</html>"""
-    output.mkdir(parents=True, exist_ok=True)
+    output = Path(output)
+    payload = build_replay_payload(output, results)
     path = output / "index.html"
-    path.write_text(body, encoding="utf-8")
+    backup = output / "index.before-replay.html"
+    payload["has_original_report"] = path.exists() or backup.exists()
+    assets = Path(__file__).parent / "report_assets"
+    document = (assets / "continuous_replay.html").read_text(encoding="utf-8")
+    encoded = json.dumps(payload, ensure_ascii=False, allow_nan=False).replace("<", "\\u003c")
+    document = document.replace("__REPORT_CSS__", (assets / "continuous_replay.css").read_text(encoding="utf-8"))
+    document = document.replace("__REPORT_JS__", (assets / "continuous_replay.js").read_text(encoding="utf-8"))
+    document = document.replace("__REPORT_DATA__", encoded)
+    if path.exists() and not backup.exists():
+        shutil.copy2(path, backup)
+    path.write_text(document, encoding="utf-8")
+    verification = {
+        "report_version": payload["report_version"],
+        "rendering": "recorded_xy_trajectory_canvas_replay",
+        "simulation_rerun": False,
+        "episode_count": len(payload["episodes"]),
+        "recorded_frame_count": sum(len(episode["trace"]) for episode in payload["episodes"]),
+        "source_sha256": payload["source_hashes"],
+        "comparisons": payload["comparisons"],
+        "terminal_state": "trace records pre-tick observations; no terminal frame synthesized",
+    }
+    (output / "replay_verification.json").write_text(
+        json.dumps(verification, ensure_ascii=False, indent=2), encoding="utf-8")
     return path
+
+
+def rebuild_saved_report(output: str | Path) -> Path:
+    output = Path(output)
+    source = (output / "paired_summary.json" if (output / "paired_summary.json").exists()
+              else output / "summary.json")
+    summary = json.loads(source.read_text(encoding="utf-8"))
+    return write_continuous_report(output, summary["episodes"])

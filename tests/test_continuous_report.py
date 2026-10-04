@@ -1,0 +1,84 @@
+"""检查回放使用历史证据而不重造实验。"""
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import unittest
+
+from hrc_pilot.continuous_report import build_replay_payload, write_continuous_report
+
+
+class ContinuousReportTests(unittest.TestCase):
+    def write_episode(self, root, mode="adaptive", offset=0.0):
+        directory = root / mode / "example"
+        directory.mkdir(parents=True)
+        metrics = {"scenario": "example", "seed": 7, "partner_mode": mode,
+                   "task_success": True, "steps": 2}
+        scenario = {"name": "example", "description": "</script><script>bad()</script>",
+                    "regions": {"tray": [0.5, 0.0, 0.8]}}
+        trace = [{"step": index, "time_s": index / 10,
+                  "objects": {"cup": [offset + index / 10, 0.0, 0.8]},
+                  "human_position": [0.5, 0.8, 0.0],
+                  "robot_position": [0.0, 0.0, 1.0],
+                  "active_robot_action": "transfer:cup", "human_action": "observe"}
+                 for index in range(2)]
+        (directory / "metrics.json").write_text(json.dumps(metrics))
+        (directory / "scenario.json").write_text(json.dumps(scenario))
+        (directory / "trace.jsonl").write_text("\n".join(json.dumps(row) for row in trace))
+        (directory / "events.jsonl").write_text(json.dumps({"kind": "robot_transfer_completed", "step": 1}))
+        return metrics, directory, trace
+
+    def test_historical_records_are_preserved_without_current_defaults(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, episode_dir, trace = self.write_episode(root)
+            before = (episode_dir / "trace.jsonl").read_bytes()
+            payload = build_replay_payload(root, [metrics])
+            self.assertEqual(payload["episodes"][0]["trace"], trace)
+            self.assertNotIn("activity", payload["episodes"][0]["scenario"])
+            self.assertNotIn("robot_failures", payload["episodes"][0]["metrics"])
+            write_continuous_report(root, [metrics])
+            self.assertEqual((episode_dir / "trace.jsonl").read_bytes(), before)
+            verification = json.loads((root / "replay_verification.json").read_text())
+            self.assertFalse(verification["simulation_rerun"])
+            self.assertEqual(verification["recorded_frame_count"], 2)
+
+    def test_pair_comparison_checks_trajectory_not_only_frame_count(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            first, _, _ = self.write_episode(root, "fixed_replay")
+            second, _, _ = self.write_episode(root, "reactive")
+            self.assertTrue(build_replay_payload(root, [first, second])["comparisons"][0]["trajectory_equal"])
+            third, _, _ = self.write_episode(root, "adaptive", offset=0.02)
+            self.assertFalse(build_replay_payload(root, [first, second, third])["comparisons"][0]["trajectory_equal"])
+
+    def test_offline_document_escapes_data_and_keeps_original_report(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, _, _ = self.write_episode(root)
+            (root / "index.html").write_text("original report")
+            path = write_continuous_report(root, [metrics])
+            document = path.read_text()
+            self.assertNotIn("</script><script>bad()", document)
+            self.assertNotIn("__REPORT_", document)
+            self.assertIn('id="report-data"', document)
+            self.assertIn('id="timeline"', document)
+            self.assertEqual((root / "index.before-replay.html").read_text(), "original report")
+            write_continuous_report(root, [metrics])
+            self.assertEqual((root / "index.before-replay.html").read_text(), "original report")
+
+    def test_missing_and_ambiguous_episode_sources_are_rejected(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, episode_dir, _ = self.write_episode(root)
+            (episode_dir / "trace.jsonl").unlink()
+            with self.assertRaisesRegex(ValueError, "缺少可回放轨迹"):
+                build_replay_payload(root, [metrics])
+            duplicate = root / "duplicate"
+            duplicate.mkdir()
+            (duplicate / "metrics.json").write_text(json.dumps(metrics))
+            with self.assertRaisesRegex(ValueError, "无法唯一匹配"):
+                build_replay_payload(root, [metrics])
+
+
+if __name__ == "__main__":
+    unittest.main()
