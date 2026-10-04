@@ -129,6 +129,7 @@ class DynamicsSpec:
     return_on_robot_idle: bool = True
     human_initiative: float = 0.65
     handoff_on_failure_probability: float = 1.0
+    robot_failure_budget: int = 0
 
 
 @dataclass(frozen=True)
@@ -290,6 +291,7 @@ def scenario_to_dict(scenario: ContinuousScenario) -> dict[str, Any]:
             "return_on_robot_idle": scenario.dynamics.return_on_robot_idle,
             "human_initiative": scenario.dynamics.human_initiative,
             "handoff_on_failure_probability": scenario.dynamics.handoff_on_failure_probability,
+            "robot_failure_budget": scenario.dynamics.robot_failure_budget,
         },
         "activity": {
             "objective": activity.objective,
@@ -332,7 +334,7 @@ def scenario_from_dict(data: dict[str, Any]) -> ContinuousScenario:
     dynamics_fields = {
         "robot_delay_probability", "robot_failure_probability", "max_delay_steps",
         "human_replan_sensitivity", "leave_pressure", "return_on_robot_idle",
-        "human_initiative", "handoff_on_failure_probability",
+        "human_initiative", "handoff_on_failure_probability", "robot_failure_budget",
     }
     dynamics = DynamicsSpec(**{key: dynamics_data[key] for key in dynamics_fields
                                if key in dynamics_data})
@@ -443,6 +445,23 @@ CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
                                                                 ("joint_execution", "intervention", "joint_execution"),
                                                                 (("joint_execution", "intervention"), ("intervention", "joint_execution")))),
 }
+
+
+def make_history_counterfactual_scenario(name: str = "history_counterfactual") -> ContinuousScenario:
+    """构造用于历史反事实门槛的最小任务实例。
+
+    失败预算只在机器人实际启动 transfer 时消耗，因此“直接执行”和
+    “先公开求助”会在同一初始场景中形成不同历史；它不指定失败发生的
+    tick，也不规定伙伴随后必须采取哪一步。
+    """
+    base = CONTINUOUS_SCENARIOS["relay"]
+    return replace(
+        base,
+        name=name,
+        description="相同 relay 几何下比较直接执行与先公开求助的历史依赖。",
+        max_steps=260,
+        dynamics=replace(base.dynamics, robot_failure_budget=1),
+    )
 
 
 def generate_scenarios(count: int, *, seed: int = 0) -> list[ContinuousScenario]:
@@ -681,6 +700,7 @@ class AdaptivePartner:
         self.last_robot_progress = 0.0
         self.last_robot_action = "idle"
         self.reassignments = 0
+        self.recovery_wait_steps = 0
         self.messages_sent: list[Message] = []
 
     @property
@@ -771,6 +791,7 @@ class AdaptivePartner:
                                        "robot_action_failed", observation,
                                        {"object_id": message.object_id})
                     self.reassignments += 1
+                    self.recovery_wait_steps = max(self.recovery_wait_steps, 1)
                     outgoing.append(Message("human", "reassignment", "机器人未完成，我接手这个贡献。",
                                              message.object_id, "accept", destination))
             elif message.speaker == "robot" and message.kind == "action_delayed":
@@ -820,6 +841,10 @@ class AdaptivePartner:
                                    "returned", observation)
             return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages),
                                  self._drain_state_updates())
+        if self.recovery_wait_steps > 0:
+            self.recovery_wait_steps -= 1
+            return PartnerOutput(HumanCommand("observe", target=observation.human_position),
+                                 tuple(messages), self._drain_state_updates())
         if (not self.has_left and self.scenario.dynamics.leave_pressure > 0.0
                 and observation.active_robot_action != "idle"):
             stress = min(1.0, self.workload + (1.0 - self.trust)
@@ -1023,6 +1048,7 @@ class ContinuousWorld:
         self.robot_delay_steps = 0
         self.interruptions = 0
         self.near_misses = 0
+        self.remaining_failure_budget = int(max(0, self.scenario.dynamics.robot_failure_budget))
 
     @property
     def time_s(self) -> float:
@@ -1082,7 +1108,10 @@ class ContinuousWorld:
             delay = (int(self.rng.integers(1, dynamics.max_delay_steps + 1))
                      if dynamics.max_delay_steps > 0
                      and self.rng.random() < dynamics.robot_delay_probability else 0)
-            failed = bool(self.rng.random() < dynamics.robot_failure_probability)
+            budget_failure = self.remaining_failure_budget > 0
+            if budget_failure:
+                self.remaining_failure_budget -= 1
+            failed = budget_failure or bool(self.rng.random() < dynamics.robot_failure_probability)
             self.robot_execution = _RobotExecution(action, phase="approach", object_id=action.object_id,
                                                     destination=action.destination, progress=0.0,
                                                     delay_remaining=delay, failed=failed)
@@ -1250,6 +1279,8 @@ class ContinuousWorld:
 def load_continuous_policy(spec: str):
     if spec == "greedy_public":
         return GreedyPublicPolicy()
+    if spec == "request_help_public":
+        return RequestHelpPublicPolicy()
     module, factory = spec.split(":", 1)
     return getattr(importlib.import_module(module), factory)()
 
@@ -1281,6 +1312,48 @@ class GreedyPublicPolicy:
         if candidates:
             _, object_id, destination = min(candidates)
             return Action("transfer", object_id, destination, duration_steps=1)
+        if observation.active_robot_action == "idle":
+            return Action("wait", duration_steps=2)
+        return Action("wait", duration_steps=2)
+
+
+class RequestHelpPublicPolicy:
+    """在执行机器人贡献前先公开请求接手的参考策略。
+
+    这是历史反事实实验中的稳定对照：它只使用公开 assignment 和消息，
+    不读取伙伴的信任或 evaluator 状态。通过公开协商避免触发机器人失败，
+    可以和直接尝试 transfer 的策略形成同一场景的不同历史。
+    """
+
+    def reset(self) -> None:
+        self.assignments: dict[str, tuple[str, str]] = {}
+        self.seen_messages = 0
+        self.requested: set[str] = set()
+
+    def act(self, observation: Observation) -> Action:
+        for message in observation.messages[self.seen_messages:]:
+            if message.kind == "assignment" and message.object_id:
+                self.assignments[message.object_id] = (message.value or "robot",
+                                                       message.destination or f"tray_{message.object_id}")
+            if message.kind in {"help_reply", "reassignment"} and message.object_id:
+                if message.value == "decline":
+                    self.assignments[message.object_id] = ("robot", message.destination or f"tray_{message.object_id}")
+                elif message.value == "accept":
+                    self.assignments[message.object_id] = ("human", message.destination or f"tray_{message.object_id}")
+        self.seen_messages = len(observation.messages)
+        candidates = []
+        for object_id, (assignment, destination) in self.assignments.items():
+            if assignment != "robot" or object_id in self.requested:
+                continue
+            if destination in observation.regions and object_id in observation.objects:
+                if math.dist(observation.objects[object_id], observation.regions[destination]) > 0.065:
+                    candidates.append((math.dist(observation.robot_ee, observation.objects[object_id]),
+                                       object_id, destination))
+        if candidates:
+            _, object_id, destination = min(candidates)
+            self.requested.add(object_id)
+            return Action("request_help", object_id, destination,
+                          text="我无法稳定完成这个贡献，可以请你接手吗？")
         if observation.active_robot_action == "idle":
             return Action("wait", duration_steps=2)
         return Action("wait", duration_steps=2)
@@ -1379,7 +1452,9 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                       "human_position": public_observation.human_position,
                       "robot_position": public_observation.robot_ee,
                       "active_robot_action": public_observation.active_robot_action,
-                      "human_action": public_observation.visible_human_action})
+                      "human_action": public_observation.visible_human_action,
+                      "human_object": partner_output.command.object_id,
+                      "human_destination": partner_output.command.destination})
         world.tick()
         if world.finished_robot() and world.finished_human():
             break
@@ -1390,7 +1465,9 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                   "objects": terminal.objects, "human_position": terminal.human_position,
                   "robot_position": terminal.robot_ee,
                   "active_robot_action": terminal.active_robot_action,
-                  "human_action": terminal.visible_human_action, "terminal": True})
+                  "human_action": terminal.visible_human_action,
+                  "human_object": None, "human_destination": None,
+                  "terminal": True})
     finalizer = getattr(world, "finish_episode", None)
     if finalizer is not None:
         finalizer()
@@ -1487,6 +1564,12 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "human_yield_steps": human_actions.count("yield"),
         "human_idle_ratio": (human_actions.count("observe") / len(human_actions)
                               if human_actions else 0.0),
+        "human_action_trace": [
+            {"intent": row.get("human_action"), "object_id": row.get("human_object"),
+             "destination": row.get("human_destination")}
+            for row in trace
+        ],
+        "geometry_trace": [row.get("objects", {}) for row in trace],
         "adaptation_events": adaptation_events,
         "coordination_cost": float(len(policy_io) + 2 * len(response_latencies)
                                     + 3 * result_preemptions(events)),
@@ -1621,4 +1704,67 @@ def run_counterfactual_benchmark(*, policy_specs: tuple[str, ...], seed: int = 0
             json.dumps({"episodes": results, "policy_specs": list(policy_specs),
                         "partner_mode": partner_mode, "scenario_count": len(scenario_list),
                         "seed": seed}, ensure_ascii=False, indent=2))
+    return results
+
+
+def run_history_counterfactual(*, policy_specs: tuple[str, ...] = ("greedy_public", "request_help_public"),
+                               seed: int = 0, output: Path | None = None,
+                               scenarios: list[ContinuousScenario] | None = None,
+                               backend_factory=ContinuousWorld,
+                               partner_mode: str = "adaptive") -> list[dict[str, Any]]:
+    """运行同一场景的历史反事实，并计算伙伴后续行为的历史依赖。
+
+    两个策略共享实例、seed、伙伴初始状态和公开任务；差异只来自机器人
+    在前期选择的公开动作。评测器寻找几何状态仍相同但伙伴动作已分化的
+    时间点，从而区分“内部状态被更新”与“更新改变了可观察协作”。
+    """
+    results = run_counterfactual_benchmark(
+        policy_specs=policy_specs, seed=seed, output=output, scenarios=scenarios,
+        backend_factory=backend_factory, partner_mode=partner_mode)
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for result in results:
+        grouped.setdefault(str(result["counterfactual_group"]), []).append(result)
+    for group_results in grouped.values():
+        if len(group_results) < 2:
+            continue
+        baseline = group_results[0]
+        base_geometry = baseline.get("geometry_trace", [])
+        base_actions = baseline.get("human_action_trace", [])
+        for result in group_results:
+            geometry = result.get("geometry_trace", [])
+            actions = result.get("human_action_trace", [])
+            comparable = min(len(base_geometry), len(geometry), len(base_actions), len(actions))
+            same_geometry_steps = 0
+            divergent_steps = 0
+            first_divergence = None
+            for index in range(comparable):
+                left = base_geometry[index]
+                right = geometry[index]
+                same_geometry = left.keys() == right.keys() and all(
+                    np.linalg.norm(np.asarray(left[name]) - np.asarray(right[name])) <= 1e-6
+                    for name in left
+                )
+                if not same_geometry:
+                    continue
+                same_geometry_steps += 1
+                if base_actions[index] != actions[index]:
+                    divergent_steps += 1
+                    if first_divergence is None:
+                        first_divergence = index
+            result["same_geometry_steps"] = same_geometry_steps
+            result["history_conditioned_action_divergence"] = (
+                divergent_steps / same_geometry_steps if same_geometry_steps else 0.0
+            )
+            result["history_conditioned_first_divergence_step"] = first_divergence
+            result["history_counterfactual_baseline"] = baseline["policy_name"]
+            if output is not None:
+                episode_output = output / result["policy_name"] / result["scenario"]
+                episode_output.mkdir(parents=True, exist_ok=True)
+                (episode_output / "metrics.json").write_text(
+                    json.dumps(result, ensure_ascii=False, indent=2))
+    if output:
+        (output / "history_counterfactual_summary.json").write_text(
+            json.dumps({"episodes": results, "policy_specs": list(policy_specs),
+                        "partner_mode": partner_mode, "scenario_count": len(scenarios or CONTINUOUS_SCENARIOS)},
+                       ensure_ascii=False, indent=2))
     return results

@@ -8,7 +8,9 @@ from pathlib import Path
 from .backend_options import add_backend_options, backend_provenance, configure_backend
 from .continuous import (CONTINUOUS_SCENARIOS, generate_benchmark_suite, generate_scenarios, load_scenario,
                           load_scenario_catalog,
-                          run_catalog, run_counterfactual_benchmark, run_paired_benchmark)
+                          make_history_counterfactual_scenario, run_catalog,
+                          run_counterfactual_benchmark, run_history_counterfactual,
+                          run_paired_benchmark)
 from .continuous_report import write_continuous_report
 
 
@@ -36,6 +38,8 @@ def main() -> None:
                         help="在同一场景和 seed 上运行 fixed/reactive/adaptive 三种伙伴")
     parser.add_argument("--counterfactual-policies", default=None,
                         help="逗号分隔的策略 spec；同一场景/seed/伙伴下只改变机器人策略")
+    parser.add_argument("--history-counterfactual", action="store_true",
+                        help="运行直接执行与先求助的历史反事实对照")
     parser.add_argument("--count-per-condition", type=int, default=2,
                         help="--suite 每个结构条件生成多少实例")
     args = parser.parse_args()
@@ -60,9 +64,16 @@ def main() -> None:
             parser.error("--scenes 只用于选择内置场景")
         scenarios = [CONTINUOUS_SCENARIOS[name] for name in args.scenes]
     backend_factory = configure_backend(args, parser, args.output_dir)
-    if args.paired and args.counterfactual_policies:
-        parser.error("--paired 不能和 --counterfactual-policies 同时使用")
-    if args.counterfactual_policies:
+    if sum(bool(value) for value in (args.paired, bool(args.counterfactual_policies), args.history_counterfactual)) > 1:
+        parser.error("--paired、--counterfactual-policies 和 --history-counterfactual 只能选择一个")
+    if args.history_counterfactual:
+        if args.scenario_file or args.scenario_dir or args.suite or args.generated or args.scenes:
+            parser.error("--history-counterfactual 使用内置 history_counterfactual 场景，不能与场景选择参数同时使用")
+        scenarios = [make_history_counterfactual_scenario()]
+        results = run_history_counterfactual(seed=args.seed, output=args.output_dir,
+                                             scenarios=scenarios, partner_mode=args.partner_mode,
+                                             backend_factory=backend_factory)
+    elif args.counterfactual_policies:
         policy_specs = tuple(spec.strip() for spec in args.counterfactual_policies.split(",") if spec.strip())
         results = run_counterfactual_benchmark(policy_specs=policy_specs, seed=args.seed,
                                                output=args.output_dir, scenarios=scenarios or None,
@@ -79,11 +90,13 @@ def main() -> None:
         **backend_provenance(args),
         "policy": args.policy, "seed": args.seed,
         "counterfactual_policies": args.counterfactual_policies,
+        "history_counterfactual": args.history_counterfactual,
         "generated": args.generated, "suite": args.suite,
         "scenario_file": str(args.scenario_file) if args.scenario_file else None,
         "scenario_dir": str(args.scenario_dir) if args.scenario_dir else None,
         "count_per_condition": args.count_per_condition,
-        "partner_mode": ("counterfactual" if args.counterfactual_policies else
+        "partner_mode": ("history_counterfactual" if args.history_counterfactual else
+                          "counterfactual" if args.counterfactual_policies else
                           "paired" if args.paired else args.partner_mode),
         "paired": args.paired,
         "scenario_seed": scenario_seed,

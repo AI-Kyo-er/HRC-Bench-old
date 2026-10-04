@@ -68,6 +68,21 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
   --scenario-file path/to/activity.json --paired
 ```
 
+运行历史条件化的反事实门槛实验：
+
+```bash
+PYTHONPATH=src python scripts/run_continuous_benchmark.py \
+  --history-counterfactual \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/history_counterfactual_v2 \
+  --seed 3
+```
+
+该实验固定场景几何和伙伴初始条件，只替换机器人是否在执行贡献前公开求助，
+用于检查失败、求助和接管是否会通过伙伴历史改变后续动作。结果目录包含两条
+episode、`history_counterfactual_summary.json`、事件/轨迹/策略输入输出及可视化
+报告。它是参考运行时的机制验证，不代表已测试真实 VLA/WLA、Genesis 接触动力学
+或真人 HRC。
+
 `activity.json` 只需定义对象、区域、角色目标和 `activity.work_items` 的
 前置关系；它不包含逐步事件脚本。`scenario_from_dict`/`load_scenario` 也可
 直接被数据集生成器调用。

@@ -17,6 +17,8 @@ from hrc_pilot.continuous import (
     load_scenario_catalog,
     run_catalog,
     run_counterfactual_benchmark,
+    run_history_counterfactual,
+    make_history_counterfactual_scenario,
     run_paired_benchmark,
 )
 from hrc_pilot.protocol import Action, Message
@@ -270,6 +272,22 @@ class ContinuousRuntimeTests(unittest.TestCase):
             episodes = iter_dataset(root / "dataset")
         self.assertEqual(metadata["episode_count"], 1)
         self.assertEqual(episodes[0][1].task_family, "tool_handoff")
+
+    def test_history_counterfactual_changes_adaptive_follow_up(self):
+        scenario = make_history_counterfactual_scenario()
+        results = run_history_counterfactual(
+            policy_specs=("greedy_public", "request_help_public"),
+            seed=3, scenarios=[scenario])
+        self.assertEqual(len(results), 2)
+        self.assertTrue(all(result["task_success"] for result in results))
+        failed = next(result for result in results if result["policy_name"] == "greedy_public")
+        helped = next(result for result in results if result["policy_name"] == "request_help_public")
+        self.assertGreaterEqual(failed["robot_failures"], 1)
+        self.assertGreaterEqual(failed["human_reassignments"], 1)
+        self.assertEqual(helped["robot_failures"], 0)
+        self.assertGreater(failed["same_geometry_steps"], 0)
+        self.assertGreater(helped["history_conditioned_action_divergence"], 0.0)
+        self.assertIsNotNone(helped["history_conditioned_first_divergence_step"])
 
     def test_genesis_activity_evaluator_uses_work_items(self):
         from hrc_pilot.continuous_genesis import GenesisContinuousAdapter
