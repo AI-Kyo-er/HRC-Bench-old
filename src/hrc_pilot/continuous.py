@@ -45,6 +45,21 @@ class WorkItem:
 
 
 @dataclass(frozen=True)
+class InteractionAct:
+    """活动中的一个可组合交互作用标注。
+
+    交互作用只描述数据集中的可观察贡献和跨作用依赖，不规定某个
+    时间点必须发生什么。运行时仍由双方根据公开观测选择动作。
+    """
+
+    act_id: str
+    kind: str
+    actor: str = "shared"
+    target: str | None = None
+    requires: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
 class ActivityContract:
     """描述持续共同活动的目标、依赖和可重规划边界。
 
@@ -54,6 +69,7 @@ class ActivityContract:
 
     objective: str
     work_items: tuple[WorkItem, ...]
+    interaction_acts: tuple[InteractionAct, ...] = ()
     shared_resources: tuple[str, ...] = ()
     replanning_triggers: tuple[str, ...] = (
         "action_failed", "action_delayed", "help_request", "partner_returned",
@@ -64,6 +80,12 @@ class ActivityContract:
         item_ids = [item.item_id for item in self.work_items]
         if len(item_ids) != len(set(item_ids)):
             raise ValueError("ActivityContract 的 item_id 必须唯一")
+        act_ids = [act.act_id for act in self.interaction_acts]
+        if len(act_ids) != len(set(act_ids)):
+            raise ValueError("ActivityContract 的 act_id 必须唯一")
+        unknown_acts = {required for act in self.interaction_acts for required in act.requires} - set(act_ids)
+        if unknown_acts:
+            raise ValueError(f"交互作用引用了未知前置作用: {sorted(unknown_acts)}")
         known = set(item_ids) | {
             f"{role}:{item.object_id}:{item.destination}"
             for item in self.work_items
@@ -213,9 +235,23 @@ def make_activity_contract(human_targets: dict[str, str], robot_targets: dict[st
         robot_items = [robot_items[0]] + [replace(item, prerequisites=(robot_items[0].item_id,))
                                           for item in robot_items[1:]]
     items = tuple(human_items + robot_items)
+    acts: list[InteractionAct] = []
+    if human_items:
+        acts.append(InteractionAct("guidance", "guidance", "human",
+                                   target=human_items[0].item_id))
+    for item in items:
+        kind = "joint_execution" if item.preferred_role == "robot" else "intervention"
+        requires = ("guidance",) if item.preferred_role == "robot" and human_items else ()
+        acts.append(InteractionAct(f"act:{item.item_id}", kind, item.preferred_role,
+                                   target=item.item_id, requires=requires))
+    if family in {"nested", "reinterpretation", "held_out_reinterpretation"} and robot_items:
+        acts.append(InteractionAct("replan", "guidance", "shared",
+                                   target=robot_items[0].item_id,
+                                   requires=(f"act:{robot_items[0].item_id}",)))
     return ActivityContract(
         objective=objective,
         work_items=items,
+        interaction_acts=tuple(acts),
         shared_resources=("shared_workspace", "public_commitment_channel"),
     )
 
@@ -249,6 +285,7 @@ def scenario_to_dict(scenario: ContinuousScenario) -> dict[str, Any]:
         "activity": {
             "objective": activity.objective,
             "work_items": [item.__dict__ for item in activity.work_items],
+            "interaction_acts": [act.__dict__ for act in activity.interaction_acts],
             "shared_resources": activity.shared_resources,
             "replanning_triggers": activity.replanning_triggers,
             "success_policy": activity.success_policy,
@@ -299,6 +336,10 @@ def scenario_from_dict(data: dict[str, Any]) -> ContinuousScenario:
                 prerequisites=tuple(item.get("prerequisites", ())),
                 handoff=item.get("handoff", "open"), priority=float(item.get("priority", 1.0)),
             ) for item in activity_data.get("work_items", ())),
+            interaction_acts=tuple(InteractionAct(
+                act_id=act["act_id"], kind=act["kind"], actor=act.get("actor", "shared"),
+                target=act.get("target"), requires=tuple(act.get("requires", ())),
+            ) for act in activity_data.get("interaction_acts", ())),
             shared_resources=tuple(activity_data.get("shared_resources", ())),
             replanning_triggers=tuple(activity_data.get("replanning_triggers", (
                 "action_failed", "action_delayed", "help_request", "partner_returned"))),
@@ -500,10 +541,46 @@ class HumanCommand:
     text: str = ""
 
 
+@dataclass
+class HumanAdaptiveState:
+    """伙伴对当前共同活动的可变信念与可用性。
+
+    这些变量不是模型输入，也不是预写状态机；它们由公开的机器人动作、
+    结果、求助和共同空间占用在线更新，并作为 evaluator trace 输出。
+    """
+
+    trust: float = 0.70
+    reliability_belief: float = 0.70
+    workload: float = 0.0
+    commitment_stability: float = 0.80
+    initiative: float = 0.65
+    robot_dependency: float = 0.25
+    willingness_to_help: float = 0.70
+    available: float = 0.75
+
+    def clipped(self) -> "HumanAdaptiveState":
+        for field_name in (
+            "trust", "reliability_belief", "workload", "commitment_stability",
+            "initiative", "robot_dependency", "willingness_to_help", "available",
+        ):
+            setattr(self, field_name, float(np.clip(getattr(self, field_name), 0.0, 1.0)))
+        return self
+
+    def snapshot(self) -> dict[str, float]:
+        return {
+            field_name: round(float(getattr(self, field_name)), 6)
+            for field_name in (
+                "trust", "reliability_belief", "workload", "commitment_stability",
+                "initiative", "robot_dependency", "willingness_to_help", "available",
+            )
+        }
+
+
 @dataclass(frozen=True)
 class PartnerOutput:
     command: HumanCommand
     messages: tuple[Message, ...] = ()
+    state_updates: tuple[dict[str, Any], ...] = ()
 
 
 def _work_item_for(scenario: ContinuousScenario, role: str, object_id: str,
@@ -549,8 +626,13 @@ class AdaptivePartner:
     def reset(self, seed: int) -> None:
         self.rng = np.random.default_rng(seed)
         self.seen_messages = 0
-        self.trust = 0.70
-        self.workload = 0.0
+        self.state = HumanAdaptiveState(
+            available=self.scenario.human_availability,
+            initiative=self.scenario.dynamics.human_initiative,
+            willingness_to_help=self.scenario.human_availability,
+        )
+        self.state_updates: list[dict[str, Any]] = []
+        self.pending_state_updates: list[dict[str, Any]] = []
         self.commitments = dict(self.scenario.human_targets)
         self.accepted_requests: dict[str, str] = {}
         self.current_object: str | None = None
@@ -561,6 +643,48 @@ class AdaptivePartner:
         self.last_robot_action = "idle"
         self.reassignments = 0
         self.messages_sent: list[Message] = []
+
+    @property
+    def trust(self) -> float:
+        return self.state.trust
+
+    @trust.setter
+    def trust(self, value: float) -> None:
+        self.state.trust = float(np.clip(value, 0.0, 1.0))
+
+    @property
+    def workload(self) -> float:
+        return self.state.workload
+
+    @workload.setter
+    def workload(self, value: float) -> None:
+        self.state.workload = float(np.clip(value, 0.0, 1.0))
+
+    def _update_state(self, field_name: str, value: float, reason: str,
+                      observation: Observation, evidence: dict[str, Any] | None = None) -> None:
+        if not hasattr(self.state, field_name):
+            raise ValueError(f"未知伙伴状态字段: {field_name}")
+        before = self.state.snapshot()
+        setattr(self.state, field_name, value)
+        self.state.clipped()
+        after = self.state.snapshot()
+        if before == after:
+            return
+        update = {
+            "step": int(round(observation.time_s * 10)),
+            "reason": reason,
+            "field": field_name,
+            "before": before,
+            "after": after,
+            "evidence": evidence or {},
+        }
+        self.state_updates.append(update)
+        self.pending_state_updates.append(update)
+
+    def _drain_state_updates(self) -> tuple[dict[str, Any], ...]:
+        updates = tuple(self.pending_state_updates)
+        self.pending_state_updates.clear()
+        return updates
 
     def initial_messages(self) -> tuple[Message, ...]:
         return self.scenario.initial_messages()
@@ -580,24 +704,47 @@ class AdaptivePartner:
                     self.commitments[message.object_id] = destination
                     outgoing.append(Message("human", "help_reply", "我可以接手这个贡献。",
                                              message.object_id, "accept", destination))
+                    self._update_state("willingness_to_help", self.state.willingness_to_help + 0.02,
+                                       "help_request_accepted", observation,
+                                       {"object_id": message.object_id})
                 else:
                     outgoing.append(Message("human", "help_reply", "我现在无法接手，请你继续完成。",
                                              message.object_id, "decline"))
+                    self._update_state("willingness_to_help", self.state.willingness_to_help - 0.06,
+                                       "help_request_declined", observation,
+                                       {"object_id": message.object_id})
                 self.workload = min(1.0, self.workload + 0.08)
+                self._update_state("robot_dependency", self.state.robot_dependency + 0.05,
+                                   "help_request_observed", observation,
+                                   {"object_id": message.object_id})
             elif message.speaker == "robot" and message.kind == "action_failed" and message.object_id:
                 destination = message.destination or f"tray_{message.object_id}"
                 probability = self.scenario.dynamics.handoff_on_failure_probability
                 should_take = bool(self.rng.random() < probability) if self.stochastic else probability >= 0.5
                 if should_take and _handoff_allowed(self.scenario, message.object_id, destination):
                     self.commitments[message.object_id] = destination
-                    self.trust = max(0.0, self.trust - 0.12)
+                    self._update_state("trust", self.trust - 0.12, "robot_action_failed",
+                                       observation, {"object_id": message.object_id})
+                    self._update_state("reliability_belief", self.state.reliability_belief - 0.18,
+                                       "robot_action_failed", observation,
+                                       {"object_id": message.object_id})
+                    self._update_state("robot_dependency", self.state.robot_dependency + 0.08,
+                                       "robot_action_failed", observation,
+                                       {"object_id": message.object_id})
                     self.reassignments += 1
                     outgoing.append(Message("human", "reassignment", "机器人未完成，我接手这个贡献。",
                                              message.object_id, "accept", destination))
             elif message.speaker == "robot" and message.kind == "action_delayed":
-                self.trust = max(0.0, self.trust - 0.025)
+                self._update_state("trust", self.trust - 0.025, "robot_action_delayed",
+                                   observation, {"object_id": message.object_id})
+                self._update_state("reliability_belief", self.state.reliability_belief - 0.04,
+                                   "robot_action_delayed", observation,
+                                   {"object_id": message.object_id})
             elif message.speaker == "robot" and message.kind == "acknowledge":
-                self.trust = min(1.0, self.trust + 0.015)
+                self._update_state("trust", self.trust + 0.015, "robot_acknowledged",
+                                   observation)
+                self._update_state("reliability_belief", self.state.reliability_belief + 0.01,
+                                   "robot_acknowledged", observation)
         self.seen_messages = len(observation.messages)
         return outgoing
 
@@ -628,7 +775,12 @@ class AdaptivePartner:
             self.left_until -= 1
             if self.left_until == 0 and self.scenario.dynamics.return_on_robot_idle:
                 messages.append(Message("human", "returned", "我回来了，依据当前进度继续。"))
-            return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages))
+                self._update_state("available", self.scenario.human_availability,
+                                   "returned", observation)
+                self._update_state("initiative", self.state.initiative + 0.03,
+                                   "returned", observation)
+            return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages),
+                                 self._drain_state_updates())
         if (not self.has_left and self.scenario.dynamics.leave_pressure > 0.0
                 and observation.active_robot_action != "idle"):
             stress = min(1.0, self.workload + (1.0 - self.trust)
@@ -641,25 +793,36 @@ class AdaptivePartner:
                 self.has_left = True
                 self.left_until = self.scenario.leave_duration_steps
                 messages.append(Message("human", "temporarily_away", "我暂时离开一下，稍后依据进度回来。"))
-                return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages))
+                self._update_state("available", 0.0, "temporarily_away", observation)
+                self._update_state("commitment_stability", self.state.commitment_stability - 0.04,
+                                   "temporarily_away", observation)
+                return PartnerOutput(HumanCommand("away", target=(0.50, 0.90, 0.0)), tuple(messages),
+                                     self._drain_state_updates())
         if observation.active_robot_action.startswith("transfer:"):
             target_object = observation.active_robot_action.split(":", 1)[1]
             if target_object in self.commitments and target_object not in observation.held_by_human:
                 self.trust = max(0.0, self.trust - 0.001)
                 messages.append(Message("human", "correction", "这个贡献由我处理，请让行。",
                                         target_object, "yield", self.commitments[target_object]))
-                return PartnerOutput(HumanCommand("yield", target=(0.50, 0.78, 0.0)), tuple(messages))
+                self._update_state("workload", self.workload + 0.02, "shared_space_conflict",
+                                   observation, {"object_id": target_object})
+                return PartnerOutput(HumanCommand("yield", target=(0.50, 0.78, 0.0)), tuple(messages),
+                                     self._drain_state_updates())
         if observation.held_by_human:
             held_object = observation.held_by_human[0]
             destination = self.commitments.get(held_object, self.current_destination)
             if destination in observation.regions:
                 region = observation.regions[destination]
                 return PartnerOutput(HumanCommand("carry", held_object, destination,
-                                                  (float(region[0]), float(region[1]), 0.0)), tuple(messages))
+                                                  (float(region[0]), float(region[1]), 0.0)), tuple(messages),
+                                     self._drain_state_updates())
         candidates = self._goal_candidates(observation)
         if not candidates:
             self.workload = max(0.0, self.workload - 0.01)
-            return PartnerOutput(HumanCommand("observe", target=observation.human_position), tuple(messages))
+            self._update_state("workload", self.workload - 0.01, "no_available_contribution",
+                               observation)
+            return PartnerOutput(HumanCommand("observe", target=observation.human_position), tuple(messages),
+                                 self._drain_state_updates())
         _, object_id, destination = candidates[0]
         self.current_object = object_id
         self.current_destination = destination
@@ -668,7 +831,10 @@ class AdaptivePartner:
         target_position = region_position if object_id in observation.held_by_human else object_position
         target = (float(target_position[0]), float(target_position[1]), 0.0)
         intent = "carry" if object_id in observation.held_by_human else "approach"
-        return PartnerOutput(HumanCommand(intent, object_id, destination, target), tuple(messages))
+        self._update_state("workload", self.workload + 0.015, "contribution_selected", observation,
+                           {"object_id": object_id, "destination": destination})
+        return PartnerOutput(HumanCommand(intent, object_id, destination, target), tuple(messages),
+                             self._drain_state_updates())
 
 
 class FixedReplayPartner:
@@ -828,6 +994,10 @@ class ContinuousWorld:
         self.events.append({"step": self.step_count, "kind": "public_message", "speaker": message.speaker,
                             "message_kind": message.kind, "object_id": message.object_id, "value": message.value,
                             "text": message.text})
+
+    def record_event(self, kind: str, **data: Any) -> None:
+        """记录不进入模型输入的 evaluator 事件，例如伙伴潜在状态更新。"""
+        self.events.append({"step": self.step_count, "kind": kind, **data})
 
     def held_by_human(self) -> tuple[str, ...]:
         return (self.human_hold,) if self.human_hold else ()
@@ -1080,6 +1250,7 @@ class ContinuousBackend(Protocol):
     def reset(self, seed: int) -> None: ...
     def observe(self) -> Observation: ...
     def say(self, message: Message) -> None: ...
+    def record_event(self, kind: str, **data: Any) -> None: ...
     def apply_human_command(self, command: HumanCommand) -> None: ...
     def start_action(self, action: Action) -> None: ...
     def tick(self) -> None: ...
@@ -1119,6 +1290,10 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
     for _ in range(scenario.max_steps):
         observation = world.observe()
         partner_output = partner.step(observation)
+        for update in partner_output.state_updates:
+            recorder = getattr(world, "record_event", None)
+            if recorder is not None:
+                recorder("human_state_update", **update)
         for message in partner_output.messages:
             world.say(message)
         world.apply_human_command(partner_output.command)
@@ -1150,6 +1325,9 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
             break
     robot_success = world.finished_robot()
     human_success = world.finished_human()
+    activity_success = bool(getattr(
+        world, "finished_activity", lambda: robot_success and human_success
+    )())
     events = list(getattr(world, "events", ()))
     completed_skills = list(getattr(world, "completed_skills", ()))
     mode = partner_mode or {
@@ -1173,7 +1351,7 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "robot_action_failed"} for event in events)
     result = {
         "scenario": scenario.name, "seed": seed, "robot_success": robot_success,
-        "human_success": human_success, "task_success": bool(robot_success and human_success),
+        "human_success": human_success, "task_success": activity_success,
         "condition": scenario.condition, "structure_family": scenario.structure.family,
         "structure_split": scenario.structure.split, "partner_mode": mode,
         "steps": len(trace), "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
@@ -1185,17 +1363,26 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "action_chunks": len(policy_io),
         "completion_time_s": trace[-1]["time_s"] if trace else 0.0,
         "completed_skills": completed_skills, "events": len(events),
+        "robot_role_success": all(
+            f"robot:{object_id}:{destination}" in completed_skills
+            for object_id, destination in scenario.robot_targets.items()
+        ),
+        "human_role_success": all(
+            f"human:{object_id}:{destination}" in completed_skills
+            for object_id, destination in scenario.human_targets.items()
+        ),
         "response_latency_steps": (sum(response_latencies) / len(response_latencies)
                                     if response_latencies else None),
         "human_corrections": sum(event.get("message_kind") == "correction" for event in events),
         "human_reassignments": sum(event.get("message_kind") == "reassignment" for event in events),
+        "human_state_updates": sum(event.get("kind") == "human_state_update" for event in events),
         "human_yield_steps": human_actions.count("yield"),
         "human_idle_ratio": (human_actions.count("observe") / len(human_actions)
                               if human_actions else 0.0),
         "adaptation_events": adaptation_events,
         "coordination_cost": float(len(policy_io) + 2 * len(response_latencies)
                                     + 3 * result_preemptions(events)),
-        "activity_success": bool(getattr(world, "finished_activity", lambda: robot_success and human_success)()),
+        "activity_success": activity_success,
         "blocked_transfers": sum(event.get("kind") in {"robot_transfer_blocked", "robot_blocked_by_human"}
                                  for event in events),
     }
@@ -1264,4 +1451,52 @@ def run_paired_benchmark(*, policy_spec: str = "greedy_public", seed: int = 0,
             json.dumps({"episodes": results, "partner_modes": list(partner_modes),
                         "scenario_count": len(scenario_list), "seed": seed},
                        ensure_ascii=False, indent=2))
+    return results
+
+
+def run_counterfactual_benchmark(*, policy_specs: tuple[str, ...], seed: int = 0,
+                                 output: Path | None = None,
+                                 scenarios: list[ContinuousScenario] | None = None,
+                                 backend_factory=ContinuousWorld,
+                                 partner_mode: str = "adaptive") -> list[dict[str, Any]]:
+    """在完全相同的场景和伙伴初始状态下比较多个机器人策略。
+
+    每个策略都使用相同的 ``scenario``、seed 和伙伴模式；只有机器人输出
+    会改变后续公开消息、动作结果和伙伴状态更新。这是识别“机器人行为
+    是否改变人类后续协作”的反事实配对单元，而不是把伙伴当成固定脚本。
+    结果按 ``<policy_name>/<scenario_name>`` 保存，配对关系由目录和
+    ``counterfactual_group`` 字段表达，不依赖 manifest。
+    """
+    if not policy_specs:
+        raise ValueError("policy_specs 至少需要一个策略")
+    if len(set(policy_specs)) != len(policy_specs):
+        raise ValueError("policy_specs 不能包含重复策略")
+    if partner_mode not in {"fixed_replay", "reactive", "adaptive"}:
+        raise ValueError(f"未知伙伴模式: {partner_mode}")
+    scenario_list = scenarios or list(CONTINUOUS_SCENARIOS.values())
+    results: list[dict[str, Any]] = []
+    for policy_spec in policy_specs:
+        policy_name = policy_spec.replace(":", "_").replace("/", "_")
+        policy_output = output / policy_name if output else None
+        for scenario in scenario_list:
+            episode_output = policy_output / scenario.name if policy_output else None
+            result = run_continuous_episode(
+                scenario, load_continuous_policy(policy_spec),
+                make_partner(scenario, partner_mode), seed=seed,
+                output=episode_output, backend_factory=backend_factory,
+                partner_mode=partner_mode,
+            )
+            result["policy_spec"] = policy_spec
+            result["policy_name"] = policy_name
+            result["counterfactual_group"] = f"{scenario.name}:seed={seed}:partner={partner_mode}"
+            if episode_output is not None:
+                (episode_output / "metrics.json").write_text(
+                    json.dumps(result, ensure_ascii=False, indent=2))
+            results.append(result)
+    if output:
+        output.mkdir(parents=True, exist_ok=True)
+        (output / "counterfactual_summary.json").write_text(
+            json.dumps({"episodes": results, "policy_specs": list(policy_specs),
+                        "partner_mode": partner_mode, "scenario_count": len(scenario_list),
+                        "seed": seed}, ensure_ascii=False, indent=2))
     return results

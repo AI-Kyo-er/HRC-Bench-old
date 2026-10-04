@@ -1,5 +1,6 @@
 """持续运行时的机制测试。"""
 import unittest
+import json
 from dataclasses import asdict, replace
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -14,6 +15,7 @@ from hrc_pilot.continuous import (
     ReactivePartner,
     generate_benchmark_suite,
     run_catalog,
+    run_counterfactual_benchmark,
     run_paired_benchmark,
 )
 from hrc_pilot.protocol import Action, Message
@@ -142,6 +144,9 @@ class ContinuousRuntimeTests(unittest.TestCase):
         self.assertGreaterEqual(result["robot_delay_steps"], 1)
         self.assertGreaterEqual(result["human_reassignments"], 1)
         self.assertIn("human:blue:tray_blue", result["completed_skills"])
+        self.assertTrue(result["activity_success"])
+        self.assertTrue(result["task_success"])
+        self.assertFalse(result["robot_role_success"])
 
     def test_paired_runner_keeps_scenario_seed_and_mode_directories(self):
         scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="paired_relay")
@@ -179,6 +184,43 @@ class ContinuousRuntimeTests(unittest.TestCase):
         self.assertEqual(restored.resolved_activity().work_items,
                          original.resolved_activity().work_items)
         self.assertEqual(restored.initial_messages(), original.initial_messages())
+
+    def test_activity_contract_round_trips_interaction_acts(self):
+        from hrc_pilot.continuous import scenario_from_dict, scenario_to_dict
+        original = CONTINUOUS_SCENARIOS["nested_support"]
+        encoded = scenario_to_dict(original)
+        self.assertTrue(encoded["activity"]["interaction_acts"])
+        restored = scenario_from_dict(encoded)
+        self.assertEqual(restored.resolved_activity().interaction_acts,
+                         original.resolved_activity().interaction_acts)
+
+    def test_adaptive_partner_updates_private_state_after_public_failure(self):
+        from hrc_pilot.continuous import run_continuous_episode
+        scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="state_trace",
+                           dynamics=DynamicsSpec(robot_failure_probability=1.0,
+                                                 human_replan_sensitivity=1.0))
+        with TemporaryDirectory() as directory:
+            result = run_continuous_episode(scenario, GreedyPublicPolicy(),
+                                            AdaptivePartner(scenario), seed=4,
+                                            output=Path(directory))
+            state_events = [json.loads(line) for line in
+                            (Path(directory) / "events.jsonl").read_text().splitlines()
+                            if line]
+        self.assertGreater(result["human_state_updates"], 0)
+        state_events = [event for event in state_events if event.get("kind") == "human_state_update"]
+        self.assertTrue(any(event["reason"] == "robot_action_failed" for event in state_events))
+
+    def test_counterfactual_runner_keeps_group_identity(self):
+        scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="counterfactual_relay")
+        with TemporaryDirectory() as directory:
+            results = run_counterfactual_benchmark(
+                policy_specs=("greedy_public", "hrc_pilot.continuous:GreedyPublicPolicy"),
+                seed=9, output=Path(directory), scenarios=[scenario], partner_mode="adaptive")
+        self.assertEqual(len(results), 2)
+        self.assertEqual({result["counterfactual_group"] for result in results},
+                         {"counterfactual_relay:seed=9:partner=adaptive"})
+        self.assertEqual({result["policy_name"] for result in results},
+                         {"greedy_public", "hrc_pilot.continuous_GreedyPublicPolicy"})
 
 
 if __name__ == "__main__":

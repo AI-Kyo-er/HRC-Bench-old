@@ -53,6 +53,10 @@
 ```json
 {
   "objective": "共同整理物体",
+  "interaction_acts": [
+    {"act_id": "guidance", "kind": "guidance", "actor": "human", "target": "human:red:tray_red", "requires": []},
+    {"act_id": "act:robot:blue:tray_blue", "kind": "joint_execution", "actor": "robot", "target": "robot:blue:tray_blue", "requires": ["guidance"]}
+  ],
   "work_items": [
     {"item_id": "human:red:tray_red", "object_id": "red", "destination": "tray_red", "preferred_role": "human", "prerequisites": [], "handoff": "open"},
     {"item_id": "robot:blue:tray_blue", "object_id": "blue", "destination": "tray_blue", "preferred_role": "robot", "prerequisites": ["human:red:tray_red"], "handoff": "open"}
@@ -61,6 +65,10 @@
   "replanning_triggers": ["action_failed", "action_delayed", "help_request", "partner_returned"]
 }
 ```
+
+`interaction_acts` 是场景的组合标注，不是事件脚本。它描述指导、共同
+执行、干预、重新规划之间的局部依赖，运行时不会按 act 的顺序自动触发
+动作；双方仍依据公开观测、几何占用、消息和工作项终态在线选择贡献。
 
 前置条件是公开完成 skill 的约束，不是事件序列。工作项可以被另一方接管；后端在提交时检查约束并产生 `action_blocked`，模型需要从公开反馈中恢复。
 
@@ -75,6 +83,12 @@
 发送的协作信号；模型需要根据它们重新规划。`DynamicsSpec` 中的概率参数
 属于实例条件，不进入模型观测。
 
+`events.jsonl` 还会记录 `human_state_update` evaluator 事件。事件包含
+`trust`、`reliability_belief`、`workload`、`commitment_stability`、
+`initiative`、`robot_dependency`、`willingness_to_help` 和 `available` 的
+更新前后值及其公开证据。这些字段用于分析机器人行为是否改变人的后续
+承诺、让行、接管和暂离，不会送入模型观测。
+
 ## 结构划分
 
 训练/开发/测试的划分按 `structure.split` 执行。测试集可以包含训练中见过的局部作用，但不能复用同一依赖关系。例如训练可见 `guidance -> joint_execution`，测试使用 `guidance -> intervention -> joint_execution`。对象布局和初始分工仍需做 seed 与几何去重，避免模型只记住坐标。
@@ -85,3 +99,16 @@
 `fixed_replay`、`reactive`、`adaptive`。结果目录使用
 `<partner_mode>/<scenario_name>/`，加载器用目录名、场景名和 seed 配对，
 不需要额外的 `manifest.json`。
+
+若要只改变机器人策略而固定场景、seed 和伙伴初始状态，可使用反事实
+运行器：
+
+```bash
+PYTHONPATH=src python scripts/run_continuous_benchmark.py \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/counterfactual \
+  --generated 4 --seed 7 --counterfactual-policies greedy_public,package.module:factory
+```
+
+输出按 `<policy_name>/<scenario_name>` 保存，`counterfactual_group` 标记
+配对单元。策略造成的延迟、失败、求助和公开承诺差异会进入同一套事件与
+状态更新记录。

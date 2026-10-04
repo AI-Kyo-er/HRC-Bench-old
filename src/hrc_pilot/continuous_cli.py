@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 from .continuous import (generate_benchmark_suite, generate_scenarios, load_scenario,
-                          run_catalog, run_paired_benchmark)
+                          run_catalog, run_counterfactual_benchmark, run_paired_benchmark)
 from .continuous_report import write_continuous_report
 
 
@@ -28,6 +28,8 @@ def main() -> None:
                         help="生成 isolated/matched_serial/compositional/held_out 条件集合")
     parser.add_argument("--paired", action="store_true",
                         help="在同一场景和 seed 上运行 fixed/reactive/adaptive 三种伙伴")
+    parser.add_argument("--counterfactual-policies", default=None,
+                        help="逗号分隔的策略 spec；同一场景/seed/伙伴下只改变机器人策略")
     parser.add_argument("--count-per-condition", type=int, default=2,
                         help="--suite 每个结构条件生成多少实例")
     args = parser.parse_args()
@@ -43,7 +45,14 @@ def main() -> None:
                                              seed=scenario_seed, include_reference=False)
     else:
         scenarios = generate_scenarios(args.generated, seed=scenario_seed)
-    if args.paired:
+    if args.paired and args.counterfactual_policies:
+        parser.error("--paired 不能和 --counterfactual-policies 同时使用")
+    if args.counterfactual_policies:
+        policy_specs = tuple(spec.strip() for spec in args.counterfactual_policies.split(",") if spec.strip())
+        results = run_counterfactual_benchmark(policy_specs=policy_specs, seed=args.seed,
+                                               output=args.output_dir, scenarios=scenarios or None,
+                                               partner_mode=args.partner_mode)
+    elif args.paired:
         results = run_paired_benchmark(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
                                        scenarios=scenarios or None)
     else:
@@ -52,10 +61,12 @@ def main() -> None:
     (args.output_dir / "provenance.json").write_text(json.dumps({
         "runtime": "hrc_pilot.continuous", "backend": "ContinuousWorld",
         "policy": args.policy, "seed": args.seed,
+        "counterfactual_policies": args.counterfactual_policies,
         "generated": args.generated, "suite": args.suite,
         "scenario_file": str(args.scenario_file) if args.scenario_file else None,
         "count_per_condition": args.count_per_condition,
-        "partner_mode": "paired" if args.paired else args.partner_mode,
+        "partner_mode": ("counterfactual" if args.counterfactual_policies else
+                          "paired" if args.paired else args.partner_mode),
         "paired": args.paired,
         "scenario_seed": scenario_seed,
         "observation_boundary": "public_observation_only", "scenario_count": len(results),

@@ -28,6 +28,14 @@
 
 活动契约的前置条件只在贡献提交时检查。例如 `robot:blue:tray_blue` 可以声明依赖 `human:red:tray_red`；机器人可以提前尝试，但若公开完成记录尚未满足，后端会报告 `action_blocked`，保留物体未完成状态，等待双方基于新观测重新规划。这是约束驱动的执行，不是把“阻塞”编码成固定状态转移。
 
+这里的“动态”有明确的运行时含义：`InteractionStructure` 和
+`interaction_acts` 是用于生成、分层和分析数据的结构标签，`WorkItem` 的
+前置条件是提交时的可验证约束；它们都不携带“第 N tick 执行 A，再执行 B”
+的事件脚本。每一 tick，伙伴先根据公开消息、几何占用和当前承诺选出一个
+动作，策略再从公开 `Observation` 产生动作块；动作块可以被新消息、让行、
+失败或延迟打断。这样，同一个场景契约可以产生不同的轨迹，且轨迹差异来
+自策略、伙伴反应、扰动和几何，而不是来自预写转移表。
+
 伙伴模式不是对真人行为的心理学结论，而是用于拆分机器人能力边界的可复现机制条件。正式真人实验需要另行校准伙伴参数和伦理流程。
 
 ## 输入、输出与分析单位
@@ -41,7 +49,26 @@
 - **扰动与恢复：** robot failure、delay steps、human reassignment、recovery latency，以及失败后双方是否完成剩余贡献。
 - **联合结果：** task success、proximity warnings、依赖结构对应的完成技能、协调代价。
 
-`coordination_cost` 只是当前参考评分，不能替代 HRIBench 的完整指标集。`activity_success` 根据活动工作项的终态计算，不把原始角色分配当作成功条件；`blocked_transfers` 用于分析依赖约束带来的协调负担。接入物理后端后，应加入碰撞、接触力、停机和恢复标签，并报告每个 seed 的分布而非只报告一次运行的成功率。
+`task_success` 与 `activity_success` 都根据活动工作项的终态计算，因此允许
+在公开协商后由另一方接管。`robot_success` 和 `human_success` 表示对应目标
+区域的终态是否满足；`robot_role_success` 与 `human_role_success` 则根据完成
+技能的贡献者记录判断原始角色是否坚持完成。`coordination_cost` 只是当前参考评分，不能替代
+HRIBench 的完整指标集。`blocked_transfers` 用于分析依赖约束带来的协调负担。
+接入物理后端后，应加入碰撞、接触力、停机和恢复标签，并报告每个 seed 的
+分布而非只报告一次运行的成功率。
+
+伙伴的 `HumanAdaptiveState`（信任、可靠性信念、负载、承诺稳定性、主动性、
+对机器人依赖、求助意愿和可用性）是评测器内部的潜变量。它由延迟、失败、
+求助、空间冲突、暂离和重返等公开证据在线更新，并写入
+`events.jsonl` 的 `human_state_update`；它不进入模型的 `Observation`，也不
+直接路由机器人的动作。这样可以分析“机器人行为是否改变后续协作”，而不把
+一个可修改的 status table 伪装成机器人记忆或任务状态机。
+
+机器人策略的反事实比较固定同一场景实例、布局 seed、伙伴模式和初始潜变量，
+只替换策略输出。`run_counterfactual_benchmark` 用稳定的
+`<policy>/<scenario>` 目录和 `counterfactual_group` 字段配对，不使用关系
+清单；因此可以直接把不同 VLA/WLA 的 `policy_io.jsonl` 与相同场景的公开
+观测逐 episode 对齐。
 
 ## 证据门槛
 

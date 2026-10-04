@@ -38,6 +38,9 @@ class GenesisContinuousAdapter:
     def say(self, message: Message) -> None:
         self.workspace.say(message)
 
+    def record_event(self, kind: str, **data) -> None:
+        self.workspace.log.add(self.workspace.step_count, kind, **data)
+
     def apply_human_command(self, command: HumanCommand) -> None:
         self.workspace.continuous_apply_human_command(command)
 
