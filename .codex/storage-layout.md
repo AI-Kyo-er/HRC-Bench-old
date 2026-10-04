@@ -6,9 +6,15 @@
 |---|---|---|
 | Qwen模型权重 | `/data1/sieniwgroup/sieniw/models/Qwen/<模型名称>/` | `models/<模型名称>` |
 | 原始实验结果 | `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/` | `results/legacy_llm_direction/` 下的 `raw` 等软链接 |
+| v1 pilot结果 | `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/pilot_v1/` | `results/pilot_v1` 软链接 |
+| v2持续协作结果、报告与动画 | `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/` | `results/continuous_v2` 软链接 |
 | 早期Python环境 | `/data1/sieniwgroup/sieniw/projects/HRC-Bench/venv-llm/` | `.venv-llm` |
 | Qwen3 Python环境 | `/data1/sieniwgroup/sieniw/projects/HRC-Bench/venv-qwen3-v14/` | `.venv-qwen3-v14` |
 | 项目资源及缓存 | `/data1/sieniwgroup/sieniw/projects/HRC-Bench/{assets,cache,pip-cache}/` | 程序需要时从对应路径访问 |
+
+日常报告链接和结果操作使用 `/home` 下的仓库入口。新增实验结果目录时，先在数据盘
+创建实际目录，再用 `ln -s` 在仓库中建立对应入口；运行命令通过入口输出数据。
+`results/continuous_v2` 已纳入 Git，只保存软链接目标，不保存数据盘上的实验文件。
 
 ## 2026-10-03迁移
 

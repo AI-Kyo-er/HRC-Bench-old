@@ -35,20 +35,20 @@
 
 ```bash
 PYTHONPATH=src python scripts/run_continuous_benchmark.py \
-  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal
+  --output-dir results/continuous_v2/formal
 ```
 
 或在安装项目后使用：
 
 ```bash
-hrc-continuous --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal
+hrc-continuous --output-dir results/continuous_v2/formal
 ```
 
 生成一批可作为开发/压力测试实例的场景：
 
 ```bash
 PYTHONPATH=src python scripts/run_continuous_benchmark.py \
-  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/generated \
+  --output-dir results/continuous_v2/generated \
   --generated 20 --scenario-seed 42
 ```
 
@@ -56,7 +56,7 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 
 ```bash
 PYTHONPATH=src python scripts/run_continuous_benchmark.py \
-  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/suite \
+  --output-dir results/continuous_v2/suite \
   --suite --count-per-condition 5 --partner-mode adaptive
 ```
 
@@ -64,7 +64,7 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 
 ```bash
 PYTHONPATH=src python scripts/run_continuous_benchmark.py \
-  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/custom \
+  --output-dir results/continuous_v2/custom \
   --scenario-file path/to/activity.json --paired
 ```
 
@@ -81,10 +81,13 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 它只回放保存的位置和动作，没有补造关节轨迹、人体姿态、接触过程或最后终态。
 输入缺失字段显示“未记录”，历史场景未记录的活动契约不会从当前代码补入。
 
-已有两组报告已重建，结果仍位于外部存储：
+已有两组报告已重建，可从仓库中的软链接入口打开：
 
-- `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal_v6/index.html`
-- `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/paired_v8/index.html`
+- [六场景报告与动画](../../results/continuous_v2/formal_v6/index.html)
+- [三种伙伴配对报告与动画](../../results/continuous_v2/paired_v8/index.html)
+
+`results/continuous_v2` 指向 `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/`。
+数据盘负责实际存储；查看报告与执行下面命令使用仓库路径，命令在仓库根目录运行。
 
 报告围绕研究动机解释机器人如何驱动、伙伴如何变化、哪些变化实际被触发，
 并区分当时运行证据、后续工程能力与尚未验证的研究假设。原页面保存在
@@ -95,9 +98,9 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 
 ```bash
 PYTHONPATH=src python scripts/rebuild_continuous_report.py \
-  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal_v6
+  --input-dir results/continuous_v2/formal_v6
 PYTHONPATH=src python scripts/rebuild_continuous_report.py \
-  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/paired_v8
+  --input-dir results/continuous_v2/paired_v8
 ```
 
 详细的回放方法与证据边界见 `replay_report.md`。

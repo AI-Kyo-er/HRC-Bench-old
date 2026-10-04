@@ -8,9 +8,19 @@
 - [持续运行时、六类场景与当前边界](experiments/continuous_v2/README.md)
 - [v2 实验设计与数据契约](experiments/continuous_v2/design.md)
 - [已经生成的正式展示页](results/pilot_v1/formal/index.html)
+- [v2 六场景报告与轨迹动画](results/continuous_v2/formal_v6/index.html)
+- [v2 三种伙伴配对报告与轨迹动画](results/continuous_v2/paired_v8/index.html)
 - [运行脚本](scripts/run_pilot_demo.sh)
 
 所有环境、第三方仓库、资产、缓存和结果实际存储在 `/data1/sieniwgroup/sieniw/projects/HRC-Bench/`，通过软链接访问。此前的 `legacy_llm_direction` 内容保留归档状态。
+
+日常查看和运行使用仓库内的 `results/pilot_v1/`、`results/continuous_v2/`。
+它们是指向数据盘对应目录的软链接，报告、动画及原始记录都从这些入口访问。
+新工作区若缺少 v2 入口，可在仓库根目录执行：
+
+```bash
+ln -s /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2 results/continuous_v2
+```
 
 ## 运行
 
@@ -31,7 +41,7 @@ v2 的参考运行可直接生成 HTML 报告：
 
 ```bash
 PYTHONPATH=src python scripts/run_continuous_benchmark.py \
-  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal
+  --output-dir results/continuous_v2/formal
 ```
 
 这次 v2 报告验证的是连续协议、动态伙伴和独立记录逻辑；它使用 `ContinuousWorld` 参考后端，不把参考伙伴的成功率当作模型结果。`continuous_genesis.py` 和 `VCWorkspace` 已提供逐 tick Genesis 接缝，完整六场景 Genesis 资产、真实 VLA/WLA 推理和接触安全评测仍需后续实现。
@@ -62,7 +72,7 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py evaluate \
 
 ```bash
 PYTHONPATH=src python scripts/run_continuous_benchmark.py \
-  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/paired \
+  --output-dir results/continuous_v2/paired \
   --suite --count-per-condition 5 --paired
 ```
 
