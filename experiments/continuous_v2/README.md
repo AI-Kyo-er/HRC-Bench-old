@@ -27,9 +27,9 @@
   不使用第 N 步事件表；前置不满足时会产生公开 `action_blocked` 反馈。
 - `--partner-mode` 可选 `fixed_replay`、`reactive`、`adaptive`。三者分别
   对应固定回放、只根据当前公开行为反应、以及保留公开历史后的适应式伙伴。
-- `ModelPolicy` 接受 VLA 的 RGB 加结构化输入或 WLA 的文本/状态输入，并把
-  JSON 动作统一解码为 `Action`。`GreedyPublicPolicy` 仅用于检查协议，不是模型
-  能力结果。
+- `ExternalPolicyAdapter` 接受 VLA 的 RGB 加结构化输入或 WLA 的文本/状态输入，
+  把 JSON 动作统一解码为 `Action`，并记录推理耗时、原始输出与异常审计。
+  `GreedyPublicPolicy` 仅用于检查协议，不是模型能力结果。
 
 ## 运行
 
@@ -153,6 +153,11 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
 
 随后用 `hrc-dataset evaluate` 对同一批 episode 运行任意 VLA/WLA 适配器，
 评测器仍从私有 `scenario.json` 独立计算活动终态、接管、重规划、冲突和伙伴状态变化。
+
+每个 episode 的 `metrics.json` 还包含贡献互补、失败恢复、协调效率和
+`cobalance_score` 四个透明组件。它们是当前 benchmark 的协议代理指标，
+用于比较模型如何维持共同活动，不把模拟伙伴状态直接解释为真人心理量。
+数据集 `summary.json` 会为各分组指标附带确定性 bootstrap 95% 区间。
 
 ## 证据边界
 

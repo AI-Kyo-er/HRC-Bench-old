@@ -1438,11 +1438,23 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                       or (getattr(policy, "continuous_control", False)
                           and tick_index % max(1, decision_interval) == 0))
         if can_decide:
-            action = policy.act(public_observation)
+            try:
+                action = policy.act(public_observation)
+            except Exception:
+                audit_record = getattr(policy, "audit_record", None)
+                failed_record = {"step": public_observation.time_s,
+                                 "observation": observation_record(public_observation),
+                                 "adapter": audit_record() if audit_record is not None else None}
+                policy_io.append(failed_record)
+                raise
             policy_seen_messages = len(public_observation.messages)
-            policy_io.append({"step": public_observation.time_s,
-                              "observation": observation_record(public_observation),
-                              "action": serialize(action)})
+            policy_record = {"step": public_observation.time_s,
+                             "observation": observation_record(public_observation),
+                             "action": serialize(action)}
+            audit_record = getattr(policy, "audit_record", None)
+            if audit_record is not None:
+                policy_record["adapter"] = audit_record()
+            policy_io.append(policy_record)
             world.start_action(action)
             if action.kind == "finish":
                 break
@@ -1519,6 +1531,26 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
     adaptation_events = sum(event.get("kind") in {
         "robot_action_preempted", "proximity_warning", "robot_action_delayed",
         "robot_action_failed"} for event in events)
+    robot_expected = len(scenario.robot_targets)
+    human_expected = len(scenario.human_targets)
+    robot_completion = (sum(f"robot:{object_id}:{destination}" in completed_skills
+                            for object_id, destination in scenario.robot_targets.items())
+                        / robot_expected if robot_expected else 1.0)
+    human_completion = (sum(f"human:{object_id}:{destination}" in completed_skills
+                            for object_id, destination in scenario.human_targets.items())
+                        / human_expected if human_expected else 1.0)
+    contribution_complementarity = (min(robot_completion, human_completion)
+                                    if robot_expected and human_expected
+                                    else max(robot_completion, human_completion))
+    failure_count = int(getattr(world, "robot_failures", 0))
+    recovery_success = (1.0 if activity_success else 0.0)
+    coordination_efficiency = 1.0 / (1.0 + (
+        len(policy_io) + 2 * len(response_latencies) + 3 * result_preemptions(events)
+    ) / max(1, len(trace)))
+    cobalance_score = (0.35 * float(activity_success)
+                       + 0.25 * contribution_complementarity
+                       + 0.20 * recovery_success
+                       + 0.20 * coordination_efficiency)
     result = {
         "scenario": scenario.name, "seed": seed, "robot_success": robot_success,
         "human_success": human_success, "task_success": activity_success,
@@ -1579,6 +1611,13 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "public_observation_count": len(public_observations),
         "blocked_transfers": sum(event.get("kind") in {"robot_transfer_blocked", "robot_blocked_by_human"}
                                  for event in events),
+        "robot_contribution_completion": round(float(robot_completion), 6),
+        "human_contribution_completion": round(float(human_completion), 6),
+        "contribution_complementarity": round(float(contribution_complementarity), 6),
+        "recovery_success": round(float(recovery_success), 6),
+        "coordination_efficiency": round(float(coordination_efficiency), 6),
+        "cobalance_score": round(float(cobalance_score), 6),
+        "failure_count_for_recovery": failure_count,
     }
     if output is not None:
         output.mkdir(parents=True, exist_ok=True)

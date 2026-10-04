@@ -51,7 +51,7 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 伙伴或 `GreedyPublicPolicy` 的成功率当作模型结果；Genesis 仍采用运动学夹持和
 Avatar 拿放抽象，真实接触安全、训练后的 VLA/WLA 推理和真人协作仍需后续实现。
 
-v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ModelPolicy` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
+v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 
 可以先生成一个按 `train/dev/test` 结构划分的数据集，再用同一批场景批量评测模型：
 
@@ -77,7 +77,7 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
 也可以用 `--scenario-dir path/to/scenarios` 把自定义的 JSON 活动契约目录直接
 生成成同样的数据集；每个文件声明对象、区域、工作项和前置关系，不需要固定事件脚本。
 
-`my_adapter:make_policy` 工厂返回实现 `reset()`/`act(observation)` 的策略；通过 `ModelPolicy` 接入的 VLA/WLA 只收到公开 observation，不能读取 `scenario.json` 中的目标和伙伴潜变量。批量结果会按结构划分、条件、伙伴和策略聚合任务成功、恢复时间、重新分工、冲突率以及人类信任/依赖变化等指标。
+`my_adapter:make_policy` 工厂可以返回实现 `reset()`/`act(observation)` 的策略，或返回用 `ExternalPolicyAdapter` 包装的 `predict(public_observation)` 模型。VLA/WLA 只收到公开 observation，不能读取 `scenario.json` 中的目标和伙伴潜变量；每次调用的动作校验、耗时、原始输出和异常会写入 `policy_io.jsonl`。批量结果会按结构划分、条件、伙伴和策略聚合任务成功、恢复时间、重新分工、冲突率、cobalance 代理指标以及人类信任/依赖变化，并报告多 seed 的 bootstrap 95% 区间。
 
 可以用 `--suite` 生成 isolated、matched_serial、compositional 和 held_out 结构条件，并用 `--partner-mode fixed_replay|reactive|adaptive` 做伙伴信息边界对照。held-out 的依赖关系写在每个 episode 的 `scenario.json` 中，不依赖 `manifest.json`。
 

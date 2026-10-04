@@ -82,6 +82,14 @@
 
 `public_observations.jsonl` 保存 `Observation` 的公开编码：对象和区域几何、机器人末端、人的位置、公开消息、已完成公开技能、当前动作阶段和可见人类动作。`policy_io.jsonl` 保存模型收到的同一观测及其输出动作。
 
+外部模型适配器可以实现一个 `predict(public_observation)` 函数，并通过
+`hrc_pilot.benchmark.ExternalPolicyAdapter` 包装。输入只包含上述公开字段，
+输出为 `Action`、动作 JSON 对象或 JSON 字符串。适配器在每次调用时校验动作，
+记录推理耗时、状态、原始输出和解析后的动作；这些信息写入同一行的
+`adapter` 字段，模型异常也会留下失败审计记录。这样本地 VLA/WLA、HTTP
+客户端或 subprocess 推理都可以放在适配器内部，运行时和 evaluator 不需要
+为每个模型分叉。
+
 允许的动作包括 `transfer`、`request_help`、`acknowledge`、`wait`、`joint_position` 和 `finish`。`finish` 只表示模型的声明，终态成功由后端独立计算。
 
 公开消息还可以报告 `action_delayed`、`action_failed`、`reassignment`、
@@ -139,3 +147,11 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py evaluate \
 模型。结果目录使用 `<policy>/<split>/<episode_id>/`，因此多个模型可以对同一
 场景直接按稳定路径配对。聚合指标包括活动成功、机器人/人类角色成功、重分工
 恢复时间、公共重规划、冲突率和伙伴隐藏状态的变化。
+
+每个 episode 还会保存一组透明的 cobalance 协议代理指标：机器人和人的贡献
+完成率、`contribution_complementarity`、失败后的 `recovery_success`、
+`coordination_efficiency` 和加权的 `cobalance_score`。当前权重固定为活动
+成功 0.35、双方贡献互补 0.25、恢复成功 0.20、协调效率 0.20；它们是可审计
+的 benchmark 起始定义，不是对真人信任或负担的心理测量，后续真人研究应重新
+校准。聚合器同时报告每个数值指标的确定性 bootstrap 95% 区间，以便多 seed
+结果不被单次 episode 的成功率替代。

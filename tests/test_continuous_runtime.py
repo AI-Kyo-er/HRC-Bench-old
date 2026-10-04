@@ -322,11 +322,17 @@ class ContinuousRuntimeTests(unittest.TestCase):
             "human_reassignments": 1, "public_replans": 1, "recovery_time_steps": 3,
             "human_trust_delta": -0.1, "human_reliability_delta": -0.2,
             "human_workload_delta": 0.1, "human_dependency_delta": 0.2,
+            "response_latency_steps": 1.0, "human_corrections": 0,
+            "blocked_transfers": 0, "contribution_complementarity": 1.0,
+            "recovery_success": 1.0, "coordination_efficiency": 0.8,
+            "cobalance_score": 0.9,
             "structure_split": "test", "condition": "held_out", "structure_family": "x",
             "partner_mode": "adaptive", "policy_name": "p",
         }])
         self.assertEqual(summary["overall"]["episodes"], 1)
         self.assertEqual(summary["overall"]["recovery_time_steps"], 3.0)
+        self.assertEqual(summary["overall"]["cobalance_score"], 0.9)
+        self.assertEqual(summary["overall"]["confidence_intervals_95"]["cobalance_score"], [0.9, 0.9])
 
 
 if __name__ == "__main__":

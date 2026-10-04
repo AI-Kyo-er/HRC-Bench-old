@@ -3,8 +3,11 @@ from __future__ import annotations
 
 import json
 import math
+from time import perf_counter
 from collections.abc import Callable, Mapping
 from typing import Any
+
+import numpy as np
 
 from .protocol import Action, Observation, serialize
 
@@ -23,6 +26,23 @@ def public_observation_dict(observation: Observation) -> dict[str, Any]:
     if leaked:
         raise ValueError(f"公开观测包含私有字段: {sorted(leaked)}")
     return encoded
+
+
+def _json_safe(value: Any) -> Any:
+    """将外部模型的输入输出转换为可审计的 JSON 值。"""
+    if isinstance(value, np.ndarray):
+        return {"type": "ndarray", "shape": list(value.shape), "dtype": str(value.dtype)}
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, Mapping):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(item) for item in value]
+    if hasattr(value, "__dataclass_fields__"):
+        return _json_safe(serialize(value))
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    return repr(value)
 
 
 def decode_action(value: Action | Mapping[str, Any] | str) -> Action:
@@ -59,17 +79,63 @@ class ModelPolicy:
     也可以是 WLA 的文本/状态输入；它返回 Action、JSON 字典或 JSON 字符串。
     """
 
-    def __init__(self, predict: Callable[[dict[str, Any]], Any], *, continuous_control: bool = False):
+    def __init__(self, predict: Callable[[dict[str, Any]], Any], *, continuous_control: bool = False,
+                 adapter_name: str = "python_callable"):
         self.predict = predict
         self.continuous_control = continuous_control
+        self.adapter_name = adapter_name
         self.calls = 0
+        self.last_call: dict[str, Any] | None = None
 
     def reset(self) -> None:
         self.calls = 0
+        self.last_call = None
 
     def act(self, observation: Observation) -> Action:
         self.calls += 1
-        return decode_action(self.predict(public_observation_dict(observation)))
+        request = public_observation_dict(observation)
+        started = perf_counter()
+        try:
+            raw_output = self.predict(request)
+            action = decode_action(raw_output)
+        except Exception as error:
+            self.last_call = {
+                "adapter": self.adapter_name,
+                "call_index": self.calls,
+                "elapsed_ms": round((perf_counter() - started) * 1000.0, 3),
+                "status": "error",
+                "error_type": type(error).__name__,
+                "error": str(error),
+            }
+            raise
+        self.last_call = {
+            "adapter": self.adapter_name,
+            "call_index": self.calls,
+            "elapsed_ms": round((perf_counter() - started) * 1000.0, 3),
+            "status": "ok",
+            "raw_output": _json_safe(raw_output),
+            "action": _json_safe(action),
+        }
+        return action
+
+    def audit_record(self) -> dict[str, Any] | None:
+        """返回最近一次调用的轻量审计记录，不包含 RGB 像素。"""
+        return self.last_call
+
+
+class ExternalPolicyAdapter(ModelPolicy):
+    """现有 VLA/WLA 的稳定 Python 适配契约。
+
+    外部模型只需要实现 ``predict(public_observation)``。输入是公开观测字典，
+    输出是 ``Action``、动作 JSON 字典或 JSON 字符串；适配器负责动作校验、
+    推理耗时和原始输出审计。HTTP、subprocess 或模型仓库调用可以封装在
+    ``predict`` 内，而不需要修改 benchmark 运行时。
+    """
+
+    def __init__(self, predict: Callable[[dict[str, Any]], Any], *,
+                 continuous_control: bool = False, adapter_name: str = "external"):
+        super().__init__(predict, continuous_control=continuous_control,
+                         adapter_name=adapter_name)
 
 
 class FixedActionModel:

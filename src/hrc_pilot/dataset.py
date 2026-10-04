@@ -12,6 +12,8 @@ from pathlib import Path
 from dataclasses import replace
 from typing import Any, Iterable
 
+import numpy as np
+
 from .continuous import (
     ContinuousScenario,
     ContinuousWorld,
@@ -137,14 +139,37 @@ def aggregate_results(results: list[dict[str, Any]]) -> dict[str, Any]:
         "coordination_cost", "conflict_rate", "human_reassignments",
         "public_replans", "recovery_time_steps", "human_trust_delta",
         "human_reliability_delta", "human_workload_delta", "human_dependency_delta",
+        "response_latency_steps", "human_corrections", "blocked_transfers",
+        "contribution_complementarity", "recovery_success", "coordination_efficiency",
+        "cobalance_score",
+        "same_geometry_steps", "history_conditioned_action_divergence",
+        "history_conditioned_first_divergence_step",
     )
 
     def mean(rows: list[dict[str, Any]], key: str) -> float | None:
         values = [float(row[key]) for row in rows if row.get(key) is not None]
         return sum(values) / len(values) if values else None
 
+    def interval(rows: list[dict[str, Any]], key: str) -> list[float] | None:
+        values = [float(row[key]) for row in rows if row.get(key) is not None]
+        if not values:
+            return None
+        if len(values) == 1:
+            return [round(values[0], 6), round(values[0], 6)]
+        rng = np.random.default_rng(0)
+        samples = rng.choice(np.asarray(values, dtype=float), size=(2000, len(values)), replace=True)
+        means = samples.mean(axis=1)
+        return [round(float(np.quantile(means, 0.025)), 6),
+                round(float(np.quantile(means, 0.975)), 6)]
+
     def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
-        return {key: mean(rows, key) for key in numeric_keys} | {"episodes": len(rows)}
+        intervals = {key: interval(rows, key) for key in numeric_keys}
+        return ({key: mean(rows, key) for key in numeric_keys}
+                | {"episodes": len(rows),
+                   "confidence_intervals_95": {
+                       key: value for key, value in intervals.items()
+                       if value is not None
+                   }})
 
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for result in results:

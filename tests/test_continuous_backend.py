@@ -6,7 +6,7 @@ from tempfile import TemporaryDirectory
 import numpy as np
 import pytest
 
-from hrc_pilot.benchmark import ModelPolicy, decode_action
+from hrc_pilot.benchmark import ExternalPolicyAdapter, ModelPolicy, decode_action
 from hrc_pilot.continuous import (CONTINUOUS_SCENARIOS, ContinuousWorld,
                                  GreedyPublicPolicy, make_partner, run_continuous_episode)
 from hrc_pilot.continuous_genesis import GenesisContinuousAdapter
@@ -88,3 +88,29 @@ def test_continuous_model_is_invoked_during_action_chunk():
                          continuous_control=True)
     run_continuous_episode(scenario, policy, make_partner(scenario), decision_interval=2)
     assert policy.calls == 4
+
+
+def test_external_adapter_records_public_call_audit():
+    world = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"])
+    world.reset(0)
+    policy = ExternalPolicyAdapter(lambda value: {"kind": "wait", "duration_steps": 2},
+                                   adapter_name="fake-vla")
+    action = policy.act(world.observe())
+    assert action.kind == "wait"
+    assert policy.audit_record()["adapter"] == "fake-vla"
+    assert policy.audit_record()["status"] == "ok"
+    assert policy.audit_record()["action"]["kind"] == "wait"
+
+
+def test_external_adapter_records_inference_error():
+    world = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"])
+    world.reset(0)
+
+    def fail(_):
+        raise RuntimeError("model unavailable")
+
+    policy = ExternalPolicyAdapter(fail)
+    with pytest.raises(RuntimeError, match="model unavailable"):
+        policy.act(world.observe())
+    assert policy.audit_record()["status"] == "error"
+    assert policy.audit_record()["error_type"] == "RuntimeError"
