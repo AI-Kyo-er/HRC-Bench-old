@@ -28,6 +28,8 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
             f"<td>{result['proximity_warnings']}</td>"
             f"<td>{result.get('response_latency_steps') if result.get('response_latency_steps') is not None else '—'}</td>"
             f"<td>{result.get('coordination_cost', 0):.1f}</td>"
+            f"<td>{'通过' if result.get('activity_success', result['task_success']) else '未通过'}</td>"
+            f"<td>{result.get('blocked_transfers', 0)}</td>"
             f"<td>{html.escape(', '.join(result['completed_skills']))}</td>"
             "</tr>"
         )
@@ -44,6 +46,9 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
             f"片段：{html.escape(' → '.join(scenario.structure.segments))}；"
             f"划分：<code>{html.escape(scenario.structure.split)}</code>；"
             f"条件：<code>{html.escape(scenario.condition)}</code></p>"
+            f"<p>活动契约：{len(scenario.resolved_activity().work_items)} 个工作项；"
+            f"前置承诺 {sum(bool(item.prerequisites) for item in scenario.resolved_activity().work_items)} 个；"
+            f"重规划触发：{html.escape(', '.join(scenario.resolved_activity().replanning_triggers))}。</p>"
             f"<p class='note'>伙伴可用性是隐藏条件（{scenario.human_availability:.2f}）；"
             f"动作延迟概率 {scenario.dynamics.robot_delay_probability:.2f}，失败概率 "
             f"{scenario.dynamics.robot_failure_probability:.2f}，离返压力 "
@@ -73,13 +78,13 @@ code {{ background: #eef2f7; padding: 2px 5px; border-radius: 4px; }} .note {{ c
 <li>后端同时推进人和机器人，并记录真实物体位置、动作阶段、消息、接近事件和完成事件。</li>
 <li>独立评测器根据终态和全程事件计算结果，模型不能通过输出 <code>finish</code> 伪造任务完成。</li></ol></section>
 <section><h2>这版具体改变了什么</h2>
-<ul><li>这不是按“第 N 步发生事件”的固定状态机：任务实例只定义物体、区域、分工和动力学参数，双方每个 tick 根据当前公开观测重新选择下一步。</li>
+<ul><li>这不是按“第 N 步发生事件”的固定状态机：任务实例定义活动目标、工作项、前置承诺、共享资源和重规划触发条件，双方每个 tick 根据当前公开观测重新选择下一步。</li>
 <li>动作是可持续的 action chunk，执行中可以因公开消息或伙伴靠近而重新决策。</li>
 <li>伙伴使用冻结参数的连续效用模型，根据距离、负载、信任、动作延迟/失败和机器人当前占用选择目标；它会并行移动、抓取、放置、接管、暂离和返回。</li>
-<li>场景由物体、区域、公开分工、交互结构和私有伙伴参数组合而成；<code>generate_scenarios</code> 与 <code>generate_benchmark_suite</code> 可以改变布局、分工、结构划分和离返条件，不依靠预写的“第 N 步触发事件”推进。</li>
+<li>场景由物体、区域、公开分工、活动契约、交互结构和私有伙伴参数组合而成；<code>generate_scenarios</code> 与 <code>generate_benchmark_suite</code> 可以改变布局、分工、依赖、结构划分和离返条件，不依靠预写的“第 N 步触发事件”推进。</li>
 <li>每个 tick 保存公开观测、双方动作、物体位置、动作打断、接近警告和技能完成事件，便于接入真实 VLA/WLA 后复算同一指标。</li></ul></section>
 <section><h2>场景目录</h2>{''.join(scenario_cards)}</section>
-<section><h2>本次运行</h2><p>完成 {success_count}/{len(results)} 个 episode，共记录 {total_steps} 个 benchmark tick。</p><table><thead><tr><th>场景</th><th>条件</th><th>结构</th><th>伙伴</th><th>任务</th><th>仿真步</th><th>机器人动作</th><th>机器人失败</th><th>延迟步</th><th>人接管</th><th>打断</th><th>接近警告</th><th>响应步数</th><th>协调代价</th><th>完成技能</th></tr></thead><tbody>{''.join(rows)}</tbody></table></section>
+<section><h2>本次运行</h2><p>完成 {success_count}/{len(results)} 个 episode，共记录 {total_steps} 个 benchmark tick。</p><table><thead><tr><th>场景</th><th>条件</th><th>结构</th><th>伙伴</th><th>任务</th><th>仿真步</th><th>机器人动作</th><th>机器人失败</th><th>延迟步</th><th>人接管</th><th>打断</th><th>接近警告</th><th>响应步数</th><th>协调代价</th><th>活动终态</th><th>阻塞搬运</th><th>完成技能</th></tr></thead><tbody>{''.join(rows)}</tbody></table></section>
 <section><h2>可用于数据集的产物</h2><p>每个场景目录包含 <code>scenario.json</code>（实例、结构条件和评测目标）、<code>public_observations.jsonl</code>（模型可见输入）、<code>policy_io.jsonl</code>（策略输入输出）、<code>trace.jsonl</code>（逐 tick 几何轨迹）、<code>events.jsonl</code>（事件审计）和 <code>metrics.json</code>（独立评分）。训练或评测加载器应按 episode 目录和文件 stem 配对，不需要额外关系清单。<code>held_out</code> 结构只依据 <code>scenario.json</code> 的 split 进入测试集。</p></section>
 <section><h2>模型接入边界</h2><p><code>ModelPolicy</code> 将 VLA 的 RGB 加结构化观测或 WLA 的文本/状态观测转换成同一个动作协议。模型可以返回 JSON 字符串、JSON 对象或 <code>Action</code>；运行时检查动作类型、目标字段、关节维度和持续步数，再交给后端执行。参考的 <code>GreedyPublicPolicy</code> 只是协议基线，不能代表先进具身模型。</p></section>
 <section><h2>证据边界</h2><p>参考后端用于验证协议、动态伙伴和评测逻辑；真实模型通过公开观测到动作的适配器接入，Genesis 后端仍需在相同场景实例和记录格式下完成接触动力学验证。当前结果不能当作真实 VLA/WLA 排行榜。</p></section>

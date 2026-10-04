@@ -5,7 +5,8 @@ import argparse
 import json
 from pathlib import Path
 
-from .continuous import generate_benchmark_suite, generate_scenarios, run_catalog, run_paired_benchmark
+from .continuous import (generate_benchmark_suite, generate_scenarios, load_scenario,
+                          run_catalog, run_paired_benchmark)
 from .continuous_report import write_continuous_report
 
 
@@ -17,6 +18,8 @@ def main() -> None:
     parser.add_argument("--policy", default="greedy_public")
     parser.add_argument("--generated", type=int, default=0,
                         help="生成多少个随机任务实例；0 表示运行六个参考条件")
+    parser.add_argument("--scenario-file", type=Path, default=None,
+                        help="读取一个用户定义的 JSON 活动契约；可与 --paired 一起使用")
     parser.add_argument("--scenario-seed", type=int, default=None,
                         help="任务实例生成种子，默认沿用 --seed")
     parser.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive"),
@@ -31,7 +34,11 @@ def main() -> None:
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error("输出目录已有内容，请使用新的目录，避免覆盖已有实验。")
     scenario_seed = args.seed if args.scenario_seed is None else args.scenario_seed
-    if args.suite:
+    if args.scenario_file is not None and (args.suite or args.generated):
+        parser.error("--scenario-file 不能和 --suite/--generated 同时使用")
+    if args.scenario_file is not None:
+        scenarios = [load_scenario(args.scenario_file)]
+    elif args.suite:
         scenarios = generate_benchmark_suite(count_per_condition=args.count_per_condition,
                                              seed=scenario_seed, include_reference=False)
     else:
@@ -46,6 +53,7 @@ def main() -> None:
         "runtime": "hrc_pilot.continuous", "backend": "ContinuousWorld",
         "policy": args.policy, "seed": args.seed,
         "generated": args.generated, "suite": args.suite,
+        "scenario_file": str(args.scenario_file) if args.scenario_file else None,
         "count_per_condition": args.count_per_condition,
         "partner_mode": "paired" if args.paired else args.partner_mode,
         "paired": args.paired,

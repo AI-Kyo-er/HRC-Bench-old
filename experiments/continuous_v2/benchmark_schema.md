@@ -48,6 +48,22 @@
 
 `robot_targets` 和 `human_targets` 是评测端的私有目标，不应送入模型。公开 assignment 消息是模型可以使用的任务信息；如果需要研究目标歧义，应在消息协议中显式记录，而不是把目标藏在私有字段后要求模型猜测。
 
+`activity` 是场景的活动契约，保存任务目标和可执行工作项：
+
+```json
+{
+  "objective": "共同整理物体",
+  "work_items": [
+    {"item_id": "human:red:tray_red", "object_id": "red", "destination": "tray_red", "preferred_role": "human", "prerequisites": [], "handoff": "open"},
+    {"item_id": "robot:blue:tray_blue", "object_id": "blue", "destination": "tray_blue", "preferred_role": "robot", "prerequisites": ["human:red:tray_red"], "handoff": "open"}
+  ],
+  "shared_resources": ["shared_workspace", "public_commitment_channel"],
+  "replanning_triggers": ["action_failed", "action_delayed", "help_request", "partner_returned"]
+}
+```
+
+前置条件是公开完成 skill 的约束，不是事件序列。工作项可以被另一方接管；后端在提交时检查约束并产生 `action_blocked`，模型需要从公开反馈中恢复。
+
 ## 观测与动作
 
 `public_observations.jsonl` 保存 `Observation` 的公开编码：对象和区域几何、机器人末端、人的位置、公开消息、已完成公开技能、当前动作阶段和可见人类动作。`policy_io.jsonl` 保存模型收到的同一观测及其输出动作。

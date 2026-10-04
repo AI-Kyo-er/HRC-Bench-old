@@ -27,6 +27,55 @@ class ObjectSpec:
 
 
 @dataclass(frozen=True)
+class WorkItem:
+    """活动中的一个可交接工作项。
+
+    工作项只描述成功条件和公开协作边界，不描述某一步必须发生什么。
+    ``prerequisites`` 是已经公开完成的 skill id；满足条件后，任一被允许
+    的伙伴都可以通过真实动作完成该工作项。
+    """
+
+    item_id: str
+    object_id: str
+    destination: str
+    preferred_role: str
+    prerequisites: tuple[str, ...] = ()
+    handoff: str = "open"
+    priority: float = 1.0
+
+
+@dataclass(frozen=True)
+class ActivityContract:
+    """描述持续共同活动的目标、依赖和可重规划边界。
+
+    这是场景生成契约，不是状态机。运行时只在动作完成时检查依赖，
+    人和机器人仍然根据当前公开观测决定是否执行、让行或接管。
+    """
+
+    objective: str
+    work_items: tuple[WorkItem, ...]
+    shared_resources: tuple[str, ...] = ()
+    replanning_triggers: tuple[str, ...] = (
+        "action_failed", "action_delayed", "help_request", "partner_returned",
+    )
+    success_policy: str = "all_work_items"
+
+    def __post_init__(self) -> None:
+        item_ids = [item.item_id for item in self.work_items]
+        if len(item_ids) != len(set(item_ids)):
+            raise ValueError("ActivityContract 的 item_id 必须唯一")
+        known = set(item_ids) | {
+            f"{role}:{item.object_id}:{item.destination}"
+            for item in self.work_items
+            for role in ("human", "robot")
+        }
+        for item in self.work_items:
+            unknown = set(item.prerequisites) - known
+            if unknown:
+                raise ValueError(f"工作项 {item.item_id} 引用了未知前置条件: {sorted(unknown)}")
+
+
+@dataclass(frozen=True)
 class InteractionStructure:
     """描述交互作用之间的关系，而不是规定逐步事件脚本。
 
@@ -56,6 +105,8 @@ class DynamicsSpec:
     human_replan_sensitivity: float = 0.65
     leave_pressure: float = 0.0
     return_on_robot_idle: bool = True
+    human_initiative: float = 0.65
+    handoff_on_failure_probability: float = 1.0
 
 
 @dataclass(frozen=True)
@@ -79,15 +130,26 @@ class ContinuousScenario:
     structure: InteractionStructure = field(
         default_factory=lambda: InteractionStructure("isolated", ("joint_execution",)))
     condition: str = "compositional"
+    activity: ActivityContract | None = None
+
+    def resolved_activity(self) -> ActivityContract:
+        if self.activity is not None:
+            return self.activity
+        return make_activity_contract(self.human_targets, self.robot_targets,
+                                      self.structure.family, self.description)
 
     def initial_messages(self) -> tuple[Message, ...]:
         messages = []
-        for object_id, destination in self.human_targets.items():
-            messages.append(Message("human", "assignment", f"我先处理 {object_id}，目标是 {destination}。",
-                                    object_id, "human", destination))
-        for object_id, destination in self.robot_targets.items():
-            messages.append(Message("human", "assignment", f"请你处理 {object_id}，目标是 {destination}。",
-                                    object_id, "robot", destination))
+        activity = self.resolved_activity()
+        for item in activity.work_items:
+            if item.preferred_role == "human":
+                text = f"我先处理 {item.object_id}，目标是 {item.destination}。"
+            else:
+                text = f"请你处理 {item.object_id}，目标是 {item.destination}。"
+            if item.prerequisites:
+                text += f" 前置贡献完成后再接手（{', '.join(item.prerequisites)}）。"
+            messages.append(Message("human", "assignment", text, item.object_id,
+                                    item.preferred_role, item.destination))
         return tuple(messages)
 
 
@@ -97,7 +159,8 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
            leave_duration_steps: int = 12,
            dynamics: DynamicsSpec | None = None,
            structure: InteractionStructure | None = None,
-           condition: str = "compositional") -> ContinuousScenario:
+           condition: str = "compositional",
+           activity: ActivityContract | None = None) -> ContinuousScenario:
     return ContinuousScenario(
         name=name,
         description=description,
@@ -124,7 +187,139 @@ def _scene(name: str, description: str, human: dict[str, str], robot: dict[str, 
         dynamics=dynamics or DynamicsSpec(),
         structure=structure or InteractionStructure("isolated", ("joint_execution",)),
         condition=condition,
+        activity=activity,
     )
+
+
+def make_activity_contract(human_targets: dict[str, str], robot_targets: dict[str, str],
+                           family: str, objective: str) -> ActivityContract:
+    """从角色分工和结构关系生成可执行的活动契约。
+
+    依赖是声明式的：它们约束哪些贡献已经可以被接受，但不指定完成时间、
+    伙伴动作或中间事件。因此同一契约可以由不同模型、不同伙伴和不同物理
+    后端执行，适合生成 matched、compositional 和 held-out 数据。
+    """
+    human_items = [WorkItem(f"human:{object_id}:{destination}", object_id, destination,
+                            "human", priority=1.0)
+                   for object_id, destination in human_targets.items()]
+    robot_items = [WorkItem(f"robot:{object_id}:{destination}", object_id, destination,
+                            "robot", priority=1.0)
+                   for object_id, destination in robot_targets.items()]
+    if family in {"matched_serial", "nested", "reinterpretation", "robot_initiated_rebalance",
+                  "leave_return", "held_out_reinterpretation"} and human_items and robot_items:
+        anchor = human_items[-1].item_id
+        robot_items = [replace(item, prerequisites=(anchor,)) for item in robot_items]
+    if family in {"reinterpretation", "held_out_reinterpretation"} and len(robot_items) > 1:
+        robot_items = [robot_items[0]] + [replace(item, prerequisites=(robot_items[0].item_id,))
+                                          for item in robot_items[1:]]
+    items = tuple(human_items + robot_items)
+    return ActivityContract(
+        objective=objective,
+        work_items=items,
+        shared_resources=("shared_workspace", "public_commitment_channel"),
+    )
+
+
+def scenario_to_dict(scenario: ContinuousScenario) -> dict[str, Any]:
+    """把场景契约写成可版本控制的 JSON 对象。"""
+    activity = scenario.resolved_activity()
+    return {
+        "name": scenario.name,
+        "description": scenario.description,
+        "objects": [spec.__dict__ for spec in scenario.objects],
+        "regions": scenario.regions,
+        "robot_targets": scenario.robot_targets,
+        "human_targets": scenario.human_targets,
+        "human_availability": scenario.human_availability,
+        "max_steps": scenario.max_steps,
+        "tick_hz": scenario.tick_hz,
+        "leave_trigger": scenario.leave_trigger,
+        "leave_probability": scenario.leave_probability,
+        "leave_duration_steps": scenario.leave_duration_steps,
+        "dynamics": {
+            "robot_delay_probability": scenario.dynamics.robot_delay_probability,
+            "robot_failure_probability": scenario.dynamics.robot_failure_probability,
+            "max_delay_steps": scenario.dynamics.max_delay_steps,
+            "human_replan_sensitivity": scenario.dynamics.human_replan_sensitivity,
+            "leave_pressure": scenario.dynamics.leave_pressure,
+            "return_on_robot_idle": scenario.dynamics.return_on_robot_idle,
+            "human_initiative": scenario.dynamics.human_initiative,
+            "handoff_on_failure_probability": scenario.dynamics.handoff_on_failure_probability,
+        },
+        "activity": {
+            "objective": activity.objective,
+            "work_items": [item.__dict__ for item in activity.work_items],
+            "shared_resources": activity.shared_resources,
+            "replanning_triggers": activity.replanning_triggers,
+            "success_policy": activity.success_policy,
+        },
+        "condition": scenario.condition,
+        "structure": {
+            "family": scenario.structure.family,
+            "segments": scenario.structure.segments,
+            "dependencies": scenario.structure.dependencies,
+            "concurrency": scenario.structure.concurrency,
+            "split": scenario.structure.split,
+        },
+    }
+
+
+def scenario_from_dict(data: dict[str, Any]) -> ContinuousScenario:
+    """从 JSON 场景契约构造运行时实例。
+
+    该入口让新任务通过数据定义即可加入 benchmark；未知字段被忽略，便于
+    在数据集文件中保存额外的资产或标注信息。
+    """
+    objects = tuple(ObjectSpec(spec["name"], tuple(spec["position"]), float(spec.get("radius", 0.045)))
+                    for spec in data.get("objects", ()))
+    structure_data = data.get("structure", {})
+    structure = InteractionStructure(
+        structure_data.get("family", "isolated"),
+        tuple(structure_data.get("segments", ("joint_execution",))),
+        tuple(tuple(pair) for pair in structure_data.get("dependencies", ())),
+        tuple(tuple(pair) for pair in structure_data.get("concurrency", ())),
+        structure_data.get("split", "dev"),
+    )
+    dynamics_data = data.get("dynamics", {})
+    dynamics_fields = {
+        "robot_delay_probability", "robot_failure_probability", "max_delay_steps",
+        "human_replan_sensitivity", "leave_pressure", "return_on_robot_idle",
+        "human_initiative", "handoff_on_failure_probability",
+    }
+    dynamics = DynamicsSpec(**{key: dynamics_data[key] for key in dynamics_fields
+                               if key in dynamics_data})
+    activity_data = data.get("activity")
+    activity = None
+    if activity_data:
+        activity = ActivityContract(
+            objective=activity_data.get("objective", data.get("description", "持续共同活动")),
+            work_items=tuple(WorkItem(
+                item_id=item["item_id"], object_id=item["object_id"],
+                destination=item["destination"], preferred_role=item.get("preferred_role", "robot"),
+                prerequisites=tuple(item.get("prerequisites", ())),
+                handoff=item.get("handoff", "open"), priority=float(item.get("priority", 1.0)),
+            ) for item in activity_data.get("work_items", ())),
+            shared_resources=tuple(activity_data.get("shared_resources", ())),
+            replanning_triggers=tuple(activity_data.get("replanning_triggers", (
+                "action_failed", "action_delayed", "help_request", "partner_returned"))),
+            success_policy=activity_data.get("success_policy", "all_work_items"),
+        )
+    return ContinuousScenario(
+        name=data["name"], description=data.get("description", "持续共同活动"),
+        objects=objects, regions={key: tuple(value) for key, value in data.get("regions", {}).items()},
+        robot_targets=dict(data.get("robot_targets", {})), human_targets=dict(data.get("human_targets", {})),
+        human_availability=float(data.get("human_availability", 0.75)),
+        max_steps=int(data.get("max_steps", 260)), tick_hz=float(data.get("tick_hz", 10.0)),
+        leave_trigger=data.get("leave_trigger"), leave_probability=float(data.get("leave_probability", 0.0)),
+        leave_duration_steps=int(data.get("leave_duration_steps", 12)), dynamics=dynamics,
+        structure=structure, condition=data.get("condition", "compositional"), activity=activity,
+    )
+
+
+def load_scenario(path: str | Path) -> ContinuousScenario:
+    """从单个 JSON 文件读取用户定义场景。"""
+    source = Path(path)
+    return scenario_from_dict(json.loads(source.read_text(encoding="utf-8")))
 
 
 CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
@@ -311,6 +506,28 @@ class PartnerOutput:
     messages: tuple[Message, ...] = ()
 
 
+def _work_item_for(scenario: ContinuousScenario, role: str, object_id: str,
+                   destination: str) -> WorkItem | None:
+    skill_id = f"{role}:{object_id}:{destination}"
+    for item in scenario.resolved_activity().work_items:
+        if item.item_id == skill_id:
+            return item
+    return None
+
+
+def _prerequisites_satisfied(scenario: ContinuousScenario, role: str, object_id: str,
+                             destination: str, completed_skills: tuple[str, ...] | list[str]) -> bool:
+    item = _work_item_for(scenario, role, object_id, destination)
+    return item is None or set(item.prerequisites).issubset(completed_skills)
+
+
+def _handoff_allowed(scenario: ContinuousScenario, object_id: str, destination: str) -> bool:
+    for item in scenario.resolved_activity().work_items:
+        if item.object_id == object_id and item.destination == destination:
+            return item.handoff in {"open", "human_robot", "robot_human"}
+    return True
+
+
 class ContinuousPartner(Protocol):
     def reset(self, seed: int) -> None: ...
     def initial_messages(self) -> tuple[Message, ...]: ...
@@ -357,23 +574,26 @@ class AdaptivePartner:
                                       + self.scenario.dynamics.human_replan_sensitivity * 0.12
                                       - load * 0.08, 0.0, 1.0)
                 accepted = bool(self.rng.random() < probability) if self.stochastic else probability >= 0.35
-                if accepted:
-                    destination = message.destination or f"tray_{message.object_id}"
+                destination = message.destination or f"tray_{message.object_id}"
+                if accepted and _handoff_allowed(self.scenario, message.object_id, destination):
                     self.accepted_requests[message.object_id] = destination
                     self.commitments[message.object_id] = destination
                     outgoing.append(Message("human", "help_reply", "我可以接手这个贡献。",
-                                             message.object_id, "accept"))
+                                             message.object_id, "accept", destination))
                 else:
                     outgoing.append(Message("human", "help_reply", "我现在无法接手，请你继续完成。",
                                              message.object_id, "decline"))
                 self.workload = min(1.0, self.workload + 0.08)
             elif message.speaker == "robot" and message.kind == "action_failed" and message.object_id:
                 destination = message.destination or f"tray_{message.object_id}"
-                self.commitments[message.object_id] = destination
-                self.trust = max(0.0, self.trust - 0.12)
-                self.reassignments += 1
-                outgoing.append(Message("human", "reassignment", "机器人未完成，我接手这个贡献。",
-                                         message.object_id, "accept", destination))
+                probability = self.scenario.dynamics.handoff_on_failure_probability
+                should_take = bool(self.rng.random() < probability) if self.stochastic else probability >= 0.5
+                if should_take and _handoff_allowed(self.scenario, message.object_id, destination):
+                    self.commitments[message.object_id] = destination
+                    self.trust = max(0.0, self.trust - 0.12)
+                    self.reassignments += 1
+                    outgoing.append(Message("human", "reassignment", "机器人未完成，我接手这个贡献。",
+                                             message.object_id, "accept", destination))
             elif message.speaker == "robot" and message.kind == "action_delayed":
                 self.trust = max(0.0, self.trust - 0.025)
             elif message.speaker == "robot" and message.kind == "acknowledge":
@@ -388,6 +608,9 @@ class AdaptivePartner:
                 continue
             object_position = np.asarray(observation.objects[object_id])
             region_position = np.asarray(observation.regions[destination])
+            if not _prerequisites_satisfied(self.scenario, "human", object_id, destination,
+                                            observation.completed_skills):
+                continue
             if float(np.linalg.norm(object_position - region_position)) <= 0.065:
                 continue
             distance = float(np.linalg.norm(object_position[:2] - observation.human_position[:2]))
@@ -704,6 +927,13 @@ class ContinuousWorld:
                 if self._move(self.robot_pos, source + np.array((0.0, 0.0, 0.12)), 0.075):
                     execution.phase = "grasp"
             elif execution.phase == "grasp":
+                if self.human_hold == execution.object_id:
+                    self.say(Message("robot", "action_blocked", "伙伴正在持有该物体，机器人让行。",
+                                     execution.object_id, "human_holding", execution.destination))
+                    self.events.append({"step": self.step_count, "kind": "robot_blocked_by_human",
+                                        "object_id": execution.object_id})
+                    self.robot_execution = None
+                    return
                 self.robot_pos[:] = source + np.array((0.0, 0.0, 0.07))
                 self.robot_hold = execution.object_id
                 execution.phase = "carry"
@@ -715,6 +945,17 @@ class ContinuousWorld:
                 if self.robot_hold:
                     self.objects[self.robot_hold][:] = self.robot_pos - np.array((0.0, 0.0, 0.07))
             elif execution.phase == "release":
+                if not _prerequisites_satisfied(self.scenario, "robot", execution.object_id,
+                                                execution.destination, self.completed_skills):
+                    self.robot_hold = None
+                    self.objects[execution.object_id][:] = source
+                    self.say(Message("robot", "action_blocked", "前置贡献尚未公开完成，暂不能提交这个工作项。",
+                                     execution.object_id, "prerequisite", execution.destination))
+                    self.events.append({"step": self.step_count, "kind": "robot_transfer_blocked",
+                                        "object_id": execution.object_id,
+                                        "destination": execution.destination})
+                    self.robot_execution = None
+                    return
                 self.objects[execution.object_id][:] = destination
                 self.robot_hold = None
                 self.completed_skills.append(f"robot:{execution.object_id}:{execution.destination}")
@@ -742,17 +983,30 @@ class ContinuousWorld:
         if command.object_id is None or command.object_id not in self.objects:
             return
         object_position = self.objects[command.object_id]
+        robot_targeting = (self.robot_execution is not None
+                           and self.robot_execution.object_id == command.object_id)
+        if self.human_hold is None and command.intent == "approach" and robot_targeting:
+            self.events.append({"step": self.step_count, "kind": "human_blocked_by_robot_claim",
+                                "object_id": command.object_id})
+            return
         if self.human_hold is None and command.intent == "approach" and np.linalg.norm(object_position[:2] - self.human_pos[:2]) < 0.07:
             self.human_hold = command.object_id
             self.events.append({"step": self.step_count, "kind": "human_grasped", "object_id": command.object_id})
         if self.human_hold == command.object_id:
             object_position[:] = self.human_pos + np.array((0.0, 0.0, 0.78))
             if command.destination and np.linalg.norm(self.regions[command.destination][:2] - self.human_pos[:2]) < 0.08:
-                object_position[:] = self.regions[command.destination]
-                self.completed_skills.append(f"human:{command.object_id}:{command.destination}")
-                self.events.append({"step": self.step_count, "kind": "human_transfer_completed",
-                                    "object_id": command.object_id, "destination": command.destination})
-                self.human_hold = None
+                if _prerequisites_satisfied(self.scenario, "human", command.object_id,
+                                            command.destination, self.completed_skills):
+                    object_position[:] = self.regions[command.destination]
+                    skill = f"human:{command.object_id}:{command.destination}"
+                    if skill not in self.completed_skills:
+                        self.completed_skills.append(skill)
+                    self.events.append({"step": self.step_count, "kind": "human_transfer_completed",
+                                        "object_id": command.object_id, "destination": command.destination})
+                    self.human_hold = None
+                else:
+                    self.events.append({"step": self.step_count, "kind": "human_transfer_waiting",
+                                        "object_id": command.object_id, "destination": command.destination})
 
     def tick(self) -> None:
         self._step_robot()
@@ -770,6 +1024,15 @@ class ContinuousWorld:
     def finished_human(self) -> bool:
         return all(np.linalg.norm(self.objects[name] - self.regions[destination]) < 0.065
                    for name, destination in self.scenario.human_targets.items())
+
+    def finished_activity(self) -> bool:
+        """检查活动契约的终态，不把贡献者身份误当作任务成功。"""
+        activity = self.scenario.resolved_activity()
+        for item in activity.work_items:
+            if (item.object_id not in self.objects or item.destination not in self.regions
+                    or np.linalg.norm(self.objects[item.object_id] - self.regions[item.destination]) >= 0.065):
+                return False
+        return True
 
 
 def load_continuous_policy(spec: str):
@@ -863,7 +1126,7 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         new_public_messages = public_observation.messages[policy_seen_messages:]
         public_reaction = any(message.kind in {"help_reply", "temporarily_away", "returned",
                                               "correction", "reassignment",
-                                              "action_failed"}
+                                              "action_failed", "action_blocked"}
                               for message in new_public_messages)
         can_decide = public_observation.active_robot_action == "idle" or public_reaction
         if can_decide:
@@ -932,31 +1195,14 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "adaptation_events": adaptation_events,
         "coordination_cost": float(len(policy_io) + 2 * len(response_latencies)
                                     + 3 * result_preemptions(events)),
+        "activity_success": bool(getattr(world, "finished_activity", lambda: robot_success and human_success)()),
+        "blocked_transfers": sum(event.get("kind") in {"robot_transfer_blocked", "robot_blocked_by_human"}
+                                 for event in events),
     }
     if output is not None:
         output.mkdir(parents=True, exist_ok=True)
         (output / "scenario.json").write_text(
-            json.dumps({"name": scenario.name, "description": scenario.description,
-                        "objects": [spec.__dict__ for spec in scenario.objects],
-                        "regions": scenario.regions, "robot_targets": scenario.robot_targets,
-                        "human_targets": scenario.human_targets,
-                        "human_availability": scenario.human_availability,
-                        "max_steps": scenario.max_steps, "tick_hz": scenario.tick_hz,
-                        "leave_trigger": scenario.leave_trigger,
-                        "leave_probability": scenario.leave_probability,
-                        "leave_duration_steps": scenario.leave_duration_steps,
-                        "dynamics": {"robot_delay_probability": scenario.dynamics.robot_delay_probability,
-                                      "robot_failure_probability": scenario.dynamics.robot_failure_probability,
-                                      "max_delay_steps": scenario.dynamics.max_delay_steps,
-                                      "human_replan_sensitivity": scenario.dynamics.human_replan_sensitivity,
-                                      "leave_pressure": scenario.dynamics.leave_pressure,
-                                      "return_on_robot_idle": scenario.dynamics.return_on_robot_idle},
-                        "condition": scenario.condition,
-                        "structure": {"family": scenario.structure.family,
-                                      "segments": scenario.structure.segments,
-                                      "dependencies": scenario.structure.dependencies,
-                                      "concurrency": scenario.structure.concurrency,
-                                      "split": scenario.structure.split}},
+            json.dumps(scenario_to_dict(scenario),
                        ensure_ascii=False, indent=2))
         (output / "trace.jsonl").write_text("\n".join(json.dumps(row, ensure_ascii=False) for row in trace) + "\n")
         (output / "public_observations.jsonl").write_text(

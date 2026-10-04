@@ -152,6 +152,34 @@ class ContinuousRuntimeTests(unittest.TestCase):
             self.assertTrue((Path(directory) / "adaptive" / "paired_relay" / "scenario.json").exists())
             self.assertEqual({result["seed"] for result in results}, {7})
 
+    def test_activity_contract_contains_declarative_dependencies(self):
+        activity = CONTINUOUS_SCENARIOS["relay"].resolved_activity()
+        robot_item = next(item for item in activity.work_items if item.preferred_role == "robot")
+        self.assertEqual(robot_item.prerequisites, ("human:red:tray_red",))
+        self.assertEqual(activity.success_policy, "all_work_items")
+
+    def test_dependency_blocks_submission_until_public_skill_is_complete(self):
+        from hrc_pilot.continuous import ContinuousWorld
+        scenario = CONTINUOUS_SCENARIOS["relay"]
+        world = ContinuousWorld(scenario)
+        world.reset(2)
+        world.start_action(Action("transfer", "blue", "tray_blue"))
+        for _ in range(80):
+            world.tick()
+            if world.robot_execution is None:
+                break
+        self.assertIn("robot_transfer_blocked", {event["kind"] for event in world.events})
+        self.assertNotIn("robot:blue:tray_blue", world.completed_skills)
+
+    def test_user_defined_scenario_round_trips_without_state_script(self):
+        from hrc_pilot.continuous import scenario_from_dict, scenario_to_dict
+        original = CONTINUOUS_SCENARIOS["relay"]
+        restored = scenario_from_dict(scenario_to_dict(original))
+        self.assertEqual(restored.name, original.name)
+        self.assertEqual(restored.resolved_activity().work_items,
+                         original.resolved_activity().work_items)
+        self.assertEqual(restored.initial_messages(), original.initial_messages())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -22,6 +22,9 @@
   和 `held_out` 四类结构条件；`InteractionStructure` 记录作用片段、跨片段
   依赖、并发关系和 train/dev/test 划分。它用于组织数据和评测，不是逐步
   触发器。
+- `ActivityContract` 把“真实场景”落成可执行约束：活动目标、工作项、前置
+  承诺、共享资源、允许交接和重规划触发器。运行时只在动作提交时检查约束，
+  不使用第 N 步事件表；前置不满足时会产生公开 `action_blocked` 反馈。
 - `--partner-mode` 可选 `fixed_replay`、`reactive`、`adaptive`。三者分别
   对应固定回放、只根据当前公开行为反应、以及保留公开历史后的适应式伙伴。
 - `ModelPolicy` 接受 VLA 的 RGB 加结构化输入或 WLA 的文本/状态输入，并把
@@ -57,6 +60,18 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
   --suite --count-per-condition 5 --partner-mode adaptive
 ```
 
+使用自定义场景契约：
+
+```bash
+PYTHONPATH=src python scripts/run_continuous_benchmark.py \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/custom \
+  --scenario-file path/to/activity.json --paired
+```
+
+`activity.json` 只需定义对象、区域、角色目标和 `activity.work_items` 的
+前置关系；它不包含逐步事件脚本。`scenario_from_dict`/`load_scenario` 也可
+直接被数据集生成器调用。
+
 完整的研究设计和字段约束见 `design.md` 与 `benchmark_schema.md`。
 
 每个 episode 目录是一个独立数据单元。`scenario.json` 保存实例条件，
@@ -64,6 +79,9 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 `trace.jsonl`/`events.jsonl` 保存审计轨迹，`metrics.json` 保存独立评测结果。
 Genesis 后端的 RGB 文件按 `observation_<step>_<index>.png` 命名，可依据
 JSONL 中的 `rgb_artifact` 稳定配对；不依赖 `manifest.json`。
+
+`metrics.json` 另外记录 `activity_success` 和 `blocked_transfers`：前者按活动
+契约的工作项终态评分，后者帮助区分单纯操作失败和跨贡献依赖带来的协调成本。
 
 ## 证据边界
 
