@@ -5,6 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .backend_options import add_backend_options, backend_provenance, configure_backend
 from .dataset import evaluate_dataset, generate_dataset
 
 
@@ -34,21 +35,35 @@ def main() -> None:
     evaluate.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive"), default="adaptive")
     evaluate.add_argument("--split", choices=("train", "dev", "test"), default=None)
     evaluate.add_argument("--seed-offset", type=int, default=0)
+    for subparser in (generate, evaluate):
+        add_backend_options(subparser)
     args = parser.parse_args()
+    if args.output.exists() and any(args.output.iterdir()):
+        parser.error("输出目录已有内容，请使用新的目录，避免覆盖已有实验。")
+    backend_factory = configure_backend(args, parser, args.output)
     if args.command == "generate":
         metadata = generate_dataset(
             output=args.output, count=args.count, seed=args.seed,
             suite=not args.no_suite, count_per_condition=args.count_per_condition,
             repeats=args.repeats, partner_mode=args.partner_mode, policy_spec=args.policy,
             scenario_dir=args.scenario_dir,
+            backend_factory=backend_factory,
         )
         print(json.dumps(metadata, ensure_ascii=False, indent=2))
     else:
         summary = evaluate_dataset(
             dataset=args.dataset, output=args.output, policy_spec=args.policy,
             partner_mode=args.partner_mode, seed_offset=args.seed_offset, split=args.split,
+            backend_factory=backend_factory,
         )
         print(json.dumps(summary["overall"], ensure_ascii=False, indent=2))
+    provenance = {
+        **backend_provenance(args), "command": args.command,
+        "policy": args.policy, "partner_mode": args.partner_mode,
+        "observation_boundary": "public_observation_only",
+    }
+    (args.output / "provenance.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":

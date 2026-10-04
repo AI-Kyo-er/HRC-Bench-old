@@ -109,6 +109,9 @@ class VCWorkspace:
         self.active_scenario = self.scenario
         self.last_observation_path = None
         self.observation_index = 0
+        self.continuous_delay_frames = 0
+        self.continuous_pending_placement = None
+        self.continuous_rng = np.random.default_rng(0)
 
     def add_entity(self, type, name, morph, material=None, surface=None, **kwargs):
         entity = self.scene.add_entity(morph=morph, material=material, surface=surface, **kwargs)
@@ -131,6 +134,9 @@ class VCWorkspace:
         self.continuous_human_phase = None
         self.last_observation_path = None
         self.observation_index = 0
+        self.continuous_delay_frames = 0
+        self.continuous_pending_placement = None
+        self.continuous_rng = np.random.default_rng(seed)
         self.current_robot_action = "观察共同工作空间"
         self.title = f"{scenario} · {policy} · seed {seed}"
         self.writer = imageio.get_writer(str(output / "demo.mp4"), fps=60 // self.stride,
@@ -173,6 +179,8 @@ class VCWorkspace:
         self.last_observation_path = image_path.name
         execution = self.continuous_execution
         active_action = "idle" if execution is None else execution["action"].kind
+        if execution is not None and active_action == "transfer":
+            active_action = f"transfer:{execution['action'].object_id}"
         phase = "idle" if execution is None else execution.get("phase", "execute")
         return Observation(
             objects={k: tuple(v) for k, v in self.positions().items()}, regions=dict(self.regions),
@@ -205,6 +213,10 @@ class VCWorkspace:
         if self.continuous_execution is not None:
             self.log.add(self.step_count, "robot_action_preempted",
                          previous=self.continuous_execution["action"].kind, next=action.kind)
+            self.attachment = None
+        self.log.add(self.step_count, "policy_action", action=action.kind,
+                     object_id=action.object_id, destination=action.destination,
+                     duration_steps=action.duration_steps)
         if action.kind == "transfer":
             if action.object_id not in self.objects or action.destination not in self.regions:
                 raise ValueError(f"连续搬运目标不存在: {action}")
@@ -212,6 +224,13 @@ class VCWorkspace:
             destination = np.asarray(self.regions[action.destination])
             self.continuous_execution = {"action": action, "phase": "approach", "source": source,
                                          "destination": destination, "qgoal": None, "progress": 0}
+            dynamics = self.scenario.dynamics
+            delay = (int(self.continuous_rng.integers(1, dynamics.max_delay_steps + 1))
+                     if dynamics.max_delay_steps > 0
+                     and self.continuous_rng.random() < dynamics.robot_delay_probability else 0)
+            self.continuous_execution["delay"] = delay * int(60 / self.scenario.tick_hz)
+            self.continuous_execution["failed"] = bool(
+                self.continuous_rng.random() < dynamics.robot_failure_probability)
             self.current_robot_action = f"连续搬运 {action.object_id} 到 {action.destination}"
         elif action.kind == "joint_position":
             values = np.asarray(action.joints, dtype=float)
@@ -230,19 +249,46 @@ class VCWorkspace:
     def continuous_apply_human_command(self, command):
         """把伙伴的当前意图映射到 AvatarController 的非阻塞动作。"""
         self.continuous_human_command = command
-        try:
-            from vico.modules.avatar.utils import AvatarState
-        except ImportError:
+        from .continuous import _prerequisites_satisfied
+        if not self.avatar.spare():
             return
-        if self.avatar.robot.action_state != AvatarState.NO_ACTION or not command.object_id:
+        if command.intent in {"away", "yield", "return"} and command.target is not None:
+            delta = np.asarray(command.target)[:2] - self.avatar.get_global_pose()[:2]
+            distance = float(np.linalg.norm(delta))
+            if distance > 0.07:
+                direction = delta / distance
+                self.avatar.robot.global_rot = np.array([
+                    [direction[0], -direction[1], 0],
+                    [direction[1], direction[0], 0], [0, 0, 1]])
+                self.avatar.walk(min(distance, 0.25))
+            return
+        if not command.object_id:
             return
         held = self.held_by_human()
         if command.intent == "approach" and not held and command.object_id in self.objects:
+            execution = self.continuous_execution
+            if execution is not None and execution["action"].object_id == command.object_id:
+                self.log.add(self.step_count, "human_blocked_by_robot_claim", object_id=command.object_id)
+                return
             self.avatar.pick(1, self.objects[command.object_id])
             self.continuous_human_phase = "picking"
         elif command.intent == "carry" and command.object_id in held and command.destination in self.regions:
+            if not _prerequisites_satisfied(self.scenario, "human", command.object_id,
+                                           command.destination, self.completed_skills):
+                return
             self.avatar.put(1, np.asarray(self.regions[command.destination]), rotation=np.eye(3, dtype=float))
             self.continuous_human_phase = "placing"
+            self.continuous_pending_placement = (command.object_id, command.destination)
+
+    def _continuous_fail(self, execution, reason, *, blocked=False):
+        action = execution["action"]
+        self.attachment = None
+        self.say(Message("robot", "action_blocked" if blocked else "action_failed",
+                         "当前搬运未提交，需要等待或重新分工。", action.object_id,
+                         reason, action.destination))
+        self.log.add(self.step_count, "robot_transfer_blocked" if blocked else "robot_action_failed",
+                     object_id=action.object_id, destination=action.destination, reason=reason)
+        self.continuous_execution = None
 
     def _continuous_robot_step(self):
         execution = self.continuous_execution
@@ -251,10 +297,33 @@ class VCWorkspace:
         action = execution["action"]
         execution["progress"] += 1
         if action.kind == "transfer":
+            from .continuous import _prerequisites_satisfied
+            if execution.get("delay", 0) > 0:
+                if execution["phase"] != "delayed":
+                    self.say(Message("robot", "action_delayed", "当前动作出现可见延迟。",
+                                     action.object_id, "synthetic_delay", action.destination))
+                    self.log.add(self.step_count, "robot_action_delayed", object_id=action.object_id,
+                                 destination=action.destination, source="scenario_synthetic_dynamics")
+                execution["phase"] = "delayed"
+                execution["delay"] -= 1
+                self.continuous_delay_frames += 1
+                return
+            if execution.get("failed"):
+                self._continuous_fail(execution, "scenario_synthetic_failure")
+                return
+            if execution["phase"] == "delayed":
+                execution["phase"] = "approach"
+                execution["progress"] = 0
+            if execution["progress"] > 240:
+                self._continuous_fail(execution, "ik_tracking_timeout")
+                return
             phase = execution["phase"]
             source = execution["source"]
             destination = execution["destination"]
             if phase == "approach":
+                if action.object_id in self.held_by_human():
+                    self._continuous_fail(execution, "human_holding", blocked=True)
+                    return
                 target = source + [0, 0, 0.20]
                 execution["qgoal"] = self._continuous_ik(target, 0.04)
                 if self._continuous_at(target):
@@ -263,7 +332,10 @@ class VCWorkspace:
             elif phase == "grasp":
                 target = source + [0, 0, 0.10]
                 execution["qgoal"] = self._continuous_ik(target, 0.025)
-                if execution["progress"] >= 10:
+                if action.object_id in self.held_by_human():
+                    self._continuous_fail(execution, "human_holding", blocked=True)
+                    return
+                if execution["progress"] >= 10 and self._continuous_at(target):
                     self.attachment = (action.object_id, source - self.ee.get_pos().cpu().numpy())
                     execution["phase"] = "carry"
                     execution["progress"] = 0
@@ -275,6 +347,10 @@ class VCWorkspace:
                     execution["phase"] = "release"
                     execution["progress"] = 0
             elif phase == "release":
+                if not _prerequisites_satisfied(self.scenario, "robot", action.object_id,
+                                               action.destination, self.completed_skills):
+                    self._continuous_fail(execution, "prerequisite", blocked=True)
+                    return
                 self.attachment = None
                 self.objects[action.object_id].set_pos(destination)
                 self.completed_skills.append(f"robot:{action.object_id}:{action.destination}")
@@ -291,10 +367,13 @@ class VCWorkspace:
                 self.robot.control_dofs_position(execution["qgoal"])
         elif action.kind == "joint_position":
             self.robot.control_dofs_position(execution["qgoal"])
-            if execution["progress"] >= max(1, action.duration_steps):
+            if execution["progress"] >= self._continuous_duration(action):
                 self.continuous_execution = None
-        elif execution["progress"] >= max(1, action.duration_steps):
+        elif execution["progress"] >= self._continuous_duration(action):
             self.continuous_execution = None
+
+    def _continuous_duration(self, action):
+        return max(1, action.duration_steps) * int(60 / getattr(self.scenario, "tick_hz", 60))
 
     def _continuous_ik(self, target, fingers):
         qgoal = self.robot.inverse_kinematics(link=self.ee, pos=np.asarray(target),
@@ -311,6 +390,15 @@ class VCWorkspace:
             self.avatar.step()
             self.avatar.robot.update()
             self.scene.step()
+            pending = self.continuous_pending_placement
+            if pending is not None and self.avatar.spare():
+                object_id, destination = pending
+                if (object_id not in self.held_by_human()
+                        and math.dist(self.positions()[object_id], self.regions[destination]) < 0.065):
+                    self.completed_skills.append(f"human:{object_id}:{destination}")
+                    self.log.add(self.step_count, "human_transfer_completed", object_id=object_id,
+                                 destination=destination)
+                self.continuous_pending_placement = None
             if self.attachment is not None:
                 name, offset = self.attachment
                 self.objects[name].set_pos(self.ee.get_pos().cpu().numpy() + offset)
@@ -319,6 +407,8 @@ class VCWorkspace:
             self.capture()
 
     def capture(self, force=False):
+        if self.writer is None:
+            return
         if not force and self.step_count % self.stride:
             return
         rgb = np.asarray(self.camera.render(rgb=True)[0], dtype=np.uint8)
@@ -328,7 +418,7 @@ class VCWorkspace:
         draw.rounded_rectangle((12, 12, 300, 43), radius=5, fill="#101a2c")
         draw.text((21, 17), "蓝色底板：收纳区   绿色底板：留用区", font=self.small_font, fill="white")
         h = rgb.shape[0]
-        draw.text((15, h + 6), "HRC · Progressively Rebalanced Collaboration / Pilot v1", font=self.font, fill="#91d3ff")
+        draw.text((15, h + 6), "HRC · Continuous Collaboration / VC-Genesis", font=self.font, fill="#91d3ff")
         draw.text((15, h + 35), f"{self.title}   |   执行步 {self.step_count}", font=self.small_font, fill="white")
         draw.text((15, h + 60), f"机器人：{self.current_robot_action}", font=self.small_font, fill="#d5def0")
         latest = self.messages[-1] if self.messages else None
@@ -342,7 +432,7 @@ class VCWorkspace:
         r = self.avatar.robot
         self.trace.append({
             "step": self.step_count, "qpos": self.robot.get_qpos().cpu().numpy().copy(),
-            "objects": np.array([self.positions()[n] for n in ("red", "blue")]),
+            "objects": np.array([self.positions()[name] for name in self.objects]),
             "human_pose": r.pose.copy(), "human_global_trans": r.global_trans.copy(),
             "human_global_rot": r.global_rot.copy(), "human_node_trans": np.array(r.node_trans).copy(),
             "human_global_mat": r.global_mat.copy(), "human_global_mat_inv": r.global_mat_inv.copy(),
@@ -446,16 +536,18 @@ class VCWorkspace:
         self.move_ee(destination_pos + [0, 0, 0.32])
         return True
 
-    def finish_episode(self):
-        self.tick(24)
+    def finish_episode(self, settle_steps=24):
+        self.tick(settle_steps)
         self.capture(force=True)
         self.writer.close()
         self.writer = None
         arrays = {key: np.stack([row[key] for row in self.trace]) for key in self.trace[0]}
+        arrays["object_names"] = np.array(list(self.objects))
         np.savez_compressed(self.output / "trajectory.npz", **arrays)
         (self.output / "events.jsonl").write_text("\n".join(json.dumps(e, ensure_ascii=False) for e in self.log.events) + "\n")
 
     def close(self):
         if self.writer is not None:
             self.writer.close()
+            self.writer = None
         self.gs.destroy()

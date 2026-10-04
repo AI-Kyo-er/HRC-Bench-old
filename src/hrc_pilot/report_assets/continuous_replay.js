@@ -75,11 +75,15 @@ function fillReport() {
     document.getElementById("headline-stats").append(card);
   }
   const provenance = report.provenance;
+  const genesis = provenance.backend === "GenesisContinuousAdapter";
+  document.getElementById("backend-limits").textContent = genesis
+    ? "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。尚未验证接触抓握、人机碰撞安全、训练后的 VLA/WLA 或真人效度。"
+    : "本次运行 ContinuousWorld：简化几何与操作抽象，用于检查协议和伙伴机制。结果没有验证真实接触抓取、接触安全、先进 VLA/WLA 推理或真人协作。";
   document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。后端：${provenance.backend || "未记录"}；机器人策略：${provenance.policy || "未记录"}；seed：${metric(provenance.seed)}。`));
-  document.getElementById("setup-description").append(element("p", "机器人由手写参考策略驱动，人的贡献由可替换伙伴规则驱动。机器人获得公开分工、几何与消息；评分目标和人的内部变量属于环境与评测端。"));
+  document.getElementById("setup-description").append(element("p", `${provenance.policy === "greedy_public" ? "机器人由手写参考策略驱动" : "机器人策略由上方 policy 配置指定，其是否使用训练模型需查看对应适配器"}，人的贡献由可替换伙伴规则驱动。机器人获得公开分工、几何与消息；Genesis 还提供 RGB 像素与关节状态。评分目标和人的内部变量属于评测端。`));
   document.getElementById("provenance").textContent = JSON.stringify(provenance, null, 2);
   const findings = document.getElementById("findings-description");
-  findings.append(element("p", `原记录中 ${success}/${report.episodes.length} 次任务通过。这个数字来自旧版评分，不能直接解释为最新活动契约成功，也不能解释为具身模型成绩。`));
+  findings.append(element("p", `保存记录中 ${success}/${report.episodes.length} 次任务通过。评分沿用各次运行的评测器；查看 activity_success、角色贡献与事件区分活动终态、操作失败和分工变化。这个数字不能解释为训练后具身模型成绩。`));
   if (report.comparisons.length) {
     const equalCount = report.comparisons.filter(group => group.trajectory_equal).length;
     findings.append(element("p", `逐帧核查 ${report.comparisons.length} 个配对场景：其中 ${equalCount} 个场景的三种伙伴在记录的位置、物体、动作和时间上完全一致。这个核查比较实际轨迹，而不只比较总步数。`, "notice"));
@@ -195,13 +199,21 @@ function buildPanels() {
     }
     details.append(list);
     const sourceLinks = element("p");
-    for (const name of ["trace.jsonl", "events.jsonl", "metrics.json", "scenario.json", "policy_io.jsonl"]) {
+    for (const name of episode.artifacts) {
       if (!episode.artifacts.includes(name)) continue;
       const link = element("a", name); link.href = episode.id.split("/").map(encodeURIComponent).join("/") + "/" + name;
       sourceLinks.append(link, document.createTextNode(" · "));
     }
     const settings = element("details"); settings.append(element("summary", "本次场景与初始分工（评测端信息）"), element("pre", JSON.stringify({description: episode.scenario.description, robot_targets: episode.scenario.robot_targets, human_targets: episode.scenario.human_targets, dynamics: episode.scenario.dynamics ?? "未记录", activity: episode.scenario.activity ?? "未记录", structure: episode.scenario.structure}, null, 2)));
     information.append(status, observed, latest, details, settings, sourceLinks);
+    if (episode.artifacts.includes("demo.mp4")) {
+      const video = element("video");
+      video.controls = true;
+      video.preload = "metadata";
+      video.style.width = "100%";
+      video.src = episode.id.split("/").map(encodeURIComponent).join("/") + "/demo.mp4";
+      information.append(element("p", "VC/Genesis 实际仿真视频（独立播放；含初始化热身，视频时间与 benchmark 时钟有约 0.33 秒偏移）"), video);
+    }
     panel.append(heading, canvas, information); container.append(panel);
     episode.panel = panel;
   }

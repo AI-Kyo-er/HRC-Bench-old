@@ -284,12 +284,17 @@ class ContinuousRuntimeTests(unittest.TestCase):
             def positions(self):
                 return self._positions
 
+            def held_by_human(self):
+                return ()
+
         workspace = FakeWorkspace()
         adapter = GenesisContinuousAdapter(workspace, scenario=scenario)
         self.assertFalse(adapter.finished_activity())
         for item in scenario.resolved_activity().work_items:
             workspace._positions[item.object_id] = list(workspace.regions[item.destination])
         self.assertTrue(adapter.finished_activity())
+        workspace.attachment = (scenario.resolved_activity().work_items[0].object_id, (0, 0, 0))
+        self.assertFalse(adapter.finished_activity())
 
     def test_aggregate_exposes_adaptation_metrics(self):
         summary = aggregate_results([{

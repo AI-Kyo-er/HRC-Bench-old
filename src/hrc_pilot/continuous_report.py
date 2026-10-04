@@ -14,6 +14,7 @@ from .continuous import ContinuousScenario
 ARTIFACT_NAMES = (
     "metrics.json", "scenario.json", "trace.jsonl", "events.jsonl",
     "public_observations.jsonl", "policy_io.jsonl", "public_scenario.json",
+    "demo.mp4", "preview.png", "trajectory.npz",
 )
 
 
@@ -117,7 +118,7 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
         "recorded_frame_count": sum(len(episode["trace"]) for episode in payload["episodes"]),
         "source_sha256": payload["source_hashes"],
         "comparisons": payload["comparisons"],
-        "terminal_state": "trace records pre-tick observations; no terminal frame synthesized",
+        "terminal_state": "recorded terminal frame when present; no terminal frame synthesized",
     }
     (output / "replay_verification.json").write_text(
         json.dumps(verification, ensure_ascii=False, indent=2), encoding="utf-8")

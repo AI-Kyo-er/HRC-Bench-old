@@ -5,7 +5,8 @@ import argparse
 import json
 from pathlib import Path
 
-from .continuous import (generate_benchmark_suite, generate_scenarios, load_scenario,
+from .backend_options import add_backend_options, backend_provenance, configure_backend
+from .continuous import (CONTINUOUS_SCENARIOS, generate_benchmark_suite, generate_scenarios, load_scenario,
                           load_scenario_catalog,
                           run_catalog, run_counterfactual_benchmark, run_paired_benchmark)
 from .continuous_report import write_continuous_report
@@ -16,6 +17,8 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path,
                         default=Path("/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/formal"))
     parser.add_argument("--seed", type=int, default=0)
+    add_backend_options(parser)
+    parser.add_argument("--scenes", nargs="+", choices=tuple(CONTINUOUS_SCENARIOS), default=None)
     parser.add_argument("--policy", default="greedy_public")
     parser.add_argument("--generated", type=int, default=0,
                         help="生成多少个随机任务实例；0 表示运行六个参考条件")
@@ -52,21 +55,28 @@ def main() -> None:
                                              seed=scenario_seed, include_reference=False)
     else:
         scenarios = generate_scenarios(args.generated, seed=scenario_seed)
+    if args.scenes is not None:
+        if args.scenario_file or args.scenario_dir or args.suite or args.generated:
+            parser.error("--scenes 只用于选择内置场景")
+        scenarios = [CONTINUOUS_SCENARIOS[name] for name in args.scenes]
+    backend_factory = configure_backend(args, parser, args.output_dir)
     if args.paired and args.counterfactual_policies:
         parser.error("--paired 不能和 --counterfactual-policies 同时使用")
     if args.counterfactual_policies:
         policy_specs = tuple(spec.strip() for spec in args.counterfactual_policies.split(",") if spec.strip())
         results = run_counterfactual_benchmark(policy_specs=policy_specs, seed=args.seed,
                                                output=args.output_dir, scenarios=scenarios or None,
-                                               partner_mode=args.partner_mode)
+                                               partner_mode=args.partner_mode, backend_factory=backend_factory)
     elif args.paired:
         results = run_paired_benchmark(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
-                                       scenarios=scenarios or None)
+                                       scenarios=scenarios or None, backend_factory=backend_factory)
     else:
         results = run_catalog(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
-                              scenarios=scenarios or None, partner_mode=args.partner_mode)
+                              scenarios=scenarios or None, partner_mode=args.partner_mode,
+                              backend_factory=backend_factory)
     (args.output_dir / "provenance.json").write_text(json.dumps({
-        "runtime": "hrc_pilot.continuous", "backend": "ContinuousWorld",
+        "runtime": "hrc_pilot.continuous",
+        **backend_provenance(args),
         "policy": args.policy, "seed": args.seed,
         "counterfactual_policies": args.counterfactual_policies,
         "generated": args.generated, "suite": args.suite,

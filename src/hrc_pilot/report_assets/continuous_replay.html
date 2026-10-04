@@ -12,7 +12,7 @@
   <p class="eyebrow">HRC-CONTINUOUS V2 / 实验中场复盘</p>
   <h1 id="report-title">看清人和机器人实际怎样协作</h1>
   <p class="lead">围绕你的 motivation：机器人行为会改变人的后续协作方式，机器人也需要据此重新组织自己的贡献。</p>
-  <p class="notice"><strong>动画来自已保存的参考仿真轨迹。</strong>这是桌面俯视的几何回放；显示人位置、机器人末端和物体移动，没有机械臂关节、人体姿态或接触力的三维画面。没有重新运行实验，也没有生成额外的动作。</p>
+  <p class="notice" id="backend-notice"><strong>动画来自已保存的实验轨迹。</strong>桌面俯视回放显示人位置、机器人末端和物体移动。若本次使用 Genesis，每个面板另有真实仿真视频和姿态轨迹文件；回放页面本身不重新运行实验。</p>
   <div class="stat-grid" id="headline-stats"></div>
   <nav aria-label="报告导航"><a href="#motivation">研究问题</a><a href="#replay">看动画</a><a href="#findings">看结果</a><a href="#implementation">做了什么</a><a href="#limits">下一步判断</a></nav>
 </header>
@@ -84,7 +84,7 @@
 <section id="limits">
   <p class="eyebrow">06 / 基于这些结果决定下一步</p>
   <h2>距离目标 benchmark 还差什么</h2>
-  <p>当前保留实验运行在 <code>ContinuousWorld</code>，是简化几何与操作抽象。Genesis 适配代码和模型接口已有工程入口，但这些结果没有验证真实接触抓取、安全量、先进 VLA/WLA 推理或真人协作。</p>
+  <p id="backend-limits">实际后端见本页运行设置。参考后端采用简化几何，Genesis 后端采用机械臂关节控制与 Avatar 动画，两者都保留操作抽象。这些结果没有验证真实接触抓取、安全量、先进 VLA/WLA 推理或真人协作。</p>
   <p>下一轮最关键的是做出一个能产生差异的场景：连续几次机器人失误让人从等待转为监督或接管；即使当前物体位置相同，不同历史也影响人后续如何协作。机器人必须观察这种变化，在继续、求助和主动承担之间作出有效选择。</p>
   <ul><li>验证人的内部变化确实影响后续行为，而不只是日志中的状态数字。</li><li>比较实质不同的机器人策略，检验谁能发现和处理伙伴变化。</li><li>分别评分活动完成、双方负担和重新协调，避免把人替机器人做完等同于良好协作。</li><li>再把经过机制检查的任务落实到物理后端，接入真实具身模型。</li></ul>
   <p>本页不能据此证明已有模型缺乏 cobalance 能力，也不能证明你的研究假设已成立。它让我们看到实际执行了什么，以及下一轮应当改变哪些设置。</p>

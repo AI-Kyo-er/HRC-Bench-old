@@ -10,6 +10,8 @@
 - [已经生成的正式展示页](results/pilot_v1/formal/index.html)
 - [v2 六场景报告与轨迹动画](results/continuous_v2/formal_v6/index.html)
 - [v2 三种伙伴配对报告与轨迹动画](results/continuous_v2/paired_v8/index.html)
+- [v2 Genesis 六场景报告](results/continuous_v2/genesis_v9/index.html)
+- [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)
 
 所有环境、第三方仓库、资产、缓存和结果实际存储在 `/data1/sieniwgroup/sieniw/projects/HRC-Bench/`，通过软链接访问。此前的 `legacy_llm_direction` 内容保留归档状态。
@@ -44,7 +46,10 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
   --output-dir results/continuous_v2/formal
 ```
 
-这次 v2 报告验证的是连续协议、动态伙伴和独立记录逻辑；它使用 `ContinuousWorld` 参考后端，不把参考伙伴的成功率当作模型结果。`continuous_genesis.py` 和 `VCWorkspace` 已提供逐 tick Genesis 接缝，完整六场景 Genesis 资产、真实 VLA/WLA 推理和接触安全评测仍需后续实现。
+这次 v2 报告验证的是连续协议、动态伙伴和独立记录逻辑；参考报告使用
+`ContinuousWorld`，Genesis 报告使用 VC/Genesis 逐 tick 后端。两者都不把手写
+伙伴或 `GreedyPublicPolicy` 的成功率当作模型结果；Genesis 仍采用运动学夹持和
+Avatar 拿放抽象，真实接触安全、训练后的 VLA/WLA 推理和真人协作仍需后续实现。
 
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ModelPolicy` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 
@@ -59,6 +64,14 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py evaluate \
   --dataset /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/continuous_v1 \
   --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v1/my_model \
   --policy my_adapter:make_policy --split test
+```
+
+Dataset 生成和评测也可选择 Genesis 后端：
+
+```bash
+PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
+  --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/continuous_genesis \
+  --count-per-condition 1 --backend genesis
 ```
 
 也可以用 `--scenario-dir path/to/scenarios` 把自定义的 JSON 活动契约目录直接

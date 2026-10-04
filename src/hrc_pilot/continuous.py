@@ -710,7 +710,7 @@ class AdaptivePartner:
         if before == after:
             return
         update = {
-            "step": int(round(observation.time_s * 10)),
+            "step": int(round(observation.time_s * self.scenario.tick_hz)),
             "reason": reason,
             "field": field_name,
             "before": before,
@@ -1070,7 +1070,7 @@ class ContinuousWorld:
             self.events.append({"step": self.step_count, "kind": "robot_action_preempted",
                                 "previous": self.robot_execution.action.kind, "next": action.kind})
         if action.kind == "request_help":
-            self.say(Message("robot", "request_help", action.text, action.object_id, action.destination))
+            self.say(Message("robot", "request_help", action.text, action.object_id, None, action.destination))
             self.robot_execution = _RobotExecution(action, phase="communicate", progress=0.0)
         elif action.kind == "acknowledge":
             self.say(Message("robot", "acknowledge", action.text, action.object_id))
@@ -1313,6 +1313,21 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
     把 benchmark 逻辑复制到某个仿真器内部。
     """
     world: ContinuousBackend = backend_factory(scenario)
+    try:
+        binder = getattr(world, "bind_output", None)
+        if binder is not None:
+            binder(output)
+        return _run_continuous_episode(scenario, policy, partner, world=world, seed=seed,
+                                       output=output, decision_interval=decision_interval,
+                                       partner_mode=partner_mode)
+    finally:
+        closer = getattr(world, "close", None)
+        if closer is not None:
+            closer()
+
+
+def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
+                            decision_interval, partner_mode):
     world.reset(seed)
     policy.reset()
     partner.reset(seed)
@@ -1330,7 +1345,7 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
             record["rgb_artifact"] = str(artifact)
         return record
 
-    for _ in range(scenario.max_steps):
+    for tick_index in range(scenario.max_steps):
         observation = world.observe()
         partner_output = partner.step(observation)
         for update in partner_output.state_updates:
@@ -1346,7 +1361,9 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
                                               "correction", "reassignment",
                                               "action_failed", "action_blocked"}
                               for message in new_public_messages)
-        can_decide = public_observation.active_robot_action == "idle" or public_reaction
+        can_decide = (public_observation.active_robot_action == "idle" or public_reaction
+                      or (getattr(policy, "continuous_control", False)
+                          and tick_index % max(1, decision_interval) == 0))
         if can_decide:
             action = policy.act(public_observation)
             policy_seen_messages = len(public_observation.messages)
@@ -1366,6 +1383,17 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         world.tick()
         if world.finished_robot() and world.finished_human():
             break
+    terminal = world.observe()
+    if trace and trace[-1]["time_s"] == terminal.time_s:
+        trace.pop()
+    trace.append({"step": len(trace), "time_s": terminal.time_s,
+                  "objects": terminal.objects, "human_position": terminal.human_position,
+                  "robot_position": terminal.robot_ee,
+                  "active_robot_action": terminal.active_robot_action,
+                  "human_action": terminal.visible_human_action, "terminal": True})
+    finalizer = getattr(world, "finish_episode", None)
+    if finalizer is not None:
+        finalizer()
     robot_success = world.finished_robot()
     human_success = world.finished_human()
     activity_success = bool(world.finished_activity())
@@ -1421,7 +1449,7 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
         "structure_split": scenario.structure.split, "partner_mode": mode,
         "task_family": scenario.task_family,
         "backend": type(world).__name__,
-        "steps": len(trace), "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
+        "steps": tick_index + 1, "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
         "preemptions": int(getattr(world, "interruptions", 0)),
         "robot_failures": int(getattr(world, "robot_failures", 0)),
         "robot_delay_steps": int(getattr(world, "robot_delay_steps", 0)),

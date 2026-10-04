@@ -14,6 +14,7 @@ from typing import Any, Iterable
 
 from .continuous import (
     ContinuousScenario,
+    ContinuousWorld,
     generate_benchmark_suite,
     generate_scenarios,
     load_continuous_policy,
@@ -59,7 +60,8 @@ def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
                      suite: bool = True, count_per_condition: int = 2,
                      repeats: int = 1, partner_mode: str = "adaptive",
                      policy_spec: str = "greedy_public",
-                     scenario_dir: str | Path | None = None) -> dict[str, Any]:
+                     scenario_dir: str | Path | None = None,
+                     backend_factory=ContinuousWorld) -> dict[str, Any]:
     """生成结构化 benchmark 数据集，并写入每个 episode 的完整审计产物。
 
     ``suite=True`` 生成 train/dev/test 结构条件；``count`` 用于只生成随机
@@ -98,9 +100,12 @@ def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
             result = run_continuous_episode(
                 episode_scenario, policy, make_partner(episode_scenario, partner_mode),
                 seed=episode_seed, output=episode_output, partner_mode=partner_mode,
+                backend_factory=backend_factory,
             )
             result["dataset_version"] = DATASET_VERSION
             result["episode_id"] = episode_name
+            (episode_output / "metrics.json").write_text(
+                json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
             results.append(result)
     output.mkdir(parents=True, exist_ok=True)
     summary = aggregate_results(results)
@@ -114,6 +119,7 @@ def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
         "scenario_source": (str(scenario_dir) if scenario_dir is not None
                              else ("generated_suite" if suite else "generated_random")),
         "episode_count": len(results),
+        "backends": sorted({result["backend"] for result in results}),
         "splits": sorted({result["structure_split"] for result in results}),
         "aggregate": summary,
     }
@@ -153,7 +159,8 @@ def aggregate_results(results: list[dict[str, Any]]) -> dict[str, Any]:
 
 def evaluate_dataset(*, dataset: str | Path, output: str | Path,
                      policy_spec: str, partner_mode: str = "adaptive",
-                     seed_offset: int = 0, split: str | None = None) -> dict[str, Any]:
+                     seed_offset: int = 0, split: str | None = None,
+                     backend_factory=ContinuousWorld) -> dict[str, Any]:
     """用一个模型策略重新评测已有场景，保持场景和分割不变。"""
     dataset = Path(dataset)
     output = Path(output)
@@ -172,6 +179,7 @@ def evaluate_dataset(*, dataset: str | Path, output: str | Path,
         result = run_continuous_episode(
             scenario, policy, make_partner(scenario, partner_mode), seed=run_seed,
             output=target, partner_mode=partner_mode,
+            backend_factory=backend_factory,
         )
         result.update({
             "dataset_version": DATASET_VERSION,
@@ -191,6 +199,7 @@ def evaluate_dataset(*, dataset: str | Path, output: str | Path,
         "partner_mode": partner_mode,
         "split": split,
         "episode_count": len(results),
+        "backends": sorted({result["backend"] for result in results}),
         "episodes": results,
         **summary,
     }

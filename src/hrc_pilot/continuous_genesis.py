@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import math
 
 from .backend import VCWorkspace
 from .continuous import HumanCommand
@@ -19,15 +20,28 @@ class GenesisContinuousAdapter:
         self.scenario = scenario or workspace.scenario
         self.output_root = output_root
         self.policy = policy
+        self.episode_output = None
+        self.physics_steps_per_tick = 60 / self.scenario.tick_hz
+        if not self.physics_steps_per_tick.is_integer() or self.physics_steps_per_tick < 1:
+            raise ValueError("Genesis 的 tick_hz 必须是 60 的正整数约数")
+        self.physics_steps_per_tick = int(self.physics_steps_per_tick)
+
+    def bind_output(self, output: Path | None) -> None:
+        self.episode_output = output
 
     def reset(self, seed: int) -> None:
         if self.scenario is None:
             raise RuntimeError("GenesisContinuousAdapter 需要绑定 ContinuousScenario")
-        output = (self.output_root / self.scenario.name if self.output_root is not None
-                  else self.workspace.output)
+        output = self.episode_output or (self.output_root / self.scenario.name if self.output_root is not None
+                                        else self.workspace.output)
         if output is None:
             raise RuntimeError("GenesisContinuousAdapter 需要 output_root 或 workspace.output")
         self.workspace.begin_episode(output, self.scenario.name, self.policy, seed)
+        self.workspace.step_count = 0
+        self.workspace.log.events.clear()
+        self.workspace.trace.clear()
+        self.workspace.capture(force=True)
+        self.record_event("initial_state", positions=self.workspace.positions())
 
     def observe(self) -> Observation:
         return self.workspace.observe()
@@ -39,13 +53,24 @@ class GenesisContinuousAdapter:
         self.workspace.say(message)
 
     def record_event(self, kind: str, **data) -> None:
+        data.pop("step", None)
         self.workspace.log.add(self.workspace.step_count, kind, **data)
 
     def apply_human_command(self, command: HumanCommand) -> None:
         self.workspace.continuous_apply_human_command(command)
 
     def tick(self) -> None:
-        self.workspace.tick(1)
+        self.workspace.tick(self.physics_steps_per_tick)
+
+    def finish_episode(self) -> None:
+        self.workspace.finish_episode(settle_steps=0)
+
+    def close(self) -> None:
+        self.workspace.close()
+
+    @property
+    def last_observation_path(self):
+        return self.workspace.last_observation_path
 
     @property
     def action_active(self) -> bool:
@@ -53,7 +78,35 @@ class GenesisContinuousAdapter:
 
     @property
     def events(self):
-        return self.workspace.log.events
+        return [{**event, "physics_step": event["step"],
+                 "step": event["step"] / self.physics_steps_per_tick}
+                for event in self.workspace.log.events]
+
+    @property
+    def robot_failures(self):
+        return sum(event["kind"] == "robot_action_failed" for event in self.events)
+
+    @property
+    def robot_delay_steps(self):
+        return self.workspace.continuous_delay_frames / self.physics_steps_per_tick
+
+    @property
+    def interruptions(self):
+        return sum(event["kind"] == "robot_action_preempted" for event in self.events)
+
+    @property
+    def robot_action_count(self):
+        return sum(event["kind"] == "policy_action" for event in self.events)
+
+    def _placed(self, object_id, destination) -> bool:
+        positions = self.workspace.positions()
+        held = set(self.workspace.held_by_human())
+        attachment = getattr(self.workspace, "attachment", None)
+        if attachment is not None:
+            held.add(attachment[0])
+        return (object_id in positions and object_id not in held
+                and destination in self.workspace.regions
+                and math.dist(positions[object_id], self.workspace.regions[destination]) < 0.065)
 
     @property
     def messages(self):
@@ -66,20 +119,13 @@ class GenesisContinuousAdapter:
     def finished_robot(self) -> bool:
         if self.scenario is None:
             return False
-        positions = self.workspace.positions()
-        return all(object_id in positions and destination in self.workspace.regions
-                   and sum((positions[object_id][i] - self.workspace.regions[destination][i]) ** 2
-                           for i in range(3)) ** 0.5 < 0.065
+        return all(self._placed(object_id, destination)
                    for object_id, destination in self.scenario.robot_targets.items())
 
     def finished_human(self) -> bool:
         if self.scenario is None:
             return False
-        positions = self.workspace.positions()
-        held = set(self.workspace.held_by_human())
-        return all(object_id in positions and object_id not in held and destination in self.workspace.regions
-                   and sum((positions[object_id][i] - self.workspace.regions[destination][i]) ** 2
-                           for i in range(3)) ** 0.5 < 0.065
+        return all(self._placed(object_id, destination)
                    for object_id, destination in self.scenario.human_targets.items())
 
     def finished_activity(self) -> bool:
@@ -90,13 +136,8 @@ class GenesisContinuousAdapter:
         """
         if self.scenario is None:
             return False
-        positions = self.workspace.positions()
         for item in self.scenario.resolved_activity().work_items:
-            if item.object_id not in positions or item.destination not in self.workspace.regions:
-                return False
-            distance = sum((positions[item.object_id][i] - self.workspace.regions[item.destination][i]) ** 2
-                           for i in range(3)) ** 0.5
-            if distance >= 0.065:
+            if not self._placed(item.object_id, item.destination):
                 return False
         return True
 

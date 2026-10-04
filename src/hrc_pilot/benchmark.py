@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import math
 from collections.abc import Callable, Mapping
 from typing import Any
 
@@ -15,8 +16,9 @@ PRIVATE_OBSERVATION_KEYS = frozenset({
 
 
 def public_observation_dict(observation: Observation) -> dict[str, Any]:
-    """把协议观测编码为可传给 VLA/WLA 的公开 JSON 对象。"""
+    """把协议观测编码为模型输入，RGB 保留实际像素数组。"""
     encoded = serialize(observation)
+    encoded["rgb"] = observation.rgb.copy() if observation.rgb is not None else None
     leaked = PRIVATE_OBSERVATION_KEYS.intersection(encoded)
     if leaked:
         raise ValueError(f"公开观测包含私有字段: {sorted(leaked)}")
@@ -39,10 +41,12 @@ def decode_action(value: Action | Mapping[str, Any] | str) -> Action:
         action = Action(**dict(value))
     if action.kind not in {"transfer", "request_help", "acknowledge", "wait", "joint_position", "finish"}:
         raise ValueError(f"未知动作类型: {action.kind}")
-    if action.duration_steps < 1:
+    if isinstance(action.duration_steps, bool) or not isinstance(action.duration_steps, int) or action.duration_steps < 1:
         raise ValueError("duration_steps 必须为正整数")
     if action.kind == "joint_position" and len(action.joints) != 9:
         raise ValueError("joint_position 必须包含 9 个关节目标")
+    if action.kind == "joint_position" and not all(math.isfinite(value) for value in action.joints):
+        raise ValueError("joint_position 必须包含有限关节目标")
     if action.kind == "transfer" and (not action.object_id or not action.destination):
         raise ValueError("transfer 必须同时给出 object_id 和 destination")
     return action
@@ -55,8 +59,9 @@ class ModelPolicy:
     也可以是 WLA 的文本/状态输入；它返回 Action、JSON 字典或 JSON 字符串。
     """
 
-    def __init__(self, predict: Callable[[dict[str, Any]], Any]):
+    def __init__(self, predict: Callable[[dict[str, Any]], Any], *, continuous_control: bool = False):
         self.predict = predict
+        self.continuous_control = continuous_control
         self.calls = 0
 
     def reset(self) -> None:

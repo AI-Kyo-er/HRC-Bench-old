@@ -86,6 +86,16 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 - [六场景报告与动画](../../results/continuous_v2/formal_v6/index.html)
 - [三种伙伴配对报告与动画](../../results/continuous_v2/paired_v8/index.html)
 
+Genesis 验证结果：
+
+- [六场景 Genesis 报告](../../results/continuous_v2/genesis_v9/index.html)
+- [Genesis 伙伴条件对照](../../results/continuous_v2/genesis_paired_v9/index.html)
+
+`genesis_v9` 在 VC/Genesis 后端运行六个 v2 场景，使用 60 Hz 物理时钟、RGB
+观察、视频和关节轨迹。六个活动契约均完成，但本次 `robot_induced_rebalance`
+没有触发重新分工，六个 episode 的 `human_reassignments` 都为 0；这验证了
+后端和记录链路，不是 cobalance 能力已被证明的结果。
+
 `results/continuous_v2` 指向 `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/`。
 数据盘负责实际存储；查看报告与执行下面命令使用仓库路径，命令在仓库根目录运行。
 
@@ -133,9 +143,8 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
 
 `ContinuousWorld` 是不依赖 Genesis 的参考后端，用来验证 benchmark 协议、
 连续伙伴和记录/评测逻辑；它不声称完成接触动力学。`continuous_genesis.py`
-已经提供 `GenesisContinuousAdapter`，而 `VCWorkspace` 也提供逐 tick 的
-机器人动作队列和 Avatar 拿放动作入口。当前 VC 场景仍使用 v1 的固定两杯
-布局和运动学夹持抽象，尚未把六个 v2 场景全部实体化为经过验证的 Genesis
-资产，因此还不能把这次报告称为真实机械臂模型排行榜。下一步是在该适配面
-上加入接触安全量、视觉标定、基础技能失败标签和真实 VLA/WLA 推理；然后用
-训练/开发/测试场景分割和多 seed 结果报告模型的泛化与协调代价。
+已经提供 `GenesisContinuousAdapter`，六个 v2 场景现在都可在该适配器上运行。
+VC 资产仍使用运动学夹持绑定，人的拿放仍是 Avatar 动作接口，物体碰撞和接触
+力没有作为真实失败来源。因此这些结果是可复现的后端接缝和机制审计，不是接触
+动力学或真实机械臂模型排行榜。下一步是在该适配面上加入接触安全量、视觉标定、
+基础技能失败标签和真实 VLA/WLA 推理。
