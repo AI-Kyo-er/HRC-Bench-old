@@ -151,7 +151,10 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py evaluate \
 每个 episode 还会保存一组透明的 cobalance 协议代理指标：机器人和人的贡献
 完成率、`contribution_complementarity`、失败后的 `recovery_success`、
 `coordination_efficiency` 和加权的 `cobalance_score`。当前权重固定为活动
-成功 0.35、双方贡献互补 0.25、恢复成功 0.20、协调效率 0.20；它们是可审计
-的 benchmark 起始定义，不是对真人信任或负担的心理测量，后续真人研究应重新
-校准。聚合器同时报告每个数值指标的确定性 bootstrap 95% 区间，以便多 seed
-结果不被单次 episode 的成功率替代。
+成功 0.35、双方贡献互补 0.25、恢复成功 0.20、协调效率 0.20；它们是可审计的
+benchmark 起始定义，不是对真人信任或负担的心理测量，后续真人研究应重新校准。
+`recovery_status`
+明确区分 `no_failure`（没有发生失败，`recovery_success` 为 `null`）、
+`recovered_after_failure`（失败后完成，值为 `1.0`）和 `failed_to_recover`
+（失败后未完成，值为 `0.0`）。聚合器同时报告三类状态计数和每个数值指标的确定性
+bootstrap 95% 区间，以便多 seed 结果不被单次 episode 的成功率替代。

@@ -91,9 +91,11 @@ episode、`history_counterfactual_summary.json`、事件/轨迹/策略输入输�
 
 ## 动画与中场报告
 
-报告现在包含来自 `trace.jsonl` 的桌面俯视动画、事件跳转、逐帧检查、播放速度，
-配对实验使用同一时间轴并排展示伙伴。动画内嵌在 `index.html`，无需联网或启动服务器。
-它只回放保存的位置和动作，没有补造关节轨迹、人体姿态、接触过程或最后终态。
+报告现在同时包含来自 `trace.jsonl` 的桌面俯视动画和（Genesis 后端时）每个 episode 的
+真实 Sim `demo.mp4`。页面提供事件跳转、逐帧检查、播放速度，配对实验使用同一时间轴
+并排展示伙伴。视频由 VC/Genesis 在运行时录制，另存 RGB 观测和 `trajectory.npz` 关节
+轨迹；它不是用轨迹动画重新渲染。动画内嵌在 `index.html`，无需联网或启动服务器，
+视频和原始文件通过每个面板的链接访问。
 输入缺失字段显示“未记录”，历史场景未记录的活动契约不会从当前代码补入。
 
 已有两组报告已重建，可从仓库中的软链接入口打开：
@@ -103,13 +105,16 @@ episode、`history_counterfactual_summary.json`、事件/轨迹/策略输入输�
 
 Genesis 验证结果：
 
-- [六场景 Genesis 报告](../../results/continuous_v2/genesis_v9/index.html)
-- [Genesis 伙伴条件对照](../../results/continuous_v2/genesis_paired_v9/index.html)
+- [六场景 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/genesis_v10/index.html)
+- [Genesis 伙伴条件对照（18 个 episode，含真实 Sim 视频）](../../results/continuous_v2/genesis_paired_v10/index.html)
+- [历史反事实 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 
-`genesis_v9` 在 VC/Genesis 后端运行六个 v2 场景，使用 60 Hz 物理时钟、RGB
-观察、视频和关节轨迹。六个活动契约均完成，但本次 `robot_induced_rebalance`
-没有触发重新分工，六个 episode 的 `human_reassignments` 都为 0；这验证了
-后端和记录链路，不是 cobalance 能力已被证明的结果。
+`genesis_v10` 在 VC/Genesis 后端运行六个 v2 场景，使用 60 Hz 物理时钟、RGB
+观察、视频和关节轨迹；六个场景的活动契约均完成。`history_reinterpretation` 和
+`robot_induced_rebalance` 各记录了一个 `robot_action_delayed` 以及随后的伙伴
+trust/reliability 更新，但本次 seed 没有记录 `robot_action_failed`，因此不能把
+结果描述为失败后的恢复。视频中的物体仍使用运动学 attachment；这验证后端和记录
+链路，不是 cobalance 能力已被证明的结果。
 
 `results/continuous_v2` 指向 `/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/`。
 数据盘负责实际存储；查看报告与执行下面命令使用仓库路径，命令在仓库根目录运行。
@@ -153,9 +158,16 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
 
 随后用 `hrc-dataset evaluate` 对同一批 episode 运行任意 VLA/WLA 适配器，
 评测器仍从私有 `scenario.json` 独立计算活动终态、接管、重规划、冲突和伙伴状态变化。
+可替换的最小 Python 包装见 [`examples/hrc_external_policy_adapter.py`](../../examples/hrc_external_policy_adapter.py)：
+VLA 接收 RGB 加公开结构化观测，WLA 接收公开结构化/文本状态，二者都只能返回
+定义好的 `Action` JSON。
 
 每个 episode 的 `metrics.json` 还包含贡献互补、失败恢复、协调效率和
-`cobalance_score` 四个透明组件。它们是当前 benchmark 的协议代理指标，
+`cobalance_score` 四个透明组件。`recovery_status` 明确区分
+`no_failure`（没有发生失败，`recovery_success` 为 `null`）、
+`recovered_after_failure`（失败后完成，值为 `1.0`）和 `failed_to_recover`
+（失败后未完成，值为 `0.0`）。聚合结果同时给出三类状态计数，避免把“没有失败”
+误读为“成功恢复”。这些指标是当前 benchmark 的协议代理指标，
 用于比较模型如何维持共同活动，不把模拟伙伴状态直接解释为真人心理量。
 数据集 `summary.json` 会为各分组指标附带确定性 bootstrap 95% 区间。
 

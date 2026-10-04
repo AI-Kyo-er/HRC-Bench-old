@@ -164,8 +164,13 @@ def aggregate_results(results: list[dict[str, Any]]) -> dict[str, Any]:
 
     def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         intervals = {key: interval(rows, key) for key in numeric_keys}
+        recovery_status_counts = {
+            status: sum(row.get("recovery_status") == status for row in rows)
+            for status in ("no_failure", "recovered_after_failure", "failed_to_recover")
+        }
         return ({key: mean(rows, key) for key in numeric_keys}
                 | {"episodes": len(rows),
+                   "recovery_status_counts": recovery_status_counts,
                    "confidence_intervals_95": {
                        key: value for key, value in intervals.items()
                        if value is not None

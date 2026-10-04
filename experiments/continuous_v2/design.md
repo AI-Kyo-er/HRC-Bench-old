@@ -42,6 +42,11 @@
 
 模型每次接收一个公开观测，可以是 RGB 加结构化状态（VLA）或结构化/文本状态（WLA），输出一个 `Action`。模型不能读取 `scenario.json` 中的私有目标、伙伴信任、可用性或评测标签。一个 episode 是分析单位，逐 tick 记录用于重算协调和安全指标。
 
+Genesis episode 还必须保存 `demo.mp4`、RGB 观测和 `trajectory.npz`。`index.html`
+同时提供桌面轨迹动画和真实 Sim 视频入口：动画用于精确对齐公开事件，视频用于
+核查 VC Avatar、Franka、物体和渲染画面。视频采用当前后端的物理与接触近似，不能
+替代结构化指标，也不能把运动学 attachment 解释为真实夹持动力学。
+
 主要指标分为三类：
 
 - **机器人结果：** robot success、完成时间、动作块数量、提前终止和动作打断。

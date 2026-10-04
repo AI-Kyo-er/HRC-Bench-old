@@ -137,7 +137,7 @@ def write_dashboard(output: Path, results: list[dict]):
 <p>正式运行使用 GPU 0，Genesis revision、VC revision、资产 revision、依赖版本、源码哈希和运行参数均记录在 <code>provenance.json</code>。验证还检查了 15 个 MP4 可解码、视频帧与轨迹样本对齐、轨迹数值有限、终态位置一致，以及预期的技能失败为 0。</p>
 
 <h2>12. 结论边界与下一步</h2>
-<div class="two-col"><div class="panel"><h3>当前结论</h3><p>第一版 VC + Genesis 底座已经能够运行一个可检查的持续共同活动，并通过受控物理状态和公开历史对照，把历史保留、信息更新和分工重组这些机制转化为可测的行为差异。</p></div><div class="panel"><h3>下一步实验</h3><p>接入真实具身模型；加入长度匹配的简单串接对照、未见交互组合、多 seed、多布局和更多物体；把视觉感知、基础技能失败、协调失败分别报告；再验证模拟伙伴的协调指标是否对应真人协作行为。</p></div></div>
+<div class="two-col"><div class="panel"><h3>当前结论</h3><p>第一版 VC + Genesis 底座已经能够运行一个可检查的持续共同活动，并通过受控物理状态和公开历史对照，把历史保留、信息更新和分工重组这些机制转化为可测的行为差异。重要 episode 同时保存轨迹回放和 Genesis/VC 的 <code>demo.mp4</code>、RGB 观测、关节轨迹，便于逐帧结果与真实 Sim 画面互相核对。</p></div><div class="panel"><h3>下一步实验</h3><p>接入真实具身模型；加入长度匹配的简单串接对照、未见交互组合、多 seed、多布局和更多物体；把视觉感知、基础技能失败、协调失败分别报告；再验证模拟伙伴的协调指标是否对应真人协作行为。</p></div></div>
 
 <h2>13. 查看每个执行</h2><p>选择条件和策略，逐段观看正式生成的视频，并打开对应的状态、事件和策略输入输出。</p><select id="scenario"><option value="all">全部条件</option>SCENARIO_OPTIONS</select><select id="policy"><option value="all">全部策略</option>POLICY_OPTIONS</select><div class="grid">CARDS</div>
 <p class="foot">生成说明：本页由 <code>src/hrc_pilot/report.py</code> 根据已执行 episode 生成。视频、轨迹、事件和指标均来自 <code>results/pilot_v1/formal/</code> 的正式产物；重新生成页面不会重新运行实验。</p>

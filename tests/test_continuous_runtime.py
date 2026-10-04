@@ -18,6 +18,8 @@ from hrc_pilot.continuous import (
     run_catalog,
     run_counterfactual_benchmark,
     run_history_counterfactual,
+    run_continuous_episode,
+    make_partner,
     make_history_counterfactual_scenario,
     run_paired_benchmark,
 )
@@ -325,6 +327,7 @@ class ContinuousRuntimeTests(unittest.TestCase):
             "response_latency_steps": 1.0, "human_corrections": 0,
             "blocked_transfers": 0, "contribution_complementarity": 1.0,
             "recovery_success": 1.0, "coordination_efficiency": 0.8,
+            "recovery_status": "recovered_after_failure",
             "cobalance_score": 0.9,
             "structure_split": "test", "condition": "held_out", "structure_family": "x",
             "partner_mode": "adaptive", "policy_name": "p",
@@ -332,7 +335,33 @@ class ContinuousRuntimeTests(unittest.TestCase):
         self.assertEqual(summary["overall"]["episodes"], 1)
         self.assertEqual(summary["overall"]["recovery_time_steps"], 3.0)
         self.assertEqual(summary["overall"]["cobalance_score"], 0.9)
+        self.assertEqual(summary["overall"]["recovery_status_counts"], {
+            "no_failure": 0, "recovered_after_failure": 1, "failed_to_recover": 0})
         self.assertEqual(summary["overall"]["confidence_intervals_95"]["cobalance_score"], [0.9, 0.9])
+
+    def test_recovery_status_distinguishes_no_failure_from_recovery(self):
+        scenario = CONTINUOUS_SCENARIOS["relay"]
+        result = run_continuous_episode(
+            scenario, GreedyPublicPolicy(), make_partner(scenario, "adaptive"), seed=0)
+        self.assertEqual(result["recovery_status"], "no_failure")
+        self.assertIsNone(result["recovery_success"])
+
+        failure_scenario = CONTINUOUS_SCENARIOS["robot_induced_rebalance"]
+        recovered = run_continuous_episode(
+            failure_scenario, GreedyPublicPolicy(), make_partner(failure_scenario, "adaptive"), seed=0)
+        self.assertEqual(recovered["recovery_status"], "recovered_after_failure")
+        self.assertEqual(recovered["recovery_success"], 1.0)
+        self.assertGreaterEqual(recovered["robot_failures"], 1)
+
+    def test_reference_scenes_exercise_dynamic_events(self):
+        results = {
+            name: run_continuous_episode(
+                scenario, GreedyPublicPolicy(), make_partner(scenario, "adaptive"), seed=0)
+            for name, scenario in CONTINUOUS_SCENARIOS.items()
+        }
+        self.assertGreaterEqual(results["history_reinterpretation"]["robot_failures"], 1)
+        self.assertGreaterEqual(results["robot_induced_rebalance"]["human_reassignments"], 1)
+        self.assertGreaterEqual(results["leave_and_return"]["human_state_updates"], 1)
 
 
 if __name__ == "__main__":

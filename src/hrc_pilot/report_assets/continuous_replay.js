@@ -95,7 +95,7 @@ function fillReport() {
   const tbody = document.getElementById("metrics-rows");
   for (const episode of report.episodes) {
     const row = episode.metrics;
-    const values = [row.scenario, modeNames[row.partner_mode] || metric(row.partner_mode), `${metric(row.structure_family)} / ${metric(row.structure_split)}`, row.task_success === true ? "通过" : row.task_success === false ? "未通过" : "未记录", episode.trace.length, metric(row.robot_failures), metric(row.robot_delay_steps), metric(row.human_reassignments), metric(row.proximity_warnings), metric(row.human_state_updates)];
+    const values = [row.scenario, modeNames[row.partner_mode] || metric(row.partner_mode), `${metric(row.structure_family)} / ${metric(row.structure_split)}`, row.task_success === true ? "通过" : row.task_success === false ? "未通过" : "未记录", metric(row.recovery_status), episode.trace.length, metric(row.robot_failures), metric(row.robot_delay_steps), metric(row.human_reassignments), episode.artifacts.includes("demo.mp4") ? "demo.mp4" : "无", metric(row.human_state_updates)];
     const tableRow = element("tr");
     values.forEach((value, index) => tableRow.append(element("td", String(value), index === 3 ? (row.task_success ? "passed" : "failed") : undefined)));
     tbody.append(tableRow);

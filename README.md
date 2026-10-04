@@ -10,7 +10,9 @@
 - [已经生成的正式展示页](results/pilot_v1/formal/index.html)
 - [v2 六场景报告与轨迹动画](results/continuous_v2/formal_v6/index.html)
 - [v2 三种伙伴配对报告与轨迹动画](results/continuous_v2/paired_v8/index.html)
-- [v2 Genesis 六场景报告](results/continuous_v2/genesis_v9/index.html)
+- [v2 Genesis 六场景报告（含真实 Sim 视频）](results/continuous_v2/genesis_v10/index.html)
+- [v2 Genesis 三种伙伴条件报告（18 个 episode，含真实 Sim 视频）](results/continuous_v2/genesis_paired_v10/index.html)
+- [历史反事实 Genesis 报告（含真实 Sim 视频）](results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)
 

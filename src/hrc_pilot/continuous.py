@@ -422,6 +422,11 @@ CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
                                                                   concurrency=(("joint_execution", "intervention"),))),
     "history_reinterpretation": _scene("history_reinterpretation", "共同活动中保留公开约定，同时允许新的用途信息改变分工。",
                                         {"red": "keep_red"}, {"blue": "tray_blue", "green": "tray_green"},
+                                        dynamics=DynamicsSpec(robot_delay_probability=0.35,
+                                                              robot_failure_probability=0.08,
+                                                              max_delay_steps=5,
+                                                              human_replan_sensitivity=0.8,
+                                                              robot_failure_budget=1),
                                         structure=InteractionStructure("reinterpretation",
                                                                         ("guidance", "intervention", "guidance"),
                                                                         (("guidance", "intervention"), ("intervention", "guidance")))),
@@ -431,7 +436,8 @@ CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
                                        dynamics=DynamicsSpec(robot_delay_probability=0.45,
                                                              robot_failure_probability=0.18,
                                                              max_delay_steps=8,
-                                                             human_replan_sensitivity=0.85),
+                                                             human_replan_sensitivity=0.85,
+                                                             robot_failure_budget=1),
                                        structure=InteractionStructure("robot_initiated_rebalance",
                                                                        ("joint_execution", "guidance", "joint_execution"),
                                                                        (("joint_execution", "guidance"),))),
@@ -1543,13 +1549,24 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                                     if robot_expected and human_expected
                                     else max(robot_completion, human_completion))
     failure_count = int(getattr(world, "robot_failures", 0))
-    recovery_success = (1.0 if activity_success else 0.0)
+    if failure_count == 0:
+        recovery_status = "no_failure"
+        recovery_success = None
+        recovery_component = 1.0
+    elif activity_success:
+        recovery_status = "recovered_after_failure"
+        recovery_success = 1.0
+        recovery_component = 1.0
+    else:
+        recovery_status = "failed_to_recover"
+        recovery_success = 0.0
+        recovery_component = 0.0
     coordination_efficiency = 1.0 / (1.0 + (
         len(policy_io) + 2 * len(response_latencies) + 3 * result_preemptions(events)
     ) / max(1, len(trace)))
     cobalance_score = (0.35 * float(activity_success)
                        + 0.25 * contribution_complementarity
-                       + 0.20 * recovery_success
+                       + 0.20 * recovery_component
                        + 0.20 * coordination_efficiency)
     result = {
         "scenario": scenario.name, "seed": seed, "robot_success": robot_success,
@@ -1614,7 +1631,9 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "robot_contribution_completion": round(float(robot_completion), 6),
         "human_contribution_completion": round(float(human_completion), 6),
         "contribution_complementarity": round(float(contribution_complementarity), 6),
-        "recovery_success": round(float(recovery_success), 6),
+        "recovery_success": (round(float(recovery_success), 6)
+                             if recovery_success is not None else None),
+        "recovery_status": recovery_status,
         "coordination_efficiency": round(float(coordination_efficiency), 6),
         "cobalance_score": round(float(cobalance_score), 6),
         "failure_count_for_recovery": failure_count,
