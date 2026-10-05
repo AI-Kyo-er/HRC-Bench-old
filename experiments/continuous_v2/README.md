@@ -6,6 +6,17 @@
 
 ## 2026-10-05 最新可核查进展
 
+## 2026-10-06 最新视频核查
+
+- [六场景动态意图伙伴 Genesis 报告](../../results/continuous_v2/dynamic_genesis_v2/index.html)：同一
+  seed 下运行 `relay`、`nested_support`、`concurrent_overlay`、
+  `history_reinterpretation`、`robot_induced_rebalance` 和 `leave_and_return`。
+  6/6 episode 均有可解码的真实 `demo.mp4`、RGB、关节轨迹和完整
+  `video_timeline.json`；每个视频都能从报告中的事件跳转到对应 benchmark 时间。
+  六个活动契约均完成，其中两个扰动场景各记录一次失败、延迟和伙伴重新分工，
+  `leave_and_return` 记录公开重规划。这是动态伙伴和视频链路的机制验证，不是
+  VLA/WLA 或真人 HRC 能力结果。
+
 - [匹配当前输入的历史实验](../../results/continuous_v2/matched_history_genesis_v2/index.html)：
   三 seed 下，首次观察 / RGB / 动作和回答前完整伙伴输入 / RGB 五项匹配全部
   通过；可靠历史接受、失败历史拒绝，冻结适应后差异消失。共 18 条真实视频，
@@ -138,6 +149,7 @@ Genesis 验证结果：
 - [六场景 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/genesis_v10/index.html)
 - [Genesis 伙伴条件对照（18 个 episode，含真实 Sim 视频）](../../results/continuous_v2/genesis_paired_v10/index.html)
 - [动态意图伙伴 Genesis 报告（真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v1/index.html)
+- [动态意图伙伴六场景 Genesis 报告（6 条真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v2/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [失败恢复三条件 × 三 seed（9 条真实 Sim 视频）](../../results/continuous_v2/recovery_genesis_v1/index.html)
 - [持续失败未恢复核查（3 条真实 Sim 视频）](../../results/continuous_v2/recovery_negative_genesis_v1/index.html)

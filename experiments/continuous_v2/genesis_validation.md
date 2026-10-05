@@ -1,5 +1,27 @@
 # Genesis 阶段验证记录
 
+## 2026-10-06：动态伙伴六场景真实视频
+
+报告：[dynamic_genesis_v2](../../results/continuous_v2/dynamic_genesis_v2/index.html)。
+运行固定 seed 17、`greedy_public` 协议基线和 `dynamic` 伙伴，覆盖六个内置场景。
+每个 episode 都通过独立视频核验：`demo.mp4` 能完整解码，帧数与
+`video_timeline.json` 一致，时间轴覆盖 benchmark 起点和终点。
+
+| 场景 | 活动成功 | 视频帧数 | 伙伴状态更新 | 意图切换 | 机器人延迟 | 机器人失败 | 公开重规划 | cobalance |
+|---|:---:|---:|---:|---:|---:|---:|---:|---:|
+| `relay` | 是 | 12 | 6 | 3 | 0 | 0 | 0 | 0.975 |
+| `nested_support` | 是 | 28 | 8 | 3 | 0 | 0 | 0 | 0.984 |
+| `concurrent_overlay` | 是 | 26 | 8 | 3 | 0 | 0 | 0 | 0.983 |
+| `history_reinterpretation` | 是 | 17 | 15 | 5 | 3 | 1 | 1 | 0.846 |
+| `robot_induced_rebalance` | 是 | 23 | 15 | 5 | 4 | 1 | 1 | 0.855 |
+| `leave_and_return` | 是 | 24 | 12 | 5 | 0 | 0 | 0 | 0.927 |
+
+这次运行证明动态伙伴的状态更新会进入实际的动作/重规划链路，而不是只写入
+评测日志；尤其两个扰动场景的公开失败/延迟反馈触发了重新分工。视频中的抓取和
+放置仍使用 Genesis 的运动学 attachment，人类动作仍由 Avatar 接口驱动，因而
+这些结果只能说明场景、反馈、记录和视频审计链路有效，不能解释为接触动力学、
+真实机械臂或 VLA/WLA 的协作能力。
+
 ## 2026-10-05：匹配历史、关节抓放与真实 VLA
 
 最新匹配历史报告：[matched_history_genesis_v2](../../results/continuous_v2/matched_history_genesis_v2/index.html)。
