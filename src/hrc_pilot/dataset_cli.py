@@ -21,6 +21,10 @@ def main() -> None:
     generate.add_argument("--scenario-dir", type=Path, default=None,
                           help="读取用户定义的 JSON 场景目录；文件名排序决定稳定顺序")
     generate.add_argument("--count-per-condition", type=int, default=2)
+    generate.add_argument("--task-catalog", action="store_true",
+                          help="生成九类可组合任务族，而不是默认结构 suite")
+    generate.add_argument("--count-per-family", type=int, default=1,
+                          help="--task-catalog 每个任务族的实例数")
     generate.add_argument("--repeats", type=int, default=1)
     generate.add_argument("--no-suite", action="store_true")
     generate.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive", "dynamic"), default="adaptive")
@@ -44,7 +48,8 @@ def main() -> None:
     if args.command == "generate":
         metadata = generate_dataset(
             output=args.output, count=args.count, seed=args.seed,
-            suite=not args.no_suite, count_per_condition=args.count_per_condition,
+            suite=not args.no_suite and not args.task_catalog,
+            task_catalog=args.task_catalog, count_per_family=args.count_per_family,
             repeats=args.repeats, partner_mode=args.partner_mode, policy_spec=args.policy,
             scenario_dir=args.scenario_dir,
             backend_factory=backend_factory,

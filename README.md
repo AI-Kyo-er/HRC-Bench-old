@@ -105,6 +105,15 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
   --count-per-condition 1 --backend genesis
 ```
 
+正式扩展基准也可以直接生成九类任务族；`--task-catalog` 会让数据集入口和
+连续运行器使用同一套任务定义，每个 episode 仍按稳定的 split/family/name 路径保存：
+
+```bash
+PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
+  --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/continuous_catalog \
+  --task-catalog --count-per-family 5 --repeats 3 --partner-mode dynamic
+```
+
 也可以用 `--scenario-dir path/to/scenarios` 把自定义的 JSON 活动契约目录直接
 生成成同样的数据集；每个文件声明对象、区域、工作项和前置关系，不需要固定事件脚本。
 

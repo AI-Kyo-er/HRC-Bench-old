@@ -291,6 +291,16 @@ class ContinuousRuntimeTests(unittest.TestCase):
         self.assertEqual(metadata["episode_count"], 1)
         self.assertEqual(episodes[0][1].task_family, "tool_handoff")
 
+    def test_dataset_generation_can_use_extended_task_catalog(self):
+        with TemporaryDirectory() as directory:
+            metadata = generate_dataset(
+                output=Path(directory) / "catalog", task_catalog=True,
+                count_per_family=1, repeats=1, seed=19,
+            )
+            self.assertEqual(metadata["scenario_source"], "extended_task_catalog")
+            self.assertEqual(metadata["episode_count"], 9)
+            self.assertEqual(metadata["count_per_family"], 1)
+
     def test_history_counterfactual_changes_adaptive_follow_up(self):
         scenario = make_history_counterfactual_scenario()
         results = run_history_counterfactual(

@@ -143,6 +143,15 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=src .venv-vc-pilot/bin/python \
   --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/task_catalog_v1
 ```
 
+如果要把同一目录作为可评测数据集发布，可使用数据集入口；它不会生成
+`manifest.json`，而是按稳定的 split/family/name 路径匹配 episode：
+
+```bash
+PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
+  --output /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/continuous_catalog \
+  --task-catalog --count-per-family 5 --repeats 3 --partner-mode dynamic
+```
+
 正式 Genesis 运行应保留每个 episode 的 `demo.mp4`、`video_timeline.json`、RGB、
 关节轨迹、`policy_io.jsonl` 和动态伙伴审计文件；可用以下命令强制检查视频和时间轴：
 
@@ -174,6 +183,7 @@ Genesis 验证结果：
 - [Genesis 伙伴条件对照（18 个 episode，含真实 Sim 视频）](../../results/continuous_v2/genesis_paired_v10/index.html)
 - [动态意图伙伴 Genesis 报告（真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v1/index.html)
 - [动态意图伙伴六场景 Genesis 报告（6 条真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v2/index.html)
+- [九类任务族 Genesis 报告（9 条真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/task_catalog_genesis_v1/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [失败恢复三条件 × 三 seed（9 条真实 Sim 视频）](../../results/continuous_v2/recovery_genesis_v1/index.html)
 - [持续失败未恢复核查（3 条真实 Sim 视频）](../../results/continuous_v2/recovery_negative_genesis_v1/index.html)

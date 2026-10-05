@@ -19,6 +19,7 @@ from .continuous import (
     ContinuousWorld,
     generate_benchmark_suite,
     generate_scenarios,
+    make_extended_task_catalog,
     load_continuous_policy,
     make_partner,
     run_continuous_episode,
@@ -60,6 +61,7 @@ def _ensure_empty_or_missing(path: Path) -> None:
 
 def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
                      suite: bool = True, count_per_condition: int = 2,
+                     task_catalog: bool = False, count_per_family: int = 1,
                      repeats: int = 1, partner_mode: str = "adaptive",
                      policy_spec: str = "greedy_public",
                      scenario_dir: str | Path | None = None,
@@ -76,16 +78,24 @@ def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
         raise ValueError("repeats 必须为正整数")
     if partner_mode not in {"fixed_replay", "reactive", "adaptive", "dynamic"}:
         raise ValueError(f"未知伙伴模式: {partner_mode}")
-    if scenario_dir is not None and count:
-        raise ValueError("scenario_dir 不能和 count 同时使用")
-    if scenario_dir is None and suite and count:
-        raise ValueError("suite 和 count 只能选择一个")
+    if scenario_dir is not None and (count or task_catalog):
+        raise ValueError("scenario_dir 不能和 count/task_catalog 同时使用")
+    suite = bool(suite) and not task_catalog
+    if sum(bool(value) for value in (suite, task_catalog, bool(count))) > 1:
+        raise ValueError("suite、task_catalog 和 count 只能选择一个")
+    if count_per_family < 1:
+        raise ValueError("count_per_family 必须为正整数")
     if scenario_dir is not None:
         base = load_scenario_catalog(scenario_dir)
     else:
-        base = (generate_benchmark_suite(count_per_condition=count_per_condition,
-                                         seed=seed, include_reference=False)
-                if suite else generate_scenarios(count, seed=seed))
+        if task_catalog:
+            base = make_extended_task_catalog(count_per_family=count_per_family,
+                                              seed=seed, include_reference=False)
+        elif suite:
+            base = generate_benchmark_suite(count_per_condition=count_per_condition,
+                                            seed=seed, include_reference=False)
+        else:
+            base = generate_scenarios(count, seed=seed)
     if not base:
         raise ValueError("没有可生成的场景")
     names = [scenario.name for scenario in base]
@@ -118,8 +128,10 @@ def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
         "partner_mode": partner_mode,
         "seed": seed,
         "repeats": repeats,
+        "count_per_family": count_per_family if task_catalog else None,
         "scenario_source": (str(scenario_dir) if scenario_dir is not None
-                             else ("generated_suite" if suite else "generated_random")),
+                             else ("extended_task_catalog" if task_catalog else
+                                   "generated_suite" if suite else "generated_random")),
         "episode_count": len(results),
         "backends": sorted({result["backend"] for result in results}),
         "splits": sorted({result["structure_split"] for result in results}),
