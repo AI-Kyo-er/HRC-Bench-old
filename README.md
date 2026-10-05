@@ -51,7 +51,12 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 这次 v2 报告验证的是连续协议、动态伙伴和独立记录逻辑；参考报告使用
 `ContinuousWorld`，Genesis 报告使用 VC/Genesis 逐 tick 后端。两者都不把手写
 伙伴或 `GreedyPublicPolicy` 的成功率当作模型结果；Genesis 仍采用运动学夹持和
-Avatar 拿放抽象，真实接触安全、训练后的 VLA/WLA 推理和真人协作仍需后续实现。
+ Avatar 拿放抽象，真实接触安全、训练后的 VLA/WLA 推理和真人协作仍需后续实现。
+
+重要 Genesis 实验的正式报告以运行时非空 `demo.mp4` 作为产物门槛，并在
+`replay_verification.json` 中记录视频覆盖率。新运行还保存 `video_timeline.json`，
+用于把真实 Sim 视频与 benchmark 时间和事件逐帧联动；旧快照若只有视频仍可播放，
+但会明确标出缺少时间轴。`ContinuousWorld` 是参考后端，不要求真实 Sim 视频。
 
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 

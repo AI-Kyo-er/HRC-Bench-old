@@ -12,7 +12,7 @@
   <p class="eyebrow">HRC-CONTINUOUS V2 / 实验中场复盘</p>
   <h1 id="report-title">看清人和机器人实际怎样协作</h1>
   <p class="lead">围绕你的 motivation：机器人行为会改变人的后续协作方式，机器人也需要据此重新组织自己的贡献。</p>
-  <p class="notice" id="backend-notice"><strong>每个重要 episode 同时提供两种证据。</strong>桌面俯视回放显示人位置、机器人末端和物体移动；若本次使用 Genesis，每个面板另有可播放的真实 Sim 视频、RGB 观测和关节轨迹。视频来自已保存的运行，不是轨迹动画重新渲染。</p>
+  <p class="notice" id="backend-notice"><strong>重要 Genesis episode 必须有真实 Sim 视频。</strong>桌面俯视回放显示人位置、机器人末端和物体移动；Genesis 面板另有运行时录制的 `demo.mp4`、RGB 观测和关节轨迹。视频来自已保存的 VC/Genesis 运行，不是轨迹动画重新渲染；缺少非空视频的 Genesis 报告不会生成。</p>
   <div class="stat-grid" id="headline-stats"></div>
   <nav aria-label="报告导航"><a href="#motivation">研究问题</a><a href="#replay">视频与回放</a><a href="#findings">看结果</a><a href="#implementation">做了什么</a><a href="#limits">下一步判断</a></nav>
 </header>
@@ -34,7 +34,7 @@
 <section id="replay" class="replay-section">
   <p class="eyebrow">03 / 逐步观察同一段共同活动</p>
   <h2>真实 Sim 视频、RGB 观测与公开事件</h2>
-  <p>先选择场景，再播放或逐帧检查。条件对照会并排显示，图中 x、y 坐标以米为单位。视频是 Genesis/VC 运行时的相机记录。新运行保存每个视频帧对应的仿真时间；点击事件或移动时间轴会按该记录定位视频。旧运行缺少逐帧映射时，视频独立播放，不使用热身估计代替精确对齐。</p>
+  <p>先选择场景，再播放或逐帧检查。条件对照会并排显示，图中 x、y 坐标以米为单位。视频是 Genesis/VC 运行时的相机记录。新运行保存每个视频帧对应的仿真时间；点击事件或移动时间轴会按该记录定位视频。旧运行缺少逐帧映射时，视频仍可播放，但页面会明确标出“无时间轴”，不使用热身估计代替精确对齐。</p>
   <div class="toolbar">
     <label>场景<select id="scenario-select"></select></label>
     <label>布局 seed<select id="seed-select"></select></label>
@@ -93,7 +93,7 @@
 <section id="sources">
   <p class="eyebrow">07 / 回到原始证据</p>
   <h2>文件、复现与核查</h2>
-  <p>每个动画面板都有原始轨迹、事件和评分链接。页面内嵌数据，直接双击 HTML 即可使用，无需服务器或网络。<code>replay_verification.json</code> 保存输入文件 SHA-256、帧数和伙伴轨迹一致性检查；它用于检查回放来源，不是 episode 配对清单。</p>
+  <p>每个动画面板都有原始轨迹、事件和评分链接。页面内嵌数据，直接双击 HTML 即可使用，无需服务器或网络。<code>replay_verification.json</code> 保存输入文件 SHA-256、帧数、真实 Sim 视频覆盖率和伙伴轨迹一致性检查；它用于检查回放来源，不是 episode 配对清单。对 Genesis，非空 <code>demo.mp4</code> 是报告生成门槛；<code>video_timeline.json</code> 用于检查视频与 benchmark 时间的精确联动。</p>
   <div class="source-links" id="run-verification-links"><a href="replay_verification.json">回放来源核查</a><a id="original-report" href="index.before-replay.html">重建前的报告</a><a id="related-report" hidden>另一组实验报告</a></div>
   <details><summary>查看本次哪些记录存在，哪些机制没有证据</summary><div id="artifact-audit"></div></details>
 </section>

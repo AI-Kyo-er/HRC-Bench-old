@@ -94,6 +94,44 @@ class ContinuousReportTests(unittest.TestCase):
             self.assertEqual(payload["episodes"][0]["video_timeline"], timeline)
             self.assertIn("adaptive/example/video_timeline.json", payload["source_hashes"])
 
+    def test_genesis_report_requires_nonempty_sim_video(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, _, _ = self.write_episode(root)
+            (root / "provenance.json").write_text(json.dumps({"backend": "GenesisContinuousAdapter"}))
+            with self.assertRaisesRegex(ValueError, "缺少有效真实 Sim 视频"):
+                write_continuous_report(root, [metrics])
+
+    def test_genesis_video_audit_is_written_to_payload_and_verification(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, episode_dir, _ = self.write_episode(root)
+            (root / "provenance.json").write_text(json.dumps({"backend": "GenesisContinuousAdapter"}))
+            (episode_dir / "demo.mp4").write_bytes(b"sim video")
+            timeline = {"fps": 10, "frame_count": 2, "frames": [
+                {"video_time_s": 0.0, "benchmark_time_s": 0.0},
+                {"video_time_s": 0.1, "benchmark_time_s": 0.1},
+            ]}
+            (episode_dir / "video_timeline.json").write_text(json.dumps(timeline))
+            write_continuous_report(root, [metrics])
+            payload = build_replay_payload(root, [metrics])
+            self.assertEqual(payload["video_summary"]["video_coverage"], 1.0)
+            self.assertTrue(payload["episodes"][0]["video_audit"]["timeline_valid"])
+            verification = json.loads((root / "replay_verification.json").read_text())
+            self.assertTrue(verification["video_required"])
+            self.assertEqual(verification["video_complete_count"], 1)
+            self.assertEqual(verification["video_coverage"], 1.0)
+
+    def test_reference_backend_does_not_require_video(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, _, _ = self.write_episode(root)
+            (root / "provenance.json").write_text(json.dumps({"backend": "ContinuousWorld"}))
+            write_continuous_report(root, [metrics])
+            verification = json.loads((root / "replay_verification.json").read_text())
+            self.assertFalse(verification["video_required"])
+            self.assertIsNone(verification["video_coverage"])
+
 
 if __name__ == "__main__":
     unittest.main()

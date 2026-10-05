@@ -57,6 +57,13 @@ function metric(value) {
   return value === undefined || value === null ? "未记录" : String(value);
 }
 
+function videoLabel(episode) {
+  const audit = episode.video_audit;
+  if (!audit?.video_complete) return "缺失";
+  if (audit.timeline_valid) return "demo.mp4 + 时间轴";
+  return "demo.mp4（无时间轴）";
+}
+
 function eventTime(episode, event) {
   if (Number.isFinite(event.time_s)) return event.time_s;
   const frame = episode.trace.find(row => row.step === event.step);
@@ -92,6 +99,11 @@ function fillReport() {
   }
   const provenance = report.provenance;
   const genesis = provenance.backend === "GenesisContinuousAdapter";
+  const videoSummary = report.video_summary || {};
+  const videoValue = videoSummary.video_required ? `${videoSummary.video_episode_count} / ${videoSummary.episode_count}` : "不适用";
+  const videoCard = element("div", undefined, "stat");
+  videoCard.append(element("strong", videoValue), element("span", videoSummary.video_required ? "真实 Sim 视频覆盖" : "真实 Sim 视频（参考后端不适用）"));
+  document.getElementById("headline-stats").append(videoCard);
   const trained = provenance.trained_model === true;
   const calibration = provenance.experiment === "joint_control_calibration";
   document.getElementById("next-priority").textContent = trained
@@ -113,6 +125,9 @@ function fillReport() {
     ? "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。接触抓握、人机碰撞安全和真人效度尚未验证。是否运行训练模型，以本页具体策略及输入输出记录为准。"
     : "本次运行 ContinuousWorld：简化几何与操作抽象，用于检查协议和伙伴机制。结果没有验证真实接触抓取、接触安全、先进 VLA/WLA 推理或真人协作。";
   document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。后端：${provenance.backend || "未记录"}；机器人策略：${provenance.history_counterfactual ? "greedy_public / request_help_public" : provenance.policy || "未记录"}；seed：${metric(provenance.seeds?.join(", ") ?? provenance.seed)}。`));
+  document.getElementById("setup-description").append(element("p", videoSummary.video_required
+    ? `真实 Sim 视频契约：${videoSummary.video_episode_count}/${videoSummary.episode_count} 个 episode 有非空 demo.mp4，覆盖率 ${(videoSummary.video_coverage * 100).toFixed(0)}%。逐帧时间轴完整 ${videoSummary.timeline_complete_count}/${videoSummary.episode_count}；没有时间轴的旧视频仍可播放，但不能精确联动轨迹。`
+    : "本次是参考后端的离线几何运行，真实 Sim 视频不适用；轨迹动画和事件审计仍来自保存的 episode 文件。", "notice"));
   for (const key of ["purpose", "controlled", "interpretation"]) {
     if (provenance[key]) document.getElementById("setup-description").append(element("p", provenance[key]));
   }
@@ -120,6 +135,9 @@ function fillReport() {
   document.getElementById("provenance").textContent = JSON.stringify(provenance, null, 2);
   const findings = document.getElementById("findings-description");
   findings.append(element("p", `保存记录中 ${success}/${report.episodes.length} 次任务通过。评分沿用各次运行的评测器；查看 activity_success、角色贡献与事件区分活动终态、操作失败和分工变化。${trained ? "这是训练模型在当前任务抽象中的一次结果，不能推广为 HRC 或 cobalance 能力。" : "这个数字不能解释为训练后具身模型成绩。"}`));
+  findings.append(element("p", videoSummary.video_required
+    ? `视频核查：${videoSummary.video_episode_count}/${videoSummary.episode_count} 个 Genesis episode 有真实 Sim demo.mp4；时间轴完整 ${videoSummary.timeline_complete_count}/${videoSummary.episode_count}。真实视频用于核查 VC/Genesis 场景是否实际发生，轨迹动画用于逐 tick 对齐和事件审计。`
+    : "视频核查：参考后端不产生真实 Sim 视频，因此本次只报告轨迹、公开观测和事件证据。", "notice"));
   if (trained) findings.append(element("p", `实际模型调用 ${provenance.model_calls} 次，15 Hz 控制，每次最多执行 ${provenance.execution_horizon} 个动作；详细原始动作块、图像哈希和推理耗时在 policy_io.jsonl。单个 seed、分布不同的模拟视觉和运动学抓放不能支持能力排行榜。`, "notice"));
   if (calibration) findings.append(element("p", "检查 policy_action 全部为 joint_position，并查看 source=joint_control 的靠近 / 闭合抓取、实际位置释放和搬运完成记录。IK 教师的成功只说明底层接口能够操作物体。", "notice"));
   const recoveryCounts = Object.fromEntries(["no_failure", "recovered_after_failure", "failed_to_recover"].map(status => [status, report.episodes.filter(e => e.metrics.recovery_status === status).length]));
@@ -148,11 +166,11 @@ function fillReport() {
   const tbody = document.getElementById("metrics-rows");
   for (const episode of report.episodes) {
     const row = episode.metrics;
-    const values = [`${row.scenario} / ${metric(row.seed)}`, row.policy_name || provenance.policy || "未记录", `${modeNames[row.partner_mode] || metric(row.partner_mode)}${row.history_condition ? ` / ${historyNames[row.history_condition] || row.history_condition}` : ""}`, `${metric(row.structure_family)} / ${metric(row.structure_split)}`, row.task_success === true ? "通过" : row.task_success === false ? "未通过" : "未记录", metric(row.recovery_status), episode.trace.length, metric(row.robot_failures), metric(row.robot_delay_steps), metric(row.human_reassignments), episode.artifacts.includes("demo.mp4") ? "demo.mp4" : "无", metric(row.human_state_updates)];
+    const values = [`${row.scenario} / ${metric(row.seed)}`, row.policy_name || provenance.policy || "未记录", `${modeNames[row.partner_mode] || metric(row.partner_mode)}${row.history_condition ? ` / ${historyNames[row.history_condition] || row.history_condition}` : ""}`, `${metric(row.structure_family)} / ${metric(row.structure_split)}`, row.task_success === true ? "通过" : row.task_success === false ? "未通过" : "未记录", metric(row.recovery_status), episode.trace.length, metric(row.robot_failures), metric(row.robot_delay_steps), metric(row.human_reassignments), videoLabel(episode), metric(row.human_state_updates)];
     const tableRow = element("tr");
     values.forEach((value, index) => tableRow.append(element("td", String(value), index === 4 ? (row.task_success ? "passed" : "failed") : undefined)));
     tbody.append(tableRow);
-    const audit = element("p", `${episode.id}：${episode.trace.length} 帧；${episode.events.length} 个事件；${episode.scenario.activity ? "场景文件记录活动契约" : "场景文件未记录活动契约，不补入后续规则"}；${episode.events.some(event => event.kind === "human_state_update") ? "事件含伙伴状态更新" : "事件未记录伙伴状态更新"}；文件：${episode.artifacts.join("、")}。`);
+    const audit = element("p", `${episode.id}：${episode.trace.length} 帧；${episode.events.length} 个事件；${episode.scenario.activity ? "场景文件记录活动契约" : "场景文件未记录活动契约，不补入后续规则"}；${episode.events.some(event => event.kind === "human_state_update") ? "事件含伙伴状态更新" : "事件未记录伙伴状态更新"}；视频：${videoLabel(episode)}；文件：${episode.artifacts.join("、")}。`);
     document.getElementById("artifact-audit").append(audit);
   }
   const related = document.getElementById("related-report");
@@ -275,7 +293,7 @@ function buildPanels() {
         const option = element("option", `${value} 倍`); option.value = String(value); option.selected = value === 1; speed.append(option);
       }
       speed.addEventListener("change", () => { video.playbackRate = Number(speed.value); });
-      information.append(element("p", episode.video_timeline ? "VC/Genesis 实际视频：时间轴定位已保存帧；事件跳转定位事件后的首个视频帧（最多一个采样间隔）。也可独立播放或慢放。" : "VC/Genesis 实际视频：旧运行没有精确时间映射，独立播放。"), speed, video);
+      information.append(element("p", episode.video_timeline ? "VC/Genesis 实际视频：时间轴定位已保存帧；事件跳转定位事件后的首个视频帧（最多一个采样间隔）。也可独立播放或慢放。" : "VC/Genesis 实际视频：旧运行没有精确时间映射，独立播放；不能把轨迹时间轴当作视频精确定位。"), speed, video);
     }
     if (episode.observations.some(row => row.rgb_artifact)) {
       const rgb = element("img"); rgb.dataset.rgb = "true"; rgb.alt = "机器人相机的实际 RGB 输入"; rgb.style.width = "100%";

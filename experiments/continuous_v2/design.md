@@ -47,6 +47,12 @@ Genesis episode 还必须保存 `demo.mp4`、RGB 观测和 `trajectory.npz`。`i
 核查 VC Avatar、Franka、物体和渲染画面。视频采用当前后端的物理与接触近似，不能
 替代结构化指标，也不能把运动学 attachment 解释为真实夹持动力学。
 
+对 Genesis，报告生成器会检查每个 episode 的 `demo.mp4` 存在且非空；缺少视频时
+拒绝生成正式回放报告。`video_timeline.json` 是新运行的时间轴完整性检查，记录
+`fps`、`frame_count` 和每帧的 benchmark 时间。旧运行没有时间轴时仍保留原视频，
+但报告把它标为“无时间轴”，不伪造视频与轨迹的精确对应。参考 `ContinuousWorld`
+不适用该视频门槛。
+
 主要指标分为三类：
 
 - **机器人结果：** robot success、完成时间、动作块数量、提前终止和动作打断。

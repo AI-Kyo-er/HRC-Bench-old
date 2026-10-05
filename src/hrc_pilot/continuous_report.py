@@ -18,6 +18,57 @@ ARTIFACT_NAMES = (
 )
 
 
+def _audit_video(directory: Path) -> dict[str, Any]:
+    """检查运行时视频及其可选的逐帧时间轴，不重新解码或重跑仿真。"""
+    video_path = directory / "demo.mp4"
+    timeline_path = directory / "video_timeline.json"
+    audit: dict[str, Any] = {
+        "video_path": "demo.mp4",
+        "video_exists": video_path.exists(),
+        "video_bytes": video_path.stat().st_size if video_path.exists() else 0,
+        "video_complete": video_path.is_file() and video_path.stat().st_size > 0,
+        "timeline_exists": timeline_path.exists(),
+        "timeline_valid": False,
+        "timeline_error": None,
+    }
+    if not timeline_path.exists():
+        audit["timeline_error"] = "缺少 video_timeline.json"
+        return audit
+    try:
+        timeline = json.loads(timeline_path.read_text(encoding="utf-8"))
+        frames = timeline.get("frames")
+        frame_count = timeline.get("frame_count")
+        fps = float(timeline.get("fps", 0))
+        valid_count = isinstance(frame_count, int) and frame_count > 0
+        valid_frames = isinstance(frames, list) and len(frames) == frame_count
+        valid_fps = fps > 0
+        if not (valid_count and valid_frames and valid_fps):
+            raise ValueError("fps、frame_count 或 frames 不合法")
+        audit["timeline_valid"] = True
+        audit["timeline_fps"] = fps
+        audit["timeline_frame_count"] = frame_count
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        audit["timeline_error"] = str(exc)
+    return audit
+
+
+def _video_summary(audits: list[dict[str, Any]], required: bool) -> dict[str, Any]:
+    required_count = len(audits) if required else 0
+    complete_count = sum(audit["video_complete"] for audit in audits)
+    timeline_count = sum(audit["timeline_valid"] for audit in audits)
+    return {
+        "video_required": required,
+        "episode_count": len(audits),
+        "video_episode_count": complete_count,
+        "video_complete_count": complete_count if required else None,
+        "timeline_complete_count": timeline_count,
+        "video_coverage": (complete_count / required_count if required_count else None),
+        "timeline_coverage": (timeline_count / required_count if required_count else None),
+        "status": ("complete" if required and complete_count == required_count
+                   else "missing" if required else "not_applicable"),
+    }
+
+
 def _json_lines(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -39,7 +90,9 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
     provenance_path = output / "provenance.json"
     provenance = (json.loads(provenance_path.read_text(encoding="utf-8"))
                   if provenance_path.exists() else {})
+    video_required = provenance.get("backend") == "GenesisContinuousAdapter"
     episodes = []
+    video_audits = []
     source_hashes = {}
     for result in results:
         matches = candidates.get(_identity(result), [])
@@ -49,6 +102,10 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
         scenario_path = directory / "scenario.json"
         scenario = (json.loads(scenario_path.read_text(encoding="utf-8"))
                     if scenario_path.exists() else {})
+        video_audit = _audit_video(directory)
+        if video_required and not video_audit["video_complete"]:
+            raise ValueError(f"Genesis episode 缺少有效真实 Sim 视频 demo.mp4：{directory}")
+        video_audits.append(video_audit)
         trace = _json_lines(directory / "trace.jsonl")
         if not trace:
             raise ValueError(f"episode 缺少可回放轨迹：{directory}")
@@ -66,6 +123,7 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
             "id": source, "metrics": result, "scenario": scenario,
             "trace": trace, "observations": observations, "events": events,
             "artifacts": artifacts,
+            "video_audit": video_audit,
             "video_timeline": (json.loads((directory / "video_timeline.json").read_text(encoding="utf-8"))
                                if (directory / "video_timeline.json").exists() else None),
             "history_probe": (json.loads((directory / "history_probe.json").read_text(encoding="utf-8"))
@@ -98,8 +156,9 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
                 "modes": [episode["metrics"].get("partner_mode") for episode in group],
             })
     return {
-        "report_version": "continuous-replay-1", "run_name": output.name,
+        "report_version": "continuous-replay-2", "run_name": output.name,
         "provenance": provenance, "episodes": episodes, "comparisons": comparisons,
+        "video_summary": _video_summary(video_audits, video_required),
         "source_hashes": source_hashes,
         "run_artifacts": run_artifacts,
         "matched_history_verification": (json.loads((output / "matched_history_verification.json").read_text(encoding="utf-8"))
@@ -132,6 +191,13 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
         "source_sha256": payload["source_hashes"],
         "comparisons": payload["comparisons"],
         "terminal_state": "recorded terminal frame when present; no terminal frame synthesized",
+        "video_required": payload["video_summary"]["video_required"],
+        "video_episode_count": payload["video_summary"]["video_episode_count"],
+        "video_complete_count": payload["video_summary"]["video_complete_count"],
+        "video_coverage": payload["video_summary"]["video_coverage"],
+        "timeline_complete_count": payload["video_summary"]["timeline_complete_count"],
+        "timeline_coverage": payload["video_summary"]["timeline_coverage"],
+        "video_audits": [episode["video_audit"] for episode in payload["episodes"]],
     }
     (output / "replay_verification.json").write_text(
         json.dumps(verification, ensure_ascii=False, indent=2), encoding="utf-8")

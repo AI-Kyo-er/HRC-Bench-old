@@ -64,6 +64,14 @@ reference joint limit / constraint time constant 提示，尚未完成真实硬�
 研究门槛仍未达到：需无重置持续活动、实际模型与自适应伙伴交互、真实接触 /
 安全、可信的人行为校准，以及操作难度匹配的结构组合与留出评测。
 
+本次报告重建还执行了统一的视频产物审计：`genesis_v10` 为 6/6、
+`genesis_paired_v10` 为 18/18、`matched_history_genesis_v2` 为 18/18、
+`recovery_genesis_v1` 为 9/9、`recovery_contract_genesis_v2` 为 4/4，
+两条 `pi05_droid_genesis` 运行均为 1/1，所有 Genesis episode 都有非空运行时
+`demo.mp4`。其中旧的六场景和 18 条配对快照没有保存逐帧时间轴，所以报告标记
+为“demo.mp4（无时间轴）”并允许独立播放；匹配历史、恢复、关节校准和 π0.5
+运行的时间轴完整性记录保留在各自的 `replay_verification.json` 中。
+
 
 ## 2026-10-05：失败预算与真实视频恢复实验
 

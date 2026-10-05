@@ -23,6 +23,10 @@ Genesis 重要实验同时输出真实 `demo.mp4` 和 `trajectory.npz`，新运�
 时间为 `null`；正式阶段从 0 开始。视频可以包含同一仿真时刻的强制截图，因此
 以逐帧映射定位事件，不假设“视频时间减固定偏移”等于 benchmark 时间。
 报告同时展示第三人称视频与机器人 RGB 输入；模型接口不接收报告相机或此映射。
+报告生成时，Genesis episode 的 `demo.mp4` 必须是非空文件；审计结果写入
+`replay_verification.json` 的 `video_required`、`video_complete_count` 和
+`video_coverage`。时间轴缺失不会把视频判成不存在，但会降低 `timeline_coverage`，
+并禁用精确的轨迹/事件联动。参考后端不要求这些视频产物。
 
 ## `scenario.json`
 

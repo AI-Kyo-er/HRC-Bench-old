@@ -150,6 +150,9 @@ Genesis 验证结果：
 实验说明一起提供；仅有轨迹动画不满足报告要求。新 Genesis episode 保存
 `video_timeline.json`，逐帧记录视频时间、物理步和 benchmark 时间，报告据此定位
 视频，并支持慢放及 RGB 对照。旧实验没有映射时保持独立播放，不补造时间信息。
+正式 Genesis 报告生成会检查每个 episode 的 `demo.mp4` 非空；缺失时直接报错，
+并在 `replay_verification.json` 写入视频覆盖率。参考 `ContinuousWorld` 报告明确
+标记视频不适用，不会用轨迹动画冒充真实 Sim 画面。
 
 使用已安装 VC 环境复现本次多 seed 实验（运行器会先用 `nvidia-smi` 选择至少有
 4 GB 空闲显存的单卡；输出目录必须为空）：
