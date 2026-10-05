@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 
 from .backend_options import add_backend_options, backend_provenance, configure_backend
-from .continuous import (CONTINUOUS_SCENARIOS, generate_benchmark_suite, generate_scenarios, load_scenario,
+from .continuous import (CONTINUOUS_SCENARIOS, generate_benchmark_suite, generate_scenarios,
+                          make_extended_task_catalog, load_scenario,
                           load_scenario_catalog,
                           make_history_counterfactual_scenario, run_catalog,
                           run_counterfactual_benchmark, run_history_counterfactual,
@@ -24,6 +25,10 @@ def main() -> None:
     parser.add_argument("--policy", default="greedy_public")
     parser.add_argument("--generated", type=int, default=0,
                         help="生成多少个随机任务实例；0 表示运行六个参考条件")
+    parser.add_argument("--task-catalog", action="store_true",
+                        help="运行可选的九类任务族目录；默认不改变六个参考场景")
+    parser.add_argument("--count-per-family", type=int, default=1,
+                        help="--task-catalog 每个任务族生成多少实例")
     parser.add_argument("--scenario-file", type=Path, default=None,
                         help="读取一个用户定义的 JSON 活动契约；可与 --paired 一起使用")
     parser.add_argument("--scenario-dir", type=Path, default=None,
@@ -45,11 +50,13 @@ def main() -> None:
     args = parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error("输出目录已有内容，请使用新的目录，避免覆盖已有实验。")
+    if sum(bool(value) for value in (args.suite, args.task_catalog, bool(args.generated))) > 1:
+        parser.error("--suite、--task-catalog 和 --generated 只能选择一个")
     scenario_seed = args.seed if args.scenario_seed is None else args.scenario_seed
     if args.scenario_file is not None and args.scenario_dir is not None:
         parser.error("--scenario-file 和 --scenario-dir 只能选择一个")
-    if (args.scenario_file is not None or args.scenario_dir is not None) and (args.suite or args.generated):
-        parser.error("自定义场景不能和 --suite/--generated 同时使用")
+    if (args.scenario_file is not None or args.scenario_dir is not None) and (args.suite or args.generated or args.task_catalog):
+        parser.error("自定义场景不能和 --suite/--generated/--task-catalog 同时使用")
     if args.scenario_file is not None:
         scenarios = [load_scenario(args.scenario_file)]
     elif args.scenario_dir is not None:
@@ -57,17 +64,20 @@ def main() -> None:
     elif args.suite:
         scenarios = generate_benchmark_suite(count_per_condition=args.count_per_condition,
                                              seed=scenario_seed, include_reference=False)
+    elif args.task_catalog:
+        scenarios = make_extended_task_catalog(count_per_family=args.count_per_family,
+                                                seed=scenario_seed, include_reference=False)
     else:
         scenarios = generate_scenarios(args.generated, seed=scenario_seed)
     if args.scenes is not None:
-        if args.scenario_file or args.scenario_dir or args.suite or args.generated:
+        if args.scenario_file or args.scenario_dir or args.suite or args.generated or args.task_catalog:
             parser.error("--scenes 只用于选择内置场景")
         scenarios = [CONTINUOUS_SCENARIOS[name] for name in args.scenes]
     backend_factory = configure_backend(args, parser, args.output_dir)
     if sum(bool(value) for value in (args.paired, bool(args.counterfactual_policies), args.history_counterfactual)) > 1:
         parser.error("--paired、--counterfactual-policies 和 --history-counterfactual 只能选择一个")
     if args.history_counterfactual:
-        if args.scenario_file or args.scenario_dir or args.suite or args.generated or args.scenes:
+        if args.scenario_file or args.scenario_dir or args.suite or args.generated or args.task_catalog or args.scenes:
             parser.error("--history-counterfactual 使用内置 history_counterfactual 场景，不能与场景选择参数同时使用")
         scenarios = [make_history_counterfactual_scenario()]
         results = run_history_counterfactual(seed=args.seed, output=args.output_dir,
@@ -92,6 +102,7 @@ def main() -> None:
         "counterfactual_policies": args.counterfactual_policies,
         "history_counterfactual": args.history_counterfactual,
         "generated": args.generated, "suite": args.suite,
+        "task_catalog": args.task_catalog, "count_per_family": args.count_per_family,
         "scenario_file": str(args.scenario_file) if args.scenario_file else None,
         "scenario_dir": str(args.scenario_dir) if args.scenario_dir else None,
         "count_per_condition": args.count_per_condition,

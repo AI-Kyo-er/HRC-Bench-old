@@ -453,6 +453,56 @@ CONTINUOUS_SCENARIOS: dict[str, ContinuousScenario] = {
 }
 
 
+TASK_FAMILY_DEFINITIONS: dict[str, dict[str, Any]] = {
+    "serial_relay": {"base": "relay", "split": "train", "capability": "公开承诺后的连续接力"},
+    "concurrent_overlay": {"base": "concurrent_overlay", "split": "train", "capability": "并行占用与让行"},
+    "nested_support": {"base": "nested_support", "split": "dev", "capability": "嵌套支持与局部介入"},
+    "interruption_reprioritization": {"base": "history_reinterpretation", "split": "dev", "capability": "失败、打断和优先级重排"},
+    "leave_and_return": {"base": "leave_and_return", "split": "dev", "capability": "离开、回归和恢复"},
+    "robot_induced_rebalance": {"base": "robot_induced_rebalance", "split": "test", "capability": "机器人诱发的重新分工"},
+    "history_reinterpretation": {"base": "history_reinterpretation", "split": "test", "capability": "保留历史并解释新信息"},
+    "trait_dependent_open_task": {"base": "concurrent_overlay", "split": "test", "capability": "伙伴特征条件下的开放任务"},
+    "held_out_task_composition": {"base": "robot_induced_rebalance", "split": "test", "capability": "未见任务族组合泛化"},
+}
+
+
+def make_extended_task_catalog(*, count_per_family: int = 1, seed: int = 0,
+                               include_reference: bool = False) -> list[ContinuousScenario]:
+    """生成可选的任务族目录，不改变 ``run_catalog`` 默认六场景。
+
+    任务族通过活动契约、布局扰动和结构标签组合而成；它们不携带逐 tick
+    事件脚本。相同任务族可以在不同伙伴 profile、机器人策略和物理后端上
+    重复运行，便于做 unseen human/scene/task 的划分。
+    """
+    if count_per_family < 1:
+        return list(CONTINUOUS_SCENARIOS.values()) if include_reference else []
+    rng = np.random.default_rng(seed)
+    scenarios: list[ContinuousScenario] = []
+    for family, definition in TASK_FAMILY_DEFINITIONS.items():
+        base = CONTINUOUS_SCENARIOS[definition["base"]]
+        for index in range(count_per_family):
+            jitter = rng.normal(0.0, 0.012, 2)
+            objects = tuple(replace(spec, position=(spec.position[0] + float(jitter[0]),
+                                                     spec.position[1] + float(jitter[1]),
+                                                     spec.position[2])) for spec in base.objects)
+            regions = {name: (value[0] + float(jitter[0]), value[1] + float(jitter[1]), value[2])
+                       for name, value in base.regions.items()}
+            structure = replace(base.structure, family=family, split=definition["split"])
+            scenarios.append(replace(
+                base,
+                name=f"{family}_{index:03d}",
+                description=f"{definition['capability']}：{base.description}",
+                objects=objects,
+                regions=regions,
+                structure=structure,
+                condition=family,
+                task_family=family,
+            ))
+    if include_reference:
+        scenarios.extend(CONTINUOUS_SCENARIOS.values())
+    return scenarios
+
+
 def make_history_counterfactual_scenario(name: str = "history_counterfactual") -> ContinuousScenario:
     """构造用于历史反事实门槛的最小任务实例。
 
@@ -603,6 +653,9 @@ class HumanCommand:
     destination: str | None = None
     target: tuple[float, float, float] | None = None
     text: str = ""
+    speed_mps: float = 0.55
+    acceleration_mps2: float = 2.0
+    gaze_target: tuple[float, float, float] | None = None
 
 
 @dataclass
@@ -1025,6 +1078,14 @@ class DynamicHumanPolicy(AdaptivePartner):
         jitter = self.rng.normal(0.0, 0.025, len(values))
         self.profile = HumanProfile(self.profile_id, *(np.asarray(values) + jitter)).clipped()
         self.memory: list[dict[str, Any]] = []
+        self.memory_retrievals: list[dict[str, Any]] = []
+        self.reflections: list[dict[str, Any]] = []
+        self.episode_state: dict[str, Any] = {
+            "phase": "orient",
+            "open_commitments": sorted(self.commitments),
+            "last_public_feedback": None,
+            "last_reflection_time_s": None,
+        }
         self.intention: HumanIntention | None = None
         self.intention_history: list[dict[str, Any]] = []
         self._last_intention_key: tuple[Any, ...] | None = None
@@ -1032,15 +1093,68 @@ class DynamicHumanPolicy(AdaptivePartner):
     def _remember(self, observation: Observation, event: str, details: dict[str, Any],
                   salience: float = 0.5) -> None:
         self.memory.append({
+            "memory_id": f"m{len(self.memory):05d}",
             "time_s": round(float(observation.time_s), 6),
             "event": event,
             "salience": round(float(np.clip(salience, 0.0, 1.0)), 6),
             "details": details,
+            "access_count": 0,
+            "last_access_time_s": None,
         })
         if len(self.memory) > 48:
-            self.memory = sorted(self.memory, key=lambda item: item["salience"])[-48:]
+            self.memory = sorted(self.memory, key=lambda item: (item["salience"], item["time_s"]))[-48:]
+
+    def _retrieve_memories(self, observation: Observation, *, query: str,
+                           object_id: str | None = None, top_k: int = 5) -> list[dict[str, Any]]:
+        """按语义线索、时间新近性和显著性检索，而非简单截断尾部。"""
+        query_terms = set(query.lower().split("_"))
+        scored = []
+        for item in self.memory:
+            details = item.get("details", {})
+            detail_terms = {str(value).lower() for value in details.values() if value is not None}
+            semantic = 1.0 if query.lower() in str(item.get("event", "")).lower() else 0.0
+            if object_id and object_id in detail_terms:
+                semantic += 0.8
+            semantic += 0.15 * len(query_terms & set(str(item.get("event", "")).lower().split("_")))
+            age = max(0.0, float(observation.time_s) - float(item.get("time_s", 0.0)))
+            recency = math.exp(-age / 12.0)
+            score = 0.50 * semantic + 0.30 * recency + 0.20 * float(item.get("salience", 0.0))
+            scored.append((score, item))
+        scored.sort(key=lambda pair: (pair[0], pair[1].get("time_s", 0.0)), reverse=True)
+        selected = []
+        for score, item in scored[:max(1, top_k)]:
+            item["access_count"] = int(item.get("access_count", 0)) + 1
+            item["last_access_time_s"] = round(float(observation.time_s), 6)
+            selected.append({"memory_id": item["memory_id"], "score": round(float(score), 6),
+                             "event": item["event"]})
+        self.memory_retrievals.append({"time_s": round(float(observation.time_s), 6),
+                                       "query": query, "object_id": object_id,
+                                       "selected": selected})
+        if len(self.memory_retrievals) > 96:
+            self.memory_retrievals = self.memory_retrievals[-96:]
+        return [item for _, item in scored[:max(1, top_k)]]
+
+    def _reflect(self, observation: Observation, trigger: str,
+                 evidence: dict[str, Any], *, outcome: str) -> None:
+        retrieved = self._retrieve_memories(observation, query=trigger,
+                                             object_id=evidence.get("object_id"))
+        record = {
+            "time_s": round(float(observation.time_s), 6),
+            "trigger": trigger,
+            "outcome": outcome,
+            "evidence": evidence,
+            "intention": self.intention.snapshot() if self.intention else None,
+            "retrieved_memory_ids": [item["memory_id"] for item in retrieved],
+            "state": self.state.snapshot(),
+        }
+        self.reflections.append(record)
+        self.episode_state["last_reflection_time_s"] = record["time_s"]
+        self.episode_state["last_public_feedback"] = trigger
+        if len(self.reflections) > 96:
+            self.reflections = self.reflections[-96:]
 
     def _select_intention(self, observation: Observation, reason: str) -> None:
+        self._retrieve_memories(observation, query=reason)
         candidates = []
         for object_id, destination in self.commitments.items():
             if object_id in observation.held_by_human:
@@ -1083,8 +1197,12 @@ class DynamicHumanPolicy(AdaptivePartner):
             self.intention_history.append({"time_s": observation.time_s,
                                            "reason": reason,
                                            "intention": new_intention.snapshot()})
+            self._reflect(observation, "intention_switch", {"reason": reason},
+                          outcome="replanned")
             self._last_intention_key = key
         self.intention = new_intention
+        self.episode_state["phase"] = new_intention.phase
+        self.episode_state["open_commitments"] = sorted(self.commitments)
 
     def _process_messages(self, observation: Observation) -> list[Message]:
         new_messages = observation.messages[self.seen_messages:]
@@ -1093,6 +1211,11 @@ class DynamicHumanPolicy(AdaptivePartner):
                 "speaker": message.speaker, "kind": message.kind,
                 "object_id": message.object_id, "value": message.value,
             }, 0.85 if message.kind in {"action_failed", "correction", "reassignment"} else 0.55)
+            if message.kind in {"action_failed", "action_delayed", "correction", "reassignment",
+                                "temporarily_away", "returned"}:
+                self._reflect(observation, message.kind,
+                              {"object_id": message.object_id, "value": message.value},
+                              outcome="public_feedback_processed")
         for skill in observation.completed_skills:
             if skill not in self.seen_robot_completions and skill.startswith("robot:"):
                 self._remember(observation, "robot_contribution_completed", {"skill": skill}, 0.65)
@@ -1128,7 +1251,12 @@ class DynamicHumanPolicy(AdaptivePartner):
     def audit_state(self) -> dict[str, Any]:
         return {"policy": "dynamic_human_policy", "profile": self.profile.snapshot(),
                 "intention": self.intention.snapshot() if self.intention else None,
-                "memory_size": len(self.memory), "intention_switches": len(self.intention_history)}
+                "episode_state": self.episode_state,
+                "memory_size": len(self.memory), "memory": self.memory,
+                "memory_retrievals": self.memory_retrievals,
+                "reflections": self.reflections,
+                "intention_history": self.intention_history,
+                "intention_switches": len(self.intention_history)}
 
 
 class FixedReplayPartner:
@@ -1267,6 +1395,9 @@ class ContinuousWorld:
         self.regions = {key: np.asarray(value, dtype=float).copy() for key, value in self.scenario.regions.items()}
         self.robot_pos = np.array((-0.04, 0.0, 1.05), dtype=float)
         self.human_pos = np.array((0.50, 0.90, 0.0), dtype=float)
+        self.human_velocity = np.zeros(3, dtype=float)
+        self.human_heading = 0.0
+        self.human_gaze_target: tuple[float, float, float] | None = None
         self.robot_qpos = np.zeros(9, dtype=float)
         self.robot_execution: _RobotExecution | None = None
         self.human_command = HumanCommand("observe", target=tuple(self.human_pos))
@@ -1322,6 +1453,7 @@ class ContinuousWorld:
 
     def apply_human_command(self, command: HumanCommand) -> None:
         self.human_command = command
+        self.human_gaze_target = command.gaze_target
 
     def start_action(self, action: Action) -> None:
         if self.robot_execution is not None:
@@ -1454,7 +1586,36 @@ class ContinuousWorld:
         command = self.human_command
         target = np.asarray(command.target if command.target is not None else self.human_pos, dtype=float).copy()
         target[2] = 0.0
-        self._move(self.human_pos, target, 0.055 if command.intent != "away" else 0.075)
+        delta = target - self.human_pos
+        distance = float(np.linalg.norm(delta[:2]))
+        desired = np.zeros(3, dtype=float)
+        if distance > 1e-8:
+            desired[:2] = delta[:2] / distance * max(0.0, float(command.speed_mps))
+            self.human_heading = float(math.atan2(delta[1], delta[0]))
+        max_delta_v = max(0.0, float(command.acceleration_mps2)) * self.dt
+        velocity_delta = desired - self.human_velocity
+        delta_norm = float(np.linalg.norm(velocity_delta))
+        if delta_norm > max_delta_v > 0:
+            velocity_delta *= max_delta_v / delta_norm
+        elif max_delta_v <= 0:
+            self.human_velocity[:] = desired
+            velocity_delta = np.zeros(3, dtype=float)
+        self.human_velocity += velocity_delta
+        displacement = self.human_velocity * self.dt
+        if np.linalg.norm(displacement[:2]) > distance > 0:
+            displacement[:2] = delta[:2]
+            self.human_velocity[:2] = displacement[:2] / self.dt
+        self.human_pos[:] += displacement
+        if distance <= 1e-8:
+            self.human_velocity *= max(0.0, 1.0 - min(1.0, self.dt * 8.0))
+        self.events.append({"step": self.step_count, "kind": "human_motion",
+                            "intent": command.intent,
+                            "position": self.human_pos.tolist(),
+                            "velocity_mps": self.human_velocity.tolist(),
+                            "speed_mps": float(command.speed_mps),
+                            "acceleration_mps2": float(command.acceleration_mps2),
+                            "heading_rad": float(self.human_heading),
+                            "gaze_target": command.gaze_target})
         if command.object_id is None or command.object_id not in self.objects:
             return
         object_position = self.objects[command.object_id]
@@ -1666,6 +1827,8 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
             recorder = getattr(world, "record_event", None)
             if recorder is not None:
                 recorder("human_state_update", **update)
+                if update.get("field") == "intention":
+                    recorder("human_intention_update", **update)
         for message in partner_output.messages:
             world.say(message)
         world.apply_human_command(partner_output.command)
@@ -1706,6 +1869,10 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                       "robot_position": public_observation.robot_ee,
                       "active_robot_action": public_observation.active_robot_action,
                       "human_action": public_observation.visible_human_action,
+                      "human_velocity_mps": getattr(world, "human_velocity", None).tolist()
+                      if getattr(world, "human_velocity", None) is not None else None,
+                      "human_heading_rad": getattr(world, "human_heading", None),
+                      "human_gaze_target": getattr(world, "human_gaze_target", None),
                       "human_object": partner_output.command.object_id,
                       "human_destination": partner_output.command.destination})
         world.tick()
@@ -1719,6 +1886,10 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                   "robot_position": terminal.robot_ee,
                   "active_robot_action": terminal.active_robot_action,
                   "human_action": terminal.visible_human_action,
+                  "human_velocity_mps": getattr(world, "human_velocity", None).tolist()
+                  if getattr(world, "human_velocity", None) is not None else None,
+                  "human_heading_rad": getattr(world, "human_heading", None),
+                  "human_gaze_target": getattr(world, "human_gaze_target", None),
                   "human_object": None, "human_destination": None,
                   "terminal": True})
     finalizer = getattr(world, "finish_episode", None)
@@ -1736,6 +1907,17 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "DynamicHumanPolicy": "dynamic",
     }.get(type(partner).__name__, type(partner).__name__)
     partner_audit = (partner.audit_state() if hasattr(partner, "audit_state") else {})
+    # Private partner traces are evaluator artifacts. They are written as separate
+    # JSONL streams so model inputs remain limited to public observations.
+    audit_event_specs = (
+        ("memory", "human_memory_write"),
+        ("memory_retrievals", "human_memory_retrieval"),
+        ("reflections", "human_reflection"),
+        ("intention_history", "human_intention_update"),
+    )
+    for audit_key, event_kind in audit_event_specs:
+        for record in partner_audit.get(audit_key, ()) or ():
+            events.append({"step": record.get("time_s", 0.0), "kind": event_kind, **record})
     requests = [event for event in events if event.get("kind") == "public_message"
                 and event.get("speaker") == "robot" and event.get("message_kind") == "request_help"]
     replies = [event for event in events if event.get("kind") == "public_message"
@@ -1814,6 +1996,9 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "human_profile": partner_audit.get("profile"),
         "human_intention_switches": partner_audit.get("intention_switches"),
         "human_memory_size": partner_audit.get("memory_size"),
+        "human_memory_writes": len(partner_audit.get("memory", ()) or ()),
+        "human_memory_retrievals": len(partner_audit.get("memory_retrievals", ()) or ()),
+        "human_reflections": len(partner_audit.get("reflections", ()) or ()),
         "human_intention": partner_audit.get("intention"),
         "task_family": scenario.task_family,
         "backend": type(world).__name__,
@@ -1902,6 +2087,14 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         (output / "policy_io.jsonl").write_text(
             "\n".join(json.dumps(row, ensure_ascii=False) for row in policy_io) + "\n")
         (output / "events.jsonl").write_text("\n".join(json.dumps(e, ensure_ascii=False) for e in events) + "\n")
+        for filename, key in (("human_memory.jsonl", "memory"),
+                              ("human_reflections.jsonl", "reflections"),
+                              ("human_intentions.jsonl", "intention_history"),
+                              ("human_memory_retrievals.jsonl", "memory_retrievals")):
+            records = partner_audit.get(key, ()) or ()
+            (output / filename).write_text(
+                "\n".join(json.dumps(record, ensure_ascii=False) for record in records)
+                + ("\n" if records else ""))
         (output / "metrics.json").write_text(json.dumps(result, ensure_ascii=False, indent=2))
     return result
 

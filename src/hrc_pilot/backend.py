@@ -275,6 +275,11 @@ class VCWorkspace:
     def continuous_apply_human_command(self, command):
         """把伙伴的当前意图映射到 AvatarController 的非阻塞动作。"""
         self.continuous_human_command = command
+        self.log.add(self.step_count, "human_command", intent=command.intent,
+                     object_id=command.object_id, destination=command.destination,
+                     target=command.target, speed_mps=float(command.speed_mps),
+                     acceleration_mps2=float(command.acceleration_mps2),
+                     gaze_target=command.gaze_target)
         from .continuous import _prerequisites_satisfied
         if not self.avatar.spare():
             return
@@ -286,7 +291,8 @@ class VCWorkspace:
                 self.avatar.robot.global_rot = np.array([
                     [direction[0], -direction[1], 0],
                     [direction[1], direction[0], 0], [0, 0, 1]])
-                self.avatar.walk(min(distance, 0.25))
+                tick_hz = float(getattr(self.scenario, "tick_hz", 10.0))
+                self.avatar.walk(min(distance, max(0.07, float(command.speed_mps) / tick_hz)))
             return
         if not command.object_id:
             return

@@ -35,6 +35,11 @@
 - 新运行修复活动评分：必须释放到目标且提交符合依赖 / 交接的贡献；任意
   item_id 和接管方不会绕过同一约束。旧报告不重评分。
 
+- [动态人类 benchmark 设计](dynamic_human_benchmark_design.md)：记录任务族目录、
+  动态伙伴的 profile / memory / intention / reflection 审计、VLA/WLA 公开输入边界、
+  泛化划分、指标和真实 Sim 视频门槛。`dynamic_genesis_v3` 是用仓库内 VC/Genesis
+  环境完成的单场景视频烟测，报告中的 `relay/demo.mp4` 已通过逐帧解码与时间轴核查。
+
 详细目的、设置、逐项结论和未验证项见 [`genesis_validation.md`](genesis_validation.md)。
 真实视频、外部 / 腕部 RGB、事件与关节状态在各报告中展示。下一阶段仍需同一
 活动无重置、真实模型和可适应伙伴共同执行、接触 / 安全，以及操作难度匹配
@@ -127,6 +132,25 @@ episode、`history_counterfactual_summary.json`、事件/轨迹/策略输入输�
 `activity.json` 只需定义对象、区域、角色目标和 `activity.work_items` 的
 前置关系；它不包含逐步事件脚本。`scenario_from_dict`/`load_scenario` 也可
 直接被数据集生成器调用。
+
+扩展任务族目录（每个任务族生成五个布局实例）：
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=src .venv-vc-pilot/bin/python \
+  scripts/run_continuous_benchmark.py \
+  --task-catalog --count-per-family 5 --partner-mode dynamic \
+  --backend genesis \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/task_catalog_v1
+```
+
+正式 Genesis 运行应保留每个 episode 的 `demo.mp4`、`video_timeline.json`、RGB、
+关节轨迹、`policy_io.jsonl` 和动态伙伴审计文件；可用以下命令强制检查视频和时间轴：
+
+```bash
+PYTHONPATH=src .venv-vc-pilot/bin/python scripts/verify_genesis_videos.py \
+  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/task_catalog_v1 \
+  --require-timeline
+```
 
 完整的研究设计和字段约束见 `design.md` 与 `benchmark_schema.md`。
 
