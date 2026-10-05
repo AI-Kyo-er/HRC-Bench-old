@@ -147,6 +147,23 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 
 ## 数据集级工作流
 
+## 真实 Sim 视频产物门槛
+
+以 Genesis 作为重要实验后端时，每个包含 `metrics.json` 的 episode 必须保存运行时
+相机录制的 `demo.mp4`。`demo.mp4` 必须能完整解码。新运行还应保存
+`video_timeline.json`，使解码帧数、FPS 和首帧尺寸与时间轴一致，并覆盖 episode
+的 benchmark 起止记录。实验完成后运行：
+
+```bash
+PYTHONPATH=src python scripts/verify_genesis_videos.py \
+  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/<run>
+```
+
+只有 `video_verification.json` 的 `status` 为 `verified` 才把运行视为正式视频证据；
+需要逐帧事件联动的正式运行再加 `--require-timeline`，把时间轴缺失或不一致升级为失败。
+HTML 报告优先展示真实 Sim 视频；轨迹回放只负责逐 tick 对齐、事件跳转和指标审计。
+参考 `ContinuousWorld` 可省略视频，但不能作为重要实验的真实场景展示结果。
+
 `hrc_pilot.dataset` 提供正式的数据集生成和批量评测入口：
 
 ```bash

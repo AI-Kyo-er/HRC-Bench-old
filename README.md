@@ -58,6 +58,20 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 用于把真实 Sim 视频与 benchmark 时间和事件逐帧联动；旧快照若只有视频仍可播放，
 但会明确标出缺少时间轴。`ContinuousWorld` 是参考后端，不要求真实 Sim 视频。
 
+正式实验结束后还必须独立执行真实视频核验，确认 MP4 能完整解码、帧数 / FPS / 尺寸
+有效。新运行应同时保存逐帧时间轴，以便把视频和事件精确对齐：
+
+```bash
+PYTHONPATH=src python scripts/verify_genesis_videos.py \
+  --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/my_genesis_run
+```
+
+命令在结果根目录写入 `video_verification.json`，任一 episode 缺视频、无法解码或
+时间轴不一致都会以失败退出；旧运行缺少时间轴时会标记警告但仍核验视频本身。
+需要把时间轴缺失也作为正式门槛时，加上 `--require-timeline`。HTML 报告将真实 Sim
+视频放在轨迹画布之前，并显示每条 episode 的核验状态；轨迹画布仍用于逐 tick 事件
+审计，不能代替 Sim 视频。
+
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 
 可以先生成一个按 `train/dev/test` 结构划分的数据集，再用同一批场景批量评测模型：

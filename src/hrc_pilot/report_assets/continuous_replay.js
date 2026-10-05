@@ -257,6 +257,25 @@ function buildPanels() {
     const heading = element("div", undefined, "panel-heading");
     heading.append(element("h3", `${episode.metrics.policy_name || report.provenance.policy || "策略未记录"} · ${modeNames[episode.metrics.partner_mode] || metric(episode.metrics.partner_mode)}`), element("p", `${episode.metrics.scenario} · seed ${metric(episode.metrics.seed)}`));
     if (episode.metrics.history_condition) heading.append(element("p", historyNames[episode.metrics.history_condition] || episode.metrics.history_condition));
+    const simVideo = element("div", undefined, "sim-video");
+    const videoAudit = episode.video_audit || {};
+    const auditText = videoAudit.video_complete
+      ? (videoAudit.timeline_valid ? "视频核验：demo.mp4 非空，时间轴结构有效。" : "视频核验：demo.mp4 非空，但缺少有效逐帧时间轴。")
+      : "视频核验：缺少可播放的 demo.mp4。";
+    simVideo.append(element("p", auditText, videoAudit.video_complete && videoAudit.timeline_valid ? "video-pass" : "video-warning"));
+    if (episode.artifacts.includes("demo.mp4")) {
+      const video = element("video");
+      video.controls = true;
+      video.preload = "metadata";
+      video.className = "sim-video-player";
+      video.src = episode.id.split("/").map(encodeURIComponent).join("/") + "/demo.mp4";
+      const speed = element("select"); speed.setAttribute("aria-label", "仿真视频播放速度");
+      for (const value of [0.25, 0.5, 1]) {
+        const option = element("option", `${value} 倍`); option.value = String(value); option.selected = value === 1; speed.append(option);
+      }
+      speed.addEventListener("change", () => { video.playbackRate = Number(speed.value); });
+      simVideo.append(element("p", episode.video_timeline ? "真实 VC/Genesis 相机画面；时间轴和事件跳转可定位视频帧。" : "真实 VC/Genesis 相机画面；当前运行没有逐帧时间映射。"), speed, video);
+    }
     const canvas = document.createElement("canvas"); canvas.width = 680; canvas.height = 600; canvas.setAttribute("role", "img");
     const information = element("div", undefined, "panel-info");
     const status = element("p"); status.dataset.status = "true";
@@ -285,19 +304,6 @@ function buildPanels() {
       const probe = episode.history_probe;
       information.append(element("p", `探针开始的伙伴判断（评测端）：trust=${probe.probe_initial_state.trust}，reliability=${probe.probe_initial_state.reliability_belief}；同一求助回答：${probe.help_reply === "accept" ? "接受" : probe.help_reply === "decline" ? "拒绝" : "未记录"}。`));
     }
-    if (episode.artifacts.includes("demo.mp4")) {
-      const video = element("video");
-      video.controls = true;
-      video.preload = "metadata";
-      video.style.width = "100%";
-      video.src = episode.id.split("/").map(encodeURIComponent).join("/") + "/demo.mp4";
-      const speed = element("select"); speed.setAttribute("aria-label", "仿真视频播放速度");
-      for (const value of [0.25, 0.5, 1]) {
-        const option = element("option", `${value} 倍`); option.value = String(value); option.selected = value === 1; speed.append(option);
-      }
-      speed.addEventListener("change", () => { video.playbackRate = Number(speed.value); });
-      information.append(element("p", episode.video_timeline ? "VC/Genesis 实际视频：时间轴定位已保存帧；事件跳转定位事件后的首个视频帧（最多一个采样间隔）。也可独立播放或慢放。" : "VC/Genesis 实际视频：旧运行没有精确时间映射，独立播放；不能把轨迹时间轴当作视频精确定位。"), speed, video);
-    }
     if (episode.observations.some(row => row.rgb_artifact)) {
       const rgb = element("img"); rgb.dataset.rgb = "true"; rgb.alt = "机器人相机的实际 RGB 输入"; rgb.style.width = "100%";
       information.append(element("p", "机器人输入 RGB（随事件 / 时间轴定位）"), rgb);
@@ -307,7 +313,7 @@ function buildPanels() {
       information.append(element("p", "随机械臂运动的腕部相机 RGB"), wrist);
     }
     const joints = element("p"); joints.dataset.joints = "true"; information.append(joints);
-    panel.append(heading, canvas, information); container.append(panel);
+    panel.append(heading, simVideo, canvas, information); container.append(panel);
     episode.panel = panel;
   }
 }
