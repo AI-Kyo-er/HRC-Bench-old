@@ -12,6 +12,11 @@ from .continuous import ContinuousWorld
 
 def add_backend_options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--backend", choices=("reference", "genesis"), default="reference")
+    parser.add_argument("--experiment-tier", choices=("exploratory", "important"),
+                        default="exploratory",
+                        help="实验等级；important 要求 Genesis 真实 Sim 视频")
+    parser.add_argument("--important", dest="experiment_tier", action="store_const",
+                        const="important", help="重要实验快捷选项，等价于 --experiment-tier important")
     parser.add_argument("--assets-dir", type=Path,
                         default=Path("/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community"))
     parser.add_argument("--resolution", type=int, default=640)
@@ -21,6 +26,8 @@ def add_backend_options(parser: argparse.ArgumentParser) -> None:
 def configure_backend(args, parser: argparse.ArgumentParser, output: Path):
     if args.resolution < 64 or not 1 <= args.render_stride <= 60:
         parser.error("resolution 必须至少为 64；render-stride 必须在 1–60 之间")
+    if getattr(args, "experiment_tier", "exploratory") == "important" and args.backend != "genesis":
+        parser.error("important 实验必须使用 --backend genesis，才能保存真实 Sim 场景视频")
     if args.backend == "reference":
         return ContinuousWorld
     gpu_rows = subprocess.check_output([
@@ -45,8 +52,18 @@ def configure_backend(args, parser: argparse.ArgumentParser, output: Path):
 
 
 def backend_provenance(args) -> dict:
+    tier = getattr(args, "experiment_tier", "exploratory")
+    video_required = tier == "important" or args.backend == "genesis"
     return {
         "backend": "GenesisContinuousAdapter" if args.backend == "genesis" else "ContinuousWorld",
+        "experiment_tier": tier,
+        "sim_video_required": video_required,
+        "sim_video_contract": {
+            "artifact": "demo.mp4",
+            "per_episode": True,
+            "runtime_recorded": True,
+            "timeline_artifact": "video_timeline.json",
+        },
         "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES") if args.backend == "genesis" else None,
         "grasp_model": "kinematic_attachment" if args.backend == "genesis" else "geometric_abstraction",
         "physics_hz": 60 if args.backend == "genesis" else None,

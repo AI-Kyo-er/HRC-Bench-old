@@ -51,7 +51,7 @@ class JointCalibrationPolicy:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     add_backend_options(parser)
-    parser.set_defaults(backend="genesis", resolution=480)
+    parser.set_defaults(backend="genesis", experiment_tier="important", resolution=480)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     args.policy = "public_geometry_ik_calibration"

@@ -41,6 +41,7 @@ class ContinuousReportTests(unittest.TestCase):
             verification = json.loads((root / "replay_verification.json").read_text())
             self.assertFalse(verification["simulation_rerun"])
             self.assertEqual(verification["recorded_frame_count"], 2)
+            self.assertEqual(verification["primary_visual_evidence"], "trajectory_canvas")
 
     def test_pair_comparison_checks_trajectory_not_only_frame_count(self):
         with TemporaryDirectory() as directory:
@@ -121,6 +122,8 @@ class ContinuousReportTests(unittest.TestCase):
             self.assertTrue(verification["video_required"])
             self.assertEqual(verification["video_complete_count"], 1)
             self.assertEqual(verification["video_coverage"], 1.0)
+            self.assertEqual(verification["primary_visual_evidence"], "runtime_recorded_sim_video")
+            self.assertEqual(verification["rendering"], "runtime_sim_video_plus_recorded_xy_trajectory_canvas")
 
     def test_reference_backend_does_not_require_video(self):
         with TemporaryDirectory() as directory:

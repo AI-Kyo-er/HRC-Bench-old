@@ -90,7 +90,9 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
     provenance_path = output / "provenance.json"
     provenance = (json.loads(provenance_path.read_text(encoding="utf-8"))
                   if provenance_path.exists() else {})
-    video_required = provenance.get("backend") == "GenesisContinuousAdapter"
+    # 新运行显式记录契约；旧 Genesis 结果没有该字段时按后端推断，保持可复盘。
+    video_required = bool(provenance.get(
+        "sim_video_required", provenance.get("backend") == "GenesisContinuousAdapter"))
     episodes = []
     video_audits = []
     source_hashes = {}
@@ -156,7 +158,7 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
                 "modes": [episode["metrics"].get("partner_mode") for episode in group],
             })
     return {
-        "report_version": "continuous-replay-2", "run_name": output.name,
+        "report_version": "continuous-replay-3", "run_name": output.name,
         "provenance": provenance, "episodes": episodes, "comparisons": comparisons,
         "video_summary": _video_summary(video_audits, video_required),
         "source_hashes": source_hashes,
@@ -184,7 +186,9 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
     path.write_text(document, encoding="utf-8")
     verification = {
         "report_version": payload["report_version"],
-        "rendering": "recorded_xy_trajectory_canvas_replay",
+        "rendering": ("runtime_sim_video_plus_recorded_xy_trajectory_canvas"
+                      if payload["video_summary"]["video_required"]
+                      else "recorded_xy_trajectory_canvas_replay"),
         "simulation_rerun": False,
         "episode_count": len(payload["episodes"]),
         "recorded_frame_count": sum(len(episode["trace"]) for episode in payload["episodes"]),
@@ -198,6 +202,9 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
         "timeline_complete_count": payload["video_summary"]["timeline_complete_count"],
         "timeline_coverage": payload["video_summary"]["timeline_coverage"],
         "video_audits": [episode["video_audit"] for episode in payload["episodes"]],
+        "primary_visual_evidence": ("runtime_recorded_sim_video"
+                                     if payload["video_summary"]["video_required"]
+                                     else "trajectory_canvas"),
     }
     (output / "replay_verification.json").write_text(
         json.dumps(verification, ensure_ascii=False, indent=2), encoding="utf-8")

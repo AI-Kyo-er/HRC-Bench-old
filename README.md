@@ -72,6 +72,16 @@ PYTHONPATH=src python scripts/verify_genesis_videos.py \
 视频放在轨迹画布之前，并显示每条 episode 的核验状态；轨迹画布仍用于逐 tick 事件
 审计，不能代替 Sim 视频。
 
+需要把某次运行作为重要实验时，显式使用 `--experiment-tier important`（或快捷选项
+`--important`）。该等级只允许 `--backend genesis`，并把每个 episode 的运行时
+`demo.mp4` 作为报告生成门槛；参考后端适合快速探索，不会被误当成重要实验的视觉证据：
+
+```bash
+PYTHONPATH=src python scripts/run_continuous_benchmark.py \
+  --output-dir results/continuous_v2/important_demo \
+  --backend genesis --experiment-tier important --suite --count-per-condition 1
+```
+
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 
 可以先生成一个按 `train/dev/test` 结构划分的数据集，再用同一批场景批量评测模型：

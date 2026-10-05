@@ -100,9 +100,10 @@ function fillReport() {
   const provenance = report.provenance;
   const genesis = provenance.backend === "GenesisContinuousAdapter";
   const videoSummary = report.video_summary || {};
-  const videoValue = videoSummary.video_required ? `${videoSummary.video_episode_count} / ${videoSummary.episode_count}` : "不适用";
+  const simVideoRequired = Boolean(videoSummary.video_required);
+  const videoValue = simVideoRequired ? `${videoSummary.video_episode_count} / ${videoSummary.episode_count}` : "不适用";
   const videoCard = element("div", undefined, "stat");
-  videoCard.append(element("strong", videoValue), element("span", videoSummary.video_required ? "真实 Sim 视频覆盖" : "真实 Sim 视频（参考后端不适用）"));
+  videoCard.append(element("strong", videoValue), element("span", simVideoRequired ? "真实 Sim 视频覆盖" : "真实 Sim 视频（探索性参考运行）"));
   document.getElementById("headline-stats").append(videoCard);
   const trained = provenance.trained_model === true;
   const calibration = provenance.experiment === "joint_control_calibration";
@@ -122,9 +123,9 @@ function fillReport() {
     : calibration ? "本次机器人是公开几何 IK 教师，仅输出关节位置；它读取杯子位置进行校准，没有加载训练权重。该过程只核查底层抓放接口，不是模型成绩。"
     : "本次机器人策略见运行设置。greedy_public / request_help_public / 历史探针均为透明手写基线，不代表先进具身模型。";
   document.getElementById("backend-limits").textContent = genesis
-    ? "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。接触抓握、人机碰撞安全和真人效度尚未验证。是否运行训练模型，以本页具体策略及输入输出记录为准。"
+    ? "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。接触抓握、人机碰撞安全和真人效度尚未验证。是否运行训练模型，以本页具体策略及输入输出记录为准。真实 Sim 视频是本实验的主视觉证据，轨迹画布用于逐 tick 审计。"
     : "本次运行 ContinuousWorld：简化几何与操作抽象，用于检查协议和伙伴机制。结果没有验证真实接触抓取、接触安全、先进 VLA/WLA 推理或真人协作。";
-  document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。后端：${provenance.backend || "未记录"}；机器人策略：${provenance.history_counterfactual ? "greedy_public / request_help_public" : provenance.policy || "未记录"}；seed：${metric(provenance.seeds?.join(", ") ?? provenance.seed)}。`));
+  document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。实验等级：${provenance.experiment_tier || "旧结果未记录"}；后端：${provenance.backend || "未记录"}；机器人策略：${provenance.history_counterfactual ? "greedy_public / request_help_public" : provenance.policy || "未记录"}；seed：${metric(provenance.seeds?.join(", ") ?? provenance.seed)}。`));
   document.getElementById("setup-description").append(element("p", videoSummary.video_required
     ? `真实 Sim 视频契约：${videoSummary.video_episode_count}/${videoSummary.episode_count} 个 episode 有非空 demo.mp4，覆盖率 ${(videoSummary.video_coverage * 100).toFixed(0)}%。逐帧时间轴完整 ${videoSummary.timeline_complete_count}/${videoSummary.episode_count}；没有时间轴的旧视频仍可播放，但不能精确联动轨迹。`
     : "本次是参考后端的离线几何运行，真实 Sim 视频不适用；轨迹动画和事件审计仍来自保存的 episode 文件。", "notice"));

@@ -16,7 +16,7 @@ from hrc_pilot.dataset import aggregate_results
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     add_backend_options(parser)
-    parser.set_defaults(backend="genesis", resolution=480)
+    parser.set_defaults(backend="genesis", experiment_tier="important", resolution=480)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--seeds", nargs="+", type=int, default=[0, 1, 2])
     parser.add_argument("--conditions", nargs="+", choices=(
