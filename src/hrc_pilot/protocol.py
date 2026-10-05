@@ -28,6 +28,7 @@ class Observation:
     robot_qpos: tuple[float, ...] = ()
     # Pass pixels, not an artifact path that could reveal the experimental condition.
     rgb: Any = None
+    wrist_rgb: Any = None
     # Continuous benchmark fields. They expose execution timing and public action
     # status, while keeping scenario goals and partner latent state private.
     time_s: float = 0.0
@@ -71,7 +72,10 @@ class EventLog:
 def serialize(value: Any) -> Any:
     if hasattr(value, "__dataclass_fields__"):
         result = asdict(value)
-        if isinstance(value, Observation) and value.rgb is not None:
-            result["rgb"] = {"shape": list(value.rgb.shape), "dtype": str(value.rgb.dtype)}
+        if isinstance(value, Observation):
+            for name in ("rgb", "wrist_rgb"):
+                pixels = getattr(value, name)
+                if pixels is not None:
+                    result[name] = {"shape": list(pixels.shape), "dtype": str(pixels.dtype)}
         return result
     raise TypeError(type(value).__name__)

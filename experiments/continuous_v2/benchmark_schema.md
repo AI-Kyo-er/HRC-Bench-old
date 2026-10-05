@@ -165,3 +165,47 @@ benchmark 起始定义，不是对真人信任或负担的心理测量，后续�
 `recovered_after_failure`（失败后完成，值为 `1.0`）和 `failed_to_recover`
 （失败后未完成，值为 `0.0`）。聚合器同时报告三类状态计数和每个数值指标的确定性
 bootstrap 95% 区间，以便多 seed 结果不被单次 episode 的成功率替代。
+
+## 原生 π0.5-DROID 契约
+
+与可读取公共几何的通用适配器区分，`DroidVLAAdapter` 只构造五个模型输入：
+
+| 字段 | 内容 |
+|---|---|
+| `observation/exterior_image_1_left` | 外部相机实际 RGB uint8 像素 |
+| `observation/wrist_image_left` | 随真实末端姿态移动的腕部相机 RGB |
+| `observation/joint_position` | 7 个臂关节位置 |
+| `observation/gripper_position` | 0 打开，1 闭合的夹爪状态 |
+| `prompt` | 公开任务说明和最近的人类消息 |
+
+模型不接收物体坐标、区域坐标、伙伴内部状态、scenario id 或 evaluator 文件路径。
+审计文件仍保留公共几何以核查运行；审计行不等于实际送入模型的完整 payload。
+双相机各保存真实 PNG，腕部文件名从外部 stem 加 `_wrist` 派生；JSONL 的
+`rgb_artifact` / `wrist_rgb_artifact` 定位文件，不需要 paired manifest。
+
+输出为 N×8 动作块（本次官方模型为 10×8）：7 个归一化关节速度和夹爪闭合比例。
+15 Hz 每步将速度裁剪到 [-1,1] 后乘 0.2 rad，加到当前关节位置；夹爪以 0.5
+二值化，Genesis 每侧指关节 0.04 m 打开 / 0 闭合。不能把动作块当作绝对位置。
+默认执行前 8 个动作，再推理；公开纠正、交接、失败等消息使旧块失效。
+`policy_io.jsonl.adapter` 保存原始块、实际执行 index、输入键、像素哈希和耗时；
+`control_mode=droid_velocity_to_joint_position` 明确转换来源。
+
+物体操作由实际指间点 / 宽度触发运动学绑定，原生关节 Action 不含语义目标，
+不能由后端按私有任务目标自动抓取或放置。真实接触尚未完成；人动作仍为 Avatar。
+
+`model_execution_verification.json` 是保存后独立检查像素、动作重构与视频的审计，
+不是训练配对清单。模型权重的 OCDBT `manifest.ocdbt` 属于官方 checkpoint 内部
+索引格式，与本项目禁止的 paired-data `manifest.json` 无关。
+
+## 匹配历史诊断数据
+
+`seed_<NNN>/prefix/prefix_<history>` 保存实际历史来源；
+`seed_<NNN>/probe/<history>_<adaptive|frozen>/matched_history_probe` 保存探针。
+`history_probe.json` 记录来源公共文件哈希、学习前后状态、探针初始状态、首次
+输入 / 动作及回答前完整输入和 RGB 哈希；`partner_inputs.jsonl` 保存回答前公共
+输入，`matched_history_verification.json` 汇总五项匹配与回应差异。这些字段用于
+受控机制诊断，不把匹配世界重建描述为同一活动无重置执行。
+
+2026-10-05 后新运行的活动成功同时要求实际释放到区域与合法完成记录。自定义
+工作项 id 不再绕开依赖，允许的接管者继承前置约束，交接方向受限；提前释放到
+目标但没有提交合法贡献不会使活动成功。历史评分仍以历史文件为准。

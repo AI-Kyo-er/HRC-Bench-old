@@ -1,5 +1,70 @@
 # Genesis 阶段验证记录
 
+## 2026-10-05：匹配历史、关节抓放与真实 VLA
+
+最新匹配历史报告：[matched_history_genesis_v2](../../results/continuous_v2/matched_history_genesis_v2/index.html)。
+三 seed × 两个历史来源 + 四个探针，共 18 条视频；6 条来源复用 v1 已完成的真实
+运行，12 条探针重新运行，来源与哈希均保存。五项匹配在 3/3 seed 全部通过：
+首次模型公共输入、首次 RGB、首次动作、回答前伙伴完整公共输入及回答前 RGB。
+
+| 条件 | 探针起始 trust / reliability | 同一公开求助回答（3 seed） |
+|---|---|---|
+| 可靠历史 + adaptive | 0.78 / 0.82 | 接受 3/3 |
+| 连续失败历史 + adaptive | 0.34 / 0.16 | 拒绝 3/3 |
+| 两种历史 + frozen | 0.70 / 0.70 | 均接受，各 3/3 |
+
+四探针都能完成活动，但接受时由人完成，拒绝时由手写机器人策略自行完成。
+因此机制差异在贡献组织，而不是只看成功率。这里重建了世界和协议，只带入
+两个学习变量；它证明模拟机制的历史作用，不是真人规律或无重置持续 HRC。
+来源最后一项完成后立即结束，伙伴未再观察该事件，可靠信念只记录两次完成
+更新；没有凭终态补写第三次学习。18 个视频全部解码并核对帧数与 fps，浏览器
+核查九个场景 / seed 组合、事件跳转、视频 / RGB 加载与移动端宽度通过。
+
+底层关节校准：[joint_calibration_genesis_v1](../../results/continuous_v2/joint_calibration_genesis_v1/index.html)。
+公开几何 IK 教师仅输出 18 个 `joint_position`，1.2 秒内实际触发
+`abstract_grasp_attached` → `abstract_grasp_released` → `robot_transfer_completed`，
+三事件的来源都是 `joint_control`。模型输出不再需要语义 `transfer` 才能搬运。
+外部 / 腕部相机均为 320×240 实际渲染，第三人称 480×360 视频用于报告。
+抓取仍是运动学 attachment，不是接触动力学或 VLA 操作成绩。
+
+官方 OpenPI 的 π0.5-DROID 环境、权重、归一化资产和 tokenizer 已就绪。
+源码固定为 `215abfb217dbac7d5f1273282331b9b1866c0479`，20 个权重对象共约
+12.43 GB，全部核对 GCS MD5，权重位于共享 models 目录。
+
+| 原生模型运行 | 模拟时限 | 真实推理次数 | 关节控制步 | 收纳成功 |
+|---|---:|---:|---:|---|
+| [v1](../../results/continuous_v2/pi05_droid_genesis_v1/index.html) | 6 秒 | 12 | 90 | 否 |
+| [v2](../../results/continuous_v2/pi05_droid_genesis_v2/index.html) | 30 秒 | 57 | 450 | 否 |
+
+控制为 15 Hz，真实模型动作块为 10×8、执行前 8 个；仅五项双相机 / 本体 /
+公开语言输入。两条运行独立核查所有模型调用的 PNG 像素哈希、全部关节动作
+转换，分别完整解码 98 / 458 视频帧，记录在 `model_execution_verification.json`。
+模型臂关节与夹爪实际变化，但无抓取和完成事件，杯子没有搬运；结果保留。
+首次推理含编译约 11.65 秒，随后 v1 推理约 88–94 ms。同步推理暂停模拟时钟，
+这些耗时还未转为人的延迟反馈。v2 复用服务，模型随机流继续推进，不是与 v1
+严格配对的时限因果对照。
+
+这两条只证明实际权重推理和关节控制闭环，并暴露基础操作未达成；伙伴仅观察，
+任务没有测试 HRC。视觉与 DROID 实机训练分布不同、抽象抓放、控制标定、语言
+与时限都是待分析因素，不能归因为模型没有协作能力。运行出现 Genesis 的
+reference joint limit / constraint time constant 提示，尚未完成真实硬件等价
+的控制与视觉校准，因此不能当正式模型排行榜。
+
+官方规格依据 [OpenPI DROID 输入变换](https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/src/openpi/policies/droid_policy.py)、
+[归一化与控制频率说明](https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/docs/norm_stats.md)
+及 [DROID RobotIKSolver](https://github.com/droid-dataset/droid/blob/main/droid/robot_ik/robot_ik_solver.py)。
+
+新评分又修复了“几何接近目标即提前完成”的缺口：活动成功需要实际释放和合法
+贡献，任意 item_id 与接管方都不能绕开依赖；循环按活动契约结束。旧结果保留
+原评分，不回写成功标签。修订后 [关节校准 v2](../../results/continuous_v2/joint_calibration_genesis_v2/index.html)
+仍为 18 步成功；[恢复契约 v2](../../results/continuous_v2/recovery_contract_genesis_v2/index.html)
+在 seed 0 跑四条件，人接管 / 自行重试 / 无失败均完成，持续失败未完成。所有
+蓝杯合法完成事件均在红杯前置完成之后，五条新增视频完整解码核对通过。
+
+研究门槛仍未达到：需无重置持续活动、实际模型与自适应伙伴交互、真实接触 /
+安全、可信的人行为校准，以及操作难度匹配的结构组合与留出评测。
+
+
 ## 2026-10-05：失败预算与真实视频恢复实验
 
 修复 `VCWorkspace` 原先未读取 `robot_failure_budget` 的问题。预算在 episode

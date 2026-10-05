@@ -9,7 +9,7 @@ from pathlib import Path
 import math
 
 from .backend import VCWorkspace
-from .continuous import HumanCommand
+from .continuous import HumanCommand, _work_item_completed
 from .protocol import Action, Message, Observation
 
 
@@ -72,6 +72,10 @@ class GenesisContinuousAdapter:
     @property
     def last_observation_path(self):
         return self.workspace.last_observation_path
+
+    @property
+    def last_wrist_observation_path(self):
+        return self.workspace.last_wrist_observation_path
 
     @property
     def action_active(self) -> bool:
@@ -138,7 +142,8 @@ class GenesisContinuousAdapter:
         if self.scenario is None:
             return False
         for item in self.scenario.resolved_activity().work_items:
-            if not self._placed(item.object_id, item.destination):
+            if (not self._placed(item.object_id, item.destination)
+                    or not _work_item_completed(item, self.completed_skills)):
                 return False
         return True
 

@@ -22,6 +22,7 @@ def public_observation_dict(observation: Observation) -> dict[str, Any]:
     """把协议观测编码为模型输入，RGB 保留实际像素数组。"""
     encoded = serialize(observation)
     encoded["rgb"] = observation.rgb.copy() if observation.rgb is not None else None
+    encoded["wrist_rgb"] = observation.wrist_rgb.copy() if observation.wrist_rgb is not None else None
     leaked = PRIVATE_OBSERVATION_KEYS.intersection(encoded)
     if leaked:
         raise ValueError(f"公开观测包含私有字段: {sorted(leaked)}")

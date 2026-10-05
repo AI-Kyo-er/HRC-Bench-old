@@ -649,23 +649,45 @@ class PartnerOutput:
 
 def _work_item_for(scenario: ContinuousScenario, role: str, object_id: str,
                    destination: str) -> WorkItem | None:
-    skill_id = f"{role}:{object_id}:{destination}"
-    for item in scenario.resolved_activity().work_items:
-        if item.item_id == skill_id:
-            return item
-    return None
+    matches = [item for item in scenario.resolved_activity().work_items
+               if item.object_id == object_id and item.destination == destination]
+    return next((item for item in matches if item.preferred_role == role), matches[0] if matches else None)
+
+
+def _work_item_roles(item: WorkItem) -> tuple[str, ...]:
+    roles = [item.preferred_role]
+    other_role = "robot" if item.preferred_role == "human" else "human"
+    if item.handoff in {"open", f"{item.preferred_role}_{other_role}"}:
+        roles.append(other_role)
+    return tuple(roles)
+
+
+def _work_item_completed(item: WorkItem, completed_skills) -> bool:
+    return any(f"{role}:{item.object_id}:{item.destination}" in completed_skills
+               for role in _work_item_roles(item))
 
 
 def _prerequisites_satisfied(scenario: ContinuousScenario, role: str, object_id: str,
                              destination: str, completed_skills: tuple[str, ...] | list[str]) -> bool:
     item = _work_item_for(scenario, role, object_id, destination)
-    return item is None or set(item.prerequisites).issubset(completed_skills)
+    if item is None:
+        return True
+    if role not in _work_item_roles(item):
+        return False
+    items = scenario.resolved_activity().work_items
+    for prerequisite in item.prerequisites:
+        source = next((candidate for candidate in items if prerequisite == candidate.item_id
+                       or prerequisite in {f"human:{candidate.object_id}:{candidate.destination}",
+                                           f"robot:{candidate.object_id}:{candidate.destination}"}), None)
+        if source is None or not _work_item_completed(source, completed_skills):
+            return False
+    return True
 
 
 def _handoff_allowed(scenario: ContinuousScenario, object_id: str, destination: str) -> bool:
     for item in scenario.resolved_activity().work_items:
         if item.object_id == object_id and item.destination == destination:
-            return item.handoff in {"open", "human_robot", "robot_human"}
+            return "human" in _work_item_roles(item)
     return True
 
 
@@ -682,9 +704,11 @@ class AdaptivePartner:
     任务紧迫性和机器人当前占用作为连续效用，逐 tick 选择下一步贡献。
     """
 
-    def __init__(self, scenario: ContinuousScenario, *, stochastic: bool = False):
+    def __init__(self, scenario: ContinuousScenario, *, stochastic: bool = False,
+                 update_adaptation: bool = True):
         self.scenario = scenario
         self.stochastic = stochastic
+        self.update_adaptation = update_adaptation
         self.reset(0)
 
     def reset(self, seed: int) -> None:
@@ -708,6 +732,7 @@ class AdaptivePartner:
         self.reassignments = 0
         self.recovery_wait_steps = 0
         self.messages_sent: list[Message] = []
+        self.seen_robot_completions: set[str] = set()
 
     @property
     def trust(self) -> float:
@@ -715,7 +740,8 @@ class AdaptivePartner:
 
     @trust.setter
     def trust(self, value: float) -> None:
-        self.state.trust = float(np.clip(value, 0.0, 1.0))
+        if self.update_adaptation:
+            self.state.trust = float(np.clip(value, 0.0, 1.0))
 
     @property
     def workload(self) -> float:
@@ -723,12 +749,15 @@ class AdaptivePartner:
 
     @workload.setter
     def workload(self, value: float) -> None:
-        self.state.workload = float(np.clip(value, 0.0, 1.0))
+        if self.update_adaptation:
+            self.state.workload = float(np.clip(value, 0.0, 1.0))
 
     def _update_state(self, field_name: str, value: float, reason: str,
                       observation: Observation, evidence: dict[str, Any] | None = None) -> None:
         if not hasattr(self.state, field_name):
             raise ValueError(f"未知伙伴状态字段: {field_name}")
+        if not self.update_adaptation:
+            return
         before = self.state.snapshot()
         setattr(self.state, field_name, value)
         self.state.clipped()
@@ -759,7 +788,8 @@ class AdaptivePartner:
         for message in observation.messages[self.seen_messages:]:
             if message.speaker == "robot" and message.kind == "request_help" and message.object_id:
                 load = self.workload + 0.25 * len(self.commitments)
-                probability = np.clip(self.scenario.human_availability * self.trust
+                probability = np.clip(self.state.willingness_to_help * (
+                                          0.6 * self.trust + 0.4 * self.state.reliability_belief)
                                       + self.scenario.dynamics.human_replan_sensitivity * 0.12
                                       - load * 0.08, 0.0, 1.0)
                 accepted = bool(self.rng.random() < probability) if self.stochastic else probability >= 0.35
@@ -778,7 +808,8 @@ class AdaptivePartner:
                     self._update_state("willingness_to_help", self.state.willingness_to_help - 0.06,
                                        "help_request_declined", observation,
                                        {"object_id": message.object_id})
-                self.workload = min(1.0, self.workload + 0.08)
+                self._update_state("workload", self.workload + 0.08, "help_request_observed",
+                                   observation, {"object_id": message.object_id})
                 self._update_state("robot_dependency", self.state.robot_dependency + 0.05,
                                    "help_request_observed", observation,
                                    {"object_id": message.object_id})
@@ -786,13 +817,13 @@ class AdaptivePartner:
                 destination = message.destination or f"tray_{message.object_id}"
                 probability = self.scenario.dynamics.handoff_on_failure_probability
                 should_take = bool(self.rng.random() < probability) if self.stochastic else probability >= 0.5
+                self._update_state("trust", self.trust - 0.12, "robot_action_failed",
+                                   observation, {"object_id": message.object_id})
+                self._update_state("reliability_belief", self.state.reliability_belief - 0.18,
+                                   "robot_action_failed", observation,
+                                   {"object_id": message.object_id})
                 if should_take and _handoff_allowed(self.scenario, message.object_id, destination):
                     self.commitments[message.object_id] = destination
-                    self._update_state("trust", self.trust - 0.12, "robot_action_failed",
-                                       observation, {"object_id": message.object_id})
-                    self._update_state("reliability_belief", self.state.reliability_belief - 0.18,
-                                       "robot_action_failed", observation,
-                                       {"object_id": message.object_id})
                     self._update_state("robot_dependency", self.state.robot_dependency + 0.08,
                                        "robot_action_failed", observation,
                                        {"object_id": message.object_id})
@@ -812,6 +843,14 @@ class AdaptivePartner:
                 self._update_state("reliability_belief", self.state.reliability_belief + 0.01,
                                    "robot_acknowledged", observation)
         self.seen_messages = len(observation.messages)
+        for skill in observation.completed_skills:
+            if skill.startswith("robot:") and skill not in self.seen_robot_completions:
+                self.seen_robot_completions.add(skill)
+                self._update_state("trust", self.trust + 0.04, "robot_contribution_completed",
+                                   observation, {"completed_skill": skill})
+                self._update_state("reliability_belief", self.state.reliability_belief + 0.06,
+                                   "robot_contribution_completed", observation,
+                                   {"completed_skill": skill})
         return outgoing
 
     def _goal_candidates(self, observation: Observation) -> list[tuple[float, str, str]]:
@@ -824,7 +863,9 @@ class AdaptivePartner:
             if not _prerequisites_satisfied(self.scenario, "human", object_id, destination,
                                             observation.completed_skills):
                 continue
-            if float(np.linalg.norm(object_position - region_position)) <= 0.065:
+            if (float(np.linalg.norm(object_position - region_position)) <= 0.065
+                    and any(f"{role}:{object_id}:{destination}" in observation.completed_skills
+                            for role in ("human", "robot"))):
                 continue
             distance = float(np.linalg.norm(object_position[:2] - observation.human_position[:2]))
             remaining = float(np.linalg.norm(object_position[:2] - region_position[:2]))
@@ -871,7 +912,8 @@ class AdaptivePartner:
         if observation.active_robot_action.startswith("transfer:"):
             target_object = observation.active_robot_action.split(":", 1)[1]
             if target_object in self.commitments and target_object not in observation.held_by_human:
-                self.trust = max(0.0, self.trust - 0.001)
+                self._update_state("trust", self.trust - 0.001, "shared_space_conflict",
+                                   observation, {"object_id": target_object})
                 messages.append(Message("human", "correction", "这个贡献由我处理，请让行。",
                                         target_object, "yield", self.commitments[target_object]))
                 self._update_state("workload", self.workload + 0.02, "shared_space_conflict",
@@ -888,7 +930,6 @@ class AdaptivePartner:
                                      self._drain_state_updates())
         candidates = self._goal_candidates(observation)
         if not candidates:
-            self.workload = max(0.0, self.workload - 0.01)
             self._update_state("workload", self.workload - 0.01, "no_available_contribution",
                                observation)
             return PartnerOutput(HumanCommand("observe", target=observation.human_position), tuple(messages),
@@ -1017,6 +1058,7 @@ class _RobotExecution:
     delay_remaining: int = 0
     failed: bool = False
     status_reported: bool = False
+    starting_position: np.ndarray | None = None
 
 
 class ContinuousWorld:
@@ -1120,7 +1162,8 @@ class ContinuousWorld:
             failed = budget_failure or bool(self.rng.random() < dynamics.robot_failure_probability)
             self.robot_execution = _RobotExecution(action, phase="approach", object_id=action.object_id,
                                                     destination=action.destination, progress=0.0,
-                                                    delay_remaining=delay, failed=failed)
+                                                    delay_remaining=delay, failed=failed,
+                                                    starting_position=self.objects[action.object_id].copy())
         elif action.kind in {"wait", "joint_position", "finish"}:
             self.robot_execution = _RobotExecution(action, phase="execute", progress=0.0)
         else:
@@ -1195,7 +1238,7 @@ class ContinuousWorld:
                 if not _prerequisites_satisfied(self.scenario, "robot", execution.object_id,
                                                 execution.destination, self.completed_skills):
                     self.robot_hold = None
-                    self.objects[execution.object_id][:] = source
+                    self.objects[execution.object_id][:] = execution.starting_position
                     self.say(Message("robot", "action_blocked", "前置贡献尚未公开完成，暂不能提交这个工作项。",
                                      execution.object_id, "prerequisite", execution.destination))
                     self.events.append({"step": self.step_count, "kind": "robot_transfer_blocked",
@@ -1277,7 +1320,9 @@ class ContinuousWorld:
         activity = self.scenario.resolved_activity()
         for item in activity.work_items:
             if (item.object_id not in self.objects or item.destination not in self.regions
-                    or np.linalg.norm(self.objects[item.object_id] - self.regions[item.destination]) >= 0.065):
+                    or item.object_id in {self.robot_hold, self.human_hold}
+                    or np.linalg.norm(self.objects[item.object_id] - self.regions[item.destination]) >= 0.065
+                    or not _work_item_completed(item, self.completed_skills)):
                 return False
         return True
 
@@ -1313,7 +1358,9 @@ class GreedyPublicPolicy:
         candidates = []
         for object_id, (assignment, destination) in self.assignments.items():
             if assignment == "robot":
-                if destination in observation.regions and math.dist(observation.objects[object_id], observation.regions[destination]) > 0.065:
+                if (destination in observation.regions
+                        and not any(f"{role}:{object_id}:{destination}" in observation.completed_skills
+                                    for role in ("robot", "human"))):
                     candidates.append((math.dist(observation.robot_ee, observation.objects[object_id]), object_id, destination))
         if candidates:
             _, object_id, destination = min(candidates)
@@ -1422,6 +1469,9 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         artifact = getattr(world, "last_observation_path", None)
         if artifact is not None:
             record["rgb_artifact"] = str(artifact)
+        wrist_artifact = getattr(world, "last_wrist_observation_path", None)
+        if wrist_artifact is not None:
+            record["wrist_rgb_artifact"] = str(wrist_artifact)
         return record
 
     for tick_index in range(scenario.max_steps):
@@ -1474,7 +1524,7 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                       "human_object": partner_output.command.object_id,
                       "human_destination": partner_output.command.destination})
         world.tick()
-        if world.finished_robot() and world.finished_human():
+        if world.finished_activity():
             break
     terminal = world.observe()
     if trace and trace[-1]["time_s"] == terminal.time_s:

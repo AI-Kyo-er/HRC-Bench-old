@@ -300,6 +300,7 @@ class ContinuousRuntimeTests(unittest.TestCase):
                 self.scenario = scenario
                 self.regions = dict(scenario.regions)
                 self._positions = {spec.name: list(spec.position) for spec in scenario.objects}
+                self.completed_skills = []
 
             def positions(self):
                 return self._positions
@@ -312,9 +313,42 @@ class ContinuousRuntimeTests(unittest.TestCase):
         self.assertFalse(adapter.finished_activity())
         for item in scenario.resolved_activity().work_items:
             workspace._positions[item.object_id] = list(workspace.regions[item.destination])
+        self.assertFalse(adapter.finished_activity())
+        for item in scenario.resolved_activity().work_items:
+            workspace.completed_skills.append(f"{item.preferred_role}:{item.object_id}:{item.destination}")
         self.assertTrue(adapter.finished_activity())
         workspace.attachment = (scenario.resolved_activity().work_items[0].object_id, (0, 0, 0))
         self.assertFalse(adapter.finished_activity())
+
+    def test_custom_ids_and_handoff_preserve_prerequisites(self):
+        from hrc_pilot.continuous import ActivityContract, WorkItem, _prerequisites_satisfied
+        base = CONTINUOUS_SCENARIOS["relay"]
+        activity = ActivityContract("交接不能绕过依赖", (
+            WorkItem("prepare", "red", "tray_red", "human"),
+            WorkItem("deliver", "blue", "tray_blue", "robot", prerequisites=("prepare",)),
+        ))
+        scenario = replace(base, activity=activity)
+        self.assertFalse(_prerequisites_satisfied(scenario, "human", "blue", "tray_blue", []))
+        self.assertTrue(_prerequisites_satisfied(scenario, "human", "blue", "tray_blue",
+                                                 ["robot:red:tray_red"]))
+        closed = replace(scenario, activity=replace(activity, work_items=(activity.work_items[0],
+                         replace(activity.work_items[1], handoff="none"))))
+        self.assertFalse(_prerequisites_satisfied(closed, "human", "blue", "tray_blue",
+                                                  ["human:red:tray_red"]))
+        self.assertTrue(_prerequisites_satisfied(closed, "robot", "blue", "tray_blue",
+                                                 ["human:red:tray_red"]))
+
+    def test_episode_does_not_finish_before_release_and_commit(self):
+        scenario = CONTINUOUS_SCENARIOS["relay"]
+        world = ContinuousWorld(scenario)
+        result = run_continuous_episode(scenario, GreedyPublicPolicy(), make_partner(scenario),
+                                         seed=3, backend_factory=lambda _: world)
+        self.assertTrue(result["task_success"])
+        self.assertIsNone(world.robot_hold)
+        completed = [event for event in world.events if event["kind"].endswith("transfer_completed")]
+        self.assertLess(next(e["step"] for e in completed if e["object_id"] == "red"),
+                        next(e["step"] for e in completed if e["object_id"] == "blue"))
+        self.assertIn("robot:blue:tray_blue", result["completed_skills"])
 
     def test_aggregate_exposes_adaptation_metrics(self):
         summary = aggregate_results([{

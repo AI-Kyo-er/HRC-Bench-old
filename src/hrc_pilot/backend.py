@@ -84,6 +84,8 @@ class VCWorkspace:
             pos=(2.05, -2.35, 2.30), lookat=(0.35, 0.20, 0.94), fov=48, GUI=False)
         self.robot_camera = self.scene.add_camera(res=(320, 240),
             pos=(-0.48, -0.42, 1.50), lookat=(0.48, 0.12, 0.88), fov=65, GUI=False)
+        self.wrist_camera = self.scene.add_camera(res=(320, 240),
+            pos=(0.3, 0, 1.3), lookat=(0.3, 0, 0.8), fov=75, GUI=False)
         self.scene.build()
         self.ee = self.robot.get_link("hand")
         self.robot.set_dofs_kp(np.array([4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100]))
@@ -109,6 +111,7 @@ class VCWorkspace:
         self.active_scenario = self.scenario
         self.last_observation_path = None
         self.observation_index = 0
+        self.last_wrist_observation_path = None
         self.continuous_delay_frames = 0
         self.continuous_pending_placement = None
         self.continuous_rng = np.random.default_rng(0)
@@ -137,6 +140,7 @@ class VCWorkspace:
         self.continuous_human_phase = None
         self.last_observation_path = None
         self.observation_index = 0
+        self.last_wrist_observation_path = None
         self.continuous_delay_frames = 0
         self.continuous_pending_placement = None
         self.continuous_rng = np.random.default_rng(seed)
@@ -185,6 +189,16 @@ class VCWorkspace:
         rgb = self.robot_camera.render(rgb=True)[0]
         Image.fromarray(np.asarray(rgb, dtype=np.uint8)).save(image_path)
         self.last_observation_path = image_path.name
+        from .robot_control import hand_rotation
+        rotation = hand_rotation(self.ee.get_quat().cpu().numpy())
+        hand = self.ee.get_pos().cpu().numpy()
+        self.wrist_camera.set_pose(pos=hand + rotation @ np.array([0.035, 0, 0.025]),
+                                   lookat=hand + rotation @ np.array([0, 0, 0.40]),
+                                   up=rotation @ np.array([0, -1, 0]))
+        wrist_rgb = np.asarray(self.wrist_camera.render(rgb=True)[0], dtype=np.uint8).copy()
+        wrist_path = image_path.with_name(image_path.stem + "_wrist.png")
+        Image.fromarray(wrist_rgb).save(wrist_path)
+        self.last_wrist_observation_path = wrist_path.name
         execution = self.continuous_execution
         active_action = "idle" if execution is None else execution["action"].kind
         if execution is not None and active_action == "transfer":
@@ -197,6 +211,7 @@ class VCWorkspace:
             held_by_human=self.held_by_human(), completed_skills=tuple(self.completed_skills),
             robot_qpos=tuple(self.robot.get_qpos().cpu().numpy().tolist()),
             rgb=np.asarray(rgb, dtype=np.uint8).copy(),
+            wrist_rgb=wrist_rgb,
             time_s=float(self.step_count) / 60.0,
             active_robot_action=active_action,
             action_phase=phase,
@@ -378,6 +393,7 @@ class VCWorkspace:
                 self.robot.control_dofs_position(execution["qgoal"])
         elif action.kind == "joint_position":
             self.robot.control_dofs_position(execution["qgoal"])
+            self._continuous_joint_grasp()
             if execution["progress"] >= self._continuous_duration(action):
                 self.continuous_execution = None
         elif execution["progress"] >= self._continuous_duration(action):
@@ -385,6 +401,45 @@ class VCWorkspace:
 
     def _continuous_duration(self, action):
         return max(1, action.duration_steps) * int(60 / getattr(self.scenario, "tick_hz", 60))
+
+    def _continuous_joint_grasp(self):
+        """底层关节策略的几何抓放抽象，不读取动作中的语义目标。
+
+        物体依然是运动学绑定，不表示接触或力闭合。闭合时仅考虑指间点附近
+        的物体；打开时在当前实际位置释放，不能按私有目标自动移动到区域。
+        """
+        from .robot_control import hand_rotation, select_grasp_candidate
+        qpos = self.robot.get_qpos().cpu().numpy()
+        width = float(qpos[-2:].sum())
+        if self.attachment is not None:
+            if width >= 0.065:
+                name, _ = self.attachment
+                self.attachment = None
+                self.log.add(self.step_count, "abstract_grasp_released", object_id=name,
+                             source="joint_control", position=self.positions()[name])
+                for destination, region in self.regions.items():
+                    if math.dist(self.positions()[name], region) < 0.065:
+                        from .continuous import _prerequisites_satisfied
+                        if _prerequisites_satisfied(self.scenario, "robot", name, destination, self.completed_skills):
+                            skill = f"robot:{name}:{destination}"
+                            if skill not in self.completed_skills:
+                                self.completed_skills.append(skill)
+                                self.log.add(self.step_count, "robot_transfer_completed", object_id=name,
+                                             destination=destination, source="joint_control")
+                        else:
+                            self.say(Message("robot", "action_blocked", "物体已释放，但前置贡献或交接约束尚未满足。",
+                                             name, "prerequisite", destination))
+                            self.log.add(self.step_count, "robot_transfer_blocked", object_id=name,
+                                         destination=destination, source="joint_control")
+            return
+        if width > 0.045:
+            return
+        hand = self.ee.get_pos().cpu().numpy()
+        point = hand + hand_rotation(self.ee.get_quat().cpu().numpy()) @ np.array([0, 0, 0.10])
+        candidate = select_grasp_candidate(point, self.positions(), excluded=self.held_by_human())
+        if candidate is not None:
+            self.attachment = (candidate, np.asarray(self.positions()[candidate]) - hand)
+            self.log.add(self.step_count, "abstract_grasp_attached", object_id=candidate, source="joint_control")
 
     def _continuous_ik(self, target, fingers):
         qgoal = self.robot.inverse_kinematics(link=self.ee, pos=np.asarray(target),

@@ -14,7 +14,7 @@ from .continuous import ContinuousScenario
 ARTIFACT_NAMES = (
     "metrics.json", "scenario.json", "trace.jsonl", "events.jsonl",
     "public_observations.jsonl", "policy_io.jsonl", "public_scenario.json",
-    "demo.mp4", "preview.png", "trajectory.npz", "video_timeline.json",
+    "demo.mp4", "preview.png", "trajectory.npz", "video_timeline.json", "history_probe.json", "partner_inputs.jsonl",
 )
 
 
@@ -26,7 +26,8 @@ def _json_lines(path: Path) -> list[dict[str, Any]]:
 
 
 def _identity(row: dict[str, Any]) -> tuple[Any, ...]:
-    return row.get("scenario"), row.get("seed"), row.get("partner_mode"), row.get("policy_name")
+    return (row.get("scenario"), row.get("seed"), row.get("partner_mode"),
+            row.get("policy_name"), row.get("history_condition"))
 
 
 def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[str, Any]:
@@ -67,10 +68,17 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
             "artifacts": artifacts,
             "video_timeline": (json.loads((directory / "video_timeline.json").read_text(encoding="utf-8"))
                                if (directory / "video_timeline.json").exists() else None),
+            "history_probe": (json.loads((directory / "history_probe.json").read_text(encoding="utf-8"))
+                              if (directory / "history_probe.json").exists() else None),
         })
-    for name in ("summary.json", "paired_summary.json", "provenance.json"):
+    run_artifacts = [name for name in (
+        "summary.json", "paired_summary.json", "provenance.json", "matched_history_verification.json",
+        "model_execution_verification.json", "video_verification.json", "report_browser_verification.json",
+    ) if (output / name).exists()]
+    for name in run_artifacts:
         path = output / name
-        if path.exists():
+        # 浏览器核查产生于页面生成后，不把下游验收日志当作页面的来源。
+        if path.exists() and name != "report_browser_verification.json":
             source_hashes[name] = sha256(path.read_bytes()).hexdigest()
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for episode in episodes:
@@ -93,6 +101,9 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
         "report_version": "continuous-replay-1", "run_name": output.name,
         "provenance": provenance, "episodes": episodes, "comparisons": comparisons,
         "source_hashes": source_hashes,
+        "run_artifacts": run_artifacts,
+        "matched_history_verification": (json.loads((output / "matched_history_verification.json").read_text(encoding="utf-8"))
+                                         if (output / "matched_history_verification.json").exists() else None),
     }
 
 

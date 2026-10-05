@@ -4,6 +4,31 @@
 状态机写得更长”，而是让人和机器人在同一个时间轴里并行执行动作，并
 允许策略在动作块执行中根据新的公开观测重新选择动作。
 
+## 2026-10-05 最新可核查进展
+
+- [匹配当前输入的历史实验](../../results/continuous_v2/matched_history_genesis_v2/index.html)：
+  三 seed 下，首次观察 / RGB / 动作和回答前完整伙伴输入 / RGB 五项匹配全部
+  通过；可靠历史接受、失败历史拒绝，冻结适应后差异消失。共 18 条真实视频，
+  其中 6 条历史来源复用已完成运行、12 条探针新跑。明确重建当前世界的诊断，
+  尚非无重置活动或真人规律。
+- [关节抓放校准](../../results/continuous_v2/joint_calibration_genesis_v1/index.html)：
+  公开几何 IK 教师只输出关节位置，实际靠近 / 夹爪闭合才触发物体绑定，打开
+  后在实际位置释放。双相机实际 RGB 可查看；抓放仍是运动学抽象。
+- 真实官方 π0.5-DROID 已接入，[6 秒运行](../../results/continuous_v2/pi05_droid_genesis_v1/index.html)
+  和 [30 秒运行](../../results/continuous_v2/pi05_droid_genesis_v2/index.html) 分别调用模型
+  12 / 57 次，执行 90 / 450 个关节目标。两条均未完成收纳，原始失败、视频和
+  动作块全部保存。这是模型接入证据，尚无持续 HRC 能力结果。
+- [评分修订后关节校准](../../results/continuous_v2/joint_calibration_genesis_v2/index.html)
+  与 [四条件恢复复核](../../results/continuous_v2/recovery_contract_genesis_v2/index.html)
+  均保留真实视频和贡献事件；接管 / 重试 / 无失败完成，持续失败未完成。
+- 新运行修复活动评分：必须释放到目标且提交符合依赖 / 交接的贡献；任意
+  item_id 和接管方不会绕过同一约束。旧报告不重评分。
+
+详细目的、设置、逐项结论和未验证项见 [`genesis_validation.md`](genesis_validation.md)。
+真实视频、外部 / 腕部 RGB、事件与关节状态在各报告中展示。下一阶段仍需同一
+活动无重置、真实模型和可适应伙伴共同执行、接触 / 安全，以及操作难度匹配
+的组合和留出比较；整个 benchmark 研究目标尚未完成。
+
 ## 当前实现
 
 - `src/hrc_pilot/continuous.py` 提供 `ContinuousScenario`、`ContinuousWorld`、
@@ -210,3 +235,47 @@ VC 资产仍使用运动学夹持绑定，人的拿放仍是 Avatar 动作接口
 力没有作为真实失败来源。因此这些结果是可复现的后端接缝和机制审计，不是接触
 动力学或真实机械臂模型排行榜。下一步是在该适配面上加入接触安全量、视觉标定、
 基础技能失败标签和真实 VLA/WLA 推理。
+
+## 复现匹配历史与真实 VLA
+
+匹配历史运行器从公开历史学习，不读 evaluator 状态注入判断：
+
+```bash
+PYTHONPATH=src .venv-vc-pilot/bin/python scripts/run_matched_history_probe.py \
+  --backend genesis --seeds 0 1 2 \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/matched_history_new
+```
+
+真实模型与 Genesis 使用独立 Python 环境，分别位于数据盘 `envs/openpi` 与
+`envs/vc-pilot`，仓库软链接为 `.venv-openpi` / `.venv-vc-pilot`。官方源码从
+`vendor/openpi` 软链接访问，权重从 `models/pi05_droid` 访问。全部大文件、
+缓存与结果实际存储在数据盘。权重下载工具会校验官方 GCS MD5；需要代理时
+先使用用户的 `clashon`，再运行 `scripts/download_openpi_checkpoint.py`。
+
+启动前查看 `nvidia-smi`：本次 OpenPI 单卡占约 20 GB（设置 JAX 预分配 40%），
+Genesis 单卡预留至少 4 GB。示例卡号是本轮空闲的 GPU 1 / 0，复现时据空闲
+显存选择，并固定每个进程只用所选单卡。先在一个终端启动模型服务：
+
+```bash
+CUDA_VISIBLE_DEVICES=1 XLA_PYTHON_CLIENT_MEM_FRACTION=0.4 \
+OPENPI_DATA_HOME=/data1/sieniwgroup/sieniw/models/Physical-Intelligence/openpi-cache \
+.venv-openpi/bin/python scripts/serve_openpi_droid.py
+```
+
+看到“模型已加载”和端口就绪后，在另一个终端运行：
+
+```bash
+PYTHONPATH=src CUDA_VISIBLE_DEVICES=0 VICO_PILOT_MINIMAL_IMPORTS=1 \
+.venv-vc-pilot/bin/python scripts/run_openpi_benchmark.py --ticks 450 \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/pi05_droid_new
+PYTHONPATH=src .venv-vc-pilot/bin/python scripts/verify_openpi_run.py \
+  --input-dir results/continuous_v2/pi05_droid_new
+```
+
+原生模型只看到真实双相机、本体和公开语言，没有物体坐标；具体输出是
+10×8 速度 / 夹爪动作块，15 Hz 转关节目标，最多执行前 8 步再推理。消息更新
+会使旧块失效。包装器不替模型生成协商或求助。当前同步推理暂停模拟时钟，
+尚未验证真实推理延迟对伙伴的影响；相关耗时单独保存。
+
+验证脚本核对真实 PNG 哈希、每个动作的数值转换与视频完整解码，不以审计
+通过替代任务成功。任务未完成 / 没有失败事件不等于“已经成功恢复”。
