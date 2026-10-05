@@ -74,7 +74,7 @@ def generate_dataset(*, output: str | Path, count: int = 0, seed: int = 0,
     _ensure_empty_or_missing(output)
     if repeats < 1:
         raise ValueError("repeats 必须为正整数")
-    if partner_mode not in {"fixed_replay", "reactive", "adaptive"}:
+    if partner_mode not in {"fixed_replay", "reactive", "adaptive", "dynamic"}:
         raise ValueError(f"未知伙伴模式: {partner_mode}")
     if scenario_dir is not None and count:
         raise ValueError("scenario_dir 不能和 count 同时使用")

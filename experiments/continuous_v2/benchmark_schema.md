@@ -121,9 +121,16 @@ Genesis 重要实验同时输出真实 `demo.mp4` 和 `trajectory.npz`，新运�
 ## 配对实验
 
 `run_paired_benchmark` 在同一组场景、同一 seed 和同一公开协议下依次运行
-`fixed_replay`、`reactive`、`adaptive`。结果目录使用
+`fixed_replay`、`reactive`、`adaptive`、`dynamic`；需要动态伙伴时可将 `dynamic` 显式加入
+`partner_modes`。结果目录使用
 `<partner_mode>/<scenario_name>/`，加载器用目录名、场景名和 seed 配对，
 不需要额外的 `manifest.json`。
+
+`dynamic` episode 的 `metrics.json` 额外保存 `human_profile`、
+`human_intention`、`human_intention_switches` 和 `human_memory_size`。
+profile 是 episode 开始时按 seed 抖动后的稳定倾向；intention 是当前公开进度下
+的目标/阶段假设；memory 只保存有限的公开事件摘要。它们用于解释伙伴为何改变
+贡献和重规划，不能被机器人策略读取，也不能直接当作真人认知状态。
 
 若要只改变机器人策略而固定场景、seed 和伙伴初始状态，可使用反事实
 运行器：

@@ -23,7 +23,7 @@ def main() -> None:
     generate.add_argument("--count-per-condition", type=int, default=2)
     generate.add_argument("--repeats", type=int, default=1)
     generate.add_argument("--no-suite", action="store_true")
-    generate.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive"), default="adaptive")
+    generate.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive", "dynamic"), default="adaptive")
     generate.add_argument("--policy", default="greedy_public",
                           help="生成参考轨迹时使用的策略 spec；仅作为数据集基线")
 
@@ -32,7 +32,7 @@ def main() -> None:
     evaluate.add_argument("--output", type=Path, required=True)
     evaluate.add_argument("--policy", required=True,
                           help="greedy_public 或 module:factory；factory 返回 Policy")
-    evaluate.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive"), default="adaptive")
+    evaluate.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive", "dynamic"), default="adaptive")
     evaluate.add_argument("--split", choices=("train", "dev", "test"), default=None)
     evaluate.add_argument("--seed-offset", type=int, default=0)
     for subparser in (generate, evaluate):

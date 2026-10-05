@@ -50,8 +50,9 @@
 - `ActivityContract` 把“真实场景”落成可执行约束：活动目标、工作项、前置
   承诺、共享资源、允许交接和重规划触发器。运行时只在动作提交时检查约束，
   不使用第 N 步事件表；前置不满足时会产生公开 `action_blocked` 反馈。
-- `--partner-mode` 可选 `fixed_replay`、`reactive`、`adaptive`。三者分别
-  对应固定回放、只根据当前公开行为反应、以及保留公开历史后的适应式伙伴。
+- `--partner-mode` 可选 `fixed_replay`、`reactive`、`adaptive`、`dynamic`。前三者分别
+  对应固定回放、只根据当前公开行为反应、以及保留公开历史后的适应式伙伴；
+  `dynamic` 还维护按 seed 固定的伙伴 profile、公开事件记忆和可切换的长期意图。
 - `ExternalPolicyAdapter` 接受 VLA 的 RGB 加结构化输入或 WLA 的文本/状态输入，
   把 JSON 动作统一解码为 `Action`，并记录推理耗时、原始输出与异常审计。
   `GreedyPublicPolicy` 仅用于检查协议，不是模型能力结果。
@@ -84,6 +85,10 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
   --output-dir results/continuous_v2/suite \
   --suite --count-per-condition 5 --partner-mode adaptive
 ```
+
+重要实验使用 Genesis 时，应把 `--partner-mode dynamic` 显式写入命令，并保留每个
+episode 的真实 Sim `demo.mp4`、RGB、关节轨迹和 `video_timeline.json`。参考后端
+可以快速核对协议，但不替代真实 Sim 画面。
 
 使用自定义场景契约：
 
@@ -132,6 +137,7 @@ Genesis 验证结果：
 
 - [六场景 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/genesis_v10/index.html)
 - [Genesis 伙伴条件对照（18 个 episode，含真实 Sim 视频）](../../results/continuous_v2/genesis_paired_v10/index.html)
+- [动态意图伙伴 Genesis 报告（真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v1/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [失败恢复三条件 × 三 seed（9 条真实 Sim 视频）](../../results/continuous_v2/recovery_genesis_v1/index.html)
 - [持续失败未恢复核查（3 条真实 Sim 视频）](../../results/continuous_v2/recovery_negative_genesis_v1/index.html)

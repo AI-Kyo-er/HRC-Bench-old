@@ -1,7 +1,7 @@
 "use strict";
 
 const report = JSON.parse(document.getElementById("report-data").textContent);
-const modeNames = {fixed_replay: "固定贡献顺序", reactive: "即时响应", adaptive: "适应式伙伴", adaptive_frozen: "冻结适应状态"};
+const modeNames = {fixed_replay: "固定贡献顺序", reactive: "即时响应", adaptive: "适应式伙伴", dynamic: "动态意图伙伴", adaptive_frozen: "冻结适应状态"};
 const historyNames = {reliable: "可靠执行历史", failures: "连续失败历史"};
 const actionNames = {idle: "空闲", approach: "靠近物体", carry: "搬运", yield: "让行", away: "暂离", observe: "观察", wait: "等待", transfer: "搬运", joint_position: "关节目标"};
 const eventNames = {abstract_grasp_attached: "运动学抓取绑定", abstract_grasp_released: "实际位置释放绑定", public_message: "公开消息", robot_grasped: "机器人抓取", human_grasped: "人抓取", robot_transfer_completed: "机器人搬运完成", human_transfer_completed: "人搬运完成", policy_action: "机器人决策", robot_action_preempted: "动作打断", proximity_warning: "接近警告", robot_action_failed: "机器人失败", robot_action_delayed: "机器人延迟", human_state_update: "伙伴内部状态更新", robot_transfer_blocked: "依赖阻塞", human_transfer_waiting: "人等待前置贡献"};
@@ -132,6 +132,9 @@ function fillReport() {
     if (provenance[key]) document.getElementById("setup-description").append(element("p", provenance[key]));
   }
   document.getElementById("setup-description").append(element("p", trained ? "本次加载训练权重，模型只获得双相机像素、本体状态与公开语言；几何标签虽在审计文件中存在，但不会进入原生 VLA 推理请求。伙伴由规则驱动，内部状态仍隔离在评测端。" : `${provenance.policy === "greedy_public" ? "机器人由手写参考策略驱动" : "本次使用公开记录中指定的手写校准或机制策略"}，人的贡献由可替换伙伴规则驱动。参考策略可读取公开几何与消息，内部伙伴变量属于评测端。`));
+  if (report.episodes.some(episode => episode.metrics.partner_mode === "dynamic")) {
+    document.getElementById("setup-description").append(element("p", "动态意图伙伴把稳定 profile（节奏、主动性、合作倾向）与当前长期意图分开建模；它只从公开消息、机器人完成/失败和共同进度写入有限事件记忆，再重新选择贡献。profile、当前意图、意图切换次数和记忆大小都写入 metrics，便于审计；这些规则变量不是对真人心理的直接测量。", "notice"));
+  }
   document.getElementById("provenance").textContent = JSON.stringify(provenance, null, 2);
   const findings = document.getElementById("findings-description");
   findings.append(element("p", `保存记录中 ${success}/${report.episodes.length} 次任务通过。评分沿用各次运行的评测器；查看 activity_success、角色贡献与事件区分活动终态、操作失败和分工变化。${trained ? "这是训练模型在当前任务抽象中的一次结果，不能推广为 HRC 或 cobalance 能力。" : "这个数字不能解释为训练后具身模型成绩。"}`));
@@ -276,7 +279,7 @@ function buildPanels() {
       const link = element("a", name); link.href = episode.id.split("/").map(encodeURIComponent).join("/") + "/" + name;
       sourceLinks.append(link, document.createTextNode(" · "));
     }
-    const settings = element("details"); settings.append(element("summary", "本次场景与初始分工（评测端信息）"), element("pre", JSON.stringify({description: episode.scenario.description, robot_targets: episode.scenario.robot_targets, human_targets: episode.scenario.human_targets, dynamics: episode.scenario.dynamics ?? "未记录", activity: episode.scenario.activity ?? "未记录", structure: episode.scenario.structure}, null, 2)));
+    const settings = element("details"); settings.append(element("summary", "本次场景与初始分工（评测端信息）"), element("pre", JSON.stringify({description: episode.scenario.description, robot_targets: episode.scenario.robot_targets, human_targets: episode.scenario.human_targets, dynamics: episode.scenario.dynamics ?? "未记录", activity: episode.scenario.activity ?? "未记录", structure: episode.scenario.structure, human_policy: episode.metrics.human_policy, human_profile: episode.metrics.human_profile, human_intention: episode.metrics.human_intention, human_intention_switches: episode.metrics.human_intention_switches, human_memory_size: episode.metrics.human_memory_size}, null, 2)));
     information.append(status, observed, latest, details, settings, sourceLinks);
     if (episode.history_probe) {
       const probe = episode.history_probe;

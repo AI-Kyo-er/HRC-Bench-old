@@ -948,6 +948,189 @@ class AdaptivePartner:
                              self._drain_state_updates())
 
 
+@dataclass
+class HumanProfile:
+    """单个伙伴的稳定行为倾向；它不是当前任务状态。"""
+
+    profile_id: str = "balanced"
+    pace: float = 1.0
+    assertiveness: float = 0.55
+    interruption_tolerance: float = 0.55
+    cooperation: float = 0.75
+    persistence: float = 0.72
+    autonomy: float = 0.60
+
+    def clipped(self) -> "HumanProfile":
+        for field_name in ("pace", "assertiveness", "interruption_tolerance",
+                           "cooperation", "persistence", "autonomy"):
+            setattr(self, field_name, float(np.clip(getattr(self, field_name), 0.1, 1.0)))
+        return self
+
+    def snapshot(self) -> dict[str, float | str]:
+        return {
+            "profile_id": self.profile_id,
+            "pace": round(self.pace, 6),
+            "assertiveness": round(self.assertiveness, 6),
+            "interruption_tolerance": round(self.interruption_tolerance, 6),
+            "cooperation": round(self.cooperation, 6),
+            "persistence": round(self.persistence, 6),
+            "autonomy": round(self.autonomy, 6),
+        }
+
+
+@dataclass
+class HumanIntention:
+    """伙伴在当前时间窗内的长期目标假设和局部行动阶段。"""
+
+    objective: str
+    object_id: str | None
+    destination: str | None
+    phase: str
+    reason: str
+    commitment: float
+
+    def snapshot(self) -> dict[str, Any]:
+        return {
+            "objective": self.objective,
+            "object_id": self.object_id,
+            "destination": self.destination,
+            "phase": self.phase,
+            "reason": self.reason,
+            "commitment": round(float(self.commitment), 6),
+        }
+
+
+class DynamicHumanPolicy(AdaptivePartner):
+    """具有稳定个体特征、长期意图和事件记忆的动态人类策略。
+
+    它只读取公开观察，但会把公开消息、机器人动作结果和共同进度写入
+    有限记忆，并在线更新当前意图。配置中的 profile 只决定倾向；具体
+    贡献、让行、接管和离返仍由当前观察中的效用重新选择。
+    """
+
+    def __init__(self, scenario: ContinuousScenario, *, profile_id: str = "balanced",
+                 stochastic: bool = True):
+        self.profile_id = profile_id
+        super().__init__(scenario, stochastic=stochastic, update_adaptation=True)
+
+    def reset(self, seed: int) -> None:
+        super().reset(seed)
+        profile_defaults = {
+            "assertive": (1.05, 0.82, 0.35, 0.68, 0.78, 0.78),
+            "careful": (0.82, 0.38, 0.82, 0.78, 0.84, 0.48),
+            "supportive": (0.95, 0.48, 0.62, 0.94, 0.78, 0.50),
+            "balanced": (1.00, 0.55, 0.55, 0.75, 0.72, 0.60),
+        }
+        values = profile_defaults.get(self.profile_id, profile_defaults["balanced"])
+        jitter = self.rng.normal(0.0, 0.025, len(values))
+        self.profile = HumanProfile(self.profile_id, *(np.asarray(values) + jitter)).clipped()
+        self.memory: list[dict[str, Any]] = []
+        self.intention: HumanIntention | None = None
+        self.intention_history: list[dict[str, Any]] = []
+        self._last_intention_key: tuple[Any, ...] | None = None
+
+    def _remember(self, observation: Observation, event: str, details: dict[str, Any],
+                  salience: float = 0.5) -> None:
+        self.memory.append({
+            "time_s": round(float(observation.time_s), 6),
+            "event": event,
+            "salience": round(float(np.clip(salience, 0.0, 1.0)), 6),
+            "details": details,
+        })
+        if len(self.memory) > 48:
+            self.memory = sorted(self.memory, key=lambda item: item["salience"])[-48:]
+
+    def _select_intention(self, observation: Observation, reason: str) -> None:
+        candidates = []
+        for object_id, destination in self.commitments.items():
+            if object_id in observation.held_by_human:
+                phase = "carry"
+                distance = np.linalg.norm(np.asarray(observation.regions[destination])
+                                          - np.asarray(observation.human_position))
+            else:
+                phase = "approach"
+                distance = np.linalg.norm(np.asarray(observation.objects[object_id])
+                                          - np.asarray(observation.human_position))
+            if not _prerequisites_satisfied(self.scenario, "human", object_id, destination,
+                                            observation.completed_skills):
+                continue
+            if any(f"{role}:{object_id}:{destination}" in observation.completed_skills
+                   for role in ("human", "robot")):
+                continue
+            priority = next((item.priority for item in self.scenario.resolved_activity().work_items
+                             if item.object_id == object_id and item.destination == destination), 1.0)
+            conflict = 0.0
+            if observation.active_robot_action == f"transfer:{object_id}":
+                conflict = self.profile.assertiveness * 0.5
+            score = (priority * (0.8 + self.profile.persistence)
+                     + self.profile.autonomy * 0.25
+                     - float(distance) * (0.5 + self.profile.pace * 0.2)
+                     - conflict)
+            candidates.append((score, object_id, destination, phase))
+        candidates.sort(reverse=True)
+        selected = candidates[0] if candidates else None
+        if selected is None:
+            new_intention = HumanIntention("maintain shared activity", None, None,
+                                           "observe", reason, self.profile.persistence)
+        else:
+            _, object_id, destination, phase = selected
+            new_intention = HumanIntention("complete committed contribution", object_id,
+                                           destination, phase, reason,
+                                           self.profile.persistence)
+        key = (new_intention.objective, new_intention.object_id, new_intention.destination,
+               new_intention.phase)
+        if key != self._last_intention_key:
+            self.intention_history.append({"time_s": observation.time_s,
+                                           "reason": reason,
+                                           "intention": new_intention.snapshot()})
+            self._last_intention_key = key
+        self.intention = new_intention
+
+    def _process_messages(self, observation: Observation) -> list[Message]:
+        new_messages = observation.messages[self.seen_messages:]
+        for message in new_messages:
+            self._remember(observation, "public_message", {
+                "speaker": message.speaker, "kind": message.kind,
+                "object_id": message.object_id, "value": message.value,
+            }, 0.85 if message.kind in {"action_failed", "correction", "reassignment"} else 0.55)
+        for skill in observation.completed_skills:
+            if skill not in self.seen_robot_completions and skill.startswith("robot:"):
+                self._remember(observation, "robot_contribution_completed", {"skill": skill}, 0.65)
+        messages = super()._process_messages(observation)
+        trigger = "public_feedback" if new_messages else "progress"
+        self._select_intention(observation, trigger)
+        return messages
+
+    def _goal_candidates(self, observation: Observation) -> list[tuple[float, str, str]]:
+        candidates = super()._goal_candidates(observation)
+        if self.intention is None:
+            return candidates
+        adjusted = []
+        for score, object_id, destination in candidates:
+            if (object_id, destination) == (self.intention.object_id, self.intention.destination):
+                score -= 0.45 * self.profile.persistence
+            if observation.active_robot_action == f"transfer:{object_id}":
+                score -= 0.45 * self.profile.assertiveness
+            adjusted.append((score / self.profile.pace, object_id, destination))
+        return sorted(adjusted)
+
+    def step(self, observation: Observation) -> PartnerOutput:
+        output = super().step(observation)
+        if self.intention is None:
+            self._select_intention(observation, "initial_observation")
+        updates = list(output.state_updates)
+        if self.intention_history and np.isclose(self.intention_history[-1]["time_s"], observation.time_s):
+            updates.append({"field": "intention", "reason": self.intention_history[-1]["reason"],
+                            "intention": self.intention.snapshot() if self.intention else None,
+                            "profile": self.profile.snapshot(), "memory_size": len(self.memory)})
+        return PartnerOutput(output.command, output.messages, tuple(updates))
+
+    def audit_state(self) -> dict[str, Any]:
+        return {"policy": "dynamic_human_policy", "profile": self.profile.snapshot(),
+                "intention": self.intention.snapshot() if self.intention else None,
+                "memory_size": len(self.memory), "intention_switches": len(self.intention_history)}
+
+
 class FixedReplayPartner:
     """不读取机器人行为的固定回放对照。
 
@@ -1045,6 +1228,8 @@ def make_partner(scenario: ContinuousScenario, mode: str = "adaptive") -> Contin
         return ReactivePartner(scenario)
     if mode == "adaptive":
         return AdaptivePartner(scenario)
+    if mode == "dynamic":
+        return DynamicHumanPolicy(scenario)
     raise ValueError(f"未知伙伴模式: {mode}")
 
 
@@ -1548,7 +1733,9 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "FixedReplayPartner": "fixed_replay",
         "ReactivePartner": "reactive",
         "AdaptivePartner": "adaptive",
+        "DynamicHumanPolicy": "dynamic",
     }.get(type(partner).__name__, type(partner).__name__)
+    partner_audit = (partner.audit_state() if hasattr(partner, "audit_state") else {})
     requests = [event for event in events if event.get("kind") == "public_message"
                 and event.get("speaker") == "robot" and event.get("message_kind") == "request_help"]
     replies = [event for event in events if event.get("kind") == "public_message"
@@ -1623,6 +1810,11 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "human_success": human_success, "task_success": activity_success,
         "condition": scenario.condition, "structure_family": scenario.structure.family,
         "structure_split": scenario.structure.split, "partner_mode": mode,
+        "human_policy": partner_audit.get("policy", type(partner).__name__),
+        "human_profile": partner_audit.get("profile"),
+        "human_intention_switches": partner_audit.get("intention_switches"),
+        "human_memory_size": partner_audit.get("memory_size"),
+        "human_intention": partner_audit.get("intention"),
         "task_family": scenario.task_family,
         "backend": type(world).__name__,
         "steps": tick_index + 1, "robot_actions": int(getattr(world, "robot_action_count", len(policy_io))),
@@ -1748,7 +1940,7 @@ def run_paired_benchmark(*, policy_spec: str = "greedy_public", seed: int = 0,
     输出目录按 ``<partner_mode>/<scenario_name>`` 组织，配对关系由稳定的
     场景名、seed 和 scenario.json 表达，不需要额外 manifest。
     """
-    invalid = set(partner_modes) - {"fixed_replay", "reactive", "adaptive"}
+    invalid = set(partner_modes) - {"fixed_replay", "reactive", "adaptive", "dynamic"}
     if invalid:
         raise ValueError(f"未知伙伴模式: {sorted(invalid)}")
     scenario_list = scenarios or list(CONTINUOUS_SCENARIOS.values())
@@ -1784,7 +1976,7 @@ def run_counterfactual_benchmark(*, policy_specs: tuple[str, ...], seed: int = 0
         raise ValueError("policy_specs 至少需要一个策略")
     if len(set(policy_specs)) != len(policy_specs):
         raise ValueError("policy_specs 不能包含重复策略")
-    if partner_mode not in {"fixed_replay", "reactive", "adaptive"}:
+    if partner_mode not in {"fixed_replay", "reactive", "adaptive", "dynamic"}:
         raise ValueError(f"未知伙伴模式: {partner_mode}")
     scenario_list = scenarios or list(CONTINUOUS_SCENARIOS.values())
     results: list[dict[str, Any]] = []

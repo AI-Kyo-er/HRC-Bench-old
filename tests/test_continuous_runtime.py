@@ -9,6 +9,7 @@ from hrc_pilot.continuous import (
     AdaptivePartner,
     CONTINUOUS_SCENARIOS,
     ContinuousWorld,
+    DynamicHumanPolicy,
     DynamicsSpec,
     FixedReplayPartner,
     GreedyPublicPolicy,
@@ -62,6 +63,21 @@ class ContinuousRuntimeTests(unittest.TestCase):
         reactive.reset(0)
         self.assertEqual(fixed.step(world.observe()).command.intent, "approach")
         self.assertEqual(reactive.step(world.observe()).command.intent, "yield")
+
+    def test_dynamic_partner_tracks_public_memory_and_intention(self):
+        scenario = replace(CONTINUOUS_SCENARIOS["relay"], name="dynamic_runtime",
+                           dynamics=replace(CONTINUOUS_SCENARIOS["relay"].dynamics,
+                                            robot_failure_probability=1.0,
+                                            human_replan_sensitivity=1.0))
+        partner = make_partner(scenario, "dynamic")
+        self.assertIsInstance(partner, DynamicHumanPolicy)
+        result = run_continuous_episode(scenario, GreedyPublicPolicy(), partner, seed=2)
+        self.assertEqual(result["partner_mode"], "dynamic")
+        self.assertEqual(result["human_policy"], "dynamic_human_policy")
+        self.assertIsInstance(result["human_profile"], dict)
+        self.assertGreater(result["human_memory_size"], 0)
+        self.assertGreaterEqual(result["human_intention_switches"], 1)
+        self.assertGreater(result["human_state_updates"], 0)
 
     def test_suite_has_structure_split_without_manifest(self):
         scenarios = generate_benchmark_suite(count_per_condition=2, seed=11, include_reference=False)

@@ -30,12 +30,12 @@ def main() -> None:
                         help="批量读取目录中的 JSON 场景契约；文件名决定稳定顺序")
     parser.add_argument("--scenario-seed", type=int, default=None,
                         help="任务实例生成种子，默认沿用 --seed")
-    parser.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive"),
+    parser.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive", "dynamic"),
                         default="adaptive", help="人类伙伴条件")
     parser.add_argument("--suite", action="store_true",
                         help="生成 isolated/matched_serial/compositional/held_out 条件集合")
     parser.add_argument("--paired", action="store_true",
-                        help="在同一场景和 seed 上运行 fixed/reactive/adaptive 三种伙伴")
+                        help="在同一场景和 seed 上运行 fixed/reactive/adaptive 三种历史条件；动态伙伴可显式加入 API 配对运行")
     parser.add_argument("--counterfactual-policies", default=None,
                         help="逗号分隔的策略 spec；同一场景/seed/伙伴下只改变机器人策略")
     parser.add_argument("--history-counterfactual", action="store_true",
