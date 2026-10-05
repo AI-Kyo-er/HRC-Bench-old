@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-05T18:11:27+08:00",
+  "page_sha256": "ac53970cd6f397c40065ca0509dc6465ac354353d8ed9dc2c3ade149dc75f118",
+  "links_checked": 1465,
+  "broken_links": [],
+  "browser_checks": [
+    "11 experiment sections",
+    "31 directory rows",
+    "category filter",
+    "search filter",
+    "empty result state",
+    {
+      "video": 0,
+      "duration": 0.9
+    },
+    {
+      "video": 1,
+      "duration": 1.3
+    },
+    {
+      "video": 2,
+      "duration": 1.1
+    },
+    {
+      "video": 3,
+      "duration": 30.533333
+    },
+    {
+      "viewport": 375,
+      "no_page_horizontal_overflow": true
+    },
+    {
+      "viewport": 768,
+      "no_page_horizontal_overflow": true
+    },
+    {
+      "viewport": 1440,
+      "no_page_horizontal_overflow": true
+    },
+    "reduced motion"
+  ],
+  "page_errors": []
+}
