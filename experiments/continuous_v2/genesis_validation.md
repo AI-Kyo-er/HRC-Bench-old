@@ -1,4 +1,52 @@
-# Genesis v10 阶段验证记录
+# Genesis 阶段验证记录
+
+## 2026-10-05：失败预算与真实视频恢复实验
+
+修复 `VCWorkspace` 原先未读取 `robot_failure_budget` 的问题。预算在 episode
+初始化时重置，只在机器人实际启动 transfer 时消耗；等待和求助不消耗预算。
+失败事件明确标记 `scenario_synthetic_failure`，不是抓取接触失败。
+旧 v10 结果继续保留，不用修订后的逻辑重评分。
+
+恢复实验固定 `greedy_public`、adaptive 规则伙伴、seed 0/1/2、relay 的目标和
+贡献前置依赖、30 tick 时限。每个 seed 内三条件仅改变失败预算或失败接管概率。
+物理频率为 60 Hz，benchmark 为 10 Hz，相机 480×360，视频 10 fps。
+
+| 条件 | 每次搬运失败机制 | 失败接管概率 | 成功 / 运行 | 失败 / 运行 | 人接管 / 运行 | 恢复分类 | 时间范围（秒） |
+|---|---|---:|---:|---:|---:|---|---|
+| `failure_handoff` | 首次启动失败，预算 1 | 1 | 3/3 | 1 | 1 | `recovered_after_failure` | 0.5 |
+| `failure_no_handoff` | 首次启动失败，预算 1 | 0 | 3/3 | 1 | 0 | `recovered_after_failure` | 0.7–0.8 |
+| `no_failure` | 预算 0、随机失败概率 0 | 1 | 3/3 | 0 | 0 | `no_failure` | 0.6–0.7 |
+| `persistent_failure`（另列核查） | 每次启动失败，概率 1 | 0 | 0/3 | 30 | 0 | `failed_to_recover` | 3.0（达到时限） |
+
+人接管条件实际记录 `robot_action_failed` → 公开 `reassignment` →
+`human_transfer_completed(blue)`，机器人初始角色贡献成功为 0。禁止接管的一次
+失败条件实际记录机器人重试和 `robot_transfer_completed(blue)`，机器人角色贡献
+成功为 1。因此两者虽然都完成活动，其分工结果不同。不能把人替机器人完成任务
+解释成机器人的独立操作能力，也不能把禁止接管条件称为未恢复负例。
+
+持续失败条件改变失败持续性，单独用来核查未恢复分类，不用于估计一次失败后
+人接管的因果效果。三 seed 是小规模工程验证，不是有统计功效的模型实验。
+时间短源于 VC 动作与运动学 attachment 抽象，不能解释为真人或真实机械臂效率。
+
+证据：[9 条恢复对照](../../results/continuous_v2/recovery_genesis_v1/index.html)、
+[3 条持续失败核查](../../results/continuous_v2/recovery_negative_genesis_v1/index.html)。
+每条保存 `demo.mp4`、`trajectory.npz`、RGB、事件、公开输入与动作。
+`video_timeline.json` 的每帧记录视频时间 / 物理步 / benchmark 时间；12 个 MP4
+已完整解码，帧数和 fps 与记录一致，最后 benchmark 时间与评分终态一致，
+核查保存在各运行目录 `video_verification.json`。
+
+另运行了 3 seed × 2 策略的 Genesis 历史反事实：直接执行均为一次失败后人
+接管完成；先求助均未启动失败搬运，因此属于 `no_failure`。先求助策略的
+`same_geometry_steps=2`、`history_conditioned_action_divergence=0.5` 在三个 seed
+相同。但这里只匹配几何，没有匹配当前公开消息和占用；不能据此证明脱离即时
+反馈后的持久历史适应。下一阶段需要匹配当前可见输入的历史 / 冻结状态消融，
+以及真实 VLA/WLA 推理、动作标定和物理技能验证。
+
+证据：[seed 0](../../results/continuous_v2/history_counterfactual_genesis_v2/index.html)、
+[seed 1](../../results/continuous_v2/history_counterfactual_genesis_seed1/index.html)、
+[seed 2](../../results/continuous_v2/history_counterfactual_genesis_seed2/index.html)。
+
+以下 v10 表格是修复前的历史记录。
 
 ## 目的
 

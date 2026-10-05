@@ -15,6 +15,11 @@ const sceneNotes = {
   matched_serial: ["串接结构", "设计为指导与执行串接对照；还需核实长度、动作数和几何难度匹配。"],
   compositional: ["组合结构", "设计为跨片段依赖或嵌套；结构标签与实际有效约束需要逐场景核查。"],
   held_out: ["留出结构", "设计为测试留出的依赖组合；当前没有真实模型训练或泛化结果。"],
+  history_counterfactual: ["执行 / 求助反事实", "同一 seed 下只替换机器人直接执行或先公开求助。比较失败、帮助响应和人的接管；相同几何并不表示相同当前消息，动作差异不能单独证明持久历史机制。"],
+  failure_handoff: ["失败后可接管", "第一次启动搬运消耗一次合成失败预算，伙伴可根据公开失败消息接管；失败并不绑定某个固定 tick。"],
+  failure_no_handoff: ["失败后不接管", "与接管条件共享同一 seed、目标、依赖和时限；伙伴的失败接管概率为零，检验基线是否自行恢复。失败注入不等于真实抓取失败。"],
+  no_failure: ["无失败对照", "相同初始条件，无合成失败预算。只有记录了失败的运行才纳入恢复率分母。"],
+  persistent_failure: ["持续失败核查", "每次机器人搬运都合成失败且伙伴不接管。这一条件改变了失败持续性，用于核查未恢复分类，不能作为一次失败后接管的因果对照。"],
 };
 const episodesByScene = new Map();
 for (const episode of report.episodes) {
@@ -68,7 +73,10 @@ function frameIndexAt(rows, time) {
 function fillReport() {
   const success = report.episodes.filter(episode => episode.metrics.task_success === true).length;
   const totalFrames = report.episodes.reduce((sum, episode) => sum + episode.trace.length, 0);
-  document.getElementById("report-title").textContent = report.comparisons.length ? "三种伙伴条件，是否真的改变了协作？" : "六类参考场景，实际发生了什么？";
+  document.getElementById("report-title").textContent = report.provenance.experiment === "failure_recovery_controls"
+    ? "机器人失败后，协作如何恢复？"
+    : report.provenance.history_counterfactual ? "直接执行与先求助，怎样改变后续协作？"
+    : report.comparisons.length ? "不同伙伴条件，是否改变了协作？" : `${episodesByScene.size} 类场景，实际发生了什么？`;
   for (const [value, label] of [[`${success} / ${report.episodes.length}`, "保存的任务成功评分"], [String(totalFrames), "原始记录帧，逐帧回放"], [report.run_name, "实验快照，未重新运行"]]) {
     const card = element("div", undefined, "stat");
     card.append(element("strong", value), element("span", label));
@@ -79,25 +87,36 @@ function fillReport() {
   document.getElementById("backend-limits").textContent = genesis
     ? "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。尚未验证接触抓握、人机碰撞安全、训练后的 VLA/WLA 或真人效度。"
     : "本次运行 ContinuousWorld：简化几何与操作抽象，用于检查协议和伙伴机制。结果没有验证真实接触抓取、接触安全、先进 VLA/WLA 推理或真人协作。";
-  document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。后端：${provenance.backend || "未记录"}；机器人策略：${provenance.policy || "未记录"}；seed：${metric(provenance.seed)}。`));
+  document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。后端：${provenance.backend || "未记录"}；机器人策略：${provenance.history_counterfactual ? "greedy_public / request_help_public" : provenance.policy || "未记录"}；seed：${metric(provenance.seeds?.join(", ") ?? provenance.seed)}。`));
+  for (const key of ["purpose", "controlled", "interpretation"]) {
+    if (provenance[key]) document.getElementById("setup-description").append(element("p", provenance[key]));
+  }
   document.getElementById("setup-description").append(element("p", `${provenance.policy === "greedy_public" ? "机器人由手写参考策略驱动" : "机器人策略由上方 policy 配置指定，其是否使用训练模型需查看对应适配器"}，人的贡献由可替换伙伴规则驱动。机器人获得公开分工、几何与消息；Genesis 还提供 RGB 像素与关节状态。评分目标和人的内部变量属于评测端。`));
   document.getElementById("provenance").textContent = JSON.stringify(provenance, null, 2);
   const findings = document.getElementById("findings-description");
   findings.append(element("p", `保存记录中 ${success}/${report.episodes.length} 次任务通过。评分沿用各次运行的评测器；查看 activity_success、角色贡献与事件区分活动终态、操作失败和分工变化。这个数字不能解释为训练后具身模型成绩。`));
+  const recoveryCounts = Object.fromEntries(["no_failure", "recovered_after_failure", "failed_to_recover"].map(status => [status, report.episodes.filter(e => e.metrics.recovery_status === status).length]));
+  if (Object.values(recoveryCounts).some(Boolean)) {
+    const failureEpisodes = recoveryCounts.recovered_after_failure + recoveryCounts.failed_to_recover;
+    findings.append(element("p", `无失败 ${recoveryCounts.no_failure}；失败后完成 ${recoveryCounts.recovered_after_failure}；失败后未完成 ${recoveryCounts.failed_to_recover}。条件恢复率：${failureEpisodes ? `${recoveryCounts.recovered_after_failure}/${failureEpisodes}` : "无失败样本，不能估计"}。伙伴代做可让活动成功，但不能据此认定机器人完成了原有贡献。`));
+  }
+  if (provenance.history_counterfactual) {
+    findings.append(element("p", "直接执行策略尝试搬运；先求助策略通过公开 request_help 请人接手并等待。失败预算只在实际启动搬运时消耗，所以先求助可能完全避开失败。下面的相同几何比较没有匹配当前消息和伙伴占用，不是排除即时反馈后的历史记忆消融。", "notice"));
+  }
   if (report.comparisons.length) {
     const equalCount = report.comparisons.filter(group => group.trajectory_equal).length;
     findings.append(element("p", `逐帧核查 ${report.comparisons.length} 个配对场景：其中 ${equalCount} 个场景的三种伙伴在记录的位置、物体、动作和时间上完全一致。这个核查比较实际轨迹，而不只比较总步数。`, "notice"));
     const durations = new Set(report.episodes.map(episode => episode.trace.length));
     findings.append(element("p", durations.size === 1 ? `所有运行都记录 ${report.episodes[0].trace.length} 帧。伙伴条件在这组设置中未表现出充分区分能力；应先激活有后续影响的协作变化，再讨论模型差异。` : "不同伙伴的运行长度存在差异，但仍需分析变化来自协作、操作还是几何难度。"));
   } else {
-    findings.append(element("p", "六类场景可完成基础动作并产生事件记录。场景名称是设计意图；请通过动画和消息核查接力、接管、重解释是否实际发生，不能仅据标签归因。"));
+    findings.append(element("p", "场景名称是设计意图；请通过视频和消息核查接力、接管、重解释是否实际发生，不能仅据标签归因。"));
   }
   const tbody = document.getElementById("metrics-rows");
   for (const episode of report.episodes) {
     const row = episode.metrics;
-    const values = [row.scenario, modeNames[row.partner_mode] || metric(row.partner_mode), `${metric(row.structure_family)} / ${metric(row.structure_split)}`, row.task_success === true ? "通过" : row.task_success === false ? "未通过" : "未记录", metric(row.recovery_status), episode.trace.length, metric(row.robot_failures), metric(row.robot_delay_steps), metric(row.human_reassignments), episode.artifacts.includes("demo.mp4") ? "demo.mp4" : "无", metric(row.human_state_updates)];
+    const values = [`${row.scenario} / ${metric(row.seed)}`, row.policy_name || provenance.policy || "未记录", modeNames[row.partner_mode] || metric(row.partner_mode), `${metric(row.structure_family)} / ${metric(row.structure_split)}`, row.task_success === true ? "通过" : row.task_success === false ? "未通过" : "未记录", metric(row.recovery_status), episode.trace.length, metric(row.robot_failures), metric(row.robot_delay_steps), metric(row.human_reassignments), episode.artifacts.includes("demo.mp4") ? "demo.mp4" : "无", metric(row.human_state_updates)];
     const tableRow = element("tr");
-    values.forEach((value, index) => tableRow.append(element("td", String(value), index === 3 ? (row.task_success ? "passed" : "failed") : undefined)));
+    values.forEach((value, index) => tableRow.append(element("td", String(value), index === 4 ? (row.task_success ? "passed" : "failed") : undefined)));
     tbody.append(tableRow);
     const audit = element("p", `${episode.id}：${episode.trace.length} 帧；${episode.events.length} 个事件；${episode.scenario.activity ? "场景文件记录活动契约" : "场景文件未记录活动契约，不补入后续规则"}；${episode.events.some(event => event.kind === "human_state_update") ? "事件含伙伴状态更新" : "事件未记录伙伴状态更新"}；文件：${episode.artifacts.join("、")}。`);
     document.getElementById("artifact-audit").append(audit);
@@ -181,7 +200,7 @@ function buildPanels() {
   for (const episode of selectedEpisodes) {
     const panel = element("article", undefined, "panel");
     const heading = element("div", undefined, "panel-heading");
-    heading.append(element("h3", modeNames[episode.metrics.partner_mode] || metric(episode.metrics.partner_mode)), element("p", `${episode.metrics.scenario} · seed ${metric(episode.metrics.seed)}`));
+    heading.append(element("h3", `${episode.metrics.policy_name || report.provenance.policy || "策略未记录"} · ${modeNames[episode.metrics.partner_mode] || metric(episode.metrics.partner_mode)}`), element("p", `${episode.metrics.scenario} · seed ${metric(episode.metrics.seed)}`));
     const canvas = document.createElement("canvas"); canvas.width = 680; canvas.height = 600; canvas.setAttribute("role", "img");
     const information = element("div", undefined, "panel-info");
     const status = element("p"); status.dataset.status = "true";
@@ -194,7 +213,7 @@ function buildPanels() {
       const eventSeconds = eventTime(episode, event);
       const item = element("li");
       const button = element("button", `${eventSeconds.toFixed(2)} s · ${eventLabel(event)}`); button.type = "button";
-      button.addEventListener("click", () => { setPlaying(false); seek(frameIndexAt(timeGrid.map(time_s => ({time_s})), eventSeconds)); });
+      button.addEventListener("click", () => { setPlaying(false); seek(frameIndexAt(timeGrid.map(time_s => ({time_s})), eventSeconds), eventSeconds); });
       item.append(button); list.append(item);
     }
     details.append(list);
@@ -212,17 +231,27 @@ function buildPanels() {
       video.preload = "metadata";
       video.style.width = "100%";
       video.src = episode.id.split("/").map(encodeURIComponent).join("/") + "/demo.mp4";
-      information.append(element("p", "VC/Genesis 实际仿真视频（独立播放；含初始化热身，视频时间与 benchmark 时钟有约 0.33 秒偏移）"), video);
+      const speed = element("select"); speed.setAttribute("aria-label", "仿真视频播放速度");
+      for (const value of [0.25, 0.5, 1]) {
+        const option = element("option", `${value} 倍`); option.value = String(value); option.selected = value === 1; speed.append(option);
+      }
+      speed.addEventListener("change", () => { video.playbackRate = Number(speed.value); });
+      information.append(element("p", episode.video_timeline ? "VC/Genesis 实际视频：时间轴定位已保存帧；事件跳转定位事件后的首个视频帧（最多一个采样间隔）。也可独立播放或慢放。" : "VC/Genesis 实际视频：旧运行没有精确时间映射，独立播放。"), speed, video);
     }
+    if (episode.observations.some(row => row.rgb_artifact)) {
+      const rgb = element("img"); rgb.dataset.rgb = "true"; rgb.alt = "机器人相机的实际 RGB 输入"; rgb.style.width = "100%";
+      information.append(element("p", "机器人输入 RGB（随事件 / 时间轴定位）"), rgb);
+    }
+    const joints = element("p"); joints.dataset.joints = "true"; information.append(joints);
     panel.append(heading, canvas, information); container.append(panel);
     episode.panel = panel;
   }
 }
 
-function seek(index) {
+function seek(index, eventSeconds) {
   currentIndex = Math.max(0, Math.min(index, timeGrid.length - 1));
   timeline.value = String(currentIndex);
-  const time = timeGrid[currentIndex];
+  const time = eventSeconds ?? timeGrid[currentIndex];
   document.getElementById("clock").textContent = `${time.toFixed(2)} / ${timeGrid[timeGrid.length - 1].toFixed(2)} s · 帧 ${currentIndex + 1}/${timeGrid.length}`;
   document.getElementById("previous-frame").disabled = currentIndex === 0;
   document.getElementById("next-frame").disabled = currentIndex === timeGrid.length - 1;
@@ -233,6 +262,19 @@ function seek(index) {
     const robotAction = frame.active_robot_action?.startsWith("transfer:") ? `搬运 ${frame.active_robot_action.split(":")[1]}` : actionNames[frame.active_robot_action] || frame.active_robot_action;
     episode.panel.querySelector("[data-status]").textContent = `记录帧 ${frameIndex + 1}/${episode.trace.length} · 人：${actionNames[frame.human_action] || frame.human_action} · 机器人：${robotAction}`;
     const observation = episode.observations.length ? episode.observations[frameIndexAt(episode.observations, frame.time_s)] : {};
+    const prefix = episode.id.split("/").map(encodeURIComponent).join("/") + "/";
+    const rgb = episode.panel.querySelector("[data-rgb]");
+    if (rgb && observation.rgb_artifact) rgb.src = prefix + encodeURIComponent(observation.rgb_artifact);
+    episode.panel.querySelector("[data-joints]").textContent = observation.robot_qpos?.length ? `关节位置（rad）：${observation.robot_qpos.map(value => value.toFixed(3)).join(", ")}` : "当前观测未记录关节位置。";
+    const video = episode.panel.querySelector("video");
+    const videoFrames = episode.video_timeline?.frames.filter(row => Number.isFinite(row.benchmark_time_s));
+    if (video && videoFrames?.length && !playing) {
+      video.pause();
+      let target = videoFrames[0];
+      for (const row of videoFrames) { if (row.benchmark_time_s > time + 1e-8) break; target = row; }
+      if (eventSeconds !== undefined) target = videoFrames.find(row => row.benchmark_time_s > time + 1e-8) || videoFrames.at(-1);
+      video.currentTime = target.video_time_s;
+    }
     episode.panel.querySelector("[data-observed]").textContent = `公开完成贡献：${(observation.completed_skills || []).join("；") || "当前观测未记录完成贡献"}`;
     const visibleEvents = episode.events.filter(event => eventTime(episode, event) <= time + 1e-8 && event.kind !== "policy_action");
     const lastEvent = visibleEvents[visibleEvents.length - 1];

@@ -14,7 +14,7 @@ from .continuous import ContinuousScenario
 ARTIFACT_NAMES = (
     "metrics.json", "scenario.json", "trace.jsonl", "events.jsonl",
     "public_observations.jsonl", "policy_io.jsonl", "public_scenario.json",
-    "demo.mp4", "preview.png", "trajectory.npz",
+    "demo.mp4", "preview.png", "trajectory.npz", "video_timeline.json",
 )
 
 
@@ -65,6 +65,8 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
             "id": source, "metrics": result, "scenario": scenario,
             "trace": trace, "observations": observations, "events": events,
             "artifacts": artifacts,
+            "video_timeline": (json.loads((directory / "video_timeline.json").read_text(encoding="utf-8"))
+                               if (directory / "video_timeline.json").exists() else None),
         })
     for name in ("summary.json", "paired_summary.json", "provenance.json"):
         path = output / name
@@ -127,7 +129,10 @@ def write_continuous_report(output: Path, results: list[dict[str, Any]],
 
 def rebuild_saved_report(output: str | Path) -> Path:
     output = Path(output)
-    source = (output / "paired_summary.json" if (output / "paired_summary.json").exists()
-              else output / "summary.json")
+    source = next((output / name for name in (
+        "history_counterfactual_summary.json", "counterfactual_summary.json",
+        "paired_summary.json", "summary.json") if (output / name).exists()), None)
+    if source is None:
+        raise FileNotFoundError(f"没有可重建的实验汇总：{output}")
     summary = json.loads(source.read_text(encoding="utf-8"))
     return write_continuous_report(output, summary["episodes"])

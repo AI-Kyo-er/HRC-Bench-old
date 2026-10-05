@@ -4,7 +4,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from hrc_pilot.continuous_report import build_replay_payload, write_continuous_report
+from hrc_pilot.continuous_report import build_replay_payload, write_continuous_report, rebuild_saved_report
 
 
 class ContinuousReportTests(unittest.TestCase):
@@ -78,6 +78,21 @@ class ContinuousReportTests(unittest.TestCase):
             (duplicate / "metrics.json").write_text(json.dumps(metrics))
             with self.assertRaisesRegex(ValueError, "无法唯一匹配"):
                 build_replay_payload(root, [metrics])
+
+    def test_counterfactual_rebuild_preserves_saved_video_alignment(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            metrics, episode_dir, _ = self.write_episode(root)
+            timeline = {"fps": 10, "frames": [
+                {"video_time_s": 0.0, "benchmark_time_s": None, "phase": "warmup"},
+                {"video_time_s": 0.1, "benchmark_time_s": 0.0, "phase": "benchmark"},
+            ]}
+            (episode_dir / "video_timeline.json").write_text(json.dumps(timeline))
+            (root / "history_counterfactual_summary.json").write_text(json.dumps({"episodes": [metrics]}))
+            self.assertTrue(rebuild_saved_report(root).exists())
+            payload = build_replay_payload(root, [metrics])
+            self.assertEqual(payload["episodes"][0]["video_timeline"], timeline)
+            self.assertIn("adaptive/example/video_timeline.json", payload["source_hashes"])
 
 
 if __name__ == "__main__":

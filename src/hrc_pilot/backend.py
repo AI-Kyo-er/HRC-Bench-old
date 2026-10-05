@@ -112,6 +112,9 @@ class VCWorkspace:
         self.continuous_delay_frames = 0
         self.continuous_pending_placement = None
         self.continuous_rng = np.random.default_rng(0)
+        self.remaining_failure_budget = 0
+        self.video_frames = []
+        self.video_phase = "warmup"
 
     def add_entity(self, type, name, morph, material=None, surface=None, **kwargs):
         entity = self.scene.add_entity(morph=morph, material=material, surface=surface, **kwargs)
@@ -137,9 +140,14 @@ class VCWorkspace:
         self.continuous_delay_frames = 0
         self.continuous_pending_placement = None
         self.continuous_rng = np.random.default_rng(seed)
+        self.remaining_failure_budget = int(max(
+            0, getattr(getattr(self.scenario, "dynamics", None), "robot_failure_budget", 0)))
+        self.video_frames = []
+        self.video_phase = "warmup"
         self.current_robot_action = "观察共同工作空间"
         self.title = f"{scenario} · {policy} · seed {seed}"
-        self.writer = imageio.get_writer(str(output / "demo.mp4"), fps=60 // self.stride,
+        self.video_fps = 60 / self.stride
+        self.writer = imageio.get_writer(str(output / "demo.mp4"), fps=self.video_fps,
                                         codec="libx264", quality=7, macro_block_size=2)
         jitter = np.random.default_rng(seed).uniform(-0.015, 0.015, 2)
         if self.scenario is not None:
@@ -229,7 +237,10 @@ class VCWorkspace:
                      if dynamics.max_delay_steps > 0
                      and self.continuous_rng.random() < dynamics.robot_delay_probability else 0)
             self.continuous_execution["delay"] = delay * int(60 / self.scenario.tick_hz)
-            self.continuous_execution["failed"] = bool(
+            budget_failure = self.remaining_failure_budget > 0
+            if budget_failure:
+                self.remaining_failure_budget -= 1
+            self.continuous_execution["failed"] = budget_failure or bool(
                 self.continuous_rng.random() < dynamics.robot_failure_probability)
             self.current_robot_action = f"连续搬运 {action.object_id} 到 {action.destination}"
         elif action.kind == "joint_position":
@@ -427,6 +438,13 @@ class VCWorkspace:
                       font=self.small_font, fill="#ffe6a5")
         frame = np.asarray(canvas)
         self.writer.append_data(frame)
+        self.video_frames.append({
+            "frame_index": len(self.video_frames),
+            "video_time_s": len(self.video_frames) / self.video_fps,
+            "physics_step": self.step_count,
+            "phase": self.video_phase,
+            "benchmark_time_s": self.step_count / 60 if self.video_phase == "benchmark" else None,
+        })
         if force:
             Image.fromarray(frame).save(self.output / "preview.png")
         r = self.avatar.robot
@@ -541,6 +559,11 @@ class VCWorkspace:
         self.capture(force=True)
         self.writer.close()
         self.writer = None
+        (self.output / "video_timeline.json").write_text(json.dumps({
+            "fps": self.video_fps, "physics_hz": 60,
+            "frame_count": len(self.video_frames), "frames": self.video_frames,
+            "source": "runtime_genesis_camera", "grasp_model": "kinematic_attachment",
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
         arrays = {key: np.stack([row[key] for row in self.trace]) for key in self.trace[0]}
         arrays["object_names"] = np.array(list(self.objects))
         np.savez_compressed(self.output / "trajectory.npz", **arrays)

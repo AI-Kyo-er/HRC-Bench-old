@@ -108,6 +108,36 @@ Genesis 验证结果：
 - [六场景 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/genesis_v10/index.html)
 - [Genesis 伙伴条件对照（18 个 episode，含真实 Sim 视频）](../../results/continuous_v2/genesis_paired_v10/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/history_counterfactual_genesis_v1/index.html)
+- [失败恢复三条件 × 三 seed（9 条真实 Sim 视频）](../../results/continuous_v2/recovery_genesis_v1/index.html)
+- [持续失败未恢复核查（3 条真实 Sim 视频）](../../results/continuous_v2/recovery_negative_genesis_v1/index.html)
+- [修复失败预算后的历史反事实，seed 0](../../results/continuous_v2/history_counterfactual_genesis_v2/index.html)
+- [历史反事实，seed 1](../../results/continuous_v2/history_counterfactual_genesis_seed1/index.html)
+- [历史反事实，seed 2](../../results/continuous_v2/history_counterfactual_genesis_seed2/index.html)
+
+2026-10-05 补齐了 Genesis 与参考后端的失败预算一致性。新增 12 条恢复核查中，
+3 条由人接管完成、3 条机器人重试完成、3 条无失败完成、3 条持续失败未完成。
+这验证了公开失败反馈、分工更新和恢复分类，但不是训练模型的 HRC 成绩。
+一次失败但禁止接管的条件在 Genesis 中仍成功，不能把它写成未恢复负例；
+持续失败条件另行保存，作为分类核查。具体设置和逐条证据见
+[`genesis_validation.md`](genesis_validation.md)。
+
+重要实验必须保留运行时真实 Sim 视频，并与轨迹、公开观察、事件、关节状态及
+实验说明一起提供；仅有轨迹动画不满足报告要求。新 Genesis episode 保存
+`video_timeline.json`，逐帧记录视频时间、物理步和 benchmark 时间，报告据此定位
+视频，并支持慢放及 RGB 对照。旧实验没有映射时保持独立播放，不补造时间信息。
+
+使用已安装 VC 环境复现本次多 seed 实验（运行器会先用 `nvidia-smi` 选择至少有
+4 GB 空闲显存的单卡；输出目录必须为空）：
+
+```bash
+PYTHONPATH=src .venv-vc-pilot/bin/python scripts/run_genesis_recovery.py \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/recovery_new \
+  --seeds 0 1 2
+```
+
+默认运行四条件，共 12 条。用 `--conditions persistent_failure` 可以独立运行分类负例。
+这些场景只声明失败预算 / 概率、接管概率和活动约束；失败随实际动作启动触发，
+没有预先规定某一 tick 必须发生某事件。当前伙伴仍是可审计的规则模型。
 
 `genesis_v10` 在 VC/Genesis 后端运行六个 v2 场景，使用 60 Hz 物理时钟、RGB
 观察、视频和关节轨迹；六个场景的活动契约均完成。`history_reinterpretation` 和

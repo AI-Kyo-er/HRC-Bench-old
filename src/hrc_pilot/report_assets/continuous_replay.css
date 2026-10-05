@@ -11,8 +11,8 @@ p { margin: 12px 0; } .lead { font-size: 19px; max-width: 900px; }
 section { background: white; padding: 28px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 24px; }
 .notice { padding: 16px 20px; border-left: 4px solid #a56604; background: #fff7e6; color: #62430a; border-radius: 4px; }
 .stat-grid, .three-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.stat { padding: 16px; background: white; border: 1px solid var(--line); border-radius: 10px; }
-.stat strong { display: block; font-size: 25px; } .stat span, .muted { color: var(--muted); }
+.stat { min-width: 0; padding: 16px; background: white; border: 1px solid var(--line); border-radius: 10px; }
+.stat strong { display: block; font-size: 25px; overflow-wrap: anywhere; } .stat span, .muted { color: var(--muted); }
 nav, .source-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
 nav a, .source-links a { padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: white; }

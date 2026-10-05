@@ -10,7 +10,8 @@ from hrc_pilot.benchmark import ExternalPolicyAdapter, ModelPolicy, decode_actio
 from hrc_pilot.continuous import (CONTINUOUS_SCENARIOS, ContinuousWorld,
                                  GreedyPublicPolicy, make_partner, run_continuous_episode)
 from hrc_pilot.continuous_genesis import GenesisContinuousAdapter
-from hrc_pilot.protocol import EventLog
+from hrc_pilot.backend import VCWorkspace
+from hrc_pilot.protocol import Action, EventLog
 
 
 def test_model_receives_pixels_without_evaluator_state():
@@ -114,3 +115,31 @@ def test_external_adapter_records_inference_error():
         policy.act(world.observe())
     assert policy.audit_record()["status"] == "error"
     assert policy.audit_record()["error_type"] == "RuntimeError"
+
+
+def test_genesis_failure_budget_only_applies_to_started_transfers():
+    # 直接检查生产后端的动作 / 反馈接口，不加载 GPU 或 Genesis。
+    workspace = VCWorkspace.__new__(VCWorkspace)
+    workspace.scenario = CONTINUOUS_SCENARIOS["relay"]
+    workspace.remaining_failure_budget = 1
+    workspace.continuous_rng = np.random.default_rng(7)
+    workspace.continuous_execution = None
+    workspace.step_count = 0
+    workspace.log = EventLog()
+    workspace.messages = []
+    workspace.objects = {"blue": object()}
+    workspace.regions = workspace.scenario.regions
+    workspace.positions = lambda: {"blue": [0.35, -0.08, 0.82]}
+    workspace.continuous_start_action(Action("wait"))
+    assert workspace.remaining_failure_budget == 1
+    workspace._continuous_robot_step()
+    workspace.continuous_start_action(Action("transfer", "blue", "tray_blue"))
+    workspace._continuous_robot_step()
+    assert workspace.remaining_failure_budget == 0
+    assert workspace.continuous_execution is None
+    assert workspace.log.events[-1]["kind"] == "robot_action_failed"
+    assert workspace.messages[-1].kind == "action_failed"
+    assert workspace.messages[-1].object_id == "blue"
+    assert GenesisContinuousAdapter(workspace).robot_failures == 1
+    workspace.continuous_start_action(Action("transfer", "blue", "tray_blue"))
+    assert not workspace.continuous_execution["failed"]

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HRC-Continuous v2 · 中场实验复盘与动画</title>
+<title>HRC-Continuous v2 · 实验报告、仿真视频与事件回放</title>
 <style>__REPORT_CSS__</style>
 </head>
 <body>
@@ -14,7 +14,7 @@
   <p class="lead">围绕你的 motivation：机器人行为会改变人的后续协作方式，机器人也需要据此重新组织自己的贡献。</p>
   <p class="notice" id="backend-notice"><strong>每个重要 episode 同时提供两种证据。</strong>桌面俯视回放显示人位置、机器人末端和物体移动；若本次使用 Genesis，每个面板另有可播放的真实 Sim 视频、RGB 观测和关节轨迹。视频来自已保存的运行，不是轨迹动画重新渲染。</p>
   <div class="stat-grid" id="headline-stats"></div>
-  <nav aria-label="报告导航"><a href="#motivation">研究问题</a><a href="#replay">看动画</a><a href="#findings">看结果</a><a href="#implementation">做了什么</a><a href="#limits">下一步判断</a></nav>
+  <nav aria-label="报告导航"><a href="#motivation">研究问题</a><a href="#replay">视频与回放</a><a href="#findings">看结果</a><a href="#implementation">做了什么</a><a href="#limits">下一步判断</a></nav>
 </header>
 <main id="main">
 <section id="motivation">
@@ -33,8 +33,8 @@
 </section>
 <section id="replay" class="replay-section">
   <p class="eyebrow">03 / 逐步观察同一段共同活动</p>
-  <h2>轨迹动画与公开协作事件</h2>
-  <p>先选择场景，再播放或逐帧检查。配对实验会把三种伙伴并排显示，使用同一时间轴。图中 x、y 坐标以米为单位；所有位置直接取自记录，不插值、不推测关节动作。下方视频是 Genesis/VC 的真实 Sim 记录，包含初始化热身，时间轴与 benchmark tick 可能有约 0.33 秒偏移。</p>
+  <h2>真实 Sim 视频、RGB 观测与公开事件</h2>
+  <p>先选择场景，再播放或逐帧检查。条件对照会并排显示，图中 x、y 坐标以米为单位。视频是 Genesis/VC 运行时的相机记录。新运行保存每个视频帧对应的仿真时间；点击事件或移动时间轴会按该记录定位视频。旧运行缺少逐帧映射时，视频独立播放，不使用热身估计代替精确对齐。</p>
   <div class="toolbar">
     <label>场景<select id="scenario-select"></select></label>
     <label>播放速度<select id="speed-select"><option value="0.25">0.25 倍</option><option value="0.5">0.5 倍</option><option value="1" selected>1 倍</option><option value="2">2 倍</option></select></label>
@@ -51,7 +51,7 @@
   <p class="muted" id="motion-note">默认暂停；可按自己的节奏查看。</p>
   <div class="legend"><span><i class="human-key"></i>人位置</span><span><i class="robot-key"></i>机器人末端</span><span>○ 带名字的物体</span><span>□ 目标区域</span></div>
   <div id="replay-panels" class="replay-grid"></div>
-  <p class="notice">记录帧是每个 tick 推进前的观测。完成事件可能发生在同一 tick 推进后；最后一张图不是额外记录的最终物理状态。回放停在最后保存帧，不会为了匹配成功评分而补造终态。</p>
+  <p class="notice">一般记录帧来自 tick 推进前的观测；标记 terminal 的最后一帧来自实际终态。没有保存终态的旧实验不会补造最终位置。RGB 是机器人相机输入；第三人称视频用于报告，不能代替模型实际看到的图像。</p>
   <noscript><p class="notice">启用浏览器 JavaScript 后可播放动画；以下研究说明仍可阅读。</p></noscript>
 </section>
 <section id="findings">
@@ -59,7 +59,7 @@
   <h2>结果与区分能力</h2>
   <div id="findings-description"></div>
   <div class="table-wrap" tabindex="0" aria-label="实验结果表，可横向滚动">
-    <table><caption>保存的 episode 指标；“未记录”不表示零</caption><thead><tr><th scope="col">场景</th><th scope="col">伙伴</th><th scope="col">结构 / split</th><th scope="col">任务评分</th><th scope="col">恢复状态</th><th scope="col">记录帧</th><th scope="col">失败</th><th scope="col">延迟步</th><th scope="col">人接管</th><th scope="col">视频</th><th scope="col">伙伴状态更新</th></tr></thead><tbody id="metrics-rows"></tbody></table>
+    <table><caption>保存的 episode 指标；“未记录”不表示零</caption><thead><tr><th scope="col">场景 / seed</th><th scope="col">机器人策略</th><th scope="col">伙伴</th><th scope="col">结构 / split</th><th scope="col">任务评分</th><th scope="col">恢复状态</th><th scope="col">记录帧</th><th scope="col">失败</th><th scope="col">延迟步</th><th scope="col">人接管</th><th scope="col">视频</th><th scope="col">伙伴状态更新</th></tr></thead><tbody id="metrics-rows"></tbody></table>
   </div>
   <p>成功率说明运行流程和原评分能够工作。要判断 benchmark 是否有效，还需要让不同协作能力的机器人出现可解释的差异，并排除任务长度、动作能力和几何难度的影响。全部通过也可能意味着场景太容易或伙伴变化没有被触发。</p>
 </section>

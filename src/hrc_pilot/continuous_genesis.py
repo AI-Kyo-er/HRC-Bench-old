@@ -40,6 +40,7 @@ class GenesisContinuousAdapter:
         self.workspace.step_count = 0
         self.workspace.log.events.clear()
         self.workspace.trace.clear()
+        self.workspace.video_phase = "benchmark"
         self.workspace.capture(force=True)
         self.record_event("initial_state", positions=self.workspace.positions())
 

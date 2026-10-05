@@ -17,6 +17,13 @@
 
 不使用 `manifest.json` 表达配对关系。加载器以 episode 目录为边界，并依据 `scenario.json` 的 `structure.split`、`condition` 和 `partner_mode` 分组。RGB 文件由 `policy_io.jsonl` 或 `public_observations.jsonl` 中的 `rgb_artifact` 指向。
 
+Genesis 重要实验同时输出真实 `demo.mp4` 和 `trajectory.npz`，新运行另保存
+`video_timeline.json`：顶层 `fps`、`physics_hz`、`frame_count`；逐帧 `frame_index`、
+`video_time_s`、`physics_step`、`phase`、`benchmark_time_s`。热身阶段的 benchmark
+时间为 `null`；正式阶段从 0 开始。视频可以包含同一仿真时刻的强制截图，因此
+以逐帧映射定位事件，不假设“视频时间减固定偏移”等于 benchmark 时间。
+报告同时展示第三人称视频与机器人 RGB 输入；模型接口不接收报告相机或此映射。
+
 ## `scenario.json`
 
 场景文件包含对象、区域、公开分工、伙伴条件和交互结构：

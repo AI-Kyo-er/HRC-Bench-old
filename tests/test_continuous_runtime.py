@@ -353,6 +353,18 @@ class ContinuousRuntimeTests(unittest.TestCase):
         self.assertEqual(recovered["recovery_success"], 1.0)
         self.assertGreaterEqual(recovered["robot_failures"], 1)
 
+        persistent_failure = replace(
+            scenario, max_steps=30,
+            dynamics=replace(scenario.dynamics, robot_failure_probability=1.0,
+                             handoff_on_failure_probability=0.0))
+        failed = run_continuous_episode(
+            persistent_failure, GreedyPublicPolicy(), make_partner(persistent_failure, "adaptive"), seed=0)
+        self.assertFalse(failed["task_success"])
+        self.assertEqual(failed["recovery_status"], "failed_to_recover")
+        self.assertEqual(failed["recovery_success"], 0.0)
+        self.assertEqual(failed["human_reassignments"], 0)
+        self.assertGreaterEqual(failed["robot_failures"], 1)
+
     def test_reference_scenes_exercise_dynamic_events(self):
         results = {
             name: run_continuous_episode(
