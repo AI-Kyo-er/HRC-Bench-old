@@ -208,6 +208,11 @@ def main():
                                 task_description=task.language,human_hand_position=tuple(actor.position()),
                                 human_motor_phase=actor.phase,active_robot_action='native_joint_control',action_phase='native_control',
                                 human_execution=record['human_execution'],robot_motion=measured_motion,
+                                goal_surfaces={'near_human':{
+                                    'shape':'circle','spatial_reference':'object_center',
+                                    'center_xyz':list(regions['near_human']),
+                                    'radius_m':float(env.sim.model.geom_size[env.sim.model.geom_name2id('human_public_plate_region'),0]),
+                                    'source':'visible_marker_geometry'}},
                                 task_family=args.task_family)
                             decision=partner.step(public)
                             messages.extend(decision.messages)
