@@ -13,10 +13,10 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 </style></head><body><main><header><div class="eyebrow">HRC CONTINUOUS · 真实模型、接触动作与实际示范数据</div>
 <h1>动态伙伴在真实接触场景中，实际做了什么？</h1>
 <p>本页最新联合运行使用 π0.5（完整动作专家位置域适配） 与 Qwen3-14B 合成伙伴。两者的动作在同一物理时间轴中执行，物体通过接触移动；视频直接来自运行时相机。
-下方分别呈现真实模型结果、接触手校准与可用于模型校准的数据。</p></header>
-<div class="stats"><div class="stat"><strong>3 条</strong><span>本次实际模型运行</span></div>
+下方分别呈现真实模型结果、接触手校准与可用于模型校准的数据。</p><p>下方新模型训练使用96条可见场景示范，其基础操作测试单独呈现。这里的三项联合运行和连续活动流仍使用上一批位置域权重；不能把新训练的效果归到旧联合结果。</p></header>
+<div class="stats"><div class="stat"><strong>3 条</strong><span>已完成的联合模型运行</span></div>
 <div class="stat"><strong>404 次</strong><span>π0.5 实际推理</span></div><div class="stat"><strong>108 次</strong><span>Qwen 意图决定</span></div>
-<div class="stat"><strong>729 帧</strong><span>真实接触示范监督</span></div></div>
+<div class="stat"><strong>22,768 帧</strong><span>新可见场景示范帧</span></div></div>
 <section><h2>目的与设置</h2><p>实验要观察：当人的行动由生成式模型根据可见进度决定、机械臂由训练后的具身模型控制时，双方能否完成共同活动，人的目标选择怎样影响实际过程。
 模型能力判断需要基本操作可用、人的动作连续、任务评分按实际贡献区分。</p>
 <p>本次运行后端为 Genesis，机器人 15 Hz 控制，最长 40 秒模拟时间；人体意图约每秒更新一次，物理推进为 60 Hz。
@@ -74,31 +74,40 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
  · <a href="../../results/continuous_v2/pi05_position_qwen_session/robot_induced_rebalance/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_position_qwen_session/robot_induced_rebalance/motion_verification.json">运动核验</a></p>
 <details><summary>伙伴实际决定摘录</summary><ul><li>0.0 秒：observe / blue。当前任务是观察 blue 的位置，以确认是否需要进一步行动。</li><li>20.0 秒：observe / blue。持续观察 blue 的位置，确认是否需要协助将其移动到 tray_blue。</li><li>39.0 秒：observe / blue。持续观察 blue 的位置，确认是否需要协助将其移动到 tray_blue。</li></ul></details></article></section>
 <section><h2>本轮实际训练，以及训练后能否操作</h2>
-<p>针对当前 Sim 操作分布，从已有 π0.5-DROID 权重训练 1200 步，更新 457,967,648 个参数；训练范围为完整动作专家、语言LoRA与动作投影，视觉与语言主干冻结。
-监督来自下一控制tick内实际施加的最后一个限速位置目标，采用train数据计算的相对位置归一化。末尾窗口保留，未记录的未来步用mask排除loss。训练输入 598 个、验证输入 131 个，batch size 2。
+<p>针对当前 Sim 操作分布，从已有 π0.5-DROID 权重训练 3000 步，更新 457,967,648 个参数；训练范围为完整动作专家、语言LoRA与动作投影，视觉与语言主干冻结。
+监督来自下一控制tick内实际施加的最后一个限速位置目标，采用train数据计算的相对位置归一化。末尾窗口保留，未记录的未来步用mask排除loss。新训练还排除未记录未来步的注意力，实际8维动作loss独立报告，24维模型填充采用0.1权重的辅助loss；验证只统计实际8维。训练输入 22017 个、验证输入 751 个，batch size 2。
 只使用本地权重和已经生成的实际接触示范，没有下载新模型。</p>
-<p>曲线是在固定 16 个验证样本、固定噪声上计算的 flow-matching loss，从 1.679 降到 0.004。
+<p>曲线是在固定 64 个验证样本、固定噪声上计算的 flow-matching loss，从 0.671 降到 0.008。
 它衡量对示范监督的拟合，不等于抓取成功率，也不是全部验证集上的泛化成绩。
-当前有效 dev 只含红、蓝示范；绿色仅有一条成功训练示范，没有有效 dev 操作。时间相邻的动作窗口也不能视为独立试验。</p><svg viewBox="0 0 710 240" role="img" aria-label="固定验证样本上的损失随训练步数下降" style="width:100%;max-width:710px">
-<path d="M45 30 V200 H680" fill="none" stroke="#536879"/><polyline points="45.0,40.0 70.8,177.5 96.7,193.9 122.5,196.4 148.3,197.3 174.2,196.7 200.0,197.9 225.8,197.9 251.7,198.1 277.5,198.7 303.3,198.7 329.2,198.6 355.0,199.0 380.8,199.1 406.7,198.9 432.5,199.2 458.3,199.2 484.2,199.4 510.0,199.4 535.8,199.5 561.7,199.4 587.5,199.6 613.3,199.5 639.2,199.5 665.0,199.6" fill="none" stroke="#126b70" stroke-width="3"/>
-<text x="45" y="225">0 步</text><text x="620" y="225">1200 步</text>
-<text x="50" y="25">1.679</text><text x="585" y="185">0.004</text></svg>
-<div class="notice">独立闭环基本操作完成 0/3。 所以模型适配与闭环有效性必须分别报告；当前数据量与操作覆盖仍小，不能据此排名先进模型的 HRC 能力。
+dev为留出的seed131三色示范；闭环使用未训练的seed24、25。均为相同桌面与蓝色目标区域，不能解释为跨任务泛化。时间相邻的动作窗口也不能视为独立试验。</p><svg viewBox="0 0 710 240" role="img" aria-label="固定验证样本上的损失随训练步数下降" style="width:100%;max-width:710px">
+<path d="M45 30 V200 H680" fill="none" stroke="#536879"/><polyline points="45.0,40.0 55.3,118.3 65.7,158.3 76.0,174.1 86.3,181.4 96.7,179.7 107.0,183.8 117.3,183.8 127.7,189.1 138.0,188.3 148.3,188.1 158.7,190.5 169.0,189.0 179.3,189.6 189.7,188.6 200.0,191.0 210.3,190.7 220.7,191.9 231.0,191.8 241.3,191.3 251.7,190.8 262.0,193.4 272.3,193.4 282.7,193.0 293.0,193.9 303.3,194.4 313.7,193.9 324.0,194.1 334.3,194.9 344.7,195.8 355.0,192.3 365.3,195.3 375.7,195.0 386.0,196.0 396.3,195.8 406.7,196.3 417.0,195.6 427.3,196.5 437.7,196.3 448.0,195.8 458.3,196.8 468.7,196.8 479.0,196.8 489.3,197.0 499.7,197.2 510.0,197.3 520.3,197.5 530.7,197.3 541.0,197.3 551.3,197.2 561.7,197.5 572.0,197.3 582.3,197.7 592.7,197.6 603.0,197.4 613.3,197.7 623.7,197.9 634.0,197.7 644.3,197.6 654.7,197.7 665.0,198.1" fill="none" stroke="#126b70" stroke-width="3"/>
+<text x="45" y="225">0 步</text><text x="620" y="225">3000 步</text>
+<text x="50" y="25">0.671</text><text x="585" y="185">0.008</text></svg>
+<div class="notice">独立闭环基本操作完成 0/6。 所以模型适配与闭环有效性必须分别报告；当前操作覆盖仍有限，不能据此排名先进模型的 HRC 能力。
 这轮提示、动作块执行长度与早先原生模型运行不同，也不是严格配对的前后提升实验。</div>
-<p><a href="../../results/contact_training/pi05_position_expert_v1/summary.json">训练结果</a> · <a href="../../results/contact_training/pi05_position_expert_v1/provenance.json">训练设置与来源</a> · <a href="../../results/contact_training/pi05_position_expert_v1/training.jsonl">逐步训练记录</a></p>
+<p><a href="../../results/contact_training/pi05_visible_contact_expert/summary.json">训练结果</a> · <a href="../../results/contact_training/pi05_visible_contact_expert/provenance.json">训练设置与来源</a> · <a href="../../results/contact_training/pi05_visible_contact_expert/training.jsonl">逐步训练记录</a></p>
 <p>位置域方案参考<a href="https://github.com/Physical-Intelligence/openpi/blob/main/examples/droid/README_train.md">官方DROID训练说明</a>。
 此前速度LoRA模型的独立操作为0/3，原始视频保留在<a href="../../results/continuous_v2/pi05_lora_atom_evaluation/index.html">上一批基本操作报告</a>。
 两批控制编码、监督、归一化与训练范围不同，不把loss差异当作效果大小。</p>
-<article><h3>contact_atom_blue · 基础操作</h3>
-<p>同一个适配后模型、seed 21、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 1 个对象，
-合法贡献 0 项，任务未完成。该测试检查基本操作，不能解释成人机协作成绩。</p>
-<video controls preload="metadata" poster="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_blue/preview.png" src="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_blue/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_blue/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_blue/physics_contract.json">接触与贡献证据</a></p></article><article><h3>contact_atom_green · 基础操作</h3>
-<p>同一个适配后模型、seed 21、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
-合法贡献 0 项，任务未完成。该测试检查基本操作，不能解释成人机协作成绩。</p>
-<video controls preload="metadata" poster="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_green/preview.png" src="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_green/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_green/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_green/physics_contract.json">接触与贡献证据</a></p></article><article><h3>contact_atom_red · 基础操作</h3>
-<p>同一个适配后模型、seed 21、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
-合法贡献 0 项，任务未完成。该测试检查基本操作，不能解释成人机协作成绩。</p>
-<video controls preload="metadata" poster="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_red/preview.png" src="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_red/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_red/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_position_atom_evaluation/contact_atom_red/physics_contract.json">接触与贡献证据</a></p></article></section>
+<article><h3>visible_atom_blue · 基础操作</h3>
+<p>同一个适配后模型、seed 24、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。运动核查 verified。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0024/preview.png" src="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0024/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0024/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0024/physics_contract.json">接触与贡献证据</a></p></article><article><h3>visible_atom_blue · 基础操作</h3>
+<p>同一个适配后模型、seed 25、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。运动核查 verified。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0025/preview.png" src="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0025/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0025/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0025/physics_contract.json">接触与贡献证据</a></p></article><article><h3>visible_atom_green · 基础操作</h3>
+<p>同一个适配后模型、seed 24、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。运动核查 verified。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0024/preview.png" src="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0024/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0024/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0024/physics_contract.json">接触与贡献证据</a></p></article><article><h3>visible_atom_green · 基础操作</h3>
+<p>同一个适配后模型、seed 25、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。运动核查 verified。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0025/preview.png" src="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0025/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0025/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0025/physics_contract.json">接触与贡献证据</a></p></article><article><h3>visible_atom_red · 基础操作</h3>
+<p>同一个适配后模型、seed 24、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。运动核查 verified。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0024/preview.png" src="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0024/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0024/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0024/physics_contract.json">接触与贡献证据</a></p></article><article><h3>visible_atom_red · 基础操作</h3>
+<p>同一个适配后模型、seed 25、最长30秒、15Hz控制、最多执行 4 步后重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。运动核查 verified。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0025/preview.png" src="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0025/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0025/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0025/physics_contract.json">接触与贡献证据</a></p></article></section>
 <section><h2>本轮模型接口与持续世界进展</h2><article><h3>π0.5-LIBERO：实际末端控制接口</h3><p>中国源仿真预训练权重严格匹配813个参数结构，使用双相机、末端位置/轴角/双指位置。
 本次20Hz、6秒，实际模型调用24次，执行120个关节请求；蓝块任务未完成。
 7维输出的位置与旋转均经过实际IK和关节限速，没有用几何教师替代模型动作。</p><video controls preload="metadata" poster="../../results/continuous_v2/pi05_libero_contact_formal/pi05_libero_blue/preview.png" src="../../results/continuous_v2/pi05_libero_contact_formal/pi05_libero_blue/demo.mp4"></video>
@@ -110,7 +119,11 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 因此不进入有效模型排名。视频与转换点核查证明世界保持，不保证整个动作过程符合运动门槛。</div><video controls preload="metadata" poster="../../results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/preview.png" src="../../results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/demo.mp4"></video>
 <div class="table-wrap"><table><thead><tr><th>活动</th><th>连续时间</th><th>活动终态</th><th>实际贡献</th></tr></thead><tbody><tr><td>1 · relay</td><td>0.0–26.4秒</td><td>完成</td><td>human:red:tray_red、human:blue:tray_blue</td></tr><tr><td>2 · activity_reprioritization</td><td>26.4–56.4秒</td><td>未完成</td><td>human:blue:keep_blue</td></tr><tr><td>3 · activity_role_exchange</td><td>56.4–86.4秒</td><td>未完成</td><td>无</td></tr></tbody></table></div>
 <p>活动转换发布任务，具体行动仍由模型生成；贡献按每项活动单独记录，旧操作不会自动获得新任务贡献。
-物理连续与有记忆不等于已证明可靠协作，模型操作和合成人行为的限制仍保留。</p></article></section>
+物理连续与有记忆不等于已证明可靠协作，模型操作和合成人行为的限制仍保留。</p><p>异常窗口接触记录显示：控制目标峰值速度 0.35m/s，实际手掌峰值 1.69m/s，跟踪误差最大 11.1cm，腕部旋转峰值 7.17rad/s。提示执行器跟踪与接触稳定问题，尚未确定因果或证明修复。<a href="../../results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/motion_diagnosis.json">逐帧诊断</a></p></article><article><h3>接触手限速控制尝试：保留失败证据</h3>
+<p>针对追赶超速，诊断尝试将手的平移/腕部改为有上限的速度请求，双指仍通过受力位置控制；机器人保持原位，人的目标由数据教师指定。
+40秒内任务未完成，运动核查为 verified。本次实际停留在接近阶段，没有成功抓放，不能把“未超速”解释为修复有效。</p><video controls preload="metadata" poster="../../results/continuous_v2/human_velocity_contact_calibration/human_contact_calibration/preview.png" src="../../results/continuous_v2/human_velocity_contact_calibration/human_contact_calibration/demo.mp4"></video>
+<p>该方式只保留为可选诊断控制器，未替换已有操作基线。此运行期间运动核查代码有更新，执行器未改变；不进入正式模型成绩。
+<a href="../../results/continuous_v2/human_velocity_contact_calibration/index.html">诊断原始报告</a> · <a href="../../results/continuous_v2/human_velocity_contact_calibration/human_contact_calibration/human_control.jsonl">控制记录</a></p></article></section>
 <section><h2>伙伴怎样根据经历改变下一步</h2><p>这轮 Qwen 在每次决定时看到当前公开状态、最近 10 次带时间的观察、最近 4 次公开决定和最近 12 条自身生成的经验。
 它输出行动、解释与可选记忆，实际写入 108 条经验。以下是实际模型输出，可能有判断错误，不是评测器认证的事实。</p><ul><li>0.0 秒：blue 的位置为 [0.373, -0.072, 0.81]，目标 tray_blue 的位置为 [0.42, -0.3, 0.82]。</li><li>0.0 秒：确认 red 的位置为 [0.488, 0.053, 0.81]，目标 tray_red 的位置为 [0.6, -0.3, 0.82]。</li><li>1.0 秒：blue 的位置为 [0.373, -0.072, 0.81]，目标 keep_blue 的位置为 [0.42, 0.24, 0.82]。</li><li>5.0 秒：确认 red 的位置为 [0.488, 0.053, 0.835]，目标 tray_red 的位置为 [0.6, -0.3, 0.82]。</li></ul>
 <p>这些是生成的经验文本，而非手工信任分数或固定路由表；动作执行器仍使用阶段控制把意图变成连续物理动作。
@@ -122,7 +135,7 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 <p>数据教师根据夹爪实际碰撞几何保持手掌间隙，并在区域内低落差条件满足时释放；未把物体移动坐标。
 绿色、蓝色与红色都已有实际完成证据。以下是不同生成校准阶段，不能合并成模型效果提升。</p>
 <div class="table-wrap"><table><thead><tr><th>数据校准</th><th>完成/运行</th><th>查看</th></tr></thead><tbody><tr><td>visible_surface_contact_calibration</td><td>4/6</td><td><a href="../../datasets/visible_surface_contact_calibration/index.html">原始校准与失败视频</a></td></tr><tr><td>visible_surface_area_release</td><td>1/1</td><td><a href="../../datasets/visible_surface_area_release/index.html">原始校准与失败视频</a></td></tr></tbody></table></div>
-<article><h3>green · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p><video controls preload="metadata" poster="../../datasets/visible_surface_contact_calibration/dev/contact_green_seed_0105/preview.png" src="../../datasets/visible_surface_contact_calibration/dev/contact_green_seed_0105/demo.mp4"></video></article><article><h3>blue · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p><video controls preload="metadata" poster="../../datasets/visible_surface_contact_calibration/dev/contact_blue_seed_0105/preview.png" src="../../datasets/visible_surface_contact_calibration/dev/contact_blue_seed_0105/demo.mp4"></video></article><article><h3>red · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p><video controls preload="metadata" poster="../../datasets/visible_surface_area_release/dev/contact_red_seed_0104/preview.png" src="../../datasets/visible_surface_area_release/dev/contact_red_seed_0104/demo.mp4"></video></article><p>正式采集已完成：96条实际运行，96条完成，train 22017 帧、dev 751 帧。<a href="../../datasets/visible_surface_demonstrations/progress.html">采集进度与真实视频</a>。这批数据尚未用于本页的模型权重，还需训练与闭环验证。</p><p>另一项仿真预训练参照 π0.5-LIBERO 的权重已从中国 ModelScope 直连下载并通过 SHA256 核验，<a href="../../models/pi05_libero/download_receipt.json">中国源下载记录</a>。实际末端控制接口运行见下方；尚未完成充分的域匹配校准。</p></section>
+<article><h3>green · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p><video controls preload="metadata" poster="../../datasets/visible_surface_contact_calibration/dev/contact_green_seed_0105/preview.png" src="../../datasets/visible_surface_contact_calibration/dev/contact_green_seed_0105/demo.mp4"></video></article><article><h3>blue · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p><video controls preload="metadata" poster="../../datasets/visible_surface_contact_calibration/dev/contact_blue_seed_0105/preview.png" src="../../datasets/visible_surface_contact_calibration/dev/contact_blue_seed_0105/demo.mp4"></video></article><article><h3>red · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p><video controls preload="metadata" poster="../../datasets/visible_surface_area_release/dev/contact_red_seed_0104/preview.png" src="../../datasets/visible_surface_area_release/dev/contact_red_seed_0104/demo.mp4"></video></article><p>正式采集已完成：96条实际运行，96条完成，train 22017 帧、dev 751 帧。<a href="../../datasets/visible_surface_demonstrations/progress.html">采集进度与真实视频</a>。这批数据已用于本页的新模型训练，闭环结果单独按核验完成情况发布。三色物体的目标均为蓝色收纳底板；不能据此假定已经学习绿色留用区。</p><p>另一项仿真预训练参照 π0.5-LIBERO 的权重已从中国 ModelScope 直连下载并通过 SHA256 核验，<a href="../../models/pi05_libero/download_receipt.json">中国源下载记录</a>。实际末端控制接口运行见下方；尚未完成充分的域匹配校准。</p></section>
 <section><h2>用于后续模型校准的实际示范 Dataset</h2><p>已采集 17 条接触操作运行，11 条形成有效示范，共 729 个双相机/本体状态/动作监督样本。
 目标来自实际下一物理步的关节变化，避免把大幅 IK 目标跳变当成已执行动作。失败运行保留视频与原始记录，不生成有效训练目标。</p>
 <div class="table-wrap"><table><thead><tr><th>数据批次</th><th>有效示范 / 运行</th><th>train 样本</th><th>dev 样本</th><th>查看</th></tr></thead><tbody><tr><td>contact_demonstrations_v1</td><td>10 / 15</td><td>532</td><td>131</td><td><a href="../../datasets/contact_demonstrations_v1/index.html">实际示范与视频</a></td></tr><tr><td>contact_feedback_demonstrations</td><td>1 / 2</td><td>66</td><td>0</td><td><a href="../../datasets/contact_feedback_demonstrations/index.html">实际示范与视频</a></td></tr></tbody></table></div>
@@ -146,4 +159,4 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 Robot 模型只有 π0.5；Qwen 为合成伙伴。人的动作原语属于执行器，几何教师只用于校准与示范生成。</p>
 <p><a href="../../src/hrc_pilot/human_contact.py">动作执行器</a> · <a href="../../experiments/continuous_v2/physical_frame_dataset.py">按 stem 加载的数据接口</a>
  · <a href="../../scripts/collect_contact_demonstrations.py">实际示范采集入口</a></p></details>
-<p class="quiet">记录批次：pi05_position_qwen_session。生成时间：2026-10-06T19:46:24+08:00。本页从保存结果重建，不重新评分。</p></section></main></body></html>
+<p class="quiet">记录批次：pi05_position_qwen_session。生成时间：2026-10-06T20:41:01+08:00。本页从保存结果重建，不重新评分。</p></section></main></body></html>

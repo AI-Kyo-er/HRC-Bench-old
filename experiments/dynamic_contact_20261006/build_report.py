@@ -75,12 +75,15 @@ def surface_panel():
         assert receipt['status'] == 'downloaded_and_verified'
         asset_note = f'<p>另一项仿真预训练参照 π0.5-LIBERO 的权重已从中国 ModelScope 直连下载并通过 SHA256 核验，{link(model, "中国源下载记录")}。实际末端控制接口运行见下方；尚未完成充分的域匹配校准。</p>'
         sources.append(model)
+    usage = ('这批数据已用于本页的新模型训练，闭环结果单独按核验完成情况发布。三色物体的目标均为蓝色收纳底板；不能据此假定已经学习绿色留用区。'
+             if (ROOT / 'results/contact_training/pi05_visible_contact_expert/summary.json').exists()
+             else '这批数据尚未用于本页已完成的模型权重，还需训练与闭环验证。')
     document = f'''<section><h2>任务范围可见，实际示范数据扩大</h2><p>旧任务用“蓝色底板”描述目标，但评分检查一个不可见的小中心范围，部分指定点也在底板边缘。
 新场景让显示与判定共用蓝色收纳/绿色留用表面，检查物体完整足迹、实际释放和稳定；初始物体独立变化且彼此分离。</p>
 <p>数据教师根据夹爪实际碰撞几何保持手掌间隙，并在区域内低落差条件满足时释放；未把物体移动坐标。
 绿色、蓝色与红色都已有实际完成证据。以下是不同生成校准阶段，不能合并成模型效果提升。</p>
 <div class="table-wrap"><table><thead><tr><th>数据校准</th><th>完成/运行</th><th>查看</th></tr></thead><tbody>{''.join(table)}</tbody></table></div>
-{gallery}<p>{status}{progress_link}。这批数据尚未用于本页的模型权重，还需训练与闭环验证。</p>{asset_note}</section>'''
+{gallery}<p>{status}{progress_link}。{usage}</p>{asset_note}</section>'''
     return document, sources
 
 
@@ -105,6 +108,12 @@ def integration_panel():
         directory = root / 'continuous_activity_stream'
         result = read(directory / 'metrics.json')
         motion = read(directory / 'motion_verification.json')
+        diagnosis_path = directory / 'motion_diagnosis.json'
+        diagnosis_note = ''
+        if diagnosis_path.exists():
+            diagnosis = read(diagnosis_path)
+            sources.append(diagnosis_path)
+            diagnosis_note = f'<p>异常窗口接触记录显示：控制目标峰值速度 {diagnosis["peak_target_palm_speed_m_s"]:.2f}m/s，实际手掌峰值 {diagnosis["peak_actual_palm_speed_m_s"]:.2f}m/s，跟踪误差最大 {diagnosis["peak_tracking_error_m"]*100:.1f}cm，腕部旋转峰值 {diagnosis["peak_absolute_actual_yaw_speed_rad_s"]:.2f}rad/s。提示执行器跟踪与接触稳定问题，尚未确定因果或证明修复。{link(diagnosis_path,"逐帧诊断")}</p>'
         table = ''.join(f'<tr><td>{row["activity_index"] + 1} · {escape(row["scenario"])}</td><td>{row["start_time_s"]:.1f}–{row["end_time_s"]:.1f}秒</td><td>{"完成" if row["task_success"] else "未完成"}</td><td>{escape("、".join(row["completed_skills"]) or "无")}</td></tr>' for row in result['activities'])
         panels.append(f'''<article><h3>同一世界中的连续活动与分工变化</h3><p>只初始化一次物理世界；活动结束或到期后发布新的公开安排，物体、机械臂、人体位置与模拟时钟保持连续。
 双方模型与伙伴的经历和当前目标也不重置。三项活动分别为收纳接力、把刚整理的物体转为留用、交换整理职责。
@@ -113,19 +122,35 @@ def integration_panel():
 因此不进入有效模型排名。视频与转换点核查证明世界保持，不保证整个动作过程符合运动门槛。</div>{video(directory)}
 <div class="table-wrap"><table><thead><tr><th>活动</th><th>连续时间</th><th>活动终态</th><th>实际贡献</th></tr></thead><tbody>{table}</tbody></table></div>
 <p>活动转换发布任务，具体行动仍由模型生成；贡献按每项活动单独记录，旧操作不会自动获得新任务贡献。
-物理连续与有记忆不等于已证明可靠协作，模型操作和合成人行为的限制仍保留。</p></article>''')
+物理连续与有记忆不等于已证明可靠协作，模型操作和合成人行为的限制仍保留。</p>{diagnosis_note}</article>''')
         sources += [directory / name for name in ('metrics.json','activity_transitions.jsonl','motion_verification.json')]
         sources += [root / name for name in ('summary.json','provenance.json','video_verification.json','model_execution_verification.json')]
         evidence['physical_activity_stream'] = {**result,'motion_verification':motion}
     elif (root / 'continuous_activity_stream').exists():
         panels.append('<p>无重置活动流正在实际运行；完整视频与终态核验结束后才发布成绩。</p>')
+    calibration = RESULTS / 'human_velocity_contact_calibration'
+    if (calibration / 'video_verification.json').exists():
+        assert read(calibration / 'video_verification.json')['status'] == 'verified'
+        directory = calibration / 'human_contact_calibration'
+        metric, motion = read(directory / 'metrics.json'), read(directory / 'motion_verification.json')
+        panels.append(f'''<article><h3>接触手限速控制尝试：保留失败证据</h3>
+<p>针对追赶超速，诊断尝试将手的平移/腕部改为有上限的速度请求，双指仍通过受力位置控制；机器人保持原位，人的目标由数据教师指定。
+40秒内任务{'完成' if metric['task_success'] else '未完成'}，运动核查为 {escape(motion['status'])}。本次实际停留在接近阶段，没有成功抓放，不能把“未超速”解释为修复有效。</p>{video(directory)}
+<p>该方式只保留为可选诊断控制器，未替换已有操作基线。此运行期间运动核查代码有更新，执行器未改变；不进入正式模型成绩。
+{link(calibration / 'index.html', '诊断原始报告')} · {link(directory / 'human_control.jsonl', '控制记录')}</p></article>''')
+        sources += [directory / 'metrics.json', directory / 'motion_verification.json', calibration / 'provenance.json', calibration / 'video_verification.json']
+        evidence['velocity_controller_diagnostic'] = {'task_success':metric['task_success'],
+                                                      'motion_status':motion['status'], 'adopted_as_default':False}
     return '<section><h2>本轮模型接口与持续世界进展</h2>' + ''.join(panels) + '</section>', sources, evidence
 
 
 def adaptation_panel():
+    visible = (ROOT / 'results/contact_training/pi05_visible_contact_expert/summary.json').exists()
     position = (ROOT / 'results/contact_training/pi05_position_expert_v1/summary.json').exists()
-    training = ROOT / ('results/contact_training/pi05_position_expert_v1' if position else 'results/contact_training/pi05_lora_v1')
-    evaluation = RESULTS / ('pi05_position_atom_evaluation' if position else 'pi05_lora_atom_evaluation')
+    training = ROOT / ('results/contact_training/pi05_visible_contact_expert' if visible else
+                       'results/contact_training/pi05_position_expert_v1' if position else 'results/contact_training/pi05_lora_v1')
+    evaluation = RESULTS / ('pi05_visible_contact_atomic' if visible else
+                            'pi05_position_atom_evaluation' if position else 'pi05_lora_atom_evaluation')
     if not (training / 'summary.json').exists():
         return '', {}, []
     summary, provenance = read(training / 'summary.json'), read(training / 'provenance.json')
@@ -143,12 +168,15 @@ def adaptation_panel():
         assert verified['status'] == 'verified'
         eval_provenance = read(evaluation / 'provenance.json')
         for metric in read(evaluation / 'summary.json')['episodes']:
-            directory = evaluation / metric['scenario']
+            matches = [p.parent for p in evaluation.rglob('metrics.json')
+                       if read(p).get('scenario') == metric['scenario'] and read(p).get('seed') == metric['seed']]
+            assert len(matches) == 1
+            directory = matches[0]
             physics = read(directory / 'physics_contract.json')
             evaluation_evidence.append({key: metric[key] for key in ('scenario', 'seed', 'task_success', 'completed_skills')})
             panels.append(f'''<article><h3>{escape(metric['scenario'])} · 基础操作</h3>
 <p>同一个适配后模型、seed {metric['seed']}、最长30秒、15Hz控制、最多执行 {eval_provenance['execution_horizon']} 步后重新推理；伙伴只观察。真实接触抬起记录 {len(physics['contact_grasp_objects'])} 个对象，
-合法贡献 {len(metric['completed_skills'])} 项，任务{'完成' if metric['task_success'] else '未完成'}。该测试检查基本操作，不能解释成人机协作成绩。</p>
+合法贡献 {len(metric['completed_skills'])} 项，任务{'完成' if metric['task_success'] else '未完成'}。运动核查 {escape(metric.get('motion_verification_status', '未核查'))}。该测试检查基本操作，不能解释成人机协作成绩。</p>
 {video(directory)}<p>{link(directory / 'metrics.json', '原始成绩')} · {link(directory / 'physics_contract.json', '接触与贡献证据')}</p></article>''')
             sources += [directory / 'metrics.json', directory / 'physics_contract.json']
         sources += [evaluation / name for name in ('summary.json', 'provenance.json', 'video_verification.json', 'model_execution_verification.json')]
@@ -158,14 +186,18 @@ def adaptation_panel():
     method = ('完整动作专家、语言LoRA与动作投影，视觉与语言主干冻结' if position else 'LoRA适配参数')
     setup = ('监督来自下一控制tick内实际施加的最后一个限速位置目标，采用train数据计算的相对位置归一化。末尾窗口保留，未记录的未来步用mask排除loss。'
              if position else '使用官方OpenPI训练步骤和原有DROID归一化，只保留完整15步窗口。')
+    validation_note = '当前有效 dev 只含红、蓝示范；绿色仅有一条成功训练示范，没有有效 dev 操作。'
+    if visible:
+        setup += '新训练还排除未记录未来步的注意力，实际8维动作loss独立报告，24维模型填充采用0.1权重的辅助loss；验证只统计实际8维。'
+        validation_note = 'dev为留出的seed131三色示范；闭环使用未训练的seed24、25。均为相同桌面与蓝色目标区域，不能解释为跨任务泛化。'
     document = f'''<section><h2>本轮实际训练，以及训练后能否操作</h2>
 <p>针对当前 Sim 操作分布，从已有 π0.5-DROID 权重训练 {summary['steps']} 步，更新 {provenance['trainable_parameters']:,} 个参数；训练范围为{method}。
 {setup}训练输入 {provenance['train_samples']} 个、验证输入 {provenance['dev_samples']} 个，batch size {provenance['batch_size']}。
 只使用本地权重和已经生成的实际接触示范，没有下载新模型。</p>
-<p>曲线是在固定 16 个验证样本、固定噪声上计算的 flow-matching loss，从 {summary['initial_dev_loss']:.3f} 降到 {summary['final_dev_loss']:.3f}。
+<p>曲线是在固定 {provenance.get('eval_sample_count', 16)} 个验证样本、固定噪声上计算的 flow-matching loss，从 {summary['initial_dev_loss']:.3f} 降到 {summary['final_dev_loss']:.3f}。
 它衡量对示范监督的拟合，不等于抓取成功率，也不是全部验证集上的泛化成绩。
-当前有效 dev 只含红、蓝示范；绿色仅有一条成功训练示范，没有有效 dev 操作。时间相邻的动作窗口也不能视为独立试验。</p>{plot}
-<div class="notice">{outcome} 所以模型适配与闭环有效性必须分别报告；当前数据量与操作覆盖仍小，不能据此排名先进模型的 HRC 能力。
+{validation_note}时间相邻的动作窗口也不能视为独立试验。</p>{plot}
+<div class="notice">{outcome} 所以模型适配与闭环有效性必须分别报告；当前操作覆盖仍有限，不能据此排名先进模型的 HRC 能力。
 这轮提示、动作块执行长度与早先原生模型运行不同，也不是严格配对的前后提升实验。</div>
 <p>{link(training / 'summary.json', '训练结果')} · {link(training / 'provenance.json', '训练设置与来源')} · {link(training / 'training.jsonl', '逐步训练记录')}</p>
 <p>位置域方案参考<a href="https://github.com/Physical-Intelligence/openpi/blob/main/examples/droid/README_train.md">官方DROID训练说明</a>。
@@ -268,6 +300,13 @@ def main():
             sample_panels.append(f'<article><h3>真实示范：{escape(selected["episode"])}</h3><p>几何教师通过关节控制完成物理操作；此处展示数据生成，不是训练模型成绩。</p>{video(dataset_root / selected["episode"])}</article>')
     stamp = datetime.now().astimezone().isoformat(timespec='seconds')
     count = len(summary['episodes'])
+    frame_headline, frame_label = frame_total, '早期真实接触示范监督'
+    latest_dataset = ROOT / 'datasets/visible_surface_demonstrations/dataset.json'
+    if latest_dataset.exists():
+        frame_headline = sum(read(latest_dataset)['verified_samples'].values())
+        frame_label = '新可见场景示范帧'
+    batch_note = ('<p>下方新模型训练使用96条可见场景示范，其基础操作测试单独呈现。这里的三项联合运行和连续活动流仍使用上一批位置域权重；不能把新训练的效果归到旧联合结果。</p>'
+                  if (ROOT / 'results/contact_training/pi05_visible_contact_expert/summary.json').exists() else '')
     memory_section = ''
     scope_text = ('伙伴经验跨活动保留，本批三个活动分别重新初始化物理世界，因此不是世界无重置的连续任务流。'
                   if provenance.get('human_memory_scope') == 'session' else '记忆当前只在单个episode内保留。')
@@ -301,10 +340,10 @@ th,td{{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-ali
 </style></head><body><main><header><div class="eyebrow">HRC CONTINUOUS · 真实模型、接触动作与实际示范数据</div>
 <h1>动态伙伴在真实接触场景中，实际做了什么？</h1>
 <p>本页最新联合运行使用 {robot_label} 与 Qwen3-14B 合成伙伴。两者的动作在同一物理时间轴中执行，物体通过接触移动；视频直接来自运行时相机。
-下方分别呈现真实模型结果、接触手校准与可用于模型校准的数据。</p></header>
-<div class="stats"><div class="stat"><strong>{count} 条</strong><span>本次实际模型运行</span></div>
+下方分别呈现真实模型结果、接触手校准与可用于模型校准的数据。</p>{batch_note}</header>
+<div class="stats"><div class="stat"><strong>{count} 条</strong><span>已完成的联合模型运行</span></div>
 <div class="stat"><strong>{provenance['model_calls']} 次</strong><span>π0.5 实际推理</span></div><div class="stat"><strong>{decision_count} 次</strong><span>Qwen 意图决定</span></div>
-<div class="stat"><strong>{frame_total} 帧</strong><span>真实接触示范监督</span></div></div>
+<div class="stat"><strong>{frame_headline:,} 帧</strong><span>{frame_label}</span></div></div>
 <section><h2>目的与设置</h2><p>实验要观察：当人的行动由生成式模型根据可见进度决定、机械臂由训练后的具身模型控制时，双方能否完成共同活动，人的目标选择怎样影响实际过程。
 模型能力判断需要基本操作可用、人的动作连续、任务评分按实际贡献区分。</p>
 <p>本次运行后端为 Genesis，机器人 15 Hz 控制，最长 {budget_s:.0f} 秒模拟时间；人体意图约每秒更新一次，物理推进为 60 Hz。

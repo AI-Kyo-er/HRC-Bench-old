@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T19:46:24+08:00",
+  "generated_at": "2026-10-06T20:41:01+08:00",
   "native_run": "pi05_position_qwen_session",
   "episodes": [
     {
@@ -59,11 +59,11 @@
   "model_adaptation": {
     "training": {
       "status": "trained",
-      "checkpoint": "/data1/sieniwgroup/sieniw/models/HRC-Bench/pi05_contact_position_expert_v1/1200",
-      "initial_dev_loss": 1.6788138151168823,
-      "final_dev_loss": 0.004113925562705845,
-      "steps": 1200,
-      "elapsed_s": 468.11699337908067,
+      "checkpoint": "/data1/sieniwgroup/sieniw/models/HRC-Bench/pi05_visible_contact_expert/3000",
+      "initial_dev_loss": 0.6705557345412672,
+      "final_dev_loss": 0.00802033537911484,
+      "steps": 3000,
+      "elapsed_s": 1193.0335516310297,
       "interpretation": "已完成真实权重更新，仍需独立闭环仿真评测。"
     },
     "settings": {
@@ -79,51 +79,67 @@
         "discrete_state_input": true,
         "pytorch_compile_mode": "max-autotune"
       },
-      "seed": 21,
+      "seed": 24,
       "batch_size": 2,
-      "steps": 1200,
-      "train_samples": 598,
-      "dev_samples": 131,
+      "steps": 3000,
+      "train_samples": 22017,
+      "dev_samples": 751,
       "trainable_parameters": 457967648,
       "trainable_scope": "full_action_expert_plus_language_lora_and_projections",
       "action_encoding": "joint_position",
       "normalization": "train_only_relative_position_stats",
-      "partial_action_chunks": "masked_loss_on_real_steps",
-      "sampling": "仅使用完整动作块，dev保留最大示范seed；不声称跨任务或跨人泛化。",
+      "partial_action_chunks": "masked_suffix_attention_and_loss",
+      "loss_dimensions": {
+        "physical": 8,
+        "padding": 24,
+        "padding_weight": 0.1,
+        "dev_loss": "physical_8_only"
+      },
+      "eval_sample_count": 64,
+      "sampling": "dev保留最大示范seed；完整位置专家允许有时间mask的末尾块，不声称跨任务或跨人泛化。",
       "dataset_roots": [
-        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_demonstrations_v1",
-        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_feedback_demonstrations"
+        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/visible_surface_demonstrations"
       ],
       "dataset_metadata_sha256": {
-        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_demonstrations_v1": "7160d10c11ad6d05eda11961cec90f5013353ebf680109057d941cac9241e8fe",
-        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_feedback_demonstrations": "91d077a8b128e6f5a6a72bfc0f355a67938c9028296b452d1911d94e2625172b"
+        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/visible_surface_demonstrations": "f07476b2ddcd437c067d14fc26194144aedc8989a22ccadf07b4e66c2295c587"
       },
       "official_training_step_sha256": "22f98a06aaa6e68e0f725d727ab95398238d1cae8a46bb94e829f330758a9baf",
-      "interpretation": "操作域适配训练，训练或验证loss不代表仿真成功或HRC能力。",
-      "training_code_fingerprint_capture": "after_run_files_unchanged_during_training",
-      "training_source_sha256": {
-        "scripts/train_contact_lora.py": "bb642ab06f09d2399b840e554d54f2feaba9b484ffe22f17b0c6dd03cce77d24",
-        "experiments/continuous_v2/contact_position_config.py": "80a8d167d52e5a8511222f6349acc5fd8f4474df9cdf751990e7ddf65ebb8e1d",
-        "experiments/continuous_v2/physical_frame_dataset.py": "b36e02605075954c2cf97ac3c88298abbcb353ec122e78d118b006ee2729933f"
-      },
-      "supervision": "next_tick_last_rate_limited_applied_joint_position_and_continuous_gripper"
+      "interpretation": "操作域适配训练，训练或验证loss不代表仿真成功或HRC能力。"
     },
     "atomic_evaluation": [
       {
-        "scenario": "contact_atom_blue",
-        "seed": 21,
+        "scenario": "visible_atom_blue",
+        "seed": 24,
         "task_success": false,
         "completed_skills": []
       },
       {
-        "scenario": "contact_atom_green",
-        "seed": 21,
+        "scenario": "visible_atom_blue",
+        "seed": 25,
         "task_success": false,
         "completed_skills": []
       },
       {
-        "scenario": "contact_atom_red",
-        "seed": 21,
+        "scenario": "visible_atom_green",
+        "seed": 24,
+        "task_success": false,
+        "completed_skills": []
+      },
+      {
+        "scenario": "visible_atom_green",
+        "seed": 25,
+        "task_success": false,
+        "completed_skills": []
+      },
+      {
+        "scenario": "visible_atom_red",
+        "seed": 24,
+        "task_success": false,
+        "completed_skills": []
+      },
+      {
+        "scenario": "visible_atom_red",
+        "seed": 25,
         "task_success": false,
         "completed_skills": []
       }
@@ -226,6 +242,11 @@
         ],
         "interpretation": "检查人体拿放过程中物体的逐步位移与控制目标速度，不证明全身运动、接触安全或真人效度。"
       }
+    },
+    "velocity_controller_diagnostic": {
+      "task_success": false,
+      "motion_status": "verified",
+      "adopted_as_default": false
     }
   },
   "generated_human_memory_count": 108,
@@ -254,19 +275,25 @@
     "datasets/contact_feedback_demonstrations/dataset.json": "91d077a8b128e6f5a6a72bfc0f355a67938c9028296b452d1911d94e2625172b",
     "datasets/contact_feedback_demonstrations/provenance.json": "d030362a60946727011f88d0b27b8c73318c20181b7df786cf0096df5eb10971",
     "datasets/contact_feedback_demonstrations/video_verification.json": "7e230c82a838bc99031b45ba95abff02c2356f3b4ee2161d45426eec3b02f459",
-    "results/contact_training/pi05_position_expert_v1/summary.json": "675b39c4f0225ce8906dde3f88330fc6528a954561ff421e7214992e2bb2d2f7",
-    "results/contact_training/pi05_position_expert_v1/provenance.json": "d940fcef19a0f2f23b1d74c33408e8a4b9ecd82d6f2df636bed0c4f21690b000",
-    "results/contact_training/pi05_position_expert_v1/training.jsonl": "702a8efc1f25a48a3cecc21e49b95c75b0f99ebde66c5de4b27884bc533dfdf8",
-    "results/continuous_v2/pi05_position_atom_evaluation/contact_atom_blue/metrics.json": "18045d97e0e526b6cbc31b3cfa9f71e4e5ece95194fafe344ee5514efd9ceb64",
-    "results/continuous_v2/pi05_position_atom_evaluation/contact_atom_blue/physics_contract.json": "00584e009580fb912f21472ff3fbd43ff8e18b4d1891b2d4fd6b00be5f776a51",
-    "results/continuous_v2/pi05_position_atom_evaluation/contact_atom_green/metrics.json": "1bea39e32a76bb5814dc06ac120fade8283ce49acd039b9b8864348bc5ecf9d9",
-    "results/continuous_v2/pi05_position_atom_evaluation/contact_atom_green/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
-    "results/continuous_v2/pi05_position_atom_evaluation/contact_atom_red/metrics.json": "4bd2957df5f0b523f996ffd078359446b255b47ce3f2c1a3f59e33d442efcbe1",
-    "results/continuous_v2/pi05_position_atom_evaluation/contact_atom_red/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
-    "results/continuous_v2/pi05_position_atom_evaluation/summary.json": "7ec9972802424cedc82d3c6ccd383520d7d75e7a15a0033de21d7b7e1512d639",
-    "results/continuous_v2/pi05_position_atom_evaluation/provenance.json": "de52f44ebd7c19fa9e2c22fb2128ddc9203fbdad54ccc7fb541a44aa72612dd0",
-    "results/continuous_v2/pi05_position_atom_evaluation/video_verification.json": "36263ee09e33d66b874ee69b3190288f8d9f85346b1671c440f94752dfedad68",
-    "results/continuous_v2/pi05_position_atom_evaluation/model_execution_verification.json": "5eca4bb87c5a09f2a4f470c1de98cebb0859ab4d7dea8bcb8a2450c6aa3d28d4",
+    "results/contact_training/pi05_visible_contact_expert/summary.json": "09203c3696407b917e528ec1569979b1297054d2a51345cee36d194ec961c1ed",
+    "results/contact_training/pi05_visible_contact_expert/provenance.json": "eb28623e9f90a8dc8ae3fcf6325a7a6552b4eee3a2fb6a49d5e14e822569136d",
+    "results/contact_training/pi05_visible_contact_expert/training.jsonl": "76409877c8bf96282191c979a7243ba5e7d8cc48c38aec3f9334c53d193e7dcf",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0024/metrics.json": "f0e7ffdbd53fc16bc43d3fddbddd438a9e2874b0b8295d95f2b41da33dd6389f",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0024/physics_contract.json": "9fa1575492295950bcc28db959a4011d5dc66915722d0d96047c03917f42aeda",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0025/metrics.json": "f0669503d94d8b2f8c23c5c4991f9983adbfb4f692d5b4203021f1ff8d2e97bd",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_blue/seed_0025/physics_contract.json": "9fa1575492295950bcc28db959a4011d5dc66915722d0d96047c03917f42aeda",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0024/metrics.json": "b29eead5cb73ba635206433e13a20d020824d63f390c5edf3918f59164ae4867",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0024/physics_contract.json": "9fa1575492295950bcc28db959a4011d5dc66915722d0d96047c03917f42aeda",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0025/metrics.json": "43fa077f244957e7cc7b0e9163f0710af027d806f80e62f2108028b899073090",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_green/seed_0025/physics_contract.json": "9fa1575492295950bcc28db959a4011d5dc66915722d0d96047c03917f42aeda",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0024/metrics.json": "7aaf24d750e0b3b34b1a137c9c7aa5c0f1c0d5717f15e7a52c72a6cf2807aed1",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0024/physics_contract.json": "9fa1575492295950bcc28db959a4011d5dc66915722d0d96047c03917f42aeda",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0025/metrics.json": "a4cdadcb39c5bb1724e08aa7e4c611590c901197a184bc93d5206ebf8631f9e9",
+    "results/continuous_v2/pi05_visible_contact_atomic/visible_atom_red/seed_0025/physics_contract.json": "9fa1575492295950bcc28db959a4011d5dc66915722d0d96047c03917f42aeda",
+    "results/continuous_v2/pi05_visible_contact_atomic/summary.json": "430816192c7c759a412556ddfefc08117a7b7e508f6d7fe43c94dc45c2ec807a",
+    "results/continuous_v2/pi05_visible_contact_atomic/provenance.json": "fe5e7f0d594583a0c813125ff88333940e1cfa2895370f62eaf9e6dead69a3a3",
+    "results/continuous_v2/pi05_visible_contact_atomic/video_verification.json": "cf0054c70dfc29bea11856198bd9c229c61b76ad7dd9a2ef6973672c3e4a2b6a",
+    "results/continuous_v2/pi05_visible_contact_atomic/model_execution_verification.json": "d5038a0dad1a95a4b6b82bcfd1149f6de307be3007641c080e8aa47b552f383b",
     "datasets/visible_surface_contact_calibration/dataset.json": "b9ba9bf115be249826088df1c188dbf4e6e5c8e45b740d1b72a3806b63e4a545",
     "datasets/visible_surface_contact_calibration/provenance.json": "84fdac8a2152b92aeaeb608f4f25a53c5115d874aa29750b48ea20911583ab14",
     "datasets/visible_surface_contact_calibration/video_verification.json": "479800b42efb987b9a165ab3b71ea6f478aaca193010d32f86cb0183cc1fcbfc",
@@ -282,12 +309,17 @@
     "results/continuous_v2/pi05_libero_contact_formal/provenance.json": "c4ffeb5d50ab2f3b2300659ba9dac4b3780e1ffdb6944406960997bd6737ac24",
     "results/continuous_v2/pi05_libero_contact_formal/video_verification.json": "32015ff617c50a027e7bb85f4d37595b9b1781a109763870739d3dcc5eaa53f4",
     "results/continuous_v2/pi05_libero_contact_formal/model_execution_verification.json": "40726c630488905cd40f0a8a0a1830c9ae29dbaba19d14f4d1fcd3ec7f2a763c",
+    "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/motion_diagnosis.json": "16db6a4c0ec9966ed2302fbe7a1da3a837529b4bedbce1246a7d93176f85143c",
     "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/metrics.json": "23eec4f70189a2d0d2209b008635470cce4ce133599ec66ee61a01cd169c380d",
     "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/activity_transitions.jsonl": "da4e8b0c3ba9737546e9f1f0f5b2d2d3de08e521cc575a5ddc4dffd569dc74c7",
     "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/motion_verification.json": "624bb8e17b8b8230f78e9b9c1b8da3daad1826b022206b81064dbc8a5c5371c0",
     "results/continuous_v2/physical_activity_stream_v1/summary.json": "4898601074aea6cf8aa2088e9d4446a6336bf45afecbc56896a11da0269233a9",
     "results/continuous_v2/physical_activity_stream_v1/provenance.json": "5ac9597eb7858bcacdf4a2bf675ab11f3bbdc267914f20d228504e7fbba88f27",
     "results/continuous_v2/physical_activity_stream_v1/video_verification.json": "a053fdc7737d2a9d614b1876cf992554ba1e3c6d4cadbeef6ab0fc2b817e1118",
-    "results/continuous_v2/physical_activity_stream_v1/model_execution_verification.json": "6e93e7c02358a034a3a22f9396cf49b77b7c23ff86bab9511ea31385c9036033"
+    "results/continuous_v2/physical_activity_stream_v1/model_execution_verification.json": "6e93e7c02358a034a3a22f9396cf49b77b7c23ff86bab9511ea31385c9036033",
+    "results/continuous_v2/human_velocity_contact_calibration/human_contact_calibration/metrics.json": "fa4f4a66b91e4e317f5c525a30f2192068951b4cc0cfc8a561098f7670356325",
+    "results/continuous_v2/human_velocity_contact_calibration/human_contact_calibration/motion_verification.json": "788b0dda0ce27237665ecc2b2e9ef71dad7b18adffd3cb789fef2775b8c6fc6e",
+    "results/continuous_v2/human_velocity_contact_calibration/provenance.json": "6ed1449d5c080b80e9e4bd48943a2fea2735cd2c4725c3e7c0e41d4376f8bfb5",
+    "results/continuous_v2/human_velocity_contact_calibration/video_verification.json": "80b254f98581b2b03f99a33ba1d6dc93f7ee0c3ca72aa4c1e94bf105f4e6fcda"
   }
 }

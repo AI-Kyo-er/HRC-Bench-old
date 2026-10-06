@@ -16,6 +16,7 @@
 - [真实接触、生成式伙伴与模型适配进展（2026-10-06，含真实 Sim 视频）](experiments/dynamic_contact_20261006/index.html)
 - [可见目标表面与96条实际示范的采集进度](datasets/visible_surface_demonstrations/progress.html)
 - [96条可见区域真实接触示范正式报告](datasets/visible_surface_demonstrations/index.html)
+- [96条示范训练后的六条独立操作测试（真实视频，0/6）](results/continuous_v2/pi05_visible_contact_atomic/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)
@@ -36,7 +37,16 @@ ln -s /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2 results
 以公开任务更新切换活动。86.4秒实际运行完成首项、后两项未完成，另有两处持握速度
 超阈值，作为诊断保留。π0.5-LIBERO已完成7维末端动作的6秒真实场景接口运行与
 像素/动作/请求核查，尚未完成相机和坐标域匹配校准，不能解释为HRC成绩。
-96条采集正式完成，22,768个样本与96条视频核验通过；新的学习训练仍待进行。
+96条采集正式完成，22,768个样本与96条视频核验通过。后续3000步学习训练已完成，
+22,017帧训练/751帧验证；真实8维动作loss与24维填充辅助loss分别计量，
+未记录未来步同时排除注意力与监督。固定64个验证输入loss从0.671到0.0080，
+六条独立布局操作仍0/6、无合法接触抬起。678次模型调用/2700个动作的像素、
+请求、视频和运动核查通过。报告不将低loss或教师成功当作学习模型的HRC能力。
+
+新运行入口为 `scripts/run_visible_contact_training.sh`、`scripts/run_visible_contact_server.sh`
+和 `scripts/run_visible_contact_evaluation.sh`；训练/模型服务/Genesis分别使用GPU3/2/0，
+启动前必须重新核对显存。接触手速度控制诊断40秒未完成抓放，未采用为默认基线。
+连续活动上下文已修订任务板与旧目标年代标识，仅通过接口回归，尚无新的生成式实测。
 
 新入口：`scripts/run_activity_stream.py`、`scripts/run_pi05_libero_benchmark.py`，
 模型服务 `scripts/serve_pi05_libero.py` 使用已下载中国源权重，需设置Torch overlay
@@ -156,7 +166,8 @@ CUDA_VISIBLE_DEVICES=2 XLA_PYTHON_CLIENT_MEM_FRACTION=0.4 PYTHONPATH=src:. \
 
 生成式伙伴新增带时间的公开观察历史，以及 Qwen 自己生成的解释和经验记忆；
 每次决定检索最近 12 条经验，完整内容保存到 `human_memory.jsonl`。
-这属于单 episode 内的生成式记忆，尚不是跨活动长期记忆，也没有真人校准或效用消融证据。
+早期只在单episode内保留；后续session与无重置活动流会保留跨活动经历，
+尚无跨天长期记忆、真人校准或效用消融证据。
 独立基本操作可选 `--partner-mode observing`，用于隔离人的接管行为。
 
 后续已完成完整动作专家的位置域适配：1200步、457,967,648个训练参数，使用实际
@@ -167,8 +178,8 @@ CUDA_VISIBLE_DEVICES=2 XLA_PYTHON_CLIENT_MEM_FRACTION=0.4 PYTHONPATH=src:. \
 出现整段观察停顿；物理世界仍在每个episode重新初始化，尚不是世界无重置的活动流。
 
 可见目标场景由[同一份表面几何](src/hrc_pilot/goal_regions.py)控制显示与评分，检查
-实际物体完整足迹、释放、支撑和稳定。已完成接触生成校准，96条独立布局示范采集
-正在进行；这是几何教师数据生成，不计成学习模型成绩。采集启动脚本为
+实际物体完整足迹、释放、支撑和稳定。接触生成校准与96条独立布局示范采集
+已完成；这是几何教师数据生成，不计成学习模型成绩。采集启动脚本为
 `scripts/run_visible_surface_collection.sh`，已完成视频可用以下命令生成独立进度快照：
 
 ```bash
@@ -177,8 +188,9 @@ PYTHONPATH=src:. .venv-vc-pilot/bin/python experiments/continuous_v2/build_visib
 
 π0.5-LIBERO权重已通过直连中国ModelScope获取并完成SHA256核验，位于
 `/data1/sieniwgroup/sieniw/models/lerobot/pi05-libero/`；仓库的 `models/pi05_libero`
-为软链接。它使用7维动作与不同的状态接口，尚未完成本平台运行，不能接到DROID
-接口后直接当作有效模型结果。下载脚本 `scripts/download_modelscope_policy.py`
+为软链接。它使用7维末端增量动作与不同的状态接口，已完成6秒实际运行与链路核查；
+相机、坐标和接触域匹配尚未充分校准，不能接到DROID接口后直接当作有效能力排名。
+下载脚本 `scripts/download_modelscope_policy.py`
 禁用环境代理，限制重定向为ModelScope/中国区阿里云OSS，没有HuggingFace或VPN回退。
 
 ```bash

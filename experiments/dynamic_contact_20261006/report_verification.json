@@ -1,147 +1,57 @@
 {
-  "checked_at": "2026-10-06T19:52:21+08:00",
   "status": "verified",
   "pages": [
     {
-      "path": "experiments/dynamic_contact_20261006/index.html",
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false,
-      "videos": [
-        {
-          "duration": 15.8,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 29.6,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 42,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 42,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 32,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 32,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 32,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 7.95,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 88.4,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 14.666667,
-          "width": 480,
-          "height": 484,
-          "error": null
-        },
-        {
-          "duration": 14.8,
-          "width": 480,
-          "height": 484,
-          "error": null
-        },
-        {
-          "duration": 27.533333,
-          "width": 480,
-          "height": 484,
-          "error": null
-        },
-        {
-          "duration": 6.733333,
-          "width": 480,
-          "height": 484,
-          "error": null
-        },
-        {
-          "duration": 6.4,
-          "width": 480,
-          "height": 484,
-          "error": null
-        }
-      ],
-      "playback_check": {
-        "time": 0.915593,
+      "page": "experiments/dynamic_contact_20261006/index.html",
+      "status": "verified",
+      "video_count": 18,
+      "first_video_playback": {
+        "time": 0.41697,
         "paused": false,
-        "error": null
+        "readyState": 4,
+        "duration": 15.8
       },
-      "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "77ce140fe28016115ac1b9e1507656ab66e3aeb7efcbfc0529229493ca7128e4"
+      "visible_local_links_checked": 47,
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
     },
     {
-      "path": "results/continuous_v2/pi05_position_qwen_session/index.html",
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false,
-      "videos": [
-        {
-          "duration": 29.6,
-          "width": 640,
-          "height": 604,
-          "error": null
-        }
-      ],
-      "playback_check": {
-        "time": 0.912175,
+      "page": "results/continuous_v2/pi05_visible_contact_atomic/index.html",
+      "status": "verified",
+      "video_count": 1,
+      "first_video_playback": {
+        "time": 0.411907,
         "paused": false,
-        "error": null
+        "readyState": 4,
+        "duration": 32
       },
-      "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "061dffc59f4327c34b8086eef312b3984d5b868a6187fba8bd1cc58f915bee7a"
+      "visible_local_links_checked": 29,
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
     },
     {
-      "path": "results/continuous_v2/pi05_libero_contact_formal/index.html",
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false,
-      "videos": [
-        {
-          "duration": 7.95,
-          "width": 640,
-          "height": 604,
-          "error": null
-        }
-      ],
-      "playback_check": {
-        "time": 0.910649,
+      "page": "results/continuous_v2/human_velocity_contact_calibration/index.html",
+      "status": "verified",
+      "video_count": 1,
+      "first_video_playback": {
+        "time": 0.412404,
         "paused": false,
-        "error": null
+        "readyState": 4,
+        "duration": 42
       },
-      "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "267711076a656b5c6e14dd075932c5549981f795adaf7386648323287829f0ec"
+      "visible_local_links_checked": 29,
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
     }
-  ]
+  ],
+  "interpretation": "HTML可读性、实际视频起播及可见本地链接核查；不验证策略能力。"
 }
