@@ -34,7 +34,7 @@ def test_holding_feedback_does_not_turn_past_grasp_into_current_contact():
     from hrc_pilot.native_contact_human import NativeContactHuman
     from hrc_pilot.native_articulated_hand import NativeArticulatedHuman
     hand=object.__new__(NativeArticulatedHuman)
-    hand.env=SimpleNamespace(sim=SimpleNamespace(data=SimpleNamespace(qpos=np.zeros(3))))
+    hand.env=SimpleNamespace(sim=SimpleNamespace(data=SimpleNamespace(qpos=np.zeros(3))),env=SimpleNamespace(objects_dict={'cookies_1':None}))
     hand.finger_q=[0,1];hand.yaw_q=2;hand.carry_object='cookies_1';hand.motor_failure=None;hand.object_id=None
     hand.finger_contacts=lambda name=None:[False,False]
     with patch.object(NativeContactHuman,'public_feedback',return_value={}):feedback=hand.public_feedback()

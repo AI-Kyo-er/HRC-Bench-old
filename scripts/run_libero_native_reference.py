@@ -20,6 +20,8 @@ from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
 from hrc_pilot.native_placement import NativePlacementEvidence
+from hrc_pilot.native_scene_catalog import CASES,resolve_goal,scene_regions,case_metadata
+from hrc_pilot.native_goal_evidence import create_goal_evidence,goal_success
 from hrc_pilot.native_activity import PROFILES,activity_plan,activity_regions,public_surfaces,evaluate_activity
 from hrc_pilot.native_autonomous_human import CONTEXTS
 from hrc_pilot.native_personal_evidence import evaluate_personal_goals
@@ -32,6 +34,7 @@ def write_json(path, value):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--scene-case',choices=list(CASES))
     parser.add_argument('--suite', default='libero_spatial')
     parser.add_argument('--task-ids', type=int, nargs='+', default=[0, 1, 2])
     parser.add_argument('--init-state-ids', type=int, nargs='+', default=[0])
@@ -54,6 +57,9 @@ def main():
     parser.add_argument('--human-persona', choices=['cooperative','independent','cautious','assertive'], default='cooperative')
     parser.add_argument('--human-model', type=Path, default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     args = parser.parse_args()
+    if args.scene_case:
+        case=CASES[args.scene_case];args.suite=case.suite;args.task_ids=[case.task_id]
+        if args.human_mode=='qwen' and args.autonomous_human_context!='pantry_work':parser.error('通用库存场景要求pantry_work自主背景')
     contract=NativeTaskContract(args.task_family)
     work_plan=activity_plan(args.activity_profile) if args.activity_profile else []
     if args.autonomous_human_context and (args.human_mode!='qwen' or args.activity_profile or args.completion_criterion!='released_stable'):
@@ -115,7 +121,8 @@ def main():
                   Path('src/hrc_pilot/native_task_contracts.py'),
                   Path('src/hrc_pilot/native_activity.py'),Path('src/hrc_pilot/native_autonomous_human.py'),
                   Path('src/hrc_pilot/native_personal_evidence.py'),Path('src/hrc_pilot/native_articulated_hand.py'),
-                  Path('src/hrc_pilot/native_hand_policy.py'),
+                  Path('src/hrc_pilot/native_hand_policy.py'),Path('src/hrc_pilot/native_scene_catalog.py'),
+                  Path('src/hrc_pilot/native_goal_evidence.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
                   Path('src/hrc_pilot/native_placement.py'),
@@ -139,6 +146,7 @@ def main():
         if args.autonomous_human_context:
             from hrc_pilot.native_autonomous_human import AutonomousNativeHuman
             human_class=AutonomousNativeHuman;human_kwargs={'autonomous_context':args.autonomous_human_context}
+            if args.scene_case:human_kwargs['preferred_personal_objects']=CASES[args.scene_case].preferred_personal_objects
         if args.human_contact_model=='articulated_hand':
             from hrc_pilot.native_hand_policy import ArticulatedAutonomousHuman,ArticulatedAssignedHuman
             human_class=ArticulatedAutonomousHuman if args.autonomous_human_context else ArticulatedAssignedHuman
@@ -182,6 +190,7 @@ def main():
                 for _ in range(10):
                     obs, _, _, _ = env.step([0.] * 6 + [-1.])
                     if args.human_mode=='none':frame(obs)
+                goal_spec=resolve_goal(env) if args.completion_criterion=='released_stable' else None
                 actor, regions, messages, contact_witness = None, {}, [], False
                 initial_plate, plate_goal, human_dwell = None, None, 0
                 work_events=[];active_work=None
@@ -189,7 +198,7 @@ def main():
                     from hrc_pilot.native_contact_human import augment_contact_human, NativeContactHuman
                     from hrc_pilot.protocol import Message, Observation
                     from hrc_pilot.continuous import HumanCommand
-                    human_object=contract.human_object_id
+                    human_object=sorted(env.env.objects_dict)[0] if args.scene_case else contract.human_object_id
                     if human_object not in env.env.obj_body_id:
                         raise ValueError(f'任务所需公开物体不存在：{human_object}')
                     initial_plate = env.sim.data.body_xpos[env.env.obj_body_id[human_object]].copy()
@@ -197,7 +206,9 @@ def main():
                     regions = {'near_human':tuple(plate_goal)}
                     if work_plan or args.autonomous_human_context:
                         objects={name:env.sim.data.body_xpos[body].copy() for name,body in env.env.obj_body_id.items()}
-                        regions=activity_regions(objects);plate_goal=np.asarray(regions['plate_ready'])
+                        if args.scene_case:
+                            regions=scene_regions(objects,env.env.objects_dict);plate_goal=np.asarray(regions['near_human'])
+                        else:regions=activity_regions(objects);plate_goal=np.asarray(regions['plate_ready'])
                     if args.human_workspace_layout=='raised_storage':
                         if args.human_contact_model!='articulated_hand':raise ValueError('高台抓放任务要求实际接触手')
                         cookie=env.sim.data.body_xpos[env.env.obj_body_id['cookies_1']].copy()
@@ -229,10 +240,7 @@ def main():
                 start_physics = float(env.sim.data.time)
                 placement=None
                 if args.completion_criterion=='released_stable':
-                    goals=env.env.parsed_problem['goal_state']
-                    if len(goals)!=1 or len(goals[0])!=3 or goals[0][0].lower()!='on':
-                        raise ValueError('释放稳定判据当前仅支持单个公开On物体关系，不回退几何成功')
-                    placement=NativePlacementEvidence(goals[0][1],goals[0][2])
+                    placement=create_goal_evidence(goal_spec)
                 (directory/'scene.xml').write_text(env.sim.model.get_xml())
                 done = False
                 for step in range(args.steps):
@@ -246,6 +254,7 @@ def main():
                     if work_plan:record['public_work_update_index']=len(work_events)-1
                     if actor is not None:
                         measured_motion=motion_observer.update(record)
+                        measured_motion['visible_fixture_joint_positions']=record['articulated_joints']
                         record['human_hand_position'] = actor.position().tolist()
                         record['human_position']=np.r_[actor.body_base,0].tolist()
                         record['human_motor_phase'] = actor.phase
@@ -403,12 +412,12 @@ def main():
                                    and second['object_position'] is not None]
                     object_speed_peak=max(object_speeds,default=0.)
                     result.update(human_mode=args.human_mode,human_contact_witness=contact_witness,
-                                  human_goal_success=human_dwell>=4, robot_goal_success=(placement.records[-1]['released_stable_placement'] if placement is not None else bool(env.check_success())),
+                                  human_goal_success=human_dwell>=4, robot_goal_success=(goal_success(placement.records[-1]) if placement is not None else bool(env.check_success())),
                                   human_fingertip_peak_speed_m_s=motion_peak,
                                   human_object_peak_speed_m_s=float(object_speed_peak),
                                   human_motion_check_passed=bool(motion_peak<=.65 and object_speed_peak<=1.5),
                                   human_object_id=human_object,final_human_object_position=actor.object_position(human_object).tolist(),
-                                  final_plate_position=actor.object_position('plate_1').tolist(),
+                                  final_plate_position=actor.object_position('plate_1').tolist() if 'plate_1' in env.env.obj_body_id else None,
                                   public_plate_target=plate_goal.tolist(),
                                   interpretation='真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。')
                     (directory/'human_control.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in actor.records))
@@ -447,10 +456,11 @@ def main():
                     done=result['task_success']
                 if args.autonomous_human_context:
                     personal=evaluate_personal_goals(regions,trace,actor.records,partner.policy_io,placement.records,
-                        require_shelf_release=args.human_contact_model=='articulated_hand' and args.human_workspace_layout=='raised_storage')
+                        require_shelf_release=args.human_contact_model=='articulated_hand' and args.human_workspace_layout=='raised_storage',
+                        require_table_release=bool(args.scene_case))
                     write_json(directory/'personal_evidence.json',personal)
-                    write_json(directory/'personal_context.json',{'context_id':args.autonomous_human_context,
-                        'context':CONTEXTS[args.autonomous_human_context],'regions':regions,'robot_instruction':task.language,
+                    write_json(directory/'personal_context.json',{'scene_case':case_metadata(args.scene_case) if args.scene_case else None,'context_id':args.autonomous_human_context,
+                        'context':CONTEXTS[args.autonomous_human_context],'preferred_personal_objects':partner.preferred_personal_objects,'regions':regions,'robot_instruction':task.language,
                         'human_assigned_targets':None,'timed_work_updates':[],'world_initializations':1,'human_policy_resets':1})
                     (directory/'human_intentions.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in partner.intention_records))
                     result.update(autonomous_human_context=args.autonomous_human_context,personal_evidence=personal,
@@ -463,7 +473,7 @@ def main():
                                                            'task_family':'autonomous_personal_activity'})
                     done=result['task_success']
                 if placement is not None:
-                    result.update(robot_goal_object=placement.object_id,robot_goal_receiver=placement.receiver_id)
+                    result.update(robot_goal_object=placement.object_id,robot_goal_receiver=placement.receiver_id,robot_goal_spec=goal_spec)
                 write_json(directory/'metrics.json', result)
                 if coordinator is not None:
                     (directory/'robot_planner_io.jsonl').write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in robot_plans))
@@ -493,9 +503,11 @@ def main():
         'cuda_visible_devices':selected,'source_sha256':hashes,
         'renderer_device_binding':matched[0],
         'human_mode':args.human_mode,'human_persona':args.human_persona if partner is not None else None,
+        'scene_case':case_metadata(args.scene_case) if args.scene_case else None,
         'autonomous_human_context':args.autonomous_human_context,
         'human_target_source':'model_generated_from_personal_preferences' if args.autonomous_human_context else 'public_assignment',
         'private_human_targets_in_robot_input':False,
+        'personal_goal_table_release_required':bool(args.scene_case),
         'personal_goal_shelf_release_required':args.human_contact_model=='articulated_hand' and args.human_workspace_layout=='raised_storage',
         'activity_profile':args.activity_profile,'human_decision_interval_steps':args.human_decision_interval_steps,
         'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),

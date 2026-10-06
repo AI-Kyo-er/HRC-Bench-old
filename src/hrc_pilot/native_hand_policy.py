@@ -14,16 +14,19 @@ class ArticulatedSkills:
                           '实际接触手支持push、grasp、place、release、observe、yield、away、return。')
         text=text.replace('支持的意图为push、observe、yield、away、return。','支持的意图为push、grasp、place、release、observe、yield、away、return。')
         text=text.replace('本执行器不支持抓持，不输出approach或carry。','本执行器通过真实双指摩擦抓持；使用grasp/place，不输出approach或carry。')
-        return text+('grasp选择可见object_id，接触手接近、闭指、真实抬起，失败会反馈motor_failure；发出grasp不代表握住。'
+        shelf_note=('高台cookies_shelf的支撑面比桌面高8cm，水平push不会把物体抬到台面，实际抓放需要你自己选择。'
+                    if getattr(self,'autonomous_context',None) in {'snack_storage','shared_serving'} else
+                    '以本时刻action_interface的对象和区域为准，不臆造其他场景的高台或固定物体名。')
+        return text+shelf_note+('grasp选择可见object_id，接触手接近、闭指、真实抬起，失败会反馈motor_failure；发出grasp不代表握住。'
                      '只有测得object_measured_in_hand为所选对象时，place才可搬运到destination并真实释放。'
                      'grasp尚在运行时，可再次选择grasp继续；observe暂停运动但保留夹指，不替你自动执行后续计划。'
                      'release明确打开手；不能拿着物体同时推另一个物体，先决定是否放下。'
-                     '高台cookies_shelf的支撑面比桌面高8cm，水平push不会把物体抬到台面，实际抓放需要你自己选择。'
                      'contact_model和双指接触来自执行反馈，不是评分器给出的目标是否完成。')
 
     def _prompt(self,observation):
         value=json.loads(super()._prompt(observation).split('\n',1)[1])
         value['action_interface']['intents']=['push','grasp','place','release','observe','yield','away','return']
+        value['action_interface']['manipulable_object_id_values']=observation.human_execution.get('manipulable_object_ids',list(observation.objects))
         return '根据实际接触手接口、自身意图及当前感知，自主选择下一动作：\n'+json.dumps(value,ensure_ascii=False,separators=(',',':'))
 
     def _native_command(self,value,observation):
@@ -42,6 +45,7 @@ class ArticulatedSkills:
         held=observation.human_execution.get('object_measured_in_hand')
         error=('requested_object_not_in_measured_hand' if value.get('intent')=='place' and held!=value.get('object_id')
                else 'hand_occupied_requires_explicit_release' if value.get('intent')=='push' and held else None)
+        if value.get('intent') in {'grasp','push'} and value.get('object_id') not in observation.human_execution.get('manipulable_object_ids',observation.objects):error='fixed_fixture_not_manipulable_by_hand'
         if error:
             command=HumanCommand('observe');self.last_command_feedback['status']='rejected'
             self.last_command_feedback['errors'].append(error)

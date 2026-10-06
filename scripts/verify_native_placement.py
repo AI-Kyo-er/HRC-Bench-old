@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from hrc_pilot.native_placement import NativePlacementEvidence
+from hrc_pilot.native_goal_evidence import create_goal_evidence,goal_success
 
 
 def rows(path):return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -17,16 +18,18 @@ def verify_episode(directory):
     recorded_path=directory/'placement_evidence.jsonl'
     score=NativePlacementEvidence(metrics.get('robot_goal_object','akita_black_bowl_1'),
                                   metrics.get('robot_goal_receiver','plate_1'))
+    if metrics.get('robot_goal_spec'):
+        score=create_goal_evidence(metrics['robot_goal_spec'])
     if recorded_path.exists():
         recorded=rows(recorded_path);assert len(recorded)==len(trace)-1
         for index,observed in enumerate(recorded):
             score.update(trace[index],trace[index+1],observed['native_geometry_satisfied'])
             actual=score.records[-1]
-            for key in ['gripper_aperture_m','object_speed_m_s','receiver_speed_m_s','stable_duration_s']:
+            for key in (['joint_positions','joint_displacement_from_start','joint_peak_step_speed','stable_duration_s'] if metrics.get('robot_goal_spec',{}).get('kind') in {'open','close','turnon','turnoff'} else ['gripper_aperture_m','object_speed_m_s','receiver_speed_m_s','stable_duration_s']):
                 np.testing.assert_allclose(actual[key],observed[key],atol=1e-8)
-            for key in ['receiver_contact','gripper_contact','released','released_stable_placement']:
+            for key in (['native_physical_goal_success'] if metrics.get('robot_goal_spec',{}).get('kind') in {'open','close','turnon','turnoff'} else ['receiver_contact','gripper_contact','released','released_stable_placement']):
                 assert actual[key]==observed[key]
-        verified=score.records[-1]['released_stable_placement']
+        verified=goal_success(score.records[-1])
         status='reconstructed_physical_criterion'
     else:
         score.update(trace[-2],trace[-1],bool(metrics.get('native_geometry_success',metrics.get('robot_goal_success',False))))

@@ -1,12 +1,14 @@
 """模型自选意图的事后可观察测量，不向策略反馈成绩或推荐下一动作。"""
 import numpy as np
 
+from .native_goal_evidence import goal_success
+
 
 def signature(targets,regions):
     return tuple(sorted((t['object_id'],*tuple(regions[t['destination']])) for t in targets))
 
 
-def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, require_shelf_release=False):
+def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, require_shelf_release=False, require_table_release=False):
     revisions=[];previous=None
     for row in decisions:
         targets=row['personal_goal_state']['personal_targets'];key=signature(targets,regions)
@@ -25,13 +27,13 @@ def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, requi
                 position=np.asarray(r['objects'][obj]);terminal_distance=float(np.linalg.norm(position[:2]-point[:2]))
                 speed=float(np.linalg.norm(position-np.asarray(previous_record['objects'][obj]))/(r['time_s']-previous_record['time_s'])) if previous_record else float('inf')
                 eligible=terminal_distance<.025 and abs(position[2]-point[2])<.025 and speed<.08
-                if require_shelf_release and dest.endswith('_shelf'):
+                if (require_shelf_release and dest.endswith('_shelf')) or (require_table_release and dest.endswith(('_personal','_home'))):
                     supported=hand_contact=False
                     for c in r['contacts']:
                         a,b=c['geom1'] or '',c['geom2'] or ''
                         if b.startswith(obj+'_'):a,b=b,a
                         if a.startswith(obj+'_'):
-                            supported|=b=='human_storage_support'
+                            supported|=b==('human_storage_support' if dest.endswith('_shelf') else 'table_collision')
                             hand_contact|=b.startswith(('human_left_finger','human_right_finger','gripper'))
                     eligible=eligible and supported and not hand_contact
                 dwell=dwell+.05 if eligible else 0.
@@ -49,7 +51,7 @@ def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, requi
     terminal_goals=[g for g in goals if g['start_s']==latest['start_s']]
     evaluable=bool(latest['targets'])
     current_satisfied=bool(evaluable and all(g['terminal_relation_satisfied'] for g in terminal_goals))
-    robot=bool(placement and placement[-1]['released_stable_placement'])
+    robot=bool(placement and goal_success(placement[-1]))
     proposals=[m for row in decisions for m in row.get('negotiation_proposal_messages',[])]
     validation_errors=sum(row['personal_goal_state']['target_validation_error'] is not None for row in decisions)
     source_times=[row['time_s'] for row in decisions]

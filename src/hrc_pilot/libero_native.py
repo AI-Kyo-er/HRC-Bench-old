@@ -35,7 +35,8 @@ def physical_record(env, observation, *, time_s, step):
         contacts.append({'geom1': sim.model.geom_id2name(contact.geom1),
                          'geom2': sim.model.geom_id2name(contact.geom2),
                          'distance_m': float(contact.dist)})
-    return {'time_s': time_s, 'step': step, 'physics_time_s': float(sim.data.time),
+    from .native_goal_evidence import fixture_joint_measurements
+    return {'articulated_joints':fixture_joint_measurements(env), 'time_s': time_s, 'step': step, 'physics_time_s': float(sim.data.time),
             'objects': objects, 'robot_qpos': np.r_[observation['robot0_joint_pos'],
                                                   observation['robot0_gripper_qpos']].tolist(),
             'robot_ee': observation['robot0_eef_pos'].tolist(),

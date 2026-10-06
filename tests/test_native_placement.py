@@ -26,3 +26,11 @@ def test_release_requires_support_and_stability_then_accumulates_actual_time():
 def test_closed_gripper_without_collision_is_not_evidence_of_release():
     score=NativePlacementEvidence('bowl','plate')
     assert not score.update(record(0,aperture=.008),record(.2,aperture=.008),True)
+
+
+def test_new_multi_agent_release_cannot_ignore_human_grasp_contact():
+    score=NativePlacementEvidence('bowl','plate',require_all_hand_release=True)
+    first=record(0);last=record(.2)
+    last['contacts'].append({'geom1':'bowl_g1','geom2':'human_left_finger_contact'})
+    assert not score.update(first,last,True)
+    assert score.records[-1]['gripper_contact']

@@ -114,7 +114,7 @@ class NativeArticulatedHuman(NativeContactHuman):
 
     def public_feedback(self):
         result=super().public_feedback()
-        result.update(contact_model='articulated_hand',supported_intents=['push','grasp','place','release','observe','yield','away','return'],
+        result.update(manipulable_object_ids=list(self.env.env.objects_dict),contact_model='articulated_hand',supported_intents=['push','grasp','place','release','observe','yield','away','return'],
                       measured_finger_joint_positions_m=self.env.sim.data.qpos[self.finger_q].tolist(),
                       measured_finger_target_contacts=self.finger_contacts(),wrist_yaw_rad=float(self.env.sim.data.qpos[self.yaw_q]),
                       object_measured_in_hand=self.carry_object if all(self.finger_contacts(self.carry_object)) else None,

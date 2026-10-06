@@ -169,10 +169,10 @@ def augment_contact_human(env, destination, *, visualization='vico_skin', public
         for name,point in public_regions.items():
             if name in {'near_human','plate_shelf'}:continue
             # plate_ready aliases the existing green marker; no duplicate z-fighting.
-            if name=='plate_ready':continue
+            if name=='plate_ready' or np.linalg.norm(np.asarray(point)[:2]-np.asarray(destination)[:2])<1e-8:continue
             ET.SubElement(world,'geom',name='human_public_region_'+name,type='cylinder',
                           pos=f'{point[0]} {point[1]} {surface_z+.0808 if name=="cookies_shelf" else surface_z+.0008}',size='.025 .0005',
-                          rgba=colors.get(name,'.83 .64 .26 .65'),contype='0',conaffinity='0',group='1')
+                          rgba=colors.get(name,'.24 .47 .85 .65' if name.endswith('_home') else '.32 .64 .47 .65' if name.endswith('_personal') else '.83 .64 .26 .65'),contype='0',conaffinity='0',group='1')
     if contact_model=='articulated_hand':
         from .native_articulated_hand import install_articulated_hand
         install_articulated_hand(root)

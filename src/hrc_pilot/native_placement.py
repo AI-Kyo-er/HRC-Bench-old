@@ -3,7 +3,8 @@ import numpy as np
 
 
 class NativePlacementEvidence:
-    def __init__(self, object_id, receiver_id, stable_seconds=.2):
+    def __init__(self, object_id, receiver_id, stable_seconds=.2, *, require_all_hand_release=False):
+        self.require_all_hand_release=require_all_hand_release
         self.object_id=object_id;self.receiver_id=receiver_id
         self.stable_seconds=stable_seconds;self.duration=0.;self.records=[]
 
@@ -18,7 +19,7 @@ class NativePlacementEvidence:
             if b.startswith(self.object_id+'_'):a,b=b,a
             if a.startswith(self.object_id+'_'):
                 supported|=b.startswith(self.receiver_id+'_')
-                gripper_contact|=b.startswith('gripper')
+                gripper_contact|=b.startswith('gripper') or (self.require_all_hand_release and b.startswith(('human_left_finger','human_right_finger','human_palm','human_fingertip')))
         aperture=sum(abs(value) for value in current['robot_qpos'][-2:])
         released=not gripper_contact and aperture>=.04
         eligible=bool(geometry_satisfied and supported and released and speed<.08 and receiver_speed<.08)

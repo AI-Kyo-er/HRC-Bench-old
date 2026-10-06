@@ -14,6 +14,7 @@ CONTEXTS={
                   'preferences':'你在准备自己的点心休息，希望饼干在自己容易够到的位置，餐盘可供共同用餐。你喜欢先完成自己需要的整理，再决定是否帮助机械臂；可以根据实际进展改变物体安排、请求对方腾空间或暂时休息。没有必须执行的物体搬运清单。'},
     'snack_storage':{'label':'高台收纳自己的点心','preferences':'你准备把自己的饼干收纳在靠近自己的高台上，以腾出共用桌面的空间。你可以选择合适的真实抓取/搬运工具、改变安排或请求机械臂给你留出空间；根据实际反馈决定怎样推进，不假设命令已经完成。'},
     'shared_serving':{'label':'移动餐盘完成共同上桌','preferences':'你与机械臂准备把食物上桌。你希望接收盘最后在靠近自己的高台上，可先整理自己的食物，也可在机械臂放好碗之后移动盘子。你根据实际进展选择时机、工具和分工提案，不把机器人动作或自己的命令当作已经完成。'},
+    'pantry_work':{'label':'共享厨房中的个人整理','preferences':'你在共用厨房整理自己的食物和餐具，希望可移动物品位于自己容易取用的位置。你可以选择物品与个人整理区域、保留原位、向机械臂请求空间或协助，不必照搬它的工作。以当前库存和真实进展决定个人目标，没有固定物体清单或变化时刻。'},
     'workspace_owner':{'label':'整理并维护自己的工作空间',
                        'preferences':'你与机械臂共用桌面，希望自己的食物和餐具容易取用、桌面不拥挤。你重视空间秩序，会根据对方的运动调整位置安排或提出协商；可以保留物品原位、重新整理或离开返回。没有预定的动作顺序和变化时刻。'}
 }
@@ -36,8 +37,9 @@ def validate_targets(value,observation):
 class AutonomousNativeHuman(NativeQwenHuman):
     generation_token_limit=640
 
-    def __init__(self,*args,autonomous_context,**kwargs):
+    def __init__(self,*args,autonomous_context,preferred_personal_objects=(),**kwargs):
         self.autonomous_context=autonomous_context
+        self.preferred_personal_objects=list(preferred_personal_objects)
         if autonomous_context not in CONTEXTS:raise ValueError('未知个人活动背景')
         super().__init__(*args,**kwargs)
 
@@ -51,6 +53,7 @@ class AutonomousNativeHuman(NativeQwenHuman):
             '你是在共用餐桌上活动的人，不是完成预设搬运脚本的执行器。'
             f'个人背景与偏好：{CONTEXTS[self.autonomous_context]["preferences"]}'
             f'稳定行为倾向：{PERSONAS[self.persona_id]}'
+            f'你个人偏好取用和整理的物品：{self.preferred_personal_objects}。这只是偏好，不是动作或时间清单；是否操作其他物品也由你决定。'
             '没有给你分配固定物体任务；根据个人偏好、可见世界、自身执行经历及机械臂活动，'
             '自己决定long_term_intention、personal_targets、当前计划和一个下一动作。'
             '机械臂自己的公开任务属于它，你可以合作、提出新安排、拒绝等待或保留个人事项。'
@@ -80,6 +83,7 @@ class AutonomousNativeHuman(NativeQwenHuman):
                 distance=float(np.linalg.norm(np.asarray(observation.objects[obj])[:2]-np.asarray(observation.regions[destination])[:2]))
                 geometry.append({**target,'measured_xy_distance_m':distance,'visible_radius_m':.025})
         visible.update(personal_context=CONTEXTS[self.autonomous_context],
+                       preferred_personal_object_ids=self.preferred_personal_objects,
                        your_previous_personal_targets=self.personal_targets,
                        your_long_term_intention=self.long_term_intention,
                        your_generated_intention_history=self.intention_records[-5:],

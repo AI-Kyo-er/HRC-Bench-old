@@ -15,7 +15,7 @@ def read(p):return json.loads(p.read_text())
 def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
 
 
-def verify_episode(directory, *, require_shelf_release=False):
+def verify_episode(directory, *, require_shelf_release=False, require_table_release=False):
     context=read(directory/'personal_context.json');assert context['human_assigned_targets'] is None and context['timed_work_updates']==[]
     trace=rows(directory/'trace.jsonl');control=rows(directory/'human_control.jsonl')
     human=rows(directory/'human_policy_io.jsonl');dialogue=rows(directory/'public_dialogue.jsonl');calls=rows(directory/'model_calls.jsonl')
@@ -26,6 +26,7 @@ def verify_episode(directory, *, require_shelf_release=False):
         assert public['your_current_assignments']==[]
         assert public['your_previous_personal_targets']==targets
         assert public['personal_context']==context['context']
+        if 'preferred_personal_objects' in context:assert public['preferred_personal_object_ids']==context['preferred_personal_objects']
         assert not {'personal_evidence','human_goal_success','task_success'}.intersection(public)
         if d['parse_error'] is None:
             value=json.loads(d['raw_output'][d['raw_output'].find('{'):d['raw_output'].rfind('}')+1])
@@ -58,7 +59,7 @@ def verify_episode(directory, *, require_shelf_release=False):
         # The only language suffix is publicly emitted speech; private targets are never routed to the robot.
         for text in c['prompt'].split('\nHuman: ')[1:]:assert text in communicated
         proposal_uses+=int(any(m['text'] in c['prompt'] for m in emitted))
-    rebuilt=evaluate_personal_goals(context['regions'],trace,control,human,rows(directory/'placement_evidence.jsonl'),require_shelf_release=require_shelf_release)
+    rebuilt=evaluate_personal_goals(context['regions'],trace,control,human,rows(directory/'placement_evidence.jsonl'),require_shelf_release=require_shelf_release,require_table_release=require_table_release)
     assert read(directory/'personal_evidence.json')==rebuilt
     assert read(directory/'metrics.json')['personal_evidence']==rebuilt
     return {'episode':str(directory),'status':'verified','human_calls':len(human),
@@ -73,7 +74,7 @@ def main():
     args=parser.parse_args();provenance=read(args.input_dir/'provenance.json')
     assert provenance['human_target_source']=='model_generated_from_personal_preferences'
     assert not provenance['source_files_changed_during_run']
-    episodes=[verify_episode(p.parent,require_shelf_release=provenance.get('personal_goal_shelf_release_required',False)) for p in sorted(args.input_dir.rglob('personal_context.json'))];assert episodes
+    episodes=[verify_episode(p.parent,require_shelf_release=provenance.get('personal_goal_shelf_release_required',False),require_table_release=provenance.get('personal_goal_table_release_required',False)) for p in sorted(args.input_dir.rglob('personal_context.json'))];assert episodes
     (args.input_dir/'personal_verification.json').write_text(json.dumps({'status':'verified','episodes':episodes},ensure_ascii=False,indent=2))
     print(f'{len(episodes)}条自主目标、公开提案和真实执行边界核查通过')
 
