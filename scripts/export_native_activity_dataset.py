@@ -37,6 +37,7 @@ def main():
         destination_frames=frames if eligible else args.output_dir/'diagnostic_frames'
         destination_frames.mkdir(exist_ok=True)
         prefix=(provenance['model_server_metadata']['config']+'__'+metrics['autonomous_human_context'] if autonomous else metrics['activity_profile'])
+        if provenance.get('scene_case'):prefix+='__'+provenance['scene_case']['key']
         identifier=f'{prefix}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
         target=args.output_dir/'episodes'/identifier;target.mkdir(parents=True)
         activity_files=['personal_context.json','personal_evidence.json','human_intentions.jsonl','public_dialogue.jsonl'] if autonomous else ['activity_plan.json','activity_events.json','activity_evidence.json']

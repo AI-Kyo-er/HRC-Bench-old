@@ -1,0 +1,72 @@
+{
+  "status": "verified",
+  "video_count": 8,
+  "playback": [
+    {
+      "time": 0.506483,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.508489,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.503272,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.499467,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.499918,
+      "paused": false,
+      "duration": 5.45,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.497834,
+      "paused": false,
+      "duration": 7.55,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.498661,
+      "paused": false,
+      "duration": 5.35,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.497114,
+      "paused": false,
+      "duration": 7.35,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "model_seek_s": 10.2,
+  "model_action_sync_verified": true,
+  "actor_attribution_and_causal_limits_disclosed": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_local_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/native_scene_catalog_20261007/desktop.png"
+}
