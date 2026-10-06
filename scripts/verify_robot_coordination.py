@@ -21,7 +21,9 @@ def verify_episode(directory):
     actions=rows(directory/'policy_io.jsonl')
     by_id={row['decision_id']:row for row in plans}
     for row in plans:
-        assert set(row['public_input'])==PUBLIC_KEYS-{'images'}
+        expected_keys=PUBLIC_KEYS-{'images'}
+        if 'self_execution' not in row['public_input']:expected_keys=expected_keys-{'self_execution'}
+        assert set(row['public_input'])==expected_keys
         decision,error=validate_decision(row['raw_output'])
         assert decision==row['decision'] and error==row['parse_error']
         for name,field in [('initial','initial_artifact'),('current','exterior_artifact'),('wrist','wrist_artifact')]:
