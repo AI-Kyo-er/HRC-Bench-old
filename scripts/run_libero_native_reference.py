@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+import signal
 
 import imageio.v2 as imageio
 import numpy as np
@@ -17,6 +18,7 @@ from PIL import Image
 
 from hrc_pilot.libero_native import native_policy_input, input_audit, physical_record, perceived_object_contacts
 from hrc_pilot.native_video_frame import compose_runtime_views
+from hrc_pilot.native_run_journal import NativeRunJournal,native_time_limits
 from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
@@ -33,6 +35,8 @@ def write_json(path, value):
 
 
 def main():
+    def stop_with_evidence(signum,frame):raise KeyboardInterrupt('收到终止信号，保存已执行原始证据')
+    signal.signal(signal.SIGTERM,stop_with_evidence)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--scene-case',choices=list(CASES))
@@ -130,6 +134,7 @@ def main():
                   Path('src/hrc_pilot/native_hand_policy.py'),Path('src/hrc_pilot/native_scene_catalog.py'),
                   Path('src/hrc_pilot/native_goal_evidence.py'),
                   Path('src/hrc_pilot/native_reflective_human.py'),Path('src/hrc_pilot/native_video_frame.py'),
+                  Path('src/hrc_pilot/native_run_journal.py'),
                   Path('src/hrc_pilot/native_relative_placement.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
@@ -173,10 +178,11 @@ def main():
         for initial_id in args.init_state_ids:
             directory = args.output_dir / f'task_{task_id:02d}' / f'init_{initial_id:03d}'
             directory.mkdir(parents=True)
+            limits=native_time_limits(args.steps,continuous=bool(work_plan or args.autonomous_human_context))
             env = OffScreenRenderEnv(bddl_file_name=str(bddl), control_freq=20,
                                      camera_names=['agentview', 'robot0_eye_in_hand', 'frontview'],
                                      camera_heights=[256, 256, 480], camera_widths=[256, 256, 640],
-                                     render_gpu_device_id=0)
+                                     render_gpu_device_id=0,**limits)
             trace, policy_io, timeline, calls = [], [], [], []
             robot_plans=[];robot_history=[];robot_goal='';next_plan_step=0;initial_robot_rgb=None
             robot_decision=None;robot_decision_error=None;initial_robot_state=None
@@ -184,6 +190,18 @@ def main():
             task_evidence=NativeTaskEvidence(contract)
             motion_observer=NativeMotionObserver()
             writer = imageio.get_writer(directory / 'demo.mp4', fps=20)
+            journal=NativeRunJournal(directory);actor=None;placement=None
+            def save_running_evidence():
+                streams={'trace.jsonl':trace,'policy_io.jsonl':policy_io,'model_calls.jsonl':calls}
+                if actor is not None:
+                    streams['human_control.jsonl']=actor.records
+                    if actor.avatar is not None:streams['human_avatar.jsonl']=actor.avatar.records
+                if partner is not None:
+                    audit=partner.audit_state()
+                    for name,key in [('human_policy_io.jsonl','policy_io'),('human_planner_io.jsonl','human_planner_io'),('human_memory.jsonl','memory')]:
+                        if key in audit:streams[name]=audit[key]
+                if placement is not None:streams['placement_evidence.jsonl']=placement.records
+                journal.flush(streams)
             def frame(obs, *, benchmark_time=None):
                 raw = (env.sim.render(width=640,height=480,camera_name='hrc_view')
                        if args.human_mode!='none' else obs['frontview_image'])
@@ -253,6 +271,10 @@ def main():
                 if args.completion_criterion=='released_stable':
                     placement=create_goal_evidence(goal_spec)
                 (directory/'scene.xml').write_text(env.sim.model.get_xml())
+                write_json(directory/'runtime_plan.json',{'requested_control_steps':args.steps,'settle_steps':10,
+                    'actual_environment_horizon':env.env.horizon,'actual_environment_ignore_done':env.env.ignore_done,
+                    'source_sha256':hashes,'human_policy_architecture':args.human_policy_architecture,
+                    'interpretation':'运行参数，不据此判断进程仍存活或实验已完成。'})
                 done = False
                 for step in range(args.steps):
                     time_s = step / 20
@@ -391,6 +413,7 @@ def main():
                         elif args.human_mode=='calibration':done=human_success
                     policy_io[-1].update(post_physics_time_s=float(env.sim.data.time),
                                          actuator_ctrl=env.sim.data.ctrl.tolist())
+                    save_running_evidence()
                     if not np.isclose(env.sim.data.time-start_physics, (step+1)/20, atol=1e-7):
                         raise RuntimeError('原生物理时间没有按20Hz控制推进')
                     if done and not work_plan and not args.autonomous_human_context:
@@ -500,9 +523,19 @@ def main():
                 write_json(directory/'video_timeline.json', {'fps':20,'frame_count':len(timeline),'frames':timeline})
                 episodes.append(result)
                 provenance_episodes.append({'task_id':task_id,'init_state_id':initial_id,
+                                            'actual_environment_horizon':env.env.horizon,'actual_environment_ignore_done':env.env.ignore_done,
                                             'bddl_sha256':sha256(bddl.read_bytes()).hexdigest(),
                                             'init_file_sha256':sha256(initial_path.read_bytes()).hexdigest()})
                 print(f'[native-libero] task{task_id} init{initial_id}: 成功{done}，{len(calls)}个控制块（VLA推理{result["actual_vla_model_calls"]}次、保持{result["hold_primitive_calls"]}块）', flush=True)
+            except BaseException as exc:
+                save_running_evidence()
+                write_json(directory/'video_timeline.json',{'fps':20,'frame_count':len(timeline),'frames':timeline})
+                write_json(directory/'failure_status.json',{'status':'incomplete','exception_type':type(exc).__name__,'reason':str(exc),
+                    'executed_actions':sum('post_physics_time_s' in r for r in policy_io),'requested_actions':args.steps,
+                    'saved_human_motor_decisions':len(partner.policy_io) if partner else 0,
+                    'saved_human_reflections':len(getattr(partner,'planning_io',[])) if partner else 0,
+                    'source_sha256':hashes,'benchmark_eligible':False})
+                raise
             finally:
                 writer.close()
                 env.close()
