@@ -21,16 +21,21 @@ def main():
     if args.output_dir.exists() and any(args.output_dir.iterdir()):parser.error('输出目录必须为空')
     frames=args.output_dir/'frames';frames.mkdir(parents=True)
     source_receipts=[];total=0
-    for plan in sorted(args.input_dir.rglob('activity_plan.json')):
+    plans=sorted(args.input_dir.rglob('activity_plan.json'))+sorted(args.input_dir.rglob('personal_context.json'))
+    for plan in plans:
         episode=plan.parent;root=episode.parents[1]
         provenance=json.loads((root/'provenance.json').read_text());metrics=json.loads((episode/'metrics.json').read_text())
         assert not provenance['source_files_changed_during_run']
-        for name in ['video_verification.json','model_execution_verification.json','activity_verification.json']:
+        autonomous=plan.name=='personal_context.json'
+        verification='personal_verification.json' if autonomous else 'activity_verification.json'
+        for name in ['video_verification.json','model_execution_verification.json',verification]:
             assert json.loads((root/name).read_text())['status']=='verified'
         assert json.loads((root/'model_execution_verification.json').read_text())['motion_eligible_episode_count']==1
-        identifier=f'{metrics["activity_profile"]}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
+        prefix=(provenance['model_server_metadata']['config']+'__'+metrics['autonomous_human_context'] if autonomous else metrics['activity_profile'])
+        identifier=f'{prefix}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
         target=args.output_dir/'episodes'/identifier;target.mkdir(parents=True)
-        source_files=['activity_plan.json','activity_events.json','activity_evidence.json','metrics.json','scene.xml',
+        activity_files=['personal_context.json','personal_evidence.json','human_intentions.jsonl','public_dialogue.jsonl'] if autonomous else ['activity_plan.json','activity_events.json','activity_evidence.json']
+        source_files=activity_files+['metrics.json','scene.xml',
                       'trace.jsonl','human_policy_io.jsonl','human_control.jsonl','placement_evidence.jsonl','model_calls.jsonl','policy_io.jsonl','video_timeline.json']
         for name in source_files:(target/name).symlink_to((episode/name).resolve())
         (target/'demo.mp4').symlink_to((episode/'demo.mp4').resolve())
@@ -39,7 +44,7 @@ def main():
         np.save(target/'initial.qvel.npy',np.asarray(trace[0]['qvel']))
         source_receipts.append({'episode':identifier,'source':str(episode.resolve()),
                                 'source_sha256':{n:sha256((episode/n).read_bytes()).hexdigest() for n in source_files},
-                                'joint_success':metrics['task_success'],'world_initializations':1})
+                                'joint_success':metrics['task_success'],'world_initializations':1,'robot_model':provenance['model_server_metadata']['config']})
         for call in calls:
             executed=[r['action'] for r in actions if r['model_call']==call['model_call']]
             assert executed and call['action_source']=='learned_vla'
