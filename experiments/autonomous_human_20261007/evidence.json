@@ -1,0 +1,3636 @@
+{
+  "research_goal_achieved": false,
+  "runs": {
+    "pi05_snack_host": {
+      "summary.json": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 0,
+            "task_success": false,
+            "completion_time_s": 45.0,
+            "model_calls": 90,
+            "native_actions": 900,
+            "backend": "LIBERO_MuJoCo_native",
+            "native_geometry_success": true,
+            "completion_criterion": "released_stable",
+            "actual_vla_model_calls": 90,
+            "hold_primitive_calls": 0,
+            "planner_output_rejection_holds": 0,
+            "robot_planner_model_calls": 0,
+            "interpretation": "人自选个人目标、当前动作和公开协商提案；测量可观察目标关系，主观满足及协商接受不由程序判定。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.30297395784773534,
+            "human_object_peak_speed_m_s": 0.2762244670480348,
+            "human_motion_check_passed": true,
+            "human_object_id": "plate_1",
+            "final_human_object_position": [
+              0.11905417944584765,
+              0.2549496529457195,
+              0.9024782607427178
+            ],
+            "final_plate_position": [
+              0.11905417944584765,
+              0.2549496529457195,
+              0.9024782607427178
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.002992334707179654,
+            "human_decisions": 23,
+            "interaction_metrics": {
+              "robot_ee_motion_time_s": 20.9,
+              "human_motion_time_s": 7.500000000000001,
+              "simultaneous_motion_time_s": 5.45,
+              "both_stationary_time_s": 22.05,
+              "human_observe_command_time_s": 2.0,
+              "minimum_ee_fingertip_distance_m": 0.12159390151630388,
+              "human_force_contact_samples": 701,
+              "interpretation": "实际运动与等待描述；距离不是碰撞证明，指尖代理与EE距离不是完整人体安全指标。"
+            },
+            "task_contract": {
+              "family": "moving_receptacle",
+              "clearance_observed": false,
+              "return_observed": false,
+              "robot_placement_credit": true,
+              "premature_placements": 0,
+              "events": [
+                {
+                  "time_s": 5.6,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 8.2,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 10.05,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 10.45,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 11.95,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 12.5,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 13.55,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 18.7,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 20.75,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 22.55,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 24.45,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 26.45,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 28.9,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 29.5,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 29.9,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 35.75,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 36.2,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 38.35,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 38.75,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 39.1,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 42.3,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 44.7,
+                  "event": "robot_placement_contribution"
+                }
+              ]
+            },
+            "autonomous_human_context": "snack_host",
+            "personal_evidence": {
+              "goal_revisions": [
+                {
+                  "start_s": 0.0,
+                  "targets": [
+                    {
+                      "object_id": "cookies_1",
+                      "destination": "cookies_ready"
+                    },
+                    {
+                      "object_id": "plate_1",
+                      "destination": "plate_ready"
+                    }
+                  ],
+                  "long_term_intention": "Ensure cookies are within my reach and the plate is accessible for shared use."
+                }
+              ],
+              "target_intervals": [
+                {
+                  "object_id": "cookies_1",
+                  "destination": "cookies_ready",
+                  "start_s": 0.0,
+                  "end_s": 45.0,
+                  "initial_xy_distance_m": 0.12,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": 7.8,
+                  "terminal_relation_satisfied": true,
+                  "human_contact_in_target_interval": true,
+                  "terminal_xy_distance_m": 0.012140107624841887,
+                  "object_displacement_in_target_interval_m": 0.10789324424072362
+                },
+                {
+                  "object_id": "plate_1",
+                  "destination": "plate_ready",
+                  "start_s": 0.0,
+                  "end_s": 45.0,
+                  "initial_xy_distance_m": 0.1199999999980784,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": null,
+                  "terminal_relation_satisfied": false,
+                  "human_contact_in_target_interval": false,
+                  "terminal_xy_distance_m": 0.08083351173363637,
+                  "object_displacement_in_target_interval_m": 0.07230678434613842
+                }
+              ],
+              "observable_target_set_changes": 0,
+              "distinct_target_relations": 2,
+              "target_intervals_with_stable_relation": 1,
+              "new_target_intervals_with_stable_relation": 1,
+              "public_negotiation_proposals": 23,
+              "target_validation_errors": 0,
+              "human_current_observable_goals_evaluable": true,
+              "human_current_observable_goals_satisfied": false,
+              "robot_final_released_stable_success": true,
+              "joint_observable_goals_satisfied": false,
+              "human_model_calls": 23,
+              "human_generated_goal_decision_times": [
+                0.0,
+                2.0,
+                4.0,
+                6.0,
+                8.0,
+                10.0,
+                12.0,
+                14.0,
+                16.0,
+                18.0,
+                20.0,
+                22.0,
+                24.0,
+                26.0,
+                28.0,
+                30.0,
+                32.0,
+                34.0,
+                36.0,
+                38.0,
+                40.0,
+                42.0,
+                44.0
+              ],
+              "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+            },
+            "human_goal_evaluable": true,
+            "robot_goal_object": "akita_black_bowl_1",
+            "robot_goal_receiver": "plate_1"
+          }
+        ],
+        "successes": 0,
+        "episode_count": 1
+      },
+      "provenance.json": {
+        "backend": "LIBERO_MuJoCo_native",
+        "trained_model": true,
+        "model_server_metadata": {
+          "config": "pi05_libero",
+          "checkpoint": "/data1/sieniwgroup/sieniw/models/lerobot/pi05-libero",
+          "action_encoding": "libero_osc_delta",
+          "action_dim": 7,
+          "state_encoding": "eef_xyz_axisangle_signed_finger_positions",
+          "weight_key_mapping": "strip_model_prefix_strict_813_key_shape_match",
+          "normalization": "checkpoint_mean_std",
+          "image_normalization": "[-1,1]",
+          "offline_assets_only": true
+        },
+        "suite": "libero_spatial",
+        "seed": 0,
+        "control_hz": 20,
+        "robot_planner_metadata": null,
+        "robot_planner_interval_steps": null,
+        "robot_policy_composition": "native VLA",
+        "execution_horizon": 10,
+        "max_steps": 900,
+        "settle_steps": 10,
+        "mujoco_version": "3.2.3",
+        "robosuite_version": "1.4.1",
+        "libero_commit": "f78abd68ee283de9f9be3c8f7e2a9ad60246e95c",
+        "cuda_visible_devices": "0",
+        "source_sha256": {
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/run_libero_native_reference.py": "629071a5f4a8bab5e574926ece503152928176257f2cfd9cdabfaabfff8d77ff",
+          "src/hrc_pilot/libero_native.py": "1796686463fd8a8af5fbc970b846278ae84176d74d61a35376fa878ac3e5ed93",
+          "src/hrc_pilot/native_contact_human.py": "84ad68641f781e58f9608d78ad250a07a38f3f99f89f28e721185b81f75c1d51",
+          "src/hrc_pilot/llm_human.py": "0520916c1112a0b9c4abb51b3e1052bf9906b0300891a0ac59fff7a553c51a42",
+          "src/hrc_pilot/human_contact.py": "9bef4d6ee628df1d1645a8e46a4c85b5a1d6b3885dba85469c8f7708bb1c020b",
+          "src/hrc_pilot/native_avatar.py": "1d9d1b8695faad3eb687b7c5b7bd5b3da9d6e9f9aaaadaad852da3f4914c37ab",
+          "src/hrc_pilot/native_task_contracts.py": "7f1c1f2e2449fb943a8a0488223bd8750ea7897780a0aa4b77570820f801d9e9",
+          "src/hrc_pilot/native_activity.py": "efa34da241340523c299dd54100e42525a1d431b5bd4d86934b3e5754add8b75",
+          "src/hrc_pilot/native_autonomous_human.py": "8eb4d799e821c3912cc98be8fb6e82c5738adfb54968bbf0acc1e55ec324acd5",
+          "src/hrc_pilot/native_personal_evidence.py": "09707a6e73807a7fffe9a3a0449ace1618a9f34807a699f4d28d064ada93848b",
+          "src/hrc_pilot/native_execution.py": "9423c6f6c563c178b344c4be0f35078c9ee2676fb38638bea8616260c966ce3c",
+          "src/hrc_pilot/protocol.py": "3cd467a0813e84f4762ffe6350fd26699949b88eb64d48223a16b279ca564013",
+          "src/hrc_pilot/native_action_validation.py": "c6c2f0bd386a47309403a3bd473e2d678f106757f4683a5da853c0c1142eb352",
+          "src/hrc_pilot/native_placement.py": "07aa810c3f33201a44e2da6f2b022e906539db701259b452d628228f75c69ced",
+          "src/hrc_pilot/robot_coordination.py": "b5164cf861b962a7de38304828632238ea6a00fc6cd4ca3277ed9b96664e2d81",
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/probe_egl_devices.py": "d90fff61553425a2b24681d16de6de8f5ce39b795dc136ecf491e262d3baf0ea"
+        },
+        "renderer_device_binding": {
+          "egl_ordinal": 1,
+          "cuda_ordinal": 0,
+          "pci_bus": "0000:23:00.0"
+        },
+        "human_mode": "qwen",
+        "human_persona": "independent",
+        "autonomous_human_context": "snack_host",
+        "human_target_source": "model_generated_from_personal_preferences",
+        "private_human_targets_in_robot_input": false,
+        "activity_profile": null,
+        "human_decision_interval_steps": 40,
+        "world_initializations_per_episode": 1,
+        "fixed_duration_with_no_success_early_exit": true,
+        "task_family": "moving_receptacle",
+        "human_public_work_requirement": null,
+        "human_memory_scope": "episode",
+        "human_object_id": "plate_1",
+        "human_execution_feedback": "measured_motor_state_and_public_geometry_no_evaluator_outcomes",
+        "human_action_validation_feedback": true,
+        "completion_criterion": "released_stable",
+        "human_plan_execution": "Qwen reselects each action; generated plans never routed by runtime",
+        "human_torch_seed_rule": "seed + 1000*task_id + init_state_id",
+        "human_model": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B",
+        "human_physics": "force_driven_xyz_fingertip",
+        "human_body_visualization": "vico_skin",
+        "human_avatar_assets": {
+          "directory": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/native_avatar/vico_a1b13b6162c7",
+          "metadata": {
+            "source_glb": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/models/mixamo_Alex_Jefferson.glb",
+            "source_motion": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/motions/motion.pkl",
+            "source_sha256": {
+              "glb": "18e7a8e69c74227e79ca2a959fdffb85357e3431395145196f0cba938d1684ea",
+              "motion": "070f312b048afa6003a102eae04d5047a5b68499d31434c5baa0adcd8da4590c"
+            },
+            "vertex_count": 3042,
+            "face_count": 4152,
+            "skin_bones": 52,
+            "joint_names": [
+              "Hips",
+              "Spine",
+              "Spine1",
+              "Spine2",
+              "Neck",
+              "Head",
+              "HeadTop_End",
+              "LeftShoulder",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "LeftHandThumb1",
+              "LeftHandThumb2",
+              "LeftHandThumb3",
+              "LeftHandThumb4",
+              "LeftHandIndex1",
+              "LeftHandIndex2",
+              "LeftHandIndex3",
+              "LeftHandIndex4",
+              "LeftHandMiddle1",
+              "LeftHandMiddle2",
+              "LeftHandMiddle3",
+              "LeftHandMiddle4",
+              "LeftHandRing1",
+              "LeftHandRing2",
+              "LeftHandRing3",
+              "LeftHandRing4",
+              "LeftHandPinky1",
+              "LeftHandPinky2",
+              "LeftHandPinky3",
+              "LeftHandPinky4",
+              "RightShoulder",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "RightHandThumb1",
+              "RightHandThumb2",
+              "RightHandThumb3",
+              "RightHandThumb4",
+              "RightHandIndex1",
+              "RightHandIndex2",
+              "RightHandIndex3",
+              "RightHandIndex4",
+              "RightHandMiddle1",
+              "RightHandMiddle2",
+              "RightHandMiddle3",
+              "RightHandMiddle4",
+              "RightHandRing1",
+              "RightHandRing2",
+              "RightHandRing3",
+              "RightHandRing4",
+              "RightHandPinky1",
+              "RightHandPinky2",
+              "RightHandPinky3",
+              "RightHandPinky4",
+              "LeftUpLeg",
+              "LeftLeg",
+              "LeftFoot",
+              "LeftToeBase",
+              "LeftToe_End",
+              "RightUpLeg",
+              "RightLeg",
+              "RightFoot",
+              "RightToeBase",
+              "RightToe_End"
+            ],
+            "skin_file": "alex.skn",
+            "texture_file": "alex_color.png",
+            "rig_file": "rig.npz",
+            "motion_fps": 30,
+            "interpretation": "复用既有人物/动作蒙皮资产；显示骨骼与物理接触分开，不代表完整人体动力学或动作策略学习。"
+          },
+          "sha256": {
+            "alex.skn": "2503e6338b8372cc0744843181f05731a6f3304ee0d0955bedfee8f4f2faae2f",
+            "alex_color.png": "4b1839ff4153d2a9db0f3c0c2557c55c375c758f513085037e546d2a4c632a61",
+            "rig.npz": "f4975c4e23e0f0de11d7a2989bfb72ea93f41ac0514cc4fe1062e47a886a7e3a",
+            "avatar.json": "5dd578b21dab07776b90046d8f25909bbbae3015af59aaba6f7dd2aba2a8c57c"
+          }
+        },
+        "human_goal_definition": "assigned object center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness; temporal prerequisites apply as publicly specified",
+        "source_files_changed_during_run": [],
+        "episodes": [
+          {
+            "task_id": 2,
+            "init_state_id": 0,
+            "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+            "init_file_sha256": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb"
+          }
+        ],
+        "object_pose_writes_during_control": 0,
+        "robot_ik_adapter": false,
+        "purpose": "用匹配的原生场景、相机、状态和操作空间控制验证现成模型的基础操作能力。",
+        "interpretation": "原生参照不证明模型已具备动态人类协作能力；不能与不同域的Genesis失败作严格配对因果比较。"
+      },
+      "video_verification.json": {
+        "status": "verified",
+        "input_dir": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/autonomous_human/pi05/snack_host",
+        "episode_count": 1,
+        "verified_episode_count": 1,
+        "failed_episode_count": 0,
+        "warning_episode_count": 0,
+        "timeline_required": true,
+        "episodes": [
+          {
+            "episode": "task_02/init_000",
+            "status": "verified",
+            "video": {
+              "path": "demo.mp4",
+              "exists": true,
+              "bytes": 697996,
+              "decoded_frames": 901,
+              "fps": 20.0,
+              "shape": [
+                480,
+                640,
+                3
+              ]
+            },
+            "timeline": {
+              "path": "video_timeline.json",
+              "exists": true,
+              "frame_count": 901,
+              "fps": 20.0,
+              "benchmark_frame_count": 901,
+              "benchmark_start_s": 0.0,
+              "benchmark_end_s": 45.0
+            },
+            "errors": [],
+            "warnings": []
+          }
+        ],
+        "interpretation": "真实运行视频、时间轴和保存轨迹的产物核查；不推断模型能力或 HRC 效果。"
+      },
+      "model_execution_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000",
+            "model_calls": 90,
+            "native_actions": 900,
+            "actual_vla_model_calls": 90,
+            "hold_primitive_calls": 0,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.26124897516392304,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 22500,
+            "human_peak_speed_m_s": 0.30297395784773534,
+            "human_object_peak_speed_m_s": 0.2762244670480348,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          }
+        ],
+        "episode_count": 1,
+        "motion_eligible_episode_count": 1,
+        "model_calls": 90,
+        "native_actions": 900,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000",
+            "pose_records": 901,
+            "max_alignment_error_m": 0.002992334707179654,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.016528191488255867,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          }
+        ],
+        "qualified_count": 1,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      },
+      "human_feedback_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000",
+            "feedback_records": 23,
+            "status": "verified",
+            "model_output_parse_error_count": 0,
+            "public_geometry_reconstructed": true,
+            "actual_robot_speed_reconstructed": true,
+            "model_commands_followed_without_plan_routing": true,
+            "interpretation": "核对记录的模型命令、反馈和物理测量一致；不证明模型理解或真人效度。"
+          }
+        ],
+        "episode_count": 1
+      },
+      "placement_verification.json": {
+        "status": "audited",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000",
+            "status": "reconstructed_physical_criterion",
+            "raw_task_success": false,
+            "physical_placement_completion_verified": true,
+            "terminal_contact_measurement": {
+              "time_s": 45.0,
+              "native_geometry_satisfied": true,
+              "receiver_contact": true,
+              "gripper_contact": false,
+              "gripper_aperture_m": 0.07981254867707453,
+              "released": true,
+              "object_speed_m_s": 3.0067624394776866e-07,
+              "receiver_speed_m_s": 3.5684600916831833e-08,
+              "stable_duration_s": 0.5,
+              "released_stable_placement": true
+            },
+            "interpretation": "旧记录没有连续几何判定，不能事后证明完成；末帧仍夹持可直接排除释放。新记录重建持续稳定的物理判据，不代替真人效度。"
+          }
+        ],
+        "physical_completion_verified_count": 1
+      },
+      "personal_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000",
+            "status": "verified",
+            "human_calls": 23,
+            "no_external_human_assignments_or_timed_updates": true,
+            "raw_generated_targets_reconstructed": true,
+            "private_target_not_routed_to_robot_verified": true,
+            "public_proposal_count": 23,
+            "robot_calls_containing_public_proposals": 90,
+            "personal_geometry_reconstructed": true,
+            "interpretation": "核查自选目标、真实动作和公开边界；不证明偏好/主观满足的真实性、因果贡献或协商理解。"
+          }
+        ]
+      },
+      "prompt_token_verification.json": {
+        "status": "verified_no_truncation",
+        "token_limit": 200,
+        "truncated_calls": 0,
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000",
+            "max_tokens": 96,
+            "calls": [
+              {
+                "step": 0,
+                "time_s": 0.0,
+                "tokens": 84,
+                "truncated": false
+              },
+              {
+                "step": 10,
+                "time_s": 0.5,
+                "tokens": 85,
+                "truncated": false
+              },
+              {
+                "step": 20,
+                "time_s": 1.0,
+                "tokens": 87,
+                "truncated": false
+              },
+              {
+                "step": 30,
+                "time_s": 1.5,
+                "tokens": 87,
+                "truncated": false
+              },
+              {
+                "step": 40,
+                "time_s": 2.0,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 50,
+                "time_s": 2.5,
+                "tokens": 88,
+                "truncated": false
+              },
+              {
+                "step": 60,
+                "time_s": 3.0,
+                "tokens": 88,
+                "truncated": false
+              },
+              {
+                "step": 70,
+                "time_s": 3.5,
+                "tokens": 89,
+                "truncated": false
+              },
+              {
+                "step": 80,
+                "time_s": 4.0,
+                "tokens": 94,
+                "truncated": false
+              },
+              {
+                "step": 90,
+                "time_s": 4.5,
+                "tokens": 94,
+                "truncated": false
+              },
+              {
+                "step": 100,
+                "time_s": 5.0,
+                "tokens": 94,
+                "truncated": false
+              },
+              {
+                "step": 110,
+                "time_s": 5.5,
+                "tokens": 96,
+                "truncated": false
+              },
+              {
+                "step": 120,
+                "time_s": 6.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 130,
+                "time_s": 6.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 140,
+                "time_s": 7.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 150,
+                "time_s": 7.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 160,
+                "time_s": 8.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 170,
+                "time_s": 8.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 180,
+                "time_s": 9.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 190,
+                "time_s": 9.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 200,
+                "time_s": 10.0,
+                "tokens": 93,
+                "truncated": false
+              },
+              {
+                "step": 210,
+                "time_s": 10.5,
+                "tokens": 93,
+                "truncated": false
+              },
+              {
+                "step": 220,
+                "time_s": 11.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 230,
+                "time_s": 11.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 240,
+                "time_s": 12.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 250,
+                "time_s": 12.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 260,
+                "time_s": 13.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 270,
+                "time_s": 13.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 280,
+                "time_s": 14.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 290,
+                "time_s": 14.5,
+                "tokens": 91,
+                "truncated": false
+              },
+              {
+                "step": 300,
+                "time_s": 15.0,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 310,
+                "time_s": 15.5,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 320,
+                "time_s": 16.0,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 330,
+                "time_s": 16.5,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 340,
+                "time_s": 17.0,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 350,
+                "time_s": 17.5,
+                "tokens": 90,
+                "truncated": false
+              },
+              {
+                "step": 360,
+                "time_s": 18.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 370,
+                "time_s": 18.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 380,
+                "time_s": 19.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 390,
+                "time_s": 19.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 400,
+                "time_s": 20.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 410,
+                "time_s": 20.5,
+                "tokens": 93,
+                "truncated": false
+              },
+              {
+                "step": 420,
+                "time_s": 21.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 430,
+                "time_s": 21.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 440,
+                "time_s": 22.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 450,
+                "time_s": 22.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 460,
+                "time_s": 23.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 470,
+                "time_s": 23.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 480,
+                "time_s": 24.0,
+                "tokens": 91,
+                "truncated": false
+              },
+              {
+                "step": 490,
+                "time_s": 24.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 500,
+                "time_s": 25.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 510,
+                "time_s": 25.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 520,
+                "time_s": 26.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 530,
+                "time_s": 26.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 540,
+                "time_s": 27.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 550,
+                "time_s": 27.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 560,
+                "time_s": 28.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 570,
+                "time_s": 28.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 580,
+                "time_s": 29.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 590,
+                "time_s": 29.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 600,
+                "time_s": 30.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 610,
+                "time_s": 30.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 620,
+                "time_s": 31.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 630,
+                "time_s": 31.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 640,
+                "time_s": 32.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 650,
+                "time_s": 32.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 660,
+                "time_s": 33.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 670,
+                "time_s": 33.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 680,
+                "time_s": 34.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 690,
+                "time_s": 34.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 700,
+                "time_s": 35.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 710,
+                "time_s": 35.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 720,
+                "time_s": 36.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 730,
+                "time_s": 36.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 740,
+                "time_s": 37.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 750,
+                "time_s": 37.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 760,
+                "time_s": 38.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 770,
+                "time_s": 38.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 780,
+                "time_s": 39.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 790,
+                "time_s": 39.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 800,
+                "time_s": 40.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 810,
+                "time_s": 40.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 820,
+                "time_s": 41.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 830,
+                "time_s": 41.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 840,
+                "time_s": 42.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 850,
+                "time_s": 42.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 860,
+                "time_s": 43.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 870,
+                "time_s": 43.5,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 880,
+                "time_s": 44.0,
+                "tokens": 92,
+                "truncated": false
+              },
+              {
+                "step": 890,
+                "time_s": 44.5,
+                "tokens": 92,
+                "truncated": false
+              }
+            ]
+          }
+        ],
+        "interpretation": "按已运行π0.5适配器和本地官方sentencepiece资产重建；不证明语言被模型理解。"
+      },
+      "personal_evidence": {
+        "goal_revisions": [
+          {
+            "start_s": 0.0,
+            "targets": [
+              {
+                "object_id": "cookies_1",
+                "destination": "cookies_ready"
+              },
+              {
+                "object_id": "plate_1",
+                "destination": "plate_ready"
+              }
+            ],
+            "long_term_intention": "Ensure cookies are within my reach and the plate is accessible for shared use."
+          }
+        ],
+        "target_intervals": [
+          {
+            "object_id": "cookies_1",
+            "destination": "cookies_ready",
+            "start_s": 0.0,
+            "end_s": 45.0,
+            "initial_xy_distance_m": 0.12,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": 7.8,
+            "terminal_relation_satisfied": true,
+            "human_contact_in_target_interval": true,
+            "terminal_xy_distance_m": 0.012140107624841887,
+            "object_displacement_in_target_interval_m": 0.10789324424072362
+          },
+          {
+            "object_id": "plate_1",
+            "destination": "plate_ready",
+            "start_s": 0.0,
+            "end_s": 45.0,
+            "initial_xy_distance_m": 0.1199999999980784,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": null,
+            "terminal_relation_satisfied": false,
+            "human_contact_in_target_interval": false,
+            "terminal_xy_distance_m": 0.08083351173363637,
+            "object_displacement_in_target_interval_m": 0.07230678434613842
+          }
+        ],
+        "observable_target_set_changes": 0,
+        "distinct_target_relations": 2,
+        "target_intervals_with_stable_relation": 1,
+        "new_target_intervals_with_stable_relation": 1,
+        "public_negotiation_proposals": 23,
+        "target_validation_errors": 0,
+        "human_current_observable_goals_evaluable": true,
+        "human_current_observable_goals_satisfied": false,
+        "robot_final_released_stable_success": true,
+        "joint_observable_goals_satisfied": false,
+        "human_model_calls": 23,
+        "human_generated_goal_decision_times": [
+          0.0,
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0,
+          42.0,
+          44.0
+        ],
+        "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+      },
+      "robot_first_released_stable_s": 5.6,
+      "robot_stable_relation_total_s": 19.1
+    },
+    "pi05_workspace_owner": {
+      "summary.json": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 0,
+            "task_success": false,
+            "completion_time_s": 45.0,
+            "model_calls": 90,
+            "native_actions": 900,
+            "backend": "LIBERO_MuJoCo_native",
+            "native_geometry_success": true,
+            "completion_criterion": "released_stable",
+            "actual_vla_model_calls": 90,
+            "hold_primitive_calls": 0,
+            "planner_output_rejection_holds": 0,
+            "robot_planner_model_calls": 0,
+            "interpretation": "人自选个人目标、当前动作和公开协商提案；测量可观察目标关系，主观满足及协商接受不由程序判定。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "human_object_id": "plate_1",
+            "final_human_object_position": [
+              0.0706982156043469,
+              0.19812665099337393,
+              0.9024805117605874
+            ],
+            "final_plate_position": [
+              0.0706982156043469,
+              0.19812665099337393,
+              0.9024805117605874
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029908862174888077,
+            "human_decisions": 23,
+            "interaction_metrics": {
+              "robot_ee_motion_time_s": 34.74999999999999,
+              "human_motion_time_s": 0.0,
+              "simultaneous_motion_time_s": 0.0,
+              "both_stationary_time_s": 10.250000000000007,
+              "human_observe_command_time_s": 45.0,
+              "minimum_ee_fingertip_distance_m": 0.38462790042845335,
+              "human_force_contact_samples": 0,
+              "interpretation": "实际运动与等待描述；距离不是碰撞证明，指尖代理与EE距离不是完整人体安全指标。"
+            },
+            "task_contract": {
+              "family": "moving_receptacle",
+              "clearance_observed": false,
+              "return_observed": false,
+              "robot_placement_credit": true,
+              "premature_placements": 0,
+              "events": [
+                {
+                  "time_s": 5.5,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 15.5,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 16.35,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 17.0,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 30.6,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 30.95,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 32.1,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 36.75,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 37.65,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 42.0,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 43.0,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 43.65,
+                  "event": "robot_placement_contribution"
+                }
+              ]
+            },
+            "autonomous_human_context": "workspace_owner",
+            "personal_evidence": {
+              "goal_revisions": [
+                {
+                  "start_s": 0.0,
+                  "targets": [],
+                  "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+                }
+              ],
+              "target_intervals": [],
+              "observable_target_set_changes": 0,
+              "distinct_target_relations": 0,
+              "target_intervals_with_stable_relation": 0,
+              "new_target_intervals_with_stable_relation": 0,
+              "public_negotiation_proposals": 0,
+              "target_validation_errors": 0,
+              "human_current_observable_goals_evaluable": false,
+              "human_current_observable_goals_satisfied": false,
+              "robot_final_released_stable_success": true,
+              "joint_observable_goals_satisfied": false,
+              "human_model_calls": 23,
+              "human_generated_goal_decision_times": [
+                0.0,
+                2.0,
+                4.0,
+                6.0,
+                8.0,
+                10.0,
+                12.0,
+                14.0,
+                16.0,
+                18.0,
+                20.0,
+                22.0,
+                24.0,
+                26.0,
+                28.0,
+                30.0,
+                32.0,
+                34.0,
+                36.0,
+                38.0,
+                40.0,
+                42.0,
+                44.0
+              ],
+              "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+            },
+            "human_goal_evaluable": false,
+            "robot_goal_object": "akita_black_bowl_1",
+            "robot_goal_receiver": "plate_1"
+          }
+        ],
+        "successes": 0,
+        "episode_count": 1
+      },
+      "provenance.json": {
+        "backend": "LIBERO_MuJoCo_native",
+        "trained_model": true,
+        "model_server_metadata": {
+          "config": "pi05_libero",
+          "checkpoint": "/data1/sieniwgroup/sieniw/models/lerobot/pi05-libero",
+          "action_encoding": "libero_osc_delta",
+          "action_dim": 7,
+          "state_encoding": "eef_xyz_axisangle_signed_finger_positions",
+          "weight_key_mapping": "strip_model_prefix_strict_813_key_shape_match",
+          "normalization": "checkpoint_mean_std",
+          "image_normalization": "[-1,1]",
+          "offline_assets_only": true
+        },
+        "suite": "libero_spatial",
+        "seed": 0,
+        "control_hz": 20,
+        "robot_planner_metadata": null,
+        "robot_planner_interval_steps": null,
+        "robot_policy_composition": "native VLA",
+        "execution_horizon": 10,
+        "max_steps": 900,
+        "settle_steps": 10,
+        "mujoco_version": "3.2.3",
+        "robosuite_version": "1.4.1",
+        "libero_commit": "f78abd68ee283de9f9be3c8f7e2a9ad60246e95c",
+        "cuda_visible_devices": "0",
+        "source_sha256": {
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/run_libero_native_reference.py": "629071a5f4a8bab5e574926ece503152928176257f2cfd9cdabfaabfff8d77ff",
+          "src/hrc_pilot/libero_native.py": "1796686463fd8a8af5fbc970b846278ae84176d74d61a35376fa878ac3e5ed93",
+          "src/hrc_pilot/native_contact_human.py": "84ad68641f781e58f9608d78ad250a07a38f3f99f89f28e721185b81f75c1d51",
+          "src/hrc_pilot/llm_human.py": "0520916c1112a0b9c4abb51b3e1052bf9906b0300891a0ac59fff7a553c51a42",
+          "src/hrc_pilot/human_contact.py": "9bef4d6ee628df1d1645a8e46a4c85b5a1d6b3885dba85469c8f7708bb1c020b",
+          "src/hrc_pilot/native_avatar.py": "1d9d1b8695faad3eb687b7c5b7bd5b3da9d6e9f9aaaadaad852da3f4914c37ab",
+          "src/hrc_pilot/native_task_contracts.py": "7f1c1f2e2449fb943a8a0488223bd8750ea7897780a0aa4b77570820f801d9e9",
+          "src/hrc_pilot/native_activity.py": "efa34da241340523c299dd54100e42525a1d431b5bd4d86934b3e5754add8b75",
+          "src/hrc_pilot/native_autonomous_human.py": "8eb4d799e821c3912cc98be8fb6e82c5738adfb54968bbf0acc1e55ec324acd5",
+          "src/hrc_pilot/native_personal_evidence.py": "09707a6e73807a7fffe9a3a0449ace1618a9f34807a699f4d28d064ada93848b",
+          "src/hrc_pilot/native_execution.py": "9423c6f6c563c178b344c4be0f35078c9ee2676fb38638bea8616260c966ce3c",
+          "src/hrc_pilot/protocol.py": "3cd467a0813e84f4762ffe6350fd26699949b88eb64d48223a16b279ca564013",
+          "src/hrc_pilot/native_action_validation.py": "c6c2f0bd386a47309403a3bd473e2d678f106757f4683a5da853c0c1142eb352",
+          "src/hrc_pilot/native_placement.py": "07aa810c3f33201a44e2da6f2b022e906539db701259b452d628228f75c69ced",
+          "src/hrc_pilot/robot_coordination.py": "b5164cf861b962a7de38304828632238ea6a00fc6cd4ca3277ed9b96664e2d81",
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/probe_egl_devices.py": "d90fff61553425a2b24681d16de6de8f5ce39b795dc136ecf491e262d3baf0ea"
+        },
+        "renderer_device_binding": {
+          "egl_ordinal": 1,
+          "cuda_ordinal": 0,
+          "pci_bus": "0000:23:00.0"
+        },
+        "human_mode": "qwen",
+        "human_persona": "independent",
+        "autonomous_human_context": "workspace_owner",
+        "human_target_source": "model_generated_from_personal_preferences",
+        "private_human_targets_in_robot_input": false,
+        "activity_profile": null,
+        "human_decision_interval_steps": 40,
+        "world_initializations_per_episode": 1,
+        "fixed_duration_with_no_success_early_exit": true,
+        "task_family": "moving_receptacle",
+        "human_public_work_requirement": null,
+        "human_memory_scope": "episode",
+        "human_object_id": "plate_1",
+        "human_execution_feedback": "measured_motor_state_and_public_geometry_no_evaluator_outcomes",
+        "human_action_validation_feedback": true,
+        "completion_criterion": "released_stable",
+        "human_plan_execution": "Qwen reselects each action; generated plans never routed by runtime",
+        "human_torch_seed_rule": "seed + 1000*task_id + init_state_id",
+        "human_model": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B",
+        "human_physics": "force_driven_xyz_fingertip",
+        "human_body_visualization": "vico_skin",
+        "human_avatar_assets": {
+          "directory": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/native_avatar/vico_a1b13b6162c7",
+          "metadata": {
+            "source_glb": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/models/mixamo_Alex_Jefferson.glb",
+            "source_motion": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/motions/motion.pkl",
+            "source_sha256": {
+              "glb": "18e7a8e69c74227e79ca2a959fdffb85357e3431395145196f0cba938d1684ea",
+              "motion": "070f312b048afa6003a102eae04d5047a5b68499d31434c5baa0adcd8da4590c"
+            },
+            "vertex_count": 3042,
+            "face_count": 4152,
+            "skin_bones": 52,
+            "joint_names": [
+              "Hips",
+              "Spine",
+              "Spine1",
+              "Spine2",
+              "Neck",
+              "Head",
+              "HeadTop_End",
+              "LeftShoulder",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "LeftHandThumb1",
+              "LeftHandThumb2",
+              "LeftHandThumb3",
+              "LeftHandThumb4",
+              "LeftHandIndex1",
+              "LeftHandIndex2",
+              "LeftHandIndex3",
+              "LeftHandIndex4",
+              "LeftHandMiddle1",
+              "LeftHandMiddle2",
+              "LeftHandMiddle3",
+              "LeftHandMiddle4",
+              "LeftHandRing1",
+              "LeftHandRing2",
+              "LeftHandRing3",
+              "LeftHandRing4",
+              "LeftHandPinky1",
+              "LeftHandPinky2",
+              "LeftHandPinky3",
+              "LeftHandPinky4",
+              "RightShoulder",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "RightHandThumb1",
+              "RightHandThumb2",
+              "RightHandThumb3",
+              "RightHandThumb4",
+              "RightHandIndex1",
+              "RightHandIndex2",
+              "RightHandIndex3",
+              "RightHandIndex4",
+              "RightHandMiddle1",
+              "RightHandMiddle2",
+              "RightHandMiddle3",
+              "RightHandMiddle4",
+              "RightHandRing1",
+              "RightHandRing2",
+              "RightHandRing3",
+              "RightHandRing4",
+              "RightHandPinky1",
+              "RightHandPinky2",
+              "RightHandPinky3",
+              "RightHandPinky4",
+              "LeftUpLeg",
+              "LeftLeg",
+              "LeftFoot",
+              "LeftToeBase",
+              "LeftToe_End",
+              "RightUpLeg",
+              "RightLeg",
+              "RightFoot",
+              "RightToeBase",
+              "RightToe_End"
+            ],
+            "skin_file": "alex.skn",
+            "texture_file": "alex_color.png",
+            "rig_file": "rig.npz",
+            "motion_fps": 30,
+            "interpretation": "复用既有人物/动作蒙皮资产；显示骨骼与物理接触分开，不代表完整人体动力学或动作策略学习。"
+          },
+          "sha256": {
+            "alex.skn": "2503e6338b8372cc0744843181f05731a6f3304ee0d0955bedfee8f4f2faae2f",
+            "alex_color.png": "4b1839ff4153d2a9db0f3c0c2557c55c375c758f513085037e546d2a4c632a61",
+            "rig.npz": "f4975c4e23e0f0de11d7a2989bfb72ea93f41ac0514cc4fe1062e47a886a7e3a",
+            "avatar.json": "5dd578b21dab07776b90046d8f25909bbbae3015af59aaba6f7dd2aba2a8c57c"
+          }
+        },
+        "human_goal_definition": "assigned object center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness; temporal prerequisites apply as publicly specified",
+        "source_files_changed_during_run": [],
+        "episodes": [
+          {
+            "task_id": 2,
+            "init_state_id": 0,
+            "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+            "init_file_sha256": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb"
+          }
+        ],
+        "object_pose_writes_during_control": 0,
+        "robot_ik_adapter": false,
+        "purpose": "用匹配的原生场景、相机、状态和操作空间控制验证现成模型的基础操作能力。",
+        "interpretation": "原生参照不证明模型已具备动态人类协作能力；不能与不同域的Genesis失败作严格配对因果比较。"
+      },
+      "video_verification.json": {
+        "status": "verified",
+        "input_dir": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/autonomous_human/pi05/workspace_owner",
+        "episode_count": 1,
+        "verified_episode_count": 1,
+        "failed_episode_count": 0,
+        "warning_episode_count": 0,
+        "timeline_required": true,
+        "episodes": [
+          {
+            "episode": "task_02/init_000",
+            "status": "verified",
+            "video": {
+              "path": "demo.mp4",
+              "exists": true,
+              "bytes": 728925,
+              "decoded_frames": 901,
+              "fps": 20.0,
+              "shape": [
+                480,
+                640,
+                3
+              ]
+            },
+            "timeline": {
+              "path": "video_timeline.json",
+              "exists": true,
+              "frame_count": 901,
+              "fps": 20.0,
+              "benchmark_frame_count": 901,
+              "benchmark_start_s": 0.0,
+              "benchmark_end_s": 45.0
+            },
+            "errors": [],
+            "warnings": []
+          }
+        ],
+        "interpretation": "真实运行视频、时间轴和保存轨迹的产物核查；不推断模型能力或 HRC 效果。"
+      },
+      "model_execution_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000",
+            "model_calls": 90,
+            "native_actions": 900,
+            "actual_vla_model_calls": 90,
+            "hold_primitive_calls": 0,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.26037150512962354,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 22500,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          }
+        ],
+        "episode_count": 1,
+        "motion_eligible_episode_count": 1,
+        "model_calls": 90,
+        "native_actions": 900,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000",
+            "pose_records": 901,
+            "max_alignment_error_m": 0.0029908862174888077,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.003698538466472879,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          }
+        ],
+        "qualified_count": 1,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      },
+      "human_feedback_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000",
+            "feedback_records": 23,
+            "status": "verified",
+            "model_output_parse_error_count": 0,
+            "public_geometry_reconstructed": true,
+            "actual_robot_speed_reconstructed": true,
+            "model_commands_followed_without_plan_routing": true,
+            "interpretation": "核对记录的模型命令、反馈和物理测量一致；不证明模型理解或真人效度。"
+          }
+        ],
+        "episode_count": 1
+      },
+      "placement_verification.json": {
+        "status": "audited",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000",
+            "status": "reconstructed_physical_criterion",
+            "raw_task_success": false,
+            "physical_placement_completion_verified": true,
+            "terminal_contact_measurement": {
+              "time_s": 45.0,
+              "native_geometry_satisfied": true,
+              "receiver_contact": true,
+              "gripper_contact": false,
+              "gripper_aperture_m": 0.07923293595976322,
+              "released": true,
+              "object_speed_m_s": 3.7607572040672696e-07,
+              "receiver_speed_m_s": 3.5223235145521376e-11,
+              "stable_duration_s": 1.5499999999999972,
+              "released_stable_placement": true
+            },
+            "interpretation": "旧记录没有连续几何判定，不能事后证明完成；末帧仍夹持可直接排除释放。新记录重建持续稳定的物理判据，不代替真人效度。"
+          }
+        ],
+        "physical_completion_verified_count": 1
+      },
+      "personal_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000",
+            "status": "verified",
+            "human_calls": 23,
+            "no_external_human_assignments_or_timed_updates": true,
+            "raw_generated_targets_reconstructed": true,
+            "private_target_not_routed_to_robot_verified": true,
+            "public_proposal_count": 0,
+            "robot_calls_containing_public_proposals": 0,
+            "personal_geometry_reconstructed": true,
+            "interpretation": "核查自选目标、真实动作和公开边界；不证明偏好/主观满足的真实性、因果贡献或协商理解。"
+          }
+        ]
+      },
+      "prompt_token_verification.json": {
+        "status": "verified_no_truncation",
+        "token_limit": 200,
+        "truncated_calls": 0,
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000",
+            "max_tokens": 83,
+            "calls": [
+              {
+                "step": 0,
+                "time_s": 0.0,
+                "tokens": 66,
+                "truncated": false
+              },
+              {
+                "step": 10,
+                "time_s": 0.5,
+                "tokens": 67,
+                "truncated": false
+              },
+              {
+                "step": 20,
+                "time_s": 1.0,
+                "tokens": 69,
+                "truncated": false
+              },
+              {
+                "step": 30,
+                "time_s": 1.5,
+                "tokens": 69,
+                "truncated": false
+              },
+              {
+                "step": 40,
+                "time_s": 2.0,
+                "tokens": 83,
+                "truncated": false
+              },
+              {
+                "step": 50,
+                "time_s": 2.5,
+                "tokens": 81,
+                "truncated": false
+              },
+              {
+                "step": 60,
+                "time_s": 3.0,
+                "tokens": 81,
+                "truncated": false
+              },
+              {
+                "step": 70,
+                "time_s": 3.5,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 80,
+                "time_s": 4.0,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 90,
+                "time_s": 4.5,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 100,
+                "time_s": 5.0,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 110,
+                "time_s": 5.5,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 120,
+                "time_s": 6.0,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 130,
+                "time_s": 6.5,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 140,
+                "time_s": 7.0,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 150,
+                "time_s": 7.5,
+                "tokens": 82,
+                "truncated": false
+              },
+              {
+                "step": 160,
+                "time_s": 8.0,
+                "tokens": 80,
+                "truncated": false
+              },
+              {
+                "step": 170,
+                "time_s": 8.5,
+                "tokens": 80,
+                "truncated": false
+              },
+              {
+                "step": 180,
+                "time_s": 9.0,
+                "tokens": 80,
+                "truncated": false
+              },
+              {
+                "step": 190,
+                "time_s": 9.5,
+                "tokens": 80,
+                "truncated": false
+              },
+              {
+                "step": 200,
+                "time_s": 10.0,
+                "tokens": 80,
+                "truncated": false
+              },
+              {
+                "step": 210,
+                "time_s": 10.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 220,
+                "time_s": 11.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 230,
+                "time_s": 11.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 240,
+                "time_s": 12.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 250,
+                "time_s": 12.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 260,
+                "time_s": 13.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 270,
+                "time_s": 13.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 280,
+                "time_s": 14.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 290,
+                "time_s": 14.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 300,
+                "time_s": 15.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 310,
+                "time_s": 15.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 320,
+                "time_s": 16.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 330,
+                "time_s": 16.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 340,
+                "time_s": 17.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 350,
+                "time_s": 17.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 360,
+                "time_s": 18.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 370,
+                "time_s": 18.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 380,
+                "time_s": 19.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 390,
+                "time_s": 19.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 400,
+                "time_s": 20.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 410,
+                "time_s": 20.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 420,
+                "time_s": 21.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 430,
+                "time_s": 21.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 440,
+                "time_s": 22.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 450,
+                "time_s": 22.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 460,
+                "time_s": 23.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 470,
+                "time_s": 23.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 480,
+                "time_s": 24.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 490,
+                "time_s": 24.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 500,
+                "time_s": 25.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 510,
+                "time_s": 25.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 520,
+                "time_s": 26.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 530,
+                "time_s": 26.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 540,
+                "time_s": 27.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 550,
+                "time_s": 27.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 560,
+                "time_s": 28.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 570,
+                "time_s": 28.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 580,
+                "time_s": 29.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 590,
+                "time_s": 29.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 600,
+                "time_s": 30.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 610,
+                "time_s": 30.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 620,
+                "time_s": 31.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 630,
+                "time_s": 31.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 640,
+                "time_s": 32.0,
+                "tokens": 80,
+                "truncated": false
+              },
+              {
+                "step": 650,
+                "time_s": 32.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 660,
+                "time_s": 33.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 670,
+                "time_s": 33.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 680,
+                "time_s": 34.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 690,
+                "time_s": 34.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 700,
+                "time_s": 35.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 710,
+                "time_s": 35.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 720,
+                "time_s": 36.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 730,
+                "time_s": 36.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 740,
+                "time_s": 37.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 750,
+                "time_s": 37.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 760,
+                "time_s": 38.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 770,
+                "time_s": 38.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 780,
+                "time_s": 39.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 790,
+                "time_s": 39.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 800,
+                "time_s": 40.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 810,
+                "time_s": 40.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 820,
+                "time_s": 41.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 830,
+                "time_s": 41.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 840,
+                "time_s": 42.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 850,
+                "time_s": 42.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 860,
+                "time_s": 43.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 870,
+                "time_s": 43.5,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 880,
+                "time_s": 44.0,
+                "tokens": 79,
+                "truncated": false
+              },
+              {
+                "step": 890,
+                "time_s": 44.5,
+                "tokens": 79,
+                "truncated": false
+              }
+            ]
+          }
+        ],
+        "interpretation": "按已运行π0.5适配器和本地官方sentencepiece资产重建；不证明语言被模型理解。"
+      },
+      "personal_evidence": {
+        "goal_revisions": [
+          {
+            "start_s": 0.0,
+            "targets": [],
+            "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+          }
+        ],
+        "target_intervals": [],
+        "observable_target_set_changes": 0,
+        "distinct_target_relations": 0,
+        "target_intervals_with_stable_relation": 0,
+        "new_target_intervals_with_stable_relation": 0,
+        "public_negotiation_proposals": 0,
+        "target_validation_errors": 0,
+        "human_current_observable_goals_evaluable": false,
+        "human_current_observable_goals_satisfied": false,
+        "robot_final_released_stable_success": true,
+        "joint_observable_goals_satisfied": false,
+        "human_model_calls": 23,
+        "human_generated_goal_decision_times": [
+          0.0,
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0,
+          42.0,
+          44.0
+        ],
+        "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+      },
+      "robot_first_released_stable_s": 5.5,
+      "robot_stable_relation_total_s": 33.65
+    },
+    "openvla_snack_host": {
+      "summary.json": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 0,
+            "task_success": false,
+            "completion_time_s": 45.0,
+            "model_calls": 900,
+            "native_actions": 900,
+            "backend": "LIBERO_MuJoCo_native",
+            "native_geometry_success": false,
+            "completion_criterion": "released_stable",
+            "actual_vla_model_calls": 900,
+            "hold_primitive_calls": 0,
+            "planner_output_rejection_holds": 0,
+            "robot_planner_model_calls": 0,
+            "interpretation": "人自选个人目标、当前动作和公开协商提案；测量可观察目标关系，主观满足及协商接受不由程序判定。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": false,
+            "human_fingertip_peak_speed_m_s": 0.45952069711883914,
+            "human_object_peak_speed_m_s": 0.2762244674461264,
+            "human_motion_check_passed": true,
+            "human_object_id": "plate_1",
+            "final_human_object_position": [
+              0.07480502361360472,
+              0.2488599932149015,
+              0.9024988140670759
+            ],
+            "final_plate_position": [
+              0.07480502361360472,
+              0.2488599932149015,
+              0.9024988140670759
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029952324199528572,
+            "human_decisions": 23,
+            "interaction_metrics": {
+              "robot_ee_motion_time_s": 37.44999999999998,
+              "human_motion_time_s": 12.799999999999994,
+              "simultaneous_motion_time_s": 10.69999999999999,
+              "both_stationary_time_s": 5.450000000000014,
+              "human_observe_command_time_s": 2.0,
+              "minimum_ee_fingertip_distance_m": 0.1296065461316881,
+              "human_force_contact_samples": 3972,
+              "interpretation": "实际运动与等待描述；距离不是碰撞证明，指尖代理与EE距离不是完整人体安全指标。"
+            },
+            "task_contract": {
+              "family": "moving_receptacle",
+              "clearance_observed": false,
+              "return_observed": false,
+              "robot_placement_credit": false,
+              "premature_placements": 0,
+              "events": []
+            },
+            "autonomous_human_context": "snack_host",
+            "personal_evidence": {
+              "goal_revisions": [
+                {
+                  "start_s": 0.0,
+                  "targets": [
+                    {
+                      "object_id": "cookies_1",
+                      "destination": "cookies_ready"
+                    },
+                    {
+                      "object_id": "plate_1",
+                      "destination": "plate_ready"
+                    }
+                  ],
+                  "long_term_intention": "Ensure cookies are within my reach and the plate is accessible for shared use."
+                }
+              ],
+              "target_intervals": [
+                {
+                  "object_id": "cookies_1",
+                  "destination": "cookies_ready",
+                  "start_s": 0.0,
+                  "end_s": 45.0,
+                  "initial_xy_distance_m": 0.12,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": 7.8,
+                  "terminal_relation_satisfied": true,
+                  "human_contact_in_target_interval": true,
+                  "terminal_xy_distance_m": 0.00867433406908206,
+                  "object_displacement_in_target_interval_m": 0.111335845318695
+                },
+                {
+                  "object_id": "plate_1",
+                  "destination": "plate_ready",
+                  "start_s": 0.0,
+                  "end_s": 45.0,
+                  "initial_xy_distance_m": 0.1199999999980784,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": null,
+                  "terminal_relation_satisfied": false,
+                  "human_contact_in_target_interval": false,
+                  "terminal_xy_distance_m": 0.07160204249039871,
+                  "object_displacement_in_target_interval_m": 0.048575180311346444
+                }
+              ],
+              "observable_target_set_changes": 0,
+              "distinct_target_relations": 2,
+              "target_intervals_with_stable_relation": 1,
+              "new_target_intervals_with_stable_relation": 1,
+              "public_negotiation_proposals": 22,
+              "target_validation_errors": 0,
+              "human_current_observable_goals_evaluable": true,
+              "human_current_observable_goals_satisfied": false,
+              "robot_final_released_stable_success": false,
+              "joint_observable_goals_satisfied": false,
+              "human_model_calls": 23,
+              "human_generated_goal_decision_times": [
+                0.0,
+                2.0,
+                4.0,
+                6.0,
+                8.0,
+                10.0,
+                12.0,
+                14.0,
+                16.0,
+                18.0,
+                20.0,
+                22.0,
+                24.0,
+                26.0,
+                28.0,
+                30.0,
+                32.0,
+                34.0,
+                36.0,
+                38.0,
+                40.0,
+                42.0,
+                44.0
+              ],
+              "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+            },
+            "human_goal_evaluable": true,
+            "robot_goal_object": "akita_black_bowl_1",
+            "robot_goal_receiver": "plate_1"
+          }
+        ],
+        "successes": 0,
+        "episode_count": 1
+      },
+      "provenance.json": {
+        "backend": "LIBERO_MuJoCo_native",
+        "trained_model": true,
+        "model_server_metadata": {
+          "config": "openvla_libero_spatial",
+          "checkpoint": "/data1/sieniwgroup/sieniw/models/zixiaoBios/openvla-7b-finetuned-libero-spatial",
+          "action_encoding": "libero_osc_delta",
+          "action_dim": 7,
+          "consumed_inputs": [
+            "observation/image",
+            "prompt"
+          ],
+          "unused_compatibility_inputs": [
+            "observation/wrist_image",
+            "observation/state"
+          ],
+          "center_crop": true,
+          "crop_area": 0.9,
+          "image_preprocessing": "JPEG roundtrip -> TF Lanczos3 224 -> TF center crop 0.9 area -> uint8",
+          "attention_implementation": "sdpa",
+          "offline_assets_only": true,
+          "adapter_sha256": "adf911d4744714711e358fc24122e091f6d74e03cb2354831ace7249f3edb564",
+          "preprocessing_sha256": "b60d1dbfc37ab77f9ffc50090e7429c4c44580bddad1e46dbe9729289a53adf0",
+          "checkpoint_mirror_identity": "ModelScope file SHA256 verified; upstream hash identity not checked",
+          "source_commit": "c8f03f48af692657d3060c19588038c7220e9af9",
+          "source_sha256": {
+            "configuration_prismatic.py": "68cc5ae34f1b46af3168d8d479cb81bb776965653453fd904aa8eefb6c8f9f68",
+            "modeling_prismatic.py": "9ce241c5ca09a4bed73654d0ca509baaff0fc5887d0bdd62e360ca8254f7794a",
+            "processing_prismatic.py": "2474a5c3fdd4ff15234924636dc0ead6419c89f49699193be47dbb87510a5425"
+          },
+          "weight_loading_info": {
+            "missing_keys": [],
+            "unexpected_keys": [],
+            "mismatched_keys": [],
+            "error_msgs": []
+          }
+        },
+        "suite": "libero_spatial",
+        "seed": 0,
+        "control_hz": 20,
+        "robot_planner_metadata": null,
+        "robot_planner_interval_steps": null,
+        "robot_policy_composition": "native VLA",
+        "execution_horizon": 1,
+        "max_steps": 900,
+        "settle_steps": 10,
+        "mujoco_version": "3.2.3",
+        "robosuite_version": "1.4.1",
+        "libero_commit": "f78abd68ee283de9f9be3c8f7e2a9ad60246e95c",
+        "cuda_visible_devices": "1",
+        "source_sha256": {
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/run_libero_native_reference.py": "629071a5f4a8bab5e574926ece503152928176257f2cfd9cdabfaabfff8d77ff",
+          "src/hrc_pilot/libero_native.py": "1796686463fd8a8af5fbc970b846278ae84176d74d61a35376fa878ac3e5ed93",
+          "src/hrc_pilot/native_contact_human.py": "84ad68641f781e58f9608d78ad250a07a38f3f99f89f28e721185b81f75c1d51",
+          "src/hrc_pilot/llm_human.py": "0520916c1112a0b9c4abb51b3e1052bf9906b0300891a0ac59fff7a553c51a42",
+          "src/hrc_pilot/human_contact.py": "9bef4d6ee628df1d1645a8e46a4c85b5a1d6b3885dba85469c8f7708bb1c020b",
+          "src/hrc_pilot/native_avatar.py": "1d9d1b8695faad3eb687b7c5b7bd5b3da9d6e9f9aaaadaad852da3f4914c37ab",
+          "src/hrc_pilot/native_task_contracts.py": "7f1c1f2e2449fb943a8a0488223bd8750ea7897780a0aa4b77570820f801d9e9",
+          "src/hrc_pilot/native_activity.py": "efa34da241340523c299dd54100e42525a1d431b5bd4d86934b3e5754add8b75",
+          "src/hrc_pilot/native_autonomous_human.py": "8eb4d799e821c3912cc98be8fb6e82c5738adfb54968bbf0acc1e55ec324acd5",
+          "src/hrc_pilot/native_personal_evidence.py": "09707a6e73807a7fffe9a3a0449ace1618a9f34807a699f4d28d064ada93848b",
+          "src/hrc_pilot/native_execution.py": "9423c6f6c563c178b344c4be0f35078c9ee2676fb38638bea8616260c966ce3c",
+          "src/hrc_pilot/protocol.py": "3cd467a0813e84f4762ffe6350fd26699949b88eb64d48223a16b279ca564013",
+          "src/hrc_pilot/native_action_validation.py": "c6c2f0bd386a47309403a3bd473e2d678f106757f4683a5da853c0c1142eb352",
+          "src/hrc_pilot/native_placement.py": "07aa810c3f33201a44e2da6f2b022e906539db701259b452d628228f75c69ced",
+          "src/hrc_pilot/robot_coordination.py": "b5164cf861b962a7de38304828632238ea6a00fc6cd4ca3277ed9b96664e2d81",
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/probe_egl_devices.py": "d90fff61553425a2b24681d16de6de8f5ce39b795dc136ecf491e262d3baf0ea"
+        },
+        "renderer_device_binding": {
+          "egl_ordinal": 0,
+          "cuda_ordinal": 1,
+          "pci_bus": "0000:41:00.0"
+        },
+        "human_mode": "qwen",
+        "human_persona": "independent",
+        "autonomous_human_context": "snack_host",
+        "human_target_source": "model_generated_from_personal_preferences",
+        "private_human_targets_in_robot_input": false,
+        "activity_profile": null,
+        "human_decision_interval_steps": 40,
+        "world_initializations_per_episode": 1,
+        "fixed_duration_with_no_success_early_exit": true,
+        "task_family": "moving_receptacle",
+        "human_public_work_requirement": null,
+        "human_memory_scope": "episode",
+        "human_object_id": "plate_1",
+        "human_execution_feedback": "measured_motor_state_and_public_geometry_no_evaluator_outcomes",
+        "human_action_validation_feedback": true,
+        "completion_criterion": "released_stable",
+        "human_plan_execution": "Qwen reselects each action; generated plans never routed by runtime",
+        "human_torch_seed_rule": "seed + 1000*task_id + init_state_id",
+        "human_model": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B",
+        "human_physics": "force_driven_xyz_fingertip",
+        "human_body_visualization": "vico_skin",
+        "human_avatar_assets": {
+          "directory": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/native_avatar/vico_a1b13b6162c7",
+          "metadata": {
+            "source_glb": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/models/mixamo_Alex_Jefferson.glb",
+            "source_motion": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/motions/motion.pkl",
+            "source_sha256": {
+              "glb": "18e7a8e69c74227e79ca2a959fdffb85357e3431395145196f0cba938d1684ea",
+              "motion": "070f312b048afa6003a102eae04d5047a5b68499d31434c5baa0adcd8da4590c"
+            },
+            "vertex_count": 3042,
+            "face_count": 4152,
+            "skin_bones": 52,
+            "joint_names": [
+              "Hips",
+              "Spine",
+              "Spine1",
+              "Spine2",
+              "Neck",
+              "Head",
+              "HeadTop_End",
+              "LeftShoulder",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "LeftHandThumb1",
+              "LeftHandThumb2",
+              "LeftHandThumb3",
+              "LeftHandThumb4",
+              "LeftHandIndex1",
+              "LeftHandIndex2",
+              "LeftHandIndex3",
+              "LeftHandIndex4",
+              "LeftHandMiddle1",
+              "LeftHandMiddle2",
+              "LeftHandMiddle3",
+              "LeftHandMiddle4",
+              "LeftHandRing1",
+              "LeftHandRing2",
+              "LeftHandRing3",
+              "LeftHandRing4",
+              "LeftHandPinky1",
+              "LeftHandPinky2",
+              "LeftHandPinky3",
+              "LeftHandPinky4",
+              "RightShoulder",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "RightHandThumb1",
+              "RightHandThumb2",
+              "RightHandThumb3",
+              "RightHandThumb4",
+              "RightHandIndex1",
+              "RightHandIndex2",
+              "RightHandIndex3",
+              "RightHandIndex4",
+              "RightHandMiddle1",
+              "RightHandMiddle2",
+              "RightHandMiddle3",
+              "RightHandMiddle4",
+              "RightHandRing1",
+              "RightHandRing2",
+              "RightHandRing3",
+              "RightHandRing4",
+              "RightHandPinky1",
+              "RightHandPinky2",
+              "RightHandPinky3",
+              "RightHandPinky4",
+              "LeftUpLeg",
+              "LeftLeg",
+              "LeftFoot",
+              "LeftToeBase",
+              "LeftToe_End",
+              "RightUpLeg",
+              "RightLeg",
+              "RightFoot",
+              "RightToeBase",
+              "RightToe_End"
+            ],
+            "skin_file": "alex.skn",
+            "texture_file": "alex_color.png",
+            "rig_file": "rig.npz",
+            "motion_fps": 30,
+            "interpretation": "复用既有人物/动作蒙皮资产；显示骨骼与物理接触分开，不代表完整人体动力学或动作策略学习。"
+          },
+          "sha256": {
+            "alex.skn": "2503e6338b8372cc0744843181f05731a6f3304ee0d0955bedfee8f4f2faae2f",
+            "alex_color.png": "4b1839ff4153d2a9db0f3c0c2557c55c375c758f513085037e546d2a4c632a61",
+            "rig.npz": "f4975c4e23e0f0de11d7a2989bfb72ea93f41ac0514cc4fe1062e47a886a7e3a",
+            "avatar.json": "5dd578b21dab07776b90046d8f25909bbbae3015af59aaba6f7dd2aba2a8c57c"
+          }
+        },
+        "human_goal_definition": "assigned object center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness; temporal prerequisites apply as publicly specified",
+        "source_files_changed_during_run": [],
+        "episodes": [
+          {
+            "task_id": 2,
+            "init_state_id": 0,
+            "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+            "init_file_sha256": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb"
+          }
+        ],
+        "object_pose_writes_during_control": 0,
+        "robot_ik_adapter": false,
+        "purpose": "用匹配的原生场景、相机、状态和操作空间控制验证现成模型的基础操作能力。",
+        "interpretation": "原生参照不证明模型已具备动态人类协作能力；不能与不同域的Genesis失败作严格配对因果比较。"
+      },
+      "video_verification.json": {
+        "status": "verified",
+        "input_dir": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/autonomous_human/openvla/snack_host",
+        "episode_count": 1,
+        "verified_episode_count": 1,
+        "failed_episode_count": 0,
+        "warning_episode_count": 0,
+        "timeline_required": true,
+        "episodes": [
+          {
+            "episode": "task_02/init_000",
+            "status": "verified",
+            "video": {
+              "path": "demo.mp4",
+              "exists": true,
+              "bytes": 757373,
+              "decoded_frames": 901,
+              "fps": 20.0,
+              "shape": [
+                480,
+                640,
+                3
+              ]
+            },
+            "timeline": {
+              "path": "video_timeline.json",
+              "exists": true,
+              "frame_count": 901,
+              "fps": 20.0,
+              "benchmark_frame_count": 901,
+              "benchmark_start_s": 0.0,
+              "benchmark_end_s": 45.0
+            },
+            "errors": [],
+            "warnings": []
+          }
+        ],
+        "interpretation": "真实运行视频、时间轴和保存轨迹的产物核查；不推断模型能力或 HRC 效果。"
+      },
+      "model_execution_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000",
+            "model_calls": 900,
+            "native_actions": 900,
+            "actual_vla_model_calls": 900,
+            "hold_primitive_calls": 0,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.4834296828569872,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 22500,
+            "human_peak_speed_m_s": 0.45952069711883914,
+            "human_object_peak_speed_m_s": 0.2762244674461264,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          }
+        ],
+        "episode_count": 1,
+        "motion_eligible_episode_count": 1,
+        "model_calls": 900,
+        "native_actions": 900,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000",
+            "pose_records": 901,
+            "max_alignment_error_m": 0.0029952324199528572,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.01919329922071725,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          }
+        ],
+        "qualified_count": 1,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      },
+      "human_feedback_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000",
+            "feedback_records": 23,
+            "status": "verified",
+            "model_output_parse_error_count": 0,
+            "public_geometry_reconstructed": true,
+            "actual_robot_speed_reconstructed": true,
+            "model_commands_followed_without_plan_routing": true,
+            "interpretation": "核对记录的模型命令、反馈和物理测量一致；不证明模型理解或真人效度。"
+          }
+        ],
+        "episode_count": 1
+      },
+      "placement_verification.json": {
+        "status": "audited",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000",
+            "status": "reconstructed_physical_criterion",
+            "raw_task_success": false,
+            "physical_placement_completion_verified": false,
+            "terminal_contact_measurement": {
+              "time_s": 45.0,
+              "native_geometry_satisfied": false,
+              "receiver_contact": false,
+              "gripper_contact": false,
+              "gripper_aperture_m": 0.059157578422010276,
+              "released": true,
+              "object_speed_m_s": 0.0,
+              "receiver_speed_m_s": 6.121623855045837e-07,
+              "stable_duration_s": 0.0,
+              "released_stable_placement": false
+            },
+            "interpretation": "旧记录没有连续几何判定，不能事后证明完成；末帧仍夹持可直接排除释放。新记录重建持续稳定的物理判据，不代替真人效度。"
+          }
+        ],
+        "physical_completion_verified_count": 0
+      },
+      "personal_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000",
+            "status": "verified",
+            "human_calls": 23,
+            "no_external_human_assignments_or_timed_updates": true,
+            "raw_generated_targets_reconstructed": true,
+            "private_target_not_routed_to_robot_verified": true,
+            "public_proposal_count": 22,
+            "robot_calls_containing_public_proposals": 900,
+            "personal_geometry_reconstructed": true,
+            "interpretation": "核查自选目标、真实动作和公开边界；不证明偏好/主观满足的真实性、因果贡献或协商理解。"
+          }
+        ]
+      },
+      "preprocessing_verification.json": {
+        "status": "verified",
+        "model_call_count": 900,
+        "pixel_exact_reconstruction": true,
+        "interpretation": "独立重建官方图像/语言预处理及保存帧，不证明模型能力或上游权重身份。"
+      },
+      "personal_evidence": {
+        "goal_revisions": [
+          {
+            "start_s": 0.0,
+            "targets": [
+              {
+                "object_id": "cookies_1",
+                "destination": "cookies_ready"
+              },
+              {
+                "object_id": "plate_1",
+                "destination": "plate_ready"
+              }
+            ],
+            "long_term_intention": "Ensure cookies are within my reach and the plate is accessible for shared use."
+          }
+        ],
+        "target_intervals": [
+          {
+            "object_id": "cookies_1",
+            "destination": "cookies_ready",
+            "start_s": 0.0,
+            "end_s": 45.0,
+            "initial_xy_distance_m": 0.12,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": 7.8,
+            "terminal_relation_satisfied": true,
+            "human_contact_in_target_interval": true,
+            "terminal_xy_distance_m": 0.00867433406908206,
+            "object_displacement_in_target_interval_m": 0.111335845318695
+          },
+          {
+            "object_id": "plate_1",
+            "destination": "plate_ready",
+            "start_s": 0.0,
+            "end_s": 45.0,
+            "initial_xy_distance_m": 0.1199999999980784,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": null,
+            "terminal_relation_satisfied": false,
+            "human_contact_in_target_interval": false,
+            "terminal_xy_distance_m": 0.07160204249039871,
+            "object_displacement_in_target_interval_m": 0.048575180311346444
+          }
+        ],
+        "observable_target_set_changes": 0,
+        "distinct_target_relations": 2,
+        "target_intervals_with_stable_relation": 1,
+        "new_target_intervals_with_stable_relation": 1,
+        "public_negotiation_proposals": 22,
+        "target_validation_errors": 0,
+        "human_current_observable_goals_evaluable": true,
+        "human_current_observable_goals_satisfied": false,
+        "robot_final_released_stable_success": false,
+        "joint_observable_goals_satisfied": false,
+        "human_model_calls": 23,
+        "human_generated_goal_decision_times": [
+          0.0,
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0,
+          42.0,
+          44.0
+        ],
+        "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+      },
+      "robot_first_released_stable_s": null,
+      "robot_stable_relation_total_s": 0
+    },
+    "openvla_workspace_owner": {
+      "summary.json": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 0,
+            "task_success": false,
+            "completion_time_s": 45.0,
+            "model_calls": 900,
+            "native_actions": 900,
+            "backend": "LIBERO_MuJoCo_native",
+            "native_geometry_success": true,
+            "completion_criterion": "released_stable",
+            "actual_vla_model_calls": 900,
+            "hold_primitive_calls": 0,
+            "planner_output_rejection_holds": 0,
+            "robot_planner_model_calls": 0,
+            "interpretation": "人自选个人目标、当前动作和公开协商提案；测量可观察目标关系，主观满足及协商接受不由程序判定。",
+            "human_mode": "qwen",
+            "human_contact_witness": true,
+            "human_goal_success": true,
+            "robot_goal_success": false,
+            "human_fingertip_peak_speed_m_s": 1.9875235951825818,
+            "human_object_peak_speed_m_s": 0.7853583765692648,
+            "human_motion_check_passed": false,
+            "human_object_id": "plate_1",
+            "final_human_object_position": [
+              0.06865815840446352,
+              0.3211449170019169,
+              0.9024754365224806
+            ],
+            "final_plate_position": [
+              0.06865815840446352,
+              0.3211449170019169,
+              0.9024754365224806
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.03968582889769934,
+            "human_decisions": 23,
+            "interaction_metrics": {
+              "robot_ee_motion_time_s": 35.34999999999999,
+              "human_motion_time_s": 17.4,
+              "simultaneous_motion_time_s": 16.550000000000008,
+              "both_stationary_time_s": 8.800000000000018,
+              "human_observe_command_time_s": 6.0,
+              "minimum_ee_fingertip_distance_m": 0.04037101658558272,
+              "human_force_contact_samples": 7239,
+              "interpretation": "实际运动与等待描述；距离不是碰撞证明，指尖代理与EE距离不是完整人体安全指标。"
+            },
+            "task_contract": {
+              "family": "moving_receptacle",
+              "clearance_observed": false,
+              "return_observed": false,
+              "robot_placement_credit": true,
+              "premature_placements": 0,
+              "events": [
+                {
+                  "time_s": 15.95,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 23.85,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 38.35,
+                  "event": "robot_placement_contribution"
+                },
+                {
+                  "time_s": 41.9,
+                  "event": "robot_placement_contribution"
+                }
+              ]
+            },
+            "autonomous_human_context": "workspace_owner",
+            "personal_evidence": {
+              "goal_revisions": [
+                {
+                  "start_s": 0.0,
+                  "targets": [],
+                  "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+                },
+                {
+                  "start_s": 4.0,
+                  "targets": [
+                    {
+                      "object_id": "cookies_1",
+                      "destination": "cookies_ready"
+                    },
+                    {
+                      "object_id": "plate_1",
+                      "destination": "plate_ready"
+                    }
+                  ],
+                  "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+                },
+                {
+                  "start_s": 6.0,
+                  "targets": [
+                    {
+                      "object_id": "plate_1",
+                      "destination": "plate_ready"
+                    }
+                  ],
+                  "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+                }
+              ],
+              "target_intervals": [
+                {
+                  "object_id": "cookies_1",
+                  "destination": "cookies_ready",
+                  "start_s": 4.0,
+                  "end_s": 6.0,
+                  "initial_xy_distance_m": 0.120000019761419,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": null,
+                  "terminal_relation_satisfied": false,
+                  "human_contact_in_target_interval": false,
+                  "terminal_xy_distance_m": 0.120000019761419,
+                  "object_displacement_in_target_interval_m": 0.0
+                },
+                {
+                  "object_id": "plate_1",
+                  "destination": "plate_ready",
+                  "start_s": 4.0,
+                  "end_s": 6.0,
+                  "initial_xy_distance_m": 0.1200000167618309,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": null,
+                  "terminal_relation_satisfied": false,
+                  "human_contact_in_target_interval": false,
+                  "terminal_xy_distance_m": 0.1198283793931845,
+                  "object_displacement_in_target_interval_m": 0.0009342935617697973
+                },
+                {
+                  "object_id": "plate_1",
+                  "destination": "plate_ready",
+                  "start_s": 6.0,
+                  "end_s": 45.0,
+                  "initial_xy_distance_m": 0.11982900077182208,
+                  "already_in_region_when_chosen": false,
+                  "first_stable_relation_s": 11.55,
+                  "terminal_relation_satisfied": true,
+                  "human_contact_in_target_interval": true,
+                  "terminal_xy_distance_m": 0.0030404976470321233,
+                  "object_displacement_in_target_interval_m": 0.12064183351603631
+                }
+              ],
+              "observable_target_set_changes": 2,
+              "distinct_target_relations": 2,
+              "target_intervals_with_stable_relation": 1,
+              "new_target_intervals_with_stable_relation": 1,
+              "public_negotiation_proposals": 6,
+              "target_validation_errors": 0,
+              "human_current_observable_goals_evaluable": true,
+              "human_current_observable_goals_satisfied": true,
+              "robot_final_released_stable_success": false,
+              "joint_observable_goals_satisfied": false,
+              "human_model_calls": 23,
+              "human_generated_goal_decision_times": [
+                0.0,
+                2.0,
+                4.0,
+                6.0,
+                8.0,
+                10.0,
+                12.0,
+                14.0,
+                16.0,
+                18.0,
+                20.0,
+                22.0,
+                24.0,
+                26.0,
+                28.0,
+                30.0,
+                32.0,
+                34.0,
+                36.0,
+                38.0,
+                40.0,
+                42.0,
+                44.0
+              ],
+              "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+            },
+            "human_goal_evaluable": true,
+            "robot_goal_object": "akita_black_bowl_1",
+            "robot_goal_receiver": "plate_1"
+          }
+        ],
+        "successes": 0,
+        "episode_count": 1
+      },
+      "provenance.json": {
+        "backend": "LIBERO_MuJoCo_native",
+        "trained_model": true,
+        "model_server_metadata": {
+          "config": "openvla_libero_spatial",
+          "checkpoint": "/data1/sieniwgroup/sieniw/models/zixiaoBios/openvla-7b-finetuned-libero-spatial",
+          "action_encoding": "libero_osc_delta",
+          "action_dim": 7,
+          "consumed_inputs": [
+            "observation/image",
+            "prompt"
+          ],
+          "unused_compatibility_inputs": [
+            "observation/wrist_image",
+            "observation/state"
+          ],
+          "center_crop": true,
+          "crop_area": 0.9,
+          "image_preprocessing": "JPEG roundtrip -> TF Lanczos3 224 -> TF center crop 0.9 area -> uint8",
+          "attention_implementation": "sdpa",
+          "offline_assets_only": true,
+          "adapter_sha256": "adf911d4744714711e358fc24122e091f6d74e03cb2354831ace7249f3edb564",
+          "preprocessing_sha256": "b60d1dbfc37ab77f9ffc50090e7429c4c44580bddad1e46dbe9729289a53adf0",
+          "checkpoint_mirror_identity": "ModelScope file SHA256 verified; upstream hash identity not checked",
+          "source_commit": "c8f03f48af692657d3060c19588038c7220e9af9",
+          "source_sha256": {
+            "configuration_prismatic.py": "68cc5ae34f1b46af3168d8d479cb81bb776965653453fd904aa8eefb6c8f9f68",
+            "modeling_prismatic.py": "9ce241c5ca09a4bed73654d0ca509baaff0fc5887d0bdd62e360ca8254f7794a",
+            "processing_prismatic.py": "2474a5c3fdd4ff15234924636dc0ead6419c89f49699193be47dbb87510a5425"
+          },
+          "weight_loading_info": {
+            "missing_keys": [],
+            "unexpected_keys": [],
+            "mismatched_keys": [],
+            "error_msgs": []
+          }
+        },
+        "suite": "libero_spatial",
+        "seed": 0,
+        "control_hz": 20,
+        "robot_planner_metadata": null,
+        "robot_planner_interval_steps": null,
+        "robot_policy_composition": "native VLA",
+        "execution_horizon": 1,
+        "max_steps": 900,
+        "settle_steps": 10,
+        "mujoco_version": "3.2.3",
+        "robosuite_version": "1.4.1",
+        "libero_commit": "f78abd68ee283de9f9be3c8f7e2a9ad60246e95c",
+        "cuda_visible_devices": "1",
+        "source_sha256": {
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/run_libero_native_reference.py": "629071a5f4a8bab5e574926ece503152928176257f2cfd9cdabfaabfff8d77ff",
+          "src/hrc_pilot/libero_native.py": "1796686463fd8a8af5fbc970b846278ae84176d74d61a35376fa878ac3e5ed93",
+          "src/hrc_pilot/native_contact_human.py": "84ad68641f781e58f9608d78ad250a07a38f3f99f89f28e721185b81f75c1d51",
+          "src/hrc_pilot/llm_human.py": "0520916c1112a0b9c4abb51b3e1052bf9906b0300891a0ac59fff7a553c51a42",
+          "src/hrc_pilot/human_contact.py": "9bef4d6ee628df1d1645a8e46a4c85b5a1d6b3885dba85469c8f7708bb1c020b",
+          "src/hrc_pilot/native_avatar.py": "1d9d1b8695faad3eb687b7c5b7bd5b3da9d6e9f9aaaadaad852da3f4914c37ab",
+          "src/hrc_pilot/native_task_contracts.py": "7f1c1f2e2449fb943a8a0488223bd8750ea7897780a0aa4b77570820f801d9e9",
+          "src/hrc_pilot/native_activity.py": "efa34da241340523c299dd54100e42525a1d431b5bd4d86934b3e5754add8b75",
+          "src/hrc_pilot/native_autonomous_human.py": "8eb4d799e821c3912cc98be8fb6e82c5738adfb54968bbf0acc1e55ec324acd5",
+          "src/hrc_pilot/native_personal_evidence.py": "09707a6e73807a7fffe9a3a0449ace1618a9f34807a699f4d28d064ada93848b",
+          "src/hrc_pilot/native_execution.py": "9423c6f6c563c178b344c4be0f35078c9ee2676fb38638bea8616260c966ce3c",
+          "src/hrc_pilot/protocol.py": "3cd467a0813e84f4762ffe6350fd26699949b88eb64d48223a16b279ca564013",
+          "src/hrc_pilot/native_action_validation.py": "c6c2f0bd386a47309403a3bd473e2d678f106757f4683a5da853c0c1142eb352",
+          "src/hrc_pilot/native_placement.py": "07aa810c3f33201a44e2da6f2b022e906539db701259b452d628228f75c69ced",
+          "src/hrc_pilot/robot_coordination.py": "b5164cf861b962a7de38304828632238ea6a00fc6cd4ca3277ed9b96664e2d81",
+          "/home/sieniw/working-doc/projects/HRC-Bench/scripts/probe_egl_devices.py": "d90fff61553425a2b24681d16de6de8f5ce39b795dc136ecf491e262d3baf0ea"
+        },
+        "renderer_device_binding": {
+          "egl_ordinal": 0,
+          "cuda_ordinal": 1,
+          "pci_bus": "0000:41:00.0"
+        },
+        "human_mode": "qwen",
+        "human_persona": "independent",
+        "autonomous_human_context": "workspace_owner",
+        "human_target_source": "model_generated_from_personal_preferences",
+        "private_human_targets_in_robot_input": false,
+        "activity_profile": null,
+        "human_decision_interval_steps": 40,
+        "world_initializations_per_episode": 1,
+        "fixed_duration_with_no_success_early_exit": true,
+        "task_family": "moving_receptacle",
+        "human_public_work_requirement": null,
+        "human_memory_scope": "episode",
+        "human_object_id": "plate_1",
+        "human_execution_feedback": "measured_motor_state_and_public_geometry_no_evaluator_outcomes",
+        "human_action_validation_feedback": true,
+        "completion_criterion": "released_stable",
+        "human_plan_execution": "Qwen reselects each action; generated plans never routed by runtime",
+        "human_torch_seed_rule": "seed + 1000*task_id + init_state_id",
+        "human_model": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B",
+        "human_physics": "force_driven_xyz_fingertip",
+        "human_body_visualization": "vico_skin",
+        "human_avatar_assets": {
+          "directory": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/native_avatar/vico_a1b13b6162c7",
+          "metadata": {
+            "source_glb": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/models/mixamo_Alex_Jefferson.glb",
+            "source_motion": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community/avatars/motions/motion.pkl",
+            "source_sha256": {
+              "glb": "18e7a8e69c74227e79ca2a959fdffb85357e3431395145196f0cba938d1684ea",
+              "motion": "070f312b048afa6003a102eae04d5047a5b68499d31434c5baa0adcd8da4590c"
+            },
+            "vertex_count": 3042,
+            "face_count": 4152,
+            "skin_bones": 52,
+            "joint_names": [
+              "Hips",
+              "Spine",
+              "Spine1",
+              "Spine2",
+              "Neck",
+              "Head",
+              "HeadTop_End",
+              "LeftShoulder",
+              "LeftArm",
+              "LeftForeArm",
+              "LeftHand",
+              "LeftHandThumb1",
+              "LeftHandThumb2",
+              "LeftHandThumb3",
+              "LeftHandThumb4",
+              "LeftHandIndex1",
+              "LeftHandIndex2",
+              "LeftHandIndex3",
+              "LeftHandIndex4",
+              "LeftHandMiddle1",
+              "LeftHandMiddle2",
+              "LeftHandMiddle3",
+              "LeftHandMiddle4",
+              "LeftHandRing1",
+              "LeftHandRing2",
+              "LeftHandRing3",
+              "LeftHandRing4",
+              "LeftHandPinky1",
+              "LeftHandPinky2",
+              "LeftHandPinky3",
+              "LeftHandPinky4",
+              "RightShoulder",
+              "RightArm",
+              "RightForeArm",
+              "RightHand",
+              "RightHandThumb1",
+              "RightHandThumb2",
+              "RightHandThumb3",
+              "RightHandThumb4",
+              "RightHandIndex1",
+              "RightHandIndex2",
+              "RightHandIndex3",
+              "RightHandIndex4",
+              "RightHandMiddle1",
+              "RightHandMiddle2",
+              "RightHandMiddle3",
+              "RightHandMiddle4",
+              "RightHandRing1",
+              "RightHandRing2",
+              "RightHandRing3",
+              "RightHandRing4",
+              "RightHandPinky1",
+              "RightHandPinky2",
+              "RightHandPinky3",
+              "RightHandPinky4",
+              "LeftUpLeg",
+              "LeftLeg",
+              "LeftFoot",
+              "LeftToeBase",
+              "LeftToe_End",
+              "RightUpLeg",
+              "RightLeg",
+              "RightFoot",
+              "RightToeBase",
+              "RightToe_End"
+            ],
+            "skin_file": "alex.skn",
+            "texture_file": "alex_color.png",
+            "rig_file": "rig.npz",
+            "motion_fps": 30,
+            "interpretation": "复用既有人物/动作蒙皮资产；显示骨骼与物理接触分开，不代表完整人体动力学或动作策略学习。"
+          },
+          "sha256": {
+            "alex.skn": "2503e6338b8372cc0744843181f05731a6f3304ee0d0955bedfee8f4f2faae2f",
+            "alex_color.png": "4b1839ff4153d2a9db0f3c0c2557c55c375c758f513085037e546d2a4c632a61",
+            "rig.npz": "f4975c4e23e0f0de11d7a2989bfb72ea93f41ac0514cc4fe1062e47a886a7e3a",
+            "avatar.json": "5dd578b21dab07776b90046d8f25909bbbae3015af59aaba6f7dd2aba2a8c57c"
+          }
+        },
+        "human_goal_definition": "assigned object center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness; temporal prerequisites apply as publicly specified",
+        "source_files_changed_during_run": [],
+        "episodes": [
+          {
+            "task_id": 2,
+            "init_state_id": 0,
+            "bddl_sha256": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+            "init_file_sha256": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb"
+          }
+        ],
+        "object_pose_writes_during_control": 0,
+        "robot_ik_adapter": false,
+        "purpose": "用匹配的原生场景、相机、状态和操作空间控制验证现成模型的基础操作能力。",
+        "interpretation": "原生参照不证明模型已具备动态人类协作能力；不能与不同域的Genesis失败作严格配对因果比较。"
+      },
+      "video_verification.json": {
+        "status": "verified",
+        "input_dir": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/autonomous_human/openvla/workspace_owner",
+        "episode_count": 1,
+        "verified_episode_count": 1,
+        "failed_episode_count": 0,
+        "warning_episode_count": 0,
+        "timeline_required": true,
+        "episodes": [
+          {
+            "episode": "task_02/init_000",
+            "status": "verified",
+            "video": {
+              "path": "demo.mp4",
+              "exists": true,
+              "bytes": 711747,
+              "decoded_frames": 901,
+              "fps": 20.0,
+              "shape": [
+                480,
+                640,
+                3
+              ]
+            },
+            "timeline": {
+              "path": "video_timeline.json",
+              "exists": true,
+              "frame_count": 901,
+              "fps": 20.0,
+              "benchmark_frame_count": 901,
+              "benchmark_start_s": 0.0,
+              "benchmark_end_s": 45.0
+            },
+            "errors": [],
+            "warnings": []
+          }
+        ],
+        "interpretation": "真实运行视频、时间轴和保存轨迹的产物核查；不推断模型能力或 HRC 效果。"
+      },
+      "model_execution_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000",
+            "model_calls": 900,
+            "native_actions": 900,
+            "actual_vla_model_calls": 900,
+            "hold_primitive_calls": 0,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.2555175238282668,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 22500,
+            "human_peak_speed_m_s": 1.9875235951825818,
+            "human_object_peak_speed_m_s": 0.7853583765692648,
+            "human_motion_check_passed": false,
+            "motion_eligible": false
+          }
+        ],
+        "episode_count": 1,
+        "motion_eligible_episode_count": 0,
+        "model_calls": 900,
+        "native_actions": 900,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar_verification.json": {
+        "status": "failed",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000",
+            "pose_records": 901,
+            "max_alignment_error_m": 0.03968582889769934,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.046893801925762146,
+            "body_speed_source": "body_base",
+            "qualification_passed": false
+          }
+        ],
+        "qualified_count": 0,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      },
+      "human_feedback_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000",
+            "feedback_records": 23,
+            "status": "verified",
+            "model_output_parse_error_count": 0,
+            "public_geometry_reconstructed": true,
+            "actual_robot_speed_reconstructed": true,
+            "model_commands_followed_without_plan_routing": true,
+            "interpretation": "核对记录的模型命令、反馈和物理测量一致；不证明模型理解或真人效度。"
+          }
+        ],
+        "episode_count": 1
+      },
+      "placement_verification.json": {
+        "status": "audited",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000",
+            "status": "reconstructed_physical_criterion",
+            "raw_task_success": false,
+            "physical_placement_completion_verified": false,
+            "terminal_contact_measurement": {
+              "time_s": 45.0,
+              "native_geometry_satisfied": true,
+              "receiver_contact": true,
+              "gripper_contact": false,
+              "gripper_aperture_m": 0.013986337667862787,
+              "released": false,
+              "object_speed_m_s": 3.169834578187121e-07,
+              "receiver_speed_m_s": 1.267067121681131e-07,
+              "stable_duration_s": 0.0,
+              "released_stable_placement": false
+            },
+            "interpretation": "旧记录没有连续几何判定，不能事后证明完成；末帧仍夹持可直接排除释放。新记录重建持续稳定的物理判据，不代替真人效度。"
+          }
+        ],
+        "physical_completion_verified_count": 0
+      },
+      "personal_verification.json": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000",
+            "status": "verified",
+            "human_calls": 23,
+            "no_external_human_assignments_or_timed_updates": true,
+            "raw_generated_targets_reconstructed": true,
+            "private_target_not_routed_to_robot_verified": true,
+            "public_proposal_count": 6,
+            "robot_calls_containing_public_proposals": 320,
+            "personal_geometry_reconstructed": true,
+            "interpretation": "核查自选目标、真实动作和公开边界；不证明偏好/主观满足的真实性、因果贡献或协商理解。"
+          }
+        ]
+      },
+      "preprocessing_verification.json": {
+        "status": "verified",
+        "model_call_count": 900,
+        "pixel_exact_reconstruction": true,
+        "interpretation": "独立重建官方图像/语言预处理及保存帧，不证明模型能力或上游权重身份。"
+      },
+      "personal_evidence": {
+        "goal_revisions": [
+          {
+            "start_s": 0.0,
+            "targets": [],
+            "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+          },
+          {
+            "start_s": 4.0,
+            "targets": [
+              {
+                "object_id": "cookies_1",
+                "destination": "cookies_ready"
+              },
+              {
+                "object_id": "plate_1",
+                "destination": "plate_ready"
+              }
+            ],
+            "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+          },
+          {
+            "start_s": 6.0,
+            "targets": [
+              {
+                "object_id": "plate_1",
+                "destination": "plate_ready"
+              }
+            ],
+            "long_term_intention": "Maintain a tidy and organized workspace with easy access to my food and utensils."
+          }
+        ],
+        "target_intervals": [
+          {
+            "object_id": "cookies_1",
+            "destination": "cookies_ready",
+            "start_s": 4.0,
+            "end_s": 6.0,
+            "initial_xy_distance_m": 0.120000019761419,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": null,
+            "terminal_relation_satisfied": false,
+            "human_contact_in_target_interval": false,
+            "terminal_xy_distance_m": 0.120000019761419,
+            "object_displacement_in_target_interval_m": 0.0
+          },
+          {
+            "object_id": "plate_1",
+            "destination": "plate_ready",
+            "start_s": 4.0,
+            "end_s": 6.0,
+            "initial_xy_distance_m": 0.1200000167618309,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": null,
+            "terminal_relation_satisfied": false,
+            "human_contact_in_target_interval": false,
+            "terminal_xy_distance_m": 0.1198283793931845,
+            "object_displacement_in_target_interval_m": 0.0009342935617697973
+          },
+          {
+            "object_id": "plate_1",
+            "destination": "plate_ready",
+            "start_s": 6.0,
+            "end_s": 45.0,
+            "initial_xy_distance_m": 0.11982900077182208,
+            "already_in_region_when_chosen": false,
+            "first_stable_relation_s": 11.55,
+            "terminal_relation_satisfied": true,
+            "human_contact_in_target_interval": true,
+            "terminal_xy_distance_m": 0.0030404976470321233,
+            "object_displacement_in_target_interval_m": 0.12064183351603631
+          }
+        ],
+        "observable_target_set_changes": 2,
+        "distinct_target_relations": 2,
+        "target_intervals_with_stable_relation": 1,
+        "new_target_intervals_with_stable_relation": 1,
+        "public_negotiation_proposals": 6,
+        "target_validation_errors": 0,
+        "human_current_observable_goals_evaluable": true,
+        "human_current_observable_goals_satisfied": true,
+        "robot_final_released_stable_success": false,
+        "joint_observable_goals_satisfied": false,
+        "human_model_calls": 23,
+        "human_generated_goal_decision_times": [
+          0.0,
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0,
+          42.0,
+          44.0
+        ],
+        "interpretation": "仅测量模型自选的可观察物体关系；不将文字改写当目标变化，不将先满足的位置当新贡献，不评判主观意图/人格真实性，不推断机器人接受协商。"
+      },
+      "robot_first_released_stable_s": 15.95,
+      "robot_stable_relation_total_s": 10.55
+    }
+  },
+  "source_sha256": {
+    "results/continuous_v2/autonomous_human/pi05/snack_host/summary.json": "1ebe4381328e3fcd12904ef726bd0cee1c9d0aca40ce0a08fa029d912e878320",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/provenance.json": "79712253377cee0020aaca4ab2c6dd3a2c57d9fdfbf5285b5a9f99100e633925",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/video_verification.json": "1a8a8fb14c028ef84a2f9de9a641e10b1fc4094957bc98fdbc4c63ad5ca1d8e5",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/model_execution_verification.json": "def9dd0ae29653b2dfabd4fa1dfa7e9a9a4d03ca0f6e654ccd730d236266b7c2",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/avatar_verification.json": "81b5a0d5c1de1bd67be6025992742a651d48481a794193d7f1e0bee4ed006f5b",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/human_feedback_verification.json": "074bbc8675e9753085034a2e0e6efd0025c33e54201c02b88136564b143548a8",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/placement_verification.json": "14dac1afc115a8800835e94df5194faa84f0809281dbcbee362a185b548bb44c",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/personal_verification.json": "5632bc3f9722dae4281c8decda227652dad6ec7fabc90ddead8db7e165c21cbb",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/prompt_token_verification.json": "726c6c392f33dc8b54d2559aa7874ba239deb8da4830ff00a750c3457a44a391",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/personal_context.json": "334678570d1e95818259a934bf5a279e25e6674c0c3fe8a658b415ea04a2af34",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/personal_evidence.json": "68c66d8f0512b23cfeba802eb37a73985d9a87e4416ae3c03e2d7cd9964541e0",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/human_policy_io.jsonl": "2381730357b0f67d2a7317ecc160acdc437e3c710cfb6ef45070e0b8b52fa0d0",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/human_intentions.jsonl": "9203d7d6456847e290512f1362e1378cd33ec616a11646d61c6cfb096c3b716f",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/public_dialogue.jsonl": "94e9489d3def36b433b2f55436856c21096f125e41e6aec70431ed342bd41bff",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/model_calls.jsonl": "5a64d74ccfd61ccf5d1e9896304c66bb386c18ee8127b6babea6a4ac33045de4",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/placement_evidence.jsonl": "85f2eaec30d9ea5da117894f07958f819774bc5df6fc3ec45a23502bc2cd24c7",
+    "results/continuous_v2/autonomous_human/pi05/snack_host/task_02/init_000/trace.jsonl": "7cf68441f997eebfd467b33ecc970a2dca7a98435020617168c3afe4cc9d0bd7",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/summary.json": "b7e7c37105676b9f593ea49ab361b25e284b5cd64d580bb80ee03d433ebe4252",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/provenance.json": "7d901f94e5805e611d8718c2b89dcc088f02946bf97559a4ad9f44e05fadc4f2",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/video_verification.json": "686341757a4acb11b24ca3101880db7ac2f895d8e0eb17c18a43e6c25363c848",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/model_execution_verification.json": "d446f8327d347f34270941a2d93b695e5864f85cd1f90e54643db872885eff1e",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/avatar_verification.json": "0bb8d24523f5f40c86a46ddd0c903e88836eb2224703a15894c3008d6b337702",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/human_feedback_verification.json": "6a9ecbb2525c223b6d2a8d7bdf1a06a15b935cab30950205f5383531f189736b",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/placement_verification.json": "7c736c8cb59fff7e0473c28ddcf6c0366eb8e4a347ad9871f6188ee254544d2e",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/personal_verification.json": "8c58632946a71d81012d275a8ff0f5f9e06120cf61223bbc7d0eee3ddca3dba8",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/prompt_token_verification.json": "33243b8b0b54241f0f78830a321f0e8baa14f4ef51fdb9813de0bcc224be205f",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/personal_context.json": "341289a936beb7fb9b0f3638dd860954d5c8eb42a567d18410f3b2c04891979f",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/personal_evidence.json": "11b686f1042faa8520cb33bd5060a4c29765db8671c15a984743e14f98080726",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/human_policy_io.jsonl": "6b6f83c1b3fd4945381bd0f4b0e4975a4fec88df5d3cad5c058a58a255431108",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/human_intentions.jsonl": "0a1ec681c8ceaa653dd676792c38f213c2e91ddc15b47c9c7407284733949514",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/public_dialogue.jsonl": "294bff954f6e9cd43fe2ba7e7a2cf148619267c5d87e9d536dac5ac09a237b4a",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/model_calls.jsonl": "3becc31f40e81069b6cfde9e7a836e13682b33cc7cd8ca56d15ffcf31f385757",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/placement_evidence.jsonl": "7390259c641bad5f9971f24fcbf44ebb8c783b123ae3891f127a136b2dd5e318",
+    "results/continuous_v2/autonomous_human/pi05/workspace_owner/task_02/init_000/trace.jsonl": "9ff34b801af15b9356aa4cf9d6bcaa0b4b14d202e692206209cd883686044637",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/summary.json": "b5be6f04744e3f57fe0811835426bbeac133bebc6a46a8e4400f1cafbf2a46f3",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/provenance.json": "1d2a971547d41c4d8c055dc22995c73cf26e8f5605fab7da555f6ca93c44e6da",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/video_verification.json": "f0a55fa34fe5b16649059a1bfb1298bd0c99e45e42f40363d7013eb16edfb047",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/model_execution_verification.json": "345b6156c9ece010c814a73ebdee0a82a4baf58db27b7ead18aa6c43c359daf9",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/avatar_verification.json": "0bb377b051c36cfc5ceed7173ef80e26ef721770b7979eab49f8b7cfe3ab5d71",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/human_feedback_verification.json": "496a71d44fbeb13973ff20059c298f85541d2712de50424a86ce9ca7fd75df55",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/placement_verification.json": "55665c0283409d950514b1598ff684761a183406e5b374cd98a9a85694955549",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/personal_verification.json": "eef6310836a2119606931e24e560ed77a90d075cfcdad8c43b86dc9fb7c7e040",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/preprocessing_verification.json": "b2eea112e05be534ee7a82551b3a549fd274e43a9384cde2eed135b8745a3b68",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/personal_context.json": "334678570d1e95818259a934bf5a279e25e6674c0c3fe8a658b415ea04a2af34",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/personal_evidence.json": "173d89d6c7e18b98b914eeb22065dc379942e6022d74402b6259cd86aa235152",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/human_policy_io.jsonl": "58305b9fd28396d8ad6bdb56d6f7108965689f8b4db86344b1f34251138f0946",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/human_intentions.jsonl": "1f6dd59d1120c8aded004e6c3bc5924dd488dadab1ffdb2c73fde229356a53a1",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/public_dialogue.jsonl": "f4edf70d58518b548573ea62f05cfd417460706f3b6b46a3bd0956270882e403",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/model_calls.jsonl": "d0427931942ce441efe00985821fc4188dcb52e4e521d61bce99ff1952e3c5f6",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/placement_evidence.jsonl": "e1f363a0a42b9926500b9c3900745f80274c919ebb530e9e94b5d171d1287d2d",
+    "results/continuous_v2/autonomous_human/openvla/snack_host/task_02/init_000/trace.jsonl": "25aa6d28fe699a3b435c9c30b0d81885fb627b791a9a12f224a5029ec4aff62a",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/summary.json": "3079f179796c548f47fc912517363b8249fce82e249a758ef9cdf2297601abb7",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/provenance.json": "76db796792eedb994c3ba7dd434b1450424d834c227de1dc52fb4aaf9e15a44c",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/video_verification.json": "97b4333b3a8e5ea8b4894369e7015fb0ba4ea7952633699177c0e1d10ec74dc0",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/model_execution_verification.json": "e926027117a468a19ae50014a28809a776abb6748d1300cb05edd3663e3a326b",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/avatar_verification.json": "66f8abdfa3f65fefea76c383b498301c7d37fa020e5f0692e18e1405706581d1",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/human_feedback_verification.json": "b2fec8d0492be81f1e25672205a3c867322cf484da91a8a373856f98e12e1c47",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/placement_verification.json": "b0924c5f3267822ec28962f602899e0d202832adc6f56dc75fc16adb2aa6e97b",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/personal_verification.json": "ac7053c08f70d1a15ad90dec6ee058ba386efc34fdf2208d2b4773daf9a15f24",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/preprocessing_verification.json": "b2eea112e05be534ee7a82551b3a549fd274e43a9384cde2eed135b8745a3b68",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/personal_context.json": "341289a936beb7fb9b0f3638dd860954d5c8eb42a567d18410f3b2c04891979f",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/personal_evidence.json": "eb77b2f275163977fb90c6f3ced939e349966360e22736efb9db0d628c1b4996",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/human_policy_io.jsonl": "1733a7c7d0bb13ee2f6d0a629ae14a67261140d46d67e11f5d3ac79c9fcfc22c",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/human_intentions.jsonl": "8cfa657ea237415f18863641006e39bda477f54c16fc26ccf4a37675cc94d97a",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/public_dialogue.jsonl": "534b840f35dc22821d01739e8ab264262f13a83e0bf343a705cb500df5668265",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/model_calls.jsonl": "93211091ec8c6f79edb3f22ebb668a1ae6a38d69b42f085fde6b44d087a86af8",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/placement_evidence.jsonl": "e11e314991007226fba806e442b5d7e3391fb526810f0ea35161e3905cf594df",
+    "results/continuous_v2/autonomous_human/openvla/workspace_owner/task_02/init_000/trace.jsonl": "2c25fc5a705d958c145f2ae464a358262054416883f9ccc551383cbb81ba3b29"
+  }
+}

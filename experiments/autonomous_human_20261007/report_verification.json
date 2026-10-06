@@ -1,0 +1,61 @@
+{
+  "status": "verified",
+  "video_count": 4,
+  "playback": [
+    {
+      "time": 0.605853,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.607731,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.60525,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.604244,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "seek": [
+    {
+      "time": 8.199999,
+      "audit_time": "8.00s"
+    },
+    {
+      "time": 8.199999,
+      "audit_time": "8.00s"
+    },
+    {
+      "time": 8.199999,
+      "audit_time": "8.00s"
+    },
+    {
+      "time": 8.199999,
+      "audit_time": "8.00s"
+    }
+  ],
+  "intention_and_action_sync_verified": true,
+  "diagnostic_warning_verified": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_local_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/autonomous_human_20261007/desktop.png"
+}

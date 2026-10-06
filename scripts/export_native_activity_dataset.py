@@ -20,7 +20,7 @@ def main():
     args=parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):parser.error('输出目录必须为空')
     frames=args.output_dir/'frames';frames.mkdir(parents=True)
-    source_receipts=[];total=0
+    source_receipts=[];total=0;qualified_total=0;diagnostic_total=0
     plans=sorted(args.input_dir.rglob('activity_plan.json'))+sorted(args.input_dir.rglob('personal_context.json'))
     for plan in plans:
         episode=plan.parent;root=episode.parents[1]
@@ -30,7 +30,12 @@ def main():
         verification='personal_verification.json' if autonomous else 'activity_verification.json'
         for name in ['video_verification.json','model_execution_verification.json',verification]:
             assert json.loads((root/name).read_text())['status']=='verified'
-        assert json.loads((root/'model_execution_verification.json').read_text())['motion_eligible_episode_count']==1
+        motion_eligible=json.loads((root/'model_execution_verification.json').read_text())['motion_eligible_episode_count']==1
+        avatar_path=root/'avatar_verification.json'
+        avatar_qualified=json.loads(avatar_path.read_text())['qualified_count']==1 if avatar_path.exists() else None
+        eligible=motion_eligible and avatar_qualified is not False
+        destination_frames=frames if eligible else args.output_dir/'diagnostic_frames'
+        destination_frames.mkdir(exist_ok=True)
         prefix=(provenance['model_server_metadata']['config']+'__'+metrics['autonomous_human_context'] if autonomous else metrics['activity_profile'])
         identifier=f'{prefix}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
         target=args.output_dir/'episodes'/identifier;target.mkdir(parents=True)
@@ -44,11 +49,14 @@ def main():
         np.save(target/'initial.qvel.npy',np.asarray(trace[0]['qvel']))
         source_receipts.append({'episode':identifier,'source':str(episode.resolve()),
                                 'source_sha256':{n:sha256((episode/n).read_bytes()).hexdigest() for n in source_files},
-                                'joint_success':metrics['task_success'],'world_initializations':1,'robot_model':provenance['model_server_metadata']['config']})
+                                'joint_success':metrics['task_success'] if eligible and metrics.get('human_goal_evaluable',True) else None,
+                                'raw_joint_predicate':metrics['task_success'],
+                                'joint_goal_evaluable':metrics.get('human_goal_evaluable',True),
+                                'benchmark_episode_eligible':eligible,'motion_eligible':motion_eligible,'avatar_qualified':avatar_qualified,'world_initializations':1,'robot_model':provenance['model_server_metadata']['config']})
         for call in calls:
             executed=[r['action'] for r in actions if r['model_call']==call['model_call']]
             assert executed and call['action_source']=='learned_vla'
-            stem=identifier+f'__step{call["step"]:06d}';base=frames/stem
+            stem=identifier+f'__step{call["step"]:06d}';base=destination_frames/stem
             shutil.copyfile(episode/call['exterior_artifact'],str(base)+'.png')
             shutil.copyfile(episode/call['wrist_artifact'],str(base)+'_wrist.png')
             np.save(str(base)+'.state.npy',np.asarray(call['state'],dtype=np.float32))
@@ -56,17 +64,28 @@ def main():
             np.save(str(base)+'.action_valid.npy',np.ones(len(executed),dtype=np.bool_))
             Path(str(base)+'.prompt.txt').write_text(call['prompt'])
             total+=1
+            if eligible:qualified_total+=1
+            else:diagnostic_total+=1
     assert source_receipts
-    dataset=NativeTrajectoryDataset(frames);assert len(dataset)==total
-    action_count=sum(int(dataset[i]['action_valid'].sum()) for i in range(len(dataset)))
+    action_count=qualified_actions=diagnostic_actions=0
+    for directory,count in [(frames,qualified_total),(args.output_dir/'diagnostic_frames',diagnostic_total)]:
+        if not count:continue
+        dataset=NativeTrajectoryDataset(directory);assert len(dataset)==count
+        actual=sum(int(dataset[i]['action_valid'].sum()) for i in range(len(dataset)))
+        action_count+=actual
+        if directory==frames:qualified_actions=actual
+        else:diagnostic_actions=actual
     metadata={'status':'exported_and_loaded','episodes':len(source_receipts),'observations':total,
-              'actual_native_actions':action_count,'pair_rule':'same stem .png / _wrist.png / .state.npy / .prompt.txt / .action.npy / .action_valid.npy',
+              'actual_native_actions':action_count,'qualified_observations':qualified_total,'diagnostic_observations':diagnostic_total,
+              'qualified_native_actions':qualified_actions,'diagnostic_native_actions':diagnostic_actions,
+              'qualification_rule':'motion and available avatar gates; ineligible episodes retained only in diagnostic_frames, not in qualified frames',
+              'pair_rule':'same stem .png / _wrist.png / .state.npy / .prompt.txt / .action.npy / .action_valid.npy',
               'label_semantics':'actual executed learned-policy OSC actions, not expert or successful-demonstration targets',
               'split_rule':'keep complete episodes together; no frame-wise random train/test split',
               'episode_assets':'local symlinks to audited raw logs and runtime video; original scene mesh dependencies remain external',
               'sources':source_receipts}
     (args.output_dir/'dataset_metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2))
-    print(f'{len(source_receipts)}条持续运行，{total}组实际观测，{action_count}个原生动作；按stem加载通过')
+    print(f'{len(source_receipts)}条持续运行，{total}组实际观测，{action_count}个原生动作；合格观测{qualified_total}、诊断观测{diagnostic_total}；按stem加载通过')
 
 
 if __name__=='__main__':main()
