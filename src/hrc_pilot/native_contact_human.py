@@ -63,7 +63,7 @@ class NativeQwenHuman(QwenHumanPolicy):
             f'你的稳定行为倾向：{PERSONAS[self.persona_id]} '
             'objects_xyz、regions_xyz和your_hand_position_xyz是本时刻可靠的感知坐标，'
             '可以直接用于动作选择。它们已经给出了物体与区域的位置。'
-            '任务板assigned_role为human属于你，为robot属于机械臂；机器人放碗与人移动盘子是各自的工作。'
+            '任务板assigned_role为human属于你，为robot属于机械臂；人的对象和目的地可以随公开安排改变；当前任务板分别规定你和机械臂的工作。'
             '机械臂的活动不表示人的工作已经完成，也不表示必须在任何情况下等待。'
             '支持的意图为push、observe、yield、away、return。'
             'push指定一个当前可见物体和公开区域，执行器会连续接近并通过指尖受力推动，'

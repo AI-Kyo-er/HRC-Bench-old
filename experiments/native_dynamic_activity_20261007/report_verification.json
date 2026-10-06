@@ -1,0 +1,50 @@
+{
+  "status": "verified",
+  "video_count": 3,
+  "playback": [
+    {
+      "time": 0.806186,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.81048,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.802336,
+      "paused": false,
+      "duration": 45.05,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "seeking": [
+    {
+      "time": 16.2,
+      "public_update": "公开要求 15s · 改回原位置"
+    },
+    {
+      "time": 16.2,
+      "public_update": "公开要求 15s · 接收盘优先"
+    },
+    {
+      "time": 16.2,
+      "public_update": "公开要求 12s · 临时事务"
+    }
+  ],
+  "http_range_verified": true,
+  "public_work_and_model_decision_sync_verified": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_local_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/native_dynamic_activity_20261007/desktop.png"
+}

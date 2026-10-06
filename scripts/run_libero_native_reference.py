@@ -193,6 +193,8 @@ def main():
                                 Message('human','assignment',task.language,None,'robot',None),
                                 Message('human','assignment',contract.human_instruction(),
                                         human_object,'human','near_human')]
+                    if work_plan:
+                        messages=[]  # The first work update supplies this scene's own initial assignments.
                     if partner is not None:
                         partner.reset(args.seed)
                         torch.manual_seed(args.seed+task_id*1000+initial_id)
