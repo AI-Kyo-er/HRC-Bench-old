@@ -14,6 +14,7 @@ from hrc_pilot.backend_options import add_backend_options, backend_provenance, c
 from hrc_pilot.continuous import (AdaptivePartner, DynamicHumanPolicy, ReactivePartner,
                                    FixedReplayPartner, run_continuous_episode)
 from hrc_pilot.continuous_report import write_continuous_report
+from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.history_probe import make_history_probe
 from hrc_pilot.openpi_adapter import DroidVLAAdapter
 
@@ -81,6 +82,8 @@ def main():
     }
     (args.output_dir / "summary.json").write_text(json.dumps({"episodes": [result]}, ensure_ascii=False, indent=2))
     (args.output_dir / "provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2))
+    finalize_video_verification(args.output_dir, required=bool(provenance["sim_video_required"]),
+                                require_timeline=True)
     print(f"真实模型调用 {len(calls)} 次；活动成功：{result['task_success']}")
     print(write_continuous_report(args.output_dir, [result]))
 

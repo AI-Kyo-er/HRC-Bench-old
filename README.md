@@ -59,8 +59,9 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 用于把真实 Sim 视频与 benchmark 时间和事件逐帧联动；旧快照若只有视频仍可播放，
 但会明确标出缺少时间轴。`ContinuousWorld` 是参考后端，不要求真实 Sim 视频。
 
-正式实验结束后还必须独立执行真实视频核验，确认 MP4 能完整解码、帧数 / FPS / 尺寸
-有效。新运行应同时保存逐帧时间轴，以便把视频和事件精确对齐：
+连续 benchmark、原生 OpenPI、恢复、关节校准、历史诊断和 Dataset 的 Genesis
+入口都会在生成 HTML 前自动逐 episode 解码视频，严格核对帧数、FPS、尺寸与时间轴。
+核验失败会保存失败详情并阻止生成正式报告。也可以独立复核已经保存的结果：
 
 ```bash
 PYTHONPATH=src .venv-vc-pilot/bin/python scripts/verify_genesis_videos.py \

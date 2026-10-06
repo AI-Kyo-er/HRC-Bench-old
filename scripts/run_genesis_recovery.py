@@ -11,6 +11,7 @@ from hrc_pilot.backend_options import add_backend_options, backend_provenance, c
 from hrc_pilot.continuous import CONTINUOUS_SCENARIOS, run_catalog, scenario_to_dict
 from hrc_pilot.continuous_report import write_continuous_report
 from hrc_pilot.dataset import aggregate_results
+from hrc_pilot.video_verification import finalize_video_verification
 
 
 def main() -> None:
@@ -57,7 +58,7 @@ def main() -> None:
     (args.output_dir / "summary.json").write_text(json.dumps({
         "episodes": results, "aggregate": summary,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
-    (args.output_dir / "provenance.json").write_text(json.dumps({
+    provenance = {
         **backend_provenance(args), "policy": args.policy, "seeds": args.seeds,
         "partner_mode": "adaptive", "run_count": len(results),
         "scenario_count": len(scenarios), "observation_boundary": "public_observation_only",
@@ -67,7 +68,11 @@ def main() -> None:
         "conditions": [scenario_to_dict(scenario) for scenario in scenarios],
         "negative_control": "persistent_failure 改变失败持续性，仅用于核查分类，不用于估计一次失败后接管的因果效果。",
         "interpretation": "手写策略与模拟伙伴的机制验证，不是 VLA/WLA 性能或真人效度证据。",
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    }
+    (args.output_dir / "provenance.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
+    finalize_video_verification(args.output_dir, required=bool(provenance["sim_video_required"]),
+                                require_timeline=True)
     print(json.dumps(summary["by_scenario"], ensure_ascii=False, indent=2))
     print(f"[recovery] 报告：{write_continuous_report(args.output_dir, results, scenarios)}")
 

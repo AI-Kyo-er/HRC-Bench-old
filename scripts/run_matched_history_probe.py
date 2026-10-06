@@ -12,7 +12,8 @@ from hrc_pilot.backend_options import add_backend_options, backend_provenance, c
 from hrc_pilot.continuous import AdaptivePartner, GreedyPublicPolicy, run_continuous_episode, load_scenario
 from hrc_pilot.continuous_report import write_continuous_report
 from hrc_pilot.history_probe import (HelpThenExecutePolicy, HistoryCarryoverPartner,
-                                    make_history_prefix, make_history_probe, read_public_history)
+                                     make_history_prefix, make_history_probe, read_public_history)
+from hrc_pilot.video_verification import finalize_video_verification
 
 
 def main() -> None:
@@ -123,14 +124,18 @@ def main() -> None:
         "verified_matching": all(row["same_first_model_input"] and row["same_first_rgb"] and row["same_first_action"]
                                  and row["same_request_partner_input"] and row["same_request_partner_rgb"] for row in comparisons),
     }, ensure_ascii=False, indent=2))
-    (args.output_dir / "provenance.json").write_text(json.dumps({
+    provenance = {
         **backend_provenance(args), "policy": args.policy, "seeds": args.seeds,
         "experiment": "matched_history_probe", "run_count": len(results),
         "prefix_source": str(args.prefix_source.resolve()) if args.prefix_source else None,
         "purpose": "检查真实公开历史形成的伙伴判断是否改变后续相同求助的回答，并与冻结状态对照。",
         "controlled": "同 seed 探针固定当前物理状态、当前消息、任务、首次动作与相机；只带入 trust / reliability 或冻结其更新。",
         "interpretation": "模拟伙伴机制诊断，世界和协议在探针前重建；不是持续无重置 benchmark，也不是真人或训练具身模型证据。",
-    }, ensure_ascii=False, indent=2))
+    }
+    (args.output_dir / "provenance.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
+    finalize_video_verification(args.output_dir, required=bool(provenance["sim_video_required"]),
+                                require_timeline=True)
     print(json.dumps([{key: value for key, value in row.items() if key != "probes"} for row in comparisons], ensure_ascii=False, indent=2))
     print(write_continuous_report(args.output_dir, results))
 

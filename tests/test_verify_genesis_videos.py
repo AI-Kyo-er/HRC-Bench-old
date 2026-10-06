@@ -2,10 +2,12 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 
 from scripts.verify_genesis_videos import verify_episode, verify_result
+from hrc_pilot.video_verification import finalize_video_verification
 
 
 class FakeReader:
@@ -95,6 +97,38 @@ class GenesisVideoVerificationTests(unittest.TestCase):
                 np.zeros((2, 2, 3)), np.zeros((2, 2, 3))
             ]), require_timeline=True)
             self.assertEqual(result["status"], "failed")
+
+    def test_optional_finalization_does_not_read_or_write(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch("hrc_pilot.video_verification.verify_result") as verify:
+                self.assertIsNone(finalize_video_verification(root, required=False))
+                verify.assert_not_called()
+            self.assertFalse((root / "video_verification.json").exists())
+
+    def test_finalization_records_verified_video(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_episode(root, self.timeline())
+            verify = lambda root, **kwargs: verify_result(
+                root, reader_factory([np.zeros((2, 2, 3))] * 2), **kwargs)
+            with patch("hrc_pilot.video_verification.verify_result", side_effect=verify):
+                result = finalize_video_verification(root, required=True)
+            saved = json.loads((root / "video_verification.json").read_text())
+            self.assertEqual(saved, result)
+            self.assertEqual(saved["status"], "verified")
+            self.assertTrue(saved["timeline_required"])
+
+    def test_failed_finalization_stops_report_creation(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_episode(root, self.timeline(), video_bytes=b"")
+            with self.assertRaisesRegex(RuntimeError, "视频核验失败"):
+                finalize_video_verification(root, required=True)
+                (root / "index.html").write_text("正式报告")
+            saved = json.loads((root / "video_verification.json").read_text())
+            self.assertEqual(saved["status"], "failed")
+            self.assertFalse((root / "index.html").exists())
 
 
 if __name__ == "__main__":

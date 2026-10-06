@@ -14,6 +14,7 @@ from hrc_pilot.continuous import AdaptivePartner, run_continuous_episode
 from hrc_pilot.continuous_report import write_continuous_report
 from hrc_pilot.history_probe import make_history_probe
 from hrc_pilot.protocol import Action
+from hrc_pilot.video_verification import finalize_video_verification
 
 
 class JointCalibrationPolicy:
@@ -74,12 +75,16 @@ def main():
                                     AdaptivePartner(scenario), output=args.output_dir / scenario.name,
                                     backend_factory=backend)
     (args.output_dir / "summary.json").write_text(json.dumps({"episodes": [result]}, ensure_ascii=False, indent=2))
-    (args.output_dir / "provenance.json").write_text(json.dumps({
+    provenance = {
         **backend_provenance(args), "policy": args.policy, "seed": 0,
         "experiment": "joint_control_calibration",
         "purpose": "核查底层关节输出、实际闭合 / 接近抓放和双相机输入链路。",
         "interpretation": "公开几何 IK 教师检查，物体仍为运动学 attachment；不是 VLA 或真实接触证据。",
-    }, ensure_ascii=False, indent=2))
+    }
+    (args.output_dir / "provenance.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2))
+    finalize_video_verification(args.output_dir, required=bool(provenance["sim_video_required"]),
+                                require_timeline=True)
     print(f"活动成功：{result['task_success']}")
     print(write_continuous_report(args.output_dir, [result]))
 

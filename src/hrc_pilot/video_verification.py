@@ -131,3 +131,22 @@ def verify_result(root: Path, reader_factory: ReaderFactory = imageio.get_reader
         "episodes": episodes,
         "interpretation": "真实运行视频、时间轴和保存轨迹的产物核查；不推断模型能力或 HRC 效果。",
     }
+
+
+def finalize_video_verification(root: Path, *, required: bool,
+                                require_timeline: bool = True) -> dict[str, Any] | None:
+    """在正式报告前核验重要运行的视频契约。
+
+    探索性参考后端不需要视频，因此直接返回 ``None``。重要运行必须为每个
+    episode 解码出有效帧，并在默认设置下提供可与 benchmark 时间对齐的时间轴；
+    核验结果始终写入运行根目录，失败时阻止后续报告生成。
+    """
+    if not required:
+        return None
+    root = Path(root)
+    verification = verify_result(root, require_timeline=require_timeline)
+    (root / "video_verification.json").write_text(
+        json.dumps(verification, ensure_ascii=False, indent=2), encoding="utf-8")
+    if verification["status"] != "verified":
+        raise RuntimeError(f"重要实验真实 Sim 视频核验失败：{root / 'video_verification.json'}")
+    return verification

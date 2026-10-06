@@ -13,6 +13,7 @@ from .continuous import (CONTINUOUS_SCENARIOS, generate_benchmark_suite, generat
                           run_counterfactual_benchmark, run_history_counterfactual,
                           run_paired_benchmark)
 from .continuous_report import write_continuous_report
+from .video_verification import finalize_video_verification
 
 
 def main() -> None:
@@ -105,7 +106,7 @@ def main() -> None:
         results = run_catalog(policy_spec=args.policy, seed=args.seed, output=args.output_dir,
                               scenarios=scenarios or None, partner_mode=args.partner_mode,
                               backend_factory=backend_factory)
-    (args.output_dir / "provenance.json").write_text(json.dumps({
+    provenance = {
         "runtime": "hrc_pilot.continuous",
         **backend_provenance(args),
         "policy": args.policy, "seed": args.seed,
@@ -125,7 +126,11 @@ def main() -> None:
         "scenario_seed": scenario_seed,
         "observation_boundary": "public_observation_only",
         "scenario_count": len(scenarios), "run_count": len(results),
-    }, ensure_ascii=False, indent=2))
+    }
+    (args.output_dir / "provenance.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
+    finalize_video_verification(
+        args.output_dir, required=bool(provenance["sim_video_required"]), require_timeline=True)
     print(f"[continuous] 结果：{write_continuous_report(args.output_dir, results, scenarios or None)}")
 
 
