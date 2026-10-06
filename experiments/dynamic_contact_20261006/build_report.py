@@ -61,6 +61,10 @@ def surface_panel():
     progress = ROOT / 'datasets/visible_surface_demonstrations'
     live = read(progress / 'live_video_verification.json') if (progress / 'live_video_verification.json').exists() else {}
     status = f'截至 {escape(live.get("checked_at", "尚无快照"))}，已核验 {live.get("completed_count", 0)}/96 条采集。'
+    if (progress / 'dataset.json').exists():
+        collection = read(progress / 'dataset.json')
+        status = f'正式采集已完成：96条实际运行，96条完成，train {collection["verified_samples"]["train"]} 帧、dev {collection["verified_samples"]["dev"]} 帧。'
+        sources += [progress / name for name in ('dataset.json','provenance.json','video_verification.json')]
     progress_link = link(progress / 'progress.html', '采集进度与真实视频') if (progress / 'progress.html').exists() else '采集进度页待生成'
     if live:
         sources.append(progress / 'live_video_verification.json')
@@ -69,15 +73,53 @@ def surface_panel():
     if model.exists():
         receipt = read(model)
         assert receipt['status'] == 'downloaded_and_verified'
-        asset_note = f'<p>另一项仿真预训练参照 π0.5-LIBERO 的权重已从中国 ModelScope 直连下载并通过 SHA256 核验，{link(model, "中国源下载记录")}。本平台动作接口尚未完成运行，未计入模型结果。</p>'
+        asset_note = f'<p>另一项仿真预训练参照 π0.5-LIBERO 的权重已从中国 ModelScope 直连下载并通过 SHA256 核验，{link(model, "中国源下载记录")}。实际末端控制接口运行见下方；尚未完成充分的域匹配校准。</p>'
         sources.append(model)
-    document = f'''<section><h2>任务范围可见，示范数据正在扩大</h2><p>旧任务用“蓝色底板”描述目标，但评分检查一个不可见的小中心范围，部分指定点也在底板边缘。
+    document = f'''<section><h2>任务范围可见，实际示范数据扩大</h2><p>旧任务用“蓝色底板”描述目标，但评分检查一个不可见的小中心范围，部分指定点也在底板边缘。
 新场景让显示与判定共用蓝色收纳/绿色留用表面，检查物体完整足迹、实际释放和稳定；初始物体独立变化且彼此分离。</p>
 <p>数据教师根据夹爪实际碰撞几何保持手掌间隙，并在区域内低落差条件满足时释放；未把物体移动坐标。
 绿色、蓝色与红色都已有实际完成证据。以下是不同生成校准阶段，不能合并成模型效果提升。</p>
 <div class="table-wrap"><table><thead><tr><th>数据校准</th><th>完成/运行</th><th>查看</th></tr></thead><tbody>{''.join(table)}</tbody></table></div>
-{gallery}<p>{status}{progress_link}。这批数据尚未用于本页的模型权重，正式批次完成后还需训练与闭环验证。</p>{asset_note}</section>'''
+{gallery}<p>{status}{progress_link}。这批数据尚未用于本页的模型权重，还需训练与闭环验证。</p>{asset_note}</section>'''
     return document, sources
+
+
+def integration_panel():
+    sources, panels, evidence = [], [], {}
+    root = RESULTS / 'pi05_libero_contact_formal'
+    if finished_run(root):
+        directory = root / 'pi05_libero_blue'
+        metric = read(directory / 'metrics.json')
+        verified = read(root / 'model_execution_verification.json')['episodes'][0]
+        panels.append(f'''<article><h3>π0.5-LIBERO：实际末端控制接口</h3><p>中国源仿真预训练权重严格匹配813个参数结构，使用双相机、末端位置/轴角/双指位置。
+本次20Hz、6秒，实际模型调用{verified['model_calls']}次，执行{verified['joint_actions']}个关节请求；蓝块任务{'完成' if metric['task_success'] else '未完成'}。
+7维输出的位置与旋转均经过实际IK和关节限速，没有用几何教师替代模型动作。</p>{video(directory)}
+<p>相机视角、坐标约定与接触分布尚未充分校准；短运行确认执行链路，不能作为完整操作能力或HRC成绩。
+{link(root / 'index.html','原始运行')} · {link(root / 'model_execution_verification.json','像素与末端变换核查')}</p></article>''')
+        sources += [root / name for name in ('summary.json','provenance.json','video_verification.json','model_execution_verification.json')]
+        evidence['libero_interface'] = verified
+    root = RESULTS / 'physical_activity_stream_v1'
+    if (root / 'video_verification.json').exists() and (root / 'model_execution_verification.json').exists():
+        assert read(root / 'video_verification.json')['status'] == 'verified'
+        assert read(root / 'model_execution_verification.json')['status'] == 'verified'
+        directory = root / 'continuous_activity_stream'
+        result = read(directory / 'metrics.json')
+        motion = read(directory / 'motion_verification.json')
+        table = ''.join(f'<tr><td>{row["activity_index"] + 1} · {escape(row["scenario"])}</td><td>{row["start_time_s"]:.1f}–{row["end_time_s"]:.1f}秒</td><td>{"完成" if row["task_success"] else "未完成"}</td><td>{escape("、".join(row["completed_skills"]) or "无")}</td></tr>' for row in result['activities'])
+        panels.append(f'''<article><h3>同一世界中的连续活动与分工变化</h3><p>只初始化一次物理世界；活动结束或到期后发布新的公开安排，物体、机械臂、人体位置与模拟时钟保持连续。
+双方模型与伙伴的经历和当前目标也不重置。三项活动分别为收纳接力、把刚整理的物体转为留用、交换整理职责。
+所有转换均核查物理状态保持，累计真实模型调用{result['model_calls']}次。</p>
+<div class="notice">本次原始活动结果保留作诊断：运动核查为{motion['status']}，有{motion['violation_count']}处持握物体速度超阈值，最大逐物理帧位移{motion['maximum_human_object_displacement_per_physics_step_m']*1000:.1f}mm。
+因此不进入有效模型排名。视频与转换点核查证明世界保持，不保证整个动作过程符合运动门槛。</div>{video(directory)}
+<div class="table-wrap"><table><thead><tr><th>活动</th><th>连续时间</th><th>活动终态</th><th>实际贡献</th></tr></thead><tbody>{table}</tbody></table></div>
+<p>活动转换发布任务，具体行动仍由模型生成；贡献按每项活动单独记录，旧操作不会自动获得新任务贡献。
+物理连续与有记忆不等于已证明可靠协作，模型操作和合成人行为的限制仍保留。</p></article>''')
+        sources += [directory / name for name in ('metrics.json','activity_transitions.jsonl','motion_verification.json')]
+        sources += [root / name for name in ('summary.json','provenance.json','video_verification.json','model_execution_verification.json')]
+        evidence['physical_activity_stream'] = {**result,'motion_verification':motion}
+    elif (root / 'continuous_activity_stream').exists():
+        panels.append('<p>无重置活动流正在实际运行；完整视频与终态核验结束后才发布成绩。</p>')
+    return '<section><h2>本轮模型接口与持续世界进展</h2>' + ''.join(panels) + '</section>', sources, evidence
 
 
 def adaptation_panel():
@@ -142,6 +184,7 @@ def main():
                    'π0.5-DROID（本轮 LoRA 适配权重）' if metadata.get('contact_lora') else 'π0.5-DROID（官方原生权重）')
     adaptation, adaptation_evidence, adaptation_sources = adaptation_panel()
     surfaces, surface_sources = surface_panel()
+    integration, integration_sources, integration_evidence = integration_panel()
     table, panels, evidence, source_paths = [], [], [], [native / 'summary.json', native / 'provenance.json', native / 'video_verification.json']
     decision_count = 0
     memory_records = []
@@ -242,7 +285,7 @@ def main():
 <div class="notice">新策略保留公开任务板并输出自己的当前目标。当前接力运行先操作红块再完成蓝块，但后续并行任务出现整段观察与等待。
 保留信息不保证正确利用信息；生成理由也可能误称分工。模型动作、解释与实际贡献分别保留，不能据此认定真实人类规律或因果。</div></section>''' if provenance.get('human_memory_scope') == 'session' else f'''<section><h2>伙伴经验记录</h2>
 <p>保存{len(memory_records)}条模型生成经验。旧批次接力没有完成红块前置贡献，末期最近对话窗口丢失初始分工；新任务板与跨活动记忆需要单独实测。</p><ul>{examples}</ul></section>'''
-    source_paths += adaptation_sources + surface_sources
+    source_paths += adaptation_sources + surface_sources + integration_sources
     document = f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>动态人类与真实接触 HRC · 实际系统报告</title><style>
 *{{box-sizing:border-box}}body{{margin:0;background:#f1f5f4;color:#182e3e;font-family:system-ui,"Noto Sans CJK SC",sans-serif;line-height:1.8;overflow-wrap:anywhere}}
@@ -295,6 +338,7 @@ th,td{{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-ali
 任务未完成不能直接归因为“模型不会协作”。本页不使用手工加权总分掩盖这些问题。</div>
 {''.join(panels)}</section>
 {adaptation}
+{integration}
 {memory_section}
 {surfaces}
 <section><h2>用于后续模型校准的实际示范 Dataset</h2><p>已采集 {demo_total} 条接触操作运行，{demo_success} 条形成有效示范，共 {frame_total} 个双相机/本体状态/动作监督样本。
@@ -326,6 +370,7 @@ Robot 模型只有 π0.5；Qwen 为合成伙伴。人的动作原语属于执行
         'episodes': evidence, 'demonstration_episodes': demo_total, 'valid_demonstration_episodes': demo_success,
         'valid_frame_samples': frame_total, 'goal_complete': False, 'research_validity': 'unverified',
         'model_adaptation': adaptation_evidence,
+        'integration_runs': integration_evidence,
         'generated_human_memory_count': len(memory_records),
         'source_sha256': {path.relative_to(ROOT).as_posix(): sha256(path.read_bytes()).hexdigest() for path in source_paths},
     }, ensure_ascii=False, indent=2), encoding='utf-8')

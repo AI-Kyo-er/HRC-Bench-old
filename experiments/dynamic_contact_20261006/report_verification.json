@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-06T18:48:34+08:00",
+  "checked_at": "2026-10-06T19:52:21+08:00",
   "status": "verified",
   "pages": [
     {
@@ -51,6 +51,18 @@
           "error": null
         },
         {
+          "duration": 7.95,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 88.4,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
           "duration": 14.666667,
           "width": 480,
           "height": 484,
@@ -82,12 +94,12 @@
         }
       ],
       "playback_check": {
-        "time": 0.913549,
+        "time": 0.915593,
         "paused": false,
         "error": null
       },
       "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "3d10346dcd4ca0d33ddb69c41abe4788a9eaf8fd563d8d7dc4018668c31e7f6e"
+      "page_sha256": "77ce140fe28016115ac1b9e1507656ab66e3aeb7efcbfc0529229493ca7128e4"
     },
     {
       "path": "results/continuous_v2/pi05_position_qwen_session/index.html",
@@ -103,7 +115,7 @@
         }
       ],
       "playback_check": {
-        "time": 0.913705,
+        "time": 0.912175,
         "paused": false,
         "error": null
       },
@@ -111,25 +123,25 @@
       "page_sha256": "061dffc59f4327c34b8086eef312b3984d5b868a6187fba8bd1cc58f915bee7a"
     },
     {
-      "path": "results/continuous_v2/pi05_position_atom_evaluation/index.html",
+      "path": "results/continuous_v2/pi05_libero_contact_formal/index.html",
       "page_errors": [],
       "broken_links": [],
       "mobile_overflow": false,
       "videos": [
         {
-          "duration": 32,
+          "duration": 7.95,
           "width": 640,
           "height": 604,
           "error": null
         }
       ],
       "playback_check": {
-        "time": 0.912895,
+        "time": 0.910649,
         "paused": false,
         "error": null
       },
       "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "1352d0e720c3636352afa7a5b8a39e95fc2d7d3dd1916ab7ce0ee0552425f617"
+      "page_sha256": "267711076a656b5c6e14dd075932c5549981f795adaf7386648323287829f0ec"
     }
   ]
 }

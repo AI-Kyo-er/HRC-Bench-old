@@ -15,6 +15,7 @@
 - [v2 九类任务族动态伙伴正式报告（9 条真实 Sim 视频、9/9 时间轴核验）](results/continuous_v2/task_catalog_genesis_v2/index.html)
 - [真实接触、生成式伙伴与模型适配进展（2026-10-06，含真实 Sim 视频）](experiments/dynamic_contact_20261006/index.html)
 - [可见目标表面与96条实际示范的采集进度](datasets/visible_surface_demonstrations/progress.html)
+- [96条可见区域真实接触示范正式报告](datasets/visible_surface_demonstrations/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)
@@ -30,6 +31,17 @@ ln -s /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2 results
 ```
 
 ## 运行
+
+最新实测新增世界无重置活动流：一次初始化，保留物体、机器人、人及双方历史，
+以公开任务更新切换活动。86.4秒实际运行完成首项、后两项未完成，另有两处持握速度
+超阈值，作为诊断保留。π0.5-LIBERO已完成7维末端动作的6秒真实场景接口运行与
+像素/动作/请求核查，尚未完成相机和坐标域匹配校准，不能解释为HRC成绩。
+96条采集正式完成，22,768个样本与96条视频核验通过；新的学习训练仍待进行。
+
+新入口：`scripts/run_activity_stream.py`、`scripts/run_pi05_libero_benchmark.py`，
+模型服务 `scripts/serve_pi05_libero.py` 使用已下载中国源权重，需设置Torch overlay
+`PYTHONPATH=/data1/sieniwgroup/sieniw/projects/HRC-Bench/cache/openpi-torch-transformers:src:.`。
+GPU作业运行前均须先确认单卡空闲显存足够，模型服务和Genesis使用不同GPU。
 
 在仓库根目录执行：
 

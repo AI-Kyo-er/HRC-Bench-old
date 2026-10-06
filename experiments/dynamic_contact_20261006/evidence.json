@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T18:48:24+08:00",
+  "generated_at": "2026-10-06T19:46:24+08:00",
   "native_run": "pi05_position_qwen_session",
   "episodes": [
     {
@@ -129,6 +129,105 @@
       }
     ]
   },
+  "integration_runs": {
+    "libero_interface": {
+      "episode": "pi05_libero_blue",
+      "model_calls": 24,
+      "joint_actions": 120,
+      "pixels_and_pose_transforms_verified": true,
+      "requested_joints_match_model_ik": true
+    },
+    "physical_activity_stream": {
+      "scenario": "continuous_activity_stream",
+      "seed": 23,
+      "task_success": false,
+      "completed_skills": [
+        "human:red:tray_red",
+        "human:blue:tray_blue",
+        "human:blue:keep_blue"
+      ],
+      "completion_time_s": 86.4,
+      "activities": [
+        {
+          "activity_index": 0,
+          "scenario": "relay",
+          "start_time_s": 0.0,
+          "end_time_s": 26.4,
+          "duration_s": 26.4,
+          "task_success": true,
+          "completed_skills": [
+            "human:red:tray_red",
+            "human:blue:tray_blue"
+          ],
+          "human_goal_at_end": "观察蓝杯的位置和状态，确认是否需要协助机器人将其放到tray_blue区域。"
+        },
+        {
+          "activity_index": 1,
+          "scenario": "activity_reprioritization",
+          "start_time_s": 26.4,
+          "end_time_s": 56.4,
+          "duration_s": 30.0,
+          "task_success": false,
+          "completed_skills": [
+            "human:blue:keep_blue"
+          ],
+          "human_goal_at_end": "确认蓝杯已正确放置到keep_blue区域。"
+        },
+        {
+          "activity_index": 2,
+          "scenario": "activity_role_exchange",
+          "start_time_s": 56.4,
+          "end_time_s": 86.4,
+          "duration_s": 30.000000000000007,
+          "task_success": false,
+          "completed_skills": [],
+          "human_goal_at_end": "确认蓝杯已正确放置到keep_blue区域。"
+        }
+      ],
+      "world_initialization_count": 1,
+      "activity_transition_count": 3,
+      "physical_state_preserved_at_all_transitions": true,
+      "model_calls": 325,
+      "native_joint_actions": 1296,
+      "interpretation": "同一世界和模型历史的实际活动流；物理连续不等于可靠HRC能力或真人效度。",
+      "motion_verification": {
+        "status": "failed",
+        "benchmark_eligible": false,
+        "human_transport_speed_limit_m_s": 1.5,
+        "maximum_human_object_displacement_per_physics_step_m": 0.030738097086994164,
+        "robot_control_target_rate_verified": true,
+        "violation_count": 2,
+        "violations": [
+          {
+            "kind": "human_object_transport_jump",
+            "object_id": "red",
+            "time_s": 10.983333333333333,
+            "displacement_m": 0.030738097086994164,
+            "interval_s": 0.01666666666666572,
+            "implied_speed_m_s": 1.8442858252197547,
+            "was_held": true,
+            "now_held": true
+          },
+          {
+            "kind": "human_object_transport_jump",
+            "object_id": "red",
+            "time_s": 11.016666666666667,
+            "displacement_m": 0.025216051691455642,
+            "interval_s": 0.016666666666667496,
+            "implied_speed_m_s": 1.5129631014872633,
+            "was_held": true,
+            "now_held": true
+          }
+        ],
+        "source_artifacts": [
+          "contacts.jsonl",
+          "robot_control.jsonl",
+          "physics_contract.json"
+        ],
+        "interpretation": "检查人体拿放过程中物体的逐步位移与控制目标速度，不证明全身运动、接触安全或真人效度。"
+      }
+    }
+  },
   "generated_human_memory_count": 108,
   "source_sha256": {
     "results/continuous_v2/pi05_position_qwen_session/summary.json": "d5cce2842070d5c058d3424bef516d971787bf299395dfbce842308464c6ac5e",
@@ -174,7 +273,21 @@
     "datasets/visible_surface_area_release/dataset.json": "e36eb35cf5261aa06eb337e05d9b8edfbff9b498fbe06c0927e7435184248cbf",
     "datasets/visible_surface_area_release/provenance.json": "99e046854686cdd81c49cf68a493a66e9aca56a1deebe4d62610613d9fab4369",
     "datasets/visible_surface_area_release/video_verification.json": "fcd788acb96a154848ca9d7ee7806601124c287be6f968a73746509f231be01e",
-    "datasets/visible_surface_demonstrations/live_video_verification.json": "8df66a00a0ec9326d4bc6b1ba9c96055d7150d2ff320d5559095286ed824d890",
-    "models/pi05_libero/download_receipt.json": "25b3e3d2d1968208c80b4b6da72e86d6d7ca4734fbcd4e92f5d92e503f75e284"
+    "datasets/visible_surface_demonstrations/dataset.json": "f07476b2ddcd437c067d14fc26194144aedc8989a22ccadf07b4e66c2295c587",
+    "datasets/visible_surface_demonstrations/provenance.json": "e775720ba26460ce45ae5c8ae3f3187b736ce9af80a762e666ee5f60215cf950",
+    "datasets/visible_surface_demonstrations/video_verification.json": "05268a9d958320618fd29c47647088a33b343a77ac147f18f1eff96387965cf4",
+    "datasets/visible_surface_demonstrations/live_video_verification.json": "79de2df9802c81026bb17ad6b11c807cfb82ecc1907aa26dd05593377469d78c",
+    "models/pi05_libero/download_receipt.json": "25b3e3d2d1968208c80b4b6da72e86d6d7ca4734fbcd4e92f5d92e503f75e284",
+    "results/continuous_v2/pi05_libero_contact_formal/summary.json": "cee5bb97860a0977551f413dfd63e86fe44b5ad72d4bdfd49dd566170506eda0",
+    "results/continuous_v2/pi05_libero_contact_formal/provenance.json": "c4ffeb5d50ab2f3b2300659ba9dac4b3780e1ffdb6944406960997bd6737ac24",
+    "results/continuous_v2/pi05_libero_contact_formal/video_verification.json": "32015ff617c50a027e7bb85f4d37595b9b1781a109763870739d3dcc5eaa53f4",
+    "results/continuous_v2/pi05_libero_contact_formal/model_execution_verification.json": "40726c630488905cd40f0a8a0a1830c9ae29dbaba19d14f4d1fcd3ec7f2a763c",
+    "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/metrics.json": "23eec4f70189a2d0d2209b008635470cce4ce133599ec66ee61a01cd169c380d",
+    "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/activity_transitions.jsonl": "da4e8b0c3ba9737546e9f1f0f5b2d2d3de08e521cc575a5ddc4dffd569dc74c7",
+    "results/continuous_v2/physical_activity_stream_v1/continuous_activity_stream/motion_verification.json": "624bb8e17b8b8230f78e9b9c1b8da3daad1826b022206b81064dbc8a5c5371c0",
+    "results/continuous_v2/physical_activity_stream_v1/summary.json": "4898601074aea6cf8aa2088e9d4446a6336bf45afecbc56896a11da0269233a9",
+    "results/continuous_v2/physical_activity_stream_v1/provenance.json": "5ac9597eb7858bcacdf4a2bf675ab11f3bbdc267914f20d228504e7fbba88f27",
+    "results/continuous_v2/physical_activity_stream_v1/video_verification.json": "a053fdc7737d2a9d614b1876cf992554ba1e3c6d4cadbeef6ab0fc2b817e1118",
+    "results/continuous_v2/physical_activity_stream_v1/model_execution_verification.json": "6e93e7c02358a034a3a22f9396cf49b77b7c23ff86bab9511ea31385c9036033"
   }
 }

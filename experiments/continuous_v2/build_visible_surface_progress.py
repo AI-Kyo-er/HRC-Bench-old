@@ -28,6 +28,9 @@ def main():
             checked[episode] = result
         metrics.append((episode, metric))
     successes = sum(row['task_success'] for _, row in metrics)
+    finished = (ROOT / 'dataset.json').exists() and (ROOT / 'index.html').exists()
+    status_text = ('完整采集已结束，正式数据与严格核验见<a href="index.html">正式报告</a>。'
+                   if finished else '采集仍在进行，这不是正式数据集总成绩。')
     all_rows = ''.join(f'<tr><td><a href="{escape(episode)}/demo.mp4">{escape(episode)}</a></td><td>{"完成" if row["task_success"] else "未完成"}</td><td>{row["completion_time_s"]:.1f} 秒</td></tr>'
                        for episode, row in metrics)
     selected = {}
@@ -40,7 +43,7 @@ def main():
     stamp = datetime.now().astimezone().isoformat(timespec='seconds')
     document = f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>可见目标区域 · 实际示范采集进度</title><style>body{{margin:auto;max-width:1000px;padding:24px;background:#f1f5f4;color:#182e3e;font-family:system-ui;line-height:1.8;overflow-wrap:anywhere}}article{{padding:20px;background:white;margin:20px 0;border-radius:12px}}video{{width:100%;background:#142430}}table{{width:100%;border-collapse:collapse}}td{{padding:10px;border-bottom:1px solid #ccd8d5}}a{{color:#126b70}}</style>
-<h1>可见区域与独立布局的实际示范</h1><p>已核验完成 {len(metrics)}/96 条，实际操作完成 {successes} 条。采集仍在进行，这不是正式数据集总成绩。</p>
+<h1>可见区域与独立布局的实际示范</h1><p>已核验完成 {len(metrics)}/96 条，实际操作完成 {successes} 条。{status_text}</p>
 <p>蓝色底板表示收纳，绿色底板表示留用。显示范围与评分共用同一几何定义，要求物体完整足迹在区域内，并实际释放、支撑和稳定。
 各物体初始位置独立变化且彼此分离；控制来自几何数据教师，没有吸附或控制期坐标搬运。本页用于检查场景和示范质量，不是学习模型或HRC成绩。</p>
 <p>未完成运行保留视频，但不导出有效监督。有效样本按输入stem配对双相机、本体状态与速度/实际位置目标，不使用配对manifest。</p>
