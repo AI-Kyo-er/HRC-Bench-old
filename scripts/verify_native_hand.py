@@ -23,10 +23,11 @@ def verify(directory,obj=None):
             if b.startswith(obj+'_'):a,b=b,a
             if a.startswith(obj+'_'):
                 for i,side in enumerate(['left','right']):finger[i]|=b=='human_'+side+'_finger_contact'
-                support|=b.startswith(relative_receiver+'_') if relative_receiver else b=='human_storage_support'
+                support|=(b.startswith(relative_receiver+'_') if relative_receiver else
+                          b=='table_collision' if destination.endswith(('_personal','_home')) else b=='human_storage_support')
         lift=r['objects'][obj][2]-initial[2]
         if all(finger) and lift>.04:bilateral.append(r['time_s'])
-        if support and not any(finger):released.append(r['time_s'])
+        if support and not any(finger) and bilateral and r['time_s']>bilateral[0]:released.append(r['time_s'])
     speed=max(float(np.linalg.norm(c['actual_velocity'])) for c in control)
     positions=[np.asarray(r['objects'][obj]) for r in trace]
     object_speed=max(float(np.linalg.norm(b-a)/.05) for a,b in zip(positions,positions[1:]))
