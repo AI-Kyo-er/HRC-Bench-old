@@ -21,6 +21,8 @@ from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidenc
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
 from hrc_pilot.native_placement import NativePlacementEvidence
 from hrc_pilot.native_activity import PROFILES,activity_plan,activity_regions,public_surfaces,evaluate_activity
+from hrc_pilot.native_autonomous_human import CONTEXTS
+from hrc_pilot.native_personal_evidence import evaluate_personal_goals
 
 
 def write_json(path, value):
@@ -40,6 +42,7 @@ def main():
     parser.add_argument('--human-mode', choices=['none','observe','qwen','calibration'], default='none')
     parser.add_argument('--human-visualization',choices=['capsule','vico_skin'],default='vico_skin')
     parser.add_argument('--task-family',choices=['moving_receptacle','clearance_return','prepare_receptacle','shared_workspace'],default='moving_receptacle')
+    parser.add_argument('--autonomous-human-context',choices=list(CONTEXTS))
     parser.add_argument('--activity-profile',choices=PROFILES)
     parser.add_argument('--human-decision-interval-steps',type=int,default=20)
     parser.add_argument('--human-memory-scope',choices=['episode','session'],default='session')
@@ -51,6 +54,8 @@ def main():
     args = parser.parse_args()
     contract=NativeTaskContract(args.task_family)
     work_plan=activity_plan(args.activity_profile) if args.activity_profile else []
+    if args.autonomous_human_context and (args.human_mode!='qwen' or args.activity_profile or args.completion_criterion!='released_stable'):
+        parser.error('自主目标模式要求生成式人和物理完成判据，不能附加定时工作脚本')
     if work_plan and (args.human_mode!='qwen' or args.completion_criterion!='released_stable'):
         parser.error('动态活动要求真实生成式人及接触释放判据')
     if work_plan and args.steps/20<=work_plan[-1].time_s:
@@ -106,7 +111,8 @@ def main():
                   Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_contact.py'),
                   Path('src/hrc_pilot/native_avatar.py'),
                   Path('src/hrc_pilot/native_task_contracts.py'),
-                  Path('src/hrc_pilot/native_activity.py'),
+                  Path('src/hrc_pilot/native_activity.py'),Path('src/hrc_pilot/native_autonomous_human.py'),
+                  Path('src/hrc_pilot/native_personal_evidence.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
                   Path('src/hrc_pilot/native_placement.py'),
@@ -126,9 +132,13 @@ def main():
         from hrc_pilot.native_contact_human import NativeQwenHuman
         from hrc_pilot.continuous import CONTINUOUS_SCENARIOS
         from dataclasses import replace
-        partner = NativeQwenHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
+        human_class=NativeQwenHuman;human_kwargs={}
+        if args.autonomous_human_context:
+            from hrc_pilot.native_autonomous_human import AutonomousNativeHuman
+            human_class=AutonomousNativeHuman;human_kwargs={'autonomous_context':args.autonomous_human_context}
+        partner = human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
                                  model_path=args.human_model, persona_id=args.human_persona,
-                                 decision_interval_steps=args.human_decision_interval_steps, memory_scope=args.human_memory_scope)
+                                 decision_interval_steps=args.human_decision_interval_steps, memory_scope=args.human_memory_scope,**human_kwargs)
         partner.prepare()
     for task_id in args.task_ids:
         task = suite.get_task(task_id)
@@ -179,11 +189,11 @@ def main():
                     initial_plate = env.sim.data.body_xpos[env.env.obj_body_id[human_object]].copy()
                     plate_goal = initial_plate + [0,.12,0]
                     regions = {'near_human':tuple(plate_goal)}
-                    if work_plan:
+                    if work_plan or args.autonomous_human_context:
                         objects={name:env.sim.data.body_xpos[body].copy() for name,body in env.env.obj_body_id.items()}
                         regions=activity_regions(objects);plate_goal=np.asarray(regions['plate_ready'])
                     obs = augment_contact_human(env,plate_goal,visualization=args.human_visualization,
-                                                public_regions=regions if work_plan else None)
+                                                public_regions=regions if work_plan or args.autonomous_human_context else None)
                     actor = NativeContactHuman(env,regions)
                     actor._display(actor.position())
                     env.sim.forward()
@@ -193,6 +203,9 @@ def main():
                                 Message('human','assignment',task.language,None,'robot',None),
                                 Message('human','assignment',contract.human_instruction(),
                                         human_object,'human','near_human')]
+                    if args.autonomous_human_context:
+                        messages=[Message('environment','scene_context','We share this table. Choose your own personal activity and coordinate using public speech and actual observations.'),
+                                  Message('environment','assignment',task.language,None,'robot')]
                     if work_plan:
                         messages=[]  # The first work update supplies this scene's own initial assignments.
                     if partner is not None:
@@ -240,6 +253,9 @@ def main():
                             if work_plan:
                                 from dataclasses import replace
                                 public=replace(public,task_description=active_work.instruction,goal_surfaces=public_surfaces(regions))
+                            if args.autonomous_human_context:
+                                from dataclasses import replace
+                                public=replace(public,goal_surfaces=public_surfaces(regions),task_family='autonomous_personal_activity')
                             decision=partner.step(public)
                             messages.extend(decision.messages)
                             actor.accept(decision.command)
@@ -251,10 +267,11 @@ def main():
                         action_plan.clear()  # Reobserve public updates; no action is selected here.
                     if not action_plan:
                         instruction=contract.robot_instruction(task.language) if partner is not None else task.language
+                        if args.autonomous_human_context:instruction=task.language
                         if work_plan:
                             instruction=task.language+'\nCurrent public human work: '+active_work.instruction
                         if partner is not None:
-                            communication=[m.text for m in messages if m.kind=='policy_message'][-2:]
+                            communication=[m.text for m in messages if m.kind in {'policy_message','negotiation_proposal'}][-2:]
                             if communication:instruction += '\nHuman: '+'\nHuman: '.join(communication)
                         request = native_policy_input(obs, instruction)
                         stem = f'observation_{step:06d}'
@@ -265,8 +282,8 @@ def main():
                                 Image.fromarray(initial_robot_rgb).save(directory/'planner_initial.png')
                             if step>=next_plan_step:
                                 public_request=coordination_request(time_s=time_s,
-                                    robot_task=task.language if work_plan else contract.robot_instruction(task.language),
-                                    human_task=active_work.instruction if work_plan else contract.human_instruction(),
+                                    robot_task=task.language if work_plan or args.autonomous_human_context else contract.robot_instruction(task.language),
+                                    human_task=('Human has private personal preferences; infer their current needs from public speech and visible actions.' if args.autonomous_human_context else active_work.instruction if work_plan else contract.human_instruction()),
                                     dialogue=messages,state=request['observation/state'],
                                     images={'initial':initial_robot_rgb,'current':request['observation/image'],
                                             'wrist':request['observation/wrist_image']},
@@ -340,7 +357,7 @@ def main():
                                          actuator_ctrl=env.sim.data.ctrl.tolist())
                     if not np.isclose(env.sim.data.time-start_physics, (step+1)/20, atol=1e-7):
                         raise RuntimeError('原生物理时间没有按20Hz控制推进')
-                    if done and not work_plan:
+                    if done and not work_plan and not args.autonomous_human_context:
                         break
                 terminal = physical_record(env, obs, time_s=(step+1)/20, step=step+1)
                 if actor is not None:
@@ -413,11 +430,28 @@ def main():
                                   task_success=activity['joint_final_goal_success'],
                                   interpretation='同一物理世界中公开工作要求变化，生成式人自主重新选择；分阶段完成与最终共同完成分开。')
                     done=result['task_success']
+                if args.autonomous_human_context:
+                    personal=evaluate_personal_goals(regions,trace,actor.records,partner.policy_io,placement.records)
+                    write_json(directory/'personal_evidence.json',personal)
+                    write_json(directory/'personal_context.json',{'context_id':args.autonomous_human_context,
+                        'context':CONTEXTS[args.autonomous_human_context],'regions':regions,'robot_instruction':task.language,
+                        'human_assigned_targets':None,'timed_work_updates':[],'world_initializations':1,'human_policy_resets':1})
+                    (directory/'human_intentions.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in partner.intention_records))
+                    result.update(autonomous_human_context=args.autonomous_human_context,personal_evidence=personal,
+                        human_goal_success=personal['human_current_observable_goals_satisfied'],
+                        human_goal_evaluable=personal['human_current_observable_goals_evaluable'],
+                        robot_goal_success=personal['robot_final_released_stable_success'],
+                        task_success=personal['joint_observable_goals_satisfied'],
+                        interpretation='人自选个人目标、当前动作和公开协商提案；测量可观察目标关系，主观满足及协商接受不由程序判定。')
+                    write_json(directory/'public_task.json',{'robot':task.language,'human':None,'human_target_source':'model_generated',
+                                                           'task_family':'autonomous_personal_activity'})
+                    done=result['task_success']
                 if placement is not None:
                     result.update(robot_goal_object=placement.object_id,robot_goal_receiver=placement.receiver_id)
                 write_json(directory/'metrics.json', result)
                 if coordinator is not None:
                     (directory/'robot_planner_io.jsonl').write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in robot_plans))
+                if coordinator is not None or args.autonomous_human_context:
                     (directory/'public_dialogue.jsonl').write_text(''.join(json.dumps(m.__dict__,ensure_ascii=False)+'\n' for m in messages))
                 if placement is not None:
                     (directory/'placement_evidence.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in placement.records))
@@ -443,9 +477,12 @@ def main():
         'cuda_visible_devices':selected,'source_sha256':hashes,
         'renderer_device_binding':matched[0],
         'human_mode':args.human_mode,'human_persona':args.human_persona if partner is not None else None,
+        'autonomous_human_context':args.autonomous_human_context,
+        'human_target_source':'model_generated_from_personal_preferences' if args.autonomous_human_context else 'public_assignment',
+        'private_human_targets_in_robot_input':False,
         'activity_profile':args.activity_profile,'human_decision_interval_steps':args.human_decision_interval_steps,
-        'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan),
-        'task_family':args.task_family,'human_public_work_requirement':contract.human_instruction(),
+        'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),
+        'task_family':args.task_family,'human_public_work_requirement':None if args.autonomous_human_context else contract.human_instruction(),
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
         'human_execution_feedback':'measured_motor_state_and_public_geometry_no_evaluator_outcomes',
         'human_action_validation_feedback':True,
