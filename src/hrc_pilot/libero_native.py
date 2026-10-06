@@ -39,5 +39,6 @@ def physical_record(env, observation, *, time_s, step):
             'objects': objects, 'robot_qpos': np.r_[observation['robot0_joint_pos'],
                                                   observation['robot0_gripper_qpos']].tolist(),
             'robot_ee': observation['robot0_eef_pos'].tolist(),
+            'eef_quaternion_xyzw': observation['robot0_eef_quat'].tolist(),
             'qpos': sim.data.qpos.tolist(), 'qvel': sim.data.qvel.tolist(),
             'ctrl': sim.data.ctrl.tolist(), 'contacts': contacts}

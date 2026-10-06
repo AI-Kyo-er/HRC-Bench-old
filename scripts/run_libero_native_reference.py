@@ -32,6 +32,9 @@ def main():
     parser.add_argument('--port', type=int, default=8766)
     parser.add_argument('--steps', type=int, default=280)
     parser.add_argument('--execution-horizon', type=int, default=10)
+    parser.add_argument('--human-mode', choices=['none','observe','qwen','calibration'], default='none')
+    parser.add_argument('--human-persona', choices=['cooperative','independent','cautious','assertive'], default='cooperative')
+    parser.add_argument('--human-model', type=Path, default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     args = parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error('请使用新的输出目录')
@@ -41,8 +44,11 @@ def main():
                                         '--format=csv,noheader,nounits'], text=True)
     free = {row.split(',')[0].strip(): int(row.split(',')[1]) for row in free_rows.splitlines()}
     selected = os.environ.get('CUDA_VISIBLE_DEVICES')
-    if selected not in free or free[selected] < 4096:
-        parser.error('原生Sim预计需要4GiB，请指定单张显存足够的GPU')
+    required = 4096
+    if args.human_mode == 'qwen':
+        required = sum(p.stat().st_size for p in args.human_model.glob('*.safetensors'))//(1024**2)+8192
+    if selected not in free or free[selected] < required:
+        parser.error(f'原生Sim与所选伙伴预计需要{required}MiB，请指定单張显存足够的GPU')
     print(f'[native-libero] GPU{selected} 空闲{free[selected]}MiB', flush=True)
     from libero.libero import benchmark, get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
@@ -56,9 +62,18 @@ def main():
         parser.error('需要实际π0.5-LIBERO原生末端增量模型服务')
     suite = benchmark.get_benchmark_dict()[args.suite]()
     args.output_dir.mkdir(parents=True)
-    code_paths = [Path(__file__), Path('src/hrc_pilot/libero_native.py')]
+    code_paths = [Path(__file__), Path('src/hrc_pilot/libero_native.py'), Path('src/hrc_pilot/native_contact_human.py')]
     hashes = {str(p): sha256(p.read_bytes()).hexdigest() for p in code_paths}
     episodes, provenance_episodes = [], []
+    partner = None
+    if args.human_mode == 'qwen':
+        from hrc_pilot.native_contact_human import NativeQwenHuman
+        from hrc_pilot.continuous import CONTINUOUS_SCENARIOS
+        from dataclasses import replace
+        partner = NativeQwenHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
+                                 model_path=args.human_model, persona_id=args.human_persona,
+                                 decision_interval_steps=20, memory_scope='session')
+        partner.prepare()
     for task_id in args.task_ids:
         task = suite.get_task(task_id)
         bddl = Path(suite.get_task_bddl_file_path(task_id))
@@ -75,7 +90,9 @@ def main():
             action_plan = deque()
             writer = imageio.get_writer(directory / 'demo.mp4', fps=20)
             def frame(obs, *, benchmark_time=None):
-                pixels = np.ascontiguousarray(obs['frontview_image'][::-1, ::-1])
+                raw = (env.sim.render(width=640,height=480,camera_name='hrc_view')
+                       if args.human_mode!='none' else obs['frontview_image'])
+                pixels = np.ascontiguousarray(raw[::-1, ::-1])
                 writer.append_data(pixels)
                 if not timeline:
                     Image.fromarray(pixels).save(directory / 'preview.png')
@@ -88,16 +105,56 @@ def main():
                 obs = env.set_init_state(initial_states[initial_id])
                 for _ in range(10):
                     obs, _, _, _ = env.step([0.] * 6 + [-1.])
-                    frame(obs)
+                    if args.human_mode=='none':frame(obs)
+                actor, regions, messages, contact_witness = None, {}, [], False
+                initial_plate, plate_goal, human_dwell = None, None, 0
+                if args.human_mode != 'none':
+                    from hrc_pilot.native_contact_human import augment_contact_human, NativeContactHuman
+                    from hrc_pilot.protocol import Message, Observation
+                    from hrc_pilot.continuous import HumanCommand
+                    initial_plate = env.sim.data.body_xpos[env.env.obj_body_id['plate_1']].copy()
+                    plate_goal = initial_plate + [0,.12,0]
+                    regions = {'near_human':tuple(plate_goal)}
+                    obs = augment_contact_human(env,plate_goal)
+                    actor = NativeContactHuman(env,regions)
+                    actor._display(actor.position())
+                    env.sim.forward()
+                    env.env._update_observables(force=True)
+                    obs=env.env._get_observations()
+                    messages = [Message('environment','activity_change','餐桌共同准备；安排按当前可见进度调整。'),
+                                Message('human','assignment',task.language,None,'robot',None),
+                                Message('human','assignment','I want to move plate_1 to the green near_human area while you place the specified bowl on it.',
+                                        'plate_1','human','near_human')]
+                    if partner is not None:partner.reset(args.seed)
                 start_physics = float(env.sim.data.time)
+                (directory/'scene.xml').write_text(env.sim.model.get_xml())
                 done = False
                 for step in range(args.steps):
                     time_s = step / 20
                     record = physical_record(env, obs, time_s=time_s, step=step)
+                    if actor is not None:
+                        record['human_hand_position'] = actor.position().tolist()
+                        record['human_motor_phase'] = actor.phase
+                        if partner is not None:
+                            public = Observation(objects={k:tuple(v) for k,v in record['objects'].items()},
+                                regions=regions,messages=tuple(messages),robot_ee=tuple(record['robot_ee']),
+                                human_position=(.25,.60,0),held_by_human=(),completed_skills=(),
+                                time_s=time_s,robot_qpos=tuple(record['robot_qpos']),
+                                task_description=task.language,human_hand_position=tuple(actor.position()),
+                                human_motor_phase=actor.phase,active_robot_action='placing_bowl',action_phase='native_control')
+                            decision=partner.step(public)
+                            messages.extend(decision.messages)
+                            actor.accept(decision.command)
+                        elif args.human_mode=='calibration':
+                            actor.accept(HumanCommand('push','plate_1','near_human',speed_mps=.15))
                     trace.append(record)
                     frame(obs, benchmark_time=time_s)
                     if not action_plan:
-                        request = native_policy_input(obs, task.language)
+                        instruction=task.language
+                        if partner is not None:
+                            communication=[m.text for m in messages if m.kind=='policy_message'][-2:]
+                            if communication:instruction += '\nHuman: '+'\nHuman: '.join(communication)
+                        request = native_policy_input(obs, instruction)
                         stem = f'observation_{step:06d}'
                         Image.fromarray(request['observation/image']).save(directory / f'{stem}.png')
                         Image.fromarray(request['observation/wrist_image']).save(directory / f'{stem}_wrist.png')
@@ -118,6 +175,20 @@ def main():
                                       'pre_physics_time_s': float(env.sim.data.time)})
                     obs, reward, _, info = env.step(action.tolist())
                     done = bool(env.check_success())
+                    if actor is not None:
+                        recent=actor.records[-int(round(.05/actor.dt)):]
+                        plate_geoms=set(env.env.objects_dict['plate_1'].contact_geoms)
+                        contact_witness = contact_witness or any(plate_geoms.intersection(row['contact_geoms']) for row in recent)
+                        actual_plate=actor.object_position('plate_1')
+                        plate_speed=(np.linalg.norm(np.asarray(recent[-1]['object_position'])-recent[0]['object_position'])/
+                                     max(recent[-1]['physics_time_s']-recent[0]['physics_time_s'],actor.dt)
+                                     if len(recent)>1 and recent[0]['object_position'] is not None else np.inf)
+                        human_geometry=bool(np.linalg.norm(actual_plate[:2]-plate_goal[:2])<.025
+                                            and abs(actual_plate[2]-initial_plate[2])<.025 and plate_speed<.08)
+                        human_dwell=human_dwell+1 if human_geometry and contact_witness else 0
+                        human_success=human_dwell>=4
+                        if args.human_mode=='qwen':done=done and human_success
+                        elif args.human_mode=='calibration':done=human_success
                     policy_io[-1].update(post_physics_time_s=float(env.sim.data.time),
                                          actuator_ctrl=env.sim.data.ctrl.tolist())
                     if not np.isclose(env.sim.data.time-start_physics, (step+1)/20, atol=1e-7):
@@ -134,6 +205,31 @@ def main():
                           'completion_time_s': terminal['time_s'], 'model_calls': len(calls),
                           'native_actions': len(policy_io), 'backend': 'LIBERO_MuJoCo_native',
                           'interpretation': '原生基础操作参照，不含人类，不是HRC/cobalance成绩。'}
+                if actor is not None:
+                    motion_peak=max(float(np.linalg.norm(row['actual_velocity'])) for row in actor.records)
+                    object_speeds=[np.linalg.norm(np.asarray(second['object_position'])-first['object_position'])/
+                                   (second['physics_time_s']-first['physics_time_s'])
+                                   for first,second in zip(actor.records,actor.records[1:])
+                                   if first['object_id']==second['object_id'] and first['object_position'] is not None
+                                   and second['object_position'] is not None]
+                    object_speed_peak=max(object_speeds,default=0.)
+                    result.update(human_mode=args.human_mode,human_contact_witness=contact_witness,
+                                  human_goal_success=human_dwell>=4, robot_goal_success=bool(env.check_success()),
+                                  human_fingertip_peak_speed_m_s=motion_peak,
+                                  human_object_peak_speed_m_s=float(object_speed_peak),
+                                  human_motion_check_passed=bool(motion_peak<=.65 and object_speed_peak<=1.5),
+                                  final_plate_position=actor.object_position('plate_1').tolist(),
+                                  public_plate_target=plate_goal.tolist(),
+                                  interpretation='真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。')
+                    (directory/'human_control.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in actor.records))
+                    write_json(directory/'public_task.json',{'robot':task.language,'human':'Move plate_1 to near_human',
+                                                           'initial_plate':initial_plate.tolist(),'near_human':plate_goal.tolist()})
+                    if partner is not None:
+                        audit=partner.audit_state()
+                        for name,key in [('human_policy_io.jsonl','policy_io'),('human_memory.jsonl','memory'),
+                                         ('human_memory_retrievals.jsonl','memory_retrievals')]:
+                            (directory/name).write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in audit[key]))
+                        result['human_decisions']=len(audit['policy_io'])
                 write_json(directory/'metrics.json', result)
                 write_json(directory/'video_timeline.json', {'fps':20,'frame_count':len(timeline),'frames':timeline})
                 episodes.append(result)
@@ -152,6 +248,11 @@ def main():
         'mujoco_version':mujoco.__version__,'robosuite_version':robosuite.__version__,
         'libero_commit':subprocess.check_output(['git','-C',str(Path(get_libero_path('benchmark_root')).parents[1]),'rev-parse','HEAD'],text=True).strip(),
         'cuda_visible_devices':selected,'source_sha256':hashes,
+        'human_mode':args.human_mode,'human_persona':args.human_persona if partner is not None else None,
+        'human_model':str(args.human_model) if partner is not None else None,
+        'human_physics':'force_driven_xyz_fingertip' if args.human_mode!='none' else None,
+        'human_body_visualization':'noncolliding_kinematic_capsules' if args.human_mode!='none' else None,
+        'human_goal_definition':'plate center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness',
         'source_files_changed_during_run':[str(p) for p in code_paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
         'episodes':provenance_episodes,'object_pose_writes_during_control':0,'robot_ik_adapter':False,
         'purpose':'用匹配的原生场景、相机、状态和操作空间控制验证现成模型的基础操作能力。',
@@ -161,7 +262,9 @@ def main():
     for result in episodes:
         location=f'task_{result["task_id"]:02d}/init_{result["init_state_id"]:03d}'
         panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，真实推理{result["model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
-    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生仿真策略操作参照</title><style>body{{margin:auto;max-width:1080px;padding:24px;background:#f1f5f4;font:17px/1.8 system-ui;color:#193540;overflow-wrap:anywhere}}article{{background:white;padding:24px;margin:24px 0;border-radius:14px}}video{{width:100%;max-height:600px;background:#142430}}h1{{font-size:30px}}h2{{font-size:22px}}</style><h1>真实π0.5模型在原生LIBERO中能否操作？</h1><p>此前Genesis中的机器人未建立可靠抓放。这里保持已下载模型权重，使用配套原生场景、两路相机、末端状态及OSC控制，区分基础操作问题与接入域差异。测试没有人类伙伴，不能解释为协作成绩。</p><p>20Hz物理控制；每次模型输出最多执行{args.execution_horizon}步后重新观察。视频直接记录Sim场景，所有物体通过物理接触运动，没有教师接管或吸附。结果：{sum(r['task_success'] for r in episodes)}/{len(episodes)}。当前样本只作操作参照，不作为全套LIBERO排名。</p><p><a href="summary.json">原始结果</a> · <a href="provenance.json">设置与来源</a> · <a href="video_verification.json">视频核验</a></p>{''.join(panels)}</html>'''
+    human_note = ('测试没有人类伙伴，不能解释为协作成绩。' if args.human_mode=='none' else
+                  '加入力驱动的碰撞指尖和不参与碰撞的显示人体。observe用于场景接入检查，calibration的推盘命令来自数据教师，qwen才使用真实Qwen3-14B决定推进、观察和让行。机器人一直执行真实π0.5；人体显示仍是简化运动学代理，不能声称真人或完整人体动力学。')
+    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生仿真策略与移动接收盘</title><style>body{{margin:auto;max-width:1080px;padding:24px;background:#f1f5f4;font:17px/1.8 system-ui;color:#193540;overflow-wrap:anywhere}}article{{background:white;padding:24px;margin:24px 0;border-radius:14px}}video{{width:100%;max-height:600px;background:#142430}}h1{{font-size:30px}}h2{{font-size:22px}}</style><h1>真实π0.5模型与可变化的接收盘</h1><p>此前Genesis中的机器人未建立可靠抓放。这里保持已下载模型权重，使用配套原生场景、两路相机、末端状态及OSC控制，区分基础操作问题与接入域差异。{human_note}</p><p>20Hz物理控制；每次模型输出最多执行{args.execution_horizon}步后重新观察。视频直接记录Sim场景；机器人没有教师接管，物体没有吸附。伙伴条件：{args.human_mode}。结果：{sum(r['task_success'] for r in episodes)}/{len(episodes)}。当前样本是系统实测，不作为完整HRC或全套LIBERO排名。</p><p><a href="summary.json">原始结果</a> · <a href="provenance.json">设置与来源</a> · <a href="video_verification.json">视频核验</a></p>{''.join(panels)}</html>'''
     (args.output_dir/'index.html').write_text(page)
     print(args.output_dir/'index.html', flush=True)
 
