@@ -30,6 +30,7 @@ class QwenHumanPolicy:
     def __init__(self, scenario, *, model_path: str | Path,
                  decision_interval_steps: int = 10,
                  persona_id: str | None = None,
+                 memory_scope: str = "episode",
                  generator: Callable[[str], str] | None = None):
         self.scenario = scenario
         self.model_path = Path(model_path)
@@ -38,13 +39,23 @@ class QwenHumanPolicy:
         if persona_id is not None and persona_id not in PERSONAS:
             raise ValueError("未知的人类 persona")
         self.fixed_persona_id = persona_id
+        if memory_scope not in {"episode", "session"}:
+            raise ValueError("未知伙伴记忆范围")
+        self.memory_scope = memory_scope
+        self.session_experiences = []
+        self.activity_index = -1
         self._model = None
         self._tokenizer = None
         self.reset(0)
 
     def reset(self, seed: int) -> None:
+        if self.memory_scope == "session":
+            self.session_experiences.extend(getattr(self, "experience_memory", [])[-12:])
+            self.session_experiences = self.session_experiences[-48:]
+        self.activity_index += 1
         self.rng = np.random.default_rng(seed)
-        self.persona_id = self.fixed_persona_id or str(self.rng.choice(tuple(PERSONAS)))
+        if self.memory_scope != "session" or not hasattr(self, "persona_id"):
+            self.persona_id = self.fixed_persona_id or str(self.rng.choice(tuple(PERSONAS)))
         self.seen_messages = 0
         self.last_inference_step = -self.decision_interval_steps
         self.last_message_count = -1
@@ -54,6 +65,9 @@ class QwenHumanPolicy:
         self.public_decision_history: list[dict[str, Any]] = []
         self.observation_history: list[dict[str, Any]] = []
         self.experience_memory: list[dict[str, Any]] = []
+        self.public_task_memory: dict[str, dict[str, Any]] = {}
+        self.current_goal = ""
+        self.memory_retrievals = []
 
     def initial_messages(self) -> tuple[Message, ...]:
         return self.scenario.initial_messages()
@@ -109,7 +123,13 @@ class QwenHumanPolicy:
             "你是一个在共享工作台工作的真实人类伙伴模拟策略。根据公开观察和公开对话，"
             "自主决定下一步意图；不得假设你知道未公开的任务标签或机器人计划。"
             f"你的稳定行为倾向是：{PERSONAS[self.persona_id]} "
-            "只输出一个 JSON 对象，字段为 intent、object_id、destination、message、speed_mps、reason、memory_note。"
+            "只输出一个 JSON 对象，字段为 intent、object_id、destination、message、speed_mps、reason、memory_note、current_goal。"
+            "你就是speaker为human的伙伴，value为robot的初始分工属于机器人，value为human属于你。"
+            "公开任务板持续保留承诺与附加条件，最近对话只补充新变化；接管是改变分工，"
+            "不要把机器人原先的任务误称为自己的原始任务。current_goal用一句话表述你当前"
+            "要完成或重新协调的目标，允许随公开进展改变。几何接近目标不等于贡献已提交，"
+            "公开未提交或action_blocked反馈应结合任务板理解，不假定它只是距离误差。"
+            "过去活动的经验只供参考，不能当作当前物体状态或当前分工；先比较现在的公开任务板与观察。"
             "reason 简短解释为何继续、改变或暂缓当前贡献；memory_note 记录你从公开观察"
             "确认的新经验，它将作为你的个人记忆进入后续决定。记忆只写有观察依据的事实，"
             "不得编造机器人隐藏计划或信任分数。比较带时间的可见历史，判断是否有实际进展。"
@@ -147,9 +167,12 @@ class QwenHumanPolicy:
             "robot_action": observation.active_robot_action,
             "robot_action_phase": observation.action_phase,
             "public_dialogue": messages,
+            "persistent_public_task_board": list(self.public_task_memory.values()),
+            "your_current_generated_goal": self.current_goal,
             "your_recent_public_decisions": self.public_decision_history[-4:],
             "your_recent_observation_history": self.observation_history[-10:],
             "your_personal_experience_memory": self.experience_memory[-12:],
+            "your_previous_activity_experiences": self.session_experiences[-12:] if self.memory_scope == "session" else [],
         }
         return "根据以下当前公开信息选择下一步伙伴意图：\n" + json.dumps(
             visible, ensure_ascii=False, separators=(",", ":"))
@@ -218,6 +241,15 @@ class QwenHumanPolicy:
                  or action_signature != self.last_action_signature)
         if not infer:
             return PartnerOutput(self.command)
+        for message in observation.messages[self.seen_messages:]:
+            if message.kind in {"assignment", "reassignment", "correction"}:
+                key = message.object_id or f"global_{len(self.public_task_memory)}"
+                self.public_task_memory[key] = {
+                    "source": "public_dialogue", "observed_at_s": observation.time_s,
+                    "speaker": message.speaker, "kind": message.kind, "text": message.text,
+                    "object_id": message.object_id, "assigned_role": message.value,
+                    "destination": message.destination,
+                }
         self.observation_history.append({
             "time_s": round(float(observation.time_s), 2),
             "objects_xyz": {key: [round(float(x), 3) for x in value] for key, value in observation.objects.items()},
@@ -227,6 +259,10 @@ class QwenHumanPolicy:
             "visible_human_motor_phase": observation.human_motor_phase,
         })
         prompt = self._prompt(observation)
+        self.memory_retrievals.append({"time_s": observation.time_s,
+                                      "current_memory_ids": [row['memory_id'] for row in self.experience_memory[-12:]],
+                                      "previous_activity_memory_ids": [row['memory_id'] for row in self.session_experiences[-12:]]
+                                      if self.memory_scope == 'session' else []})
         started = time.perf_counter()
         raw = self._generate(prompt)
         latency = time.perf_counter() - started
@@ -239,6 +275,9 @@ class QwenHumanPolicy:
             decision = {"intent": "observe"}
             command = HumanCommand("observe", target=tuple(observation.human_position))
         self.command = command
+        generated_goal = str(decision.get("current_goal", "")).strip()[:500]
+        if generated_goal:
+            self.current_goal = generated_goal
         self.last_inference_step = step
         self.last_message_count = message_count
         self.last_action_signature = action_signature
@@ -251,11 +290,13 @@ class QwenHumanPolicy:
             "message": str(decision.get("message", ""))[:240],
             "speed_mps": command.speed_mps,
             "reason": str(decision.get("reason", ""))[:500],
+            "current_goal": self.current_goal,
         }
         memory_note = str(decision.get("memory_note", "")).strip()[:800]
         if memory_note:
-            self.experience_memory.append({"memory_id": f"experience_{len(self.experience_memory):04d}",
+            self.experience_memory.append({"memory_id": f"activity_{self.activity_index:04d}_experience_{len(self.experience_memory):04d}",
                                            "time_s": observation.time_s, "text": memory_note,
+                                           "activity_index": self.activity_index,
                                            "source": "qwen_generated_from_public_observation"})
         self.public_decision_history.append(safe_decision)
         outgoing = ()
@@ -276,6 +317,9 @@ class QwenHumanPolicy:
 
     def audit_state(self) -> dict[str, Any]:
         return {"policy": "qwen_llm_human_policy", "profile": {"profile_id": self.persona_id},
+                "public_task_board": list(self.public_task_memory.values()), "generated_goal": self.current_goal,
+                "memory_scope": self.memory_scope, "previous_activity_memory": self.session_experiences,
+                "memory_retrievals": self.memory_retrievals,
                 "memory": self.experience_memory, "memory_size": len(self.experience_memory),
                 "policy_io": self.policy_io, "inference_count": len(self.policy_io),
                 "mean_inference_latency_s": (

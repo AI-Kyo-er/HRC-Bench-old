@@ -2015,6 +2015,8 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "human_profile": partner_audit.get("profile"),
         "human_intention_switches": partner_audit.get("intention_switches"),
         "human_memory_size": partner_audit.get("memory_size"),
+        "human_memory_scope": partner_audit.get("memory_scope"),
+        "human_previous_activity_memory_size": len(partner_audit.get("previous_activity_memory", ()) or ()),
         "human_memory_writes": len(partner_audit.get("memory", ()) or ()),
         "human_memory_retrievals": len(partner_audit.get("memory_retrievals", ()) or ()),
         "human_reflections": len(partner_audit.get("reflections", ()) or ()),
@@ -2107,6 +2109,8 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
             "\n".join(json.dumps(row, ensure_ascii=False) for row in policy_io) + "\n")
         (output / "events.jsonl").write_text("\n".join(json.dumps(e, ensure_ascii=False) for e in events) + "\n")
         for filename, key in (("human_memory.jsonl", "memory"),
+                              ("human_session_memory.jsonl", "previous_activity_memory"),
+                              ("public_task_board.jsonl", "public_task_board"),
                               ("human_reflections.jsonl", "reflections"),
                               ("human_intentions.jsonl", "intention_history"),
                               ("human_memory_retrievals.jsonl", "memory_retrievals")):

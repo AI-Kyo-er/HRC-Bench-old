@@ -96,3 +96,15 @@ def test_initial_assignment_with_extra_public_constraint_is_retained():
                             instruction="Pick up the blue block.")
     policy.act(observation)
     assert constraint in calls[0]["prompt"]
+
+
+def test_position_model_output_is_absolute_and_uses_continuous_gripper():
+    observation = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"]).observe()
+    observation = replace(observation, rgb=np.zeros((4, 4, 3), dtype=np.uint8),
+                          wrist_rgb=np.zeros((4, 4, 3), dtype=np.uint8), robot_qpos=(1,) * 9)
+    raw = np.array([[0.3] * 7 + [0.75]])
+    policy = DroidVLAAdapter(lambda _: {"actions": raw}, action_encoding="joint_position")
+    action = policy.act(observation)
+    np.testing.assert_allclose(action.joints, [0.3] * 7 + [0.01, 0.01])
+    assert action.control_mode == "learned_absolute_joint_position"
+    assert policy.audit_record()['action_scale_rad_per_step'] is None

@@ -17,6 +17,7 @@ ARTIFACT_NAMES = (
     "demo.mp4", "preview.png", "trajectory.npz", "video_timeline.json", "history_probe.json", "partner_inputs.jsonl",
     "contacts.jsonl", "robot_control.jsonl", "physics_contract.json",
     "motion_verification.json",
+    "human_session_memory.jsonl", "public_task_board.jsonl", "human_memory_retrievals.jsonl",
 )
 
 

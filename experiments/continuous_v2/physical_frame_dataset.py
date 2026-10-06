@@ -11,12 +11,15 @@ from PIL import Image
 
 
 class PhysicalFrameDataset:
-    def __init__(self, root, *, split="train", action_horizon=15):
+    def __init__(self, root, *, split="train", action_horizon=15, action_encoding="joint_velocity"):
         self.root = Path(root)
         self.action_horizon = action_horizon
         if action_horizon < 1:
             raise ValueError("action_horizon 必须为正整数")
-        self.frames = sorted((self.root / split).rglob("*.action.npy"))
+        if action_encoding not in {"joint_velocity", "joint_position"}:
+            raise ValueError("未知动作监督编码")
+        self.action_suffix = ".action.npy" if action_encoding == "joint_velocity" else ".joint_position.npy"
+        self.frames = sorted((self.root / split).rglob("*" + self.action_suffix))
         self.episode_frames = {}
         for path in self.frames:
             self.episode_frames.setdefault(path.parent, []).append(path)
@@ -25,9 +28,8 @@ class PhysicalFrameDataset:
     def __len__(self):
         return len(self.frames)
 
-    @staticmethod
-    def stem(path):
-        return path.name.removesuffix(".action.npy")
+    def stem(self, path):
+        return path.name.removesuffix(self.action_suffix)
 
     def __getitem__(self, index):
         path = self.frames[index]
@@ -79,3 +81,30 @@ def export_physical_frames(directory: Path, instruction: str):
         exported += 1
     (directory / "public_task.txt").write_text(instruction, encoding="utf-8")
     return exported
+
+
+def export_applied_position_frames(directory: Path):
+    """按输入stem保存下一控制tick内实际施加的最后一个PD位置目标。
+
+    使用限速后的控制请求，不以测得位移代替动作，也不使用原始IK大跳变。
+    原速度监督与图像保持原样；新目标以 .joint_position.npy 后缀独立匹配。
+    """
+    import json
+    directory = Path(directory)
+    controls = [json.loads(line) for line in (directory / "robot_control.jsonl").read_text().splitlines()]
+    by_step = {int(row["physics_step"]): row for row in controls}
+    records = [json.loads(line) for line in (directory / "policy_io.jsonl").read_text().splitlines()]
+    count = 0
+    for record in records:
+        observation = record["observation"]
+        stem = Path(observation["rgb_artifact"]).stem
+        if not (directory / (stem + ".action.npy")).exists():
+            continue
+        end_step = round(float(observation["time_s"]) * 60) + 3
+        if end_step not in by_step:
+            raise ValueError(f"缺少该输入下一tick的实际控制目标：{stem}")
+        applied = np.asarray(by_step[end_step]["applied_target"], dtype=np.float32)
+        target = np.r_[applied[:7], np.clip(1 - sum(applied[-2:]) / 0.08, 0, 1)].astype(np.float32)
+        np.save(directory / (stem + ".joint_position.npy"), target)
+        count += 1
+    return count

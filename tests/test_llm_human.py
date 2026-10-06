@@ -101,3 +101,47 @@ def test_model_generated_memory_and_real_timestamps_enter_next_human_decision():
     assert '"time_s":0.0' in prompts[-1]
     assert len(policy.audit_state()["memory"]) == 2
     assert "trust" not in prompts[-1]
+
+
+def test_public_assignment_survives_dialogue_window_and_reassignment_updates_it():
+    scenario = CONTINUOUS_SCENARIOS["relay"]
+    world = ContinuousWorld(scenario)
+    for message in scenario.initial_messages():
+        world.say(message)
+    prompts = []
+    policy = QwenHumanPolicy(scenario, model_path="/tmp/no-model", generator=lambda prompt: prompts.append(prompt) or
+                             '{"intent":"observe","current_goal":"先完成公开承诺。"}')
+    policy.step(world.observe())
+    for index in range(20):
+        world.say(Message("human", "policy_message", f"观察进度{index}"))
+    policy.step(world.observe())
+    value = json.loads(prompts[-1].split("\n", 1)[1])
+    assert not any(row['kind'] == 'assignment' for row in value['public_dialogue'])
+    board = {row['object_id']: row for row in value['persistent_public_task_board']}
+    assert board['red']['assigned_role'] == 'human'
+    assert board['blue']['assigned_role'] == 'robot'
+    assert value['your_current_generated_goal'] == '先完成公开承诺。'
+    world.say(Message("human", "reassignment", "我接管蓝块", "blue", "human", "tray_blue"))
+    policy.step(world.observe())
+    board = {row['object_id']: row for row in policy.audit_state()['public_task_board']}
+    assert board['blue']['assigned_role'] == 'human'
+
+
+def test_session_memory_is_separated_from_current_world_and_goal():
+    scenario = CONTINUOUS_SCENARIOS["relay"]
+    world = ContinuousWorld(scenario)
+    prompts = []
+    policy = QwenHumanPolicy(scenario, model_path="/tmp/no-model", memory_scope="session",
+                             generator=lambda prompt: prompts.append(prompt) or
+                             '{"intent":"observe","memory_note":"上次蓝块未完成","current_goal":"完成现在的公开任务"}')
+    policy.step(world.observe())
+    previous_id = policy.audit_state()['memory'][0]['memory_id']
+    previous_persona = policy.persona_id
+    policy.reset(2)
+    assert policy.persona_id == previous_persona
+    policy.step(world.observe())
+    value = json.loads(prompts[-1].split("\n", 1)[1])
+    assert value['your_personal_experience_memory'] == []
+    assert value['your_current_generated_goal'] == ''
+    assert value['your_previous_activity_experiences'][0]['memory_id'] == previous_id
+    assert policy.audit_state()['memory_retrievals'][0]['previous_activity_memory_ids'] == [previous_id]

@@ -40,3 +40,12 @@ def droid_action_to_joint_target(action, qpos):
     target[:7] += 0.2 * velocity
     target[-2:] = 0.0 if values[-1] > 0.5 else 0.04
     return tuple(float(value) for value in target)
+
+
+def position_action_to_joint_target(action):
+    """仿真适配模型的7维绝对关节位置与连续夹爪闭合比例。"""
+    values = np.asarray(action, dtype=float)
+    if values.shape != (8,) or not np.isfinite(values).all():
+        raise ValueError("位置动作必须为8个有限值")
+    fingers = 0.04 * (1 - np.clip(values[-1], 0, 1))
+    return tuple(float(value) for value in np.r_[values[:7], fingers, fingers])

@@ -50,6 +50,7 @@ def main():
     parser.add_argument("--human-persona", choices=("cooperative", "independent", "cautious", "assertive"),
                         default="cooperative")
     parser.add_argument("--human-decision-interval", type=int, default=15)
+    parser.add_argument("--human-memory-scope", choices=("episode", "session"), default="episode")
     args = parser.parse_args()
     args.policy = "pi05_droid_native"
     if args.backend != "genesis":
@@ -62,6 +63,8 @@ def main():
         parser.error("本地服务没有声明 pi05_droid 配置")
     if metadata.get("contact_lora"):
         args.policy = "pi05_droid_contact_lora"
+    if metadata.get("contact_position"):
+        args.policy = "pi05_contact_position_expert"
     factory = configure_backend(args, parser, args.output_dir)
     if args.scenes:
         scenarios = [CONTINUOUS_SCENARIOS[name] for name in args.scenes]
@@ -84,6 +87,7 @@ def main():
         from hrc_pilot.llm_human import QwenHumanPolicy
         generative_partner = QwenHumanPolicy(scenarios[0], model_path=args.human_model,
                                             persona_id=args.human_persona,
+                                            memory_scope=args.human_memory_scope,
                                             decision_interval_steps=args.human_decision_interval)
     for scenario in scenarios:
         for seed in seeds:
@@ -103,7 +107,8 @@ def main():
             else:
                 partner = FixedReplayPartner(scenario)
             instruction = public_robot_instruction(scenario, physical=args.robot_grasp_model == "friction_contact")
-            policy = DroidVLAAdapter(client.infer, instruction=instruction, execution_horizon=args.execution_horizon)
+            policy = DroidVLAAdapter(client.infer, instruction=instruction, execution_horizon=args.execution_horizon,
+                                     action_encoding=metadata.get("action_encoding", "joint_velocity"))
             directory = args.output_dir / scenario.name
             if len(seeds) > 1:
                 directory /= f"seed_{seed:04d}"
@@ -131,6 +136,7 @@ def main():
         "human_model": str(args.human_model) if args.partner_mode == "qwen_llm" else None,
         "human_persona": args.human_persona if args.partner_mode == "qwen_llm" else None,
         "human_decision_interval": args.human_decision_interval,
+        "human_memory_scope": args.human_memory_scope if args.partner_mode == "qwen_llm" else None,
         "model_server_metadata": metadata,
         "openpi_commit": subprocess.check_output(["git", "-C", str(openpi), "rev-parse", "HEAD"], text=True).strip(),
         "control_hz": 15, "execution_horizon": args.execution_horizon,

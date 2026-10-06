@@ -11,7 +11,7 @@ import imageio.v2 as imageio
 import numpy as np
 from PIL import Image
 
-from hrc_pilot.robot_control import droid_action_to_joint_target
+from hrc_pilot.robot_control import droid_action_to_joint_target, position_action_to_joint_target
 
 
 def verify_episode(directory):
@@ -23,9 +23,11 @@ def verify_episode(directory):
         audit, observation = row["adapter"], row["observation"]
         index = audit["executed_chunk_index"]
         raw = audit["raw_action_chunk"][index]
-        assert np.allclose(row["action"]["joints"], droid_action_to_joint_target(raw, observation["robot_qpos"]))
+        position = audit.get("action_encoding") == "joint_position"
+        expected = position_action_to_joint_target(raw) if position else droid_action_to_joint_target(raw, observation["robot_qpos"])
+        assert np.allclose(row["action"]["joints"], expected)
         assert row["action"]["kind"] == "joint_position"
-        assert row["action"]["control_mode"] == "droid_velocity_to_joint_position"
+        assert row["action"]["control_mode"] == ("learned_absolute_joint_position" if position else "droid_velocity_to_joint_position")
         if audit["model_call"] in calls:
             continue
         calls.add(audit["model_call"])

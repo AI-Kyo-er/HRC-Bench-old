@@ -7,7 +7,7 @@ from time import perf_counter
 import numpy as np
 
 from .protocol import Action, Observation
-from .robot_control import droid_action_to_joint_target
+from .robot_control import droid_action_to_joint_target, position_action_to_joint_target
 
 
 class DroidVLAAdapter:
@@ -19,12 +19,16 @@ class DroidVLAAdapter:
 
     continuous_control = True
 
-    def __init__(self, infer, *, instruction: str | None = None, execution_horizon: int = 8):
+    def __init__(self, infer, *, instruction: str | None = None, execution_horizon: int = 8,
+                 action_encoding: str = "joint_velocity"):
         if execution_horizon < 1:
             raise ValueError("execution_horizon 必须为正整数")
         self.infer = infer
         self.instruction = instruction
         self.execution_horizon = execution_horizon
+        if action_encoding not in {"joint_velocity", "joint_position"}:
+            raise ValueError("未知模型动作编码")
+        self.action_encoding = action_encoding
         self.reset()
 
     def reset(self):
@@ -82,13 +86,17 @@ class DroidVLAAdapter:
                 "exterior_rgb_sha256": sha256(observation.rgb.tobytes()).hexdigest(),
                 "wrist_rgb_sha256": sha256(observation.wrist_rgb.tobytes()).hexdigest(),
                 "model_input_keys": list(request), "control_hz": 15,
-                "action_scale_rad_per_step": 0.2,
+                "action_scale_rad_per_step": 0.2 if self.action_encoding == "joint_velocity" else None,
+                "action_encoding": self.action_encoding,
             }
         raw_action = self.chunk[self.cursor]
         self.cursor += 1
         self.last_call["executed_chunk_index"] = self.cursor - 1
-        return Action("joint_position", joints=droid_action_to_joint_target(raw_action, observation.robot_qpos),
-                      duration_steps=1, control_mode="droid_velocity_to_joint_position")
+        joints = (position_action_to_joint_target(raw_action) if self.action_encoding == "joint_position"
+                  else droid_action_to_joint_target(raw_action, observation.robot_qpos))
+        return Action("joint_position", joints=joints, duration_steps=1,
+                      control_mode="learned_absolute_joint_position" if self.action_encoding == "joint_position"
+                      else "droid_velocity_to_joint_position")
 
     def audit_record(self):
         return dict(self.last_call) if self.last_call is not None else None

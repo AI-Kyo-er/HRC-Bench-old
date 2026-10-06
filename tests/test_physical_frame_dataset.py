@@ -3,7 +3,8 @@ import json
 import numpy as np
 from PIL import Image
 
-from experiments.continuous_v2.physical_frame_dataset import PhysicalFrameDataset, export_physical_frames
+from experiments.continuous_v2.physical_frame_dataset import (PhysicalFrameDataset, export_physical_frames,
+                                                            export_applied_position_frames)
 
 
 def test_loader_matches_stems_and_never_crosses_episode_boundary(tmp_path):
@@ -46,3 +47,19 @@ def test_export_uses_executed_motion_rather_than_requested_ik_jump(tmp_path):
     assert np.isclose(action[0], 0.1)
     assert action[-1] == 1
     assert np.load(tmp_path / (stem + ".state.npy"))[-1] == 0
+
+
+def test_position_target_uses_last_applied_controller_request_and_preserves_original(tmp_path):
+    stem = "observation_000000_000001"
+    original = np.arange(8, dtype=np.float32)
+    np.save(tmp_path / (stem + ".action.npy"), original)
+    (tmp_path / "policy_io.jsonl").write_text(json.dumps({
+        "observation": {"time_s": 0, "rgb_artifact": stem + ".png"},
+    }))
+    controls = [{"physics_step": step, "applied_target": [0.02 * (step + 1)] + [0] * 6 + [0.02, 0.02]}
+                for step in range(4)]
+    (tmp_path / "robot_control.jsonl").write_text("\n".join(json.dumps(row) for row in controls))
+    assert export_applied_position_frames(tmp_path) == 1
+    target = np.load(tmp_path / (stem + ".joint_position.npy"))
+    np.testing.assert_allclose(target, [0.08] + [0] * 6 + [0.5])
+    np.testing.assert_array_equal(np.load(tmp_path / (stem + ".action.npy")), original)
