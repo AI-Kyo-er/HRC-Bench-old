@@ -126,6 +126,11 @@ class NativeArticulatedHuman(NativeContactHuman):
             self.target[2]=max(self.target[2],self.surface_z+.14)
             self.set_phase('place_transfer')
 
+    def destination_position(self):
+        if self.destination and self.destination.startswith('on:'):
+            return central_support(self.env,self.destination.split(':',1)[1])
+        return super().destination_position()
+
     def public_feedback(self):
         result=super().public_feedback()
         result.update(manipulable_object_ids=list(self.env.env.objects_dict),contact_model='articulated_hand',supported_intents=['push','grasp','place','release','observe','yield','away','return'],

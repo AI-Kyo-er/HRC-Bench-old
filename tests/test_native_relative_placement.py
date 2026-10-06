@@ -57,3 +57,21 @@ def test_relative_place_is_available_only_when_public_geometry_and_holding_exist
     self_place=policy('on:food')
     assert self_place.step(o).command.intent=='observe'
     assert 'cannot_place_object_on_itself' in self_place.last_command_feedback['errors']
+
+
+def test_real_motor_feedback_accepts_relative_destination_without_fixed_region():
+    from hrc_pilot.native_articulated_hand import NativeArticulatedHuman
+    hand=object.__new__(NativeArticulatedHuman)
+    data=SimpleNamespace(time=1.,qpos=np.zeros(3),body_xpos=np.array([[0.,0.,1.]]),
+                         geom_xpos=np.array([[0.,0.,1.02]]),geom_xmat=np.eye(3).reshape(1,9))
+    model=SimpleNamespace(geom_name2id=lambda _:0,geom_type=np.array([6]),geom_size=np.array([[.1,.1,.01]]))
+    hand.env=SimpleNamespace(env=SimpleNamespace(objects_dict={'bowl':SimpleNamespace(contact_geoms=['base'])},obj_body_id={'bowl':0}),
+                             sim=SimpleNamespace(data=data,model=model))
+    hand.regions={};hand.destination='on:bowl';hand.object_id='food';hand.relative_receiver='bowl'
+    hand.position=lambda:np.array([0.,0.,1.2]);hand.target=np.array([0.,0.,1.03]);hand.object_position=lambda _:np.array([0.,0.,1.1])
+    hand.body_base=np.zeros(2);hand.body_target=np.zeros(2);hand.accepted_intent='place';hand.phase='place_transfer';hand.command_started_at=0.
+    hand.finger_q=[0,1];hand.yaw_q=2;hand.carry_object=None;hand.motor_failure=None;hand.grasp_initial_object=None
+    hand.finger_contacts=lambda name=None:[False,False]
+    result=hand.public_feedback()
+    np.testing.assert_allclose(result['destination_xyz'],[0.,0.,1.03])
+    assert result['destination']=='on:bowl' and result['active_relative_receiver']=='bowl'

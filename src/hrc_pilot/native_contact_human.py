@@ -280,6 +280,9 @@ class NativeContactHuman:
         self.phase='retreat';self.target=actual.copy()
         self.target[2]=max(float(actual[2]),self.surface_z+.16)
 
+    def destination_position(self):
+        return np.asarray(self.regions[self.destination]) if self.destination in self.regions else None
+
     def public_feedback(self):
         """实际执行器测量；无任务标签、私有评分或策略动作建议。"""
         body_distance=float(np.linalg.norm(self.body_base-self.body_target))
@@ -291,11 +294,12 @@ class NativeContactHuman:
                 'body_xy':self.body_base.tolist(),'body_target_xy':self.body_target.tolist(),
                 'body_remaining_distance_m':body_distance,'fingertip_xyz':self.position().tolist(),
                 'fingertip_target_xyz':self.target.tolist(),'fingertip_remaining_distance_m':hand_distance}
-        if self.object_id is not None and self.destination is not None:
+        point=self.destination_position()
+        if self.object_id is not None and point is not None:
             actual=self.object_position(self.object_id)
             result.update(object_id=self.object_id,destination=self.destination,
-                          object_xyz=actual.tolist(),destination_xyz=list(self.regions[self.destination]),
-                          object_remaining_xy_distance_m=float(np.linalg.norm(actual[:2]-np.asarray(self.regions[self.destination])[:2])))
+                          object_xyz=actual.tolist(),destination_xyz=point.tolist(),
+                          object_remaining_xy_distance_m=float(np.linalg.norm(actual[:2]-point[:2])))
             radius=getattr(self,'destination_radius',.025)
             result['visible_destination_radius_m']=radius
             result['object_center_inside_visible_destination']=result['object_remaining_xy_distance_m']<radius
