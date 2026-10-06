@@ -4,6 +4,15 @@
 
 研究对象是共同活动如何在指导、协作和干预交织时被重新组织。时长和模式切换次数不是第一版的主要变量；理解更新也可以发生在物体和人体动作尚未改变时。
 
+最新已新增匹配原生LIBERO的学习模型参照与“移动接收盘”联合任务：无人的参照3/3、
+有人体的静态参照3/3。真实π0.5与Qwen联合运行原始结果为机器人2/3、人2/3、共同1/3；
+共同成功片段通过运动核查，另一失败片段因指尖超速只保留诊断。
+这是单任务族、合作型伙伴的小样本系统实测，人体外观与接触执行器仍为简化代理，
+完整Dynamic Human Policy HRC Benchmark目标尚未完成。
+
+- [最新原生模型与动态人类协作报告（12段真实Sim视频）](experiments/native_dynamic_hrc_20261006/index.html)
+- [经核验的共同完成视频（7.35秒）](results/continuous_v2/native_qwen_grounded_activity/task_02/init_000/demo.mp4)
+
 - [实验设计、接口与运行说明](experiments/pilot_v1/README.md)
 - [持续运行时、六类场景与当前边界](experiments/continuous_v2/README.md)
 - [v2 实验设计与数据契约](experiments/continuous_v2/design.md)
@@ -32,6 +41,11 @@ ln -s /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2 results
 ```
 
 ## 运行
+
+原生环境路径与依赖说明见
+[本阶段说明](experiments/native_dynamic_hrc_20261006/README.md)。模型服务
+仍使用中国源本地π0.5-LIBERO权重；原生Sim通过PCI地址绑定同一进程的CUDA与EGL，
+避免将两套编号误当作相同。此前被中止的多卡进程仅保留诊断，不纳入成绩。
 
 最新实测新增世界无重置活动流：一次初始化，保留物体、机器人、人及双方历史，
 以公开任务更新切换活动。86.4秒实际运行完成首项、后两项未完成，另有两处持握速度

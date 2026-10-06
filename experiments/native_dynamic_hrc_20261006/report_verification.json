@@ -1,0 +1,37 @@
+{
+  "status": "verified",
+  "pages": [
+    {
+      "page": "experiments/native_dynamic_hrc_20261006/index.html",
+      "status": "verified",
+      "video_count": 12,
+      "success_video_playback": {
+        "time": 0.414833,
+        "paused": false,
+        "duration": 7.35,
+        "src": "http://127.0.0.1:8123/results/continuous_v2/native_qwen_grounded_activity/task_02/init_000/demo.mp4"
+      },
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
+    },
+    {
+      "page": "results/continuous_v2/native_qwen_grounded_activity/index.html",
+      "status": "verified",
+      "video_count": 3,
+      "success_video_playback": {
+        "time": 0.411019,
+        "paused": false,
+        "duration": 7.35,
+        "src": "http://127.0.0.1:8123/results/continuous_v2/native_qwen_grounded_activity/task_02/init_000/demo.mp4"
+      },
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
+    }
+  ]
+}

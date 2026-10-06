@@ -24,7 +24,7 @@ command+=" --human-model /data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B"
 command+=" --port 8766"
 
 # Output
-command+=" --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/native_qwen_moving_plate"
+command+=" --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/native_qwen_grounded_activity"
 
 echo "$command"
 eval "$command"
