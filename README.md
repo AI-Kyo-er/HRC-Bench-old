@@ -13,7 +13,7 @@
 - [v2 Genesis 六场景报告（含真实 Sim 视频）](results/continuous_v2/genesis_v10/index.html)
 - [v2 Genesis 三种伙伴条件报告（18 个 episode，含真实 Sim 视频）](results/continuous_v2/genesis_paired_v10/index.html)
 - [v2 九类任务族动态伙伴正式报告（9 条真实 Sim 视频、9/9 时间轴核验）](results/continuous_v2/task_catalog_genesis_v2/index.html)
-- [真实接触与生成式伙伴进展（2026-10-06，含 4 条 Sim 视频与动作异常核查）](experiments/dynamic_contact_20261006/index.html)
+- [真实接触、生成式伙伴与模型适配进展（2026-10-06，含真实 Sim 视频）](experiments/dynamic_contact_20261006/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)
@@ -121,7 +121,30 @@ Genesis 与 Qwen3-14B 组合预估需要约 36 GB 空闲显存，程序会按本
 实际接触示范 Dataset 包含双相机、本体状态及下一物理控制步的动作目标。
 它使用输入 stem 匹配 `_wrist.png`、`.state.npy`、`.action.npy`，不使用配对 manifest。
 [按文件名加载的接口](experiments/continuous_v2/physical_frame_dataset.py)输出带有效时段
-的 `15×8` 动作块；这些是数据生成教师示范，本轮尚未用它训练新的模型权重。
+的 `15×8` 动作块；这些是数据生成教师示范，已用于一次实际 π0.5 LoRA 域适配训练。
+训练 400 步，仅更新约 5000 万个 LoRA 参数，保留官方 DROID 归一化与动作标度。
+固定 16 个 dev 样本上的 loss 从 1.674 降到 0.031；独立红、蓝、绿闭环测试为 0/3，
+没有合法接触搬运贡献。拟合示范和实际操作能力分别报告，不能把训练下降称为 HRC 提升。
+训练记录在 [results/contact_training/pi05_lora_v1](results/contact_training/pi05_lora_v1/summary.json)，
+评测的真实视频见 [基本操作报告](results/continuous_v2/pi05_lora_atom_evaluation/index.html)。
+
+训练入口是 `bash scripts/run_contact_lora.sh`，会拒绝覆盖已有权重/记录目录；
+重跑前改脚本中的输出目录，并用 `nvidia-smi` 确认 GPU 3 的空闲显存至少能容纳
+约 32 GB 的训练分配。权重保存在共享 models 目录，训练记录与缓存位于项目数据盘。
+训练时只解析已有本地文件/缓存，不隐式下载模型。
+启动前先用 `nvidia-smi` 确认独立 GPU 至少有约 20 GB 空闲显存。例如使用 GPU 2：
+
+```bash
+CUDA_VISIBLE_DEVICES=2 XLA_PYTHON_CLIENT_MEM_FRACTION=0.4 PYTHONPATH=src:. \
+  OPENPI_DATA_HOME=/data1/sieniwgroup/sieniw/models/Physical-Intelligence/openpi-cache \
+  HF_HUB_OFFLINE=1 .venv-openpi/bin/python scripts/serve_openpi_droid.py --contact-lora \
+  --checkpoint /data1/sieniwgroup/sieniw/models/HRC-Bench/pi05_droid_contact_lora_v1/400
+```
+
+生成式伙伴新增带时间的公开观察历史，以及 Qwen 自己生成的解释和经验记忆；
+每次决定检索最近 12 条经验，完整内容保存到 `human_memory.jsonl`。
+这属于单 episode 内的生成式记忆，尚不是跨活动长期记忆，也没有真人校准或效用消融证据。
+独立基本操作可选 `--partner-mode observing`，用于隔离人的接管行为。
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 PYTHONPATH=src:. .venv-vc-pilot/bin/python \
@@ -129,7 +152,7 @@ CUDA_VISIBLE_DEVICES=3 PYTHONPATH=src:. .venv-vc-pilot/bin/python \
   --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/new_contact_demonstrations
 ```
 
-v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
+`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，策略通过 `ExternalPolicyAdapter` 接入模型。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；`GreedyPublicPolicy` 只是协议基线。摩擦接触后端已实际运行，但模型基础操作、任务覆盖和研究效度尚未达到正式排行榜要求。
 
 可以先生成一个按 `train/dev/test` 结构划分的数据集，再用同一批场景批量评测模型：
 

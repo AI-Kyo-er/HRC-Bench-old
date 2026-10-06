@@ -1,5 +1,6 @@
 {
-  "checked_at": "2026-10-06T15:42:50+08:00",
+  "checked_at": "2026-10-06T16:40:14+08:00",
+  "status": "verified",
   "pages": [
     {
       "path": "experiments/dynamic_contact_20261006/index.html",
@@ -20,13 +21,31 @@
           "error": null
         },
         {
-          "duration": 62,
+          "duration": 58.266667,
           "width": 640,
           "height": 604,
           "error": null
         },
         {
           "duration": 62,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 32,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 32,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 32,
           "width": 640,
           "height": 604,
           "error": null
@@ -44,10 +63,16 @@
           "error": null
         }
       ],
-      "page_sha256": "b5ad14840a6465bb5c1f09703f02822c860b5ff9b7b1d76a623eb6f103645bbd"
+      "playback_check": {
+        "time": 0.913831,
+        "paused": false,
+        "error": null
+      },
+      "link_scope": "有href且未标记hidden的链接",
+      "page_sha256": "721666bcbb196253b2be380d96946c5552487ddf480e10bffaaa2528e6820a29"
     },
     {
-      "path": "results/continuous_v2/pi05_qwen_feedback_contact/index.html",
+      "path": "results/continuous_v2/pi05_lora_qwen_memory_contact/index.html",
       "page_errors": [],
       "broken_links": [],
       "mobile_overflow": false,
@@ -59,53 +84,34 @@
           "error": null
         }
       ],
-      "page_sha256": "0e3480a681af31e8d405be00c8679a3f4313c010dae0c10e81cd511148f5e796"
+      "playback_check": {
+        "time": 0.914676,
+        "paused": false,
+        "error": null
+      },
+      "link_scope": "有href且未标记hidden的链接",
+      "page_sha256": "498da525fd77cc0856f86c60f062497fdd913caa62da3b13abe61fd8a398a5f8"
     },
     {
-      "path": "results/continuous_v2/human_contact_formal/index.html",
+      "path": "results/continuous_v2/pi05_lora_atom_evaluation/index.html",
       "page_errors": [],
       "broken_links": [],
       "mobile_overflow": false,
       "videos": [
         {
-          "duration": 15.8,
+          "duration": 32,
           "width": 640,
           "height": 604,
           "error": null
         }
       ],
-      "page_sha256": "17de30e5ce948c5f9ab6703dece2f2d7f886df8e3849bfe23ba52613c4f80a0f"
-    },
-    {
-      "path": "datasets/contact_demonstrations_v1/index.html",
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false,
-      "videos": [
-        {
-          "duration": 6.733333,
-          "width": 480,
-          "height": 484,
-          "error": null
-        }
-      ],
-      "page_sha256": "a84df5d3a0debcafb85de97f28bed534537cc31ddea8fb1c82c0137d14df0314"
-    },
-    {
-      "path": "datasets/contact_feedback_demonstrations/index.html",
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false,
-      "videos": [
-        {
-          "duration": 6.4,
-          "width": 480,
-          "height": 484,
-          "error": null
-        }
-      ],
-      "page_sha256": "757a8db40d2f300aa343f20002e7082f53e93fca34c801adf198064a1d175e4b"
+      "playback_check": {
+        "time": 0.911058,
+        "paused": false,
+        "error": null
+      },
+      "link_scope": "有href且未标记hidden的链接",
+      "page_sha256": "315c011310e9db7c1dd6d9e8c9ec562fa5d59ef5fd5698bfc8025c64e8e4bee5"
     }
-  ],
-  "status": "verified"
+  ]
 }

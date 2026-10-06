@@ -71,7 +71,7 @@ def test_single_camera_cannot_be_silently_substituted_for_wrist_view():
 
 def test_initial_assignment_is_deduplicated_but_later_assignment_remains_public():
     observation = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"]).observe()
-    initial = Message("human", "assignment", "初始蓝块分工", "blue", "robot", "tray_blue")
+    initial = Message("human", "assignment", "请你处理 blue，目标是 tray_blue。", "blue", "robot", "tray_blue")
     later = Message("human", "assignment", "现在请处理绿色", "green", "robot", "tray_green")
     observation = replace(observation, rgb=np.zeros((4, 4, 3), dtype=np.uint8),
                           wrist_rgb=np.zeros((4, 4, 3), dtype=np.uint8), robot_qpos=(0,) * 9,
@@ -83,3 +83,16 @@ def test_initial_assignment_is_deduplicated_but_later_assignment_remains_public(
     assert calls[0]["prompt"] == "Pick up the blue block."
     policy.act(replace(observation, time_s=1/15, messages=(initial, later)))
     assert "现在请处理绿色" in calls[1]["prompt"]
+
+
+def test_initial_assignment_with_extra_public_constraint_is_retained():
+    observation = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"]).observe()
+    constraint = "请你处理 blue，目标是 tray_blue。 前置贡献完成后再接手（human:red:tray_red）。"
+    observation = replace(observation, rgb=np.zeros((4, 4, 3), dtype=np.uint8),
+                          wrist_rgb=np.zeros((4, 4, 3), dtype=np.uint8), robot_qpos=(0,) * 9,
+                          messages=(Message("human", "assignment", constraint, "blue", "robot", "tray_blue"),))
+    calls = []
+    policy = DroidVLAAdapter(lambda request: calls.append(request) or {"actions": np.zeros((15, 8))},
+                            instruction="Pick up the blue block.")
+    policy.act(observation)
+    assert constraint in calls[0]["prompt"]

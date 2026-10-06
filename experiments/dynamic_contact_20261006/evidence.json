@@ -1,45 +1,50 @@
 {
-  "generated_at": "2026-10-06T15:42:47+08:00",
-  "native_run": "pi05_qwen_feedback_contact",
+  "generated_at": "2026-10-06T16:35:38+08:00",
+  "native_run": "pi05_lora_qwen_memory_contact",
   "episodes": [
     {
       "scenario": "relay",
-      "seed": 0,
+      "seed": 20,
       "activity_success": false,
       "robot_contributions": [],
-      "human_contributions": [
-        "human:red:tray_red"
-      ],
-      "model_calls": 113,
-      "human_decisions": 60,
-      "target_changes": 5,
-      "maximum_wrist_alignment_error_m": 0.010110666070898503,
+      "human_contributions": [],
+      "model_calls": 114,
+      "human_decisions": 61,
+      "target_changes": 0,
+      "human_parse_errors": 0,
+      "maximum_wrist_alignment_error_m": 0.010825156560450739,
       "motion_status": "verified",
       "interpretation": "执行器与模型整体运行，不从任务失败直接推断 HRC 能力。"
     },
     {
       "scenario": "concurrent_overlay",
-      "seed": 0,
-      "activity_success": false,
+      "seed": 20,
+      "activity_success": true,
       "robot_contributions": [],
-      "human_contributions": [],
-      "model_calls": 113,
-      "human_decisions": 60,
-      "target_changes": 25,
-      "maximum_wrist_alignment_error_m": 0.03063694430740246,
+      "human_contributions": [
+        "human:red:tray_red",
+        "human:green:tray_green",
+        "human:blue:keep_blue"
+      ],
+      "model_calls": 106,
+      "human_decisions": 57,
+      "target_changes": 3,
+      "human_parse_errors": 0,
+      "maximum_wrist_alignment_error_m": 0.010882518639281082,
       "motion_status": "verified",
       "interpretation": "执行器与模型整体运行，不从任务失败直接推断 HRC 能力。"
     },
     {
       "scenario": "robot_induced_rebalance",
-      "seed": 0,
+      "seed": 20,
       "activity_success": false,
       "robot_contributions": [],
       "human_contributions": [],
-      "model_calls": 113,
-      "human_decisions": 60,
-      "target_changes": 7,
-      "maximum_wrist_alignment_error_m": 0.015133571884990642,
+      "model_calls": 115,
+      "human_decisions": 63,
+      "target_changes": 0,
+      "human_parse_errors": 0,
+      "maximum_wrist_alignment_error_m": 0.010683021005089183,
       "motion_status": "verified",
       "interpretation": "执行器与模型整体运行，不从任务失败直接推断 HRC 能力。"
     }
@@ -49,24 +54,108 @@
   "valid_frame_samples": 729,
   "goal_complete": false,
   "research_validity": "unverified",
+  "model_adaptation": {
+    "training": {
+      "status": "trained",
+      "checkpoint": "/data1/sieniwgroup/sieniw/models/HRC-Bench/pi05_droid_contact_lora_v1/400",
+      "initial_dev_loss": 1.673917442560196,
+      "final_dev_loss": 0.030588450841605663,
+      "steps": 400,
+      "elapsed_s": 187.16295247001108,
+      "interpretation": "已完成真实权重更新，仍需独立闭环仿真评测。"
+    },
+    "settings": {
+      "base_checkpoint": "/data1/sieniwgroup/sieniw/models/Physical-Intelligence/pi05_droid",
+      "model": {
+        "action_dim": 32,
+        "action_horizon": 15,
+        "max_token_len": 200,
+        "dtype": "bfloat16",
+        "paligemma_variant": "gemma_2b_lora",
+        "action_expert_variant": "gemma_300m_lora",
+        "pi05": true,
+        "discrete_state_input": true,
+        "pytorch_compile_mode": "max-autotune"
+      },
+      "seed": 20,
+      "batch_size": 2,
+      "steps": 400,
+      "train_samples": 472,
+      "dev_samples": 103,
+      "trainable_parameters": 49987584,
+      "trainable_scope": "lora_only",
+      "normalization": "original_droid_checkpoint_stats",
+      "sampling": "仅使用完整动作块，dev保留最大示范seed；不声称跨任务或跨人泛化。",
+      "dataset_roots": [
+        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_demonstrations_v1",
+        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_feedback_demonstrations"
+      ],
+      "dataset_metadata_sha256": {
+        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_demonstrations_v1": "7160d10c11ad6d05eda11961cec90f5013353ebf680109057d941cac9241e8fe",
+        "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/contact_feedback_demonstrations": "91d077a8b128e6f5a6a72bfc0f355a67938c9028296b452d1911d94e2625172b"
+      },
+      "official_training_step_sha256": "22f98a06aaa6e68e0f725d727ab95398238d1cae8a46bb94e829f330758a9baf",
+      "interpretation": "操作域适配训练，训练或验证loss不代表仿真成功或HRC能力。"
+    },
+    "atomic_evaluation": [
+      {
+        "scenario": "contact_atom_blue",
+        "seed": 20,
+        "task_success": false,
+        "completed_skills": []
+      },
+      {
+        "scenario": "contact_atom_green",
+        "seed": 20,
+        "task_success": false,
+        "completed_skills": []
+      },
+      {
+        "scenario": "contact_atom_red",
+        "seed": 20,
+        "task_success": false,
+        "completed_skills": []
+      }
+    ]
+  },
+  "generated_human_memory_count": 181,
   "source_sha256": {
-    "results/continuous_v2/pi05_qwen_feedback_contact/summary.json": "e1ebecffda2e1518a6d1a0fd678709fdbc4f6842b66becc2df3a17bc8d05b0b0",
-    "results/continuous_v2/pi05_qwen_feedback_contact/provenance.json": "e941683927681fb3ffa0c9c0d08cfa407f86db3c6b8ba1f8582e02330f2ef3c2",
-    "results/continuous_v2/pi05_qwen_feedback_contact/video_verification.json": "db874e1d3faba6fa0f5bcdab6e171defe6066ca666ee5178fe193d5629f6216a",
-    "results/continuous_v2/pi05_qwen_feedback_contact/relay/metrics.json": "5f19379d38e13943504688b1111743fde946c3935399a9252cdef53b328155f5",
-    "results/continuous_v2/pi05_qwen_feedback_contact/relay/motion_verification.json": "86106dd9cc11af8252d1ab4118f83410953ac9aeb265a1da115fa1b23d574d01",
-    "results/continuous_v2/pi05_qwen_feedback_contact/relay/physics_contract.json": "cbbd0761f6913885ab14659325b6ff7d218323b9bcc8de6befb6171086aa3418",
-    "results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/metrics.json": "08c9f7e66fb1a60fb7ab596ca1f5aa2fcd0605eb5de45602bd7d682c72cf1896",
-    "results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/motion_verification.json": "22bd69110d79dae7d347b38198f4372f7d9c48ef4df8e05f95b0c63909918a3f",
-    "results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
-    "results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/metrics.json": "7f529c7279d98b9ee9de088afa7fe64fc7f5b84ea3210baf16136889fc6ae62a",
-    "results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/motion_verification.json": "2ad99e14c211d3b9926d774372c36dfbfa7bba676a0293175307d7a19d9ce834",
-    "results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/summary.json": "2540a52813ae1401d9d0eaa0c83e3d6744bd78f9a3c00563ffb8da0702c48376",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/provenance.json": "300b0ab9cc6d082603af31b74572d0f4a20ac6231282f62ff64540dcbb59c85e",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/video_verification.json": "781f44fe68099861643646bcbb11571cb79730d3dcc980bbdab8db1889ef77a9",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/relay/human_memory.jsonl": "0210ee10458f135fd766a248514f4cf58bbaf09135f3c911ab6f47b6e245556f",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/relay/human_policy_io.jsonl": "2f15198de463de6a45ebccd262d71ca98443ae40b28a0c302879d6939c82a417",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/relay/metrics.json": "1df694adaf13a0cb9fc2202ffe494438cadfb11cb90a881219c46a3a200b6548",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/relay/motion_verification.json": "972327654299b60d92df3b6a71835ea3aa07b46961ad62a90f41122950ea41ed",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/relay/physics_contract.json": "9d3e71746ff9982b362b419a5e569cf5061d3de93bab5f9b4f1cbcac1587c038",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/human_memory.jsonl": "3accf3fdc93423d6f409c7866e8414d1f0782559083378471b6634217b6810e8",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/human_policy_io.jsonl": "a7206ab0b3fb896977549cb4048dffde5f22a1367589f3d7f87c53fe7a6f01fa",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/metrics.json": "e12bba485e2280dfd021d902f6853138871c47268358771717e18e81eb977774",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/motion_verification.json": "a8ea57430cc8605bd506b76d7683f7523c96c5bbe87bd4c511779a8c20219497",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/physics_contract.json": "3de76c320eaaac5028181ee0c6f5ea237f20d3924c40dda7ab29ecfb34c90776",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/human_memory.jsonl": "179625f783187215fd20b17b1452d178cc6c28bfd57890d7534223f362dc7f44",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/human_policy_io.jsonl": "9203d96ce4e4b04ee09226d0071a032cef069bb7d960e8abe4b8f42d890a0058",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/metrics.json": "f3435529cf36ea9b4cc7b8f9fb9c2a035aeba6471ada7de246180629862c1bf5",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/motion_verification.json": "754a1bc2cd69e7cd20af09c5b88954f5df5a818cecbe5cd8db1545c740904906",
+    "results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/physics_contract.json": "cbbd0761f6913885ab14659325b6ff7d218323b9bcc8de6befb6171086aa3418",
     "datasets/contact_demonstrations_v1/dataset.json": "7160d10c11ad6d05eda11961cec90f5013353ebf680109057d941cac9241e8fe",
     "datasets/contact_demonstrations_v1/provenance.json": "aa8ae7798850eeb3c9c6287d457595f7d7549d0f3aa310918299a1dc3e71fbc3",
     "datasets/contact_demonstrations_v1/video_verification.json": "f4d5d6ec6ad5800d1486c1c5e478ac6c25c37337c5825270d2e5cde038afbeb1",
     "datasets/contact_feedback_demonstrations/dataset.json": "91d077a8b128e6f5a6a72bfc0f355a67938c9028296b452d1911d94e2625172b",
     "datasets/contact_feedback_demonstrations/provenance.json": "d030362a60946727011f88d0b27b8c73318c20181b7df786cf0096df5eb10971",
-    "datasets/contact_feedback_demonstrations/video_verification.json": "7e230c82a838bc99031b45ba95abff02c2356f3b4ee2161d45426eec3b02f459"
+    "datasets/contact_feedback_demonstrations/video_verification.json": "7e230c82a838bc99031b45ba95abff02c2356f3b4ee2161d45426eec3b02f459",
+    "results/contact_training/pi05_lora_v1/summary.json": "781567454ed4a80f9af8a54021140a5f442fa996447e36c319edadda6e8714af",
+    "results/contact_training/pi05_lora_v1/provenance.json": "712307b3bf130a650801cf8e408291a79588c3f221bc63abd846a368be8f8ece",
+    "results/contact_training/pi05_lora_v1/training.jsonl": "4521610922a884fd84deda941e41e60d470d0d89fd9d4c7eea445d69fc7a6bcd",
+    "results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_blue/metrics.json": "40f0cc78af744c2d0a3ce822664d161502dc450a7dc6aa74af71392657e286be",
+    "results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_blue/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
+    "results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_green/metrics.json": "eefdc68d9e1ee9fbb63c2114b0fdd5568b18f93c90e9a215d8d9ea356b7b2ed8",
+    "results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_green/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
+    "results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_red/metrics.json": "a9a84ca7ba2cfd1dd6f1b63e87746451af8aab4cc45729b0a2a93b5e45db493d",
+    "results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_red/physics_contract.json": "77a262fc07178d516aec4652a6839406492b801905930229390f8b31b7afb545",
+    "results/continuous_v2/pi05_lora_atom_evaluation/summary.json": "d09874b21dee616eb8070835d36ef27d6b66e74acd16e6cc83a178d4b62997ce",
+    "results/continuous_v2/pi05_lora_atom_evaluation/provenance.json": "585cce647231041b7d5cb0d937428c517c31bab927553c9badbba76a7df59cb4",
+    "results/continuous_v2/pi05_lora_atom_evaluation/video_verification.json": "8ff33ee133aa6de3f744cd73ee5668aa5ea867eb0c6e0a11f9d6cb4782fe436f",
+    "results/continuous_v2/pi05_lora_atom_evaluation/model_execution_verification.json": "77fda7864ed6d04959f07861ccc3d94c77c8bbfe60f0e1e6f567e66f8cc51790"
   }
 }

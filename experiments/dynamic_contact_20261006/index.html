@@ -12,16 +12,31 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 @media(max-width:650px){main{padding:16px 12px 40px}header,section{padding:20px 16px}.stats{grid-template-columns:repeat(2,1fr)}}
 </style></head><body><main><header><div class="eyebrow">HRC CONTINUOUS · 真实模型、接触动作与实际示范数据</div>
 <h1>动态伙伴在真实接触场景中，实际做了什么？</h1>
-<p>本阶段的系统同时运行 π0.5-DROID 机械臂与 Qwen3-14B 合成伙伴。两者的动作在同一物理时间轴中执行，物体通过接触移动；视频直接来自运行时相机。
+<p>本页最新联合运行使用 π0.5-DROID（本轮 LoRA 适配权重） 与 Qwen3-14B 合成伙伴。两者的动作在同一物理时间轴中执行，物体通过接触移动；视频直接来自运行时相机。
 下方分别呈现真实模型结果、接触手校准与可用于模型校准的数据。</p></header>
 <div class="stats"><div class="stat"><strong>3 条</strong><span>本次实际模型运行</span></div>
-<div class="stat"><strong>339 次</strong><span>π0.5 实际推理</span></div><div class="stat"><strong>180 次</strong><span>Qwen 意图决定</span></div>
+<div class="stat"><strong>335 次</strong><span>π0.5 实际推理</span></div><div class="stat"><strong>181 次</strong><span>Qwen 意图决定</span></div>
 <div class="stat"><strong>729 帧</strong><span>真实接触示范监督</span></div></div>
 <section><h2>目的与设置</h2><p>实验要观察：当人的行动由生成式模型根据可见进度决定、机械臂由训练后的具身模型控制时，双方能否完成共同活动，人的目标选择怎样影响实际过程。
 模型能力判断需要基本操作可用、人的动作连续、任务评分按实际贡献区分。</p>
 <p>本次运行后端为 Genesis，机器人 15 Hz 控制，最长 60 秒模拟时间；人体意图约每秒更新一次，物理推进为 60 Hz。
 π0.5 只接收实际外部/腕部相机、本体状态与公开任务语言。Qwen 读取公开几何、公开对话、自身动作状态与近期公开决定，输出目标对象、目的地、行动意图、速度和公开表达。</p>
-<p>初始分工与活动依赖构成任务契约；执行中双方动作、占用、碰撞和未完成会改变后续观察。本次只使用 cooperative 伙伴，尚未形成不同人格与多模型的正式比较。</p></section>
+<p>本批基础操作指令使用英文，运行对话使用中文，尚未做语言条件对照。机器人的初始操作指令也没有完整保留串行任务的公开前置说明；因此本批不用于判断模型能否正确理解和遵守这些协调约定。
+运行结束后已修订输入去重，只去除初始的普通搬运句，保留附加公开约束；该修订通过回归测试，本页视频和模型成绩仍是修订前执行的结果。</p>
+<p>初始分工与活动依赖构成任务契约；执行中双方动作、占用、碰撞和未完成会改变后续观察。本次只使用 cooperative 伙伴，尚未形成不同人格与多模型的正式比较。
+机械臂直接执行模型给出的关节动作，不由几何教师接管。每次推理产生 15 步动作，本批最多执行 8 步后重新观察；公开纠正或失败反馈会提前丢弃旧动作块。</p>
+<h3>三项联合任务具体做什么</h3><div class="table-wrap"><table><thead><tr><th>任务</th><th>初始公开分工</th><th>协调要求与完成条件</th></tr></thead><tbody>
+<tr><td>接力</td><td>人整理红块，机器人整理蓝块，分别放到指定收纳区。</td><td>红块贡献提交后，蓝块操作才能获得有效贡献；两项都完成才算共同活动完成。</td></tr>
+<tr><td>并行作业</td><td>人把蓝块放到留用区；机器人把红、绿块放到收纳区。</td><td>允许并行。双方面对同一工作台的空间占用，三项都要稳定释放并提交贡献。</td></tr>
+<tr><td>进度受阻与重新协调</td><td>人先整理蓝块；机器人整理红、绿块。</td><td>机器人两项以前置蓝块贡献为条件。伙伴可根据可见停顿重新表达意图或接管；是否真的发生，由实际记录回答。</td></tr>
+</tbody></table></div>
+<p>桌面物体是自由刚体收纳块，旧任务名称中的“杯”沿用于历史定义。蓝色底板为收纳区，绿色底板为留用区。
+本轮原生关节控制没有套用语义搬运基线的人工失败/延迟注入；受阻来自实际模型与物理执行，不能把继承的场景参数当成已发生的扰动。</p>
+<h3>一次实验如何运行和评分</h3><p>每个 episode 只在开始时初始化布局与公开分工，随后人和机械臂共享同一物理世界。
+每个 1/15 秒，机器人读取双相机与本体状态并提交底层动作；伙伴在更新时读取公开位置、对话与自己的经历，选择意图。
+仿真器推进接触、重力和碰撞，再把实际新状态交给双方。Qwen 当前使用结构化几何观察，还没有视觉感知误差模型。</p>
+<p>评分只接受有实际接触抬起证据、在目标区域稳定释放至少 0.4 秒、且操作当时满足前置条件的贡献。人的接管可完成活动，却不会算作机器人的贡献。
+到截止时刻冻结成绩；其后 1.5 秒只录制物理稳定过程。记录同时保留行动原始输出、公开观察、接触、贡献与视频时间轴。</p></section>
 <section><h2>人的动作现在怎样执行</h2><p>Qwen 选择做什么；接触手以关节受力完成伸手、夹持、抬起和释放。显示人物使用已有步行动作与躯干 IK，跟随实际物理手的位置。
 人的物体拿放不再调用 Avatar 对物体坐标的直接写入，也没有把物体绑定到机械臂。</p>
 <p>独立几何教师完成蓝块抓放用时 13.8 秒；持握/释放时最大单物理帧位移 5.8 mm，运动核验通过。
@@ -29,49 +44,81 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 <p><a href="../../results/continuous_v2/human_contact_formal/index.html">接触手校准报告</a> · <a href="../../results/continuous_v2/human_contact_formal/human_contact_calibration/contacts.jsonl">实际接触记录</a></p>
 <div class="notice">接触手是简化关节代理，显示身体为动作数据与 IK，碰撞体为粗略代理。它尚不等于完整人体动力学或灵巧手，也未经真人行为校准。
 模型推理期间模拟时钟暂停，本轮没有测量推理延迟对正在活动的人产生的影响。</div></section>
-<section><h2>实际模型结果与贡献归属</h2><div class="table-wrap"><table><thead><tr><th>任务</th><th>共同活动终态</th><th>机器人 / 人合法贡献</th><th>π0.5 / Qwen 调用</th><th>运动核验</th><th>最大手腕对齐误差</th></tr></thead><tbody><tr><td>接力 · seed 0</td><td>未完成</td><td>0 / 1</td><td>113 / 60</td><td>verified</td><td>10.1 mm</td></tr><tr><td>并行作业 · seed 0</td><td>未完成</td><td>0 / 0</td><td>113 / 60</td><td>verified</td><td>30.6 mm</td></tr><tr><td>进度受阻与重新协调 · seed 0</td><td>未完成</td><td>0 / 0</td><td>113 / 60</td><td>verified</td><td>15.1 mm</td></tr></tbody></table></div>
-<p>本次共同活动通过 0/3；机器人实际合法贡献 0 项，人贡献 1 项。
+<section><h2>实际模型结果与贡献归属</h2><div class="table-wrap"><table><thead><tr><th>任务</th><th>共同活动终态</th><th>机器人 / 人合法贡献</th><th>π0.5 / Qwen 调用</th><th>运动核验</th><th>最大手腕对齐误差</th></tr></thead><tbody><tr><td>接力 · seed 20</td><td>未完成</td><td>0 / 0</td><td>114 / 61</td><td>verified</td><td>10.8 mm</td></tr><tr><td>并行作业 · seed 20</td><td>通过</td><td>0 / 3</td><td>106 / 57</td><td>verified</td><td>10.9 mm</td></tr><tr><td>进度受阻与重新协调 · seed 20</td><td>未完成</td><td>0 / 0</td><td>115 / 63</td><td>verified</td><td>10.7 mm</td></tr></tbody></table></div>
+<p>本次共同活动通过 1/3；机器人实际合法贡献 0 项，人贡献 3 项。
 贡献要求实际接触操作与稳定释放；人的接管完成不会被统计成机器人贡献。</p>
 <div class="notice">这些结果仍不足以排名模型的 HRC 或 cobalance 能力。π0.5 在当前操作分布中尚未建立有效基础操作表现；人的意图改变与动作执行之间也有失败边界。
 任务未完成不能直接归因为“模型不会协作”。本页不使用手工加权总分掩盖这些问题。</div>
-<article><h3>接力 · seed 0</h3><p>原始活动终态：未完成。
-机器人合法贡献 0 项，人合法贡献 1 项。Qwen 生成了 60 次决定，目标对象/目的地改变 5 次；
-实际意图包括 approach 10 次、carry 8 次、observe 42 次。
+<article><h3>接力 · seed 20</h3><p>原始活动终态：未完成。
+机器人合法贡献 0 项，人合法贡献 0 项。Qwen 生成了 61 次决定，目标对象/目的地改变 0 次；
+实际意图包括 observe 36 次、approach 18 次、carry 7 次；输出解析失败 0 次。
 人的实物抓取涉及 1 个物体，机器人涉及 0 个。</p>
-<video controls preload="metadata" poster="../../results/continuous_v2/pi05_qwen_feedback_contact/relay/preview.png" src="../../results/continuous_v2/pi05_qwen_feedback_contact/relay/demo.mp4"></video><p>持握/释放过程中物体最大单物理帧位移 6.7 mm；
-显示手腕与物理手最大距离 10.1 mm。运动核验只检查这一项，不等于完整研究效度。</p>
-<p><a href="../../results/continuous_v2/pi05_qwen_feedback_contact/index.html">逐事件报告与双相机输入</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/relay/human_policy_io.jsonl">生成式伙伴实际决定</a>
- · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/relay/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/relay/motion_verification.json">运动核验</a></p></article><article><h3>并行作业 · seed 0</h3><p>原始活动终态：未完成。
-机器人合法贡献 0 项，人合法贡献 0 项。Qwen 生成了 60 次决定，目标对象/目的地改变 25 次；
-实际意图包括 approach 38 次、observe 22 次。
-人的实物抓取涉及 0 个物体，机器人涉及 0 个。</p>
-<video controls preload="metadata" poster="../../results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/preview.png" src="../../results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/demo.mp4"></video><p>持握/释放过程中物体最大单物理帧位移 0.0 mm；
-显示手腕与物理手最大距离 30.6 mm。运动核验只检查这一项，不等于完整研究效度。</p>
-<p><a href="../../results/continuous_v2/pi05_qwen_feedback_contact/index.html">逐事件报告与双相机输入</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/human_policy_io.jsonl">生成式伙伴实际决定</a>
- · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/concurrent_overlay/motion_verification.json">运动核验</a></p></article><article><h3>进度受阻与重新协调 · seed 0</h3><p>原始活动终态：未完成。
-机器人合法贡献 0 项，人合法贡献 0 项。Qwen 生成了 60 次决定，目标对象/目的地改变 7 次；
-实际意图包括 approach 56 次、observe 4 次。
-人的实物抓取涉及 0 个物体，机器人涉及 0 个。</p>
-<video controls preload="metadata" poster="../../results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/preview.png" src="../../results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/demo.mp4"></video><p>持握/释放过程中物体最大单物理帧位移 5.9 mm；
-显示手腕与物理手最大距离 15.1 mm。运动核验只检查这一项，不等于完整研究效度。</p>
-<p><a href="../../results/continuous_v2/pi05_qwen_feedback_contact/index.html">逐事件报告与双相机输入</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/human_policy_io.jsonl">生成式伙伴实际决定</a>
- · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/robot_induced_rebalance/motion_verification.json">运动核验</a></p></article></section>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_lora_qwen_memory_contact/relay/preview.png" src="../../results/continuous_v2/pi05_lora_qwen_memory_contact/relay/demo.mp4"></video><p>持握/释放过程中物体最大单物理帧位移 5.1 mm；
+显示手腕与物理手最大距离 10.8 mm。运动核验只检查这一项，不等于完整研究效度。</p>
+<p><a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/index.html">逐事件报告与双相机输入</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/relay/human_policy_io.jsonl">生成式伙伴实际决定</a>
+ · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/relay/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/relay/motion_verification.json">运动核验</a></p>
+<details><summary>伙伴实际决定摘录</summary><ul><li>0.0 秒：observe / blue。当前未观察到机器人对 blue 的操作，需要确认其是否开始处理 blue。</li><li>30.0 秒：observe / blue。机器人末端执行器仍在靠近 blue 的区域，但尚未开始处理 blue，需要进一步观察其动作。</li><li>59.4 秒：carry / blue。机器人末端执行器已多次靠近 blue 区域，但仍未开始处理 blue，表明其可能未接收到明确的指令或存在技术问题。因此，我将继续完成分配给我的任务，将 blue 放到 tray_blue。</li></ul></details></article><article><h3>并行作业 · seed 20</h3><p>原始活动终态：通过。
+机器人合法贡献 0 项，人合法贡献 3 项。Qwen 生成了 57 次决定，目标对象/目的地改变 3 次；
+实际意图包括 approach 20 次、carry 29 次、observe 8 次；输出解析失败 0 次。
+人的实物抓取涉及 3 个物体，机器人涉及 0 个。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/preview.png" src="../../results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/demo.mp4"></video><p>持握/释放过程中物体最大单物理帧位移 6.0 mm；
+显示手腕与物理手最大距离 10.9 mm。运动核验只检查这一项，不等于完整研究效度。</p>
+<p><a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/index.html">逐事件报告与双相机输入</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/human_policy_io.jsonl">生成式伙伴实际决定</a>
+ · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/concurrent_overlay/motion_verification.json">运动核验</a></p>
+<details><summary>伙伴实际决定摘录</summary><ul><li>0.0 秒：approach / red。根据公开对话，我被分配处理 red，目标是 tray_red。目前 red 位于共享工作台，我可以开始接近它。</li><li>28.0 秒：carry / green。根据公开对话，我被分配处理 green，目标是 tray_green。目前 green 已被我持有，可以将其移动到目标区域。</li><li>56.0 秒：approach / blue。根据公开对话和观察，blue 已被我持有，目标是 keep_blue，我需要继续将其放置到目标区域。</li></ul></details></article><article><h3>进度受阻与重新协调 · seed 20</h3><p>原始活动终态：未完成。
+机器人合法贡献 0 项，人合法贡献 0 项。Qwen 生成了 63 次决定，目标对象/目的地改变 0 次；
+实际意图包括 approach 21 次、carry 19 次、observe 23 次；输出解析失败 0 次。
+人的实物抓取涉及 1 个物体，机器人涉及 0 个。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/preview.png" src="../../results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/demo.mp4"></video><p>持握/释放过程中物体最大单物理帧位移 5.9 mm；
+显示手腕与物理手最大距离 10.7 mm。运动核验只检查这一项，不等于完整研究效度。</p>
+<p><a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/index.html">逐事件报告与双相机输入</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/human_policy_io.jsonl">生成式伙伴实际决定</a>
+ · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/policy_io.jsonl">真实机器人模型动作</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/robot_induced_rebalance/motion_verification.json">运动核验</a></p>
+<details><summary>伙伴实际决定摘录</summary><ul><li>0.0 秒：approach / red。根据公开对话，我被分配处理 red，目标是 tray_red。目前 red 位于共享工作台，尚未被处理，因此我应开始接近它。</li><li>29.3 秒：carry / red。根据公开对话，我被分配处理 red，目标是 tray_red。目前 red 的位置为 [0.6,-0.3,0.937]，而 tray_red 的位置为 [0.6,-0.3,0.82]。我需要继续将其携带到目标区域。</li><li>59.3 秒：observe / red。根据公开对话和观察，red 的当前位置为 [0.6,-0.3,0.81]，而 tray_red 的位置为 [0.6,-0.3,0.82]。需要进一步确认是否放置成功。</li></ul></details></article></section>
+<section><h2>本轮实际训练，以及训练后能否操作</h2>
+<p>针对当前 Sim 操作分布，从已有 π0.5-DROID 权重进行 400 步 LoRA 训练，仅更新 49,987,584 个适配参数。
+使用官方 OpenPI 训练步骤和原有 DROID 归一化；完整动作块的候选训练样本 472 个、验证样本 103 个，batch size 2。
+只使用本地权重和已经生成的实际接触示范，没有下载新模型。</p>
+<p>曲线是在固定 16 个验证样本、固定噪声上计算的 flow-matching loss，从 1.674 降到 0.031。
+它衡量对示范监督的拟合，不等于抓取成功率，也不是全部验证集上的泛化成绩。
+当前有效 dev 只含红、蓝示范；绿色仅有一条成功训练示范，没有有效 dev 操作。时间相邻的动作窗口也不能视为独立试验。</p><svg viewBox="0 0 710 240" role="img" aria-label="固定验证样本上的损失随训练步数下降" style="width:100%;max-width:710px">
+<path d="M45 30 V200 H680" fill="none" stroke="#536879"/><polyline points="45.0,40.0 122.5,91.6 200.0,159.0 277.5,193.8 355.0,195.1 432.5,196.4 510.0,196.6 587.5,196.8 665.0,197.1" fill="none" stroke="#126b70" stroke-width="3"/>
+<text x="45" y="225">0 步</text><text x="620" y="225">400 步</text>
+<text x="50" y="25">1.674</text><text x="585" y="185">0.031</text></svg>
+<div class="notice">独立闭环基本操作完成 0/3。 所以模型适配与闭环有效性必须分别报告；当前数据量与操作覆盖仍小，不能据此排名先进模型的 HRC 能力。
+这轮提示、动作块执行长度与早先原生模型运行不同，也不是严格配对的前后提升实验。</div>
+<p><a href="../../results/contact_training/pi05_lora_v1/summary.json">训练结果</a> · <a href="../../results/contact_training/pi05_lora_v1/provenance.json">训练设置与来源</a> · <a href="../../results/contact_training/pi05_lora_v1/training.jsonl">逐步训练记录</a></p>
+<article><h3>contact_atom_blue · 基础操作</h3>
+<p>同一个适配后模型、seed 20、30 秒、每 tick 重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_blue/preview.png" src="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_blue/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_blue/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_blue/physics_contract.json">接触与贡献证据</a></p></article><article><h3>contact_atom_green · 基础操作</h3>
+<p>同一个适配后模型、seed 20、30 秒、每 tick 重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_green/preview.png" src="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_green/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_green/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_green/physics_contract.json">接触与贡献证据</a></p></article><article><h3>contact_atom_red · 基础操作</h3>
+<p>同一个适配后模型、seed 20、30 秒、每 tick 重新推理；伙伴只观察。真实接触抬起记录 0 个对象，
+合法贡献 0 项，任务未完成。该测试检查基本操作，不能解释成人机协作成绩。</p>
+<video controls preload="metadata" poster="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_red/preview.png" src="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_red/demo.mp4"></video><p><a href="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_red/metrics.json">原始成绩</a> · <a href="../../results/continuous_v2/pi05_lora_atom_evaluation/contact_atom_red/physics_contract.json">接触与贡献证据</a></p></article></section>
+<section><h2>伙伴怎样根据经历改变下一步</h2><p>这轮 Qwen 在每次决定时看到当前公开状态、最近 10 次带时间的观察、最近 4 次公开决定和最近 12 条自身生成的经验。
+它输出行动、解释与可选记忆，实际写入 181 条经验。以下是实际模型输出，可能有判断错误，不是评测器认证的事实。</p><ul><li>0.0 秒：确认 red 的位置为 [0.413, 0.119, 0.81]，目标区域是 tray_red，我的任务是处理它。</li><li>0.0 秒：确认 red 的位置为 [0.413, 0.119, 0.81]，目标是 tray_red，且机器人未开始处理 red。</li><li>0.0 秒：机器人尚未开始处理 blue，需进一步观察其动作。</li><li>4.0 秒：机器人末端执行器的位置在靠近 blue 的区域，但尚未开始处理 blue。</li></ul>
+<p>这些是生成的经验文本，而非手工信任分数或固定路由表；动作执行器仍使用阶段控制把意图变成连续物理动作。
+记忆当前只在单个 episode 内保留，尚未验证跨活动记忆或真人行为效度，也未用消融证明记忆改善了协作。</p>
+<div class="notice">本轮接力运行中，伙伴整段围绕蓝块观察、接近和持握，没有完成自己原先承诺的红块前置贡献；后期还把蓝块称为自己的任务。
+其最后一次输入的最近 16 条公开对话已经不含初始红块分工。这暴露了任务理解与记忆组织的边界；不能据此声称发现了真实人类的行为规律，也不能仅凭这次运行确定因果。</div></section>
 <section><h2>用于后续模型校准的实际示范 Dataset</h2><p>已采集 17 条接触操作运行，11 条形成有效示范，共 729 个双相机/本体状态/动作监督样本。
 目标来自实际下一物理步的关节变化，避免把大幅 IK 目标跳变当成已执行动作。失败运行保留视频与原始记录，不生成有效训练目标。</p>
 <div class="table-wrap"><table><thead><tr><th>数据批次</th><th>有效示范 / 运行</th><th>train 样本</th><th>dev 样本</th><th>查看</th></tr></thead><tbody><tr><td>contact_demonstrations_v1</td><td>10 / 15</td><td>532</td><td>131</td><td><a href="../../datasets/contact_demonstrations_v1/index.html">实际示范与视频</a></td></tr><tr><td>contact_feedback_demonstrations</td><td>1 / 2</td><td>66</td><td>0</td><td><a href="../../datasets/contact_feedback_demonstrations/index.html">实际示范与视频</a></td></tr></tbody></table></div>
 <p>红、蓝操作能够完成。最初的绿色示范显示物体被推离原始取物点、动作未重新定位；增加实际位置反馈后已有成功案例，仍有失败。
 因此每类物体和布局需要通过真实操作检查，不能只凭 IK 接口或场景定义认定任务可用。</p>
-<p>样本按输入文件 stem 匹配腕部图像、状态和目标，无配对 manifest。加载器输出 15×8 动作块并标出有效时段，已逐样本读取核查；本轮尚未训练新的模型权重，示范成绩不计入模型评测。</p>
+<p>样本按输入文件 stem 匹配腕部图像、状态和目标，无配对 manifest。加载器输出 15×8 动作块并标出有效时段，已逐样本读取核查；上述 LoRA 训练只使用完整动作块，示范成绩不计入模型评测。</p>
 <article><h3>真实示范：train/contact_red_seed_0000</h3><p>几何教师通过关节控制完成物理操作；此处展示数据生成，不是训练模型成绩。</p><video controls preload="metadata" poster="../../datasets/contact_demonstrations_v1/train/contact_red_seed_0000/preview.png" src="../../datasets/contact_demonstrations_v1/train/contact_red_seed_0000/demo.mp4"></video></article><article><h3>真实示范：train/contact_green_seed_0010</h3><p>几何教师通过关节控制完成物理操作；此处展示数据生成，不是训练模型成绩。</p><video controls preload="metadata" poster="../../datasets/contact_feedback_demonstrations/train/contact_green_seed_0010/preview.png" src="../../datasets/contact_feedback_demonstrations/train/contact_green_seed_0010/demo.mp4"></video></article></section>
 <section><h2>已确认的进展与未完成项</h2><p>已实际运行：真实机械臂模型、生成式伙伴选择意图、受力接触拿放、人物显示对齐、多活动契约、图像动作监督和逐事件视频核查。
 人体瞬时搬运已被连续接触操作替换；最新执行器还加入了物体位置反馈、腕部方向与释放退让队列。</p>
 <p>仍缺少：经过校准的模型基础操作、多模型能力差异、稳健的动作恢复、动态人类长期记忆与开放目标、多人格/未见任务组合，以及完整人体物理与真人效度。
 整体研究目标仍在进行。</p>
 <h3>接下来优先完成</h3><ol><li>让每个任务的基本操作与动态物体恢复通过实测，清除执行器和场景带来的地板问题。</li>
-<li>使用真实示范校准模型的操作与训练分布，再评测其对人的意图改变、让行、干预和接管的响应。</li>
+<li>持续保留公开分工、承诺和依赖，验证生成式伙伴的任务理解与跨活动记忆；使用实际示范继续校准机器人的操作分布。</li>
 <li>扩展到现有九类活动契约、开放目标与持续历史，加入不同生成式伙伴和更多真实具身算法。</li></ol></section>
-<section><h2>原始证据与核查</h2><p><a href="../../results/continuous_v2/pi05_qwen_feedback_contact/video_verification.json">本次真实视频核验</a> · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/provenance.json">模型、控制设置与源码记录</a>
- · <a href="../../results/continuous_v2/pi05_qwen_feedback_contact/model_execution_verification.json">模型像素与动作链路核查</a>
+<section><h2>原始证据与核查</h2><p><a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/video_verification.json">本次真实视频核验</a> · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/provenance.json">模型、控制设置与源码记录</a>
+ · <a href="../../results/continuous_v2/pi05_lora_qwen_memory_contact/model_execution_verification.json">模型像素与动作链路核查</a>
  · <a href="../../experiments/goal_progress_20261005/index.html">此前阶段报告</a></p>
 <p>每条重要运行均保存真实 Sim 视频及逐帧时间轴；轨迹画布用于审计。不同执行器版本是工程诊断，不能累积成独立模型样本或当作严格配对的效果提升。</p>
 <details><summary>数据、实现与复现边界</summary><p>模型和大型数据实际保存在数据盘，仓库通过软链接访问。本轮使用已有本地权重，没有下载新模型或数据集。
@@ -79,4 +126,4 @@ th,td{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-alig
 Robot 模型只有 π0.5；Qwen 为合成伙伴。人的动作原语属于执行器，几何教师只用于校准与示范生成。</p>
 <p><a href="../../src/hrc_pilot/human_contact.py">动作执行器</a> · <a href="../../experiments/continuous_v2/physical_frame_dataset.py">按 stem 加载的数据接口</a>
  · <a href="../../scripts/collect_contact_demonstrations.py">实际示范采集入口</a></p></details>
-<p class="quiet">记录批次：pi05_qwen_feedback_contact。生成时间：2026-10-06T15:42:47+08:00。本页从保存结果重建，不重新评分。</p></section></main></body></html>
+<p class="quiet">记录批次：pi05_lora_qwen_memory_contact。生成时间：2026-10-06T16:35:38+08:00。本页从保存结果重建，不重新评分。</p></section></main></body></html>

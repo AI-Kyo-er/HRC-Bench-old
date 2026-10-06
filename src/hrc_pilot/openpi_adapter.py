@@ -63,7 +63,8 @@ class DroidVLAAdapter:
             human_messages = [message.text for index, message in enumerate(observation.messages) if (message.speaker == "human"
                               or (message.speaker == "environment" and message.kind in {"action_blocked", "action_failed"}))
                               and not (index < self.initial_message_count
-                                       and message.kind == "assignment" and message.value == "robot")]
+                                       and message.kind == "assignment" and message.value == "robot"
+                                       and message.text == f"请你处理 {message.object_id}，目标是 {message.destination}。")]
             if human_messages:
                 request["prompt"] += "\n" + "\n".join(human_messages[-8:])
             started = perf_counter()
