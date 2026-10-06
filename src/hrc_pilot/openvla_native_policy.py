@@ -6,6 +6,7 @@ import sys
 import types
 
 import numpy as np
+from .openvla_preprocessing import preprocess_image
 
 
 SOURCE_ROOT=Path('/data1/sieniwgroup/sieniw/projects/HRC-Bench/external/openvla')
@@ -60,7 +61,10 @@ class OpenVLANativePolicy:
                        'action_encoding':'libero_osc_delta','action_dim':7,
                        'consumed_inputs':['observation/image','prompt'],
                        'unused_compatibility_inputs':['observation/wrist_image','observation/state'],
-                       'center_crop':False,'attention_implementation':'sdpa','offline_assets_only':True,
+                       'center_crop':True,'crop_area':.9,'image_preprocessing':'JPEG roundtrip -> TF Lanczos3 224 -> TF center crop 0.9 area -> uint8',
+                       'attention_implementation':'sdpa','offline_assets_only':True,
+                       'adapter_sha256':sha256(Path(__file__).read_bytes()).hexdigest(),
+                       'preprocessing_sha256':sha256(Path(__file__).with_name('openvla_preprocessing.py').read_bytes()).hexdigest(),
                        'checkpoint_mirror_identity':'ModelScope file SHA256 verified; upstream hash identity not checked',
                        'source_commit':subprocess.check_output(['git','-C',str(SOURCE_ROOT),'rev-parse','HEAD'],text=True).strip(),
                        'source_sha256':{name:sha256((SOURCE_ROOT/'prismatic/extern/hf'/name).read_bytes()).hexdigest()
@@ -70,13 +74,18 @@ class OpenVLANativePolicy:
     def infer(self, value):
         import torch
         from PIL import Image
+        from hashlib import sha256
         if set(value)!={'observation/image','observation/wrist_image','observation/state','prompt'}:
             raise ValueError('需要原生机器人接口输入，禁止额外私有状态')
         image=np.asarray(value['observation/image'])
         if image.ndim!=3 or image.shape[2]!=3 or image.dtype!=np.uint8:
             raise ValueError('需要真实RGB uint8相机输入')
         prompt=f'In: What action should the robot take to {value["prompt"].lower()}?\nOut:'
-        encoded=self.processor(prompt,Image.fromarray(image).convert('RGB')).to(self.device,dtype=torch.bfloat16)
+        processed=preprocess_image(image)
+        encoded=self.processor(prompt,Image.fromarray(processed).convert('RGB')).to(self.device,dtype=torch.bfloat16)
         with torch.inference_mode():
             action=self.model.predict_action(**encoded,unnorm_key='libero_spatial',do_sample=False)
-        return {'actions':libero_gripper(action)[None,:]}
+        return {'actions':libero_gripper(action)[None,:],
+                'model_input_evidence':{'source_rgb_sha256':sha256(image.tobytes()).hexdigest(),
+                    'processed_rgb_sha256':sha256(processed.tobytes()).hexdigest(),
+                    'processed_rgb':processed,'prompt':prompt}}

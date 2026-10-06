@@ -215,7 +215,8 @@ def main():
                         Image.fromarray(request['observation/image']).save(directory / f'{stem}.png')
                         Image.fromarray(request['observation/wrist_image']).save(directory / f'{stem}_wrist.png')
                         started = time.perf_counter()
-                        chunk = np.asarray(client.infer(request)['actions'], dtype=float)
+                        response=client.infer(request)
+                        chunk = np.asarray(response['actions'], dtype=float)
                         if chunk.ndim != 2 or chunk.shape[1] != 7 or not np.isfinite(chunk).all():
                             raise ValueError('实际模型必须输出有限N×7原生动作')
                         count = min(len(chunk), args.execution_horizon)
@@ -224,6 +225,11 @@ def main():
                                 'wrist_artifact': f'{stem}_wrist.png', 'raw_action_chunk': chunk.tolist(),
                                 'latency_s': time.perf_counter()-started}
                         calls.append(call)
+                        if 'model_input_evidence' in response:
+                            transformed=dict(response['model_input_evidence'])
+                            transformed_rgb=np.asarray(transformed.pop('processed_rgb'),dtype=np.uint8)
+                            Image.fromarray(transformed_rgb).save(directory/f'{stem}_model.png')
+                            call['model_input_evidence']={**transformed,'processed_artifact':f'{stem}_model.png'}
                         action_plan.extend((index, chunk[index]) for index in range(count))
                     chunk_index, action = action_plan.popleft()
                     policy_io.append({'step': step, 'time_s': time_s, 'model_call': calls[-1]['model_call'],
