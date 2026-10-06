@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-06T12:21:31+08:00",
-  "source_git_revision": "f55237a10ea83cd8b3de1a3582399b4ad78e23e1",
+  "generated_at": "2026-10-06T12:25:59+08:00",
+  "source_git_revision": "cb4023cb36d8d43572daf35c7e19ec9ccafc2792",
   "scope": "existing_results_only_no_new_experiments",
   "ordering": "research_progression_not_exact_wall_clock_order",
   "runs": [
@@ -2660,7 +2660,7 @@
     "results/continuous_v2/qwen_human_genesis_v2/summary.json": "2f8db00dde4ceb3e5907f70fd40ef54296b570e9576a82f887c523e0868f3cb6",
     "results/continuous_v2/qwen_human_genesis_v2/provenance.json": "f7f02c1b1e2534ac1db4f2f70f713f4723cef35d83f1dcc3c0e58d74b2d32ba7",
     "results/continuous_v2/qwen_human_genesis_v2/replay_verification.json": "7b93a04cf73501fbd6e8be3069175e7733b2b4ced0aadb174ba5a10c289786b1",
-    "results/continuous_v2/qwen_human_genesis_v2/video_verification.json": "362d4dc6cf630827b9f725881301f19fd9b7707091bb88f548052d659e85754f",
+    "results/continuous_v2/qwen_human_genesis_v2/video_verification.json": "07cbbb0348e9ac62347889d5f886754b434c264c12c4e15b43873f6c97a9190a",
     "results/continuous_v2/recovery_contract_genesis_v2/summary.json": "9dabecc1569873ea2a71ae0beec8b355bad48bec3af11ee459a44b86adbdb6a9",
     "results/continuous_v2/recovery_contract_genesis_v2/provenance.json": "f746306ab837d9abeb7f28f9453fe905b865d75e6e1470f9c577735f372d919a",
     "results/continuous_v2/recovery_contract_genesis_v2/replay_verification.json": "6d92f9820bc73cee6b0f39c79fc4da74557c37452a70a5c8986dc11ead27224d",
