@@ -51,6 +51,14 @@ def bounded_motion(position, velocity, target, *, dt, speed, acceleration):
     return position + velocity * dt, velocity
 
 
+def bounded_hand_velocity(reference, actual, feedforward, *, speed):
+    """位置外环与速度内环：跟踪误差不能要求执行器无限加速追赶。"""
+    linear = np.asarray(feedforward) + 8.0 * (np.asarray(reference[:3]) - actual[:3])
+    linear *= min(1.0, speed / max(float(np.linalg.norm(linear)), 1e-12))
+    yaw = float(np.clip(2.0 * (reference[3] - actual[3]), -1.0, 1.0))
+    return np.r_[linear, yaw]
+
+
 class HumanContactExecutor:
     palm_offset = np.array([0.0, 0.0, 0.09])
     home = np.array([0.65, 0.72, 1.03, 0.0, 0.035, 0.035])
@@ -58,6 +66,9 @@ class HumanContactExecutor:
     def __init__(self, workspace):
         self.workspace = workspace
         self.hand = workspace.human_hand
+        self.controller = workspace.scenario.assets.get('human_hand_controller', 'position_tracking')
+        if self.controller not in {'position_tracking', 'bounded_velocity_tracking_with_position_fingers'}:
+            raise ValueError('未知接触手控制器')
         self.hand.set_dofs_kp(np.array([2200, 2200, 2800, 60, 550, 550]))
         self.hand.set_dofs_kv(np.array([70, 70, 85, 1.0, 12, 12]))
         self.hand.set_dofs_force_range(np.array([-80, -80, -80, -1.5, -12, -12]), np.array([80, 80, 80, 1.5, 12, 12]))
@@ -278,12 +289,23 @@ class HumanContactExecutor:
                                                         dt=1/60, speed=speed, acceleration=1.4 if self.phase in {"idle", "navigate"} else 0.9)
         self.applied[-2:] += np.clip(self.fingers - self.applied[-2:], -0.035/60, 0.035/60)
         self.applied[3] += float(np.clip(self.yaw - self.applied[3], -1/60, 1/60))
-        self.hand.control_dofs_position(self.applied)
+        # Fingers remain force-limited position servos. Cartesian translation
+        # and yaw use bounded velocity requests, preventing large position lag
+        # from producing an unbounded catch-up command after contact releases.
+        motor_velocity = None
+        if self.controller == 'bounded_velocity_tracking_with_position_fingers':
+            motor_velocity = bounded_hand_velocity(self.applied, actual, self.velocity, speed=speed)
+            self.hand.control_dofs_position(self.applied[-2:], dofs_idx_local=[4, 5])
+            self.hand.control_dofs_velocity(motor_velocity, dofs_idx_local=[0, 1, 2, 3])
+        else:
+            self.hand.control_dofs_position(self.applied)
         if w.monitor_active:
             self.records.append({"time_s": w.step_count / 60, "phase": self.phase,
                                  "object_id": self.object_id, "destination": self.destination,
                                  "requested_palm_xyz": self.target.tolist(), "applied_joint_target": self.applied.tolist(),
                                  "actual_qpos": actual.tolist(), "human_position": w.avatar.get_global_pose()[:3].tolist(),
+                                 "applied_velocity_target": motor_velocity.tolist() if motor_velocity is not None else None,
+                                 "controller": self.controller,
                                  "reachable_work_target": bool(reachable),
                                  "body_state": self.body_state,
                                  "human_object_pose_writes": 0})

@@ -282,6 +282,9 @@ class ContactWorkspace(VCWorkspace):
             "human_contact_grasp_objects": sorted(self.human_contact_grasps),
             "human_object_pose_writes_during_control": 0 if self.human_executor else None,
             "human_hand_model": "six_dof_yaw_pinch_contact_proxy" if self.human_executor else None,
+            "human_hand_controller": self.human_executor.controller if self.human_executor else None,
+            "human_linear_velocity_request_limit_m_s": 0.65 if self.human_executor else None,
+            "human_yaw_velocity_request_limit_rad_s": 1.0 if self.human_executor else None,
             "interpretation": "机器人与可选接触手通过关节受力操作自由刚体；显示人体骨架是 IK，手代理不是完整人体动力学或真人接触安全证据。",
         }, ensure_ascii=False, indent=2), encoding="utf-8")
         from .motion_continuity import verify_motion_continuity

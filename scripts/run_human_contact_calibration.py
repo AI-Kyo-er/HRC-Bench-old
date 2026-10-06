@@ -47,6 +47,8 @@ def main():
                         human_manipulation_model="articulated_contact_hand", resolution=640, render_stride=4)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--bounded-velocity-control", action="store_true",
+                        help="诊断用速度控制，尚未通过操作门槛，不作为默认基线")
     args = parser.parse_args()
     args.policy = "parked_robot_joint_hold"
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
@@ -55,6 +57,9 @@ def main():
     scenario = replace(make_history_probe(), name="human_contact_calibration", max_steps=600, tick_hz=15.0,
                        human_targets={"blue": "tray_blue"}, robot_targets={}, activity=None,
                        description="校准人体物理接触手：连续接近蓝块，受力夹持，搬运并稳定释放；机器人保持原位。")
+    if args.bounded_velocity_control:
+        scenario = replace(scenario, assets={**scenario.assets,
+                            'human_hand_controller': 'bounded_velocity_tracking_with_position_fingers'})
     result = run_continuous_episode(scenario, ParkedRobot(), ContactHandTeacher(scenario), seed=args.seed,
                                     output=args.output_dir / scenario.name, backend_factory=factory,
                                     partner_mode="contact_hand_calibration_teacher")

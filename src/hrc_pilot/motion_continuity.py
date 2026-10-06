@@ -43,6 +43,8 @@ def verify_motion_continuity(directory: Path, *, human_transport_speed_limit_m_s
                                        "was_held": prior["human_held"], "now_held": state["human_held"]})
         control_path = directory / "robot_control.jsonl"
         contract_path = directory / "physics_contract.json"
+        human_control_path = directory / "human_control.jsonl"
+        human_velocity_verified = None
         control_verified = control_path.is_file() and contract_path.is_file()
         if control_verified:
             controls = read_rows(control_path)
@@ -55,6 +57,18 @@ def verify_motion_continuity(directory: Path, *, human_transport_speed_limit_m_s
                 if dt <= 0 or np.any(delta > limits * dt + 1e-6):
                     violations.append({"kind": "robot_control_target_speed", "time_s": second["time_s"]})
             control_verified = bool(controls)
+            if contract.get("human_hand_controller") == "bounded_velocity_tracking_with_position_fingers":
+                human_controls = read_rows(human_control_path) if human_control_path.exists() else []
+                human_velocity_verified = bool(human_controls)
+                for row in human_controls:
+                    request = np.asarray(row.get("applied_velocity_target", []), dtype=float)
+                    if (request.shape != (4,) or not np.isfinite(request).all()
+                            or np.linalg.norm(request[:3]) > contract["human_linear_velocity_request_limit_m_s"] + 1e-6
+                            or abs(request[3]) > contract["human_yaw_velocity_request_limit_rad_s"] + 1e-6):
+                        human_velocity_verified = False
+                        violations.append({"kind": "human_control_velocity_request", "time_s": row["time_s"]})
+                if not human_controls:
+                    violations.append({"kind": "missing_human_velocity_control_log"})
         result = {
             "status": "failed" if violations else "verified" if rows and control_verified else "unverified",
             "benchmark_eligible": bool(rows and control_verified and not violations),
@@ -62,8 +76,10 @@ def verify_motion_continuity(directory: Path, *, human_transport_speed_limit_m_s
             "maximum_human_object_displacement_per_physics_step_m": maximum_human_displacement,
             "robot_control_target_rate_verified": control_verified and not any(
                 row["kind"] == "robot_control_target_speed" for row in violations),
+            "human_velocity_requests_verified": human_velocity_verified,
             "violation_count": len(violations), "violations": violations,
-            "source_artifacts": ["contacts.jsonl", "robot_control.jsonl", "physics_contract.json"],
+            "source_artifacts": ["contacts.jsonl", "robot_control.jsonl", "physics_contract.json"]
+                                + (["human_control.jsonl"] if human_velocity_verified is not None else []),
             "interpretation": "检查人体拿放过程中物体的逐步位移与控制目标速度，不证明全身运动、接触安全或真人效度。",
         }
     (directory / "motion_verification.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")

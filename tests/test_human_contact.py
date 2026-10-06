@@ -1,7 +1,7 @@
 import numpy as np
 from types import SimpleNamespace
 
-from hrc_pilot.human_contact import bounded_motion, HumanContactExecutor
+from hrc_pilot.human_contact import bounded_motion, bounded_hand_velocity, HumanContactExecutor
 from hrc_pilot.continuous import HumanCommand
 
 
@@ -16,6 +16,14 @@ def test_approach_respects_speed_and_acceleration_to_the_endpoint():
         assert np.linalg.norm(position - previous_position) <= 0.4/60 + 1e-9
         assert np.linalg.norm(velocity - previous_velocity) <= 0.9/60 + 1e-9
     assert np.linalg.norm(position - target) < 0.001
+
+
+def test_large_tracking_error_cannot_request_unbounded_catchup_velocity():
+    request = bounded_hand_velocity(np.array([1., 2., 3., 5.]), np.zeros(6),
+                                    np.array([0.2, 0., 0.]), speed=0.35)
+    assert np.isclose(np.linalg.norm(request[:3]), 0.35)
+    assert request[3] == 1.0
+    np.testing.assert_array_equal(bounded_hand_velocity(np.zeros(4), np.zeros(6), np.zeros(3), speed=.35), 0)
 
 
 def test_retargeting_does_not_move_the_hand_in_one_step():

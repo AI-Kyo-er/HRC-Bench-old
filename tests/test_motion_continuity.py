@@ -39,3 +39,22 @@ def test_missing_contact_log_remains_unverified(tmp_path):
     result = verify_motion_continuity(tmp_path)
     assert result["status"] == "unverified"
     assert not result["benchmark_eligible"]
+
+
+def test_new_velocity_controller_requires_finite_bounded_requests(tmp_path):
+    write_episode(tmp_path, 0.005)
+    path = tmp_path / 'physics_contract.json'
+    contract = json.loads(path.read_text())
+    contract.update(human_hand_controller='bounded_velocity_tracking_with_position_fingers',
+                    human_linear_velocity_request_limit_m_s=.65,
+                    human_yaw_velocity_request_limit_rad_s=1.)
+    path.write_text(json.dumps(contract))
+    result = verify_motion_continuity(tmp_path)
+    assert not result['benchmark_eligible']
+    controls = tmp_path / 'human_control.jsonl'
+    controls.write_text(json.dumps({'time_s': 0, 'applied_velocity_target': [.3, .2, 0, .5]}))
+    assert verify_motion_continuity(tmp_path)['human_velocity_requests_verified'] is True
+    controls.write_text(json.dumps({'time_s': 0, 'applied_velocity_target': [1., 0, 0, .5]}))
+    result = verify_motion_continuity(tmp_path)
+    assert not result['benchmark_eligible']
+    assert result['violations'][-1]['kind'] == 'human_control_velocity_request'
