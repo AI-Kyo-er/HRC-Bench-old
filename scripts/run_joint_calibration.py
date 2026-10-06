@@ -15,6 +15,7 @@ from hrc_pilot.continuous_report import write_continuous_report
 from hrc_pilot.history_probe import make_history_probe
 from hrc_pilot.protocol import Action
 from hrc_pilot.video_verification import finalize_video_verification
+from hrc_pilot.robot_control import hand_rotation
 
 
 class JointCalibrationPolicy:
@@ -28,6 +29,7 @@ class JointCalibrationPolicy:
     def reset(self):
         self.phase = "approach"
         self.source = None
+        self.grasp_height = 0.10
 
     def act(self, observation):
         if self.source is None:
@@ -59,9 +61,18 @@ class JointCalibrationPolicy:
 
     def _contact_action(self, workspace, observation, destination, ee):
         # Geometry teacher for dataset generation and backend calibration only.
+        visible_surfaces = getattr(workspace, 'visible_surface_goals', False)
+        if visible_surfaces and self.phase in {'approach', 'descend', 'close'}:
+            rotation = hand_rotation(workspace.ee.get_quat().cpu().numpy())
+            palm = workspace.ee.get_verts().cpu().numpy()
+            local = (palm - ee) @ rotation
+            downward = local @ np.diag([1, -1, -1])
+            top = workspace.objects[self.object_id].get_AABB().cpu().numpy()[1, 2]
+            self.grasp_height = max(0.11, float(top - self.source[2] - downward[:, 2].min() + 0.012))
+        grasp_height = self.grasp_height
         if self.phase == "approach" and np.linalg.norm(ee - self.source - [0, 0, 0.25]) < 0.02:
             self.phase = "descend"
-        if self.phase == "descend" and np.linalg.norm(ee - self.source - [0, 0, 0.10]) < 0.012:
+        if self.phase == "descend" and np.linalg.norm(ee - self.source - [0, 0, grasp_height]) < 0.012:
             self.phase = "close"
         contacts = workspace.contact_records[-1]["objects"][self.object_id] if workspace.contact_records else {}
         if self.phase == "close" and len(contacts.get("finger_links", [])) == 2:
@@ -70,8 +81,18 @@ class JointCalibrationPolicy:
             self.phase = "carry"
         if self.phase == "carry" and np.linalg.norm(ee - destination - [0, 0, 0.25]) < 0.02:
             self.phase = "lower"
-        if self.phase == "lower" and np.linalg.norm(ee - destination - [0, 0, 0.10]) < 0.012:
+        if self.phase == "lower" and np.linalg.norm(ee - destination - [0, 0, grasp_height]) < 0.012:
             self.phase = "open"
+        if visible_surfaces and self.phase in {'carry', 'lower'}:
+            from hrc_pilot.goal_regions import surface_for
+            surface = surface_for(self.destination)
+            bounds = workspace.objects[self.object_id].get_AABB().cpu().numpy()
+            speed = np.linalg.norm(workspace.objects[self.object_id].get_vel().cpu().numpy())
+            # A visible area permits release anywhere inside it; a short physical
+            # drop is preferable to driving into a table collision to hit an invisible point.
+            if (surface and surface.contains(bounds, height_tolerance_m=0.055)
+                    and bounds[0, 2] >= surface.center[2] - 0.005 and speed < 0.04):
+                self.phase = 'open'
         if self.phase == "open" and sum(observation.robot_qpos[-2:]) > 0.073:
             self.phase = "retreat"
         if self.phase in {"approach", "lift"}:
@@ -79,9 +100,12 @@ class JointCalibrationPolicy:
         elif self.phase in {"carry", "retreat"}:
             target = destination + [0, 0, 0.25]
         elif self.phase in {"lower", "open"}:
-            target = destination + [0, 0, 0.10]
+            target = destination + [0, 0, grasp_height]
         else:
-            target = self.source + [0, 0, 0.10]
+            target = self.source + [0, 0, grasp_height]
+        if visible_surfaces:
+            displacement = target - ee
+            target = ee + displacement * min(1.0, 0.012 / max(np.linalg.norm(displacement), 1e-9))
         fingers = 0.0 if self.phase in {"close", "lift", "carry", "lower"} else 0.04
         joints = workspace._continuous_ik(target, fingers)
         return Action("joint_position", joints=tuple(float(value) for value in joints), duration_steps=1,

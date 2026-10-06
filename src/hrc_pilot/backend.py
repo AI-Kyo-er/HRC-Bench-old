@@ -56,10 +56,18 @@ class VCWorkspace:
         self.regions = (dict(scenario.regions) if scenario is not None else
                         {"tray_red": (0.55, -0.28, 0.82), "tray_blue": (0.37, -0.32, 0.82),
                          "keep_red": (0.53, 0.24, 0.82)})
-        self.add_entity("region", "tray", gs.morphs.Box(size=(0.43, 0.24, 0.012),
+        self.visible_surface_goals = bool(scenario and scenario.assets.get('placement_geometry') == 'visible_surface_footprint')
+        if self.visible_surface_goals:
+            from .goal_regions import GOAL_SURFACES
+            for key, surface in GOAL_SURFACES.items():
+                self.add_entity('region', key, gs.morphs.Box(size=(*surface.size_xy, 0.002),
+                                pos=(*surface.center[:2], surface.center[2] + 0.001), fixed=True, collision=False),
+                                surface=gs.surfaces.Default(color=surface.color))
+        else:
+            self.add_entity("region", "tray", gs.morphs.Box(size=(0.43, 0.24, 0.012),
                         pos=(0.46, -0.30, 0.765), fixed=True, collision=False),
                         surface=gs.surfaces.Default(color=(0.25, 0.43, 0.72)))
-        self.add_entity("region", "personal_area", gs.morphs.Box(size=(0.25, 0.22, 0.012),
+            self.add_entity("region", "personal_area", gs.morphs.Box(size=(0.25, 0.22, 0.012),
                         pos=(0.53, 0.24, 0.765), fixed=True, collision=False),
                         surface=gs.surfaces.Default(color=(0.37, 0.68, 0.48)))
         self.objects = {}
@@ -225,6 +233,7 @@ class VCWorkspace:
             active_action = f"transfer:{execution['action'].object_id}"
         phase = "idle" if execution is None else execution.get("phase", "execute")
         return Observation(
+            goal_surfaces=self.scenario.assets.get('public_goal_surfaces', {}) if self.scenario else {},
             objects={k: tuple(v) for k, v in self.positions().items()}, regions=dict(self.regions),
             messages=tuple(self.messages), robot_ee=tuple(self.ee.get_pos().cpu().numpy().tolist()),
             human_position=tuple(self.avatar.get_global_pose()[:3].tolist()),

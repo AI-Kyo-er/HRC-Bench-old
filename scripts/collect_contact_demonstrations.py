@@ -11,7 +11,8 @@ from hrc_pilot.continuous_report import write_continuous_report
 from hrc_pilot.history_probe import make_history_probe
 from hrc_pilot.video_verification import finalize_video_verification
 from scripts.run_joint_calibration import JointCalibrationPolicy
-from experiments.continuous_v2.physical_frame_dataset import PhysicalFrameDataset, export_physical_frames
+from experiments.continuous_v2.physical_frame_dataset import (PhysicalFrameDataset, export_physical_frames,
+                                                            export_applied_position_frames)
 
 
 class ObservingPartner:
@@ -36,6 +37,7 @@ def main():
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--seeds", nargs="+", type=int, default=[0, 1, 2, 3, 4])
     parser.add_argument("--objects", nargs="+", choices=("red", "blue", "green"), default=["red", "blue", "green"])
+    parser.add_argument("--visible-surfaces", action="store_true", help="使用可见表面足迹目标与独立变化的物体布局")
     args = parser.parse_args()
     args.policy = "public_geometry_contact_demonstrator"
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
@@ -59,6 +61,9 @@ def main():
             scenario = replace(make_history_probe(), name=name, tick_hz=15.0, max_steps=450,
                                human_targets={}, robot_targets={color: f"tray_{color}"}, activity=None,
                                description=instruction)
+            if args.visible_surfaces:
+                from hrc_pilot.goal_regions import visible_goal_scenario
+                scenario = visible_goal_scenario(scenario, seed=seed)
             directory = args.output_dir / split / name
             policy = JointCalibrationPolicy(lambda: active["workspace"], color, f"tray_{color}")
             result = run_continuous_episode(scenario, policy, ObservingPartner(scenario), seed=seed,
@@ -67,9 +72,12 @@ def main():
             results.append(result)
             motion = json.loads((directory / "motion_verification.json").read_text())
             count = export_physical_frames(directory, instruction) if result["task_success"] and motion["status"] == "verified" else 0
-            exports.append({"episode": f"{split}/{name}", "exported_frames": count, "task_success": result["task_success"]})
+            position_count = export_applied_position_frames(directory) if count else 0
+            exports.append({"episode": f"{split}/{name}", "exported_frames": count, "position_frames": position_count,
+                            "task_success": result["task_success"]})
             print(f"[demonstrations] {split}/{name}: 物理操作 {result['task_success']}，示范帧 {count}", flush=True)
     provenance = {**backend_provenance(args), "policy": args.policy, "seeds": args.seeds,
+                  "visible_surfaces": args.visible_surfaces,
                   "experiment": "physical_contact_demonstration_dataset", "trained_model": False,
                   "purpose": "采集真实接触操作及双相机、关节状态、动作块监督，为训练模型建立基础操作校准数据。",
                   "controlled": "几何教师仅产生关节目标；人体观察，操作物体不使用 attachment 或坐标搬运。",

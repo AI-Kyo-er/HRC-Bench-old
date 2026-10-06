@@ -153,6 +153,11 @@ class ContactWorkspace(VCWorkspace):
         # Intentionally no attachment, proximity snap, weld or object pose write.
         pass
 
+    def in_goal_surface(self, object_id, destination):
+        from .goal_regions import surface_for
+        surface = surface_for(destination)
+        return bool(surface and surface.contains(tensor_array(self.objects[object_id].get_AABB())))
+
     def _control_robot_position(self, target):
         target = np.asarray(target, dtype=float)
         limits = np.array([self.arm_speed_rad_s] * 7 + [self.finger_speed_m_s] * 2) / 60
@@ -219,8 +224,13 @@ class ContactWorkspace(VCWorkspace):
             stable = (grasped and not human_held
                       and not touched_fingers and not touched_human_fingers and contact["supported"]
                       and float(np.linalg.norm(velocity)) < 0.04)
-            destination = next((key for key, point in self.regions.items()
-                                if np.linalg.norm(position - point) < 0.065), None) if stable else None
+            if stable and getattr(self, 'visible_surface_goals', False):
+                destinations = [item.destination for item in self.scenario.resolved_activity().work_items
+                                if item.object_id == name]
+                destination = next((key for key in destinations if self.in_goal_surface(name, key)), None)
+            else:
+                destination = next((key for key, point in self.regions.items()
+                                    if np.linalg.norm(position - point) < 0.065), None) if stable else None
             prior_destination, dwell = self.stable_placements.get(name, (None, 0))
             dwell = dwell + 1 if destination is not None and destination == prior_destination else 1
             self.stable_placements[name] = (destination, dwell if destination else 0)
@@ -259,6 +269,8 @@ class ContactWorkspace(VCWorkspace):
                                ("human_control.jsonl", self.human_executor.records if self.human_executor else [])):
             (self.output / filename).write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
         (self.output / "physics_contract.json").write_text(json.dumps({
+            "placement_geometry": 'visible_surface_footprint' if getattr(self, 'visible_surface_goals', False) else 'legacy_point_radius_65mm',
+            "public_goal_surfaces": self.scenario.assets.get('public_goal_surfaces', {}),
             "robot_grasp_model": "friction_contact", "object_fixed": False, "object_collision": True,
             "object_shape_m": [0.05, 0.05, 0.10], "object_mass_kg": 0.10, "object_friction": 0.8,
             "robot_attachment": False, "robot_object_pose_writes_during_control": 0,

@@ -113,6 +113,9 @@ class GenesisContinuousAdapter:
         if attachment is not None:
             held.add(attachment[0])
         held.update(getattr(self.workspace, "finger_touching", ()))
+        if getattr(self.workspace, 'visible_surface_goals', False):
+            return (object_id in positions and object_id not in held
+                    and self.workspace.in_goal_surface(object_id, destination))
         return (object_id in positions and object_id not in held
                 and destination in self.workspace.regions
                 and math.dist(positions[object_id], self.workspace.regions[destination]) < 0.065)

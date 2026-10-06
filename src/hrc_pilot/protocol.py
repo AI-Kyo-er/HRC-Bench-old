@@ -43,6 +43,7 @@ class Observation:
     task_family: str = "object_transport"
     task_description: str = ""
     scene_id: str = ""
+    goal_surfaces: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

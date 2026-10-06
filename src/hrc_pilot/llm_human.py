@@ -158,6 +158,7 @@ class QwenHumanPolicy:
                             for key, value in observation.objects.items()},
             "regions_xyz": {key: [round(float(x), 3) for x in value]
                             for key, value in observation.regions.items()},
+            "public_goal_surfaces": observation.goal_surfaces,
             "human_position_xyz": [round(float(x), 3) for x in observation.human_position],
             "robot_ee_xyz": [round(float(x), 3) for x in observation.robot_ee],
             "human_holds": list(observation.held_by_human),

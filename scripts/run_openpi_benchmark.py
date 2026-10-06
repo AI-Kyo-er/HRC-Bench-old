@@ -51,6 +51,7 @@ def main():
                         default="cooperative")
     parser.add_argument("--human-decision-interval", type=int, default=15)
     parser.add_argument("--human-memory-scope", choices=("episode", "session"), default="episode")
+    parser.add_argument("--visible-surfaces", action="store_true", help="目标语义与可见表面足迹一致，采用独立物体布局")
     args = parser.parse_args()
     args.policy = "pi05_droid_native"
     if args.backend != "genesis":
@@ -77,6 +78,9 @@ def main():
                              human_targets={"red": "tray_red"}, robot_targets={"blue": "tray_blue"})]
     if not scenarios or args.ticks < 1 or args.count_per_family < 1:
         parser.error("需要非空场景目录、正的 ticks 和 count-per-family")
+    if args.visible_surfaces:
+        from hrc_pilot.goal_regions import visible_goal_scenario
+        scenarios = [visible_goal_scenario(scenario, seed=args.seed) for scenario in scenarios]
     scenarios = [replace(scenario, tick_hz=15.0, max_steps=args.ticks) for scenario in scenarios]
     results, episode_calls = [], []
     seeds = args.seeds or [args.seed]
@@ -137,6 +141,7 @@ def main():
         "human_persona": args.human_persona if args.partner_mode == "qwen_llm" else None,
         "human_decision_interval": args.human_decision_interval,
         "human_memory_scope": args.human_memory_scope if args.partner_mode == "qwen_llm" else None,
+        "visible_surfaces": args.visible_surfaces,
         "model_server_metadata": metadata,
         "openpi_commit": subprocess.check_output(["git", "-C", str(openpi), "rev-parse", "HEAD"], text=True).strip(),
         "control_hz": 15, "execution_horizon": args.execution_horizon,
