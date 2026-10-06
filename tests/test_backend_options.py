@@ -33,7 +33,12 @@ class BackendOptionTests(unittest.TestCase):
         args = self.parser().parse_args(["--backend", "genesis", "--robot-grasp-model", "friction_contact"])
         provenance = backend_provenance(args)
         self.assertEqual(provenance["grasp_model"], "friction_contact")
-        self.assertEqual(provenance["human_manipulation_model"], "avatar_kinematic_attachment")
+        self.assertEqual(provenance["human_manipulation_model"], "articulated_contact_hand")
+
+    def test_legacy_human_executor_requires_explicit_selection_with_contact(self):
+        args = self.parser().parse_args(["--backend", "genesis", "--robot-grasp-model", "friction_contact",
+                                        "--human-manipulation-model", "avatar_kinematic_attachment"])
+        self.assertEqual(backend_provenance(args)["human_manipulation_model"], "avatar_kinematic_attachment")
 
     def test_contact_requires_physics_backend(self):
         args = self.parser().parse_args(["--robot-grasp-model", "friction_contact"])

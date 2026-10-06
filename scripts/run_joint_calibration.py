@@ -20,8 +20,10 @@ from hrc_pilot.video_verification import finalize_video_verification
 class JointCalibrationPolicy:
     continuous_control = True
 
-    def __init__(self, workspace):
+    def __init__(self, workspace, object_id="blue", destination="tray_blue"):
         self.workspace = workspace
+        self.object_id = object_id
+        self.destination = destination
 
     def reset(self):
         self.phase = "approach"
@@ -29,9 +31,14 @@ class JointCalibrationPolicy:
 
     def act(self, observation):
         if self.source is None:
-            self.source = np.asarray(observation.objects["blue"])
+            self.source = np.asarray(observation.objects[self.object_id])
         workspace = self.workspace()
-        destination = np.asarray(observation.regions["tray_blue"])
+        if workspace.robot_grasp_model == "friction_contact" and self.phase in {"approach", "descend", "close"}:
+            actual_source = np.asarray(observation.objects[self.object_id])
+            if self.phase == "close" and np.linalg.norm(actual_source - self.source) > 0.02:
+                self.phase = "approach"
+            self.source = actual_source
+        destination = np.asarray(observation.regions[self.destination])
         ee = np.asarray(observation.robot_ee)
         if workspace.robot_grasp_model == "friction_contact":
             return self._contact_action(workspace, observation, destination, ee)
@@ -56,7 +63,7 @@ class JointCalibrationPolicy:
             self.phase = "descend"
         if self.phase == "descend" and np.linalg.norm(ee - self.source - [0, 0, 0.10]) < 0.012:
             self.phase = "close"
-        contacts = workspace.contact_records[-1]["objects"]["blue"] if workspace.contact_records else {}
+        contacts = workspace.contact_records[-1]["objects"][self.object_id] if workspace.contact_records else {}
         if self.phase == "close" and len(contacts.get("finger_links", [])) == 2:
             self.phase = "lift"
         if self.phase == "lift" and np.linalg.norm(ee - self.source - [0, 0, 0.25]) < 0.02:

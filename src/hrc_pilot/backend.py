@@ -21,18 +21,21 @@ class VCWorkspace:
     def __init__(self, *, assets: Path, backend: str = "gpu", resolution: int = 800,
                  render_stride: int = 3, viewer: bool = False, scenario=None,
                  minimum_transfer_phase_steps: int = 12,
-                 robot_grasp_model: str = "kinematic_attachment"):
+                 robot_grasp_model: str = "kinematic_attachment",
+                 human_manipulation_model: str = "avatar_kinematic_attachment"):
         import genesis as gs
         from vico.modules.avatar.avatar_controller import AvatarController
         from .assets import mug_mesh
 
         self.gs = gs
         self.robot_grasp_model = robot_grasp_model
+        self.human_manipulation_model = human_manipulation_model
         gs.init(seed=0, backend=gs.gpu if backend == "gpu" else gs.cpu,
                 logging_level=logging.WARNING, theme="dumb")
         self.scene = gs.Scene(
             sim_options=gs.options.SimOptions(dt=1 / 60, substeps=4),
-            rigid_options=gs.options.RigidOptions(enable_collision=True, max_collision_pairs=512),
+            rigid_options=gs.options.RigidOptions(enable_collision=True,
+                max_collision_pairs=1024 if human_manipulation_model == "articulated_contact_hand" else 512),
             avatar_options=gs.options.AvatarOptions(enable_collision=False),
             vis_options=gs.options.VisOptions(background_color=(0.88, 0.92, 0.96),
                 ambient_light=(0.5, 0.5, 0.5), shadow=True, segmentation_level="entity"),
@@ -89,6 +92,7 @@ class VCWorkspace:
                           "euler": (-90, 0, 90), "pos": (0, 0, -0.959008030)},
             frame_ratio=0.30, enable_collision=False,
         )
+        self._build_partner_entities(assets)
         self.camera = self.scene.add_camera(res=(resolution, resolution * 3 // 4),
             pos=(2.05, -2.35, 2.30), lookat=(0.35, 0.20, 0.94), fov=48, GUI=False)
         self.robot_camera = self.scene.add_camera(res=(320, 240),
@@ -133,6 +137,12 @@ class VCWorkspace:
         entity = self.scene.add_entity(morph=morph, material=material, surface=surface, **kwargs)
         self.entity_info[entity.idx] = {"type": type, "name": name}
         return entity
+
+    def _build_partner_entities(self, assets):
+        pass
+
+    def _continuous_human_step(self):
+        pass
 
     def positions(self):
         return {k: v.get_pos().detach().cpu().numpy().astype(float).tolist() for k, v in self.objects.items()}
@@ -230,6 +240,9 @@ class VCWorkspace:
             task_family=getattr(self.scenario, "task_family", "object_transport"),
             task_description=getattr(self.scenario, "description", ""),
             scene_id=getattr(self.scenario, "name", ""),
+            human_hand_position=(tuple(self.human_hand.get_qpos().cpu().numpy()[:3].tolist())
+                                 if getattr(self, "human_hand", None) is not None else None),
+            human_motor_phase=(self.human_executor.phase if getattr(self, "human_executor", None) is not None else "unknown"),
         )
 
     def joint_position_step(self, joints):
@@ -492,6 +505,7 @@ class VCWorkspace:
     def tick(self, steps=1):
         for _ in range(steps):
             self._continuous_robot_step()
+            self._continuous_human_step()
             self.avatar.step()
             self.avatar.robot.update()
             self.scene.step()

@@ -1,69 +1,110 @@
 {
-  "checked_at": "2026-10-06T13:33:59+08:00",
-  "page_sha256": "4eda67b5bd065299c26de44138f7b06d75217b89fc6c3b7b6004fcbb04d7d9e5",
+  "checked_at": "2026-10-06T15:42:50+08:00",
   "pages": [
     {
       "path": "experiments/dynamic_contact_20261006/index.html",
-      "title": "动态人类与真实接触 HRC · 阶段报告",
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false,
       "videos": [
         {
-          "duration": 6.066667,
+          "duration": 15.8,
           "width": 640,
           "height": 604,
           "error": null
         },
         {
-          "duration": 7.133333,
+          "duration": 62,
           "width": 640,
           "height": 604,
           "error": null
         },
         {
-          "duration": 16.133333,
+          "duration": 62,
           "width": 640,
           "height": 604,
           "error": null
         },
         {
-          "duration": 22,
+          "duration": 62,
           "width": 640,
           "height": 604,
+          "error": null
+        },
+        {
+          "duration": 6.733333,
+          "width": 480,
+          "height": 484,
+          "error": null
+        },
+        {
+          "duration": 6.4,
+          "width": 480,
+          "height": 484,
           "error": null
         }
       ],
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false
+      "page_sha256": "b5ad14840a6465bb5c1f09703f02822c860b5ff9b7b1d76a623eb6f103645bbd"
     },
     {
-      "path": "results/continuous_v2/contact_calibration_formal/index.html",
-      "title": "HRC-Continuous v2 · 实验报告、仿真视频与事件回放",
+      "path": "results/continuous_v2/pi05_qwen_feedback_contact/index.html",
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false,
       "videos": [
         {
-          "duration": 6.066667,
+          "duration": 62,
           "width": 640,
           "height": 604,
           "error": null
         }
       ],
-      "page_errors": [],
-      "broken_links": [],
-      "mobile_overflow": false
+      "page_sha256": "0e3480a681af31e8d405be00c8679a3f4313c010dae0c10e81cd511148f5e796"
     },
     {
-      "path": "results/continuous_v2/pi05_qwen_contact_benchmark/index.html",
-      "title": "HRC-Continuous v2 · 实验报告、仿真视频与事件回放",
+      "path": "results/continuous_v2/human_contact_formal/index.html",
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false,
       "videos": [
         {
-          "duration": 7.133333,
+          "duration": 15.8,
           "width": 640,
           "height": 604,
           "error": null
         }
       ],
+      "page_sha256": "17de30e5ce948c5f9ab6703dece2f2d7f886df8e3849bfe23ba52613c4f80a0f"
+    },
+    {
+      "path": "datasets/contact_demonstrations_v1/index.html",
       "page_errors": [],
       "broken_links": [],
-      "mobile_overflow": false
+      "mobile_overflow": false,
+      "videos": [
+        {
+          "duration": 6.733333,
+          "width": 480,
+          "height": 484,
+          "error": null
+        }
+      ],
+      "page_sha256": "a84df5d3a0debcafb85de97f28bed534537cc31ddea8fb1c82c0137d14df0314"
+    },
+    {
+      "path": "datasets/contact_feedback_demonstrations/index.html",
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false,
+      "videos": [
+        {
+          "duration": 6.4,
+          "width": 480,
+          "height": 484,
+          "error": null
+        }
+      ],
+      "page_sha256": "757a8db40d2f300aa343f20002e7082f53e93fca34c801adf198064a1d175e4b"
     }
   ],
   "status": "verified"

@@ -35,6 +35,8 @@ class Observation:
     active_robot_action: str = ""
     action_phase: str = "idle"
     visible_human_action: str = ""
+    human_hand_position: tuple[float, float, float] | None = None
+    human_motor_phase: str = "unknown"
     # Public task semantics supplied by the scenario, never private goals or
     # evaluator state.  These fields let a VLA/WLA distinguish task families
     # without reverse-engineering a hard-coded benchmark name.

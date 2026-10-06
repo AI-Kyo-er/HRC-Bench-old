@@ -90,11 +90,14 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 `--video-settle-seconds` 和 `--minimum-transfer-phase-seconds`；这些值会写入
 `provenance.json`，便于复现实验。
 
-2026-10-06 新增可选 `--robot-grasp-model friction_contact`：机器人只能提交底层
+2026-10-06 新增 `--robot-grasp-model friction_contact`，原生模型入口默认采用它：机器人只能提交底层
 关节动作，操作对象为受重力和碰撞影响的自由刚体；双指摩擦抓取与稳定释放由实际
 物理状态核查。保存 `contacts.jsonl`、`robot_control.jsonl`、`physics_contract.json`
-和 `motion_verification.json`。这项选项不会把人体执行器自动变成真实接触模型。
-已完成的三类 π0.5 + Qwen 联合诊断发现人体拿放瞬移，已明确排除正式能力排名；
+和 `motion_verification.json`。人体选项 `--human-manipulation-model auto` 在该后端使用
+`articulated_contact_hand`，以关节受力完成持握与释放；人物显示采用动作数据和躯干 IK。
+可显式选择旧 `avatar_kinematic_attachment` 执行器复盘历史。新的接触手已通过连续性
+与显示手腕对齐检查，仍是简化代理，不能宣称完整人体动力学或真人效度。
+三类 π0.5 + Qwen 实测、基础操作 Dataset 和执行边界均已保存；
 具体设置、视频、贡献归属与未完成项见[本阶段报告](experiments/dynamic_contact_20261006/index.html)。
 
 原生 OpenPI 入口现在支持 `--scenes`、`--task-catalog`、`--scenario-dir` 与 `--seeds`，
@@ -114,6 +117,17 @@ Genesis 与 Qwen3-14B 组合预估需要约 36 GB 空闲显存，程序会按本
 核查；OpenPI 单独使用另一张 GPU。本轮 VC 环境增加 `transformers==4.57.1` 和
 `accelerate==1.10.1`，来自清华 PyPI 镜像。模型与数据集仍只允许从中国大陆镜像或
 本土服务获取，禁止通过 VPN 下载；本轮未新增下载模型或数据。
+
+实际接触示范 Dataset 包含双相机、本体状态及下一物理控制步的动作目标。
+它使用输入 stem 匹配 `_wrist.png`、`.state.npy`、`.action.npy`，不使用配对 manifest。
+[按文件名加载的接口](experiments/continuous_v2/physical_frame_dataset.py)输出带有效时段
+的 `15×8` 动作块；这些是数据生成教师示范，本轮尚未用它训练新的模型权重。
+
+```bash
+CUDA_VISIBLE_DEVICES=3 PYTHONPATH=src:. .venv-vc-pilot/bin/python \
+  scripts/collect_contact_demonstrations.py \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/new_contact_demonstrations
+```
 
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 

@@ -15,6 +15,8 @@ def add_backend_options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--robot-grasp-model", choices=("kinematic_attachment", "friction_contact"),
                         default="kinematic_attachment",
                         help="friction_contact 使用自由碰撞刚体和实际夹爪摩擦，只接受底层关节动作")
+    parser.add_argument("--human-manipulation-model", choices=("auto", "avatar_kinematic_attachment", "articulated_contact_hand"),
+                        default="auto", help="auto 在摩擦接触后端使用关节驱动的接触手，其他后端保留原执行器")
     parser.add_argument("--experiment-tier", choices=("exploratory", "important"),
                         default="exploratory",
                         help="实验等级；important 要求 Genesis 真实 Sim 视频")
@@ -33,6 +35,8 @@ def add_backend_options(parser: argparse.ArgumentParser) -> None:
 def configure_backend(args, parser: argparse.ArgumentParser, output: Path):
     args._source_sha256 = {path.name: sha256(path.read_bytes()).hexdigest()
                           for path in Path(__file__).parent.glob("*.py")}
+    if resolved_human_model(args) == "articulated_contact_hand" and (args.backend != "genesis" or args.robot_grasp_model != "friction_contact"):
+        parser.error("关节接触手要求 --backend genesis --robot-grasp-model friction_contact")
     if (args.resolution < 64 or not 1 <= args.render_stride <= 60
             or args.video_settle_seconds < 0
             or args.minimum_transfer_phase_seconds < 0):
@@ -69,7 +73,15 @@ def configure_backend(args, parser: argparse.ArgumentParser, output: Path):
         render_stride=args.render_stride, policy=args.policy,
         settle_steps=round(args.video_settle_seconds * 60),
         minimum_transfer_phase_steps=round(args.minimum_transfer_phase_seconds * 60),
-        robot_grasp_model=args.robot_grasp_model)
+        robot_grasp_model=args.robot_grasp_model,
+        human_manipulation_model=resolved_human_model(args))
+
+
+def resolved_human_model(args):
+    mode = getattr(args, "human_manipulation_model", "auto")
+    if mode == "auto":
+        return "articulated_contact_hand" if args.backend == "genesis" and args.robot_grasp_model == "friction_contact" else "avatar_kinematic_attachment"
+    return mode
 
 
 def backend_provenance(args) -> dict:
@@ -90,7 +102,7 @@ def backend_provenance(args) -> dict:
         },
         "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES") if args.backend == "genesis" else None,
         "grasp_model": args.robot_grasp_model if args.backend == "genesis" else "geometric_abstraction",
-        "human_manipulation_model": "avatar_kinematic_attachment" if args.backend == "genesis" else "geometric_abstraction",
+        "human_manipulation_model": resolved_human_model(args) if args.backend == "genesis" else "geometric_abstraction",
         "object_geometry": "free_rigid_box_50x50x100mm" if args.robot_grasp_model == "friction_contact" else "mug_mesh",
         "physics_hz": 60 if args.backend == "genesis" else None,
         "resolution": args.resolution,

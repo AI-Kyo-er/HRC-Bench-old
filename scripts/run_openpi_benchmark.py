@@ -25,7 +25,8 @@ from hrc_pilot.motion_continuity import verify_motion_continuity
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     add_backend_options(parser)
-    parser.set_defaults(backend="genesis", experiment_tier="important", resolution=480, render_stride=4)
+    parser.set_defaults(backend="genesis", experiment_tier="important", resolution=480, render_stride=4,
+                        robot_grasp_model="friction_contact")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--ticks", type=int, default=90)

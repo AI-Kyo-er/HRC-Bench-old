@@ -1,130 +1,180 @@
-"""从真实产物重建本阶段研究报告，不运行模型或改写原始评分。"""
+"""从已完成的实际接触运行和示范数据重建报告，不运行模型或改写评分。"""
+from collections import Counter
 from datetime import datetime
 from hashlib import sha256
 from html import escape
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
-RESULTS = ROOT / "results/continuous_v2"
-NATIVE = RESULTS / "pi05_qwen_contact_benchmark"
-CALIBRATION = RESULTS / "contact_calibration_formal"
+RESULTS = ROOT / 'results/continuous_v2'
+CANDIDATES = ('pi05_qwen_feedback_contact', 'pi05_qwen_articulated_contact')
+NAMES = {'relay': '接力', 'concurrent_overlay': '并行作业', 'robot_induced_rebalance': '进度受阻与重新协调'}
 
 
 def read(path):
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding='utf-8'))
 
 
-def link(path, text):
-    relative = "../../" + path.relative_to(ROOT).as_posix()
-    return f'<a href="{escape(relative)}">{escape(text)}</a>'
+def rows(path):
+    return [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines() if line.strip()]
+
+
+def href(path):
+    return '../../' + path.relative_to(ROOT).as_posix()
+
+
+def link(path, label):
+    return f'<a href="{escape(href(path))}">{escape(label)}</a>'
+
+
+def video(directory):
+    return f'<video controls preload="metadata" poster="{href(directory / "preview.png")}" src="{href(directory / "demo.mp4")}"></video>'
 
 
 def main():
-    summary = read(NATIVE / "summary.json")
-    provenance = read(NATIVE / "provenance.json")
-    names = {"relay": "接力：人先完成前置贡献", "concurrent_overlay": "并行：双方各自操作",
-             "robot_induced_rebalance": "重新协调：伙伴观察机器人进度"}
-    tables, panels, evidence = [], [], []
-    decisions = 0
-    for metric in summary["episodes"]:
-        directory = NATIVE / metric["scenario"]
-        motion = read(directory / "motion_verification.json")
-        physics = read(directory / "physics_contract.json")
-        human_io = [json.loads(line) for line in (directory / "human_policy_io.jsonl").read_text().splitlines()]
-        decisions += len(human_io)
-        calls = next(row["model_calls"] for row in provenance["episode_model_calls"]
-                     if row["scenario"] == metric["scenario"])
-        robot = [value for value in metric["completed_skills"] if value.startswith("robot:")]
-        human = [value for value in metric["completed_skills"] if value.startswith("human:")]
-        tables.append(f'<tr><td>{names[metric["scenario"]]}</td><td>{"通过" if metric["task_success"] else "失败"}</td>'
-                      f'<td>{len(robot)} / {len(human)}</td><td>{calls} / {len(human_io)}</td>'
-                      f'<td>{metric["completion_time_s"]:.2f} 秒</td><td>未通过：{motion["violation_count"]} 次跳变</td></tr>')
-        base = "../../" + directory.relative_to(ROOT).as_posix()
-        panels.append(f'''<article><h3>{names[metric["scenario"]]}</h3>
-<p>机器人合法贡献 {len(robot)} 项，人合法贡献 {len(human)} 项。原始活动评分：{"通过" if metric["task_success"] else "失败"}。
-人体拿放最大单物理帧位移 {motion["maximum_human_object_displacement_per_physics_step_m"]:.3f} 米，不能纳入正式能力排名。</p>
-<video controls preload="metadata" poster="{base}/preview.png" src="{base}/demo.mp4"></video>
-<p>{link(NATIVE / 'index.html', '逐事件报告与双相机输入')} · {link(directory / 'motion_verification.json', '动作异常详情')}
- · {link(directory / 'human_policy_io.jsonl', '人类模型实际决策')} · {link(directory / 'policy_io.jsonl', '机器人实际动作块')}</p></article>''')
-        evidence.append({"scenario": metric["scenario"], "robot_contributions": robot, "human_contributions": human,
-                         "model_calls": calls, "human_decisions": len(human_io), "motion": motion,
-                         "physics_grasp_objects": physics["contact_grasp_objects"]})
-    calibration_episode = CALIBRATION / "joint_grasp_calibration"
-    calibration_metric = read(calibration_episode / "metrics.json")
-    calibration_video = "../../" + calibration_episode.relative_to(ROOT).as_posix()
-    stamp = datetime.now().astimezone().isoformat(timespec="seconds")
-    document = f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><title>动态人类与真实接触 HRC · 阶段报告</title>
-<style>
-:root{{color-scheme:light;--ink:#182c3d;--muted:#536578;--accent:#136c72}}
-*{{box-sizing:border-box}}body{{margin:0;background:#f2f5f5;color:var(--ink);font-family:system-ui,"Noto Sans CJK SC",sans-serif;line-height:1.75}}
-main{{max-width:1100px;margin:auto;padding:36px 24px 72px}}header{{padding:32px;border-radius:18px;background:#123440;color:white}}
-h1{{font-size:clamp(25px,4vw,40px);line-height:1.35;margin:8px 0 20px}}h2{{margin:0 0 14px;font-size:24px}}h3{{font-size:20px}}
-.eyebrow{{color:#ade1d2;font-size:14px;letter-spacing:1px}}section{{padding:28px;background:white;border-radius:16px;margin:24px 0}}
-.warning{{border-left:5px solid #c17827;background:#fff5e8;padding:18px 22px;margin:20px 0}}a{{color:var(--accent);text-underline-offset:3px}}
-.stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}}.stat{{padding:18px;background:#e8f0ee;border-radius:12px}}
-.stat strong{{display:block;font-size:28px}}.stat span{{color:var(--muted);font-size:14px}}.table-wrap{{overflow-x:auto}}table{{width:100%;border-collapse:collapse;min-width:800px;font-size:14px}}
-th,td{{text-align:left;border-bottom:1px solid #dce5e7;padding:13px 10px;vertical-align:top}}th{{background:#edf3f4}}
-video{{width:100%;max-height:720px;background:#112234;border-radius:12px}}article{{margin:28px 0 38px;padding-top:12px;border-top:1px solid #dae3e6}}
-.quiet{{color:var(--muted);font-size:14px}}code{{background:#edf1f2;padding:2px 5px;border-radius:4px}}@media(max-width:650px){{main{{padding:18px 12px 40px}}header,section{{padding:21px 17px}}.stats{{grid-template-columns:repeat(2,1fr)}}}}
-</style></head><body><main><header><div class="eyebrow">HRC CONTINUOUS · 2026-10-06 · 目标仍在进行</div>
-<h1>真实接触已经接通；联合运行暴露了人体拿放问题</h1>
-<p>本阶段把真实 π0.5 机械臂、生成式 Qwen 人类伙伴与自由刚体场景放入同一条运行。
-机器人不再通过吸附或目标坐标搬运物体；人的意图由语言模型生成。真实视频和动作记录同时暴露了当前系统仍不具备正式评测资格的原因。</p></header>
-<div class="stats"><div class="stat"><strong>4 条</strong><span>新保存并核验的 Sim 视频</span></div>
-<div class="stat"><strong>{provenance['model_calls']} 次</strong><span>真实 π0.5 模型推理</span></div>
-<div class="stat"><strong>{decisions} 次</strong><span>Qwen 自主意图决策</span></div>
-<div class="stat"><strong>0 / 3</strong><span>联合任务中的机器人合法贡献</span></div></div>
-<section><h2>为什么做这组实验</h2>
-<p>原来的规则伙伴与运动学吸附只能核查协议。这里要直接观察：训练好的具身模型负责操作时，生成式伙伴能否依据双方的公开进度改变自己的贡献，以及场景是否真的支持可信的动态 HRC 评测。</p>
-<p>研究方向仍是动态人的政策与持续协调。模型是否“会合作”，必须在基本操作可用、动作时间合理、贡献归属可信的前提下判断。</p></section>
-<section><h2>设置与可解释边界</h2>
-<p>三类活动，均为 seed 0，最长 20 秒模拟时间。机器人使用官方 π0.5-DROID 权重，以 15 Hz 接收外部/腕部相机、本体状态和公开指令，实际输出关节动作。Qwen3-14B 使用 cooperative 人格，读取公开几何、公开消息和最近公开决定，生成接近、搬运、观察、让行、离返与公开表达；41 次输出没有 JSON 解析错误。</p>
-<p>收纳块为 50×50×100 毫米、0.10 千克的自由刚体，受重力、碰撞和夹爪摩擦作用。
-机器人目标速度有限制，保存请求值与实际施加值；提交机器人贡献需要双指受力接触、抬起、释放和至少 0.4 秒稳定支撑。没有用 IK 教师替模型执行。</p>
-<div class="warning">人体仍使用 VC 的运动学拿放。动作核查发现单帧约 1 米的跳变，因此三条联合运行仅作诊断，不能纳入正式 Benchmark。
-推理期间模拟时钟暂停，尚未测量模型延迟对正在活动的人产生的影响。伙伴记忆仍只有有限公开上下文，尚未实现 COOPERA 级别的长时段行为。</div></section>
-<section><h2>机器人真实抓放：先核查场景是否可操作</h2>
-<p>独立几何 IK 教师在 {calibration_metric['completion_time_s']:.2f} 秒内完成蓝块收纳。
-实际双指摩擦夹持将物体抬高约 13 厘米，打开夹爪后物体回落到桌面并稳定。该校准通过动作连续性检查。
-它证明这套物理场景可以完成抓放，不代表 π0.5 或 HRC 的成绩。</p>
-<video controls preload="metadata" poster="{calibration_video}/preview.png" src="{calibration_video}/demo.mp4"></video>
-<p>{link(CALIBRATION / 'index.html', '完整抓放校准报告')} · {link(calibration_episode / 'contacts.jsonl', '逐物理步接触记录')}
- · {link(calibration_episode / 'motion_verification.json', '动作核验')}</p></section>
-<section><h2>联合运行结果：谁实际完成了工作</h2>
-<div class="table-wrap"><table><thead><tr><th>活动</th><th>原始活动评分</th><th>机器人 / 人贡献项</th><th>π0.5 / Qwen 调用</th><th>模拟时长</th><th>动作资格</th></tr></thead>
-<tbody>{''.join(tables)}</tbody></table></div>
-<p>前两条由 Qwen 伙伴主动接管后完成，机器人在三条任务中均没有合法贡献，也未记录物理抓取成功。
-这里的“活动通过”只说明评测器在当前执行抽象下检查到了终态，不能被读成机器人成功率。</p>
+    native = next(RESULTS / name for name in CANDIDATES if (RESULTS / name / 'provenance.json').is_file())
+    provenance = read(native / 'provenance.json')
+    summary = read(native / 'summary.json')
+    table, panels, evidence, source_paths = [], [], [], [native / 'summary.json', native / 'provenance.json', native / 'video_verification.json']
+    decision_count = 0
+    robot_total = human_total = success_count = 0
+    for metric in summary['episodes']:
+        matches = [path.parent for path in native.rglob('metrics.json')
+                   if read(path).get('scenario') == metric['scenario'] and read(path).get('seed') == metric['seed']]
+        assert len(matches) == 1
+        directory = matches[0]
+        motion = read(directory / 'motion_verification.json')
+        physics = read(directory / 'physics_contract.json')
+        policy = rows(directory / 'human_policy_io.jsonl')
+        decisions = [row['parsed_decision'] for row in policy]
+        goals = [(row.get('object_id'), row.get('destination')) for row in decisions if row.get('object_id')]
+        target_changes = sum(a != b for a, b in zip(goals, goals[1:]))
+        calls = next(row['model_calls'] for row in provenance['episode_model_calls']
+                     if row['scenario'] == metric['scenario'] and row['seed'] == metric['seed'])
+        robot = [skill for skill in metric['completed_skills'] if skill.startswith('robot:')]
+        human = [skill for skill in metric['completed_skills'] if skill.startswith('human:')]
+        contact_rows = rows(directory / 'contacts.jsonl')
+        alignment = max(row['human_hand_alignment']['distance_m'] for row in contact_rows if 'human_hand_alignment' in row)
+        title = f"{NAMES[metric['scenario']]} · seed {metric['seed']}"
+        success_count += bool(metric['task_success'])
+        robot_total += len(robot)
+        human_total += len(human)
+        decision_count += len(policy)
+        intents = Counter(row['intent'] for row in decisions)
+        table.append(f'<tr><td>{title}</td><td>{"通过" if metric["task_success"] else "未完成"}</td>'
+                     f'<td>{len(robot)} / {len(human)}</td><td>{calls} / {len(policy)}</td>'
+                     f'<td>{motion["status"]}</td><td>{alignment * 1000:.1f} mm</td></tr>')
+        panels.append(f'''<article><h3>{title}</h3><p>原始活动终态：{"通过" if metric['task_success'] else "未完成"}。
+机器人合法贡献 {len(robot)} 项，人合法贡献 {len(human)} 项。Qwen 生成了 {len(policy)} 次决定，目标对象/目的地改变 {target_changes} 次；
+实际意图包括 {escape('、'.join(f'{key} {value} 次' for key, value in intents.items()))}。
+人的实物抓取涉及 {len(physics['human_contact_grasp_objects'])} 个物体，机器人涉及 {len(physics['contact_grasp_objects'])} 个。</p>
+{video(directory)}<p>持握/释放过程中物体最大单物理帧位移 {motion['maximum_human_object_displacement_per_physics_step_m'] * 1000:.1f} mm；
+显示手腕与物理手最大距离 {alignment * 1000:.1f} mm。运动核验只检查这一项，不等于完整研究效度。</p>
+<p>{link(native / 'index.html', '逐事件报告与双相机输入')} · {link(directory / 'human_policy_io.jsonl', '生成式伙伴实际决定')}
+ · {link(directory / 'policy_io.jsonl', '真实机器人模型动作')} · {link(directory / 'motion_verification.json', '运动核验')}</p></article>''')
+        evidence.append({'scenario': metric['scenario'], 'seed': metric['seed'], 'activity_success': metric['task_success'],
+                         'robot_contributions': robot, 'human_contributions': human, 'model_calls': calls,
+                         'human_decisions': len(policy), 'target_changes': target_changes,
+                         'maximum_wrist_alignment_error_m': alignment, 'motion_status': motion['status'],
+                         'interpretation': '执行器与模型整体运行，不从任务失败直接推断 HRC 能力。'})
+        source_paths += [directory / 'metrics.json', directory / 'motion_verification.json', directory / 'physics_contract.json']
+    calibration = RESULTS / 'human_contact_formal'
+    cal_episode = calibration / 'human_contact_calibration'
+    cal_metric = read(cal_episode / 'metrics.json')
+    cal_motion = read(cal_episode / 'motion_verification.json')
+    datasets, dataset_tables, sample_panels = [], [], []
+    frame_total = demo_success = demo_total = 0
+    for name in ('contact_demonstrations_v1', 'contact_feedback_demonstrations'):
+        dataset_root = ROOT / 'datasets' / name
+        if not (dataset_root / 'dataset.json').exists():
+            continue
+        metadata = read(dataset_root / 'dataset.json')
+        datasets.append({'name': name, 'metadata': metadata})
+        source_paths += [dataset_root / 'dataset.json', dataset_root / 'provenance.json', dataset_root / 'video_verification.json']
+        for exported in metadata['exports']:
+            demo_total += 1
+            demo_success += bool(exported['exported_frames'])
+            frame_total += exported['exported_frames']
+        dataset_tables.append(f'<tr><td>{name}</td><td>{sum(bool(row["exported_frames"]) for row in metadata["exports"])} / {len(metadata["exports"])}</td>'
+                              f'<td>{metadata["verified_samples"]["train"]}</td><td>{metadata["verified_samples"]["dev"]}</td>'
+                              f'<td>{link(dataset_root / "index.html", "实际示范与视频")}</td></tr>')
+        successful = [row for row in metadata['exports'] if row['exported_frames']]
+        if successful:
+            selected = successful[0]
+            sample_panels.append(f'<article><h3>真实示范：{escape(selected["episode"])}</h3><p>几何教师通过关节控制完成物理操作；此处展示数据生成，不是训练模型成绩。</p>{video(dataset_root / selected["episode"])}</article>')
+    stamp = datetime.now().astimezone().isoformat(timespec='seconds')
+    count = len(summary['episodes'])
+    document = f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>动态人类与真实接触 HRC · 实际系统报告</title><style>
+*{{box-sizing:border-box}}body{{margin:0;background:#f1f5f4;color:#182e3e;font-family:system-ui,"Noto Sans CJK SC",sans-serif;line-height:1.8;overflow-wrap:anywhere}}
+main{{max-width:1100px;margin:auto;padding:32px 24px 70px}}header{{padding:32px;border-radius:18px;background:#143842;color:white}}
+h1{{font-size:clamp(25px,4vw,39px);line-height:1.4;margin:12px 0 20px}}h2{{margin:0 0 12px;font-size:24px}}h3{{font-size:20px}}
+.eyebrow{{color:#a5dbca;letter-spacing:1px;font-size:14px}}section{{padding:28px;background:white;border-radius:16px;margin:24px 0}}
+.stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}}.stat{{background:#e2eeeb;border-radius:12px;padding:18px}}
+.stat strong{{display:block;font-size:28px}}.stat span{{font-size:14px;color:#536879}}a{{color:#126b70;text-underline-offset:3px}}
+.notice{{background:#fff4e5;border-left:5px solid #bd7928;padding:18px 22px;margin:20px 0}}article{{padding-top:12px;border-top:1px solid #d5e2e1;margin:26px 0}}
+video{{width:100%;max-height:720px;background:#142430;border-radius:12px}}.table-wrap{{overflow-x:auto}}table{{border-collapse:collapse;min-width:760px;width:100%;font-size:14px}}
+th,td{{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-align:top}}th{{background:#eaf1ef}}.quiet{{font-size:14px;color:#586b7b}}
+@media(max-width:650px){{main{{padding:16px 12px 40px}}header,section{{padding:20px 16px}}.stats{{grid-template-columns:repeat(2,1fr)}}}}
+</style></head><body><main><header><div class="eyebrow">HRC CONTINUOUS · 真实模型、接触动作与实际示范数据</div>
+<h1>动态伙伴在真实接触场景中，实际做了什么？</h1>
+<p>本阶段的系统同时运行 π0.5-DROID 机械臂与 Qwen3-14B 合成伙伴。两者的动作在同一物理时间轴中执行，物体通过接触移动；视频直接来自运行时相机。
+下方分别呈现真实模型结果、接触手校准与可用于模型校准的数据。</p></header>
+<div class="stats"><div class="stat"><strong>{count} 条</strong><span>本次实际模型运行</span></div>
+<div class="stat"><strong>{provenance['model_calls']} 次</strong><span>π0.5 实际推理</span></div><div class="stat"><strong>{decision_count} 次</strong><span>Qwen 意图决定</span></div>
+<div class="stat"><strong>{frame_total} 帧</strong><span>真实接触示范监督</span></div></div>
+<section><h2>目的与设置</h2><p>实验要观察：当人的行动由生成式模型根据可见进度决定、机械臂由训练后的具身模型控制时，双方能否完成共同活动，人的目标选择怎样影响实际过程。
+模型能力判断需要基本操作可用、人的动作连续、任务评分按实际贡献区分。</p>
+<p>本次运行后端为 Genesis，机器人 15 Hz 控制，最长 60 秒模拟时间；人体意图约每秒更新一次，物理推进为 60 Hz。
+π0.5 只接收实际外部/腕部相机、本体状态与公开任务语言。Qwen 读取公开几何、公开对话、自身动作状态与近期公开决定，输出目标对象、目的地、行动意图、速度和公开表达。</p>
+<p>初始分工与活动依赖构成任务契约；执行中双方动作、占用、碰撞和未完成会改变后续观察。本次只使用 cooperative 伙伴，尚未形成不同人格与多模型的正式比较。</p></section>
+<section><h2>人的动作现在怎样执行</h2><p>Qwen 选择做什么；接触手以关节受力完成伸手、夹持、抬起和释放。显示人物使用已有步行动作与躯干 IK，跟随实际物理手的位置。
+人的物体拿放不再调用 Avatar 对物体坐标的直接写入，也没有把物体绑定到机械臂。</p>
+<p>独立几何教师完成蓝块抓放用时 {cal_metric['completion_time_s']:.1f} 秒；持握/释放时最大单物理帧位移 {cal_motion['maximum_human_object_displacement_per_physics_step_m'] * 1000:.1f} mm，运动核验通过。
+该校准检查执行器，不是 Qwen 或 π0.5 的能力结果。</p>{video(cal_episode)}
+<p>{link(calibration / 'index.html', '接触手校准报告')} · {link(cal_episode / 'contacts.jsonl', '实际接触记录')}</p>
+<div class="notice">接触手是简化关节代理，显示身体为动作数据与 IK，碰撞体为粗略代理。它尚不等于完整人体动力学或灵巧手，也未经真人行为校准。
+模型推理期间模拟时钟暂停，本轮没有测量推理延迟对正在活动的人产生的影响。</div></section>
+<section><h2>实际模型结果与贡献归属</h2><div class="table-wrap"><table><thead><tr><th>任务</th><th>共同活动终态</th><th>机器人 / 人合法贡献</th><th>π0.5 / Qwen 调用</th><th>运动核验</th><th>最大手腕对齐误差</th></tr></thead><tbody>{''.join(table)}</tbody></table></div>
+<p>本次共同活动通过 {success_count}/{count}；机器人实际合法贡献 {robot_total} 项，人贡献 {human_total} 项。
+贡献要求实际接触操作与稳定释放；人的接管完成不会被统计成机器人贡献。</p>
+<div class="notice">这些结果仍不足以排名模型的 HRC 或 cobalance 能力。π0.5 在当前操作分布中尚未建立有效基础操作表现；人的意图改变与动作执行之间也有失败边界。
+任务未完成不能直接归因为“模型不会协作”。本页不使用手工加权总分掩盖这些问题。</div>
 {''.join(panels)}</section>
-<section><h2>这轮能支持什么结论</h2>
-<p>已确认真实模型驱动关节、生成式伙伴选择意图、自由刚体接触与多活动契约可以共同运行。
-已确认原有“任务成功”会掩盖机器人零贡献，人体执行器的瞬间拿放还会破坏真实时间与操作难度。</p>
-<p>这轮无法回答先进具身算法是否具备持续 HRC 或 cobalance 能力：机器人基本操作尚未成功，人体动作又未通过连续性检查。
-不使用手工加权总分掩盖这两个问题，也不把这些诊断样本计入成熟 Benchmark 的结果。</p>
-<h3>继续推进的优先级</h3><ol><li>替换人体拿放执行器：连续接近、可见接触、物理持握与释放，取消坐标跳变，并把 Avatar 全身与实际物体动作对齐。</li>
-<li>在合适的操作分布中建立真实模型的基础操作表现，再评测其对人类改变意图、接管、让行和重新分工的响应。</li>
-<li>把真实操作扩展到现有九类活动契约、未见伙伴与任务组合；在同一世界内保留公开历史，再运行多模型、多 seed 的正式比较。</li></ol></section>
-<section><h2>视频、复核与原始证据</h2><p>重要实验入口已强制在 HTML 生成前解码每条视频，并严格检查帧数、FPS 与事件时间轴。
-另外复核的 7 组已有重要实验共 40 条视频均通过。轨迹用于审计，真实场景视频为主要视觉证据。</p>
-<p>{link(NATIVE / 'video_verification.json', '联合运行视频核验')} · {link(CALIBRATION / 'video_verification.json', '抓放校准视频核验')}
- · {link(NATIVE / 'provenance.json', '模型、控制设置与源码核查边界')} · {link(ROOT / 'experiments/goal_progress_20261005/index.html', '此前完整阶段报告')}</p>
-<details><summary>复现与工程检查</summary><p>本轮没有下载新模型或数据集；使用已有本地权重，推理启用离线模式。
-新权重与数据只允许从中国大陆镜像或本土服务下载。生成式伙伴与 Genesis 在 GPU 0，OpenPI 在 GPU 1，各进程只使用单卡并在启动前检查显存。</p>
-<p>测试覆盖视频失败门槛、真实接触贡献、控制限速、人体释放跳变和伙伴自消息反馈。完整命令与后续接触接口见项目 README。
-这组联合运行的源码 SHA256 属于报告时文件快照；运行中新增了监测字段，因此不能把它当作精确的已执行源码证据。后续入口已经在运行前捕获源码并记录变化。</p></details>
-<p class="quiet">生成时间：{stamp}。本页从保存的结果重建，不重新评分。研究目标尚未完成。</p></section></main></body></html>'''
-    (HERE / "index.html").write_text(document, encoding="utf-8")
-    sources = [NATIVE / "summary.json", NATIVE / "provenance.json", NATIVE / "video_verification.json",
-               CALIBRATION / "summary.json", CALIBRATION / "video_verification.json"]
-    (HERE / "evidence.json").write_text(json.dumps({"generated_at": stamp, "episodes": evidence,
-        "source_sha256": {path.relative_to(ROOT).as_posix(): sha256(path.read_bytes()).hexdigest() for path in sources},
-        "status": "diagnostic_only", "goal_complete": False}, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(HERE / "index.html")
+<section><h2>用于后续模型校准的实际示范 Dataset</h2><p>已采集 {demo_total} 条接触操作运行，{demo_success} 条形成有效示范，共 {frame_total} 个双相机/本体状态/动作监督样本。
+目标来自实际下一物理步的关节变化，避免把大幅 IK 目标跳变当成已执行动作。失败运行保留视频与原始记录，不生成有效训练目标。</p>
+<div class="table-wrap"><table><thead><tr><th>数据批次</th><th>有效示范 / 运行</th><th>train 样本</th><th>dev 样本</th><th>查看</th></tr></thead><tbody>{''.join(dataset_tables)}</tbody></table></div>
+<p>红、蓝操作能够完成。最初的绿色示范显示物体被推离原始取物点、动作未重新定位；增加实际位置反馈后已有成功案例，仍有失败。
+因此每类物体和布局需要通过真实操作检查，不能只凭 IK 接口或场景定义认定任务可用。</p>
+<p>样本按输入文件 stem 匹配腕部图像、状态和目标，无配对 manifest。加载器输出 15×8 动作块并标出有效时段，已逐样本读取核查；本轮尚未训练新的模型权重，示范成绩不计入模型评测。</p>
+{''.join(sample_panels)}</section>
+<section><h2>已确认的进展与未完成项</h2><p>已实际运行：真实机械臂模型、生成式伙伴选择意图、受力接触拿放、人物显示对齐、多活动契约、图像动作监督和逐事件视频核查。
+人体瞬时搬运已被连续接触操作替换；最新执行器还加入了物体位置反馈、腕部方向与释放退让队列。</p>
+<p>仍缺少：经过校准的模型基础操作、多模型能力差异、稳健的动作恢复、动态人类长期记忆与开放目标、多人格/未见任务组合，以及完整人体物理与真人效度。
+整体研究目标仍在进行。</p>
+<h3>接下来优先完成</h3><ol><li>让每个任务的基本操作与动态物体恢复通过实测，清除执行器和场景带来的地板问题。</li>
+<li>使用真实示范校准模型的操作与训练分布，再评测其对人的意图改变、让行、干预和接管的响应。</li>
+<li>扩展到现有九类活动契约、开放目标与持续历史，加入不同生成式伙伴和更多真实具身算法。</li></ol></section>
+<section><h2>原始证据与核查</h2><p>{link(native / 'video_verification.json', '本次真实视频核验')} · {link(native / 'provenance.json', '模型、控制设置与源码记录')}
+ · {link(native / 'model_execution_verification.json', '模型像素与动作链路核查')}
+ · {link(ROOT / 'experiments/goal_progress_20261005/index.html', '此前阶段报告')}</p>
+<p>每条重要运行均保存真实 Sim 视频及逐帧时间轴；轨迹画布用于审计。不同执行器版本是工程诊断，不能累积成独立模型样本或当作严格配对的效果提升。</p>
+<details><summary>数据、实现与复现边界</summary><p>模型和大型数据实际保存在数据盘，仓库通过软链接访问。本轮使用已有本地权重，没有下载新模型或数据集。
+后续下载只允许中国大陆镜像或本土服务，不通过 VPN。</p><p>Dataset 的 train/dev 划分是示范检查范围，不是已验证的跨任务或跨人泛化。
+Robot 模型只有 π0.5；Qwen 为合成伙伴。人的动作原语属于执行器，几何教师只用于校准与示范生成。</p>
+<p>{link(ROOT / 'src/hrc_pilot/human_contact.py', '动作执行器')} · {link(ROOT / 'experiments/continuous_v2/physical_frame_dataset.py', '按 stem 加载的数据接口')}
+ · {link(ROOT / 'scripts/collect_contact_demonstrations.py', '实际示范采集入口')}</p></details>
+<p class="quiet">记录批次：{native.name}。生成时间：{stamp}。本页从保存结果重建，不重新评分。</p></section></main></body></html>'''
+    (HERE / 'index.html').write_text(document, encoding='utf-8')
+    (HERE / 'evidence.json').write_text(json.dumps({'generated_at': stamp, 'native_run': native.name,
+        'episodes': evidence, 'demonstration_episodes': demo_total, 'valid_demonstration_episodes': demo_success,
+        'valid_frame_samples': frame_total, 'goal_complete': False, 'research_validity': 'unverified',
+        'source_sha256': {path.relative_to(ROOT).as_posix(): sha256(path.read_bytes()).hexdigest() for path in source_paths},
+    }, ensure_ascii=False, indent=2), encoding='utf-8')
+    print(HERE / 'index.html')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

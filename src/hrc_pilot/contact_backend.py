@@ -1,7 +1,7 @@
 """自由刚体、夹爪摩擦接触与稳定放置观测；不绑定机器人和物体。
 
-Avatar 的人体动作和拿放仍沿用 VC 的运动学执行器，单独披露。机器人只能
-提交关节目标：抓取、滑落、碰撞和落地由 Genesis 求解，监测器只记录结果。
+机器人与可选接触手提交关节目标：抓取、滑落、碰撞和落地由 Genesis 求解。
+人体的显示骨架仍为 IK 驱动，完整人体动力学与安全效度单独披露。
 """
 from __future__ import annotations
 
@@ -34,6 +34,12 @@ class ContactWorkspace(VCWorkspace):
         self.finger_touching = set()
         self.last_placement = {}
         self.monitor_active = False
+        self.human_hand = None
+        self.human_executor = None
+        self.human_finger_links = set()
+        self.human_contact_grasps = set()
+        self._human_held = set()
+        self.last_grasp_role = {}
         kwargs["robot_grasp_model"] = "friction_contact"
         super().__init__(**kwargs)
         self.finger_links = {self.robot.get_link(name).idx for name in ("left_finger", "right_finger")}
@@ -45,10 +51,79 @@ class ContactWorkspace(VCWorkspace):
         self.robot.set_dofs_kv(np.array([450, 450, 350, 350, 200, 200, 200, 20, 20]))
         self.robot.set_dofs_force_range(np.array([-87, -87, -87, -87, -12, -12, -12, -20, -20]),
                                         np.array([87, 87, 87, 87, 12, 12, 12, 20, 20]))
+        if self.human_hand is not None:
+            assert self.avatar.robot.box.geoms, "人体碰撞盒缺少实际几何"
+            assert all(geom._contype == 2 and geom._conaffinity == 8 for geom in self.avatar.robot.box.geoms), "人体碰撞盒过滤未生效"
+            from .human_contact import HumanContactExecutor
+            self.human_finger_links = {self.human_hand.get_link(name).idx for name in ("left_finger", "right_finger")}
+            self.human_executor = HumanContactExecutor(self)
+
+    def _build_partner_entities(self, assets):
+        if self.human_manipulation_model != "articulated_contact_hand":
+            return
+        from .human_contact import contact_hand_asset
+        gs = self.gs
+        self.human_hand = self.add_entity("human_hand", "physical_contact_hand",
+            gs.morphs.URDF(file=str(contact_hand_asset(assets)), fixed=True, merge_fixed_links=False),
+            material=gs.materials.Rigid(friction=0.8), surface=gs.surfaces.Default(color=(0.71, 0.53, 0.38)))
+        # Pinned Genesis URDF parser assigns contact bits to each collision geom.
+        # Keep hand/object and hand/robot collisions, exclude the actor's own box.
+        for geom in self.human_hand.geoms:
+            if geom._contype or geom._conaffinity:
+                geom._contype = 4
+                geom._conaffinity = 1 | 8
+        for geom in self.robot.geoms:
+            if geom._contype or geom._conaffinity:
+                geom._contype = 8
+                geom._conaffinity = 1 | 2 | 4 | 8
+        # A complete room around the unchanged shared worktable, without downloaded assets.
+        self.add_entity("structure", "back_wall", gs.morphs.Box(size=(4.0, 0.08, 2.7), pos=(0.4, 1.8, 1.35), fixed=True),
+                        surface=gs.surfaces.Default(color=(0.86, 0.85, 0.80)))
+        for x in (-0.65, 0.05, 0.75):
+            self.add_entity("structure", f"cabinet_{x}", gs.morphs.Box(size=(0.66, 0.45, 0.9), pos=(x, 1.52, 0.45), fixed=True),
+                            surface=gs.surfaces.Default(color=(0.43, 0.57, 0.53)))
+            self.add_entity("structure", f"counter_{x}", gs.morphs.Box(size=(0.69, 0.50, 0.04), pos=(x, 1.52, 0.92), fixed=True),
+                            surface=gs.surfaces.Default(color=(0.80, 0.76, 0.64)))
+            self.add_entity("structure", f"upper_cabinet_{x}", gs.morphs.Box(size=(0.63, 0.30, 0.65), pos=(x, 1.60, 1.86), fixed=True),
+                            surface=gs.surfaces.Default(color=(0.77, 0.82, 0.77)))
+
+    def add_entity(self, type, name, morph, **kwargs):
+        if (getattr(self, "human_manipulation_model", None) == "articulated_contact_hand"
+                and type == "avatar_box" and isinstance(morph, self.gs.morphs.Box)):
+            morph.contype = 2
+            morph.conaffinity = 8
+        elif (getattr(self, "human_manipulation_model", None) == "articulated_contact_hand"
+                and type == "object" and isinstance(morph, self.gs.morphs.Box)):
+            morph.contype = 1
+            morph.conaffinity = 1 | 4 | 8
+        return super().add_entity(type, name, morph, **kwargs)
+
+    def held_by_human(self):
+        if getattr(self, "human_executor", None) is not None:
+            assert all(item is None for item in self.avatar.robot.attached_object), "接触手后端不得绑定物体到 Avatar"
+            assert self.attachment is None, "接触后端不得绑定物体到机器人"
+            return tuple(sorted(self._human_held))
+        return super().held_by_human()
+
+    def continuous_apply_human_command(self, command):
+        if self.human_executor is None:
+            return super().continuous_apply_human_command(command)
+        self.continuous_human_command = command
+        self.log.add(self.step_count, "human_command", intent=command.intent, object_id=command.object_id,
+                     destination=command.destination, speed_mps=float(command.speed_mps),
+                     source="partner_policy_to_contact_executor")
+        self.human_executor.accept(command)
+
+    def _continuous_human_step(self):
+        if self.human_executor is not None:
+            self.human_executor.step()
 
     def begin_episode(self, *args, **kwargs):
         self.monitor_active = False
         self.previous_control = self.home.copy()
+        if self.human_executor is not None:
+            self.human_executor.reset()
+        self._human_held = set()
         super().begin_episode(*args, **kwargs)
 
     def begin_benchmark(self):
@@ -58,6 +133,11 @@ class ContactWorkspace(VCWorkspace):
         self.stable_placements = {}
         self.finger_touching = set()
         self.last_placement = {}
+        self.human_contact_grasps = set()
+        self.last_grasp_role = {}
+        self._human_held = set()
+        if self.human_executor is not None:
+            self.human_executor.records = []
         self.initial_physical_positions = self.positions()
         self.monitor_active = True
 
@@ -87,6 +167,7 @@ class ContactWorkspace(VCWorkspace):
         row = {"physics_step": self.step_count + 1, "time_s": (self.step_count + 1) / 60,
                "objects": {}, "robot_object_pose_writes": 0}
         held_by_human = set(self.held_by_human())
+        physical_human_held = set()
         finger_touching = set()
         for name, entity in self.objects.items():
             contacts = {key: tensor_array(value) for key, value in entity.get_contacts().items()}
@@ -94,12 +175,18 @@ class ContactWorkspace(VCWorkspace):
             loaded = np.linalg.norm(forces, axis=-1) > 0.01
             links = set(int(value) for value in np.r_[contacts["link_a"][loaded], contacts["link_b"][loaded]])
             touched_fingers = links & self.finger_links
+            touched_human_fingers = links & getattr(self, "human_finger_links", set())
+            if len(touched_human_fingers) == 2:
+                physical_human_held.add(name)
+            human_held = (len(touched_human_fingers) == 2 if getattr(self, "human_executor", None) is not None
+                          else name in held_by_human)
             position = tensor_array(entity.get_pos())
             velocity = tensor_array(entity.get_vel())
             contact = {"position": position.tolist(), "velocity": velocity.tolist(),
                        "finger_links": sorted(touched_fingers),
                        "supported": bool(links & self.support_links),
-                       "human_held": name in held_by_human,
+                       "human_held": human_held,
+                       "human_finger_links": sorted(touched_human_fingers),
                        "contact_count": len(contacts["link_a"]),
                        "contact_pairs": [{"link_a": int(a), "link_b": int(b), "force_a_n": force.tolist()}
                                          for a, b, force in zip(contacts["link_a"], contacts["link_b"], forces)],
@@ -109,14 +196,23 @@ class ContactWorkspace(VCWorkspace):
                 finger_touching.add(name)
             # A grasp witness requires both actual fingers and a lift from the table.
             lifted = float(position[2] - self.initial_physical_positions[name][2]) > 0.025
-            if name not in held_by_human and len(touched_fingers) == 2 and lifted:
+            if not human_held and len(touched_fingers) == 2 and lifted:
                 if name not in self.contact_grasps:
                     self.log.add(self.step_count + 1, "robot_contact_grasp", object_id=name,
                                  measured_position=position.tolist(), finger_links=sorted(touched_fingers))
                 self.contact_grasps.add(name)
+                if hasattr(self, "last_grasp_role"):
+                    self.last_grasp_role[name] = "robot"
+            if human_held and lifted:
+                if name not in self.human_contact_grasps:
+                    self.log.add(self.step_count + 1, "human_contact_grasp", object_id=name,
+                                 measured_position=position.tolist(), finger_links=sorted(touched_human_fingers))
+                self.human_contact_grasps.add(name)
+                self.last_grasp_role[name] = "human"
             # Only a physically released, supported and stationary object can commit.
-            stable = (name in self.contact_grasps and name not in held_by_human
-                      and not touched_fingers and contact["supported"]
+            grasped = name in self.contact_grasps or name in getattr(self, "human_contact_grasps", set())
+            stable = (grasped and not human_held
+                      and not touched_fingers and not touched_human_fingers and contact["supported"]
                       and float(np.linalg.norm(velocity)) < 0.04)
             destination = next((key for key, point in self.regions.items()
                                 if np.linalg.norm(position - point) < 0.065), None) if stable else None
@@ -126,20 +222,29 @@ class ContactWorkspace(VCWorkspace):
             if destination is not None and dwell >= self.placement_dwell_steps:
                 if self.last_placement.get(name) == destination:
                     continue
-                if _prerequisites_satisfied(self.scenario, "robot", name, destination, self.completed_skills):
-                    skill = f"robot:{name}:{destination}"
+                role = getattr(self, "last_grasp_role", {}).get(name, "robot")
+                if _prerequisites_satisfied(self.scenario, role, name, destination, self.completed_skills):
+                    skill = f"{role}:{name}:{destination}"
                     if skill not in self.completed_skills:
                         self.completed_skills.append(skill)
                     self.last_placement[name] = destination
-                    self.log.add(self.step_count + 1, "robot_transfer_completed", object_id=name,
+                    self.log.add(self.step_count + 1, f"{role}_transfer_completed", object_id=name,
                                  destination=destination, source="friction_contact",
                                  stable_duration_s=dwell / 60, measured_position=position.tolist())
         self.finger_touching = finger_touching
+        if getattr(self, "human_executor", None) is not None:
+            self._human_held = physical_human_held
+            rendered_hand = self.avatar.robot.get_hand_pos(1)
+            actual_hand = tensor_array(self.human_hand.get_qpos())[:3]
+            row["human_hand_alignment"] = {"rendered_wrist_xyz": rendered_hand.tolist(),
+                                            "physical_palm_xyz": actual_hand.tolist(),
+                                            "distance_m": float(np.linalg.norm(rendered_hand - actual_hand))}
         self.contact_records.append(row)
 
     def finish_episode(self, settle_steps=24):
         super().finish_episode(settle_steps)
-        for filename, rows in (("contacts.jsonl", self.contact_records), ("robot_control.jsonl", self.control_records)):
+        for filename, rows in (("contacts.jsonl", self.contact_records), ("robot_control.jsonl", self.control_records),
+                               ("human_control.jsonl", self.human_executor.records if self.human_executor else [])):
             (self.output / filename).write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
         (self.output / "physics_contract.json").write_text(json.dumps({
             "robot_grasp_model": "friction_contact", "object_fixed": False, "object_collision": True,
@@ -149,8 +254,11 @@ class ContactWorkspace(VCWorkspace):
             "finger_target_speed_limit_m_s": self.finger_speed_m_s,
             "contact_grasp_objects": sorted(self.contact_grasps),
             "placement_dwell_s": self.placement_dwell_steps / 60,
-            "human_manipulation_model": "avatar_kinematic_attachment",
-            "interpretation": "机器人自由刚体摩擦抓放；人体动作和拿放仍为运动学抽象，尚未验证人体接触安全。",
+            "human_manipulation_model": self.human_manipulation_model,
+            "human_contact_grasp_objects": sorted(self.human_contact_grasps),
+            "human_object_pose_writes_during_control": 0 if self.human_executor else None,
+            "human_hand_model": "six_dof_yaw_pinch_contact_proxy" if self.human_executor else None,
+            "interpretation": "机器人与可选接触手通过关节受力操作自由刚体；显示人体骨架是 IK，手代理不是完整人体动力学或真人接触安全证据。",
         }, ensure_ascii=False, indent=2), encoding="utf-8")
         from .motion_continuity import verify_motion_continuity
         verify_motion_continuity(self.output)

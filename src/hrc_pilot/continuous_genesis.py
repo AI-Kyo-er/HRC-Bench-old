@@ -157,7 +157,8 @@ def make_genesis_backend_factory(*, assets: Path, output_root: Path, backend: st
                                  viewer: bool = False, policy: str = "external_model",
                                  settle_steps: int = 90,
                                  minimum_transfer_phase_steps: int = 12,
-                                 robot_grasp_model: str = "kinematic_attachment"):
+                                 robot_grasp_model: str = "kinematic_attachment",
+                                 human_manipulation_model: str = "avatar_kinematic_attachment"):
     """返回可直接交给 `run_continuous_episode` 的 Genesis backend 工厂。"""
     def factory(scenario):
         workspace_class = VCWorkspace
@@ -167,7 +168,8 @@ def make_genesis_backend_factory(*, assets: Path, output_root: Path, backend: st
         workspace = workspace_class(assets=assets, backend=backend, resolution=resolution,
                                 render_stride=render_stride, viewer=viewer, scenario=scenario,
                                 minimum_transfer_phase_steps=minimum_transfer_phase_steps,
-                                robot_grasp_model=robot_grasp_model)
+                                robot_grasp_model=robot_grasp_model,
+                                human_manipulation_model=human_manipulation_model)
         return GenesisContinuousAdapter(workspace, scenario=scenario, output_root=output_root,
                                         policy=policy, settle_steps=settle_steps)
     return factory

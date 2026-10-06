@@ -136,6 +136,8 @@ class QwenHumanPolicy:
             "human_position_xyz": [round(float(x), 3) for x in observation.human_position],
             "robot_ee_xyz": [round(float(x), 3) for x in observation.robot_ee],
             "human_holds": list(observation.held_by_human),
+            "your_hand_position_xyz": observation.human_hand_position,
+            "your_visible_motor_phase": observation.human_motor_phase,
             "publicly_completed_contributions": list(observation.completed_skills),
             "robot_action": observation.active_robot_action,
             "robot_action_phase": observation.action_phase,

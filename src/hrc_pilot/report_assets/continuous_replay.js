@@ -108,6 +108,7 @@ function fillReport() {
   const trained = provenance.trained_model === true;
   const calibration = provenance.experiment === "joint_control_calibration";
   const physicalContact = provenance.grasp_model === "friction_contact";
+  const humanContact = provenance.human_manipulation_model === "articulated_contact_hand";
   const generativePartner = report.episodes.some(episode => episode.metrics.partner_mode === "qwen_llm");
   const motionFailures = report.episodes.filter(episode => episode.motion_verification?.status === "failed");
   if (motionFailures.length) {
@@ -134,7 +135,7 @@ function fillReport() {
     : "本次机器人策略见运行设置。greedy_public / request_help_public / 历史探针均为透明手写基线，不代表先进具身模型。";
   document.getElementById("backend-limits").textContent = genesis
     ? physicalContact
-      ? "本次机器人使用真实摩擦接触：50×50×100 mm、0.10 kg 的自由刚体收纳块受重力、碰撞和夹爪作用，不与机器人绑定，也不会在到达目标后被移动坐标。抓取证据需双指接触并抬离桌面；释放后稳定支撑至少 0.4 秒才提交贡献。关节目标限速并保留请求与实际控制记录。人体拿放仍是 VC 运动学抽象，尚未验证人体接触安全；也未声称收纳块等同真实杯子。"
+      ? `本次机器人使用真实摩擦接触：50×50×100 mm、0.10 kg 的自由刚体收纳块受重力、碰撞和夹爪作用，不与机器人绑定，也不会在到达目标后被移动坐标。抓取证据需双指接触并抬离桌面；释放后稳定支撑至少 0.4 秒才提交贡献。关节目标限速并保留请求与实际控制记录。${humanContact ? "人的物体拿放也由关节驱动的接触手执行，停止调用 Avatar 对物体坐标的直接写入；显示人体采用步行动作数据和躯干 IK，并按实际手位置对齐。接触手和人体碰撞都是代理，尚未验证完整人体动力学、灵巧手能力或真人效度。" : "人体拿放仍是 VC 运动学抽象，尚未验证人体接触安全。"}收纳块不等同真实杯子。`
       : "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。接触抓握、人机碰撞安全和真人效度尚未验证。是否运行训练模型，以本页具体策略及输入输出记录为准。真实 Sim 视频是本实验的主视觉证据，轨迹画布用于逐 tick 审计。"
     : "本次运行 ContinuousWorld：简化几何与操作抽象，用于检查协议和伙伴机制。结果没有验证真实接触抓取、接触安全、先进 VLA/WLA 推理或真人协作。";
   document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。实验等级：${provenance.experiment_tier || "旧结果未记录"}；后端：${provenance.backend || "未记录"}；机器人策略：${provenance.history_counterfactual ? "greedy_public / request_help_public" : provenance.policy || "未记录"}；seed：${metric(provenance.seeds?.join(", ") ?? provenance.seed)}。`));
@@ -145,7 +146,11 @@ function fillReport() {
     if (provenance[key]) document.getElementById("setup-description").append(element("p", provenance[key]));
   }
   document.getElementById("setup-description").append(element("p", trained ? `本次加载训练权重，模型只获得双相机像素、本体状态与公开语言；几何标签虽在审计文件中存在，但不会进入原生 VLA 推理请求。${generativePartner ? "伙伴由本地 Qwen 读取公开观察后生成意图、速度和公开表达，完整决定与耗时可查看。" : "伙伴由规则驱动，内部状态仍隔离在评测端。"}` : `${provenance.policy === "greedy_public" ? "机器人由手写参考策略驱动" : "本次使用公开记录中指定的手写校准或机制策略"}，${generativePartner ? "人的意图由本地 Qwen 根据公开观察生成" : "人的贡献由可替换伙伴规则驱动"}。参考策略可读取公开几何与消息，内部伙伴变量属于评测端。`));
-  if (physicalContact) document.getElementById("setup-description").append(element("p", "接触记录和逐物理步控制保存在 contacts.jsonl、robot_control.jsonl 与 physics_contract.json。视频中物体的落地、被碰动、滑落或未抓到，均保留为物理执行结果。底层模型不会被教师接管；IK 教师只用于独立校准与后续数据生成。", "notice"));
+  if (physicalContact) document.getElementById("setup-description").append(element("p", `接触记录和逐物理步控制保存在 contacts.jsonl、robot_control.jsonl 与 physics_contract.json。${humanContact ? "human_control.jsonl 保存人的实际手关节、移动、伸手与释放；人的意图由本页指定策略决定，执行器只完成动作原语，不选择任务和分工。" : ""}视频中物体的落地、被碰动、滑落或未抓到，均保留为物理执行结果。底层模型不会被教师接管；IK 教师只用于独立校准与后续数据生成。`, "notice"));
+  if (provenance.experiment === "human_contact_hand_calibration") {
+    document.getElementById("report-title").textContent = "人的接触手能否连续抓放？";
+    document.getElementById("robot-implementation").textContent = "机器人保持关节位置。人类动作命令由几何教师产生，以校准真实摩擦夹持、连续搬运、稳定释放和显示骨架对齐；没有加载策略训练权重，因此不是模型性能结果。";
+  }
   if (report.episodes.some(episode => episode.metrics.partner_mode === "dynamic")) {
     document.getElementById("setup-description").append(element("p", "动态意图伙伴把稳定 profile（节奏、主动性、合作倾向）与当前长期意图分开建模；它只从公开消息、机器人完成/失败和共同进度写入有限事件记忆，再重新选择贡献。profile、当前意图、意图切换次数和记忆大小都写入 metrics，便于审计；这些规则变量不是对真人心理的直接测量。", "notice"));
   }
