@@ -37,6 +37,9 @@ class Observation:
     visible_human_action: str = ""
     human_hand_position: tuple[float, float, float] | None = None
     human_motor_phase: str = "unknown"
+    # Proprioceptive/visible execution measurements, not evaluator outcomes.
+    human_execution: dict[str, Any] = field(default_factory=dict)
+    robot_motion: dict[str, Any] = field(default_factory=dict)
     # Public task semantics supplied by the scenario, never private goals or
     # evaluator state.  These fields let a VLA/WLA distinguish task families
     # without reverse-engineering a hard-coded benchmark name.

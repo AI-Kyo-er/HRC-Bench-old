@@ -110,7 +110,7 @@ class QwenHumanPolicy:
                      and "input_ids" in encoded else encoded)
         with torch.inference_mode():
             generation_kwargs = {
-                "max_new_tokens": 256, "do_sample": True,
+                "max_new_tokens": self.generation_token_limit, "do_sample": True,
                 "temperature": 0.45, "top_p": 0.85,
                 "pad_token_id": self._tokenizer.eos_token_id,
             }
@@ -120,6 +120,8 @@ class QwenHumanPolicy:
                 generated = self._model.generate(encoded, attention_mask=torch.ones_like(encoded), **generation_kwargs)
         return self._tokenizer.decode(
             generated[0, input_ids.shape[-1]:], skip_special_tokens=True).strip()
+
+    generation_token_limit = 256
 
     def _system_prompt(self) -> str:
         return (

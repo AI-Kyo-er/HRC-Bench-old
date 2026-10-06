@@ -7,10 +7,18 @@ class NativeTaskContract:
     family: str = 'moving_receptacle'
 
     def __post_init__(self):
-        if self.family not in {'moving_receptacle','clearance_return'}:
+        if self.family not in {'moving_receptacle','clearance_return','prepare_receptacle','shared_workspace'}:
             raise ValueError('未知原生协作任务族')
 
     def human_instruction(self):
+        if self.family=='shared_workspace':
+            return ('Move cookies_1 to the green near_human area to clear your side of the shared table. '
+                    'The robot places its specified bowl on plate_1. Coordinate access to the nearby objects '
+                    'and tell the robot when you need room; your work does not require waiting for its placement.')
+        if self.family=='prepare_receptacle':
+            return ('Prepare the receiving plate by moving plate_1 to the green near_human area first. '
+                    'The robot may pick up its bowl while you work, but must place it only after the plate is ready. '
+                    'Communicate when you need room and when you have actually finished preparing the plate.')
         if self.family=='clearance_return':
             return ('First step back from the shared workspace, then return and move plate_1 '
                     'to the green near_human area. Coordinate your timing with the robot; '
@@ -18,11 +26,23 @@ class NativeTaskContract:
         return 'I want to move plate_1 to the green near_human area while you place the specified bowl on it.'
 
     def robot_instruction(self, instruction):
+        if self.family=='shared_workspace':
+            return instruction+'. The human moves cookies to clear their side of the shared table. Coordinate access to nearby objects.'
+        if self.family=='prepare_receptacle':
+            return instruction+'. The human first moves the receiving plate to the green area. You may pick up the bowl, but wait for the prepared plate before placing it.'
         if self.family=='clearance_return':
             return (instruction+'. The human first steps back and then returns to prepare the plate. '
                     'You may pick up the bowl, but hold it until the human has returned and moved '
                     'the plate to the green area. Then place the bowl on the prepared plate.')
         return instruction
+
+    @property
+    def human_object_id(self):
+        return 'cookies_1' if self.family=='shared_workspace' else 'plate_1'
+
+    @property
+    def placement_requires_human_ready(self):
+        return self.family in {'clearance_return','prepare_receptacle'}
 
 
 class NativeTaskEvidence:
@@ -45,7 +65,7 @@ class NativeTaskEvidence:
             self.returned=True;self.events.append({'time_s':time_s,'event':'body_return_observed'})
         human_ready=human_placement_ready and (self.returned if self.contract.family=='clearance_return' else True)
         if robot_relation and not self.previous_robot_relation:
-            if self.contract.family=='clearance_return' and not human_ready:
+            if self.contract.placement_requires_human_ready and not human_ready:
                 self.premature_placements+=1
                 self.events.append({'time_s':time_s,'event':'placement_before_public_prerequisite'})
             else:

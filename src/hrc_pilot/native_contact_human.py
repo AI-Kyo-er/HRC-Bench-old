@@ -6,9 +6,47 @@ import numpy as np
 from .continuous import HumanCommand
 from .human_contact import bounded_motion
 from .llm_human import QwenHumanPolicy, PERSONAS
+import json
 
 
 class NativeQwenHuman(QwenHumanPolicy):
+    generation_token_limit = 384
+
+    def reset(self, seed):
+        super().reset(seed)
+        self.generated_plan=[]
+        self.motor_observation_history=[]
+        self.wait_condition=''
+
+    def _prompt(self, observation):
+        visible=json.loads(super()._prompt(observation).split('\n',1)[1])
+        measured={'time_s':observation.time_s,'human':observation.human_execution,
+                  'robot':observation.robot_motion}
+        self.motor_observation_history.append(measured)
+        visible.update(your_measured_execution=observation.human_execution,
+                       robot_measured_motion=observation.robot_motion,
+                       your_measured_execution_history=self.motor_observation_history[-6:],
+                       your_previous_generated_plan=self.generated_plan,
+                       your_previous_wait_condition=self.wait_condition,
+                       memory_semantics='memory_note是你写下的解释，不是执行成功证明；当前测量与执行历史优先。')
+        return '根据公开分工和实际执行反馈，更新自己的目标与计划并选择一个当前动作：\n'+json.dumps(visible,ensure_ascii=False,separators=(',',':'))
+
+    def step(self, observation):
+        count=len(self.policy_io)
+        output=super().step(observation)
+        if len(self.policy_io)>count and self.policy_io[-1]['parse_error'] is None:
+            value=self._parse(self.policy_io[-1]['raw_output'])
+            plan=value.get('plan',[])
+            if isinstance(plan,list):self.generated_plan=[str(item)[:180] for item in plan[:5]]
+            self.wait_condition=str(value.get('wait_condition',''))[:300]
+            self.policy_io[-1]['generated_plan']=self.generated_plan.copy()
+            self.policy_io[-1]['wait_condition']=self.wait_condition
+        return output
+
+    def audit_state(self):
+        return {**super().audit_state(),'generated_plan':self.generated_plan,
+                'measured_execution_history':self.motor_observation_history,'wait_condition':self.wait_condition}
+
     def _system_prompt(self):
         return (
             '你是正在与机械臂共同准备餐桌的人。你有自己的较长期工作目标，'
@@ -28,7 +66,14 @@ class NativeQwenHuman(QwenHumanPolicy):
             'current_goal描述你希望实现的较长期工作结果；观察、推和让行是推进目标的当前动作。'
             'recent_public_decisions和旧经验是过去的计划与记录，当前坐标优先用于判断现在的位置；'
             '经验中的旧位置不能当成当前位置。观察等待时，在reason中说明当前等待的理由或条件。'
-            '只输出JSON对象：intent、object_id、destination、message、speed_mps、reason、memory_note、current_goal。'
+            '先理解公开分工和依赖，自己在plan中列出接下来几步；每次依据测量决定继续、调整或放弃。'
+            'your_measured_execution报告实际身体、手、物体位置和剩余距离；发出命令并不代表到达。'
+            'running表示低层动作还在执行，observe会中断当前动作并保持原地，继续动作需再次选同一意图。'
+            'motor_finished只表示运动原语结束，不保证物体到达目标；请检查物体位置和剩余距离。'
+            'robot_measured_motion只描述可见运动，不能当作机器人已完成或已理解等待的证明。'
+            '当计划与实际反馈不一致时，依据当前位置重新规划；不要把过去写下的已返回等文字当成事实。'
+            '若选择等待，wait_condition写具体可观察条件；持续没有该条件时可询问或重新协调。'
+            '只输出JSON对象：intent、object_id、destination、message、speed_mps、reason、memory_note、current_goal、plan、wait_condition。'
             'message用简短英文与机器人交流，reason、memory_note和current_goal用中文。'
             'memory_note只记录有新观察依据的经验，不写机械臂隐藏计划或评测分数。'
             '不需要读取任何未公开的任务标签、机器人计划或评测器。')
@@ -127,6 +172,8 @@ class NativeContactHuman:
         self.target = self.reference.copy()
         self.dt = float(env.sim.model.opt.timestep)
         self.records = []
+        self.accepted_intent='observe'
+        self.command_started_at=float(env.sim.data.time)
         self.physics_steps=0
         self.avatar=None
         self.body_base=np.array([.25,.60]);self.body_target=self.body_base.copy();self.body_velocity=np.zeros(2)
@@ -147,6 +194,9 @@ class NativeContactHuman:
 
     def accept(self, command):
         signature = (command.intent, command.object_id, command.destination)
+        if signature!=self.signature:
+            self.command_started_at=float(self.env.sim.data.time)
+        self.accepted_intent=command.intent
         if command.intent != 'push':
             self.signature = signature
             if command.intent in {'yield','away','return'}:
@@ -184,6 +234,24 @@ class NativeContactHuman:
         self.push_end[:2] += goal[:2]-source[:2]+self.direction*.02
         self.phase='approach'
         self.target=self.push_start+[0,0,.14]
+
+    def public_feedback(self):
+        """实际执行器测量；无任务标签、私有评分或策略动作建议。"""
+        body_distance=float(np.linalg.norm(self.body_base-self.body_target))
+        hand_distance=float(np.linalg.norm(self.position()-self.target))
+        running=self.phase!='idle' or body_distance>.01 or hand_distance>.02
+        result={'accepted_intent':self.accepted_intent,'motor_phase':self.phase,
+                'status':'holding_position' if self.accepted_intent=='observe' else ('running' if running else 'motor_finished'),
+                'command_elapsed_s':float(self.env.sim.data.time)-self.command_started_at,
+                'body_xy':self.body_base.tolist(),'body_target_xy':self.body_target.tolist(),
+                'body_remaining_distance_m':body_distance,'fingertip_xyz':self.position().tolist(),
+                'fingertip_target_xyz':self.target.tolist(),'fingertip_remaining_distance_m':hand_distance}
+        if self.accepted_intent=='push' and self.object_id is not None:
+            actual=self.object_position(self.object_id)
+            result.update(object_id=self.object_id,destination=self.destination,
+                          object_xyz=actual.tolist(),destination_xyz=list(self.regions[self.destination]),
+                          object_remaining_xy_distance_m=float(np.linalg.norm(actual[:2]-np.asarray(self.regions[self.destination])[:2])))
+        return result
 
     def physics_step(self):
         self.body_base,self.body_velocity=bounded_motion(self.body_base,self.body_velocity,self.body_target,
