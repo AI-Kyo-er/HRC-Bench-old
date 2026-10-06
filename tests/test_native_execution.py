@@ -35,6 +35,19 @@ def test_generated_plan_is_reconsidered_by_model_and_never_routes_actions():
     assert 'task_success' not in prompts[-1]
 
 
+def test_invalid_command_reaches_next_model_input_with_reason_and_no_automatic_repair():
+    prompts=[]
+    policy=NativeQwenHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),model_path='/tmp/no-model',
+                          generator=lambda prompt:prompts.append(prompt) or
+                          '{"intent":"push","object_id":"plate_1","destination":"plate_1"}',
+                          decision_interval_steps=20)
+    assert policy.step(public_observation()).command.intent=='observe'
+    assert policy.step(public_observation(1)).command.intent=='observe'
+    visible=json.loads(prompts[-1].split('\n',1)[1])
+    assert visible['your_last_command_validation']['errors']==['unknown_destination_region']
+    assert visible['action_interface']['push_destination_values']==['near_human']
+
+
 def test_motor_finished_does_not_claim_object_goal_completed():
     actor=NativeContactHuman.__new__(NativeContactHuman)
     actor.env=SimpleNamespace(sim=SimpleNamespace(data=SimpleNamespace(time=4.)))

@@ -88,6 +88,7 @@ def main():
                   Path('src/hrc_pilot/native_avatar.py'),
                   Path('src/hrc_pilot/native_task_contracts.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
+                  Path('src/hrc_pilot/native_action_validation.py'),
                   Path(__file__).with_name('probe_egl_devices.py')]
     hashes = {str(p): sha256(p.read_bytes()).hexdigest() for p in code_paths}
     episodes, provenance_episodes = [], []
@@ -316,6 +317,7 @@ def main():
         'task_family':args.task_family,'human_public_work_requirement':contract.human_instruction(),
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
         'human_execution_feedback':'measured_motor_state_and_public_geometry_no_evaluator_outcomes',
+        'human_action_validation_feedback':True,
         'human_plan_execution':'Qwen reselects each action; generated plans never routed by runtime',
         'human_torch_seed_rule':'seed + 1000*task_id + init_state_id',
         'human_model':str(args.human_model) if partner is not None else None,

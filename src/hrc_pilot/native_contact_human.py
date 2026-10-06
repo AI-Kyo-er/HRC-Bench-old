@@ -6,6 +6,7 @@ import numpy as np
 from .continuous import HumanCommand
 from .human_contact import bounded_motion
 from .llm_human import QwenHumanPolicy, PERSONAS
+from .native_action_validation import command_feedback
 import json
 
 
@@ -17,6 +18,7 @@ class NativeQwenHuman(QwenHumanPolicy):
         self.generated_plan=[]
         self.motor_observation_history=[]
         self.wait_condition=''
+        self.last_command_feedback=None
 
     def _prompt(self, observation):
         visible=json.loads(super()._prompt(observation).split('\n',1)[1])
@@ -28,6 +30,12 @@ class NativeQwenHuman(QwenHumanPolicy):
                        your_measured_execution_history=self.motor_observation_history[-6:],
                        your_previous_generated_plan=self.generated_plan,
                        your_previous_wait_condition=self.wait_condition,
+                       your_last_command_validation=self.last_command_feedback,
+                       your_current_assignments=[item for item in self.public_task_memory.values() if item['assigned_role']=='human'],
+                       robot_current_assignments=[item for item in self.public_task_memory.values() if item['assigned_role']=='robot'],
+                       action_interface={'intents':['push','observe','yield','away','return'],
+                                         'push_object_id_values':list(observation.objects),
+                                         'push_destination_values':list(observation.regions)},
                        memory_semantics='memory_note是你写下的解释，不是执行成功证明；当前测量与执行历史优先。')
         return '根据公开分工和实际执行反馈，更新自己的目标与计划并选择一个当前动作：\n'+json.dumps(visible,ensure_ascii=False,separators=(',',':'))
 
@@ -41,6 +49,7 @@ class NativeQwenHuman(QwenHumanPolicy):
             self.wait_condition=str(value.get('wait_condition',''))[:300]
             self.policy_io[-1]['generated_plan']=self.generated_plan.copy()
             self.policy_io[-1]['wait_condition']=self.wait_condition
+            self.policy_io[-1]['command_validation']=self.last_command_feedback
         return output
 
     def audit_state(self):
@@ -73,12 +82,20 @@ class NativeQwenHuman(QwenHumanPolicy):
             'robot_measured_motion只描述可见运动，不能当作机器人已完成或已理解等待的证明。'
             '当计划与实际反馈不一致时，依据当前位置重新规划；不要把过去写下的已返回等文字当成事实。'
             '若选择等待，wait_condition写具体可观察条件；持续没有该条件时可询问或重新协调。'
+            'your_last_command_validation给出上一请求是否被接受及拒绝理由，rejected表示该动作没有执行。'
+            'action_interface列出本时刻合法参数，object_id是物体名，destination必须是区域名，不能拿物体名当区域名。'
+            'your_current_assignments是你的工作，robot_current_assignments是机械臂的工作；改变分工需要公开协调。'
             '只输出JSON对象：intent、object_id、destination、message、speed_mps、reason、memory_note、current_goal、plan、wait_condition。'
             'message用简短英文与机器人交流，reason、memory_note和current_goal用中文。'
             'memory_note只记录有新观察依据的经验，不写机械臂隐藏计划或评测分数。'
             '不需要读取任何未公开的任务标签、机器人计划或评测器。')
 
     def _validated_command(self, value, observation):
+        command=self._native_command(value,observation)
+        self.last_command_feedback=command_feedback(value,command,observation.objects,observation.regions)
+        return command
+
+    def _native_command(self, value, observation):
         if value.get('intent') == 'push':
             obj, destination = value.get('object_id'), value.get('destination')
             if obj in observation.objects and destination in observation.regions:
