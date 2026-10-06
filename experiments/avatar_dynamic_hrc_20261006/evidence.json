@@ -1,0 +1,536 @@
+{
+  "status": "execution_evidence",
+  "research_goal_achieved": false,
+  "runs": {
+    "native_vico_avatar_presence": {
+      "summary": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+            "task_id": 0,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": true,
+            "completion_time_s": 4.0,
+            "model_calls": 8,
+            "native_actions": 80,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "observe",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.053366626526436596,
+              0.2056467151791419,
+              0.9024524881576174
+            ],
+            "public_plate_target": [
+              0.05341726860458882,
+              0.32518007059330334,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029968612929939034
+          },
+          {
+            "scenario": "pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+            "task_id": 1,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": true,
+            "completion_time_s": 5.85,
+            "model_calls": 12,
+            "native_actions": 117,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "observe",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.06968831637538045,
+              0.18791405385221946,
+              0.9019282097514315
+            ],
+            "public_plate_target": [
+              0.0697781794278259,
+              0.30817272125126305,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029968612929939034
+          },
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": true,
+            "completion_time_s": 8.85,
+            "model_calls": 18,
+            "native_actions": 177,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "observe",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.07134455306557276,
+              0.20056687251390584,
+              0.9046500451624249
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029968612929939034
+          }
+        ],
+        "successes": 3,
+        "episode_count": 3
+      },
+      "execution": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/native_vico_avatar_presence/task_00/init_000",
+            "model_calls": 8,
+            "native_actions": 80,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.3210300828737359,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 2000,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_avatar_presence/task_01/init_000",
+            "model_calls": 12,
+            "native_actions": 117,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.30400836525268826,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 2925,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_avatar_presence/task_02/init_000",
+            "model_calls": 18,
+            "native_actions": 177,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.2506730612335452,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 4425,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          }
+        ],
+        "episode_count": 3,
+        "motion_eligible_episode_count": 3,
+        "model_calls": 38,
+        "native_actions": 374,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/native_vico_avatar_presence/task_00/init_000",
+            "pose_records": 81,
+            "max_alignment_error_m": 0.0029968612929939034,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.0029739804672772423,
+            "body_speed_source": "root_bone_horizontal_displacement",
+            "qualification_passed": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_avatar_presence/task_01/init_000",
+            "pose_records": 118,
+            "max_alignment_error_m": 0.0029968612929939034,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.0029739804672772423,
+            "body_speed_source": "root_bone_horizontal_displacement",
+            "qualification_passed": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_avatar_presence/task_02/init_000",
+            "pose_records": 178,
+            "max_alignment_error_m": 0.0029968612929939034,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.0029739804672772423,
+            "body_speed_source": "root_bone_horizontal_displacement",
+            "qualification_passed": true
+          }
+        ],
+        "qualified_count": 3,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      }
+    },
+    "native_vico_qwen_collaboration": {
+      "summary": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+            "task_id": 0,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": false,
+            "completion_time_s": 18.0,
+            "model_calls": 36,
+            "native_actions": 360,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.03786508477966992,
+              0.19998211594101123,
+              0.9024815301066906
+            ],
+            "public_plate_target": [
+              0.05341726860458882,
+              0.32518007059330334,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029793381306531834,
+            "human_decisions": 18
+          },
+          {
+            "scenario": "pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+            "task_id": 1,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": false,
+            "completion_time_s": 18.0,
+            "model_calls": 36,
+            "native_actions": 360,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.07011723014400716,
+              0.18477560857468117,
+              0.9024802602703069
+            ],
+            "public_plate_target": [
+              0.0697781794278259,
+              0.30817272125126305,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029793381306531834,
+            "human_decisions": 18
+          },
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": false,
+            "completion_time_s": 18.0,
+            "model_calls": 36,
+            "native_actions": 360,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": true,
+            "human_fingertip_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.05356009002023398,
+              0.19127320977377096,
+              0.902480981207195
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.0029793381306531834,
+            "human_decisions": 18
+          }
+        ],
+        "successes": 0,
+        "episode_count": 3
+      },
+      "execution": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/native_vico_qwen_collaboration/task_00/init_000",
+            "model_calls": 36,
+            "native_actions": 360,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.29635184480966187,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 9000,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_qwen_collaboration/task_01/init_000",
+            "model_calls": 36,
+            "native_actions": 360,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.2921401332233567,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 9000,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_qwen_collaboration/task_02/init_000",
+            "model_calls": 36,
+            "native_actions": 360,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.23530089227158357,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 9000,
+            "human_peak_speed_m_s": 0.007077601897249517,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          }
+        ],
+        "episode_count": 3,
+        "motion_eligible_episode_count": 3,
+        "model_calls": 108,
+        "native_actions": 1080,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/native_vico_qwen_collaboration/task_00/init_000",
+            "pose_records": 361,
+            "max_alignment_error_m": 0.0029793381306531834,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.003003690245015799,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_qwen_collaboration/task_01/init_000",
+            "pose_records": 361,
+            "max_alignment_error_m": 0.0029793381306531834,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.003003690245015799,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          },
+          {
+            "episode": "results/continuous_v2/native_vico_qwen_collaboration/task_02/init_000",
+            "pose_records": 361,
+            "max_alignment_error_m": 0.0029793381306531834,
+            "max_horizontal_body_speed_m_s": 0.0,
+            "max_bone_displacement_between_pose_frames_m": 0.003003690245015799,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          }
+        ],
+        "qualified_count": 3,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      }
+    },
+    "native_avatar_clearance_return": {
+      "summary": {
+        "episodes": [
+          {
+            "scenario": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+            "instruction": "pick up the black bowl from table center and place it on the plate",
+            "task_id": 2,
+            "init_state_id": 0,
+            "seed": 30,
+            "task_success": false,
+            "completion_time_s": 25.0,
+            "model_calls": 50,
+            "native_actions": 500,
+            "backend": "LIBERO_MuJoCo_native",
+            "interpretation": "真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。",
+            "human_mode": "qwen",
+            "human_contact_witness": false,
+            "human_goal_success": false,
+            "robot_goal_success": false,
+            "human_fingertip_peak_speed_m_s": 0.2017338888045595,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "final_plate_position": [
+              0.07160367607994289,
+              0.20039041123203719,
+              0.9024996568376364
+            ],
+            "public_plate_target": [
+              0.07160355689672762,
+              0.32039042799379536,
+              0.9024995808477997
+            ],
+            "avatar_maximum_alignment_error_m": 0.002991571103252191,
+            "human_decisions": 25,
+            "task_contract": {
+              "family": "clearance_return",
+              "clearance_observed": true,
+              "return_observed": false,
+              "robot_placement_credit": false,
+              "premature_placements": 0,
+              "events": [
+                {
+                  "time_s": 1.8,
+                  "event": "body_clearance_observed"
+                }
+              ]
+            }
+          }
+        ],
+        "successes": 0,
+        "episode_count": 1
+      },
+      "execution": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/native_avatar_clearance_return/task_02/init_000",
+            "model_calls": 50,
+            "native_actions": 500,
+            "pixels_verified": true,
+            "model_input_boundary_verified": true,
+            "state_pose_and_signed_gripper_verified": true,
+            "axis_angle_from_raw_quaternion_verified": true,
+            "all_native_actions_reconstructed": true,
+            "actual_actuator_ctrl_verified": true,
+            "physics_clock_verified": true,
+            "robot_eef_peak_sampled_speed_m_s": 0.7277302409461213,
+            "robot_sampled_motion_check_passed": true,
+            "human_control_count": 12500,
+            "human_peak_speed_m_s": 0.2017338888045595,
+            "human_object_peak_speed_m_s": 0.0,
+            "human_motion_check_passed": true,
+            "motion_eligible": true
+          }
+        ],
+        "episode_count": 1,
+        "motion_eligible_episode_count": 1,
+        "model_calls": 50,
+        "native_actions": 500,
+        "interpretation": "独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。"
+      },
+      "avatar": {
+        "status": "verified",
+        "episodes": [
+          {
+            "episode": "results/continuous_v2/native_avatar_clearance_return/task_02/init_000",
+            "pose_records": 501,
+            "max_alignment_error_m": 0.002991571103252191,
+            "max_horizontal_body_speed_m_s": 0.25,
+            "max_bone_displacement_between_pose_frames_m": 0.07215158370738418,
+            "body_speed_source": "body_base",
+            "qualification_passed": true
+          }
+        ],
+        "qualified_count": 1,
+        "interpretation": "显示骨骼与接触点、身体速度及离散位移核查；不证明人体动力学、身体碰撞或真人动作效度。"
+      }
+    }
+  },
+  "source_sha256": {
+    "results/continuous_v2/native_vico_avatar_presence/summary.json": "cf9163342137592789b23e02f0fc310e48880f2aa99bd5e4df8f903df5109405",
+    "results/continuous_v2/native_vico_avatar_presence/video_verification.json": "e06f2000e1585e264f8f8d8ec827ff408778dd82a78bce1f69c9191611e2631d",
+    "results/continuous_v2/native_vico_avatar_presence/model_execution_verification.json": "9ceebc7a98efb89f6dd9da4de4770bdb4cb511507793a090187fd64754cba6d5",
+    "results/continuous_v2/native_vico_avatar_presence/avatar_verification.json": "f57d49fdeb39c7128dcf16bca2daf6bec83daaee778a17df1c530913df27da63",
+    "results/continuous_v2/native_vico_avatar_presence/provenance.json": "4dad410c87e5b760ab9f7768821bf0f3cef7ba59dcb84c09aac0034b235796db",
+    "results/continuous_v2/native_vico_qwen_collaboration/summary.json": "c25fb44e8f499f241f9579ea3765c460f5ca0a775d615907dd59ca41ac1ce387",
+    "results/continuous_v2/native_vico_qwen_collaboration/video_verification.json": "7f25adb7c969109e55d4abb4124b5110fc70769e4536b378c2bbf13c660555f0",
+    "results/continuous_v2/native_vico_qwen_collaboration/model_execution_verification.json": "a4725e45f9a1a1e12932e4caa34d2033f8bf2470aee353e258e06e600ad2fc91",
+    "results/continuous_v2/native_vico_qwen_collaboration/avatar_verification.json": "c15f91231648751f82934952c9c8f9d7a787b23501edce13c66ede5155d3ab08",
+    "results/continuous_v2/native_vico_qwen_collaboration/provenance.json": "fead5a6557e525d34ab3eeaeeefe343ec8df552c8fd2dba501daa7ece914c64d",
+    "results/continuous_v2/native_vico_qwen_collaboration/task_00/init_000/human_policy_io.jsonl": "47c16f9cb7ef7934d2575c761c22434d2370de79bee54e26281b2d091f9cc5e9",
+    "results/continuous_v2/native_vico_qwen_collaboration/task_01/init_000/human_policy_io.jsonl": "cfa705026ebb183c9314c0114a6e6548add4efa5bd3ccad3cf247c2b7287220f",
+    "results/continuous_v2/native_vico_qwen_collaboration/task_02/init_000/human_policy_io.jsonl": "dcdc4304137c87e6adc594c6bc5a39fc7fec87de740aab501938b77123adb1af",
+    "results/continuous_v2/native_avatar_clearance_return/summary.json": "84cd0a0b6f8ef42f77412e7e08484990c9e2342ae3d609cab2598c90e30576f5",
+    "results/continuous_v2/native_avatar_clearance_return/video_verification.json": "699e4a481373fddd3e4258b399778032489e16ef5b0b8f2971f0a13d61f89d5d",
+    "results/continuous_v2/native_avatar_clearance_return/model_execution_verification.json": "1ce8188372817e72106f57638a36457ee0f90e7fca6ea36193d9c514d98b9c3e",
+    "results/continuous_v2/native_avatar_clearance_return/avatar_verification.json": "9a10409beef88bd8f5a5be5ba20e842dd45c82f3a482c9e0eaa937778d6fa927",
+    "results/continuous_v2/native_avatar_clearance_return/provenance.json": "f9c343326d4c593786be400faada9253e129f906242d51f6faa55cd78ec28796",
+    "results/continuous_v2/native_avatar_clearance_return/task_02/init_000/human_policy_io.jsonl": "eb1582733ea85079b210c88ec9fad41fdac640c30b48995359756bb399729dad",
+    "results/continuous_v2/native_avatar_body_clearance/summary.json": "972429cafe636cf135a932ba3ffe40d0e05f7c66e07f179f18da6539496a9d77",
+    "results/continuous_v2/native_avatar_body_clearance/video_verification.json": "245de98d195ad227cb0d61854f6ec95650a761a11f95c0cde5d5ebfbf9548ffd",
+    "results/continuous_v2/native_avatar_body_clearance/avatar_verification.json": "e5e12d3d783df7082a953a792057aa34b79e5c6883ab6667e4adad940ef0f6fe"
+  },
+  "interpretation": "真实模型运行与人物显示/运动执行器验证，不推断真人行为、完整人体动力学或成熟Benchmark完成。"
+}

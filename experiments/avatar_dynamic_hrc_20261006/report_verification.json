@@ -1,0 +1,35 @@
+{
+  "status": "verified",
+  "pages": [
+    {
+      "page": "experiments/avatar_dynamic_hrc_20261006/index.html",
+      "status": "verified",
+      "video_count": 8,
+      "video_playback": {
+        "time": 0.420154,
+        "paused": false,
+        "duration": 8
+      },
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
+    },
+    {
+      "page": "results/continuous_v2/native_avatar_clearance_return/index.html",
+      "status": "verified",
+      "video_count": 1,
+      "video_playback": {
+        "time": 0.41112,
+        "paused": false,
+        "duration": 25.05
+      },
+      "missing_links": [],
+      "mobile_width": {
+        "viewport": 375,
+        "content": 375
+      }
+    }
+  ]
+}
