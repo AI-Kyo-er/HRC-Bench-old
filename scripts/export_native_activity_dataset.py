@@ -43,6 +43,7 @@ def main():
         activity_files=['personal_context.json','personal_evidence.json','human_intentions.jsonl','public_dialogue.jsonl'] if autonomous else ['activity_plan.json','activity_events.json','activity_evidence.json']
         source_files=activity_files+['metrics.json','scene.xml',
                       'trace.jsonl','human_policy_io.jsonl','human_control.jsonl','placement_evidence.jsonl','model_calls.jsonl','policy_io.jsonl','video_timeline.json']
+        if (episode/'human_planner_io.jsonl').exists():source_files.append('human_planner_io.jsonl')
         for name in source_files:(target/name).symlink_to((episode/name).resolve())
         auxiliary_audits={}
         for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json']:

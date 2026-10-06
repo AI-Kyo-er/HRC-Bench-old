@@ -43,3 +43,20 @@ def physical_record(env, observation, *, time_s, step):
             'eef_quaternion_xyzw': observation['robot0_eef_quat'].tolist(),
             'qpos': sim.data.qpos.tolist(), 'qvel': sim.data.qvel.tolist(),
             'ctrl': sim.data.ctrl.tolist(), 'contacts': contacts}
+
+
+def perceived_object_contacts(record):
+    """理想模拟感知的实际接触实体；不读取完成谓词或评分。"""
+    result={name:{'contact_entities':[],'robot_hand_contact':False,'human_hand_contact':False} for name in record['objects']}
+    for pair in record['contacts']:
+        a,b=pair['geom1'] or '',pair['geom2'] or ''
+        for name in result:
+            other=b if a.startswith(name+'_') else a if b.startswith(name+'_') else None
+            if other is None:continue
+            if other.startswith('gripper'):result[name]['robot_hand_contact']=True
+            if other.startswith(('human_left_finger','human_right_finger','human_palm','human_fingertip')):result[name]['human_hand_contact']=True
+            entity=next((n for n in result if other.startswith(n+'_')),None)
+            if other=='table_collision':entity='table'
+            if entity and entity not in result[name]['contact_entities']:result[name]['contact_entities'].append(entity)
+    for value in result.values():value['contact_entities'].sort()
+    return result

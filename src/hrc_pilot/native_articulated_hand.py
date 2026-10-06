@@ -5,7 +5,7 @@ import numpy as np
 
 from .human_contact import bounded_motion
 from .native_contact_human import NativeContactHuman
-from .native_relative_placement import central_support, object_bottom, relative_destinations, receiver_contact
+from .native_relative_placement import central_support, object_bottom, object_vertical_bounds, relative_destinations, receiver_contact
 
 
 def install_articulated_hand(root):
@@ -105,8 +105,11 @@ class NativeArticulatedHuman(NativeContactHuman):
                 choices.append((extent,yaw))
             extent,self.yaw_target=min(choices)
             self.finger_target=float(np.clip(extent+.012, .012,.095));self.close_dwell=0.
-            self.grasp_point=source.copy();self.grasp_point[2]=max(self.surface_z+.008,float(source[2])+.003)
-            self.target=np.r_[source[:2],max(self.position()[2],self.surface_z+.16)]
+            # The palm lower face is 3cm above the finger centre. Keep it 5mm
+            # above the object's collision top; do not disable palm collision.
+            top=object_vertical_bounds(self.env,self.object_id)[1]
+            self.grasp_point=source.copy();self.grasp_point[2]=max(self.surface_z+.008,float(source[2])+.003,top-.025)
+            self.target=np.r_[source[:2],max(self.position()[2],self.surface_z+.16,top+.06)]
             self.set_phase('grasp_approach')
         elif self.carry_object!=self.object_id:
             self.motor_failure='requested_object_not_in_measured_hand';self.set_phase('failed')
@@ -187,7 +190,8 @@ class NativeArticulatedHuman(NativeContactHuman):
              and receiver_contact(self.env,self.object_id,self.relative_receiver))):
             # Release at actual support contact, including a bowl rim; no claim of containment.
             self.finger_target=.095;self.set_phase('release')
-        elif self.phase=='release' and np.min(self.env.sim.data.qpos[self.finger_q])>.06:
+        elif self.phase=='release' and (np.min(self.env.sim.data.qpos[self.finger_q])>.06
+             or (elapsed>.15 and self.object_id and not any(self.finger_contacts()))):
             self.carry_object=None;self.target=actual+[0,0,.12];self.set_phase('grasp_retreat')
         elif self.phase=='grasp_retreat' and near:self.set_phase('idle')
         elif near:

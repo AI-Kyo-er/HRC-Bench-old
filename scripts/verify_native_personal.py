@@ -9,6 +9,7 @@ from types import SimpleNamespace
 from hrc_pilot.native_autonomous_human import validate_targets
 from hrc_pilot.native_personal_evidence import evaluate_personal_goals
 from hrc_pilot.protocol import Message
+from hrc_pilot.reflective_human_verification import verify_reflective_records
 
 
 def read(p):return json.loads(p.read_text())
@@ -19,16 +20,20 @@ def verify_episode(directory, *, require_shelf_release=False, require_table_rele
     context=read(directory/'personal_context.json');assert context['human_assigned_targets'] is None and context['timed_work_updates']==[]
     trace=rows(directory/'trace.jsonl');control=rows(directory/'human_control.jsonl')
     human=rows(directory/'human_policy_io.jsonl');dialogue=rows(directory/'public_dialogue.jsonl');calls=rows(directory/'model_calls.jsonl')
+    reflective=(directory/'human_planner_io.jsonl').exists()
+    reflection=verify_reflective_records(rows(directory/'human_planner_io.jsonl'),human) if reflective else None
     targets=[];revision=0;intention=''
     for d in human:
         public=json.loads(d['public_input'].split('\n',1)[1]);state=d['personal_goal_state']
         assert public['task_source']=='no_human_assignment_or_timed_goal_schedule'
         assert public['your_current_assignments']==[]
-        assert public['your_previous_personal_targets']==targets
+        if not reflective:assert public['your_previous_personal_targets']==targets
         assert public['personal_context']==context['context']
         if 'preferred_personal_objects' in context:assert public['preferred_personal_object_ids']==context['preferred_personal_objects']
         assert not {'personal_evidence','human_goal_success','task_success'}.intersection(public)
-        if d['parse_error'] is None:
+        if reflective:
+            targets=state['personal_targets'];revision=state['revision'];intention=state['long_term_intention']
+        elif d['parse_error'] is None:
             value=json.loads(d['raw_output'][d['raw_output'].find('{'):d['raw_output'].rfind('}')+1])
             if 'personal_targets' in value:
                 expected,error=validate_targets(value['personal_targets'],SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']))
@@ -62,7 +67,7 @@ def verify_episode(directory, *, require_shelf_release=False, require_table_rele
     rebuilt=evaluate_personal_goals(context['regions'],trace,control,human,rows(directory/'placement_evidence.jsonl'),require_shelf_release=require_shelf_release,require_table_release=require_table_release)
     assert read(directory/'personal_evidence.json')==rebuilt
     assert read(directory/'metrics.json')['personal_evidence']==rebuilt
-    return {'episode':str(directory),'status':'verified','human_calls':len(human),
+    return {'episode':str(directory),'status':'verified','human_calls':len(human),'reflection_verification':reflection,
             'no_external_human_assignments_or_timed_updates':True,'raw_generated_targets_reconstructed':True,
             'private_target_not_routed_to_robot_verified':True,'public_proposal_count':len(emitted),
             'robot_calls_containing_public_proposals':proposal_uses,'personal_geometry_reconstructed':True,

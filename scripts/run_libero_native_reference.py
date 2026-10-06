@@ -15,7 +15,8 @@ import imageio.v2 as imageio
 import numpy as np
 from PIL import Image
 
-from hrc_pilot.libero_native import native_policy_input, input_audit, physical_record
+from hrc_pilot.libero_native import native_policy_input, input_audit, physical_record, perceived_object_contacts
+from hrc_pilot.native_video_frame import compose_runtime_views
 from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
@@ -51,6 +52,9 @@ def main():
     parser.add_argument('--activity-profile',choices=PROFILES)
     parser.add_argument('--human-decision-interval-steps',type=int,default=20)
     parser.add_argument('--human-memory-scope',choices=['episode','session'],default='session')
+    parser.add_argument('--human-policy-architecture',choices=['flat','reflective'],default='flat')
+    parser.add_argument('--human-reflection-interval-s',type=float,default=6.)
+    parser.add_argument('--video-layout',choices=['wide','wide_and_policy'],default='wide')
     parser.add_argument('--robot-planner-port',type=int)
     parser.add_argument('--planner-interval-steps',type=int,default=20)
     parser.add_argument('--completion-criterion',choices=['native_geometry','released_stable'],default='released_stable')
@@ -61,6 +65,8 @@ def main():
         case=CASES[args.scene_case];args.suite=case.suite;args.task_ids=[case.task_id]
         if args.human_mode=='qwen' and args.autonomous_human_context!='pantry_work':parser.error('通用库存场景要求pantry_work自主背景')
     contract=NativeTaskContract(args.task_family)
+    if args.human_policy_architecture=='reflective' and (args.human_mode!='qwen' or not args.autonomous_human_context or args.human_contact_model!='articulated_hand'):
+        parser.error('分层反思策略要求自主Qwen与真实接触手')
     work_plan=activity_plan(args.activity_profile) if args.activity_profile else []
     if args.autonomous_human_context and (args.human_mode!='qwen' or args.activity_profile or args.completion_criterion!='released_stable'):
         parser.error('自主目标模式要求生成式人和物理完成判据，不能附加定时工作脚本')
@@ -123,6 +129,7 @@ def main():
                   Path('src/hrc_pilot/native_personal_evidence.py'),Path('src/hrc_pilot/native_articulated_hand.py'),
                   Path('src/hrc_pilot/native_hand_policy.py'),Path('src/hrc_pilot/native_scene_catalog.py'),
                   Path('src/hrc_pilot/native_goal_evidence.py'),
+                  Path('src/hrc_pilot/native_reflective_human.py'),Path('src/hrc_pilot/native_video_frame.py'),
                   Path('src/hrc_pilot/native_relative_placement.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
@@ -151,6 +158,9 @@ def main():
         if args.human_contact_model=='articulated_hand':
             from hrc_pilot.native_hand_policy import ArticulatedAutonomousHuman,ArticulatedAssignedHuman
             human_class=ArticulatedAutonomousHuman if args.autonomous_human_context else ArticulatedAssignedHuman
+        if args.human_policy_architecture=='reflective':
+            from hrc_pilot.native_reflective_human import ReflectiveArticulatedHuman
+            human_class=ReflectiveArticulatedHuman;human_kwargs['reflection_interval_s']=args.human_reflection_interval_s
         partner = human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
                                  model_path=args.human_model, persona_id=args.human_persona,
                                  decision_interval_steps=args.human_decision_interval_steps, memory_scope=args.human_memory_scope,**human_kwargs)
@@ -177,7 +187,7 @@ def main():
             def frame(obs, *, benchmark_time=None):
                 raw = (env.sim.render(width=640,height=480,camera_name='hrc_view')
                        if args.human_mode!='none' else obs['frontview_image'])
-                pixels = np.ascontiguousarray(raw[::-1, ::-1])
+                pixels = compose_runtime_views(np.ascontiguousarray(raw[::-1, ::-1]),obs,args.video_layout)
                 writer.append_data(pixels)
                 if not timeline:
                     Image.fromarray(pixels).save(directory / 'preview.png')
@@ -256,6 +266,7 @@ def main():
                     if actor is not None:
                         measured_motion=motion_observer.update(record)
                         measured_motion['visible_fixture_joint_positions']=record['articulated_joints']
+                        measured_motion['perceived_object_contacts']=perceived_object_contacts(record)
                         record['human_hand_position'] = actor.position().tolist()
                         record['human_position']=np.r_[actor.body_base,0].tolist()
                         record['human_motor_phase'] = actor.phase
@@ -389,6 +400,7 @@ def main():
                     terminal.update(human_hand_position=actor.position().tolist(),human_position=np.r_[actor.body_base,0].tolist(),
                                     human_motor_phase=actor.phase,human_execution=actor.public_feedback(),
                                     robot_motion=motion_observer.update(terminal))
+                    terminal['robot_motion']['perceived_object_contacts']=perceived_object_contacts(terminal)
                 trace.append(terminal)
                 frame(obs, benchmark_time=terminal['time_s'])
                 for filename, rows in [('trace.jsonl', trace), ('policy_io.jsonl', policy_io), ('model_calls.jsonl', calls)]:
@@ -434,6 +446,9 @@ def main():
                                          ('human_memory_retrievals.jsonl','memory_retrievals')]:
                             (directory/name).write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in audit[key]))
                         result['human_decisions']=len(audit['policy_io'])
+                        if 'human_planner_io' in audit:
+                            (directory/'human_planner_io.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in audit['human_planner_io']))
+                            result.update(human_policy_architecture=audit['policy_architecture'],human_intention_reflections=len(audit['human_planner_io']),human_total_neural_inferences=audit['total_neural_inferences'])
                         (directory/'human_execution_observations.jsonl').write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in audit['measured_execution_history']))
                         result['interaction_metrics']=interaction_metrics(trace,actor.records,audit['policy_io'])
                         result['task_contract']=task_evidence.audit()
@@ -514,6 +529,8 @@ def main():
         'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),
         'task_family':args.task_family,'human_public_work_requirement':None if args.autonomous_human_context else contract.human_instruction(),
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
+        'human_policy_architecture':args.human_policy_architecture,'human_reflection_interval_s':args.human_reflection_interval_s if args.human_policy_architecture=='reflective' else None,
+        'video_layout':args.video_layout,'video_capture_source':'simultaneous runtime render + raw policy observation cameras',
         'human_execution_feedback':'measured_motor_state_and_public_geometry_no_evaluator_outcomes',
         'human_action_validation_feedback':True,
         'completion_criterion':args.completion_criterion,

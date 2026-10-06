@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 import numpy as np
+from hrc_pilot.libero_native import perceived_object_contacts
 
 
 def rows(path):return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -27,6 +28,7 @@ def verify_episode(directory):
         np.testing.assert_allclose(measured['body_remaining_distance_m'],
                                    np.linalg.norm(np.asarray(measured['body_xy'])-measured['body_target_xy']))
         motion=public['robot_measured_motion']
+        if 'perceived_object_contacts' in motion:assert motion['perceived_object_contacts']==perceived_object_contacts(actual)
         previous=by_step.get(actual['step']-1)
         expected_speed=(np.linalg.norm(np.asarray(actual['robot_ee'])-previous['robot_ee'])/
                         (actual['time_s']-previous['time_s']) if previous is not None else 0.)

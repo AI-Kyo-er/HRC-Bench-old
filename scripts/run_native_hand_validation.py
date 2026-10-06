@@ -20,6 +20,7 @@ from hrc_pilot.native_activity import activity_regions
 from hrc_pilot.native_scene_catalog import scene_regions, resolve_goal, CASES
 from hrc_pilot.native_goal_evidence import create_goal_evidence, goal_success
 from hrc_pilot.video_verification import finalize_video_verification
+from hrc_pilot.native_video_frame import compose_runtime_views
 
 
 def write(path,value):path.write_text(json.dumps(value,ensure_ascii=False,indent=2))
@@ -31,6 +32,7 @@ def main():
     parser.add_argument('--steps',type=int,default=600);parser.add_argument('--object-id',default='cookies_1')
     parser.add_argument('--scene-case',choices=list(CASES))
     parser.add_argument('--destination',default='cookies_shelf')
+    parser.add_argument('--video-layout',choices=['wide','wide_and_policy'],default='wide')
     args=parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):parser.error('使用新输出目录')
     chosen=os.environ.get('CUDA_VISIBLE_DEVICES')
@@ -44,7 +46,7 @@ def main():
     from libero.libero import benchmark,get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
     import torch
-    paths=[Path(__file__),Path('src/hrc_pilot/native_articulated_hand.py'),Path('src/hrc_pilot/native_relative_placement.py'),Path('src/hrc_pilot/native_contact_human.py'),Path('src/hrc_pilot/native_avatar.py'),Path('src/hrc_pilot/native_scene_catalog.py'),Path('src/hrc_pilot/native_goal_evidence.py')]
+    paths=[Path(__file__),Path('src/hrc_pilot/native_articulated_hand.py'),Path('src/hrc_pilot/native_relative_placement.py'),Path('src/hrc_pilot/native_video_frame.py'),Path('src/hrc_pilot/native_contact_human.py'),Path('src/hrc_pilot/native_avatar.py'),Path('src/hrc_pilot/native_scene_catalog.py'),Path('src/hrc_pilot/native_goal_evidence.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     suite_name=CASES[args.scene_case].suite if args.scene_case else 'libero_spatial'
     task_id=CASES[args.scene_case].task_id if args.scene_case else 2
@@ -54,7 +56,7 @@ def main():
     args.output_dir.mkdir(parents=True);episode=args.output_dir/'hand_validation';episode.mkdir()
     writer=imageio.get_writer(episode/'demo.mp4',fps=20);trace=[];timeline=[];teacher=[];placement=[]
     def frame(time):
-        rgb=np.ascontiguousarray(env.sim.render(width=640,height=480,camera_name='hrc_view')[::-1,::-1]);writer.append_data(rgb)
+        rgb=compose_runtime_views(np.ascontiguousarray(env.sim.render(width=640,height=480,camera_name='hrc_view')[::-1,::-1]),obs,args.video_layout);writer.append_data(rgb)
         if not timeline:Image.fromarray(rgb).save(episode/'preview.png')
         timeline.append({'frame':len(timeline),'video_time_s':len(timeline)/20,'benchmark_time_s':time,'physics_time_s':float(env.sim.data.time)})
     try:
@@ -107,7 +109,7 @@ def main():
     finally:writer.close();env.close()
     write(args.output_dir/'provenance.json',{'backend':'LIBERO_MuJoCo_native','trained_model':False,'human_policy':'calibration_teacher',
         'source_sha256':hashes,'source_files_changed_during_run':[str(p) for p in paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
-        'human_contact_model':'articulated_hand','cuda_visible_devices':chosen,'renderer_device_binding':matched[0],'object_pose_writes_during_control':0})
+        'human_contact_model':'articulated_hand','cuda_visible_devices':chosen,'renderer_device_binding':matched[0],'object_pose_writes_during_control':0,'video_layout':args.video_layout})
     finalize_video_verification(args.output_dir,required=True)
     (args.output_dir/'index.html').write_text('<meta charset="utf-8"><h1>真实接触手校准</h1><p>非学习策略与HRC成绩；请查看接触、抬起和释放审计。</p><video controls width="800" src="hand_validation/demo.mp4"></video>')
     print(json.dumps(result,ensure_ascii=False),flush=True)

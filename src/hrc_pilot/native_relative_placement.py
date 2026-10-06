@@ -37,9 +37,9 @@ def central_support(env, receiver):
     return np.r_[xy, max(surfaces)] if surfaces else None
 
 
-def object_bottom(env, name):
-    """当前盒体碰撞包络底部；不将 body 原点等同物体底面。"""
-    bottoms = []
+def object_vertical_bounds(env, name):
+    """当前碰撞包络的高低界；用于抓取避掌与放置，不把body原点当底面。"""
+    bottoms, tops = [], []
     for geom_name in env.env.objects_dict[name].contact_geoms:
         geom = env.sim.model.geom_name2id(geom_name)
         if env.sim.model.geom_type[geom] != 6:
@@ -47,9 +47,14 @@ def object_bottom(env, name):
         axes = env.sim.data.geom_xmat[geom].reshape(3, 3)
         radius = np.dot(np.abs(axes[2]), env.sim.model.geom_size[geom])
         bottoms.append(float(env.sim.data.geom_xpos[geom, 2] - radius))
+        tops.append(float(env.sim.data.geom_xpos[geom, 2] + radius))
     if not bottoms:
         raise ValueError('relative_placement_missing_collision_geometry')
-    return min(bottoms)
+    return min(bottoms), max(tops)
+
+
+def object_bottom(env, name):
+    return object_vertical_bounds(env, name)[0]
 
 
 def relative_destinations(env):
