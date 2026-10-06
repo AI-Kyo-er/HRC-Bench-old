@@ -5,6 +5,7 @@ import json
 from hrc_pilot.continuous import CONTINUOUS_SCENARIOS
 from hrc_pilot.native_reflective_human import ReflectiveArticulatedHuman
 from hrc_pilot.protocol import Observation,Message
+from hrc_pilot.reflective_human_verification import verify_reflective_records
 
 
 def observation(t=0,messages=()):
@@ -42,6 +43,7 @@ def test_reflection_and_motor_are_independent_neural_calls_and_plans_never_route
     assert p.personal_targets==[{'object_id':'plate','destination':'home'}]
     assert len(p.policy_io)==3 and p.audit_state()['total_neural_inferences']==5
     assert json.loads(p.policy_io[-1]['public_input'].split('\n',1)[1])['active_intention_plan']['decision_kind']=='revise'
+    assert verify_reflective_records(p.planning_io,p.policy_io)['total_neural_calls']==5
 
 
 def test_invalid_reflection_retains_previous_intent_without_cancelling_valid_motor():
@@ -50,9 +52,18 @@ def test_invalid_reflection_retains_previous_intent_without_cancelling_valid_mot
     assert output.command.intent=='push'
     assert p.personal_targets==[{'object_id':'plate','destination':'personal'}]
     assert p.planning_io[-1]['validation_error'] and p.policy_io[-1]['parse_error'] is None
+    assert verify_reflective_records(p.planning_io,p.policy_io)['total_neural_calls']==4
 
 
 def test_keep_intention_is_not_forced_to_change_at_reflection_time():
     p,_=policy([intention(),{'intent':'observe'},intention(),{'intent':'observe'}])
     p.step(observation());revision=p.target_revision;p.step(observation(6))
     assert p.target_revision==revision and len(p.planning_io)==2
+
+
+def test_stage_verifier_rejects_motor_goal_tampering():
+    from copy import deepcopy
+    import pytest
+    p,_=policy([intention(),{'intent':'observe'}]);p.step(observation())
+    tampered=deepcopy(p.policy_io);tampered[0]['personal_goal_state']['personal_targets']=[]
+    with pytest.raises(AssertionError):verify_reflective_records(p.planning_io,tampered)

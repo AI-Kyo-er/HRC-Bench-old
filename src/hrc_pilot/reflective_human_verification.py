@@ -11,6 +11,7 @@ def verify_reflective_records(planners,motors):
     for identifier,row in enumerate(planners):
         assert row['planner_decision_id']==identifier and row['time_s']>previous_time
         previous_time=row['time_s'];public=json.loads(row['public_input'].split('\n',1)[1])
+        assert public['time_s']==row['time_s']
         assert row['public_input'].startswith('阶段：意图反思\n')
         assert public['your_previous_personal_targets']==targets
         assert not {'task_success','human_goal_success','personal_evidence'}.intersection(public)
@@ -23,6 +24,16 @@ def verify_reflective_records(planners,motors):
             targets=chosen;intention=value['long_term_intention'][:500]
             assert row['active_intention_plan']['personal_targets']==targets
             assert row['active_intention_plan']['decision_kind']==value['decision_kind']
+        else:
+            raw=row['raw_output'];invalid=False
+            try:
+                value=json.loads(raw[raw.find('{'):raw.rfind('}')+1])
+                _,target_error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']))
+                invalid=bool(target_error or value.get('decision_kind') not in {'continue','revise','suspend','finish_activity'}
+                    or not isinstance(value.get('long_term_intention'),str) or not value['long_term_intention'].strip()
+                    or not isinstance(value.get('plan',[]),list) or any(not isinstance(p,str) for p in value.get('plan',[])))
+            except (ValueError,TypeError,AttributeError):invalid=True
+            assert invalid
         state=row['retained_or_accepted_personal_goal_state']
         assert state['personal_targets']==targets and state['revision']==revision and state['long_term_intention']==intention
         assert state['target_validation_error']==row['validation_error']
@@ -31,6 +42,7 @@ def verify_reflective_records(planners,motors):
         assert row['human_policy_architecture']=='reflective_intent_then_motor'
         assert row['public_input'].startswith('阶段：当前动作\n')
         public=json.loads(row['public_input'].split('\n',1)[1]);planner=planners[row['planner_decision_id']]
+        assert row['planner_decision_id']==max(p['planner_decision_id'] for p in planners if p['time_s']<=row['time_s'])
         assert planner['time_s']<=row['time_s'] and public['planner_decision_id']==planner['planner_decision_id']
         assert row['personal_goal_state']==planner['retained_or_accepted_personal_goal_state']
         assert public['active_intention_plan']==planner['active_intention_plan']
