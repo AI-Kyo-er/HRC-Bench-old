@@ -105,7 +105,7 @@ class NativeQwenHuman(QwenHumanPolicy):
         return super()._validated_command(value, observation)
 
 
-def augment_contact_human(env, destination, *, visualization='vico_skin'):
+def augment_contact_human(env, destination, *, visualization='vico_skin', public_regions=None):
     """仅初始化时重编译场景，并按名字保持原机器人/物体qpos与qvel。"""
     old_model, old_data = env.sim.model, env.sim.data
     qpos, qvel = old_data.qpos.copy(), old_data.qvel.copy()
@@ -159,6 +159,16 @@ def augment_contact_human(env, destination, *, visualization='vico_skin'):
     ET.SubElement(world,'geom',name='human_public_plate_region',type='cylinder',
                   pos=f'{destination[0]} {destination[1]} {surface_z+.0008}',size='.025 .0005',
                   rgba='.32 .64 .47 .65',contype='0',conaffinity='0',group='1')
+    if public_regions:
+        colors={'plate_ready':'.32 .64 .47 .65','plate_home':'.24 .47 .85 .65',
+                'cookies_ready':'.92 .57 .20 .65','cookies_home':'.62 .35 .76 .65'}
+        for name,point in public_regions.items():
+            if name=='near_human':continue
+            # plate_ready aliases the existing green marker; no duplicate z-fighting.
+            if name=='plate_ready':continue
+            ET.SubElement(world,'geom',name='human_public_region_'+name,type='cylinder',
+                          pos=f'{point[0]} {point[1]} {surface_z+.0008}',size='.025 .0005',
+                          rgba=colors[name],contype='0',conaffinity='0',group='1')
     env.env.reset_from_xml_string(ET.tostring(root,encoding='unicode'))
     env.env._hrc_avatar_rig=rig
     env.sim.data.qpos[:len(qpos)] = qpos

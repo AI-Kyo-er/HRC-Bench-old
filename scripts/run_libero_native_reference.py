@@ -20,6 +20,7 @@ from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
 from hrc_pilot.native_placement import NativePlacementEvidence
+from hrc_pilot.native_activity import PROFILES,activity_plan,activity_regions,public_surfaces,evaluate_activity
 
 
 def write_json(path, value):
@@ -39,6 +40,8 @@ def main():
     parser.add_argument('--human-mode', choices=['none','observe','qwen','calibration'], default='none')
     parser.add_argument('--human-visualization',choices=['capsule','vico_skin'],default='vico_skin')
     parser.add_argument('--task-family',choices=['moving_receptacle','clearance_return','prepare_receptacle','shared_workspace'],default='moving_receptacle')
+    parser.add_argument('--activity-profile',choices=PROFILES)
+    parser.add_argument('--human-decision-interval-steps',type=int,default=20)
     parser.add_argument('--human-memory-scope',choices=['episode','session'],default='session')
     parser.add_argument('--robot-planner-port',type=int)
     parser.add_argument('--planner-interval-steps',type=int,default=20)
@@ -47,6 +50,12 @@ def main():
     parser.add_argument('--human-model', type=Path, default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     args = parser.parse_args()
     contract=NativeTaskContract(args.task_family)
+    work_plan=activity_plan(args.activity_profile) if args.activity_profile else []
+    if work_plan and (args.human_mode!='qwen' or args.completion_criterion!='released_stable'):
+        parser.error('动态活动要求真实生成式人及接触释放判据')
+    if work_plan and args.steps/20<=work_plan[-1].time_s:
+        parser.error('运行时长必须覆盖最后一次工作要求更新')
+    if args.human_decision_interval_steps<1:parser.error('人的推理间隔必须为正整数')
     if args.task_family=='clearance_return' and args.human_mode!='qwen':
         parser.error('离返协作任务要求真实生成式伙伴，不使用运动校准命令')
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
@@ -97,6 +106,7 @@ def main():
                   Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_contact.py'),
                   Path('src/hrc_pilot/native_avatar.py'),
                   Path('src/hrc_pilot/native_task_contracts.py'),
+                  Path('src/hrc_pilot/native_activity.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
                   Path('src/hrc_pilot/native_placement.py'),
@@ -118,7 +128,7 @@ def main():
         from dataclasses import replace
         partner = NativeQwenHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
                                  model_path=args.human_model, persona_id=args.human_persona,
-                                 decision_interval_steps=20, memory_scope=args.human_memory_scope)
+                                 decision_interval_steps=args.human_decision_interval_steps, memory_scope=args.human_memory_scope)
         partner.prepare()
     for task_id in args.task_ids:
         task = suite.get_task(task_id)
@@ -158,6 +168,7 @@ def main():
                     if args.human_mode=='none':frame(obs)
                 actor, regions, messages, contact_witness = None, {}, [], False
                 initial_plate, plate_goal, human_dwell = None, None, 0
+                work_events=[];active_work=None
                 if args.human_mode != 'none':
                     from hrc_pilot.native_contact_human import augment_contact_human, NativeContactHuman
                     from hrc_pilot.protocol import Message, Observation
@@ -168,7 +179,11 @@ def main():
                     initial_plate = env.sim.data.body_xpos[env.env.obj_body_id[human_object]].copy()
                     plate_goal = initial_plate + [0,.12,0]
                     regions = {'near_human':tuple(plate_goal)}
-                    obs = augment_contact_human(env,plate_goal,visualization=args.human_visualization)
+                    if work_plan:
+                        objects={name:env.sim.data.body_xpos[body].copy() for name,body in env.env.obj_body_id.items()}
+                        regions=activity_regions(objects);plate_goal=np.asarray(regions['plate_ready'])
+                    obs = augment_contact_human(env,plate_goal,visualization=args.human_visualization,
+                                                public_regions=regions if work_plan else None)
                     actor = NativeContactHuman(env,regions)
                     actor._display(actor.position())
                     env.sim.forward()
@@ -192,7 +207,13 @@ def main():
                 done = False
                 for step in range(args.steps):
                     time_s = step / 20
+                    for work in work_plan:
+                        if step==round(work.time_s*20):
+                            active_work=work
+                            messages.extend(work.messages(task.language))
+                            work_events.append({'step':step,'time_s':time_s,**work.__dict__})
                     record = physical_record(env, obs, time_s=time_s, step=step)
+                    if work_plan:record['public_work_update_index']=len(work_events)-1
                     if actor is not None:
                         measured_motion=motion_observer.update(record)
                         record['human_hand_position'] = actor.position().tolist()
@@ -213,7 +234,10 @@ def main():
                                     'center_xyz':list(regions['near_human']),
                                     'radius_m':float(env.sim.model.geom_size[env.sim.model.geom_name2id('human_public_plate_region'),0]),
                                     'source':'visible_marker_geometry'}},
-                                task_family=args.task_family)
+                                task_family=args.activity_profile or args.task_family)
+                            if work_plan:
+                                from dataclasses import replace
+                                public=replace(public,task_description=active_work.instruction,goal_surfaces=public_surfaces(regions))
                             decision=partner.step(public)
                             messages.extend(decision.messages)
                             actor.accept(decision.command)
@@ -221,8 +245,12 @@ def main():
                             actor.accept(HumanCommand('push',human_object,'near_human',speed_mps=.15))
                     trace.append(record)
                     frame(obs, benchmark_time=time_s)
+                    if work_plan and step in {round(w.time_s*20) for w in work_plan}:
+                        action_plan.clear()  # Reobserve public updates; no action is selected here.
                     if not action_plan:
                         instruction=contract.robot_instruction(task.language) if partner is not None else task.language
+                        if work_plan:
+                            instruction=task.language+'\nCurrent public human work: '+active_work.instruction
                         if partner is not None:
                             communication=[m.text for m in messages if m.kind=='policy_message'][-2:]
                             if communication:instruction += '\nHuman: '+'\nHuman: '.join(communication)
@@ -235,7 +263,8 @@ def main():
                                 Image.fromarray(initial_robot_rgb).save(directory/'planner_initial.png')
                             if step>=next_plan_step:
                                 public_request=coordination_request(time_s=time_s,
-                                    robot_task=contract.robot_instruction(task.language),human_task=contract.human_instruction(),
+                                    robot_task=task.language if work_plan else contract.robot_instruction(task.language),
+                                    human_task=active_work.instruction if work_plan else contract.human_instruction(),
                                     dialogue=messages,state=request['observation/state'],
                                     images={'initial':initial_robot_rgb,'current':request['observation/image'],
                                             'wrist':request['observation/wrist_image']},
@@ -309,7 +338,7 @@ def main():
                                          actuator_ctrl=env.sim.data.ctrl.tolist())
                     if not np.isclose(env.sim.data.time-start_physics, (step+1)/20, atol=1e-7):
                         raise RuntimeError('原生物理时间没有按20Hz控制推进')
-                    if done:
+                    if done and not work_plan:
                         break
                 terminal = physical_record(env, obs, time_s=(step+1)/20, step=step+1)
                 if actor is not None:
@@ -368,6 +397,22 @@ def main():
                             if args.task_family=='clearance_return':
                                 result['human_goal_success']=bool(result['human_goal_success'] and task_evidence.returned)
                             result['robot_goal_success']=bool(result['robot_goal_success'] and task_evidence.robot_placement_credit)
+                if work_plan:
+                    plan_data={'profile':args.activity_profile,'updates':[work.__dict__ for work in work_plan],
+                               'regions':regions,'robot_instruction':task.language,
+                               'world_initializations':1,'human_policy_resets':1,'source':'predeclared_public_work_requests_not_action_script'}
+                    write_json(directory/'activity_plan.json',plan_data)
+                    write_json(directory/'activity_events.json',work_events)
+                    activity=evaluate_activity(work_plan,regions,trace,actor.records,partner.policy_io,placement.records)
+                    write_json(directory/'activity_evidence.json',activity)
+                    result.update(activity_profile=args.activity_profile,dynamic_activity=activity,
+                                  human_goal_success=activity['human_final_goal_success'],
+                                  robot_goal_success=activity['robot_final_goal_success'],
+                                  task_success=activity['joint_final_goal_success'],
+                                  interpretation='同一物理世界中公开工作要求变化，生成式人自主重新选择；分阶段完成与最终共同完成分开。')
+                    done=result['task_success']
+                if placement is not None:
+                    result.update(robot_goal_object=placement.object_id,robot_goal_receiver=placement.receiver_id)
                 write_json(directory/'metrics.json', result)
                 if coordinator is not None:
                     (directory/'robot_planner_io.jsonl').write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in robot_plans))
@@ -396,6 +441,8 @@ def main():
         'cuda_visible_devices':selected,'source_sha256':hashes,
         'renderer_device_binding':matched[0],
         'human_mode':args.human_mode,'human_persona':args.human_persona if partner is not None else None,
+        'activity_profile':args.activity_profile,'human_decision_interval_steps':args.human_decision_interval_steps,
+        'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan),
         'task_family':args.task_family,'human_public_work_requirement':contract.human_instruction(),
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
         'human_execution_feedback':'measured_motor_state_and_public_geometry_no_evaluator_outcomes',
@@ -421,6 +468,7 @@ def main():
     if coordinator is not None:model_label='Qwen3-VL协调器 + '+model_label
     human_note = ('测试没有人类伙伴，不能解释为协作成绩。' if args.human_mode=='none' else
                   '加入力驱动的碰撞指尖和不参与碰撞的显示人体。observe用于场景接入检查，calibration的推盘命令来自数据教师，qwen才使用真实Qwen3-14B决定推进、观察和让行。机器人执行学习动作模型输出；接入协调器时也可选择保持原语；人体显示仍是简化运动学代理，不能声称真人或完整人体动力学。')
+    if work_plan:human_note+=' 该片段持续发布新工作要求，期间不重置物体或策略，也不因暂时成功提前结束。'
     human_note=human_note.replace('π0.5',model_label)
     page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生仿真策略与移动接收盘</title><style>body{{margin:auto;max-width:1080px;padding:24px;background:#f1f5f4;font:17px/1.8 system-ui;color:#193540;overflow-wrap:anywhere}}article{{background:white;padding:24px;margin:24px 0;border-radius:14px}}video{{width:100%;max-height:600px;background:#142430}}h1{{font-size:30px}}h2{{font-size:22px}}</style><h1>真实{model_label}模型与可变化的接收盘</h1><p>此前Genesis中的机器人未建立可靠抓放。这里保持已下载模型权重，使用配套原生场景、两路相机、末端状态及OSC控制，区分基础操作问题与接入域差异。{human_note}</p><p>20Hz物理控制；每次模型输出最多执行{args.execution_horizon}步后重新观察。视频直接记录Sim场景；机器人没有教师接管，物体没有吸附。伙伴条件：{args.human_mode}。结果：{sum(r['task_success'] for r in episodes)}/{len(episodes)}。当前样本是系统实测，不作为完整HRC或全套LIBERO排名。</p><p><a href="summary.json">原始结果</a> · <a href="provenance.json">设置与来源</a> · <a href="video_verification.json">视频核验</a></p>{''.join(panels)}</html>'''
     (args.output_dir/'index.html').write_text(page)

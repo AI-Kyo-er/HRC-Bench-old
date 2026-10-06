@@ -15,7 +15,8 @@ def rows(path):return [json.loads(line) for line in path.read_text().splitlines(
 def verify_episode(directory):
     trace=rows(directory/'trace.jsonl');metrics=json.loads((directory/'metrics.json').read_text())
     recorded_path=directory/'placement_evidence.jsonl'
-    score=NativePlacementEvidence('akita_black_bowl_1','plate_1')
+    score=NativePlacementEvidence(metrics.get('robot_goal_object','akita_black_bowl_1'),
+                                  metrics.get('robot_goal_receiver','plate_1'))
     if recorded_path.exists():
         recorded=rows(recorded_path);assert len(recorded)==len(trace)-1
         for index,observed in enumerate(recorded):
