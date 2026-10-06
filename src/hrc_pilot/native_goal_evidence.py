@@ -29,7 +29,7 @@ class NativeJointEvidence:
 
 
 def create_goal_evidence(spec):
-    if spec['kind'] in {'on','in'}:return NativePlacementEvidence(spec['object_id'],spec['receiver_id'],require_all_hand_release=spec.get('require_all_hand_release',False))
+    if spec['kind'] in {'on','in'}:return NativePlacementEvidence(spec['object_id'],spec['receiver_id'],require_all_hand_release=spec.get('require_all_hand_release',False),require_robot_open_aperture=spec.get('require_robot_open_aperture',True))
     return NativeJointEvidence(spec)
 
 

@@ -3,7 +3,10 @@ import numpy as np
 
 
 class NativePlacementEvidence:
-    def __init__(self, object_id, receiver_id, stable_seconds=.2, *, require_all_hand_release=False):
+    def __init__(self, object_id, receiver_id, stable_seconds=.2, *, require_all_hand_release=False, require_robot_open_aperture=True):
+        if not require_robot_open_aperture and not require_all_hand_release:
+            raise ValueError('不要求机器人空夹张开时，必须检查全部主体手部接触')
+        self.require_robot_open_aperture=require_robot_open_aperture
         self.require_all_hand_release=require_all_hand_release
         self.object_id=object_id;self.receiver_id=receiver_id
         self.stable_seconds=stable_seconds;self.duration=0.;self.records=[]
@@ -21,7 +24,7 @@ class NativePlacementEvidence:
                 supported|=b.startswith(self.receiver_id+'_')
                 gripper_contact|=b.startswith('gripper') or (self.require_all_hand_release and b.startswith(('human_left_finger','human_right_finger','human_palm','human_fingertip')))
         aperture=sum(abs(value) for value in current['robot_qpos'][-2:])
-        released=not gripper_contact and aperture>=.04
+        released=not gripper_contact and (aperture>=.04 or not self.require_robot_open_aperture)
         eligible=bool(geometry_satisfied and supported and released and speed<.08 and receiver_speed<.08)
         self.duration=self.duration+dt if eligible else 0.
         completed=self.duration>=self.stable_seconds-1e-9

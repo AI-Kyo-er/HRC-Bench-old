@@ -1,4 +1,4 @@
-"""独立核查 Genesis 实验的真实 Sim 视频及其时间轴。"""
+"""独立核查 Genesis／原生MuJoCo 实验的运行时 Sim 视频及其时间轴。"""
 from __future__ import annotations
 
 import json

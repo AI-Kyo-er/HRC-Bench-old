@@ -27,7 +27,7 @@ def verify(directory):
                             geom_name2id=lambda n:mujoco.mj_name2id(model,mujoco.mjtObj.mjOBJ_GEOM,n))
     observed_data=SimpleNamespace(body_xpos=data.xpos,geom_xpos=data.geom_xpos,geom_xmat=data.geom_xmat)
     env=SimpleNamespace(env=SimpleNamespace(objects_dict=objects,obj_body_id=body_ids),sim=SimpleNamespace(model=adapter,data=observed_data))
-    records=0;maximum=0.;receiver_motion=0.;selected_motion=0.;initial=None;initial_by_key={}
+    records=0;maximum=0.;receiver_motion=0.;selected_motion=0.;initial_by_key={};destination_counts=set()
     with (directory/'trace.jsonl').open() as stream:
         for line in stream:
             row=json.loads(line);data.qpos[:]=row['qpos'];data.qvel[:]=row['qvel']
@@ -37,17 +37,14 @@ def verify(directory):
             mujoco.mj_forward(model,data)
             actual=relative_destinations(env);saved=row['human_execution']['relative_placement_destinations']
             assert set(actual)==set(saved)
-            positions=[]
+            destination_counts.add(len(actual))
             for key in actual:
                 a=np.asarray(actual[key]['support_xyz']);b=np.asarray(saved[key]['support_xyz'])
                 error=float(np.linalg.norm(a-b));maximum=max(maximum,error)
                 # XML serialization rounds the static layout and collision dimensions.
                 np.testing.assert_allclose(a,b,atol=3e-6,rtol=0)
-                positions.append(a)
-            positions=np.asarray(positions)
-            if initial is None:
-                initial=positions.copy();initial_by_key={key:np.asarray(value['support_xyz']) for key,value in actual.items()}
-            receiver_motion=max(receiver_motion,float(np.linalg.norm(positions-initial,axis=1).max()))
+                initial_by_key.setdefault(key,a.copy())
+                receiver_motion=max(receiver_motion,float(np.linalg.norm(a-initial_by_key[key])))
             feedback=row['human_execution']
             if feedback.get('destination','') in actual:
                 np.testing.assert_allclose(feedback['destination_xyz'],actual[feedback['destination']]['support_xyz'],atol=3e-6,rtol=0)
@@ -56,6 +53,7 @@ def verify(directory):
     return {'episode':str(directory),'status':'verified','reconstructed_frames':records,
             'maximum_support_coordinate_error_m':maximum,'maximum_potential_receiver_support_motion_m':receiver_motion,
             'maximum_selected_receiver_support_motion_m':selected_motion,
+            'visible_relative_destination_counts':sorted(destination_counts),
             'source':'saved scene.xml + measured qpos/qvel; reconstruct mj_step pre-integration geometry cache on CPU, no render',
             'interpretation':'核对真实状态下的接收支撑几何，未用任务分数选择工具或把接触放置称作完整包含。'}
 

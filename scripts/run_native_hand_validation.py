@@ -81,7 +81,7 @@ def main():
             if actor.phase=='holding' and not placed:
                 actor.accept(HumanCommand('place',args.object_id,args.destination));placed=True
                 teacher.append({'time_s':t,'intent':'place','object_id':args.object_id,'destination':args.destination})
-            obs,*_=env.step([0.]*6+[1. if args.scene_case else -1.])
+            obs,*_=env.step([0.]*6+[-1.])
             assert np.isclose(env.sim.data.time-start,(step+1)/20,atol=1e-7)
         record=physical_record(env,obs,time_s=args.steps/20,step=args.steps)
         record.update(human_hand_position=actor.position().tolist(),human_position=np.r_[actor.body_base,0].tolist(),human_execution=actor.public_feedback())

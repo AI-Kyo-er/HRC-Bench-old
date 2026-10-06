@@ -34,3 +34,11 @@ def test_new_multi_agent_release_cannot_ignore_human_grasp_contact():
     last['contacts'].append({'geom1':'bowl_g1','geom2':'human_left_finger_contact'})
     assert not score.update(first,last,True)
     assert score.records[-1]['gripper_contact']
+
+
+def test_multi_actor_contact_release_allows_unrelated_closed_empty_gripper():
+    score=NativePlacementEvidence('bowl','plate',require_all_hand_release=True,require_robot_open_aperture=False)
+    assert score.update(record(0,aperture=.008),record(.2,aperture=.008),True)
+    touched=record(.4,aperture=.008)
+    touched['contacts'].append({'geom1':'bowl_g1','geom2':'human_palm_contact'})
+    assert not score.update(record(.2,aperture=.008),touched,True)

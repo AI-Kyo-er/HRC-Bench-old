@@ -32,7 +32,7 @@ def resolve_goal(env):
             if receiver not in env.env.object_sites_dict:raise ValueError('目标接收区域没有原生site对应')
             receiver=env.env.object_sites_dict[receiver].parent_name
         if obj not in env.env.obj_body_id or receiver not in env.env.obj_body_id:raise ValueError('公开目标实体缺少物理body')
-        return {'kind':kind,'object_id':obj,'receiver_id':receiver,'native_target_symbol':goal[2],'require_all_hand_release':True}
+        return {'kind':kind,'object_id':obj,'receiver_id':receiver,'native_target_symbol':goal[2],'require_all_hand_release':True,'require_robot_open_aperture':False}
     if kind in {'open','close','turnon','turnoff'} and len(goal)==2:
         symbol=goal[1]
         if symbol in env.env.object_sites_dict:

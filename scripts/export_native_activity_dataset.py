@@ -44,6 +44,12 @@ def main():
         source_files=activity_files+['metrics.json','scene.xml',
                       'trace.jsonl','human_policy_io.jsonl','human_control.jsonl','placement_evidence.jsonl','model_calls.jsonl','policy_io.jsonl','video_timeline.json']
         for name in source_files:(target/name).symlink_to((episode/name).resolve())
+        auxiliary_audits={}
+        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json']:
+            path=root/name
+            if path.exists():
+                (target/name).symlink_to(path.resolve())
+                auxiliary_audits[name]={'source':str(path.resolve()),'sha256':sha256(path.read_bytes()).hexdigest()}
         (target/'demo.mp4').symlink_to((episode/'demo.mp4').resolve())
         trace=rows(episode/'trace.jsonl');actions=rows(episode/'policy_io.jsonl');calls=rows(episode/'model_calls.jsonl')
         np.save(target/'initial.qpos.npy',np.asarray(trace[0]['qpos']))
@@ -55,7 +61,7 @@ def main():
             candidates=json.loads(storage_path.read_text())['episodes']
             match=next(r for r in candidates if Path(r['episode']).resolve()==episode.resolve())
             stored_joint=match['final_joint_released_stable'];score_protocol='posthoc_released_support_protocol'
-        source_receipts.append({'episode':identifier,'source':str(episode.resolve()),
+        source_receipts.append({'episode':identifier,'source':str(episode.resolve()),'auxiliary_audits':auxiliary_audits,
                                 'source_sha256':{n:sha256((episode/n).read_bytes()).hexdigest() for n in source_files},
                                 'joint_success':stored_joint if eligible and metrics.get('human_goal_evaluable',True) else None,
                                 'raw_joint_predicate':metrics['task_success'],'joint_success_protocol':score_protocol,
