@@ -40,6 +40,8 @@ def main():
     parser.add_argument('--human-visualization',choices=['capsule','vico_skin'],default='vico_skin')
     parser.add_argument('--task-family',choices=['moving_receptacle','clearance_return','prepare_receptacle','shared_workspace'],default='moving_receptacle')
     parser.add_argument('--human-memory-scope',choices=['episode','session'],default='session')
+    parser.add_argument('--robot-planner-port',type=int)
+    parser.add_argument('--planner-interval-steps',type=int,default=20)
     parser.add_argument('--completion-criterion',choices=['native_geometry','released_stable'],default='released_stable')
     parser.add_argument('--human-persona', choices=['cooperative','independent','cautious','assertive'], default='cooperative')
     parser.add_argument('--human-model', type=Path, default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
@@ -51,6 +53,7 @@ def main():
         parser.error('请使用新的输出目录')
     if args.steps < 1 or args.execution_horizon < 1:
         parser.error('步数与执行块长度必须为正整数')
+    if args.planner_interval_steps<1:parser.error('协调推理间隔必须为正整数')
     free_rows = subprocess.check_output(['nvidia-smi', '--query-gpu=index,memory.free',
                                         '--format=csv,noheader,nounits'], text=True)
     free = {row.split(',')[0].strip(): int(row.split(',')[1]) for row in free_rows.splitlines()}
@@ -83,6 +86,11 @@ def main():
     metadata = client.get_server_metadata()
     if metadata.get('action_encoding') != 'libero_osc_delta':
         parser.error('需要实际π0.5-LIBERO原生末端增量模型服务')
+    coordinator=None
+    if args.robot_planner_port is not None:
+        if args.human_mode!='qwen':parser.error('双向协调实验要求生成式人类伙伴')
+        from hrc_pilot.robot_coordination import CoordinatorClient, coordination_request, hold_actions
+        coordinator=CoordinatorClient(args.robot_planner_port)
     suite = benchmark.get_benchmark_dict()[args.suite]()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     code_paths = [Path(__file__), Path('src/hrc_pilot/libero_native.py'), Path('src/hrc_pilot/native_contact_human.py'),
@@ -92,6 +100,7 @@ def main():
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
                   Path('src/hrc_pilot/native_placement.py'),
+                  Path('src/hrc_pilot/robot_coordination.py'),
                   Path(__file__).with_name('probe_egl_devices.py')]
     hashes = {str(p): sha256(p.read_bytes()).hexdigest() for p in code_paths}
     episodes, provenance_episodes = [], []
@@ -124,6 +133,8 @@ def main():
                                      camera_heights=[256, 256, 480], camera_widths=[256, 256, 640],
                                      render_gpu_device_id=0)
             trace, policy_io, timeline, calls = [], [], [], []
+            robot_plans=[];robot_history=[];robot_goal='';next_plan_step=0;initial_robot_rgb=None
+            robot_decision=None
             action_plan = deque()
             task_evidence=NativeTaskEvidence(contract)
             motion_observer=NativeMotionObserver()
@@ -212,15 +223,43 @@ def main():
                             if communication:instruction += '\nHuman: '+'\nHuman: '.join(communication)
                         request = native_policy_input(obs, instruction)
                         stem = f'observation_{step:06d}'
+                        if coordinator is not None:
+                            if initial_robot_rgb is None:
+                                initial_robot_rgb=request['observation/image'].copy()
+                                Image.fromarray(initial_robot_rgb).save(directory/'planner_initial.png')
+                            if step>=next_plan_step:
+                                public_request=coordination_request(time_s=time_s,
+                                    robot_task=contract.robot_instruction(task.language),human_task=contract.human_instruction(),
+                                    dialogue=messages,state=request['observation/state'],
+                                    images={'initial':initial_robot_rgb,'current':request['observation/image'],
+                                            'wrist':request['observation/wrist_image']},
+                                    history=robot_history,current_goal=robot_goal)
+                                planned=coordinator.infer(public_request)
+                                robot_decision=planned['decision'];robot_goal=robot_decision['current_goal'] or robot_goal
+                                robot_plans.append({'step':step,'time_s':time_s,'decision_id':len(robot_plans)+1,
+                                    'initial_artifact':'planner_initial.png','exterior_artifact':f'{stem}.png',
+                                    'wrist_artifact':f'{stem}_wrist.png',**planned})
+                                robot_history.append({'time_s':time_s,'decision':robot_decision})
+                                next_plan_step=step+args.planner_interval_steps
+                                if robot_decision['message']:
+                                    messages.append(Message('robot','policy_message',robot_decision['message']))
+                            if robot_decision['mode']=='execute':
+                                request=native_policy_input(obs,robot_decision['instruction'])
                         Image.fromarray(request['observation/image']).save(directory / f'{stem}.png')
                         Image.fromarray(request['observation/wrist_image']).save(directory / f'{stem}_wrist.png')
                         started = time.perf_counter()
-                        response=client.infer(request)
+                        if coordinator is not None and robot_decision['mode']=='hold':
+                            response={'actions':hold_actions(request['observation/state'],args.execution_horizon)}
+                            action_source='vlm_selected_hold_primitive'
+                        else:
+                            response=client.infer(request);action_source='learned_vla'
                         chunk = np.asarray(response['actions'], dtype=float)
                         if chunk.ndim != 2 or chunk.shape[1] != 7 or not np.isfinite(chunk).all():
                             raise ValueError('实际模型必须输出有限N×7原生动作')
                         count = min(len(chunk), args.execution_horizon)
                         call = {'model_call': len(calls)+1, 'step': step, 'time_s': time_s,
+                                'action_source':action_source,
+                                'planner_decision_id':robot_plans[-1]['decision_id'] if robot_plans else None,
                                 **input_audit(request), 'exterior_artifact': f'{stem}.png',
                                 'wrist_artifact': f'{stem}_wrist.png', 'raw_action_chunk': chunk.tolist(),
                                 'latency_s': time.perf_counter()-started}
@@ -276,6 +315,9 @@ def main():
                           'native_actions': len(policy_io), 'backend': 'LIBERO_MuJoCo_native',
                           'native_geometry_success':bool(env.check_success()),
                           'completion_criterion':args.completion_criterion,
+                          'actual_vla_model_calls':sum(c['action_source']=='learned_vla' for c in calls),
+                          'hold_primitive_calls':sum(c['action_source']=='vlm_selected_hold_primitive' for c in calls),
+                          'robot_planner_model_calls':len(robot_plans),
                           'interpretation': '原生基础操作参照，不含人类，不是HRC/cobalance成绩。'}
                 if actor is not None:
                     motion_peak=max(float(np.linalg.norm(row['actual_velocity'])) for row in actor.records)
@@ -315,6 +357,9 @@ def main():
                                 result['human_goal_success']=bool(result['human_goal_success'] and task_evidence.returned)
                             result['robot_goal_success']=bool(result['robot_goal_success'] and task_evidence.robot_placement_credit)
                 write_json(directory/'metrics.json', result)
+                if coordinator is not None:
+                    (directory/'robot_planner_io.jsonl').write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in robot_plans))
+                    (directory/'public_dialogue.jsonl').write_text(''.join(json.dumps(m.__dict__,ensure_ascii=False)+'\n' for m in messages))
                 if placement is not None:
                     (directory/'placement_evidence.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in placement.records))
                 write_json(directory/'video_timeline.json', {'fps':20,'frame_count':len(timeline),'frames':timeline})
@@ -330,6 +375,9 @@ def main():
                                                'episode_count':len(episodes)})
     write_json(args.output_dir/'provenance.json', {'backend':'LIBERO_MuJoCo_native','trained_model':True,
         'model_server_metadata':metadata,'suite':args.suite,'seed':args.seed,'control_hz':20,
+        'robot_planner_metadata':coordinator.metadata if coordinator is not None else None,
+        'robot_planner_interval_steps':args.planner_interval_steps if coordinator is not None else None,
+        'robot_policy_composition':'Qwen3VL coordinator + VLA + explicit hold primitive' if coordinator is not None else 'native VLA',
         'execution_horizon':args.execution_horizon,'max_steps':args.steps,'settle_steps':10,
         'mujoco_version':mujoco.__version__,'robosuite_version':robosuite.__version__,
         'libero_commit':subprocess.check_output(['git','-C',str(Path(get_libero_path('benchmark_root')).parents[1]),'rev-parse','HEAD'],text=True).strip(),
@@ -358,6 +406,7 @@ def main():
         location=f'task_{result["task_id"]:02d}/init_{result["init_state_id"]:03d}'
         panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，真实推理{result["model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
     model_label={'pi05_libero':'π0.5','openvla_libero_spatial':'OpenVLA'}.get(metadata.get('config'),'所选学习模型')
+    if coordinator is not None:model_label='Qwen3-VL协调器 + '+model_label
     human_note = ('测试没有人类伙伴，不能解释为协作成绩。' if args.human_mode=='none' else
                   '加入力驱动的碰撞指尖和不参与碰撞的显示人体。observe用于场景接入检查，calibration的推盘命令来自数据教师，qwen才使用真实Qwen3-14B决定推进、观察和让行。机器人一直执行真实π0.5；人体显示仍是简化运动学代理，不能声称真人或完整人体动力学。')
     human_note=human_note.replace('π0.5',model_label)
