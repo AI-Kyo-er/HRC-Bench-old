@@ -82,6 +82,11 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
   --backend genesis --experiment-tier important --suite --count-per-condition 1
 ```
 
+重要实验默认在任务结束后继续录制 `1.5` 秒，并让每个搬运阶段至少持续
+`0.2` 秒，避免成功动作在视频中瞬间消失。需要调整时可使用
+`--video-settle-seconds` 和 `--minimum-transfer-phase-seconds`；这些值会写入
+`provenance.json`，便于复现实验。
+
 v2 不是把更多分支写进固定状态机：`generate_scenarios` 生成可改变布局、分工和伙伴条件的任务实例，伙伴根据公开进度和当前占用响应，策略通过 `ExternalPolicyAdapter` 接入 VLA/WLA。每个 episode 产生可按目录和稳定文件名配对的 `scenario.json`、公开观测、策略输入输出、轨迹、事件和独立指标；当前 `GreedyPublicPolicy` 只是协议基线，Genesis 仍需完成真实接触动力学和完整场景验证后，才能用于先进模型的正式排行榜。
 
 可以先生成一个按 `train/dev/test` 结构划分的数据集，再用同一批场景批量评测模型：
