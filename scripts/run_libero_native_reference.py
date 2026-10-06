@@ -89,7 +89,7 @@ def main():
     coordinator=None
     if args.robot_planner_port is not None:
         if args.human_mode!='qwen':parser.error('双向协调实验要求生成式人类伙伴')
-        from hrc_pilot.robot_coordination import CoordinatorClient, coordination_request, hold_actions
+        from hrc_pilot.robot_coordination import CoordinatorClient, coordination_request, hold_actions, execution_feedback
         coordinator=CoordinatorClient(args.robot_planner_port)
     suite = benchmark.get_benchmark_dict()[args.suite]()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -134,7 +134,7 @@ def main():
                                      render_gpu_device_id=0)
             trace, policy_io, timeline, calls = [], [], [], []
             robot_plans=[];robot_history=[];robot_goal='';next_plan_step=0;initial_robot_rgb=None
-            robot_decision=None;robot_decision_error=None
+            robot_decision=None;robot_decision_error=None;initial_robot_state=None
             action_plan = deque()
             task_evidence=NativeTaskEvidence(contract)
             motion_observer=NativeMotionObserver()
@@ -231,6 +231,7 @@ def main():
                         if coordinator is not None:
                             if initial_robot_rgb is None:
                                 initial_robot_rgb=request['observation/image'].copy()
+                                initial_robot_state=request['observation/state'].copy()
                                 Image.fromarray(initial_robot_rgb).save(directory/'planner_initial.png')
                             if step>=next_plan_step:
                                 public_request=coordination_request(time_s=time_s,
@@ -238,7 +239,8 @@ def main():
                                     dialogue=messages,state=request['observation/state'],
                                     images={'initial':initial_robot_rgb,'current':request['observation/image'],
                                             'wrist':request['observation/wrist_image']},
-                                    history=robot_history,current_goal=robot_goal)
+                                    history=robot_history,current_goal=robot_goal,
+                                    self_execution=execution_feedback(record,initial_robot_state,calls,policy_io))
                                 planned=coordinator.infer(public_request)
                                 robot_decision=planned['decision'];robot_goal=robot_decision['current_goal'] or robot_goal
                                 robot_decision_error=planned['parse_error']
@@ -255,7 +257,8 @@ def main():
                         Image.fromarray(request['observation/wrist_image']).save(directory / f'{stem}_wrist.png')
                         started = time.perf_counter()
                         if coordinator is not None and robot_decision['mode']=='hold':
-                            response={'actions':hold_actions(request['observation/state'],args.execution_horizon)}
+                            held_gripper=policy_io[-1]['action'][-1] if policy_io else None
+                            response={'actions':hold_actions(request['observation/state'],args.execution_horizon,held_gripper)}
                             action_source=('planner_output_rejection_hold_primitive' if robot_decision_error
                                            else 'vlm_selected_hold_primitive')
                         else:
@@ -267,6 +270,7 @@ def main():
                         call = {'model_call': len(calls)+1, 'step': step, 'time_s': time_s,
                                 'action_source':action_source,
                                 'planner_decision_id':robot_plans[-1]['decision_id'] if robot_plans else None,
+                                'hold_gripper_reference':held_gripper if action_source!='learned_vla' else None,
                                 **input_audit(request), 'exterior_artifact': f'{stem}.png',
                                 'wrist_artifact': f'{stem}_wrist.png', 'raw_action_chunk': chunk.tolist(),
                                 'latency_s': time.perf_counter()-started}

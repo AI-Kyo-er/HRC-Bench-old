@@ -29,8 +29,11 @@ def verify_episode(directory):
         assert source in {'learned_vla','vlm_selected_hold_primitive','planner_output_rejection_hold_primitive'}
         if source!='learned_vla':
             from hrc_pilot.robot_coordination import hold_actions
-            np.testing.assert_array_equal(call['raw_action_chunk'],hold_actions(call['state'],len(call['raw_action_chunk'])))
+            np.testing.assert_array_equal(call['raw_action_chunk'],hold_actions(call['state'],len(call['raw_action_chunk']),call.get('hold_gripper_reference')))
             assert call.get('planner_decision_id') is not None
+            if 'hold_gripper_reference' in call:
+                prior=[r for r in actions if r['step']<call['step']]
+                assert call['hold_gripper_reference']==(prior[-1]['action'][-1] if prior else None)
         assert call['model_input_keys']==['observation/image','observation/wrist_image','observation/state','prompt']
         assert call['image_orientation']=='rotate_180_from_raw_simulator'
         for key,field in [('exterior_artifact','exterior_rgb_sha256'),('wrist_artifact','wrist_rgb_sha256')]:

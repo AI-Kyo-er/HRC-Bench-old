@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 
 
-PUBLIC_KEYS={'time_s','robot_task','human_task','dialogue','state','images','history','current_goal'}
+PUBLIC_KEYS={'time_s','robot_task','human_task','dialogue','state','images','history','current_goal','self_execution'}
 
 
 def image_payload(pixels):
@@ -25,13 +25,34 @@ def decode_image(payload):
     return image
 
 
-def coordination_request(*, time_s, robot_task, human_task, dialogue, state, images, history, current_goal):
+def coordination_request(*, time_s, robot_task, human_task, dialogue, state, images, history, current_goal, self_execution):
     state=np.asarray(state,dtype=float)
     if state.shape!=(8,) or not np.isfinite(state).all():raise ValueError('需要机械臂自身8维状态')
     return {'time_s':float(time_s),'robot_task':robot_task,'human_task':human_task,
             'dialogue':[{'speaker':m.speaker,'kind':m.kind,'text':m.text} for m in dialogue[-20:]],
             'state':state.tolist(),'images':{key:image_payload(value) for key,value in images.items()},
-            'history':history[-6:],'current_goal':current_goal}
+            'history':history[-6:],'current_goal':current_goal,'self_execution':self_execution}
+
+
+def execution_feedback(record, initial_state, calls, actions):
+    state=np.asarray(record['robot_qpos'],dtype=float)
+    fingers={name:0 for name in ['finger_1','finger_2']}
+    for c in record['contacts']:
+        for geom in [c['geom1'] or '',c['geom2'] or '']:
+            if geom.startswith('gripper0_finger1'):fingers['finger_1']+=1
+            if geom.startswith('gripper0_finger2'):fingers['finger_2']+=1
+    return {'source':'actual_native_controls_and_own_sensors',
+            'completed_native_control_steps':len(actions),
+            'issued_learned_vla_blocks':sum(c['action_source']=='learned_vla' for c in calls),
+            'issued_hold_blocks':sum(c['action_source']!='learned_vla' for c in calls),
+            'last_control_source':calls[-1]['action_source'] if calls else 'no_control_yet',
+            'last_native_action':actions[-1]['action'] if actions else None,
+            'eef_xyz_m':record['robot_ee'],
+            'eef_displacement_from_start_m':float(np.linalg.norm(np.asarray(record['robot_ee'])-np.asarray(initial_state)[:3])),
+            'signed_finger_joint_positions_m':state[-2:].tolist(),
+            'measured_gripper_aperture_m':float(np.abs(state[-2:]).sum()),
+            'finger_contact_sample_counts':fingers,
+            'interpretation':'已发生的动作和自身传感器测量，不是意图、不认定抓取成功或任务完成。'}
 
 
 def validate_decision(raw):
@@ -48,11 +69,12 @@ def validate_decision(raw):
     return decision,error
 
 
-def hold_actions(state, steps):
+def hold_actions(state, steps, last_gripper_action=None):
     """执行模型选择的保持姿态；根据自身夹爪开度维持开/闭，不选协作策略。"""
     state=np.asarray(state,dtype=float)
     actions=np.zeros((steps,7),dtype=float)
-    actions[:,-1]=-1. if np.abs(state[-2:]).sum()>=.04 else 1.
+    actions[:,-1]=(float(last_gripper_action) if last_gripper_action is not None
+                  else (-1. if np.abs(state[-2:]).sum()>=.04 else 1.))
     return actions
 
 

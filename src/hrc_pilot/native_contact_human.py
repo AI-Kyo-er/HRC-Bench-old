@@ -189,6 +189,8 @@ class NativeContactHuman:
         self.target = self.reference.copy()
         self.dt = float(env.sim.model.opt.timestep)
         self.records = []
+        self.retreat_signature=None
+        self.destination_radius=float(env.sim.model.geom_size[env.sim.model.geom_name2id('human_public_plate_region'),0])
         self.accepted_intent='observe'
         self.command_started_at=float(env.sim.data.time)
         self.physics_steps=0
@@ -230,9 +232,11 @@ class NativeContactHuman:
         self.body_target=np.array([.25,.60])
         source = self.object_position(self.object_id)
         goal = np.asarray(self.regions[self.destination])
-        if np.linalg.norm(source[:2]-goal[:2])<.025:
-            self.phase='retreat';self.target=self.position()+[0,0,.12]
+        if np.linalg.norm(source[:2]-goal[:2])<self.destination_radius:
+            if self.retreat_signature!=signature:
+                self.retreat_signature=signature;self._retreat(self.position())
             return
+        self.retreat_signature=None
         direction = goal[:2]-source[:2]
         self.direction = direction/np.linalg.norm(direction)
         model = self.env.env.objects_dict[self.object_id]
@@ -252,6 +256,10 @@ class NativeContactHuman:
         self.phase='approach'
         self.target=self.push_start+[0,0,.14]
 
+    def _retreat(self, actual):
+        self.phase='retreat';self.target=actual.copy()
+        self.target[2]=max(float(actual[2]),self.surface_z+.16)
+
     def public_feedback(self):
         """实际执行器测量；无任务标签、私有评分或策略动作建议。"""
         body_distance=float(np.linalg.norm(self.body_base-self.body_target))
@@ -263,11 +271,14 @@ class NativeContactHuman:
                 'body_xy':self.body_base.tolist(),'body_target_xy':self.body_target.tolist(),
                 'body_remaining_distance_m':body_distance,'fingertip_xyz':self.position().tolist(),
                 'fingertip_target_xyz':self.target.tolist(),'fingertip_remaining_distance_m':hand_distance}
-        if self.accepted_intent=='push' and self.object_id is not None:
+        if self.object_id is not None and self.destination is not None:
             actual=self.object_position(self.object_id)
             result.update(object_id=self.object_id,destination=self.destination,
                           object_xyz=actual.tolist(),destination_xyz=list(self.regions[self.destination]),
                           object_remaining_xy_distance_m=float(np.linalg.norm(actual[:2]-np.asarray(self.regions[self.destination])[:2])))
+            radius=getattr(self,'destination_radius',.025)
+            result['visible_destination_radius_m']=radius
+            result['object_center_inside_visible_destination']=result['object_remaining_xy_distance_m']<radius
         return result
 
     def physics_step(self):
@@ -281,7 +292,7 @@ class NativeContactHuman:
         if np.linalg.norm(actual-self.target)<.015:
             if self.phase=='approach':self.phase='descend';self.target=self.push_start.copy()
             elif self.phase=='descend':self.phase='push';self.target=self.push_end.copy()
-            elif self.phase=='push':self.phase='retreat';self.target=actual+[0,0,.14]
+            elif self.phase=='push':self._retreat(actual)
             elif self.phase=='retreat':self.phase='idle'
         speed = .12 if self.phase=='push' else .30
         self.reference,self.velocity=bounded_motion(self.reference,self.velocity,self.target,

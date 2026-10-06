@@ -82,3 +82,32 @@ def test_interaction_durations_use_actual_motion_and_decision_intervals():
     assert metrics['robot_ee_motion_time_s']==1.
     assert metrics['both_stationary_time_s']==1.
     assert metrics['human_observe_command_time_s']==2.
+
+
+def test_repeated_push_to_reached_area_does_not_raise_hand_repeatedly():
+    from hrc_pilot.continuous import HumanCommand
+    actor=NativeContactHuman.__new__(NativeContactHuman)
+    actor.env=SimpleNamespace(sim=SimpleNamespace(data=SimpleNamespace(time=1.)))
+    actor.signature=None;actor.retreat_signature=None;actor.phase='idle'
+    actor.destination_radius=.025;actor.surface_z=.90
+    actor.position=lambda:np.array([.1,.31,.92])
+    actor.object_position=lambda name:np.array([0,.31,.90])
+    actor.regions={'near_human':(0,.32,.9)}
+    command=HumanCommand('push','plate_1','near_human')
+    actor.accept(command);first=actor.target.copy()
+    for _ in range(50):actor.accept(command)
+    np.testing.assert_array_equal(actor.target,first)
+    assert np.isclose(first[2],1.06)
+    actor.phase='idle';actor.accept(command)
+    assert actor.phase=='idle'
+
+
+def test_observation_retains_spatial_feedback_about_last_manipulated_object():
+    actor=NativeContactHuman.__new__(NativeContactHuman)
+    actor.env=SimpleNamespace(sim=SimpleNamespace(data=SimpleNamespace(time=4.)))
+    actor.body_base=np.array([.25,.6]);actor.body_target=actor.body_base.copy()
+    actor.position=lambda:np.array([0,.2,1.1]);actor.target=actor.position()
+    actor.phase='idle';actor.accepted_intent='observe';actor.command_started_at=1.
+    actor.object_id='plate_1';actor.destination='near_human';actor.destination_radius=.025
+    actor.regions={'near_human':(0,.32,.9)};actor.object_position=lambda _:np.array([0,.31,.9])
+    assert actor.public_feedback()['object_center_inside_visible_destination']

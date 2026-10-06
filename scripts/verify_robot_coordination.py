@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from hrc_pilot.robot_coordination import PUBLIC_KEYS,validate_decision
+from hrc_pilot.robot_coordination import PUBLIC_KEYS,validate_decision,execution_feedback
 
 
 def rows(path):return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -18,6 +18,7 @@ def verify_episode(directory):
     plans=rows(directory/'robot_planner_io.jsonl');calls=rows(directory/'model_calls.jsonl')
     human=rows(directory/'human_policy_io.jsonl');dialogue=rows(directory/'public_dialogue.jsonl')
     trace={row['step']:row for row in rows(directory/'trace.jsonl')}
+    actions=rows(directory/'policy_io.jsonl')
     by_id={row['decision_id']:row for row in plans}
     for row in plans:
         assert set(row['public_input'])==PUBLIC_KEYS-{'images'}
@@ -28,6 +29,13 @@ def verify_episode(directory):
             assert sha256(pixels.tobytes()).hexdigest()==row['image_sha256'][name]
         np.testing.assert_allclose(row['public_input']['state'][:3],trace[row['step']]['robot_ee'],atol=1e-6)
         np.testing.assert_allclose(row['public_input']['state'][-2:],trace[row['step']]['robot_qpos'][-2:],atol=1e-6)
+        if 'self_execution' in row['public_input']:
+            expected=execution_feedback(trace[row['step']],calls[0]['state'],
+                [c for c in calls if c['step']<row['step']],[a for a in actions if a['step']<row['step']])
+            actual=row['public_input']['self_execution']
+            for key,value in expected.items():
+                if key=='eef_displacement_from_start_m':np.testing.assert_allclose(actual[key],value,atol=1e-8)
+                else:assert actual[key]==value
     for call in calls:
         plan=by_id[call['planner_decision_id']]
         assert plan['step']<=call['step']
