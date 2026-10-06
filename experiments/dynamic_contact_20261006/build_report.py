@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 RESULTS = ROOT / 'results/continuous_v2'
-CANDIDATES = ('pi05_lora_qwen_memory_contact', 'pi05_qwen_feedback_contact', 'pi05_qwen_articulated_contact')
+CANDIDATES = ('pi05_position_qwen_session', 'pi05_lora_qwen_memory_contact', 'pi05_qwen_feedback_contact', 'pi05_qwen_articulated_contact')
 NAMES = {'relay': '接力', 'concurrent_overlay': '并行作业', 'robot_induced_rebalance': '进度受阻与重新协调'}
 
 
@@ -41,9 +41,49 @@ def finished_run(directory):
             and read(directory / 'model_execution_verification.json')['status'] == 'verified')
 
 
+def surface_panel():
+    sources, selected, table = [], {}, []
+    for name in ('visible_surface_contact_calibration', 'visible_surface_area_release'):
+        directory = ROOT / 'datasets' / name
+        if not (directory / 'dataset.json').exists():
+            continue
+        metadata = read(directory / 'dataset.json')
+        assert read(directory / 'video_verification.json')['status'] == 'verified'
+        good = sum(row['task_success'] for row in metadata['exports'])
+        table.append(f'<tr><td>{name}</td><td>{good}/{len(metadata["exports"])}</td><td>{link(directory / "index.html", "原始校准与失败视频")}</td></tr>')
+        for row in metadata['exports']:
+            if row['task_success']:
+                color = Path(row['episode']).name.split('_')[1]
+                selected[color] = directory / row['episode']
+        sources += [directory / name for name in ('dataset.json', 'provenance.json', 'video_verification.json')]
+    gallery = ''.join(f'<article><h3>{escape(color)} · 可见区域接触校准</h3><p>数据教师完成真实拿放；用于检查场景可行性，不计入学习模型成绩。</p>{video(path)}</article>'
+                      for color, path in selected.items())
+    progress = ROOT / 'datasets/visible_surface_demonstrations'
+    live = read(progress / 'live_video_verification.json') if (progress / 'live_video_verification.json').exists() else {}
+    status = f'截至 {escape(live.get("checked_at", "尚无快照"))}，已核验 {live.get("completed_count", 0)}/96 条采集。'
+    progress_link = link(progress / 'progress.html', '采集进度与真实视频') if (progress / 'progress.html').exists() else '采集进度页待生成'
+    if live:
+        sources.append(progress / 'live_video_verification.json')
+    model = ROOT / 'models/pi05_libero/download_receipt.json'
+    asset_note = ''
+    if model.exists():
+        receipt = read(model)
+        assert receipt['status'] == 'downloaded_and_verified'
+        asset_note = f'<p>另一项仿真预训练参照 π0.5-LIBERO 的权重已从中国 ModelScope 直连下载并通过 SHA256 核验，{link(model, "中国源下载记录")}。本平台动作接口尚未完成运行，未计入模型结果。</p>'
+        sources.append(model)
+    document = f'''<section><h2>任务范围可见，示范数据正在扩大</h2><p>旧任务用“蓝色底板”描述目标，但评分检查一个不可见的小中心范围，部分指定点也在底板边缘。
+新场景让显示与判定共用蓝色收纳/绿色留用表面，检查物体完整足迹、实际释放和稳定；初始物体独立变化且彼此分离。</p>
+<p>数据教师根据夹爪实际碰撞几何保持手掌间隙，并在区域内低落差条件满足时释放；未把物体移动坐标。
+绿色、蓝色与红色都已有实际完成证据。以下是不同生成校准阶段，不能合并成模型效果提升。</p>
+<div class="table-wrap"><table><thead><tr><th>数据校准</th><th>完成/运行</th><th>查看</th></tr></thead><tbody>{''.join(table)}</tbody></table></div>
+{gallery}<p>{status}{progress_link}。这批数据尚未用于本页的模型权重，正式批次完成后还需训练与闭环验证。</p>{asset_note}</section>'''
+    return document, sources
+
+
 def adaptation_panel():
-    training = ROOT / 'results/contact_training/pi05_lora_v1'
-    evaluation = RESULTS / 'pi05_lora_atom_evaluation'
+    position = (ROOT / 'results/contact_training/pi05_position_expert_v1/summary.json').exists()
+    training = ROOT / ('results/contact_training/pi05_position_expert_v1' if position else 'results/contact_training/pi05_lora_v1')
+    evaluation = RESULTS / ('pi05_position_atom_evaluation' if position else 'pi05_lora_atom_evaluation')
     if not (training / 'summary.json').exists():
         return '', {}, []
     summary, provenance = read(training / 'summary.json'), read(training / 'provenance.json')
@@ -59,12 +99,13 @@ def adaptation_panel():
     if finished_run(evaluation):
         verified = read(evaluation / 'video_verification.json')
         assert verified['status'] == 'verified'
+        eval_provenance = read(evaluation / 'provenance.json')
         for metric in read(evaluation / 'summary.json')['episodes']:
             directory = evaluation / metric['scenario']
             physics = read(directory / 'physics_contract.json')
             evaluation_evidence.append({key: metric[key] for key in ('scenario', 'seed', 'task_success', 'completed_skills')})
             panels.append(f'''<article><h3>{escape(metric['scenario'])} · 基础操作</h3>
-<p>同一个适配后模型、seed {metric['seed']}、30 秒、每 tick 重新推理；伙伴只观察。真实接触抬起记录 {len(physics['contact_grasp_objects'])} 个对象，
+<p>同一个适配后模型、seed {metric['seed']}、最长30秒、15Hz控制、最多执行 {eval_provenance['execution_horizon']} 步后重新推理；伙伴只观察。真实接触抬起记录 {len(physics['contact_grasp_objects'])} 个对象，
 合法贡献 {len(metric['completed_skills'])} 项，任务{'完成' if metric['task_success'] else '未完成'}。该测试检查基本操作，不能解释成人机协作成绩。</p>
 {video(directory)}<p>{link(directory / 'metrics.json', '原始成绩')} · {link(directory / 'physics_contract.json', '接触与贡献证据')}</p></article>''')
             sources += [directory / 'metrics.json', directory / 'physics_contract.json']
@@ -72,9 +113,12 @@ def adaptation_panel():
     done = sum(row['task_success'] for row in evaluation_evidence)
     outcome = (f'独立闭环基本操作完成 {done}/{len(evaluation_evidence)}。'
                if evaluation_evidence else '独立闭环评测尚未完成，不发布模型操作结论。')
+    method = ('完整动作专家、语言LoRA与动作投影，视觉与语言主干冻结' if position else 'LoRA适配参数')
+    setup = ('监督来自下一控制tick内实际施加的最后一个限速位置目标，采用train数据计算的相对位置归一化。末尾窗口保留，未记录的未来步用mask排除loss。'
+             if position else '使用官方OpenPI训练步骤和原有DROID归一化，只保留完整15步窗口。')
     document = f'''<section><h2>本轮实际训练，以及训练后能否操作</h2>
-<p>针对当前 Sim 操作分布，从已有 π0.5-DROID 权重进行 {summary['steps']} 步 LoRA 训练，仅更新 {provenance['trainable_parameters']:,} 个适配参数。
-使用官方 OpenPI 训练步骤和原有 DROID 归一化；完整动作块的候选训练样本 {provenance['train_samples']} 个、验证样本 {provenance['dev_samples']} 个，batch size {provenance['batch_size']}。
+<p>针对当前 Sim 操作分布，从已有 π0.5-DROID 权重训练 {summary['steps']} 步，更新 {provenance['trainable_parameters']:,} 个参数；训练范围为{method}。
+{setup}训练输入 {provenance['train_samples']} 个、验证输入 {provenance['dev_samples']} 个，batch size {provenance['batch_size']}。
 只使用本地权重和已经生成的实际接触示范，没有下载新模型。</p>
 <p>曲线是在固定 16 个验证样本、固定噪声上计算的 flow-matching loss，从 {summary['initial_dev_loss']:.3f} 降到 {summary['final_dev_loss']:.3f}。
 它衡量对示范监督的拟合，不等于抓取成功率，也不是全部验证集上的泛化成绩。
@@ -82,6 +126,9 @@ def adaptation_panel():
 <div class="notice">{outcome} 所以模型适配与闭环有效性必须分别报告；当前数据量与操作覆盖仍小，不能据此排名先进模型的 HRC 能力。
 这轮提示、动作块执行长度与早先原生模型运行不同，也不是严格配对的前后提升实验。</div>
 <p>{link(training / 'summary.json', '训练结果')} · {link(training / 'provenance.json', '训练设置与来源')} · {link(training / 'training.jsonl', '逐步训练记录')}</p>
+<p>位置域方案参考<a href="https://github.com/Physical-Intelligence/openpi/blob/main/examples/droid/README_train.md">官方DROID训练说明</a>。
+此前速度LoRA模型的独立操作为0/3，原始视频保留在{link(RESULTS / 'pi05_lora_atom_evaluation/index.html', '上一批基本操作报告')}。
+两批控制编码、监督、归一化与训练范围不同，不把loss差异当作效果大小。</p>
 {''.join(panels)}</section>'''
     return document, {'training': summary, 'settings': provenance, 'atomic_evaluation': evaluation_evidence}, sources
 
@@ -90,17 +137,23 @@ def main():
     native = next(RESULTS / name for name in CANDIDATES if finished_run(RESULTS / name))
     provenance = read(native / 'provenance.json')
     summary = read(native / 'summary.json')
-    robot_label = 'π0.5-DROID（本轮 LoRA 适配权重）' if provenance['model_server_metadata'].get('contact_lora') else 'π0.5-DROID（官方原生权重）'
+    metadata = provenance['model_server_metadata']
+    robot_label = ('π0.5（完整动作专家位置域适配）' if metadata.get('contact_position') else
+                   'π0.5-DROID（本轮 LoRA 适配权重）' if metadata.get('contact_lora') else 'π0.5-DROID（官方原生权重）')
     adaptation, adaptation_evidence, adaptation_sources = adaptation_panel()
+    surfaces, surface_sources = surface_panel()
     table, panels, evidence, source_paths = [], [], [], [native / 'summary.json', native / 'provenance.json', native / 'video_verification.json']
     decision_count = 0
     memory_records = []
+    budget_s = 0.0
     robot_total = human_total = success_count = 0
     for metric in summary['episodes']:
         matches = [path.parent for path in native.rglob('metrics.json')
                    if read(path).get('scenario') == metric['scenario'] and read(path).get('seed') == metric['seed']]
         assert len(matches) == 1
         directory = matches[0]
+        scenario = read(directory / 'scenario.json')
+        budget_s = max(budget_s, scenario['max_steps'] / scenario['tick_hz'])
         motion = read(directory / 'motion_verification.json')
         physics = read(directory / 'physics_contract.json')
         policy = rows(directory / 'human_policy_io.jsonl')
@@ -142,6 +195,7 @@ def main():
                          'robot_contributions': robot, 'human_contributions': human, 'model_calls': calls,
                          'human_decisions': len(policy), 'target_changes': target_changes,
                          'human_parse_errors': parse_errors,
+                         'previous_activity_memory_count': metric.get('human_previous_activity_memory_size', 0),
                          'maximum_wrist_alignment_error_m': alignment, 'motion_status': motion['status'],
                          'interpretation': '执行器与模型整体运行，不从任务失败直接推断 HRC 能力。'})
         source_paths += [directory / 'metrics.json', directory / 'motion_verification.json', directory / 'physics_contract.json']
@@ -172,6 +226,11 @@ def main():
     stamp = datetime.now().astimezone().isoformat(timespec='seconds')
     count = len(summary['episodes'])
     memory_section = ''
+    scope_text = ('伙伴经验跨活动保留，本批三个活动分别重新初始化物理世界，因此不是世界无重置的连续任务流。'
+                  if provenance.get('human_memory_scope') == 'session' else '记忆当前只在单个episode内保留。')
+    constraint_text = ('初始公开分工的附加前置条件已保留在机器人输入中。'
+                       if provenance.get('visible_surfaces') else
+                       '本批机器人的初始操作指令未完整保留附加公开前置说明；后续修订已回归验证，但旧视频不是修订后成绩。')
     if memory_records:
         unique = list({record['text']: record for record in reversed(memory_records)}.values())
         unique.sort(key=lambda record: record['time_s'])
@@ -179,10 +238,11 @@ def main():
         memory_section = f'''<section><h2>伙伴怎样根据经历改变下一步</h2><p>这轮 Qwen 在每次决定时看到当前公开状态、最近 10 次带时间的观察、最近 4 次公开决定和最近 12 条自身生成的经验。
 它输出行动、解释与可选记忆，实际写入 {len(memory_records)} 条经验。以下是实际模型输出，可能有判断错误，不是评测器认证的事实。</p><ul>{examples}</ul>
 <p>这些是生成的经验文本，而非手工信任分数或固定路由表；动作执行器仍使用阶段控制把意图变成连续物理动作。
-记忆当前只在单个 episode 内保留，尚未验证跨活动记忆或真人行为效度，也未用消融证明记忆改善了协作。</p>
-<div class="notice">本轮接力运行中，伙伴整段围绕蓝块观察、接近和持握，没有完成自己原先承诺的红块前置贡献；后期还把蓝块称为自己的任务。
-其最后一次输入的最近 16 条公开对话已经不含初始红块分工。这暴露了任务理解与记忆组织的边界；不能据此声称发现了真实人类的行为规律，也不能仅凭这次运行确定因果。</div></section>'''
-    source_paths += adaptation_sources
+{scope_text}尚未验证真人行为效度，也未用消融证明记忆改善协作。</p>
+<div class="notice">新策略保留公开任务板并输出自己的当前目标。当前接力运行先操作红块再完成蓝块，但后续并行任务出现整段观察与等待。
+保留信息不保证正确利用信息；生成理由也可能误称分工。模型动作、解释与实际贡献分别保留，不能据此认定真实人类规律或因果。</div></section>''' if provenance.get('human_memory_scope') == 'session' else f'''<section><h2>伙伴经验记录</h2>
+<p>保存{len(memory_records)}条模型生成经验。旧批次接力没有完成红块前置贡献，末期最近对话窗口丢失初始分工；新任务板与跨活动记忆需要单独实测。</p><ul>{examples}</ul></section>'''
+    source_paths += adaptation_sources + surface_sources
     document = f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>动态人类与真实接触 HRC · 实际系统报告</title><style>
 *{{box-sizing:border-box}}body{{margin:0;background:#f1f5f4;color:#182e3e;font-family:system-ui,"Noto Sans CJK SC",sans-serif;line-height:1.8;overflow-wrap:anywhere}}
@@ -204,10 +264,9 @@ th,td{{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-ali
 <div class="stat"><strong>{frame_total} 帧</strong><span>真实接触示范监督</span></div></div>
 <section><h2>目的与设置</h2><p>实验要观察：当人的行动由生成式模型根据可见进度决定、机械臂由训练后的具身模型控制时，双方能否完成共同活动，人的目标选择怎样影响实际过程。
 模型能力判断需要基本操作可用、人的动作连续、任务评分按实际贡献区分。</p>
-<p>本次运行后端为 Genesis，机器人 15 Hz 控制，最长 60 秒模拟时间；人体意图约每秒更新一次，物理推进为 60 Hz。
+<p>本次运行后端为 Genesis，机器人 15 Hz 控制，最长 {budget_s:.0f} 秒模拟时间；人体意图约每秒更新一次，物理推进为 60 Hz。
 π0.5 只接收实际外部/腕部相机、本体状态与公开任务语言。Qwen 读取公开几何、公开对话、自身动作状态与近期公开决定，输出目标对象、目的地、行动意图、速度和公开表达。</p>
-<p>本批基础操作指令使用英文，运行对话使用中文，尚未做语言条件对照。机器人的初始操作指令也没有完整保留串行任务的公开前置说明；因此本批不用于判断模型能否正确理解和遵守这些协调约定。
-运行结束后已修订输入去重，只去除初始的普通搬运句，保留附加公开约束；该修订通过回归测试，本页视频和模型成绩仍是修订前执行的结果。</p>
+<p>本批基础操作指令使用英文，运行对话使用中文，尚未做语言条件对照。{constraint_text}</p>
 <p>初始分工与活动依赖构成任务契约；执行中双方动作、占用、碰撞和未完成会改变后续观察。本次只使用 cooperative 伙伴，尚未形成不同人格与多模型的正式比较。
 机械臂直接执行模型给出的关节动作，不由几何教师接管。每次推理产生 15 步动作，本批最多执行 {provenance['execution_horizon']} 步后重新观察；公开纠正或失败反馈会提前丢弃旧动作块。</p>
 <h3>三项联合任务具体做什么</h3><div class="table-wrap"><table><thead><tr><th>任务</th><th>初始公开分工</th><th>协调要求与完成条件</th></tr></thead><tbody>
@@ -220,7 +279,7 @@ th,td{{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-ali
 <h3>一次实验如何运行和评分</h3><p>每个 episode 只在开始时初始化布局与公开分工，随后人和机械臂共享同一物理世界。
 每个 1/15 秒，机器人读取双相机与本体状态并提交底层动作；伙伴在更新时读取公开位置、对话与自己的经历，选择意图。
 仿真器推进接触、重力和碰撞，再把实际新状态交给双方。Qwen 当前使用结构化几何观察，还没有视觉感知误差模型。</p>
-<p>评分只接受有实际接触抬起证据、在目标区域稳定释放至少 0.4 秒、且操作当时满足前置条件的贡献。人的接管可完成活动，却不会算作机器人的贡献。
+<p>评分只接受有实际接触抬起证据、在目标区域稳定释放至少 0.4 秒、且操作当时满足前置条件的贡献。新区域任务的显示与判定共用一份表面几何，要求物体完整足迹在底板内；旧批次仍保留原来的中心点判定，不重评分。人的接管可完成活动，却不会算作机器人的贡献。
 到截止时刻冻结成绩；其后 1.5 秒只录制物理稳定过程。记录同时保留行动原始输出、公开观察、接触、贡献与视频时间轴。</p></section>
 <section><h2>人的动作现在怎样执行</h2><p>Qwen 选择做什么；接触手以关节受力完成伸手、夹持、抬起和释放。显示人物使用已有步行动作与躯干 IK，跟随实际物理手的位置。
 人的物体拿放不再调用 Avatar 对物体坐标的直接写入，也没有把物体绑定到机械臂。</p>
@@ -237,6 +296,7 @@ th,td{{padding:12px;border-bottom:1px solid #d8e3e1;text-align:left;vertical-ali
 {''.join(panels)}</section>
 {adaptation}
 {memory_section}
+{surfaces}
 <section><h2>用于后续模型校准的实际示范 Dataset</h2><p>已采集 {demo_total} 条接触操作运行，{demo_success} 条形成有效示范，共 {frame_total} 个双相机/本体状态/动作监督样本。
 目标来自实际下一物理步的关节变化，避免把大幅 IK 目标跳变当成已执行动作。失败运行保留视频与原始记录，不生成有效训练目标。</p>
 <div class="table-wrap"><table><thead><tr><th>数据批次</th><th>有效示范 / 运行</th><th>train 样本</th><th>dev 样本</th><th>查看</th></tr></thead><tbody>{''.join(dataset_tables)}</tbody></table></div>

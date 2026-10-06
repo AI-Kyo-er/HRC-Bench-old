@@ -14,6 +14,7 @@
 - [v2 Genesis 三种伙伴条件报告（18 个 episode，含真实 Sim 视频）](results/continuous_v2/genesis_paired_v10/index.html)
 - [v2 九类任务族动态伙伴正式报告（9 条真实 Sim 视频、9/9 时间轴核验）](results/continuous_v2/task_catalog_genesis_v2/index.html)
 - [真实接触、生成式伙伴与模型适配进展（2026-10-06，含真实 Sim 视频）](experiments/dynamic_contact_20261006/index.html)
+- [可见目标表面与96条实际示范的采集进度](datasets/visible_surface_demonstrations/progress.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)
@@ -145,6 +146,28 @@ CUDA_VISIBLE_DEVICES=2 XLA_PYTHON_CLIENT_MEM_FRACTION=0.4 PYTHONPATH=src:. \
 每次决定检索最近 12 条经验，完整内容保存到 `human_memory.jsonl`。
 这属于单 episode 内的生成式记忆，尚不是跨活动长期记忆，也没有真人校准或效用消融证据。
 独立基本操作可选 `--partner-mode observing`，用于隔离人的接管行为。
+
+后续已完成完整动作专家的位置域适配：1200步、457,967,648个训练参数，使用实际
+施加的位置目标、train-only相对位置归一化与末尾动作mask。固定验证loss降到0.0041，
+独立旧中心点任务仍0/3，仅蓝块有真实接触抬起证据。低loss不能替代闭环操作成绩。
+新联合运行采用 `--visible-surfaces --human-memory-scope session`，40秒预算，
+接力完成而另外两项失败，机器人贡献全部0。伙伴跨活动经验实际进入输入，但后续
+出现整段观察停顿；物理世界仍在每个episode重新初始化，尚不是世界无重置的活动流。
+
+可见目标场景由[同一份表面几何](src/hrc_pilot/goal_regions.py)控制显示与评分，检查
+实际物体完整足迹、释放、支撑和稳定。已完成接触生成校准，96条独立布局示范采集
+正在进行；这是几何教师数据生成，不计成学习模型成绩。采集启动脚本为
+`scripts/run_visible_surface_collection.sh`，已完成视频可用以下命令生成独立进度快照：
+
+```bash
+PYTHONPATH=src:. .venv-vc-pilot/bin/python experiments/continuous_v2/build_visible_surface_progress.py
+```
+
+π0.5-LIBERO权重已通过直连中国ModelScope获取并完成SHA256核验，位于
+`/data1/sieniwgroup/sieniw/models/lerobot/pi05-libero/`；仓库的 `models/pi05_libero`
+为软链接。它使用7维动作与不同的状态接口，尚未完成本平台运行，不能接到DROID
+接口后直接当作有效模型结果。下载脚本 `scripts/download_modelscope_policy.py`
+禁用环境代理，限制重定向为ModelScope/中国区阿里云OSS，没有HuggingFace或VPN回退。
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 PYTHONPATH=src:. .venv-vc-pilot/bin/python \

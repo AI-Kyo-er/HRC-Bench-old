@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-06T16:40:14+08:00",
+  "checked_at": "2026-10-06T18:48:34+08:00",
   "status": "verified",
   "pages": [
     {
@@ -15,25 +15,19 @@
           "error": null
         },
         {
-          "duration": 62,
+          "duration": 29.6,
           "width": 640,
           "height": 604,
           "error": null
         },
         {
-          "duration": 58.266667,
+          "duration": 42,
           "width": 640,
           "height": 604,
           "error": null
         },
         {
-          "duration": 62,
-          "width": 640,
-          "height": 604,
-          "error": null
-        },
-        {
-          "duration": 32,
+          "duration": 42,
           "width": 640,
           "height": 604,
           "error": null
@@ -48,6 +42,30 @@
           "duration": 32,
           "width": 640,
           "height": 604,
+          "error": null
+        },
+        {
+          "duration": 32,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 14.666667,
+          "width": 480,
+          "height": 484,
+          "error": null
+        },
+        {
+          "duration": 14.8,
+          "width": 480,
+          "height": 484,
+          "error": null
+        },
+        {
+          "duration": 27.533333,
+          "width": 480,
+          "height": 484,
           "error": null
         },
         {
@@ -64,36 +82,36 @@
         }
       ],
       "playback_check": {
-        "time": 0.913831,
+        "time": 0.913549,
         "paused": false,
         "error": null
       },
       "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "721666bcbb196253b2be380d96946c5552487ddf480e10bffaaa2528e6820a29"
+      "page_sha256": "3d10346dcd4ca0d33ddb69c41abe4788a9eaf8fd563d8d7dc4018668c31e7f6e"
     },
     {
-      "path": "results/continuous_v2/pi05_lora_qwen_memory_contact/index.html",
+      "path": "results/continuous_v2/pi05_position_qwen_session/index.html",
       "page_errors": [],
       "broken_links": [],
       "mobile_overflow": false,
       "videos": [
         {
-          "duration": 62,
+          "duration": 29.6,
           "width": 640,
           "height": 604,
           "error": null
         }
       ],
       "playback_check": {
-        "time": 0.914676,
+        "time": 0.913705,
         "paused": false,
         "error": null
       },
       "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "498da525fd77cc0856f86c60f062497fdd913caa62da3b13abe61fd8a398a5f8"
+      "page_sha256": "061dffc59f4327c34b8086eef312b3984d5b868a6187fba8bd1cc58f915bee7a"
     },
     {
-      "path": "results/continuous_v2/pi05_lora_atom_evaluation/index.html",
+      "path": "results/continuous_v2/pi05_position_atom_evaluation/index.html",
       "page_errors": [],
       "broken_links": [],
       "mobile_overflow": false,
@@ -106,12 +124,12 @@
         }
       ],
       "playback_check": {
-        "time": 0.911058,
+        "time": 0.912895,
         "paused": false,
         "error": null
       },
       "link_scope": "有href且未标记hidden的链接",
-      "page_sha256": "315c011310e9db7c1dd6d9e8c9ec562fa5d59ef5fd5698bfc8025c64e8e4bee5"
+      "page_sha256": "1352d0e720c3636352afa7a5b8a39e95fc2d7d3dd1916ab7ce0ee0552425f617"
     }
   ]
 }
