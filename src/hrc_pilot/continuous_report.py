@@ -15,6 +15,8 @@ ARTIFACT_NAMES = (
     "metrics.json", "scenario.json", "trace.jsonl", "events.jsonl",
     "public_observations.jsonl", "policy_io.jsonl", "human_policy_io.jsonl", "public_scenario.json",
     "demo.mp4", "preview.png", "trajectory.npz", "video_timeline.json", "history_probe.json", "partner_inputs.jsonl",
+    "contacts.jsonl", "robot_control.jsonl", "physics_contract.json",
+    "motion_verification.json",
 )
 
 
@@ -126,6 +128,8 @@ def build_replay_payload(output: Path, results: list[dict[str, Any]]) -> dict[st
             "trace": trace, "observations": observations, "events": events,
             "artifacts": artifacts,
             "video_audit": video_audit,
+            "motion_verification": (json.loads((directory / "motion_verification.json").read_text(encoding="utf-8"))
+                                    if (directory / "motion_verification.json").exists() else None),
             "video_timeline": (json.loads((directory / "video_timeline.json").read_text(encoding="utf-8"))
                                if (directory / "video_timeline.json").exists() else None),
             "history_probe": (json.loads((directory / "history_probe.json").read_text(encoding="utf-8"))

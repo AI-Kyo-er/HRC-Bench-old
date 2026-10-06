@@ -2,7 +2,7 @@ import json
 
 from hrc_pilot.continuous import CONTINUOUS_SCENARIOS, ContinuousWorld
 from hrc_pilot.llm_human import QwenHumanPolicy
-from hrc_pilot.protocol import Action
+from hrc_pilot.protocol import Action, Message
 
 
 def test_qwen_partner_uses_public_prompt_and_validates_decision():
@@ -65,3 +65,22 @@ def test_qwen_partner_records_parse_errors_without_private_fallback():
     record = policy.audit_state()["policy_io"][0]
     assert record["parse_error"]
     assert record["parsed_decision"]["intent"] == "observe"
+
+
+def test_qwen_own_message_does_not_trigger_self_conversation_loop():
+    scenario = CONTINUOUS_SCENARIOS["concurrent_overlay"]
+    world = ContinuousWorld(scenario)
+    world.reset(0)
+    calls = []
+    policy = QwenHumanPolicy(scenario, model_path="/tmp/no-model", persona_id="independent",
+                             generator=lambda prompt: calls.append(prompt) or
+                             '{"intent":"observe","message":"我在观察"}')
+    first = policy.step(world.observe())
+    for message in first.messages:
+        world.say(message)
+    policy.step(world.observe())
+    assert len(calls) == 1
+    world.say(Message("robot", "request_help", "请帮忙", "blue"))
+    policy.step(world.observe())
+    assert len(calls) == 2
+    assert policy.persona_id == "independent"

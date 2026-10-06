@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-06T13:33:59+08:00",
+  "page_sha256": "4eda67b5bd065299c26de44138f7b06d75217b89fc6c3b7b6004fcbb04d7d9e5",
+  "pages": [
+    {
+      "path": "experiments/dynamic_contact_20261006/index.html",
+      "title": "动态人类与真实接触 HRC · 阶段报告",
+      "videos": [
+        {
+          "duration": 6.066667,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 7.133333,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 16.133333,
+          "width": 640,
+          "height": 604,
+          "error": null
+        },
+        {
+          "duration": 22,
+          "width": 640,
+          "height": 604,
+          "error": null
+        }
+      ],
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false
+    },
+    {
+      "path": "results/continuous_v2/contact_calibration_formal/index.html",
+      "title": "HRC-Continuous v2 · 实验报告、仿真视频与事件回放",
+      "videos": [
+        {
+          "duration": 6.066667,
+          "width": 640,
+          "height": 604,
+          "error": null
+        }
+      ],
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false
+    },
+    {
+      "path": "results/continuous_v2/pi05_qwen_contact_benchmark/index.html",
+      "title": "HRC-Continuous v2 · 实验报告、仿真视频与事件回放",
+      "videos": [
+        {
+          "duration": 7.133333,
+          "width": 640,
+          "height": 604,
+          "error": null
+        }
+      ],
+      "page_errors": [],
+      "broken_links": [],
+      "mobile_overflow": false
+    }
+  ],
+  "status": "verified"
+}

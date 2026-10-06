@@ -20,12 +20,14 @@ from .protocol import Action, EventLog, Message, Observation
 class VCWorkspace:
     def __init__(self, *, assets: Path, backend: str = "gpu", resolution: int = 800,
                  render_stride: int = 3, viewer: bool = False, scenario=None,
-                 minimum_transfer_phase_steps: int = 12):
+                 minimum_transfer_phase_steps: int = 12,
+                 robot_grasp_model: str = "kinematic_attachment"):
         import genesis as gs
         from vico.modules.avatar.avatar_controller import AvatarController
         from .assets import mug_mesh
 
         self.gs = gs
+        self.robot_grasp_model = robot_grasp_model
         gs.init(seed=0, backend=gs.gpu if backend == "gpu" else gs.cpu,
                 logging_level=logging.WARNING, theme="dumb")
         self.scene = gs.Scene(
@@ -68,10 +70,16 @@ class VCWorkspace:
                         for i, spec in enumerate(scenario.objects)]
                        if scenario is not None else default_objects)
         for name, pos, color in object_specs:
-            # Fixed collision-free props explicitly implement the abstract grasp layer.
+            if robot_grasp_model == "friction_contact":
+                # A convex container proxy is a free rigid body, never bound to the robot.
+                morph = gs.morphs.Box(size=(0.05, 0.05, 0.10), pos=pos, fixed=False, collision=True)
+                material = gs.materials.Rigid(rho=400, friction=0.8)
+            else:
+                morph = gs.morphs.Mesh(file=mug_file, pos=pos, fixed=True, collision=False,
+                                       decimate=False, convexify=False)
+                material = None
             self.objects[name] = self.add_entity("object", name,
-                gs.morphs.Mesh(file=mug_file, pos=pos, fixed=True, collision=False,
-                               decimate=False, convexify=False),
+                morph, material=material,
                 surface=gs.surfaces.Default(color=color))
         self.robot = self.add_entity("robot", "franka",
             gs.morphs.MJCF(file="xml/franka_emika_panda/panda.xml", pos=(-0.10, 0, 0.76)))
@@ -393,7 +401,7 @@ class VCWorkspace:
                 if execution["phase_steps"] < self.minimum_transfer_phase_steps:
                     execution["qgoal"] = self._continuous_ik(destination + [0, 0, 0.14], 0.04)
                     if execution.get("qgoal") is not None:
-                        self.robot.control_dofs_position(execution["qgoal"])
+                        self._control_robot_position(execution["qgoal"])
                     return
                 if not _prerequisites_satisfied(self.scenario, "robot", action.object_id,
                                                action.destination, self.completed_skills):
@@ -415,9 +423,9 @@ class VCWorkspace:
                         or execution["progress"] >= 80):
                     self.continuous_execution = None
             if execution.get("qgoal") is not None:
-                self.robot.control_dofs_position(execution["qgoal"])
+                self._control_robot_position(execution["qgoal"])
         elif action.kind == "joint_position":
-            self.robot.control_dofs_position(execution["qgoal"])
+            self._control_robot_position(execution["qgoal"])
             self._continuous_joint_grasp()
             if execution["progress"] >= self._continuous_duration(action):
                 self.continuous_execution = None
@@ -426,6 +434,12 @@ class VCWorkspace:
 
     def _continuous_duration(self, action):
         return max(1, action.duration_steps) * int(60 / getattr(self.scenario, "tick_hz", 60))
+
+    def _control_robot_position(self, target):
+        self.robot.control_dofs_position(target)
+
+    def _after_physics_step(self):
+        pass
 
     def _continuous_joint_grasp(self):
         """底层关节策略的几何抓放抽象，不读取动作中的语义目标。
@@ -481,6 +495,7 @@ class VCWorkspace:
             self.avatar.step()
             self.avatar.robot.update()
             self.scene.step()
+            self._after_physics_step()
             pending = self.continuous_pending_placement
             if pending is not None and self.avatar.spare():
                 object_id, destination = pending
@@ -642,7 +657,7 @@ class VCWorkspace:
         (self.output / "video_timeline.json").write_text(json.dumps({
             "fps": self.video_fps, "physics_hz": 60,
             "frame_count": len(self.video_frames), "frames": self.video_frames,
-            "source": "runtime_genesis_camera", "grasp_model": "kinematic_attachment",
+            "source": "runtime_genesis_camera", "grasp_model": self.robot_grasp_model,
         }, ensure_ascii=False, indent=2), encoding="utf-8")
         arrays = {key: np.stack([row[key] for row in self.trace]) for key in self.trace[0]}
         arrays["object_names"] = np.array(list(self.objects))

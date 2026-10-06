@@ -1795,6 +1795,9 @@ def run_continuous_episode(scenario: ContinuousScenario, policy, partner: Contin
     Isaac 或远程机器人环境可以复用同一场景、伙伴、策略和评测器，而不必
     把 benchmark 逻辑复制到某个仿真器内部。
     """
+    prepare_partner = getattr(partner, "prepare", None)
+    if prepare_partner is not None:
+        prepare_partner()
     world: ContinuousBackend = backend_factory(scenario)
     try:
         binder = getattr(world, "bind_output", None)
@@ -2002,6 +2005,8 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
     result = {
         "scenario": scenario.name, "seed": seed, "robot_success": robot_success,
         "human_success": human_success, "task_success": activity_success,
+        "robot_target_geometry_satisfied": robot_success,
+        "human_target_geometry_satisfied": human_success,
         "condition": scenario.condition, "structure_family": scenario.structure.family,
         "structure_split": scenario.structure.split, "partner_mode": mode,
         "human_policy": partner_audit.get("policy", type(partner).__name__),

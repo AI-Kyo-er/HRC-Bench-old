@@ -1,7 +1,7 @@
 "use strict";
 
 const report = JSON.parse(document.getElementById("report-data").textContent);
-const modeNames = {fixed_replay: "固定贡献顺序", reactive: "即时响应", adaptive: "适应式伙伴", dynamic: "动态意图伙伴", adaptive_frozen: "冻结适应状态"};
+const modeNames = {fixed_replay: "固定贡献顺序", reactive: "即时响应", adaptive: "适应式伙伴", dynamic: "动态意图伙伴", qwen_llm: "Qwen 生成式伙伴", adaptive_frozen: "冻结适应状态"};
 const historyNames = {reliable: "可靠执行历史", failures: "连续失败历史"};
 const actionNames = {idle: "空闲", approach: "靠近物体", carry: "搬运", yield: "让行", away: "暂离", observe: "观察", wait: "等待", transfer: "搬运", joint_position: "关节目标"};
 const eventNames = {abstract_grasp_attached: "运动学抓取绑定", abstract_grasp_released: "实际位置释放绑定", public_message: "公开消息", robot_grasped: "机器人抓取", human_grasped: "人抓取", robot_transfer_completed: "机器人搬运完成", human_transfer_completed: "人搬运完成", policy_action: "机器人决策", robot_action_preempted: "动作打断", proximity_warning: "接近警告", robot_action_failed: "机器人失败", robot_action_delayed: "机器人延迟", human_state_update: "伙伴内部状态更新", robot_transfer_blocked: "依赖阻塞", human_transfer_waiting: "人等待前置贡献"};
@@ -107,6 +107,12 @@ function fillReport() {
   document.getElementById("headline-stats").append(videoCard);
   const trained = provenance.trained_model === true;
   const calibration = provenance.experiment === "joint_control_calibration";
+  const physicalContact = provenance.grasp_model === "friction_contact";
+  const generativePartner = report.episodes.some(episode => episode.metrics.partner_mode === "qwen_llm");
+  const motionFailures = report.episodes.filter(episode => episode.motion_verification?.status === "failed");
+  if (motionFailures.length) {
+    document.getElementById("setup-description").append(element("p", `动作连续性未通过：${motionFailures.length}/${report.episodes.length} 条运行记录人体拿放跳变。本页保留原始任务评分与视频用于诊断；这些 episode 不具备正式 Benchmark 排名资格，也不能把人接管后的活动成功当作机器人能力。`, "notice"));
+  }
   const dynamicPartner = report.episodes.some(episode => episode.metrics.partner_mode === "dynamic");
   document.getElementById("next-priority").textContent = trained
     ? dynamicPartner
@@ -115,6 +121,7 @@ function fillReport() {
     : provenance.experiment === "matched_history_probe"
       ? "匹配探针已检验模拟伙伴状态影响回答；下一步取消世界与协议重建，在同一持续活动中保留进度和历史，并比较机器人是否发现、处理伙伴改变。规则伙伴的因果作用不等于真人效度。"
       : "下一轮需要验证不同历史对人的后续行为是否有可观察影响，并让机器人据此重新协调贡献。";
+  if (motionFailures.length) document.getElementById("next-priority").textContent = "下一步优先替换人体拿放执行器，消除瞬间搬运，统一物理接触与动作时间；然后在同一活动中评测真实模型对动态伙伴的协调。";
   for (const name of report.run_artifacts || []) {
     const link = element("a", name); link.href = name;
     document.getElementById("run-verification-links").append(link);
@@ -123,10 +130,12 @@ function fillReport() {
   if (calibration) document.getElementById("report-title").textContent = "关节输出能否实际完成抓放？";
   document.getElementById("robot-implementation").textContent = trained
     ? `本次机器人由官方 π0.5-DROID 训练权重驱动。输入是运行时外部与腕部 RGB、臂关节、夹爪状态和公开语言；输出动作块经 DROID 速度标度转成关节目标。包装器没有生成语义搬运或求助动作。${dynamicPartner ? "本次动态伙伴实际处理红杯，机器人被分配处理蓝杯；伙伴的 profile、意图和记忆留在评测端，不会泄露给模型。" : ""}`
-    : calibration ? "本次机器人是公开几何 IK 教师，仅输出关节位置；它读取杯子位置进行校准，没有加载训练权重。该过程只核查底层抓放接口，不是模型成绩。"
+    : calibration ? "本次机器人是公开几何 IK 教师，仅输出关节位置；它读取物体位置进行校准，没有加载训练权重。该过程只核查底层抓放接口，不是模型成绩。"
     : "本次机器人策略见运行设置。greedy_public / request_help_public / 历史探针均为透明手写基线，不代表先进具身模型。";
   document.getElementById("backend-limits").textContent = genesis
-    ? "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。接触抓握、人机碰撞安全和真人效度尚未验证。是否运行训练模型，以本页具体策略及输入输出记录为准。真实 Sim 视频是本实验的主视觉证据，轨迹画布用于逐 tick 审计。"
+    ? physicalContact
+      ? "本次机器人使用真实摩擦接触：50×50×100 mm、0.10 kg 的自由刚体收纳块受重力、碰撞和夹爪作用，不与机器人绑定，也不会在到达目标后被移动坐标。抓取证据需双指接触并抬离桌面；释放后稳定支撑至少 0.4 秒才提交贡献。关节目标限速并保留请求与实际控制记录。人体拿放仍是 VC 运动学抽象，尚未验证人体接触安全；也未声称收纳块等同真实杯子。"
+      : "本次实际运行 VC/Genesis：Franka 关节控制、逆运动学与 Avatar 拿放动画在同一时间轴执行，每个 benchmark tick 包含多步物理推进。物体仍采用无碰撞的运动学绑定；合成失败与延迟由场景参数采样。接触抓握、人机碰撞安全和真人效度尚未验证。是否运行训练模型，以本页具体策略及输入输出记录为准。真实 Sim 视频是本实验的主视觉证据，轨迹画布用于逐 tick 审计。"
     : "本次运行 ContinuousWorld：简化几何与操作抽象，用于检查协议和伙伴机制。结果没有验证真实接触抓取、接触安全、先进 VLA/WLA 推理或真人协作。";
   document.getElementById("setup-description").append(element("p", `这组结果包含 ${episodesByScene.size} 个场景、${report.episodes.length} 次运行。实验等级：${provenance.experiment_tier || "旧结果未记录"}；后端：${provenance.backend || "未记录"}；机器人策略：${provenance.history_counterfactual ? "greedy_public / request_help_public" : provenance.policy || "未记录"}；seed：${metric(provenance.seeds?.join(", ") ?? provenance.seed)}。`));
   document.getElementById("setup-description").append(element("p", videoSummary.video_required
@@ -135,7 +144,8 @@ function fillReport() {
   for (const key of ["purpose", "controlled", "interpretation"]) {
     if (provenance[key]) document.getElementById("setup-description").append(element("p", provenance[key]));
   }
-  document.getElementById("setup-description").append(element("p", trained ? "本次加载训练权重，模型只获得双相机像素、本体状态与公开语言；几何标签虽在审计文件中存在，但不会进入原生 VLA 推理请求。伙伴由规则驱动，内部状态仍隔离在评测端。" : `${provenance.policy === "greedy_public" ? "机器人由手写参考策略驱动" : "本次使用公开记录中指定的手写校准或机制策略"}，人的贡献由可替换伙伴规则驱动。参考策略可读取公开几何与消息，内部伙伴变量属于评测端。`));
+  document.getElementById("setup-description").append(element("p", trained ? `本次加载训练权重，模型只获得双相机像素、本体状态与公开语言；几何标签虽在审计文件中存在，但不会进入原生 VLA 推理请求。${generativePartner ? "伙伴由本地 Qwen 读取公开观察后生成意图、速度和公开表达，完整决定与耗时可查看。" : "伙伴由规则驱动，内部状态仍隔离在评测端。"}` : `${provenance.policy === "greedy_public" ? "机器人由手写参考策略驱动" : "本次使用公开记录中指定的手写校准或机制策略"}，${generativePartner ? "人的意图由本地 Qwen 根据公开观察生成" : "人的贡献由可替换伙伴规则驱动"}。参考策略可读取公开几何与消息，内部伙伴变量属于评测端。`));
+  if (physicalContact) document.getElementById("setup-description").append(element("p", "接触记录和逐物理步控制保存在 contacts.jsonl、robot_control.jsonl 与 physics_contract.json。视频中物体的落地、被碰动、滑落或未抓到，均保留为物理执行结果。底层模型不会被教师接管；IK 教师只用于独立校准与后续数据生成。", "notice"));
   if (report.episodes.some(episode => episode.metrics.partner_mode === "dynamic")) {
     document.getElementById("setup-description").append(element("p", "动态意图伙伴把稳定 profile（节奏、主动性、合作倾向）与当前长期意图分开建模；它只从公开消息、机器人完成/失败和共同进度写入有限事件记忆，再重新选择贡献。profile、当前意图、意图切换次数和记忆大小都写入 metrics，便于审计；这些规则变量不是对真人心理的直接测量。", "notice"));
   }
@@ -304,6 +314,10 @@ function buildPanels() {
     }
     const settings = element("details"); settings.append(element("summary", "本次场景与初始分工（评测端信息）"), element("pre", JSON.stringify({description: episode.scenario.description, robot_targets: episode.scenario.robot_targets, human_targets: episode.scenario.human_targets, dynamics: episode.scenario.dynamics ?? "未记录", activity: episode.scenario.activity ?? "未记录", structure: episode.scenario.structure, human_policy: episode.metrics.human_policy, human_profile: episode.metrics.human_profile, human_intention: episode.metrics.human_intention, human_intention_switches: episode.metrics.human_intention_switches, human_memory_size: episode.metrics.human_memory_size}, null, 2)));
     information.append(status, observed, latest, details, settings, sourceLinks);
+    const robotContributions = (episode.metrics.completed_skills || []).filter(value => value.startsWith("robot:"));
+    const humanContributions = (episode.metrics.completed_skills || []).filter(value => value.startsWith("human:"));
+    information.prepend(element("p", `实际合法贡献：机器人 ${robotContributions.length} 项，人 ${humanContributions.length} 项。活动成功=${metric(episode.metrics.task_success)}；机器人分配贡献完成率=${metric(episode.metrics.robot_contribution_completion)}。`));
+    if (episode.motion_verification) information.prepend(element("p", `动作连续性：${episode.motion_verification.status}；异常 ${episode.motion_verification.violation_count ?? "未记录"} 次。正式 Benchmark 资格：${episode.motion_verification.benchmark_eligible ? "本项核验通过（仍需其他有效性检查）" : "未通过，只作诊断"}。`, "notice"));
     if (episode.history_probe) {
       const probe = episode.history_probe;
       information.append(element("p", `探针开始的伙伴判断（评测端）：trust=${probe.probe_initial_state.trust}，reliability=${probe.probe_initial_state.reliability_belief}；同一求助回答：${probe.help_reply === "accept" ? "接受" : probe.help_reply === "decline" ? "拒绝" : "未记录"}。`));

@@ -42,6 +42,8 @@ class GenesisContinuousAdapter:
         self.workspace.log.events.clear()
         self.workspace.trace.clear()
         self.workspace.video_phase = "benchmark"
+        if hasattr(self.workspace, "begin_benchmark"):
+            self.workspace.begin_benchmark()
         self.workspace.capture(force=True)
         self.record_event("initial_state", positions=self.workspace.positions())
 
@@ -110,6 +112,7 @@ class GenesisContinuousAdapter:
         attachment = getattr(self.workspace, "attachment", None)
         if attachment is not None:
             held.add(attachment[0])
+        held.update(getattr(self.workspace, "finger_touching", ()))
         return (object_id in positions and object_id not in held
                 and destination in self.workspace.regions
                 and math.dist(positions[object_id], self.workspace.regions[destination]) < 0.065)
@@ -153,12 +156,18 @@ def make_genesis_backend_factory(*, assets: Path, output_root: Path, backend: st
                                  resolution: int = 800, render_stride: int = 3,
                                  viewer: bool = False, policy: str = "external_model",
                                  settle_steps: int = 90,
-                                 minimum_transfer_phase_steps: int = 12):
+                                 minimum_transfer_phase_steps: int = 12,
+                                 robot_grasp_model: str = "kinematic_attachment"):
     """返回可直接交给 `run_continuous_episode` 的 Genesis backend 工厂。"""
     def factory(scenario):
-        workspace = VCWorkspace(assets=assets, backend=backend, resolution=resolution,
+        workspace_class = VCWorkspace
+        if robot_grasp_model == "friction_contact":
+            from .contact_backend import ContactWorkspace
+            workspace_class = ContactWorkspace
+        workspace = workspace_class(assets=assets, backend=backend, resolution=resolution,
                                 render_stride=render_stride, viewer=viewer, scenario=scenario,
-                                minimum_transfer_phase_steps=minimum_transfer_phase_steps)
+                                minimum_transfer_phase_steps=minimum_transfer_phase_steps,
+                                robot_grasp_model=robot_grasp_model)
         return GenesisContinuousAdapter(workspace, scenario=scenario, output_root=output_root,
                                         policy=policy, settle_steps=settle_steps)
     return factory

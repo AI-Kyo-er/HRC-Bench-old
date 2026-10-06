@@ -14,12 +14,7 @@ from PIL import Image
 from hrc_pilot.robot_control import droid_action_to_joint_target
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-dir", type=Path, required=True)
-    args = parser.parse_args()
-    root = args.input_dir
-    directory = root / "pi05_droid_native"
+def verify_episode(directory):
     rows = [json.loads(line) for line in (directory / "policy_io.jsonl").read_text().splitlines()]
     assert rows, "没有实际策略记录，不能证明模型运行"
     checks = []
@@ -61,8 +56,45 @@ def main():
         "task_success": metrics["task_success"],
         "interpretation": "记录链路核查，不推断 HRC、真实接触或模型泛化能力。",
     }
+    control_path = directory / "robot_control.jsonl"
+    if control_path.exists():
+        controls = [json.loads(line) for line in control_path.read_text().splitlines()]
+        cursor = 0
+        for control in controls:
+            while cursor + 1 < len(rows) and rows[cursor + 1]["step"] <= control["time_s"] + 1e-8:
+                cursor += 1
+            assert np.allclose(control["requested_target"], rows[cursor]["action"]["joints"])
+        assert controls, "缺少实际控制目标"
+        verification["physics_control_requests_match_model_actions"] = True
+    return verification
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input-dir", type=Path, required=True)
+    args = parser.parse_args()
+    root = args.input_dir
+    directories = sorted(path.parent for path in root.rglob("metrics.json"))
+    assert directories, "没有 episode，不能证明模型运行"
+    episodes = []
+    for directory in directories:
+        verification = verify_episode(directory)
+        verification["episode"] = directory.relative_to(root).as_posix()
+        episodes.append(verification)
+    verification = {
+        "status": "verified", "episode_count": len(episodes), "episodes": episodes,
+        "runtime_model_calls": sum(row["runtime_model_calls"] for row in episodes),
+        "native_joint_actions": sum(row["native_joint_actions"] for row in episodes),
+        "all_joint_targets_reconstructed": all(row["all_joint_targets_reconstructed"] for row in episodes),
+        "real_sim_pixels_verified": all(row["real_sim_pixels_verified"] for row in episodes),
+        "model_input_boundary_verified": all(row["model_input_boundary_verified"] for row in episodes),
+        "interpretation": "实际像素、动作块、关节转换和请求目标链路核查；不推断 HRC、真人效度或模型泛化能力。",
+    }
+    if len(episodes) == 1:
+        verification.update({key: episodes[0][key] for key in ("calls", "video", "task_success")})
     (root / "model_execution_verification.json").write_text(json.dumps(verification, ensure_ascii=False, indent=2))
-    print(f"核查通过：{len(calls)} 次模型推理、{len(rows)} 个关节目标、{count} 个真实视频帧")
+    print(f"核查通过：{len(episodes)} 个 episode，{verification['runtime_model_calls']} 次模型推理，"
+          f"{verification['native_joint_actions']} 个关节目标")
 
 
 if __name__ == "__main__":
