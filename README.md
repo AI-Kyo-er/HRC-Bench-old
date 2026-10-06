@@ -111,6 +111,12 @@ PYTHONPATH=src python scripts/run_hrc_dataset.py generate \
   --count-per-condition 1 --backend genesis
 ```
 
+数据集 CLI 在 Genesis（尤其是 `--experiment-tier important`）运行结束后，会自动先解码
+每个 episode 的 `demo.mp4`、严格核对 `video_timeline.json`，再生成 `index.html`；核验结果
+保存在运行根目录的 `video_verification.json`。任一视频缺失、为空、无法解码或时间轴不一致，
+命令会失败并不生成通过状态的报告。这样批量数据集评测和单次 benchmark 使用同一条真实 Sim
+视频门槛。
+
 正式扩展基准也可以直接生成九类任务族；`--task-catalog` 会让数据集入口和
 连续运行器使用同一套任务定义，每个 episode 仍按稳定的 split/family/name 路径保存：
 

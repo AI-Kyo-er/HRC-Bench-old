@@ -6,7 +6,33 @@ import json
 from pathlib import Path
 
 from .backend_options import add_backend_options, backend_provenance, configure_backend
+from .continuous_report import write_continuous_report
 from .dataset import evaluate_dataset, generate_dataset
+from .video_verification import verify_result
+
+
+def _policy_output_name(policy_spec: str) -> str:
+    return policy_spec.replace(":", "_").replace("/", "_").replace("\\", "_")
+
+
+def finalize_dataset_run(output: Path, command: str, policy_spec: str,
+                         provenance: dict) -> tuple[Path, Path | None]:
+    """为数据集运行写入视频核验和离线报告；重要视频不完整时直接失败。"""
+    output = Path(output)
+    (output / "provenance.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
+    video_verification = None
+    if provenance.get("sim_video_required"):
+        video_verification = output / "video_verification.json"
+        verification = verify_result(output, require_timeline=True)
+        video_verification.write_text(
+            json.dumps(verification, ensure_ascii=False, indent=2), encoding="utf-8")
+        if verification["status"] != "verified":
+            raise RuntimeError(f"重要实验真实 Sim 视频核验失败：{video_verification}")
+    summary_name = "summary.json" if command == "generate" else f"{_policy_output_name(policy_spec)}.summary.json"
+    summary = json.loads((output / summary_name).read_text(encoding="utf-8"))
+    report = write_continuous_report(output, summary["episodes"])
+    return report, video_verification
 
 
 def main() -> None:
@@ -67,8 +93,11 @@ def main() -> None:
         "policy": args.policy, "partner_mode": args.partner_mode,
         "observation_boundary": "public_observation_only",
     }
-    (args.output / "provenance.json").write_text(
-        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
+    report, video_verification = finalize_dataset_run(
+        args.output, args.command, args.policy, provenance)
+    print(f"[dataset] 报告：{report}")
+    if video_verification is not None:
+        print(f"[dataset] 视频核验：{video_verification}")
 
 
 if __name__ == "__main__":
