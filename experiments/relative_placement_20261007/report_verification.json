@@ -1,0 +1,58 @@
+{
+  "status": "verified",
+  "formal_video_count": 5,
+  "partial_diagnostic_video_count": 1,
+  "playback": [
+    {
+      "time": 0.653556,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.654299,
+      "paused": false,
+      "duration": 25.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.653421,
+      "paused": false,
+      "duration": 25.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.652492,
+      "paused": false,
+      "duration": 25.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.653445,
+      "paused": false,
+      "duration": 25.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.652217,
+      "paused": false,
+      "duration": 8.45,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "model_seek_and_decision_sync_verified": true,
+  "collateral_loss_event_button_verified": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_local_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/relative_placement_20261007/desktop.png"
+}

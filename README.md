@@ -4,12 +4,19 @@
 
 研究对象是共同活动如何在指导、协作和干预交织时被重新组织。时长和模式切换次数不是第一版的主要变量；理解更新也可以发生在物体和人体动作尚未改变时。
 
-最新扩展奶酪包入碗、酒瓶放酒架、碗放炉面及中层抽屉四类真实任务，8段Sim视频含4个基础操作参照。
+最新完成相对接收物放置、四种物品的接触校准与真实π0.5／Qwen共同活动，5段完整Sim视频、1段不完整接口诊断。
+奶酪／薄盘校准形成真实抓放，瓶／碗仍受掌部碰撞阻挡。模型10.50秒完成奶酪原生关系，持续运行26.60秒却有酒瓶离开桌面的附带损失；
+人20次重复grasp，实际相对放置0次、无可评分个人目标，不能记作双方协作成功。空夹开口与实际物体释放分开审计，旧结果保留。
+
+- [相对放置与完整场景行为最新报告（5段完整真实Sim视频）](experiments/relative_placement_20261007/index.html)
+- [校准、真实模型行为与未完成项](experiments/relative_placement_20261007/README.md)
+
+此前扩展奶酪包入碗、酒瓶放酒架、碗放炉面及中层抽屉四类真实任务，8段Sim视频含4个基础操作参照。
 无人物参照4/4；生成式伙伴条件仅抽屉原生任务成立，人个人整理目标均未满足。
 输入/控制/时钟/速度/显示核查通过；酒瓶场景机器人却夹起奶酪，需区分角色/话语与低层适配混杂。
 四条人的目标集合未改变，不能把可变接口称为已验证动态意图重组或cobalance能力。
 
-- [跨物体、容器与关节任务最新报告（8段真实Sim视频）](experiments/native_scene_catalog_20261007/index.html)
+- [跨物体、容器与关节任务报告（8段真实Sim视频）](experiments/native_scene_catalog_20261007/index.html)
 - [任务、模型、边界与实测数据说明](experiments/native_scene_catalog_20261007/README.md)
 
 此前增加真实双指摩擦抓放、实际高8cm的收纳台与两种生成式共同活动，4段真实Sim视频含独立校准。
@@ -174,6 +181,10 @@ PYTHONPATH=src .venv-vc-pilot/bin/python scripts/verify_genesis_videos.py \
 需要把时间轴缺失也作为正式门槛时，加上 `--require-timeline`。HTML 报告将真实 Sim
 视频放在轨迹画布之前，并显示每条 episode 的核验状态；轨迹画布仍用于逐 tick 事件
 审计，不能代替 Sim 视频。
+
+原生MuJoCo学习模型入口`run_libero_native_reference.py`与接触手校准入口`run_native_hand_validation.py`
+也强制先核验真实视频再生成正式HTML。重要实验以运行时相机视频为主要观看材料，保留原速模拟时间、逐帧时间轴、
+成功与失败，并将模型意图／实际动作／物理完成分开。没有完整视频或时间轴的中断只标作诊断，不计入正式覆盖率。
 
 需要把某次运行作为重要实验时，显式使用 `--experiment-tier important`（或快捷选项
 `--important`）。该等级只允许 `--backend genesis`，并把每个 episode 的运行时
