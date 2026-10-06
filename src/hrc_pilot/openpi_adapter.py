@@ -52,7 +52,8 @@ class DroidVLAAdapter:
             raise ValueError("需要 7 个 Franka 臂关节与 2 个指关节状态")
         new_messages = observation.messages[self.seen_messages:]
         invalidate = any(message.kind in {"assignment", "correction", "reassignment", "help_reply",
-                                          "temporarily_away", "returned", "action_failed", "action_blocked"}
+                                          "temporarily_away", "returned", "action_failed", "action_blocked",
+                                          "activity_change"}
                          for message in new_messages)
         self.seen_messages = len(observation.messages)
         if invalidate or self.cursor >= min(len(self.chunk), self.execution_horizon):
@@ -64,7 +65,11 @@ class DroidVLAAdapter:
                     np.clip(1 - sum(observation.robot_qpos[-2:]) / 0.08, 0, 1)], dtype=np.float32),
                 "prompt": self.instruction or observation.task_description,
             }
-            human_messages = [message.text for index, message in enumerate(observation.messages) if (message.speaker == "human"
+            activity_start = max((index for index, message in enumerate(observation.messages)
+                                  if message.kind == "activity_change"), default=0)
+            if observation.messages and observation.messages[activity_start].kind == "activity_change":
+                request["prompt"] += "\nCurrent public activity: " + observation.messages[activity_start].text
+            human_messages = [message.text for index, message in enumerate(observation.messages) if index >= activity_start and (message.speaker == "human"
                               or (message.speaker == "environment" and message.kind in {"action_blocked", "action_failed"}))
                               and not (index < self.initial_message_count
                                        and message.kind == "assignment" and message.value == "robot"

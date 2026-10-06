@@ -145,3 +145,26 @@ def test_session_memory_is_separated_from_current_world_and_goal():
     assert value['your_current_generated_goal'] == ''
     assert value['your_previous_activity_experiences'][0]['memory_id'] == previous_id
     assert policy.audit_state()['memory_retrievals'][0]['previous_activity_memory_ids'] == [previous_id]
+
+
+def test_public_activity_change_replaces_board_without_resetting_personal_history():
+    scenario = CONTINUOUS_SCENARIOS['relay']
+    world = ContinuousWorld(scenario)
+    for message in scenario.initial_messages():
+        world.say(message)
+    prompts = []
+    policy = QwenHumanPolicy(scenario, model_path='/tmp/no-model', generator=lambda prompt:
+        prompts.append(json.loads(prompt.split('\n', 1)[1])) or
+        '{"intent":"observe","current_goal":"由模型生成的新目标","memory_note":"保留亲自观察的经验"}')
+    policy.step(world.observe())
+    prior_memory_id = policy.experience_memory[0]['memory_id']
+    world.say(Message('environment', 'activity_change', '新活动：仅处理绿色。替代上一安排。'))
+    world.say(Message('human', 'assignment', '我处理绿色', 'green', 'human', 'keep_green'))
+    policy.step(world.observe())
+    current = prompts[-1]
+    assert [row['object_id'] for row in current['persistent_public_task_board']] == ['green']
+    assert current['current_public_activity']['text'].startswith('新活动')
+    assert current['your_current_generated_goal'] == '由模型生成的新目标'
+    assert current['generated_goal_predates_current_activity'] is True
+    assert current['your_personal_experience_memory'][0]['memory_id'] == prior_memory_id
+    assert len(policy.policy_io) == 2

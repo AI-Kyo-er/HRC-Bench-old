@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""用实际接触示范适配 π0.5，仅训练 LoRA，使用官方 OpenPI 训练步骤。"""
+"""用实际接触示范适配 π0.5：LoRA 或完整位置动作专家。"""
 import argparse
 from dataclasses import asdict, replace
 from hashlib import sha256
@@ -23,6 +23,7 @@ from openpi.training.data_loader import transform_dataset
 
 from experiments.continuous_v2.contact_lora_config import contact_lora_config
 from experiments.continuous_v2.physical_frame_dataset import PhysicalFrameDataset
+from experiments.continuous_v2.contact_flow_loss import contact_flow_loss
 
 
 def offline_download(url, **kwargs):
@@ -74,19 +75,22 @@ def position_norm_stats(dataset):
 
 
 def masked_position_train_step(config, rng, state, batch):
-    """沿用官方NNX/Optax训练过程，仅将loss限定于真实记录的动作时段。"""
+    """沿用NNX/Optax训练过程，实际8维与填充24维分别计量。"""
     model = nnx.merge(state.model_def, state.params)
     model.train()
     observation, actions, valid = batch
     def loss_fn(model):
-        loss = model.compute_loss(jax.random.fold_in(rng, state.step), observation, actions, train=True)
-        return jnp.sum(loss * valid) / jnp.maximum(jnp.sum(valid), 1)
-    loss, grads = nnx.value_and_grad(loss_fn, argnums=nnx.DiffState(0, config.trainable_filter))(model)
+        active, padding = contact_flow_loss(model, jax.random.fold_in(rng, state.step),
+                                            observation, actions, valid, train=True)
+        return active + 0.1 * padding, (active, padding)
+    (loss, (active, padding)), grads = nnx.value_and_grad(
+        loss_fn, argnums=nnx.DiffState(0, config.trainable_filter), has_aux=True)(model)
     params = state.params.filter(config.trainable_filter)
     updates, opt_state = state.tx.update(grads, state.opt_state, params)
     nnx.update(model, optax.apply_updates(params, updates))
     return replace(state, step=state.step + 1, params=nnx.state(model), opt_state=opt_state), {
-        "loss": loss, "grad_norm": optax.global_norm(grads),
+        "loss": loss, "active_action_loss": active, "padding_loss": padding,
+        "grad_norm": optax.global_norm(grads),
     }
 
 
@@ -161,12 +165,12 @@ def main():
         model = nnx.merge(state.model_def, params)
         model.eval()
         observation, actions = batch[:2]
-        loss = model.compute_loss(key, observation, actions, train=False)
-        return (jnp.sum(loss * batch[2]) / jnp.maximum(jnp.sum(batch[2]), 1)
-                if args.joint_position_expert else jnp.mean(loss))
+        if args.joint_position_expert:
+            return contact_flow_loss(model, key, observation, actions, batch[2], train=False)[0]
+        return jnp.mean(model.compute_loss(key, observation, actions, train=False))
 
     eval_fn = jax.jit(eval_loss)
-    eval_indices = np.linspace(0, len(dev_cache) - 1, min(16, len(dev_cache)), dtype=int)
+    eval_indices = np.linspace(0, len(dev_cache) - 1, min(64, len(dev_cache)), dtype=int)
     eval_batches = [batch(dev_cache, eval_indices[i:i + args.batch_size])
                     for i in range(0, len(eval_indices), args.batch_size)]
 
@@ -181,8 +185,11 @@ def main():
                   "trainable_scope": "full_action_expert_plus_language_lora_and_projections" if args.joint_position_expert else "lora_only",
                   "action_encoding": encoding,
                   "normalization": "train_only_relative_position_stats" if args.joint_position_expert else "original_droid_checkpoint_stats",
-                  "partial_action_chunks": "masked_loss_on_real_steps" if args.joint_position_expert else "complete_windows_only",
-                  "sampling": "仅使用完整动作块，dev保留最大示范seed；不声称跨任务或跨人泛化。",
+                  "partial_action_chunks": "masked_suffix_attention_and_loss" if args.joint_position_expert else "complete_windows_only",
+                  "loss_dimensions": {"physical": 8, "padding": 24, "padding_weight": 0.1,
+                                      "dev_loss": "physical_8_only"} if args.joint_position_expert else "official_32_dim_mean",
+                  "eval_sample_count": len(eval_indices),
+                  "sampling": "dev保留最大示范seed；完整位置专家允许有时间mask的末尾块，不声称跨任务或跨人泛化。",
                   "dataset_roots": [str(root) for root in args.datasets],
                   "dataset_metadata_sha256": {str(root): sha256((root / "dataset.json").read_bytes()).hexdigest()
                                                for root in args.datasets},
@@ -201,6 +208,9 @@ def main():
             info = jax.device_get(info)
             record = {"step": index + 1, "loss": float(info["loss"]), "grad_norm": float(info["grad_norm"]),
                       "elapsed_s": time.monotonic() - started}
+            if args.joint_position_expert:
+                record.update(active_action_loss=float(info["active_action_loss"]),
+                              padding_loss=float(info["padding_loss"]))
             if (index + 1) % 50 == 0 or index == args.steps - 1:
                 record["dev_loss"] = evaluate()
                 print(f"[contact-lora] {record}", flush=True)

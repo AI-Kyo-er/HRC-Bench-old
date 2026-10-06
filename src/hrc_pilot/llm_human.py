@@ -67,6 +67,9 @@ class QwenHumanPolicy:
         self.experience_memory: list[dict[str, Any]] = []
         self.public_task_memory: dict[str, dict[str, Any]] = {}
         self.current_goal = ""
+        self.public_activity_context = None
+        self.public_activity_epoch = 0
+        self.goal_activity_epoch = 0
         self.memory_retrievals = []
 
     def initial_messages(self) -> tuple[Message, ...]:
@@ -130,6 +133,8 @@ class QwenHumanPolicy:
             "要完成或重新协调的目标，允许随公开进展改变。几何接近目标不等于贡献已提交，"
             "公开未提交或action_blocked反馈应结合任务板理解，不假定它只是距离误差。"
             "过去活动的经验只供参考，不能当作当前物体状态或当前分工；先比较现在的公开任务板与观察。"
+            "公开activity_change表示上一安排已被替代；保留的旧目标是你先前的意图，"
+            "需要依据新活动自行决定继续、修改或放弃，并在current_goal中明确当前目标。"
             "reason 简短解释为何继续、改变或暂缓当前贡献；memory_note 记录你从公开观察"
             "确认的新经验，它将作为你的个人记忆进入后续决定。记忆只写有观察依据的事实，"
             "不得编造机器人隐藏计划或信任分数。比较带时间的可见历史，判断是否有实际进展。"
@@ -169,7 +174,9 @@ class QwenHumanPolicy:
             "robot_action_phase": observation.action_phase,
             "public_dialogue": messages,
             "persistent_public_task_board": list(self.public_task_memory.values()),
+            "current_public_activity": self.public_activity_context,
             "your_current_generated_goal": self.current_goal,
+            "generated_goal_predates_current_activity": self.goal_activity_epoch < self.public_activity_epoch,
             "your_recent_public_decisions": self.public_decision_history[-4:],
             "your_recent_observation_history": self.observation_history[-10:],
             "your_personal_experience_memory": self.experience_memory[-12:],
@@ -243,6 +250,16 @@ class QwenHumanPolicy:
         if not infer:
             return PartnerOutput(self.command)
         for message in observation.messages[self.seen_messages:]:
+            if message.kind == "activity_change":
+                self.public_activity_epoch += 1
+                self.public_activity_context = {
+                    "source": "public_dialogue", "epoch": self.public_activity_epoch,
+                    "observed_at_s": observation.time_s, "text": message.text,
+                    "previous_generated_goal": self.current_goal,
+                }
+                # The public announcement explicitly replaces the task board.
+                # Personal goals, decisions, and experiences remain model-owned.
+                self.public_task_memory.clear()
             if message.kind in {"assignment", "reassignment", "correction"}:
                 key = message.object_id or f"global_{len(self.public_task_memory)}"
                 self.public_task_memory[key] = {
@@ -279,6 +296,7 @@ class QwenHumanPolicy:
         generated_goal = str(decision.get("current_goal", "")).strip()[:500]
         if generated_goal:
             self.current_goal = generated_goal
+            self.goal_activity_epoch = self.public_activity_epoch
         self.last_inference_step = step
         self.last_message_count = message_count
         self.last_action_signature = action_signature
@@ -298,6 +316,7 @@ class QwenHumanPolicy:
             self.experience_memory.append({"memory_id": f"activity_{self.activity_index:04d}_experience_{len(self.experience_memory):04d}",
                                            "time_s": observation.time_s, "text": memory_note,
                                            "activity_index": self.activity_index,
+                                           "public_activity_epoch": self.public_activity_epoch,
                                            "source": "qwen_generated_from_public_observation"})
         self.public_decision_history.append(safe_decision)
         outgoing = ()
@@ -319,6 +338,7 @@ class QwenHumanPolicy:
     def audit_state(self) -> dict[str, Any]:
         return {"policy": "qwen_llm_human_policy", "profile": {"profile_id": self.persona_id},
                 "public_task_board": list(self.public_task_memory.values()), "generated_goal": self.current_goal,
+                "public_activity_context": self.public_activity_context,
                 "memory_scope": self.memory_scope, "previous_activity_memory": self.session_experiences,
                 "memory_retrievals": self.memory_retrievals,
                 "memory": self.experience_memory, "memory_size": len(self.experience_memory),

@@ -1,0 +1,132 @@
+{
+  "name": "visible_atom_blue",
+  "description": "Pick up the blue block and place it on the blue mat.",
+  "objects": [
+    {
+      "name": "red",
+      "position": [
+        0.42,
+        0.12,
+        0.82
+      ],
+      "radius": 0.045
+    },
+    {
+      "name": "blue",
+      "position": [
+        0.35,
+        -0.08,
+        0.82
+      ],
+      "radius": 0.045
+    },
+    {
+      "name": "green",
+      "position": [
+        0.25,
+        0.16,
+        0.82
+      ],
+      "radius": 0.045
+    }
+  ],
+  "regions": {
+    "tray_red": [
+      0.6,
+      -0.3,
+      0.82
+    ],
+    "tray_blue": [
+      0.42,
+      -0.3,
+      0.82
+    ],
+    "tray_green": [
+      0.24,
+      -0.3,
+      0.82
+    ],
+    "keep_red": [
+      0.6,
+      0.24,
+      0.82
+    ],
+    "keep_blue": [
+      0.42,
+      0.24,
+      0.82
+    ],
+    "keep_green": [
+      0.24,
+      0.24,
+      0.82
+    ]
+  },
+  "robot_targets": {
+    "blue": "tray_blue"
+  },
+  "human_targets": {},
+  "human_availability": 0.75,
+  "max_steps": 450,
+  "tick_hz": 15,
+  "leave_trigger": null,
+  "leave_probability": 0.0,
+  "leave_duration_steps": 12,
+  "dynamics": {
+    "robot_delay_probability": 0.0,
+    "robot_failure_probability": 0.0,
+    "max_delay_steps": 0,
+    "human_replan_sensitivity": 0.65,
+    "leave_pressure": 0.0,
+    "return_on_robot_idle": true,
+    "human_initiative": 0.65,
+    "handoff_on_failure_probability": 1.0,
+    "robot_failure_budget": 0
+  },
+  "activity": {
+    "objective": "Pick up the blue block and place it on the blue mat.",
+    "work_items": [
+      {
+        "item_id": "robot:blue:tray_blue",
+        "object_id": "blue",
+        "destination": "tray_blue",
+        "preferred_role": "robot",
+        "prerequisites": [],
+        "handoff": "open",
+        "priority": 1.0
+      }
+    ],
+    "interaction_acts": [
+      {
+        "act_id": "act:robot:blue:tray_blue",
+        "kind": "joint_execution",
+        "actor": "robot",
+        "target": "robot:blue:tray_blue",
+        "requires": []
+      }
+    ],
+    "shared_resources": [
+      "shared_workspace",
+      "public_commitment_channel"
+    ],
+    "replanning_triggers": [
+      "action_failed",
+      "action_delayed",
+      "help_request",
+      "partner_returned"
+    ],
+    "success_policy": "all_work_items"
+  },
+  "condition": "compositional",
+  "task_family": "object_transport",
+  "assets": {},
+  "structure": {
+    "family": "isolated",
+    "segments": [
+      "joint_execution"
+    ],
+    "dependencies": [],
+    "concurrency": [],
+    "split": "dev"
+  }
+}
