@@ -11,7 +11,8 @@ import subprocess
 from openpi_client.websocket_client_policy import WebsocketClientPolicy
 
 from hrc_pilot.backend_options import add_backend_options, backend_provenance, configure_backend
-from hrc_pilot.continuous import AdaptivePartner, run_continuous_episode
+from hrc_pilot.continuous import (AdaptivePartner, DynamicHumanPolicy, ReactivePartner,
+                                   FixedReplayPartner, run_continuous_episode)
 from hrc_pilot.continuous_report import write_continuous_report
 from hrc_pilot.history_probe import make_history_probe
 from hrc_pilot.openpi_adapter import DroidVLAAdapter
@@ -26,6 +27,13 @@ def main():
     parser.add_argument("--ticks", type=int, default=90)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--execution-horizon", type=int, default=8)
+    parser.add_argument("--partner-mode", choices=("dynamic", "adaptive", "reactive", "fixed_replay"),
+                        default="dynamic",
+                        help="伙伴条件；重要纵切片默认使用带 profile/意图/记忆的动态伙伴")
+    parser.add_argument("--human-profile", choices=("balanced", "assertive", "careful", "supportive"),
+                        default="balanced", help="动态伙伴的稳定行为倾向")
+    parser.add_argument("--deterministic-human", action="store_true",
+                        help="关闭动态伙伴的 episode 内随机采样，便于调试")
     args = parser.parse_args()
     args.policy = "pi05_droid_native"
     if args.backend != "genesis":
@@ -38,24 +46,37 @@ def main():
     if metadata.get("config") != "pi05_droid":
         parser.error("本地服务没有声明 pi05_droid 配置")
     scenario = replace(make_history_probe(), name="pi05_droid_native", tick_hz=15.0,
-                       description="Pick up the blue cup and place it on the blue mat.", max_steps=args.ticks)
+                       description="Pick up the blue cup and place it on the blue mat.", max_steps=args.ticks,
+                       human_targets={"red": "tray_red"}, robot_targets={"blue": "tray_blue"})
     policy = DroidVLAAdapter(client.infer, execution_horizon=args.execution_horizon)
-    result = run_continuous_episode(scenario, policy, AdaptivePartner(scenario),
+    if args.partner_mode == "dynamic":
+        partner = DynamicHumanPolicy(scenario, profile_id=args.human_profile,
+                                     stochastic=not args.deterministic_human)
+    elif args.partner_mode == "adaptive":
+        partner = AdaptivePartner(scenario)
+    elif args.partner_mode == "reactive":
+        partner = ReactivePartner(scenario)
+    else:
+        partner = FixedReplayPartner(scenario)
+    result = run_continuous_episode(scenario, policy, partner,
                                     seed=args.seed, output=args.output_dir / scenario.name,
-                                    backend_factory=factory)
+                                    backend_factory=factory, partner_mode=args.partner_mode)
     policy_io = [json.loads(line) for line in (args.output_dir / scenario.name / "policy_io.jsonl").read_text().splitlines()]
     calls = {row["adapter"]["model_call"]: row["adapter"] for row in policy_io}
     openpi = Path("/data1/sieniwgroup/sieniw/projects/HRC-Bench/external/openpi")
     provenance = {
         **backend_provenance(args), "policy": args.policy, "seed": args.seed,
-        "experiment": "native_vla_pilot", "trained_model": True,
+        "experiment": "native_vla_dynamic_partner_pilot", "trained_model": True,
+        "partner_mode": args.partner_mode,
+        "human_profile": args.human_profile if args.partner_mode == "dynamic" else None,
+        "deterministic_human": args.deterministic_human if args.partner_mode == "dynamic" else None,
         "model_server_metadata": metadata,
         "openpi_commit": subprocess.check_output(["git", "-C", str(openpi), "rev-parse", "HEAD"], text=True).strip(),
         "control_hz": 15, "execution_horizon": args.execution_horizon,
         "model_calls": len(calls), "action_chunks": [len(call["raw_action_chunk"]) for call in calls.values()],
         "purpose": "核查真实训练模型接收运行时双相机和本体状态、输出动作块并闭环驱动机械臂的链路。",
-        "controlled": "蓝杯收纳，伙伴仅观察；模型只看真实外部 / 腕部 RGB、7 个臂关节、夹爪状态和公开语言。没有几何坐标或内部伙伴状态输入，也不调用语义 transfer。",
-        "interpretation": "单任务单 seed 的原生 VLA 接入实验，不是 HRC 能力排行榜。场景与 DROID 实机训练分布存在差异；抓放仍是运动学绑定，模型不会被包装器代替生成求助。",
+        "controlled": "人动态处理红杯，机器人处理蓝杯；模型只看真实外部 / 腕部 RGB、7 个臂关节、夹爪状态和公开语言。没有几何坐标、伙伴私有 profile/意图/记忆或 evaluator 状态输入，也不调用语义 transfer。",
+        "interpretation": "单任务单 seed 的原生 VLA + 动态伙伴接入实验，不是 HRC 能力排行榜。场景与 DROID 实机训练分布存在差异；抓放仍是运动学绑定，模型不会被包装器代替生成求助。",
         "sampling": "官方 OpenPI Policy 使用从 0 初始化并随调用推进的采样 RNG；本次未把场景 seed 声称为模型采样重置。",
     }
     (args.output_dir / "summary.json").write_text(json.dumps({"episodes": [result]}, ensure_ascii=False, indent=2))

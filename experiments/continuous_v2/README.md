@@ -28,7 +28,14 @@
 - 真实官方 π0.5-DROID 已接入，[6 秒运行](../../results/continuous_v2/pi05_droid_genesis_v1/index.html)
   和 [30 秒运行](../../results/continuous_v2/pi05_droid_genesis_v2/index.html) 分别调用模型
   12 / 57 次，执行 90 / 450 个关节目标。两条均未完成收纳，原始失败、视频和
-  动作块全部保存。这是模型接入证据，尚无持续 HRC 能力结果。
+  动作块全部保存。这是模型接入证据，尚无持续 HRC 能力结果。当前 OpenPI
+  入口已支持动态伙伴；后续重要纵切片必须记录伙伴 profile、公开记忆和意图审计。
+- [π0.5-DROID + 动态伙伴纵切片](../../results/continuous_v2/pi05_droid_dynamic_genesis_v2/index.html)：
+  固定 seed、30 秒、15 Hz，动态伙伴实际处理红杯，真实模型处理蓝杯；模型调用 57 次、
+  执行 450 个关节目标，保留 480 帧 / 15 FPS 的运行时 `demo.mp4` 和完整时间轴。
+  人完成红杯但模型未完成蓝杯，整体任务失败。伙伴记录 4 次意图切换、2 条记忆写入、
+  96 次检索和 4 次反思。这证明真实模型、动态伙伴反馈和视频审计链路已接通，不能
+  解释为模型 HRC 能力排行榜；运动学 attachment、程序化伙伴和单 seed 仍是明确限制。
 - [评分修订后关节校准](../../results/continuous_v2/joint_calibration_genesis_v2/index.html)
   与 [四条件恢复复核](../../results/continuous_v2/recovery_contract_genesis_v2/index.html)
   均保留真实视频和贡献事件；接管 / 重试 / 无失败完成，持续失败未完成。
@@ -322,12 +329,13 @@ OPENPI_DATA_HOME=/data1/sieniwgroup/sieniw/models/Physical-Intelligence/openpi-c
 ```bash
 PYTHONPATH=src CUDA_VISIBLE_DEVICES=0 VICO_PILOT_MINIMAL_IMPORTS=1 \
 .venv-vc-pilot/bin/python scripts/run_openpi_benchmark.py --ticks 450 \
+  --partner-mode dynamic --human-profile balanced \
   --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/pi05_droid_new
 PYTHONPATH=src .venv-vc-pilot/bin/python scripts/verify_openpi_run.py \
   --input-dir results/continuous_v2/pi05_droid_new
 ```
 
-原生模型只看到真实双相机、本体和公开语言，没有物体坐标；具体输出是
+这条纵切片中人动态处理红杯，机器人处理蓝杯；原生模型只看到真实双相机、本体和公开语言，没有物体坐标；具体输出是
 10×8 速度 / 夹爪动作块，15 Hz 转关节目标，最多执行前 8 步再推理。消息更新
 会使旧块失效。包装器不替模型生成协商或求助。当前同步推理暂停模拟时钟，
 尚未验证真实推理延迟对伙伴的影响；相关耗时单独保存。

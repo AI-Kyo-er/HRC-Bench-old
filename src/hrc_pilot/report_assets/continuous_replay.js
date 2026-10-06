@@ -21,7 +21,7 @@ const sceneNotes = {
   failure_no_handoff: ["失败后不接管", "与接管条件共享同一 seed、目标、依赖和时限；伙伴的失败接管概率为零，检验基线是否自行恢复。失败注入不等于真实抓取失败。"],
   no_failure: ["无失败对照", "相同初始条件，无合成失败预算。只有记录了失败的运行才纳入恢复率分母。"],
   persistent_failure: ["持续失败核查", "每次机器人搬运都合成失败且伙伴不接管。这一条件改变了失败持续性，用于核查未恢复分类，不能作为一次失败后接管的因果对照。"],
-  pi05_droid_native: ["原生 VLA 收纳", "训练模型接收真实双相机 / 本体状态 / 公开任务语言，每 15 Hz 执行动作块。伙伴只观察；这是先排查基本操作链路的接入任务，尚未测试持续 HRC。"],
+  pi05_droid_native: ["原生 VLA 收纳", "训练模型接收真实双相机 / 本体状态 / 公开任务语言，每 15 Hz 执行动作块。请结合本页伙伴模式和事件核查模型是否实际参与了共同活动；不能只依据场景名称推断协作能力。"],
   joint_grasp_calibration: ["底层关节抓放校准", "公开几何 IK 教师只发送关节位置；抓取与释放由实际夹爪距离和宽度触发。杯子仍运动学绑定，不是接触动力学。"],
   matched_history_probe: ["匹配当前输入的历史探针", "从真实 prefix 的公开记录重放学习，仅将 trust / reliability 带入重新构造的同一当前世界与任务。比较相同求助的接受 / 拒绝，冻结状态排除即时消息差异。这里显式重置协议和几何，不是同一自然活动的无重置评测。"],
   prefix_reliable: ["可靠历史来源", "机器人完成三个杯子贡献；伙伴依据实际公开完成记录更新判断。"],
@@ -107,8 +107,11 @@ function fillReport() {
   document.getElementById("headline-stats").append(videoCard);
   const trained = provenance.trained_model === true;
   const calibration = provenance.experiment === "joint_control_calibration";
+  const dynamicPartner = report.episodes.some(episode => episode.metrics.partner_mode === "dynamic");
   document.getElementById("next-priority").textContent = trained
-    ? "下一步先核查相机、动作标度、实际接触和基础操作分布，再让人依据模型的实际进度改变贡献；持续保留同一世界与伙伴，比较组合 / 串接和结构留出。当前单人观察的收纳任务还没有测试持续 HRC。"
+    ? dynamicPartner
+      ? "下一步先核查相机、动作标度、实际接触和基础操作分布，再在同一世界中重复多 seed，并让模型根据动态伙伴的公开进度、失败和重新分工持续重规划。本次已经接入动态伙伴，但机器人未完成蓝杯，不能据此估计持续 HRC 或 cobalance 能力。"
+      : "下一步先核查相机、动作标度、实际接触和基础操作分布，再让人依据模型的实际进度改变贡献；持续保留同一世界与伙伴，比较组合 / 串接和结构留出。当前单人观察的收纳任务还没有测试持续 HRC。"
     : provenance.experiment === "matched_history_probe"
       ? "匹配探针已检验模拟伙伴状态影响回答；下一步取消世界与协议重建，在同一持续活动中保留进度和历史，并比较机器人是否发现、处理伙伴改变。规则伙伴的因果作用不等于真人效度。"
       : "下一轮需要验证不同历史对人的后续行为是否有可观察影响，并让机器人据此重新协调贡献。";
@@ -119,7 +122,7 @@ function fillReport() {
   if (trained) document.getElementById("report-title").textContent = "π0.5-DROID：真实图像到关节动作的闭环运行";
   if (calibration) document.getElementById("report-title").textContent = "关节输出能否实际完成抓放？";
   document.getElementById("robot-implementation").textContent = trained
-    ? "本次机器人由官方 π0.5-DROID 训练权重驱动。输入是运行时外部与腕部 RGB、臂关节、夹爪状态和公开语言；输出动作块经 DROID 速度标度转成关节目标。包装器没有生成语义搬运或求助动作。"
+    ? `本次机器人由官方 π0.5-DROID 训练权重驱动。输入是运行时外部与腕部 RGB、臂关节、夹爪状态和公开语言；输出动作块经 DROID 速度标度转成关节目标。包装器没有生成语义搬运或求助动作。${dynamicPartner ? "本次动态伙伴实际处理红杯，机器人被分配处理蓝杯；伙伴的 profile、意图和记忆留在评测端，不会泄露给模型。" : ""}`
     : calibration ? "本次机器人是公开几何 IK 教师，仅输出关节位置；它读取杯子位置进行校准，没有加载训练权重。该过程只核查底层抓放接口，不是模型成绩。"
     : "本次机器人策略见运行设置。greedy_public / request_help_public / 历史探针均为透明手写基线，不代表先进具身模型。";
   document.getElementById("backend-limits").textContent = genesis
@@ -142,7 +145,7 @@ function fillReport() {
   findings.append(element("p", videoSummary.video_required
     ? `视频核查：${videoSummary.video_episode_count}/${videoSummary.episode_count} 个 Genesis episode 有真实 Sim demo.mp4；时间轴完整 ${videoSummary.timeline_complete_count}/${videoSummary.episode_count}。真实视频用于核查 VC/Genesis 场景是否实际发生，轨迹动画用于逐 tick 对齐和事件审计。`
     : "视频核查：参考后端不产生真实 Sim 视频，因此本次只报告轨迹、公开观测和事件证据。", "notice"));
-  if (trained) findings.append(element("p", `实际模型调用 ${provenance.model_calls} 次，15 Hz 控制，每次最多执行 ${provenance.execution_horizon} 个动作；详细原始动作块、图像哈希和推理耗时在 policy_io.jsonl。单个 seed、分布不同的模拟视觉和运动学抓放不能支持能力排行榜。`, "notice"));
+  if (trained) findings.append(element("p", `实际模型调用 ${provenance.model_calls} 次，15 Hz 控制，每次最多执行 ${provenance.execution_horizon} 个动作；详细原始动作块、图像哈希和推理耗时在 policy_io.jsonl。${dynamicPartner ? "动态伙伴完成红杯，模型未完成蓝杯；" : ""}单个 seed、分布不同的模拟视觉和运动学抓放不能支持能力排行榜。`, "notice"));
   if (calibration) findings.append(element("p", "检查 policy_action 全部为 joint_position，并查看 source=joint_control 的靠近 / 闭合抓取、实际位置释放和搬运完成记录。IK 教师的成功只说明底层接口能够操作物体。", "notice"));
   const recoveryCounts = Object.fromEntries(["no_failure", "recovered_after_failure", "failed_to_recover"].map(status => [status, report.episodes.filter(e => e.metrics.recovery_status === status).length]));
   if (Object.values(recoveryCounts).some(Boolean)) {
@@ -388,7 +391,9 @@ function chooseScenario() {
   timeGrid = [...new Set(selectedEpisodes.flatMap(episode => episode.trace.map(frame => frame.time_s)))].sort((first, second) => first - second);
   bounds = calculateBounds(selectedEpisodes);
   timeline.max = String(timeGrid.length - 1);
-  const note = sceneNotes[scenarioSelect.value] || sceneNotes[selectedEpisodes[0].metrics.condition];
+  const note = scenarioSelect.value === "pi05_droid_native" && dynamicPartner
+    ? ["原生 VLA + 动态伙伴", "动态伙伴在运行时处理红杯并持续观察公开进度、模型动作和完成消息；π0.5-DROID 只接收双相机、本体状态与公开语言，负责蓝杯。请在视频、事件和指标中区分伙伴完成、模型动作和整体任务评分。"]
+    : sceneNotes[scenarioSelect.value] || sceneNotes[selectedEpisodes[0].metrics.condition];
   document.getElementById("scenario-explanation").textContent = note ? note[1] : (selectedEpisodes[0].scenario.description || "此场景的研究意图未记录。请依据实际轨迹与消息分析。");
   buildPanels(); seek(0);
 }
