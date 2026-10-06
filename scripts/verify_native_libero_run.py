@@ -102,7 +102,9 @@ def main():
             'native_actions':sum(r['native_actions'] for r in episodes),
             'interpretation':'独立链路、视频与采样运动核查；不验证真人效度、完整人体动力学或模型HRC泛化。原始无人体参照未保存原生四元数，只核对位置与有符号双指，轴角源转换另外由单元测试覆盖。'}
     (args.input_dir/'model_execution_verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
-    print(f'{len(episodes)}条链路与视频核查通过，{result["model_calls"]}次真实推理，运动合格{result["motion_eligible_episode_count"]}/{len(episodes)}')
+    vla_calls=sum(r['actual_vla_model_calls'] for r in episodes)
+    holds=sum(r['hold_primitive_calls'] for r in episodes)
+    print(f'{len(episodes)}条链路与视频核查通过，真实VLA推理{vla_calls}次、保持原语{holds}次，运动合格{result["motion_eligible_episode_count"]}/{len(episodes)}')
 
 
 if __name__=='__main__':main()

@@ -1,0 +1,17 @@
+{
+  "status": "verified",
+  "video_count": 3,
+  "playback": {
+    "time": 0.818887,
+    "paused": false,
+    "duration": 30.05
+  },
+  "synchronized_audit_verified": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/bidirectional_hrc_20261007/desktop.png"
+}
