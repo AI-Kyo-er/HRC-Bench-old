@@ -1,0 +1,28 @@
+{
+  "status": "verified",
+  "video_count": 2,
+  "playback": [
+    {
+      "time": 1.012956,
+      "paused": false,
+      "duration": 30.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 1.012364,
+      "paused": false,
+      "duration": 30.05,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "synchronized_audit_verified": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/grounded_coordination_20261007/desktop.png"
+}

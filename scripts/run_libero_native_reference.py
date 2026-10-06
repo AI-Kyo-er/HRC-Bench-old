@@ -379,7 +379,7 @@ def main():
                 provenance_episodes.append({'task_id':task_id,'init_state_id':initial_id,
                                             'bddl_sha256':sha256(bddl.read_bytes()).hexdigest(),
                                             'init_file_sha256':sha256(initial_path.read_bytes()).hexdigest()})
-                print(f'[native-libero] task{task_id} init{initial_id}: 成功{done}，{len(calls)}次真实调用', flush=True)
+                print(f'[native-libero] task{task_id} init{initial_id}: 成功{done}，{len(calls)}个控制块（VLA推理{result["actual_vla_model_calls"]}次、保持{result["hold_primitive_calls"]}块）', flush=True)
             finally:
                 writer.close()
                 env.close()
@@ -416,11 +416,11 @@ def main():
     panels=[]
     for result in episodes:
         location=f'task_{result["task_id"]:02d}/init_{result["init_state_id"]:03d}'
-        panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，真实推理{result["model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
+        panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，学习动作模型实际推理{result["actual_vla_model_calls"]}次、保持原语{result["hold_primitive_calls"]}块、视觉协调模型推理{result["robot_planner_model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
     model_label={'pi05_libero':'π0.5','openvla_libero_spatial':'OpenVLA'}.get(metadata.get('config'),'所选学习模型')
     if coordinator is not None:model_label='Qwen3-VL协调器 + '+model_label
     human_note = ('测试没有人类伙伴，不能解释为协作成绩。' if args.human_mode=='none' else
-                  '加入力驱动的碰撞指尖和不参与碰撞的显示人体。observe用于场景接入检查，calibration的推盘命令来自数据教师，qwen才使用真实Qwen3-14B决定推进、观察和让行。机器人一直执行真实π0.5；人体显示仍是简化运动学代理，不能声称真人或完整人体动力学。')
+                  '加入力驱动的碰撞指尖和不参与碰撞的显示人体。observe用于场景接入检查，calibration的推盘命令来自数据教师，qwen才使用真实Qwen3-14B决定推进、观察和让行。机器人执行学习动作模型输出；接入协调器时也可选择保持原语；人体显示仍是简化运动学代理，不能声称真人或完整人体动力学。')
     human_note=human_note.replace('π0.5',model_label)
     page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生仿真策略与移动接收盘</title><style>body{{margin:auto;max-width:1080px;padding:24px;background:#f1f5f4;font:17px/1.8 system-ui;color:#193540;overflow-wrap:anywhere}}article{{background:white;padding:24px;margin:24px 0;border-radius:14px}}video{{width:100%;max-height:600px;background:#142430}}h1{{font-size:30px}}h2{{font-size:22px}}</style><h1>真实{model_label}模型与可变化的接收盘</h1><p>此前Genesis中的机器人未建立可靠抓放。这里保持已下载模型权重，使用配套原生场景、两路相机、末端状态及OSC控制，区分基础操作问题与接入域差异。{human_note}</p><p>20Hz物理控制；每次模型输出最多执行{args.execution_horizon}步后重新观察。视频直接记录Sim场景；机器人没有教师接管，物体没有吸附。伙伴条件：{args.human_mode}。结果：{sum(r['task_success'] for r in episodes)}/{len(episodes)}。当前样本是系统实测，不作为完整HRC或全套LIBERO排名。</p><p><a href="summary.json">原始结果</a> · <a href="provenance.json">设置与来源</a> · <a href="video_verification.json">视频核验</a></p>{''.join(panels)}</html>'''
     (args.output_dir/'index.html').write_text(page)
