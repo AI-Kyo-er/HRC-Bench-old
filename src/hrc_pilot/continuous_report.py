@@ -13,7 +13,7 @@ from .continuous import ContinuousScenario
 
 ARTIFACT_NAMES = (
     "metrics.json", "scenario.json", "trace.jsonl", "events.jsonl",
-    "public_observations.jsonl", "policy_io.jsonl", "public_scenario.json",
+    "public_observations.jsonl", "policy_io.jsonl", "human_policy_io.jsonl", "public_scenario.json",
     "demo.mp4", "preview.png", "trajectory.npz", "video_timeline.json", "history_probe.json", "partner_inputs.jsonl",
 )
 

@@ -1358,6 +1358,17 @@ def make_partner(scenario: ContinuousScenario, mode: str = "adaptive") -> Contin
         return AdaptivePartner(scenario)
     if mode == "dynamic":
         return DynamicHumanPolicy(scenario)
+    if mode == "qwen_llm":
+        from .llm_human import QwenHumanPolicy
+        import os
+        return QwenHumanPolicy(
+            scenario,
+            model_path=os.environ.get(
+                "HRC_HUMAN_MODEL",
+                "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B",
+            ),
+            decision_interval_steps=int(os.environ.get("HRC_HUMAN_DECISION_INTERVAL", "10")),
+        )
     raise ValueError(f"未知伙伴模式: {mode}")
 
 
@@ -1905,6 +1916,7 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
         "ReactivePartner": "reactive",
         "AdaptivePartner": "adaptive",
         "DynamicHumanPolicy": "dynamic",
+        "QwenHumanPolicy": "qwen_llm",
     }.get(type(partner).__name__, type(partner).__name__)
     partner_audit = (partner.audit_state() if hasattr(partner, "audit_state") else {})
     # Private partner traces are evaluator artifacts. They are written as separate
@@ -2095,6 +2107,10 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
             (output / filename).write_text(
                 "\n".join(json.dumps(record, ensure_ascii=False) for record in records)
                 + ("\n" if records else ""))
+        human_policy_records = partner_audit.get("policy_io", ()) or ()
+        (output / "human_policy_io.jsonl").write_text(
+            "\n".join(json.dumps(record, ensure_ascii=False) for record in human_policy_records)
+            + ("\n" if human_policy_records else ""))
         (output / "metrics.json").write_text(json.dumps(result, ensure_ascii=False, indent=2))
     return result
 

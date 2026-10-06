@@ -35,8 +35,13 @@ def main() -> None:
                         help="批量读取目录中的 JSON 场景契约；文件名决定稳定顺序")
     parser.add_argument("--scenario-seed", type=int, default=None,
                         help="任务实例生成种子，默认沿用 --seed")
-    parser.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive", "dynamic"),
+    parser.add_argument("--partner-mode", choices=("fixed_replay", "reactive", "adaptive", "dynamic", "qwen_llm"),
                         default="adaptive", help="人类伙伴条件")
+    parser.add_argument("--human-model", type=Path,
+                        default=Path("/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B"),
+                        help="qwen_llm 伙伴使用的本地模型目录")
+    parser.add_argument("--human-decision-interval", type=int, default=10,
+                        help="LLM 人类伙伴的常规重决策间隔（仿真 tick）")
     parser.add_argument("--suite", action="store_true",
                         help="生成 isolated/matched_serial/compositional/held_out 条件集合")
     parser.add_argument("--paired", action="store_true",
@@ -48,6 +53,8 @@ def main() -> None:
     parser.add_argument("--count-per-condition", type=int, default=2,
                         help="--suite 每个结构条件生成多少实例")
     args = parser.parse_args()
+    if args.human_decision_interval < 1:
+        parser.error("--human-decision-interval 必须至少为 1")
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error("输出目录已有内容，请使用新的目录，避免覆盖已有实验。")
     if sum(bool(value) for value in (args.suite, args.task_catalog, bool(args.generated))) > 1:
@@ -74,6 +81,9 @@ def main() -> None:
             parser.error("--scenes 只用于选择内置场景")
         scenarios = [CONTINUOUS_SCENARIOS[name] for name in args.scenes]
     backend_factory = configure_backend(args, parser, args.output_dir)
+    import os
+    os.environ["HRC_HUMAN_MODEL"] = str(args.human_model)
+    os.environ["HRC_HUMAN_DECISION_INTERVAL"] = str(args.human_decision_interval)
     if sum(bool(value) for value in (args.paired, bool(args.counterfactual_policies), args.history_counterfactual)) > 1:
         parser.error("--paired、--counterfactual-policies 和 --history-counterfactual 只能选择一个")
     if args.history_counterfactual:
@@ -99,6 +109,8 @@ def main() -> None:
         "runtime": "hrc_pilot.continuous",
         **backend_provenance(args),
         "policy": args.policy, "seed": args.seed,
+        "human_model": str(args.human_model) if args.partner_mode == "qwen_llm" else None,
+        "human_decision_interval": args.human_decision_interval,
         "counterfactual_policies": args.counterfactual_policies,
         "history_counterfactual": args.history_counterfactual,
         "generated": args.generated, "suite": args.suite,
