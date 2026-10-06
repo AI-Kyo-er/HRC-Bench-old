@@ -40,6 +40,8 @@ def main():
     parser.add_argument('--steps', type=int, default=280)
     parser.add_argument('--execution-horizon', type=int, default=10)
     parser.add_argument('--human-mode', choices=['none','observe','qwen','calibration'], default='none')
+    parser.add_argument('--human-contact-model',choices=['fingertip','articulated_hand'],default='fingertip')
+    parser.add_argument('--human-workspace-layout',choices=['tabletop','raised_storage'],default='tabletop')
     parser.add_argument('--human-visualization',choices=['capsule','vico_skin'],default='vico_skin')
     parser.add_argument('--task-family',choices=['moving_receptacle','clearance_return','prepare_receptacle','shared_workspace'],default='moving_receptacle')
     parser.add_argument('--autonomous-human-context',choices=list(CONTEXTS))
@@ -112,7 +114,8 @@ def main():
                   Path('src/hrc_pilot/native_avatar.py'),
                   Path('src/hrc_pilot/native_task_contracts.py'),
                   Path('src/hrc_pilot/native_activity.py'),Path('src/hrc_pilot/native_autonomous_human.py'),
-                  Path('src/hrc_pilot/native_personal_evidence.py'),
+                  Path('src/hrc_pilot/native_personal_evidence.py'),Path('src/hrc_pilot/native_articulated_hand.py'),
+                  Path('src/hrc_pilot/native_hand_policy.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
                   Path('src/hrc_pilot/native_placement.py'),
@@ -136,6 +139,9 @@ def main():
         if args.autonomous_human_context:
             from hrc_pilot.native_autonomous_human import AutonomousNativeHuman
             human_class=AutonomousNativeHuman;human_kwargs={'autonomous_context':args.autonomous_human_context}
+        if args.human_contact_model=='articulated_hand':
+            from hrc_pilot.native_hand_policy import ArticulatedAutonomousHuman,ArticulatedAssignedHuman
+            human_class=ArticulatedAutonomousHuman if args.autonomous_human_context else ArticulatedAssignedHuman
         partner = human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
                                  model_path=args.human_model, persona_id=args.human_persona,
                                  decision_interval_steps=args.human_decision_interval_steps, memory_scope=args.human_memory_scope,**human_kwargs)
@@ -192,9 +198,18 @@ def main():
                     if work_plan or args.autonomous_human_context:
                         objects={name:env.sim.data.body_xpos[body].copy() for name,body in env.env.obj_body_id.items()}
                         regions=activity_regions(objects);plate_goal=np.asarray(regions['plate_ready'])
+                    if args.human_workspace_layout=='raised_storage':
+                        if args.human_contact_model!='articulated_hand':raise ValueError('高台抓放任务要求实际接触手')
+                        cookie=env.sim.data.body_xpos[env.env.obj_body_id['cookies_1']].copy()
+                        regions['cookies_shelf']=(.32,.40,float(cookie[2])+.08)
+                        regions['plate_shelf']=(.32,.40,float(env.sim.data.body_xpos[env.env.obj_body_id['plate_1']][2])+.08)
                     obs = augment_contact_human(env,plate_goal,visualization=args.human_visualization,
-                                                public_regions=regions if work_plan or args.autonomous_human_context else None)
-                    actor = NativeContactHuman(env,regions)
+                                                public_regions=regions if work_plan or args.autonomous_human_context or args.human_workspace_layout=='raised_storage' else None,
+                                                contact_model=args.human_contact_model,raised_storage=args.human_workspace_layout=='raised_storage')
+                    if args.human_contact_model=='articulated_hand':
+                        from hrc_pilot.native_articulated_hand import NativeArticulatedHuman
+                        actor=NativeArticulatedHuman(env,regions)
+                    else:actor = NativeContactHuman(env,regions)
                     actor._display(actor.position())
                     env.sim.forward()
                     env.env._update_observables(force=True)
@@ -490,7 +505,8 @@ def main():
         'human_plan_execution':'Qwen reselects each action; generated plans never routed by runtime',
         'human_torch_seed_rule':'seed + 1000*task_id + init_state_id',
         'human_model':str(args.human_model) if partner is not None else None,
-        'human_physics':'force_driven_xyz_fingertip' if args.human_mode!='none' else None,
+        'human_contact_model':args.human_contact_model,'human_workspace_layout':args.human_workspace_layout,
+        'human_physics':('force_driven_xyz_yaw_bilateral_fingers' if args.human_contact_model=='articulated_hand' else 'force_driven_xyz_fingertip') if args.human_mode!='none' else None,
         'human_body_visualization':args.human_visualization if args.human_mode!='none' else None,
         'human_avatar_assets':avatar_assets,
         'human_goal_definition':'assigned object center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness; temporal prerequisites apply as publicly specified',

@@ -105,7 +105,7 @@ class NativeQwenHuman(QwenHumanPolicy):
         return super()._validated_command(value, observation)
 
 
-def augment_contact_human(env, destination, *, visualization='vico_skin', public_regions=None):
+def augment_contact_human(env, destination, *, visualization='vico_skin', public_regions=None, contact_model='fingertip', raised_storage=False):
     """仅初始化时重编译场景，并按名字保持原机器人/物体qpos与qvel。"""
     old_model, old_data = env.sim.model, env.sim.data
     qpos, qvel = old_data.qpos.copy(), old_data.qvel.copy()
@@ -159,16 +159,24 @@ def augment_contact_human(env, destination, *, visualization='vico_skin', public
     ET.SubElement(world,'geom',name='human_public_plate_region',type='cylinder',
                   pos=f'{destination[0]} {destination[1]} {surface_z+.0008}',size='.025 .0005',
                   rgba='.32 .64 .47 .65',contype='0',conaffinity='0',group='1')
+    if raised_storage:
+        point=public_regions['cookies_shelf']
+        ET.SubElement(world,'geom',name='human_storage_support',type='box',pos=f'{point[0]} {point[1]} {surface_z+.04}',
+                      size='.07 .07 .04',rgba='.55 .38 .22 1',friction='1 .01 .001')
     if public_regions:
         colors={'plate_ready':'.32 .64 .47 .65','plate_home':'.24 .47 .85 .65',
                 'cookies_ready':'.92 .57 .20 .65','cookies_home':'.62 .35 .76 .65'}
         for name,point in public_regions.items():
-            if name=='near_human':continue
+            if name in {'near_human','plate_shelf'}:continue
             # plate_ready aliases the existing green marker; no duplicate z-fighting.
             if name=='plate_ready':continue
             ET.SubElement(world,'geom',name='human_public_region_'+name,type='cylinder',
-                          pos=f'{point[0]} {point[1]} {surface_z+.0008}',size='.025 .0005',
-                          rgba=colors[name],contype='0',conaffinity='0',group='1')
+                          pos=f'{point[0]} {point[1]} {surface_z+.0808 if name=="cookies_shelf" else surface_z+.0008}',size='.025 .0005',
+                          rgba=colors.get(name,'.83 .64 .26 .65'),contype='0',conaffinity='0',group='1')
+    if contact_model=='articulated_hand':
+        from .native_articulated_hand import install_articulated_hand
+        install_articulated_hand(root)
+    elif contact_model!='fingertip':raise ValueError('未知原生接触手类型')
     env.env.reset_from_xml_string(ET.tostring(root,encoding='unicode'))
     env.env._hrc_avatar_rig=rig
     env.sim.data.qpos[:len(qpos)] = qpos
@@ -176,6 +184,8 @@ def augment_contact_human(env, destination, *, visualization='vico_skin', public
     env.sim.data.time = old_time
     for axis, value in zip('xyz', [.25, .60, 1.12]):
         env.sim.data.set_joint_qpos('human_'+axis, value)
+    if contact_model=='articulated_hand':
+        for side in ['left','right']:env.sim.data.set_joint_qpos('human_'+side+'_finger',.095)
     env.sim.forward()
     env.env._update_observables(force=True)
     return env.env._get_observations()

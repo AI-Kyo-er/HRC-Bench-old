@@ -55,7 +55,7 @@ def activity_regions(objects):
 
 
 def public_surfaces(regions):
-    colors={'plate_ready':'green','plate_home':'blue','cookies_ready':'orange','cookies_home':'purple','near_human':'green'}
+    colors={'plate_ready':'green','plate_home':'blue','cookies_ready':'orange','cookies_home':'purple','cookies_shelf':'gold','plate_shelf':'gold','near_human':'green'}
     return {name:{'shape':'circle','spatial_reference':'object_center','center_xyz':list(position),
                   'radius_m':.025,'color':colors[name],'source':'visible_marker_geometry'}
             for name,position in regions.items()}
