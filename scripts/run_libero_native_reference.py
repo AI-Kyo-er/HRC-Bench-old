@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import time
 
 import imageio.v2 as imageio
@@ -50,6 +51,18 @@ def main():
     if selected not in free or free[selected] < required:
         parser.error(f'原生Sim与所选伙伴预计需要{required}MiB，请指定单張显存足够的GPU')
     print(f'[native-libero] GPU{selected} 空闲{free[selected]}MiB', flush=True)
+    pci_rows=subprocess.check_output(['nvidia-smi','--query-gpu=index,pci.bus_id','--format=csv,noheader'],text=True)
+    pci={row.split(',')[0].strip():row.split(',')[1].strip().lower()[-12:] for row in pci_rows.splitlines()}
+    probe_env=dict(os.environ)
+    probe_env.pop('CUDA_VISIBLE_DEVICES',None)
+    probe_env['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
+    mapping=json.loads(subprocess.check_output([sys.executable,str(Path(__file__).with_name('probe_egl_devices.py'))],
+                                               env=probe_env,text=True))
+    matched=[r for r in mapping if r['pci_bus']==pci[selected]]
+    if len(matched)!=1:parser.error('不能唯一对应物理GPU与EGL设备，禁止跨卡渲染')
+    os.environ['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
+    os.environ['MUJOCO_EGL_DEVICE_ID']=str(matched[0]['egl_ordinal'])
+    print(f'[native-libero] EGL{matched[0]["egl_ordinal"]} → 物理GPU{selected} PCI{pci[selected]}',flush=True)
     from libero.libero import benchmark, get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
     from openpi_client.websocket_client_policy import WebsocketClientPolicy
@@ -61,8 +74,10 @@ def main():
     if metadata.get('action_encoding') != 'libero_osc_delta':
         parser.error('需要实际π0.5-LIBERO原生末端增量模型服务')
     suite = benchmark.get_benchmark_dict()[args.suite]()
-    args.output_dir.mkdir(parents=True)
-    code_paths = [Path(__file__), Path('src/hrc_pilot/libero_native.py'), Path('src/hrc_pilot/native_contact_human.py')]
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    code_paths = [Path(__file__), Path('src/hrc_pilot/libero_native.py'), Path('src/hrc_pilot/native_contact_human.py'),
+                  Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_contact.py'),
+                  Path(__file__).with_name('probe_egl_devices.py')]
     hashes = {str(p): sha256(p.read_bytes()).hexdigest() for p in code_paths}
     episodes, provenance_episodes = [], []
     partner = None
@@ -248,6 +263,7 @@ def main():
         'mujoco_version':mujoco.__version__,'robosuite_version':robosuite.__version__,
         'libero_commit':subprocess.check_output(['git','-C',str(Path(get_libero_path('benchmark_root')).parents[1]),'rev-parse','HEAD'],text=True).strip(),
         'cuda_visible_devices':selected,'source_sha256':hashes,
+        'renderer_device_binding':matched[0],
         'human_mode':args.human_mode,'human_persona':args.human_persona if partner is not None else None,
         'human_model':str(args.human_model) if partner is not None else None,
         'human_physics':'force_driven_xyz_fingertip' if args.human_mode!='none' else None,

@@ -117,7 +117,7 @@ class QwenHumanPolicy:
             if hasattr(encoded, "keys") and "input_ids" in encoded:
                 generated = self._model.generate(**encoded, **generation_kwargs)
             else:
-                generated = self._model.generate(encoded, **generation_kwargs)
+                generated = self._model.generate(encoded, attention_mask=torch.ones_like(encoded), **generation_kwargs)
         return self._tokenizer.decode(
             generated[0, input_ids.shape[-1]:], skip_special_tokens=True).strip()
 

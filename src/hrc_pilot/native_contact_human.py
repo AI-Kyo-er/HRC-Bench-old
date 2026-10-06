@@ -5,18 +5,32 @@ import numpy as np
 
 from .continuous import HumanCommand
 from .human_contact import bounded_motion
-from .llm_human import QwenHumanPolicy
+from .llm_human import QwenHumanPolicy, PERSONAS
 
 
 class NativeQwenHuman(QwenHumanPolicy):
     def _system_prompt(self):
-        return super()._system_prompt().replace('observe、approach、carry、yield、away、return',
-                                               'observe、push、yield、away、return') + (
-            '本场景是餐桌协作。你可用push意图以指尖缓慢推动指定物体到公开区域，'
-            '无需先夹持；不要使用approach或carry来推动。机器人仍会根据相机放碗。'
-            '任务更新和目标位置都是公开安排；具体何时推、何时观察、何时让行由你决定。'
-            'message用简短英文与机器人交流，reason与memory_note用中文。'
-            '不要因机器人已经放下碗就认为你移动盘子的目标也已完成。')
+        return (
+            '你是正在与机械臂共同准备餐桌的人。你有自己的较长期工作目标，'
+            '根据当前公开任务板、可见进展、自身经历和机械臂的活动，自主选择下一步行动。'
+            f'你的稳定行为倾向：{PERSONAS[self.persona_id]} '
+            'objects_xyz、regions_xyz和your_hand_position_xyz是本时刻可靠的感知坐标，'
+            '可以直接用于动作选择。它们已经给出了物体与区域的位置。'
+            '任务板assigned_role为human属于你，为robot属于机械臂；机器人放碗与人移动盘子是各自的工作。'
+            '机械臂的活动不表示人的工作已经完成，也不表示必须在任何情况下等待。'
+            '支持的意图为push、observe、yield、away、return。'
+            'push指定一个当前可见物体和公开区域，执行器会连续接近并通过指尖受力推动，'
+            '不需要先夹持；执行过程可能因碰撞偏离，你可以根据后续观察继续、暂停或重新选择。'
+            'observe保持当前手位置、观察下一时刻，yield/away/return将手从工作区域清离；'
+            '本执行器不支持抓持，不输出approach或carry。'
+            '你可以因空间冲突、个人优先事项、进展或风险改变当前计划，具体时机和动作由你决定。'
+            'current_goal描述你希望实现的较长期工作结果；观察、推和让行是推进目标的当前动作。'
+            'recent_public_decisions和旧经验是过去的计划与记录，当前坐标优先用于判断现在的位置；'
+            '经验中的旧位置不能当成当前位置。观察等待时，在reason中说明当前等待的理由或条件。'
+            '只输出JSON对象：intent、object_id、destination、message、speed_mps、reason、memory_note、current_goal。'
+            'message用简短英文与机器人交流，reason、memory_note和current_goal用中文。'
+            'memory_note只记录有新观察依据的经验，不写机械臂隐藏计划或评测分数。'
+            '不需要读取任何未公开的任务标签、机器人计划或评测器。')
 
     def _validated_command(self, value, observation):
         if value.get('intent') == 'push':
