@@ -26,8 +26,8 @@ def verify_episode(directory):
     rotation_verified=True
     for call in calls:
         source=call.get('action_source','learned_vla')
-        assert source in {'learned_vla','vlm_selected_hold_primitive'}
-        if source=='vlm_selected_hold_primitive':
+        assert source in {'learned_vla','vlm_selected_hold_primitive','planner_output_rejection_hold_primitive'}
+        if source!='learned_vla':
             from hrc_pilot.robot_coordination import hold_actions
             np.testing.assert_array_equal(call['raw_action_chunk'],hold_actions(call['state'],len(call['raw_action_chunk'])))
             assert call.get('planner_decision_id') is not None
@@ -63,7 +63,7 @@ def verify_episode(directory):
         eef_peak=max(eef_peak,float(np.linalg.norm(np.asarray(after['robot_ee'])-before['robot_ee'])/.05))
     result={'episode':str(directory),'model_calls':len(calls),'native_actions':len(actions),
             'actual_vla_model_calls':sum(c.get('action_source','learned_vla')=='learned_vla' for c in calls),
-            'hold_primitive_calls':sum(c.get('action_source')=='vlm_selected_hold_primitive' for c in calls),
+            'hold_primitive_calls':sum(c.get('action_source','learned_vla')!='learned_vla' for c in calls),
             'pixels_verified':True,'model_input_boundary_verified':True,
             'state_pose_and_signed_gripper_verified':True,'axis_angle_from_raw_quaternion_verified':rotation_verified,
             'all_native_actions_reconstructed':True,'actual_actuator_ctrl_verified':True,

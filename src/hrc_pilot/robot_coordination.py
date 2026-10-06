@@ -39,7 +39,7 @@ def validate_decision(raw):
     try:
         value=json.loads(raw[raw.find('{'):raw.rfind('}')+1])
         if not isinstance(value,dict) or value.get('mode') not in {'execute','hold'}:raise ValueError('mode必须为execute或hold')
-        if value['mode']=='execute' and not str(value.get('instruction','')).strip():raise ValueError('execute必须给出运动目标指令')
+        if value['mode']=='execute' and (not isinstance(value.get('instruction'),str) or not value['instruction'].strip()):raise ValueError('execute必须给出运动目标指令')
     except (ValueError,TypeError) as exc:
         error=str(exc);value={'mode':'hold','reason':'输出无效，维持当前姿态。'}
     decision={key:str(value.get(key,''))[:500] for key in ['mode','instruction','message','reason','memory_note','current_goal']}

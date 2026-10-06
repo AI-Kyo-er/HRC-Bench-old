@@ -134,7 +134,7 @@ def main():
                                      render_gpu_device_id=0)
             trace, policy_io, timeline, calls = [], [], [], []
             robot_plans=[];robot_history=[];robot_goal='';next_plan_step=0;initial_robot_rgb=None
-            robot_decision=None
+            robot_decision=None;robot_decision_error=None
             action_plan = deque()
             task_evidence=NativeTaskEvidence(contract)
             motion_observer=NativeMotionObserver()
@@ -236,6 +236,7 @@ def main():
                                     history=robot_history,current_goal=robot_goal)
                                 planned=coordinator.infer(public_request)
                                 robot_decision=planned['decision'];robot_goal=robot_decision['current_goal'] or robot_goal
+                                robot_decision_error=planned['parse_error']
                                 robot_plans.append({'step':step,'time_s':time_s,'decision_id':len(robot_plans)+1,
                                     'initial_artifact':'planner_initial.png','exterior_artifact':f'{stem}.png',
                                     'wrist_artifact':f'{stem}_wrist.png',**planned})
@@ -250,7 +251,8 @@ def main():
                         started = time.perf_counter()
                         if coordinator is not None and robot_decision['mode']=='hold':
                             response={'actions':hold_actions(request['observation/state'],args.execution_horizon)}
-                            action_source='vlm_selected_hold_primitive'
+                            action_source=('planner_output_rejection_hold_primitive' if robot_decision_error
+                                           else 'vlm_selected_hold_primitive')
                         else:
                             response=client.infer(request);action_source='learned_vla'
                         chunk = np.asarray(response['actions'], dtype=float)
@@ -316,7 +318,8 @@ def main():
                           'native_geometry_success':bool(env.check_success()),
                           'completion_criterion':args.completion_criterion,
                           'actual_vla_model_calls':sum(c['action_source']=='learned_vla' for c in calls),
-                          'hold_primitive_calls':sum(c['action_source']=='vlm_selected_hold_primitive' for c in calls),
+                          'hold_primitive_calls':sum(c['action_source']!='learned_vla' for c in calls),
+                          'planner_output_rejection_holds':sum(c['action_source']=='planner_output_rejection_hold_primitive' for c in calls),
                           'robot_planner_model_calls':len(robot_plans),
                           'interpretation': '原生基础操作参照，不含人类，不是HRC/cobalance成绩。'}
                 if actor is not None:
