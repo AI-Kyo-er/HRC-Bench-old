@@ -12,6 +12,7 @@
 - [v2 三种伙伴配对报告与轨迹动画](results/continuous_v2/paired_v8/index.html)
 - [v2 Genesis 六场景报告（含真实 Sim 视频）](results/continuous_v2/genesis_v10/index.html)
 - [v2 Genesis 三种伙伴条件报告（18 个 episode，含真实 Sim 视频）](results/continuous_v2/genesis_paired_v10/index.html)
+- [v2 九类任务族动态伙伴正式报告（9 条真实 Sim 视频、9/9 时间轴核验）](results/continuous_v2/task_catalog_genesis_v2/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [v2 Genesis 验证记录](experiments/continuous_v2/genesis_validation.md)
 - [运行脚本](scripts/run_pilot_demo.sh)

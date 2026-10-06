@@ -8,6 +8,20 @@
 
 ## 2026-10-06 最新视频核查
 
+- [九类任务族动态伙伴 Genesis 正式运行 v2](../../results/continuous_v2/task_catalog_genesis_v2/index.html)：固定
+  seed 0、`greedy_public` 机器人协议基线、`dynamic` 伙伴和 Genesis，覆盖
+  `serial_relay`、`concurrent_overlay`、`nested_support`、
+  `interruption_reprioritization`、`leave_and_return`、
+  `robot_induced_rebalance`、`history_reinterpretation`、
+  `trait_dependent_open_task`、`held_out_task_composition` 九类任务族。
+  9/9 活动契约完成；其中 5 条发生机器人角色失败并由伙伴重新分工或接管，另有
+  1 条记录公开重规划。9/9 episode 均有真实运行时 `demo.mp4`，并通过
+  `video_timeline.json` 完整解码核验。该运行首次把任务族目录、动态伙伴、失败/延迟、
+  重新分工、数据记录和真实 Sim 视频放在同一批正式结果中；它仍是规则策略、单 seed、
+  运动学 attachment 的平台机制证据，不是 VLA/WLA 排行榜。
+  [汇总 JSON](../../results/continuous_v2/task_catalog_genesis_v2/summary.json)
+  · [视频核验](../../results/continuous_v2/task_catalog_genesis_v2/video_verification.json)
+
 - [六场景动态意图伙伴 Genesis 报告](../../results/continuous_v2/dynamic_genesis_v2/index.html)：同一
   seed 下运行 `relay`、`nested_support`、`concurrent_overlay`、
   `history_reinterpretation`、`robot_induced_rebalance` 和 `leave_and_return`。
@@ -191,6 +205,7 @@ Genesis 验证结果：
 - [动态意图伙伴 Genesis 报告（真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v1/index.html)
 - [动态意图伙伴六场景 Genesis 报告（6 条真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/dynamic_genesis_v2/index.html)
 - [九类任务族 Genesis 报告（9 条真实 Sim 视频、RGB 与时间轴）](../../results/continuous_v2/task_catalog_genesis_v1/index.html)
+- [九类任务族动态伙伴正式 Genesis 报告（9 条真实 Sim 视频、9/9 时间轴核验）](../../results/continuous_v2/task_catalog_genesis_v2/index.html)
 - [历史反事实 Genesis 报告（含真实 Sim 视频）](../../results/continuous_v2/history_counterfactual_genesis_v1/index.html)
 - [失败恢复三条件 × 三 seed（9 条真实 Sim 视频）](../../results/continuous_v2/recovery_genesis_v1/index.html)
 - [持续失败未恢复核查（3 条真实 Sim 视频）](../../results/continuous_v2/recovery_negative_genesis_v1/index.html)

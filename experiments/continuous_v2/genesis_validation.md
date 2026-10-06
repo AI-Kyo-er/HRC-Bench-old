@@ -1,5 +1,53 @@
 # Genesis 阶段验证记录
 
+## 2026-10-06：九类任务族动态伙伴正式 Genesis 运行
+
+报告：[task_catalog_genesis_v2](../../results/continuous_v2/task_catalog_genesis_v2/index.html)。
+这次运行使用 Genesis、固定 seed 0、`greedy_public` 手写机器人协议策略和
+`dynamic` 程序化伙伴；每个任务族生成一个布局实例。运行命令为：
+
+```bash
+CUDA_VISIBLE_DEVICES=1 PYTHONPATH=src .venv-vc-pilot/bin/python \
+  scripts/run_continuous_benchmark.py \
+  --task-catalog --count-per-family 1 \
+  --partner-mode dynamic --backend genesis \
+  --experiment-tier important --seed 0 \
+  --output-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/task_catalog_genesis_v2
+```
+
+任务族目录来自声明式活动契约和结构划分，不是按第 N 步触发器写死的事件脚本。
+伙伴根据公开进度、占用、距离、工作负载和可用性更新 profile、memory、intention
+与 reflection；机器人仍使用 `greedy_public` 作为协议基线。每条 episode 都保存
+`demo.mp4`、`video_timeline.json`、`trace.jsonl`、`events.jsonl`、
+`public_observations.jsonl`、`policy_io.jsonl` 和 `metrics.json`。
+
+| 任务族 | 活动契约 | 机器人角色 | 机器人失败 | 公开重规划 | cobalance |
+|---|:---:|:---:|---:|---:|---:|
+| `serial_relay_000` | 成功 | 成功 | 0 | 0 | 0.981818 |
+| `concurrent_overlay_000` | 成功 | 成功 | 0 | 0 | 0.985714 |
+| `nested_support_000` | 成功 | 成功 | 0 | 0 | 0.986207 |
+| `interruption_reprioritization_000` | 成功 | 失败 | 2 | 2 | 0.688462 |
+| `leave_and_return_000` | 成功 | 成功 | 0 | 1 | 0.950000 |
+| `robot_induced_rebalance_000` | 成功 | 失败 | 2 | 2 | 0.688462 |
+| `history_reinterpretation_000` | 成功 | 失败 | 2 | 2 | 0.688462 |
+| `trait_dependent_open_task_000` | 成功 | 成功 | 0 | 0 | 0.986207 |
+| `held_out_task_composition_000` | 成功 | 失败 | 2 | 2 | 0.688462 |
+
+九条活动契约均完成，但“活动成功”包含伙伴接管/重新分工，不能简化为机器人角色
+成功。五条机器人角色失败说明场景确实记录了失败反馈和再分工；这不是失败的 VLA/WLA
+模型结果。`robot_failures` 来自实验中定义的协议/预算条件，Genesis 抓放仍使用
+`kinematic_attachment`，伙伴是可复现的程序规则，且只有一个 seed。
+
+独立核验文件为：[video_verification.json](../../results/continuous_v2/task_catalog_genesis_v2/video_verification.json)。
+9/9 episode 的 `demo.mp4` 均完整解码，9/9 均有完整 `video_timeline.json`，没有错误
+或警告；视频分辨率为 640×604，运行时约 10 FPS。报告中的事件跳转、RGB、轨迹和
+视频共同构成审计证据。真实 Sim 视频是这次重要实验的主视觉证据，俯视轨迹动画只用于
+补充状态检查。
+
+这一批结果证明的是：任务族目录、动态伙伴、活动契约评分、失败/延迟、重新分工、
+公开输入输出和真实 Sim 视频可以在同一次 benchmark 运行中闭环。它尚未证明真实
+具身模型的持续 HRC 能力，也没有提供跨 seed、跨模型的统计比较。
+
 ## 2026-10-06：动态伙伴六场景真实视频
 
 报告：[dynamic_genesis_v2](../../results/continuous_v2/dynamic_genesis_v2/index.html)。
