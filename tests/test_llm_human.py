@@ -84,3 +84,20 @@ def test_qwen_own_message_does_not_trigger_self_conversation_loop():
     policy.step(world.observe())
     assert len(calls) == 2
     assert policy.persona_id == "independent"
+
+
+def test_model_generated_memory_and_real_timestamps_enter_next_human_decision():
+    scenario = CONTINUOUS_SCENARIOS["concurrent_overlay"]
+    world = ContinuousWorld(scenario)
+    world.reset(0)
+    prompts = []
+    policy = QwenHumanPolicy(scenario, model_path="/tmp/no-model", decision_interval_steps=1,
+                             generator=lambda prompt: prompts.append(prompt) or
+                             '{"intent":"observe","memory_note":"机器人尚未移动红物体。","reason":"先观察"}')
+    policy.step(world.observe())
+    world.tick()
+    policy.step(world.observe())
+    assert "机器人尚未移动红物体" in prompts[-1]
+    assert '"time_s":0.0' in prompts[-1]
+    assert len(policy.audit_state()["memory"]) == 2
+    assert "trust" not in prompts[-1]

@@ -47,6 +47,7 @@ def make_workspace():
     workspace.scenario = CONTINUOUS_SCENARIOS["concurrent_overlay"]
     workspace.step_count = 0
     workspace.log = EventLog()
+    workspace.messages = []
     return workspace
 
 
@@ -107,3 +108,27 @@ def test_semantic_transfer_and_geometric_attachment_are_disabled():
         workspace.continuous_start_action(Action("transfer", "blue", "tray_blue"))
     workspace._continuous_joint_grasp()
     assert not hasattr(workspace, "attachment")
+
+
+def test_blocked_placement_cannot_be_retroactively_credited_after_prerequisite():
+    workspace = make_workspace()
+    workspace.scenario = CONTINUOUS_SCENARIOS["relay"]
+    body = workspace.objects["blue"]
+    body.links = [20, 21]
+    body.position[2] = 0.95
+    step(workspace)
+    body.links = [4]
+    body.position = np.array([0.42, -0.30, 0.81])
+    step(workspace, 24)
+    assert "robot:blue:tray_blue" not in workspace.completed_skills
+    assert workspace.messages[-1].speaker == "environment"
+    workspace.completed_skills.append("human:red:tray_red")
+    step(workspace, 30)
+    assert "robot:blue:tray_blue" not in workspace.completed_skills
+    body.links = [20, 21]
+    body.position[2] = 0.95
+    step(workspace)
+    body.links = [4]
+    body.position[2] = 0.81
+    step(workspace, 24)
+    assert "robot:blue:tray_blue" in workspace.completed_skills

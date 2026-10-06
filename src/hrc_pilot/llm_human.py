@@ -52,6 +52,8 @@ class QwenHumanPolicy:
         self.command = HumanCommand("observe")
         self.policy_io: list[dict[str, Any]] = []
         self.public_decision_history: list[dict[str, Any]] = []
+        self.observation_history: list[dict[str, Any]] = []
+        self.experience_memory: list[dict[str, Any]] = []
 
     def initial_messages(self) -> tuple[Message, ...]:
         return self.scenario.initial_messages()
@@ -91,7 +93,7 @@ class QwenHumanPolicy:
                      and "input_ids" in encoded else encoded)
         with torch.inference_mode():
             generation_kwargs = {
-                "max_new_tokens": 160, "do_sample": True,
+                "max_new_tokens": 256, "do_sample": True,
                 "temperature": 0.45, "top_p": 0.85,
                 "pad_token_id": self._tokenizer.eos_token_id,
             }
@@ -107,7 +109,10 @@ class QwenHumanPolicy:
             "你是一个在共享工作台工作的真实人类伙伴模拟策略。根据公开观察和公开对话，"
             "自主决定下一步意图；不得假设你知道未公开的任务标签或机器人计划。"
             f"你的稳定行为倾向是：{PERSONAS[self.persona_id]} "
-            "只输出一个 JSON 对象，字段为 intent、object_id、destination、message、speed_mps。"
+            "只输出一个 JSON 对象，字段为 intent、object_id、destination、message、speed_mps、reason、memory_note。"
+            "reason 简短解释为何继续、改变或暂缓当前贡献；memory_note 记录你从公开观察"
+            "确认的新经验，它将作为你的个人记忆进入后续决定。记忆只写有观察依据的事实，"
+            "不得编造机器人隐藏计划或信任分数。比较带时间的可见历史，判断是否有实际进展。"
             "intent 只能是 observe、approach、carry、yield、away、return。approach/carry 应选择"
             "公开对话中提到且当前未完成的对象与区域；若信息不足则 observe。"
             "approach 表示伸手取指定物体，carry 表示拿着物体放到指定区域。公开对话中"
@@ -143,6 +148,8 @@ class QwenHumanPolicy:
             "robot_action_phase": observation.action_phase,
             "public_dialogue": messages,
             "your_recent_public_decisions": self.public_decision_history[-4:],
+            "your_recent_observation_history": self.observation_history[-10:],
+            "your_personal_experience_memory": self.experience_memory[-12:],
         }
         return "根据以下当前公开信息选择下一步伙伴意图：\n" + json.dumps(
             visible, ensure_ascii=False, separators=(",", ":"))
@@ -211,6 +218,14 @@ class QwenHumanPolicy:
                  or action_signature != self.last_action_signature)
         if not infer:
             return PartnerOutput(self.command)
+        self.observation_history.append({
+            "time_s": round(float(observation.time_s), 2),
+            "objects_xyz": {key: [round(float(x), 3) for x in value] for key, value in observation.objects.items()},
+            "robot_ee_xyz": [round(float(x), 3) for x in observation.robot_ee],
+            "human_holds": list(observation.held_by_human),
+            "publicly_completed_contributions": list(observation.completed_skills),
+            "visible_human_motor_phase": observation.human_motor_phase,
+        })
         prompt = self._prompt(observation)
         started = time.perf_counter()
         raw = self._generate(prompt)
@@ -229,12 +244,19 @@ class QwenHumanPolicy:
         self.last_action_signature = action_signature
         self.seen_messages = message_count
         safe_decision = {
+            "time_s": observation.time_s,
             "intent": command.intent,
             "object_id": command.object_id,
             "destination": command.destination,
             "message": str(decision.get("message", ""))[:240],
             "speed_mps": command.speed_mps,
+            "reason": str(decision.get("reason", ""))[:500],
         }
+        memory_note = str(decision.get("memory_note", "")).strip()[:800]
+        if memory_note:
+            self.experience_memory.append({"memory_id": f"experience_{len(self.experience_memory):04d}",
+                                           "time_s": observation.time_s, "text": memory_note,
+                                           "source": "qwen_generated_from_public_observation"})
         self.public_decision_history.append(safe_decision)
         outgoing = ()
         text = safe_decision["message"].strip()
@@ -254,6 +276,7 @@ class QwenHumanPolicy:
 
     def audit_state(self) -> dict[str, Any]:
         return {"policy": "qwen_llm_human_policy", "profile": {"profile_id": self.persona_id},
+                "memory": self.experience_memory, "memory_size": len(self.experience_memory),
                 "policy_io": self.policy_io, "inference_count": len(self.policy_io),
                 "mean_inference_latency_s": (
                     float(np.mean([row["latency_s"] for row in self.policy_io]))

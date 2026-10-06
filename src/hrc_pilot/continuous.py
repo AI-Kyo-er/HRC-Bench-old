@@ -1906,14 +1906,16 @@ def _run_continuous_episode(scenario, policy, partner, *, world, seed, output,
                   "human_gaze_target": getattr(world, "human_gaze_target", None),
                   "human_object": None, "human_destination": None,
                   "terminal": True})
-    finalizer = getattr(world, "finish_episode", None)
-    if finalizer is not None:
-        finalizer()
+    # Freeze evaluation at the actual terminal tick. Video settling is visual
+    # evidence, not an extra opportunity to complete work after the deadline.
     robot_success = world.finished_robot()
     human_success = world.finished_human()
     activity_success = bool(world.finished_activity())
     events = list(getattr(world, "events", ()))
     completed_skills = list(getattr(world, "completed_skills", ()))
+    finalizer = getattr(world, "finish_episode", None)
+    if finalizer is not None:
+        finalizer()
     mode = partner_mode or {
         "FixedReplayPartner": "fixed_replay",
         "ReactivePartner": "reactive",

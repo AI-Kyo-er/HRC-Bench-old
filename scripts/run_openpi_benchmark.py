@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--ticks", type=int, default=90)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--execution-horizon", type=int, default=8)
-    parser.add_argument("--partner-mode", choices=("dynamic", "adaptive", "reactive", "fixed_replay", "qwen_llm"),
+    parser.add_argument("--partner-mode", choices=("dynamic", "adaptive", "reactive", "fixed_replay", "qwen_llm", "observing"),
                         default="dynamic",
                         help="伙伴条件；重要纵切片默认使用带 profile/意图/记忆的动态伙伴")
     parser.add_argument("--human-profile", choices=("balanced", "assertive", "careful", "supportive"),
@@ -56,11 +56,13 @@ def main():
         parser.error("原生双相机模型实验要求 Genesis")
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error("请使用新输出目录")
-    factory = configure_backend(args, parser, args.output_dir)
     client = WebsocketClientPolicy(host="127.0.0.1", port=args.port)
     metadata = client.get_server_metadata()
     if metadata.get("config") != "pi05_droid":
         parser.error("本地服务没有声明 pi05_droid 配置")
+    if metadata.get("contact_lora"):
+        args.policy = "pi05_droid_contact_lora"
+    factory = configure_backend(args, parser, args.output_dir)
     if args.scenes:
         scenarios = [CONTINUOUS_SCENARIOS[name] for name in args.scenes]
     elif args.task_catalog:
@@ -95,6 +97,9 @@ def main():
                 partner = AdaptivePartner(scenario)
             elif args.partner_mode == "reactive":
                 partner = ReactivePartner(scenario)
+            elif args.partner_mode == "observing":
+                from scripts.collect_contact_demonstrations import ObservingPartner
+                partner = ObservingPartner(scenario)
             else:
                 partner = FixedReplayPartner(scenario)
             instruction = public_robot_instruction(scenario, physical=args.robot_grasp_model == "friction_contact")
@@ -133,7 +138,7 @@ def main():
         "action_chunks": [value for row in episode_calls for value in row["action_chunks"]],
         "purpose": "在多种活动契约中执行真实训练模型，记录动态伙伴、物理操作和共同活动的原始结果。",
         "controlled": "模型只看真实外部 / 腕部 RGB、7 个臂关节、夹爪状态和公开任务语言。没有几何坐标、伙伴私有 profile/意图/记忆或 evaluator 状态输入，也不调用语义 transfer；不同任务使用其初始公开分工构造操作指令。",
-        "interpretation": ("原生 VLA + 动态伙伴的真实接触运行。人体拿放仍为运动学抽象，场景与 DROID 实机训练分布存在差异；需先报告基础操作表现，再讨论交互能力，不能以基础操作失败直接推断没有 HRC 能力。"
+        "interpretation": ("VLA 与可选生成式伙伴的真实接触运行。人体接触手仍为简化代理，显示骨架为运动学 IK；场景与 DROID 实机训练分布存在差异。需先报告基础操作表现，再讨论交互能力，不能以基础操作失败直接推断没有 HRC 能力。"
                            if args.robot_grasp_model == "friction_contact" else
                            "原生 VLA + 动态伙伴运行，机器人抓放仍为运动学绑定，不是接触证据或成熟 HRC 排行榜。"),
         "sampling": "官方 OpenPI Policy 使用从 0 初始化并随调用推进的采样 RNG；本次未把场景 seed 声称为模型采样重置。",

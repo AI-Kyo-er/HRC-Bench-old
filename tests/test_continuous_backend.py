@@ -91,6 +91,22 @@ def test_continuous_model_is_invoked_during_action_chunk():
     assert policy.calls == 4
 
 
+def test_video_settling_does_not_add_contributions_to_terminal_score():
+    scenario = replace(CONTINUOUS_SCENARIOS["relay"], max_steps=1)
+    world = ContinuousWorld(scenario)
+
+    def visual_tail():
+        for object_id, destination in {**scenario.human_targets, **scenario.robot_targets}.items():
+            world.objects[object_id] = np.array(scenario.regions[destination])
+        world.completed_skills.extend(["human:red:tray_red", "robot:blue:tray_blue"])
+
+    world.finish_episode = visual_tail
+    result = run_continuous_episode(scenario, ModelPolicy(lambda _: {"kind": "wait"}), make_partner(scenario),
+                                    backend_factory=lambda _: world)
+    assert result["task_success"] is False
+    assert result["completed_skills"] == []
+
+
 def test_external_adapter_records_public_call_audit():
     world = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"])
     world.reset(0)

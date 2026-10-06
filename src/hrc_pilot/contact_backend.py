@@ -115,10 +115,13 @@ class ContactWorkspace(VCWorkspace):
         self.human_executor.accept(command)
 
     def _continuous_human_step(self):
+        if getattr(self, "settling_only", False):
+            return
         if self.human_executor is not None:
             self.human_executor.step()
 
     def begin_episode(self, *args, **kwargs):
+        self.settling_only = False
         self.monitor_active = False
         self.previous_control = self.home.copy()
         if self.human_executor is not None:
@@ -201,6 +204,7 @@ class ContactWorkspace(VCWorkspace):
                     self.log.add(self.step_count + 1, "robot_contact_grasp", object_id=name,
                                  measured_position=position.tolist(), finger_links=sorted(touched_fingers))
                 self.contact_grasps.add(name)
+                self.last_placement.pop(name, None)
                 if hasattr(self, "last_grasp_role"):
                     self.last_grasp_role[name] = "robot"
             if human_held and lifted:
@@ -208,6 +212,7 @@ class ContactWorkspace(VCWorkspace):
                     self.log.add(self.step_count + 1, "human_contact_grasp", object_id=name,
                                  measured_position=position.tolist(), finger_links=sorted(touched_human_fingers))
                 self.human_contact_grasps.add(name)
+                self.last_placement.pop(name, None)
                 self.last_grasp_role[name] = "human"
             # Only a physically released, supported and stationary object can commit.
             grasped = name in self.contact_grasps or name in getattr(self, "human_contact_grasps", set())
@@ -231,6 +236,13 @@ class ContactWorkspace(VCWorkspace):
                     self.log.add(self.step_count + 1, f"{role}_transfer_completed", object_id=name,
                                  destination=destination, source="friction_contact",
                                  stable_duration_s=dwell / 60, measured_position=position.tolist())
+                else:
+                    from .protocol import Message
+                    self.last_placement[name] = destination
+                    self.log.add(self.step_count + 1, f"{role}_transfer_blocked", object_id=name,
+                                 destination=destination, reason="prerequisite_at_placement")
+                    self.say(Message("environment", "action_blocked", "放置未提交：前置贡献尚未完成，需要满足前置后重新操作。",
+                                     name, "prerequisite_at_placement", destination))
         self.finger_touching = finger_touching
         if getattr(self, "human_executor", None) is not None:
             self._human_held = physical_human_held

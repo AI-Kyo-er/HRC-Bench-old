@@ -34,6 +34,7 @@ class DroidVLAAdapter:
         self.calls = 0
         self.last_time = None
         self.last_call = None
+        self.initial_message_count = None
 
     def act(self, observation: Observation) -> Action:
         if observation.rgb is None or observation.wrist_rgb is None:
@@ -41,6 +42,8 @@ class DroidVLAAdapter:
         if self.last_time is not None and not np.isclose(observation.time_s - self.last_time, 1 / 15, atol=1e-7):
             raise ValueError("DROID 动作标度要求每 1/15 秒调用一次，请使用 tick_hz=15")
         self.last_time = observation.time_s
+        if self.initial_message_count is None:
+            self.initial_message_count = len(observation.messages)
         if len(observation.robot_qpos) != 9:
             raise ValueError("需要 7 个 Franka 臂关节与 2 个指关节状态")
         new_messages = observation.messages[self.seen_messages:]
@@ -57,7 +60,10 @@ class DroidVLAAdapter:
                     np.clip(1 - sum(observation.robot_qpos[-2:]) / 0.08, 0, 1)], dtype=np.float32),
                 "prompt": self.instruction or observation.task_description,
             }
-            human_messages = [message.text for message in observation.messages if message.speaker == "human"]
+            human_messages = [message.text for index, message in enumerate(observation.messages) if (message.speaker == "human"
+                              or (message.speaker == "environment" and message.kind in {"action_blocked", "action_failed"}))
+                              and not (index < self.initial_message_count
+                                       and message.kind == "assignment" and message.value == "robot")]
             if human_messages:
                 request["prompt"] += "\n" + "\n".join(human_messages[-8:])
             started = perf_counter()

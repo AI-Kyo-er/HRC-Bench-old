@@ -664,6 +664,10 @@ class VCWorkspace:
         return True
 
     def finish_episode(self, settle_steps=24):
+        self.video_phase = "settle"
+        self.continuous_execution = None
+        self.continuous_human_command = None
+        self.settling_only = True
         self.tick(settle_steps)
         self.capture(force=True)
         self.writer.close()

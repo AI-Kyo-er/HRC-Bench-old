@@ -67,3 +67,19 @@ def test_single_camera_cannot_be_silently_substituted_for_wrist_view():
     observation = replace(observation, rgb=np.zeros((4, 4, 3), dtype=np.uint8))
     with pytest.raises(ValueError, match="双相机"):
         DroidVLAAdapter(lambda _: None).act(observation)
+
+
+def test_initial_assignment_is_deduplicated_but_later_assignment_remains_public():
+    observation = ContinuousWorld(CONTINUOUS_SCENARIOS["relay"]).observe()
+    initial = Message("human", "assignment", "初始蓝块分工", "blue", "robot", "tray_blue")
+    later = Message("human", "assignment", "现在请处理绿色", "green", "robot", "tray_green")
+    observation = replace(observation, rgb=np.zeros((4, 4, 3), dtype=np.uint8),
+                          wrist_rgb=np.zeros((4, 4, 3), dtype=np.uint8), robot_qpos=(0,) * 9,
+                          messages=(initial,))
+    calls = []
+    policy = DroidVLAAdapter(lambda request: calls.append(request) or {"actions": np.zeros((15, 8))},
+                            instruction="Pick up the blue block.")
+    policy.act(observation)
+    assert calls[0]["prompt"] == "Pick up the blue block."
+    policy.act(replace(observation, time_s=1/15, messages=(initial, later)))
+    assert "现在请处理绿色" in calls[1]["prompt"]
