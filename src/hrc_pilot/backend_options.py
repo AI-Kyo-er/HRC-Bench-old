@@ -21,11 +21,17 @@ def add_backend_options(parser: argparse.ArgumentParser) -> None:
                         default=Path("/data1/sieniwgroup/sieniw/projects/HRC-Bench/assets/virtual-community"))
     parser.add_argument("--resolution", type=int, default=640)
     parser.add_argument("--render-stride", type=int, default=6)
+    parser.add_argument("--video-settle-seconds", type=float, default=1.5,
+                        help="任务成功或终止后继续录制真实 Sim 的秒数")
+    parser.add_argument("--minimum-transfer-phase-seconds", type=float, default=0.20,
+                        help="每个 Genesis 搬运阶段的最短物理时长")
 
 
 def configure_backend(args, parser: argparse.ArgumentParser, output: Path):
-    if args.resolution < 64 or not 1 <= args.render_stride <= 60:
-        parser.error("resolution 必须至少为 64；render-stride 必须在 1–60 之间")
+    if (args.resolution < 64 or not 1 <= args.render_stride <= 60
+            or args.video_settle_seconds < 0
+            or args.minimum_transfer_phase_seconds < 0):
+        parser.error("resolution/render-stride/视频时长参数不合法")
     if getattr(args, "experiment_tier", "exploratory") == "important" and args.backend != "genesis":
         parser.error("important 实验必须使用 --backend genesis，才能保存真实 Sim 场景视频")
     if args.backend == "reference":
@@ -48,7 +54,9 @@ def configure_backend(args, parser: argparse.ArgumentParser, output: Path):
     print(f"[continuous] GPU {selected}: {free[selected]} MiB 空闲，预计需要 4 GB。", flush=True)
     return make_genesis_backend_factory(
         assets=args.assets_dir, output_root=output, resolution=args.resolution,
-        render_stride=args.render_stride, policy=args.policy)
+        render_stride=args.render_stride, policy=args.policy,
+        settle_steps=round(args.video_settle_seconds * 60),
+        minimum_transfer_phase_steps=round(args.minimum_transfer_phase_seconds * 60))
 
 
 def backend_provenance(args) -> dict:
@@ -69,6 +77,8 @@ def backend_provenance(args) -> dict:
         "physics_hz": 60 if args.backend == "genesis" else None,
         "resolution": args.resolution,
         "render_stride": args.render_stride,
+        "video_settle_seconds": args.video_settle_seconds,
+        "minimum_transfer_phase_seconds": args.minimum_transfer_phase_seconds,
         "source_sha256": {path.name: sha256(path.read_bytes()).hexdigest()
                           for path in Path(__file__).parent.glob("*.py")},
     }

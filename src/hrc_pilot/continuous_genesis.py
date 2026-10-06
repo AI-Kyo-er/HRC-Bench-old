@@ -15,11 +15,12 @@ from .protocol import Action, Message, Observation
 
 class GenesisContinuousAdapter:
     def __init__(self, workspace: VCWorkspace, scenario=None, output_root: Path | None = None,
-                 policy: str = "external_model"):
+                 policy: str = "external_model", settle_steps: int = 90):
         self.workspace = workspace
         self.scenario = scenario or workspace.scenario
         self.output_root = output_root
         self.policy = policy
+        self.settle_steps = max(0, int(settle_steps))
         self.episode_output = None
         self.physics_steps_per_tick = 60 / self.scenario.tick_hz
         if not self.physics_steps_per_tick.is_integer() or self.physics_steps_per_tick < 1:
@@ -64,7 +65,7 @@ class GenesisContinuousAdapter:
         self.workspace.tick(self.physics_steps_per_tick)
 
     def finish_episode(self) -> None:
-        self.workspace.finish_episode(settle_steps=0)
+        self.workspace.finish_episode(settle_steps=self.settle_steps)
 
     def close(self) -> None:
         self.workspace.close()
@@ -150,11 +151,14 @@ class GenesisContinuousAdapter:
 
 def make_genesis_backend_factory(*, assets: Path, output_root: Path, backend: str = "gpu",
                                  resolution: int = 800, render_stride: int = 3,
-                                 viewer: bool = False, policy: str = "external_model"):
+                                 viewer: bool = False, policy: str = "external_model",
+                                 settle_steps: int = 90,
+                                 minimum_transfer_phase_steps: int = 12):
     """返回可直接交给 `run_continuous_episode` 的 Genesis backend 工厂。"""
     def factory(scenario):
         workspace = VCWorkspace(assets=assets, backend=backend, resolution=resolution,
-                                render_stride=render_stride, viewer=viewer, scenario=scenario)
+                                render_stride=render_stride, viewer=viewer, scenario=scenario,
+                                minimum_transfer_phase_steps=minimum_transfer_phase_steps)
         return GenesisContinuousAdapter(workspace, scenario=scenario, output_root=output_root,
-                                        policy=policy)
+                                        policy=policy, settle_steps=settle_steps)
     return factory

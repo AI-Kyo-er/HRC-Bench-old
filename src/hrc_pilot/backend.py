@@ -19,7 +19,8 @@ from .protocol import Action, EventLog, Message, Observation
 
 class VCWorkspace:
     def __init__(self, *, assets: Path, backend: str = "gpu", resolution: int = 800,
-                 render_stride: int = 3, viewer: bool = False, scenario=None):
+                 render_stride: int = 3, viewer: bool = False, scenario=None,
+                 minimum_transfer_phase_steps: int = 12):
         import genesis as gs
         from vico.modules.avatar.avatar_controller import AvatarController
         from .assets import mug_mesh
@@ -118,6 +119,7 @@ class VCWorkspace:
         self.remaining_failure_budget = 0
         self.video_frames = []
         self.video_phase = "warmup"
+        self.minimum_transfer_phase_steps = max(0, int(minimum_transfer_phase_steps))
 
     def add_entity(self, type, name, morph, material=None, surface=None, **kwargs):
         entity = self.scene.add_entity(morph=morph, material=material, surface=surface, **kwargs)
@@ -246,7 +248,8 @@ class VCWorkspace:
             source = np.asarray(self.positions()[action.object_id])
             destination = np.asarray(self.regions[action.destination])
             self.continuous_execution = {"action": action, "phase": "approach", "source": source,
-                                         "destination": destination, "qgoal": None, "progress": 0}
+                                         "destination": destination, "qgoal": None, "progress": 0,
+                                         "phase_steps": 0}
             dynamics = self.scenario.dynamics
             delay = (int(self.continuous_rng.integers(1, dynamics.max_delay_steps + 1))
                      if dynamics.max_delay_steps > 0
@@ -328,6 +331,7 @@ class VCWorkspace:
             return
         action = execution["action"]
         execution["progress"] += 1
+        execution["phase_steps"] = execution.get("phase_steps", 0) + 1
         if action.kind == "transfer":
             from .continuous import _prerequisites_satisfied
             if execution.get("delay", 0) > 0:
@@ -346,6 +350,7 @@ class VCWorkspace:
             if execution["phase"] == "delayed":
                 execution["phase"] = "approach"
                 execution["progress"] = 0
+                execution["phase_steps"] = 0
             if execution["progress"] > 240:
                 self._continuous_fail(execution, "ik_tracking_timeout")
                 return
@@ -358,27 +363,38 @@ class VCWorkspace:
                     return
                 target = source + [0, 0, 0.20]
                 execution["qgoal"] = self._continuous_ik(target, 0.04)
-                if self._continuous_at(target):
+                if (self._continuous_at(target)
+                        and execution["phase_steps"] >= self.minimum_transfer_phase_steps):
                     execution["phase"] = "grasp"
                     execution["progress"] = 0
+                    execution["phase_steps"] = 0
             elif phase == "grasp":
                 target = source + [0, 0, 0.10]
                 execution["qgoal"] = self._continuous_ik(target, 0.025)
                 if action.object_id in self.held_by_human():
                     self._continuous_fail(execution, "human_holding", blocked=True)
                     return
-                if execution["progress"] >= 10 and self._continuous_at(target):
+                if (execution["progress"] >= 10 and self._continuous_at(target)
+                        and execution["phase_steps"] >= self.minimum_transfer_phase_steps):
                     self.attachment = (action.object_id, source - self.ee.get_pos().cpu().numpy())
                     execution["phase"] = "carry"
                     execution["progress"] = 0
+                    execution["phase_steps"] = 0
                     self.log.add(self.step_count, "abstract_grasp_attached", object_id=action.object_id)
             elif phase == "carry":
                 target = destination + [0, 0, 0.14]
                 execution["qgoal"] = self._continuous_ik(target, 0.025)
-                if self._continuous_at(target):
+                if (self._continuous_at(target)
+                        and execution["phase_steps"] >= self.minimum_transfer_phase_steps):
                     execution["phase"] = "release"
                     execution["progress"] = 0
+                    execution["phase_steps"] = 0
             elif phase == "release":
+                if execution["phase_steps"] < self.minimum_transfer_phase_steps:
+                    execution["qgoal"] = self._continuous_ik(destination + [0, 0, 0.14], 0.04)
+                    if execution.get("qgoal") is not None:
+                        self.robot.control_dofs_position(execution["qgoal"])
+                    return
                 if not _prerequisites_satisfied(self.scenario, "robot", action.object_id,
                                                action.destination, self.completed_skills):
                     self._continuous_fail(execution, "prerequisite", blocked=True)
@@ -390,10 +406,13 @@ class VCWorkspace:
                              destination=action.destination, measured_position=self.positions()[action.object_id])
                 execution["phase"] = "retreat"
                 execution["progress"] = 0
+                execution["phase_steps"] = 0
             elif phase == "retreat":
                 target = destination + [0, 0, 0.30]
                 execution["qgoal"] = self._continuous_ik(target, 0.04)
-                if self._continuous_at(target) or execution["progress"] >= 80:
+                if ((self._continuous_at(target)
+                     and execution["phase_steps"] >= self.minimum_transfer_phase_steps)
+                        or execution["progress"] >= 80):
                     self.continuous_execution = None
             if execution.get("qgoal") is not None:
                 self.robot.control_dofs_position(execution["qgoal"])
