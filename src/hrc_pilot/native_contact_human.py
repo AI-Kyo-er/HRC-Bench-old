@@ -21,7 +21,8 @@ class NativeQwenHuman(QwenHumanPolicy):
             '支持的意图为push、observe、yield、away、return。'
             'push指定一个当前可见物体和公开区域，执行器会连续接近并通过指尖受力推动，'
             '不需要先夹持；执行过程可能因碰撞偏离，你可以根据后续观察继续、暂停或重新选择。'
-            'observe保持当前手位置、观察下一时刻，yield/away/return将手从工作区域清离；'
+            'observe保持位置并观察，yield小幅退让，away退离工作台，return回到原工作位置；'
+            '身体通过连续步行动作移动，手随身体清离或返回。'
             '本执行器不支持抓持，不输出approach或carry。'
             '你可以因空间冲突、个人优先事项、进展或风险改变当前计划，具体时机和动作由你决定。'
             'current_goal描述你希望实现的较长期工作结果；观察、推和让行是推进目标的当前动作。'
@@ -42,7 +43,7 @@ class NativeQwenHuman(QwenHumanPolicy):
         return super()._validated_command(value, observation)
 
 
-def augment_contact_human(env, destination):
+def augment_contact_human(env, destination, *, visualization='vico_skin'):
     """仅初始化时重编译场景，并按名字保持原机器人/物体qpos与qvel。"""
     old_model, old_data = env.sim.model, env.sim.data
     qpos, qvel = old_data.qpos.copy(), old_data.qvel.copy()
@@ -59,20 +60,26 @@ def augment_contact_human(env, destination):
     quaternion=Rotation.from_matrix(np.column_stack([right,up,-forward])).as_quat()
     ET.SubElement(world,'camera',name='hrc_view',pos=' '.join(map(str,eye)),
                   quat=' '.join(map(str,np.r_[quaternion[3],quaternion[:3]])),fovy='52')
-    # Visual proxy is explicitly non-colliding. Only the force-driven fingertip contacts objects.
-    body = ET.SubElement(world, 'body', name='human_display', mocap='true', pos='.25 .60 0')
-    for name, kind, pos, size, rgba in [
-        ('human_torso','capsule','0 0 1.20','.105 .23','.18 .27 .36 1'),
-        ('human_head','sphere','0 0 1.65','.095','.70 .53 .41 1'),
-        ('human_leg_left','capsule','-.09 0 .46','.055 .38','.22 .25 .28 1'),
-        ('human_leg_right','capsule','.09 0 .46','.055 .38','.22 .25 .28 1')]:
-        ET.SubElement(body,'geom',name=name,type=kind,pos=pos,size=size,rgba=rgba,
-                      contype='0',conaffinity='0',group='1')
-    for name, length, rgba in [('human_upper_arm',.36,'.18 .27 .36 1'),
-                               ('human_forearm',.33,'.70 .53 .41 1')]:
-        segment = ET.SubElement(world,'body',name=name,mocap='true',pos='.25 .60 1.3')
-        ET.SubElement(segment,'geom',name=name+'_visual',type='capsule',size=f'.032 {length/2}',
-                      rgba=rgba,contype='0',conaffinity='0',group='1')
+    # Visual skin is not a physical actuator. The fingertip remains force driven.
+    rig=None
+    if visualization=='vico_skin':
+        from .native_avatar import AvatarRig, add_avatar
+        rig=AvatarRig();add_avatar(root,rig)
+    elif visualization=='capsule':
+        body = ET.SubElement(world, 'body', name='human_display', mocap='true', pos='.25 .60 0')
+        for name, kind, pos, size, rgba in [
+            ('human_torso','capsule','0 0 1.20','.105 .23','.18 .27 .36 1'),
+            ('human_head','sphere','0 0 1.65','.095','.70 .53 .41 1'),
+            ('human_leg_left','capsule','-.09 0 .46','.055 .38','.22 .25 .28 1'),
+            ('human_leg_right','capsule','.09 0 .46','.055 .38','.22 .25 .28 1')]:
+            ET.SubElement(body,'geom',name=name,type=kind,pos=pos,size=size,rgba=rgba,
+                          contype='0',conaffinity='0',group='1')
+        for name, length, rgba in [('human_upper_arm',.36,'.18 .27 .36 1'),
+                                   ('human_forearm',.33,'.70 .53 .41 1')]:
+            segment = ET.SubElement(world,'body',name=name,mocap='true',pos='.25 .60 1.3')
+            ET.SubElement(segment,'geom',name=name+'_visual',type='capsule',size=f'.032 {length/2}',
+                          rgba=rgba,contype='0',conaffinity='0',group='1')
+    else:raise ValueError('未知人体显示资产')
     base = ET.SubElement(world,'body',name='human_slide_x',pos='0 0 0')
     for axis, vector in [('x','1 0 0'),('y','0 1 0'),('z','0 0 1')]:
         if axis != 'x':
@@ -82,7 +89,7 @@ def augment_contact_human(env, destination):
         ET.SubElement(base,'inertial',pos='0 0 0',mass='.01',diaginertia='.0001 .0001 .0001')
     hand = ET.SubElement(base,'body',name='human_fingertip',pos='0 0 0')
     ET.SubElement(hand,'geom',name='human_fingertip_contact',type='sphere',size='.015',
-                  mass='.12',friction='1 .005 .0001',rgba='.70 .53 .41 1',group='1')
+                  mass='.12',friction='1 .005 .0001',rgba='.70 .53 .41 0' if rig else '.70 .53 .41 1',group='1')
     actuator = root.find('actuator')
     for axis in 'xyz':
         ET.SubElement(actuator,'motor',name='human_motor_'+axis,joint='human_'+axis,
@@ -91,6 +98,7 @@ def augment_contact_human(env, destination):
                   pos=f'{destination[0]} {destination[1]} {surface_z+.0008}',size='.025 .0005',
                   rgba='.32 .64 .47 .65',contype='0',conaffinity='0',group='1')
     env.env.reset_from_xml_string(ET.tostring(root,encoding='unicode'))
+    env.env._hrc_avatar_rig=rig
     env.sim.data.qpos[:len(qpos)] = qpos
     env.sim.data.qvel[:len(qvel)] = qvel
     env.sim.data.time = old_time
@@ -119,6 +127,12 @@ class NativeContactHuman:
         self.target = self.reference.copy()
         self.dt = float(env.sim.model.opt.timestep)
         self.records = []
+        self.physics_steps=0
+        self.avatar=None
+        self.body_base=np.array([.25,.60]);self.body_target=self.body_base.copy();self.body_velocity=np.zeros(2)
+        if getattr(env.env,'_hrc_avatar_rig',None) is not None:
+            from .native_avatar import NativeAvatarDisplay
+            self.avatar=NativeAvatarDisplay(env,env.env._hrc_avatar_rig)
         original = env.env._pre_action
         def pre_action(action, policy_step=False):
             original(action, policy_step=policy_step)
@@ -135,13 +149,18 @@ class NativeContactHuman:
         signature = (command.intent, command.object_id, command.destination)
         if command.intent != 'push':
             self.signature = signature
-            self.phase = 'idle' if command.intent == 'observe' else 'retreat'
+            if command.intent in {'yield','away','return'}:
+                self.body_target=np.array([.25,{'yield':.75,'away':.95,'return':.60}[command.intent]])
+                self.phase='navigate'
+            else:
+                self.body_target=self.body_base.copy();self.phase='idle'
             self.target = self.position().copy() if command.intent=='observe' else np.array([.25,.60,1.12])
             return
         if signature == self.signature and self.phase not in {'idle','retreat'}:
             return
         self.signature = signature
         self.object_id, self.destination = command.object_id, command.destination
+        self.body_target=np.array([.25,.60])
         source = self.object_position(self.object_id)
         goal = np.asarray(self.regions[self.destination])
         if np.linalg.norm(source[:2]-goal[:2])<.025:
@@ -167,6 +186,12 @@ class NativeContactHuman:
         self.target=self.push_start+[0,0,.14]
 
     def physics_step(self):
+        self.body_base,self.body_velocity=bounded_motion(self.body_base,self.body_velocity,self.body_target,
+                                                        dt=self.dt,speed=.25,acceleration=.6)
+        if self.avatar is not None:self.avatar.rig.base[:2]=self.body_base
+        if self.phase=='navigate':
+            self.target=np.r_[self.body_base,1.12]
+            if np.linalg.norm(self.body_base-self.body_target)<.01:self.phase='idle'
         actual = self.position()
         if np.linalg.norm(actual-self.target)<.015:
             if self.phase=='approach':self.phase='descend';self.target=self.push_start.copy()
@@ -181,7 +206,10 @@ class NativeContactHuman:
         force=700*(self.reference-actual)+22*(self.velocity-measured_velocity)
         force[2] += .15*9.81
         self.env.sim.data.ctrl[self.actuators]=np.clip(force,-8,8)
-        self._display(actual)
+        self.physics_steps+=1
+        # Pose immediately before each camera update; at most 2ms of hand lag.
+        if self.avatar is None or self.physics_steps%round(.05/self.dt)==0:
+            self._display(actual)
         contact_objects=[]
         for index in range(self.env.sim.data.ncon):
             c=self.env.sim.data.contact[index]
@@ -192,10 +220,14 @@ class NativeContactHuman:
                              'object_id':self.object_id,'destination':self.destination,
                              'actual_position':actual.tolist(),'actual_velocity':measured_velocity.tolist(),
                              'reference':self.reference.tolist(),'motor_force_n':np.clip(force,-8,8).tolist(),
+                             'body_position':self.body_base.tolist(),'body_velocity':self.body_velocity.tolist(),
                              'object_position':self.object_position(self.object_id).tolist() if self.object_id else None,
                              'contact_geoms':contact_objects,'human_object_pose_writes':0})
 
     def _display(self, hand):
+        if self.avatar is not None:
+            self.avatar.update(hand,initialise=not self.avatar.records,walking=np.linalg.norm(self.body_velocity)>.01)
+            return
         shoulder=np.array([.25,.60,1.42])
         direction=hand-shoulder;distance=np.linalg.norm(direction)
         elbow=(shoulder+hand)/2

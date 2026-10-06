@@ -17,6 +17,7 @@ from PIL import Image
 
 from hrc_pilot.libero_native import native_policy_input, input_audit, physical_record
 from hrc_pilot.video_verification import finalize_video_verification
+from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 
 
 def write_json(path, value):
@@ -34,9 +35,14 @@ def main():
     parser.add_argument('--steps', type=int, default=280)
     parser.add_argument('--execution-horizon', type=int, default=10)
     parser.add_argument('--human-mode', choices=['none','observe','qwen','calibration'], default='none')
+    parser.add_argument('--human-visualization',choices=['capsule','vico_skin'],default='vico_skin')
+    parser.add_argument('--task-family',choices=['moving_receptacle','clearance_return'],default='moving_receptacle')
     parser.add_argument('--human-persona', choices=['cooperative','independent','cautious','assertive'], default='cooperative')
     parser.add_argument('--human-model', type=Path, default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     args = parser.parse_args()
+    contract=NativeTaskContract(args.task_family)
+    if args.task_family=='clearance_return' and args.human_mode!='qwen':
+        parser.error('离返协作任务要求真实生成式伙伴，不使用运动校准命令')
     if args.output_dir.exists() and any(args.output_dir.iterdir()):
         parser.error('请使用新的输出目录')
     if args.steps < 1 or args.execution_horizon < 1:
@@ -77,9 +83,18 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
     code_paths = [Path(__file__), Path('src/hrc_pilot/libero_native.py'), Path('src/hrc_pilot/native_contact_human.py'),
                   Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_contact.py'),
+                  Path('src/hrc_pilot/native_avatar.py'),
+                  Path('src/hrc_pilot/native_task_contracts.py'),
                   Path(__file__).with_name('probe_egl_devices.py')]
     hashes = {str(p): sha256(p.read_bytes()).hexdigest() for p in code_paths}
     episodes, provenance_episodes = [], []
+    avatar_assets=None
+    if args.human_mode!='none' and args.human_visualization=='vico_skin':
+        from hrc_pilot.native_avatar import DEFAULT_AVATAR
+        avatar_root=DEFAULT_AVATAR.resolve()
+        avatar_assets={'directory':str(avatar_root),'metadata':json.loads((avatar_root/'avatar.json').read_text()),
+                       'sha256':{name:sha256((avatar_root/name).read_bytes()).hexdigest()
+                                 for name in ['alex.skn','alex_color.png','rig.npz','avatar.json']}}
     partner = None
     if args.human_mode == 'qwen':
         from hrc_pilot.native_contact_human import NativeQwenHuman
@@ -103,6 +118,7 @@ def main():
                                      render_gpu_device_id=0)
             trace, policy_io, timeline, calls = [], [], [], []
             action_plan = deque()
+            task_evidence=NativeTaskEvidence(contract)
             writer = imageio.get_writer(directory / 'demo.mp4', fps=20)
             def frame(obs, *, benchmark_time=None):
                 raw = (env.sim.render(width=640,height=480,camera_name='hrc_view')
@@ -130,7 +146,7 @@ def main():
                     initial_plate = env.sim.data.body_xpos[env.env.obj_body_id['plate_1']].copy()
                     plate_goal = initial_plate + [0,.12,0]
                     regions = {'near_human':tuple(plate_goal)}
-                    obs = augment_contact_human(env,plate_goal)
+                    obs = augment_contact_human(env,plate_goal,visualization=args.human_visualization)
                     actor = NativeContactHuman(env,regions)
                     actor._display(actor.position())
                     env.sim.forward()
@@ -138,7 +154,7 @@ def main():
                     obs=env.env._get_observations()
                     messages = [Message('environment','activity_change','餐桌共同准备；安排按当前可见进度调整。'),
                                 Message('human','assignment',task.language,None,'robot',None),
-                                Message('human','assignment','I want to move plate_1 to the green near_human area while you place the specified bowl on it.',
+                                Message('human','assignment',contract.human_instruction(),
                                         'plate_1','human','near_human')]
                     if partner is not None:partner.reset(args.seed)
                 start_physics = float(env.sim.data.time)
@@ -149,11 +165,12 @@ def main():
                     record = physical_record(env, obs, time_s=time_s, step=step)
                     if actor is not None:
                         record['human_hand_position'] = actor.position().tolist()
+                        record['human_position']=np.r_[actor.body_base,0].tolist()
                         record['human_motor_phase'] = actor.phase
                         if partner is not None:
                             public = Observation(objects={k:tuple(v) for k,v in record['objects'].items()},
                                 regions=regions,messages=tuple(messages),robot_ee=tuple(record['robot_ee']),
-                                human_position=(.25,.60,0),held_by_human=(),completed_skills=(),
+                                human_position=tuple(np.r_[actor.body_base,0]),held_by_human=(),completed_skills=(),
                                 time_s=time_s,robot_qpos=tuple(record['robot_qpos']),
                                 task_description=task.language,human_hand_position=tuple(actor.position()),
                                 human_motor_phase=actor.phase,active_robot_action='placing_bowl',action_phase='native_control')
@@ -165,7 +182,7 @@ def main():
                     trace.append(record)
                     frame(obs, benchmark_time=time_s)
                     if not action_plan:
-                        instruction=task.language
+                        instruction=contract.robot_instruction(task.language) if partner is not None else task.language
                         if partner is not None:
                             communication=[m.text for m in messages if m.kind=='policy_message'][-2:]
                             if communication:instruction += '\nHuman: '+'\nHuman: '.join(communication)
@@ -202,7 +219,10 @@ def main():
                                             and abs(actual_plate[2]-initial_plate[2])<.025 and plate_speed<.08)
                         human_dwell=human_dwell+1 if human_geometry and contact_witness else 0
                         human_success=human_dwell>=4
-                        if args.human_mode=='qwen':done=done and human_success
+                        if args.human_mode=='qwen':
+                            done=task_evidence.update(time_s=(step+1)/20,body_y=float(actor.body_base[1]),
+                                  hand_y=float(actor.position()[1]),human_placement_ready=human_success,
+                                  robot_relation=done)
                         elif args.human_mode=='calibration':done=human_success
                     policy_io[-1].update(post_physics_time_s=float(env.sim.data.time),
                                          actuator_ctrl=env.sim.data.ctrl.tolist())
@@ -237,6 +257,9 @@ def main():
                                   public_plate_target=plate_goal.tolist(),
                                   interpretation='真实模型与可选生成式伙伴在同一世界中的移动接收盘任务；人体显示是运动学代理，指尖是力驱动碰撞体，不证明真人效度。')
                     (directory/'human_control.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in actor.records))
+                    if actor.avatar is not None:
+                        (directory/'human_avatar.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in actor.avatar.records))
+                        result['avatar_maximum_alignment_error_m']=max(row['alignment_error_m'] for row in actor.avatar.records)
                     write_json(directory/'public_task.json',{'robot':task.language,'human':'Move plate_1 to near_human',
                                                            'initial_plate':initial_plate.tolist(),'near_human':plate_goal.tolist()})
                     if partner is not None:
@@ -245,6 +268,10 @@ def main():
                                          ('human_memory_retrievals.jsonl','memory_retrievals')]:
                             (directory/name).write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in audit[key]))
                         result['human_decisions']=len(audit['policy_io'])
+                        result['task_contract']=task_evidence.audit()
+                        if args.task_family=='clearance_return':
+                            result['human_goal_success']=bool(result['human_goal_success'] and task_evidence.returned)
+                            result['robot_goal_success']=bool(result['robot_goal_success'] and task_evidence.robot_placement_credit)
                 write_json(directory/'metrics.json', result)
                 write_json(directory/'video_timeline.json', {'fps':20,'frame_count':len(timeline),'frames':timeline})
                 episodes.append(result)
@@ -265,9 +292,11 @@ def main():
         'cuda_visible_devices':selected,'source_sha256':hashes,
         'renderer_device_binding':matched[0],
         'human_mode':args.human_mode,'human_persona':args.human_persona if partner is not None else None,
+        'task_family':args.task_family,'human_public_work_requirement':contract.human_instruction(),
         'human_model':str(args.human_model) if partner is not None else None,
         'human_physics':'force_driven_xyz_fingertip' if args.human_mode!='none' else None,
-        'human_body_visualization':'noncolliding_kinematic_capsules' if args.human_mode!='none' else None,
+        'human_body_visualization':args.human_visualization if args.human_mode!='none' else None,
+        'human_avatar_assets':avatar_assets,
         'human_goal_definition':'plate center within 25mm XY of visible marker, near original support height, speed under 0.08m/s for 0.2s, with physical fingertip contact witness',
         'source_files_changed_during_run':[str(p) for p in code_paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
         'episodes':provenance_episodes,'object_pose_writes_during_control':0,'robot_ik_adapter':False,
