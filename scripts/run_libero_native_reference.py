@@ -19,6 +19,7 @@ from hrc_pilot.libero_native import native_policy_input, input_audit, physical_r
 from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
+from hrc_pilot.native_placement import NativePlacementEvidence
 
 
 def write_json(path, value):
@@ -39,6 +40,7 @@ def main():
     parser.add_argument('--human-visualization',choices=['capsule','vico_skin'],default='vico_skin')
     parser.add_argument('--task-family',choices=['moving_receptacle','clearance_return','prepare_receptacle','shared_workspace'],default='moving_receptacle')
     parser.add_argument('--human-memory-scope',choices=['episode','session'],default='session')
+    parser.add_argument('--completion-criterion',choices=['native_geometry','released_stable'],default='released_stable')
     parser.add_argument('--human-persona', choices=['cooperative','independent','cautious','assertive'], default='cooperative')
     parser.add_argument('--human-model', type=Path, default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     args = parser.parse_args()
@@ -89,6 +91,7 @@ def main():
                   Path('src/hrc_pilot/native_task_contracts.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
+                  Path('src/hrc_pilot/native_placement.py'),
                   Path(__file__).with_name('probe_egl_devices.py')]
     hashes = {str(p): sha256(p.read_bytes()).hexdigest() for p in code_paths}
     episodes, provenance_episodes = [], []
@@ -168,6 +171,12 @@ def main():
                         partner.reset(args.seed)
                         torch.manual_seed(args.seed+task_id*1000+initial_id)
                 start_physics = float(env.sim.data.time)
+                placement=None
+                if args.completion_criterion=='released_stable':
+                    goals=env.env.parsed_problem['goal_state']
+                    if len(goals)!=1 or len(goals[0])!=3 or goals[0][0].lower()!='on':
+                        raise ValueError('释放稳定判据当前仅支持单个公开On物体关系，不回退几何成功')
+                    placement=NativePlacementEvidence(goals[0][1],goals[0][2])
                 (directory/'scene.xml').write_text(env.sim.model.get_xml())
                 done = False
                 for step in range(args.steps):
@@ -222,6 +231,9 @@ def main():
                                       'pre_physics_time_s': float(env.sim.data.time)})
                     obs, reward, _, info = env.step(action.tolist())
                     done = bool(env.check_success())
+                    if placement is not None:
+                        after=physical_record(env,obs,time_s=(step+1)/20,step=step+1)
+                        done=placement.update(record,after,done)
                     if actor is not None:
                         recent=actor.records[-int(round(.05/actor.dt)):]
                         plate_geoms=set(env.env.objects_dict[human_object].contact_geoms)
@@ -256,6 +268,8 @@ def main():
                           'init_state_id': initial_id, 'seed': args.seed, 'task_success': done,
                           'completion_time_s': terminal['time_s'], 'model_calls': len(calls),
                           'native_actions': len(policy_io), 'backend': 'LIBERO_MuJoCo_native',
+                          'native_geometry_success':bool(env.check_success()),
+                          'completion_criterion':args.completion_criterion,
                           'interpretation': '原生基础操作参照，不含人类，不是HRC/cobalance成绩。'}
                 if actor is not None:
                     motion_peak=max(float(np.linalg.norm(row['actual_velocity'])) for row in actor.records)
@@ -266,7 +280,7 @@ def main():
                                    and second['object_position'] is not None]
                     object_speed_peak=max(object_speeds,default=0.)
                     result.update(human_mode=args.human_mode,human_contact_witness=contact_witness,
-                                  human_goal_success=human_dwell>=4, robot_goal_success=bool(env.check_success()),
+                                  human_goal_success=human_dwell>=4, robot_goal_success=(placement.records[-1]['released_stable_placement'] if placement is not None else bool(env.check_success())),
                                   human_fingertip_peak_speed_m_s=motion_peak,
                                   human_object_peak_speed_m_s=float(object_speed_peak),
                                   human_motion_check_passed=bool(motion_peak<=.65 and object_speed_peak<=1.5),
@@ -295,6 +309,8 @@ def main():
                                 result['human_goal_success']=bool(result['human_goal_success'] and task_evidence.returned)
                             result['robot_goal_success']=bool(result['robot_goal_success'] and task_evidence.robot_placement_credit)
                 write_json(directory/'metrics.json', result)
+                if placement is not None:
+                    (directory/'placement_evidence.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in placement.records))
                 write_json(directory/'video_timeline.json', {'fps':20,'frame_count':len(timeline),'frames':timeline})
                 episodes.append(result)
                 provenance_episodes.append({'task_id':task_id,'init_state_id':initial_id,
@@ -318,6 +334,7 @@ def main():
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
         'human_execution_feedback':'measured_motor_state_and_public_geometry_no_evaluator_outcomes',
         'human_action_validation_feedback':True,
+        'completion_criterion':args.completion_criterion,
         'human_plan_execution':'Qwen reselects each action; generated plans never routed by runtime',
         'human_torch_seed_rule':'seed + 1000*task_id + init_state_id',
         'human_model':str(args.human_model) if partner is not None else None,
@@ -334,9 +351,11 @@ def main():
     for result in episodes:
         location=f'task_{result["task_id"]:02d}/init_{result["init_state_id"]:03d}'
         panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，真实推理{result["model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
+    model_label={'pi05_libero':'π0.5','openvla_libero_spatial':'OpenVLA'}.get(metadata.get('config'),'所选学习模型')
     human_note = ('测试没有人类伙伴，不能解释为协作成绩。' if args.human_mode=='none' else
                   '加入力驱动的碰撞指尖和不参与碰撞的显示人体。observe用于场景接入检查，calibration的推盘命令来自数据教师，qwen才使用真实Qwen3-14B决定推进、观察和让行。机器人一直执行真实π0.5；人体显示仍是简化运动学代理，不能声称真人或完整人体动力学。')
-    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生仿真策略与移动接收盘</title><style>body{{margin:auto;max-width:1080px;padding:24px;background:#f1f5f4;font:17px/1.8 system-ui;color:#193540;overflow-wrap:anywhere}}article{{background:white;padding:24px;margin:24px 0;border-radius:14px}}video{{width:100%;max-height:600px;background:#142430}}h1{{font-size:30px}}h2{{font-size:22px}}</style><h1>真实π0.5模型与可变化的接收盘</h1><p>此前Genesis中的机器人未建立可靠抓放。这里保持已下载模型权重，使用配套原生场景、两路相机、末端状态及OSC控制，区分基础操作问题与接入域差异。{human_note}</p><p>20Hz物理控制；每次模型输出最多执行{args.execution_horizon}步后重新观察。视频直接记录Sim场景；机器人没有教师接管，物体没有吸附。伙伴条件：{args.human_mode}。结果：{sum(r['task_success'] for r in episodes)}/{len(episodes)}。当前样本是系统实测，不作为完整HRC或全套LIBERO排名。</p><p><a href="summary.json">原始结果</a> · <a href="provenance.json">设置与来源</a> · <a href="video_verification.json">视频核验</a></p>{''.join(panels)}</html>'''
+    human_note=human_note.replace('π0.5',model_label)
+    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原生仿真策略与移动接收盘</title><style>body{{margin:auto;max-width:1080px;padding:24px;background:#f1f5f4;font:17px/1.8 system-ui;color:#193540;overflow-wrap:anywhere}}article{{background:white;padding:24px;margin:24px 0;border-radius:14px}}video{{width:100%;max-height:600px;background:#142430}}h1{{font-size:30px}}h2{{font-size:22px}}</style><h1>真实{model_label}模型与可变化的接收盘</h1><p>此前Genesis中的机器人未建立可靠抓放。这里保持已下载模型权重，使用配套原生场景、两路相机、末端状态及OSC控制，区分基础操作问题与接入域差异。{human_note}</p><p>20Hz物理控制；每次模型输出最多执行{args.execution_horizon}步后重新观察。视频直接记录Sim场景；机器人没有教师接管，物体没有吸附。伙伴条件：{args.human_mode}。结果：{sum(r['task_success'] for r in episodes)}/{len(episodes)}。当前样本是系统实测，不作为完整HRC或全套LIBERO排名。</p><p><a href="summary.json">原始结果</a> · <a href="provenance.json">设置与来源</a> · <a href="video_verification.json">视频核验</a></p>{''.join(panels)}</html>'''
     (args.output_dir/'index.html').write_text(page)
     print(args.output_dir/'index.html', flush=True)
 
