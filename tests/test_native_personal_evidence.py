@@ -22,3 +22,15 @@ def test_empty_subjective_intention_is_not_scored_as_fulfilled_object_goal():
     r=evaluate_personal_goals({},records(),[],[decision(0,'休息',[])],[])
     assert not r['human_current_observable_goals_evaluable']
     assert not r['joint_observable_goals_satisfied']
+
+
+def test_shelf_position_while_still_gripped_is_not_released_placement():
+    ds=[decision(0,'放到高台',[{'object_id':'cookies_1','destination':'cookies_shelf'}])]
+    trace=records()
+    for r in trace:r['contacts']=[{'geom1':'cookies_1_box','geom2':'human_left_finger_contact'},{'geom1':'cookies_1_box','geom2':'human_storage_support'}]
+    old=evaluate_personal_goals({'cookies_shelf':(0,0,.9)},trace,[],ds,[])
+    actual=evaluate_personal_goals({'cookies_shelf':(0,0,.9)},trace,[],ds,[],require_shelf_release=True)
+    assert old['human_current_observable_goals_satisfied']
+    assert not actual['human_current_observable_goals_satisfied']
+    for r in trace:r['contacts']=r['contacts'][1:]
+    assert evaluate_personal_goals({'cookies_shelf':(0,0,.9)},trace,[],ds,[],require_shelf_release=True)['human_current_observable_goals_satisfied']

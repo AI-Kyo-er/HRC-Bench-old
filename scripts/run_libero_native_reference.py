@@ -446,7 +446,8 @@ def main():
                                   interpretation='同一物理世界中公开工作要求变化，生成式人自主重新选择；分阶段完成与最终共同完成分开。')
                     done=result['task_success']
                 if args.autonomous_human_context:
-                    personal=evaluate_personal_goals(regions,trace,actor.records,partner.policy_io,placement.records)
+                    personal=evaluate_personal_goals(regions,trace,actor.records,partner.policy_io,placement.records,
+                        require_shelf_release=args.human_contact_model=='articulated_hand' and args.human_workspace_layout=='raised_storage')
                     write_json(directory/'personal_evidence.json',personal)
                     write_json(directory/'personal_context.json',{'context_id':args.autonomous_human_context,
                         'context':CONTEXTS[args.autonomous_human_context],'regions':regions,'robot_instruction':task.language,
@@ -495,6 +496,7 @@ def main():
         'autonomous_human_context':args.autonomous_human_context,
         'human_target_source':'model_generated_from_personal_preferences' if args.autonomous_human_context else 'public_assignment',
         'private_human_targets_in_robot_input':False,
+        'personal_goal_shelf_release_required':args.human_contact_model=='articulated_hand' and args.human_workspace_layout=='raised_storage',
         'activity_profile':args.activity_profile,'human_decision_interval_steps':args.human_decision_interval_steps,
         'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),
         'task_family':args.task_family,'human_public_work_requirement':None if args.autonomous_human_context else contract.human_instruction(),

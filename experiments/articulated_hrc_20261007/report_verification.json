@@ -1,0 +1,44 @@
+{
+  "status": "verified",
+  "video_count": 4,
+  "playback": [
+    {
+      "time": 0.608801,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.605079,
+      "paused": false,
+      "duration": 40.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.604277,
+      "paused": false,
+      "duration": 30.05,
+      "width": 640,
+      "height": 480
+    },
+    {
+      "time": 0.602616,
+      "paused": false,
+      "duration": 30.05,
+      "width": 640,
+      "height": 480
+    }
+  ],
+  "seek_time_s": 10.2,
+  "model_action_contact_sync_verified": true,
+  "release_and_executor_confounds_disclosed": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_local_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/articulated_hrc_20261007/desktop.png"
+}

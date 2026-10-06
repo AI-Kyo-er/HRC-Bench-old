@@ -73,7 +73,11 @@ class NativeArticulatedHuman(NativeContactHuman):
             return
         signature=(command.intent,command.object_id,command.destination)
         self.accepted_intent=command.intent
-        if signature==self.signature and self.phase not in {'idle','holding','failed'}:return
+        if signature==self.signature and self.phase not in {'idle','holding','failed'}:
+            moved=(command.intent=='grasp' and self.phase in {'grasp_approach','grasp_descend'}
+                   and self.grasp_initial_object is not None
+                   and np.linalg.norm(self.object_position(command.object_id)-self.grasp_initial_object)>.015)
+            if not moved:return
         self.signature=signature;self.command_started_at=float(self.env.sim.data.time);self.motor_failure=None
         self.env.sim.model.geom_contype[self.geom]=0;self.env.sim.model.geom_conaffinity[self.geom]=0
         if command.intent=='release':
@@ -113,7 +117,11 @@ class NativeArticulatedHuman(NativeContactHuman):
         result.update(contact_model='articulated_hand',supported_intents=['push','grasp','place','release','observe','yield','away','return'],
                       measured_finger_joint_positions_m=self.env.sim.data.qpos[self.finger_q].tolist(),
                       measured_finger_target_contacts=self.finger_contacts(),wrist_yaw_rad=float(self.env.sim.data.qpos[self.yaw_q]),
-                      object_measured_in_hand=self.carry_object,motor_failure=self.motor_failure)
+                      object_measured_in_hand=self.carry_object if all(self.finger_contacts(self.carry_object)) else None,
+                      last_confirmed_grasp_object=self.carry_object,motor_failure=self.motor_failure)
+        if self.object_id is not None and self.grasp_initial_object is not None:
+            result['grasp_target_snapshot_xyz']=self.grasp_initial_object.tolist()
+            result['object_motion_since_grasp_snapshot_m']=float(np.linalg.norm(self.object_position(self.object_id)-self.grasp_initial_object))
         return result
 
     def physics_step(self):

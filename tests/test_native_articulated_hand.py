@@ -25,3 +25,37 @@ def test_place_requires_measured_holding_not_generated_claim():
     output=p.step(o)
     assert output.command.intent=='observe'
     assert p.last_command_feedback['errors']==['requested_object_not_in_measured_hand']
+
+
+def test_holding_feedback_does_not_turn_past_grasp_into_current_contact():
+    from types import SimpleNamespace
+    from unittest.mock import patch
+    import numpy as np
+    from hrc_pilot.native_contact_human import NativeContactHuman
+    from hrc_pilot.native_articulated_hand import NativeArticulatedHuman
+    hand=object.__new__(NativeArticulatedHuman)
+    hand.env=SimpleNamespace(sim=SimpleNamespace(data=SimpleNamespace(qpos=np.zeros(3))))
+    hand.finger_q=[0,1];hand.yaw_q=2;hand.carry_object='cookies_1';hand.motor_failure=None;hand.object_id=None
+    hand.finger_contacts=lambda name=None:[False,False]
+    with patch.object(NativeContactHuman,'public_feedback',return_value={}):feedback=hand.public_feedback()
+    assert feedback['object_measured_in_hand'] is None
+    assert feedback['last_confirmed_grasp_object']=='cookies_1'
+
+
+def test_repeated_grasp_retargets_moved_object_during_approach():
+    from types import SimpleNamespace
+    import numpy as np
+    from hrc_pilot.continuous import HumanCommand
+    from hrc_pilot.native_articulated_hand import NativeArticulatedHuman
+    hand=object.__new__(NativeArticulatedHuman)
+    hand.signature=('grasp','cookie',None);hand.phase='grasp_approach';hand.grasp_initial_object=np.array([0,0,.91])
+    hand.object_position=lambda _:np.array([.10,0,.91]);hand.carry_object=None;hand.surface_z=.9;hand.geom=0
+    hand.position=lambda:np.array([0,0,1.1])
+    model=SimpleNamespace(geom_contype=np.ones(1),geom_conaffinity=np.ones(1),geom_name2id=lambda _:0,
+                          geom_type=np.array([6]),geom_size=np.array([[.02,.03,.01]]))
+    data=SimpleNamespace(time=1.,body_xmat=np.eye(3).reshape(1,9),geom_xmat=np.eye(3).reshape(1,9),geom_xpos=np.array([[.10,0,.91]]))
+    hand.env=SimpleNamespace(sim=SimpleNamespace(model=model,data=data),env=SimpleNamespace(obj_body_id={'cookie':0},objects_dict={'cookie':SimpleNamespace(contact_geoms=['cookie_geom'])}))
+    hand.accept(HumanCommand('grasp','cookie'))
+    np.testing.assert_allclose(hand.target[:2],[.10,0])
+    np.testing.assert_allclose(hand.grasp_initial_object,[.10,0,.91])
+    assert hand.phase=='grasp_approach'

@@ -47,10 +47,17 @@ def main():
         trace=rows(episode/'trace.jsonl');actions=rows(episode/'policy_io.jsonl');calls=rows(episode/'model_calls.jsonl')
         np.save(target/'initial.qpos.npy',np.asarray(trace[0]['qpos']))
         np.save(target/'initial.qvel.npy',np.asarray(trace[0]['qvel']))
+        storage_path=root/'storage_verification.json'
+        stored_joint=metrics['task_success']
+        score_protocol='recorded_episode_protocol'
+        if storage_path.exists():
+            candidates=json.loads(storage_path.read_text())['episodes']
+            match=next(r for r in candidates if Path(r['episode']).resolve()==episode.resolve())
+            stored_joint=match['final_joint_released_stable'];score_protocol='posthoc_released_support_protocol'
         source_receipts.append({'episode':identifier,'source':str(episode.resolve()),
                                 'source_sha256':{n:sha256((episode/n).read_bytes()).hexdigest() for n in source_files},
-                                'joint_success':metrics['task_success'] if eligible and metrics.get('human_goal_evaluable',True) else None,
-                                'raw_joint_predicate':metrics['task_success'],
+                                'joint_success':stored_joint if eligible and metrics.get('human_goal_evaluable',True) else None,
+                                'raw_joint_predicate':metrics['task_success'],'joint_success_protocol':score_protocol,
                                 'joint_goal_evaluable':metrics.get('human_goal_evaluable',True),
                                 'benchmark_episode_eligible':eligible,'motion_eligible':motion_eligible,'avatar_qualified':avatar_qualified,'world_initializations':1,'robot_model':provenance['model_server_metadata']['config']})
         for call in calls:

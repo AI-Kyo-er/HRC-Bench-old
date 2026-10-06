@@ -79,7 +79,7 @@ def verify_episode(directory):
         assert human and all(r['human_object_pose_writes']==0 for r in human)
         assert all(np.isfinite(r['actual_velocity']).all() and np.isfinite(r['motor_force_n']).all() for r in human)
         scene=ET.parse(directory/'scene.xml').getroot()
-        force_limits=[max(abs(float(x)) for x in scene.find(f".//motor[@name='human_motor_{axis}']").get('ctrlrange').split()) for axis in 'xyz']
+        force_limits=[max(abs(float(x)) for x in scene.find(f".//actuator/*[@name='human_motor_{axis}']").get('ctrlrange').split()) for axis in 'xyz']
         assert all(all(abs(x)<=limit+1e-6 for x,limit in zip(r['motor_force_n'],force_limits)) for r in human)
         speed=max(float(np.linalg.norm(r['actual_velocity'])) for r in human)
         object_speeds=[float(np.linalg.norm(np.asarray(b['object_position'])-a['object_position'])/

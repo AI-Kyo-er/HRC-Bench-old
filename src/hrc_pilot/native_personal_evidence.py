@@ -6,7 +6,7 @@ def signature(targets,regions):
     return tuple(sorted((t['object_id'],*tuple(regions[t['destination']])) for t in targets))
 
 
-def evaluate_personal_goals(regions,trace,controls,decisions,placement):
+def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, require_shelf_release=False):
     revisions=[];previous=None
     for row in decisions:
         targets=row['personal_goal_state']['personal_targets'];key=signature(targets,regions)
@@ -25,6 +25,15 @@ def evaluate_personal_goals(regions,trace,controls,decisions,placement):
                 position=np.asarray(r['objects'][obj]);terminal_distance=float(np.linalg.norm(position[:2]-point[:2]))
                 speed=float(np.linalg.norm(position-np.asarray(previous_record['objects'][obj]))/(r['time_s']-previous_record['time_s'])) if previous_record else float('inf')
                 eligible=terminal_distance<.025 and abs(position[2]-point[2])<.025 and speed<.08
+                if require_shelf_release and dest.endswith('_shelf'):
+                    supported=hand_contact=False
+                    for c in r['contacts']:
+                        a,b=c['geom1'] or '',c['geom2'] or ''
+                        if b.startswith(obj+'_'):a,b=b,a
+                        if a.startswith(obj+'_'):
+                            supported|=b=='human_storage_support'
+                            hand_contact|=b.startswith(('human_left_finger','human_right_finger','gripper'))
+                    eligible=eligible and supported and not hand_contact
                 dwell=dwell+.05 if eligible else 0.
                 if dwell>=.2-1e-9 and first is None:first=r['time_s']
                 previous_record=r
