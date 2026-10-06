@@ -38,6 +38,7 @@ def main():
         destination_frames.mkdir(exist_ok=True)
         prefix=(provenance['model_server_metadata']['config']+'__'+metrics['autonomous_human_context'] if autonomous else metrics['activity_profile'])
         if provenance.get('scene_case'):prefix+='__'+provenance['scene_case']['key']
+        if provenance.get('human_policy_architecture','flat')!='flat':prefix+='__'+provenance['human_policy_architecture']
         identifier=f'{prefix}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
         target=args.output_dir/'episodes'/identifier;target.mkdir(parents=True)
         activity_files=['personal_context.json','personal_evidence.json','human_intentions.jsonl','public_dialogue.jsonl'] if autonomous else ['activity_plan.json','activity_events.json','activity_evidence.json']
@@ -46,7 +47,7 @@ def main():
         if (episode/'human_planner_io.jsonl').exists():source_files.append('human_planner_io.jsonl')
         for name in source_files:(target/name).symlink_to((episode/name).resolve())
         auxiliary_audits={}
-        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json']:
+        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json','continual_activity_verification.json']:
             path=root/name
             if path.exists():
                 (target/name).symlink_to(path.resolve())
