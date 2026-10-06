@@ -155,7 +155,7 @@ PYTHONPATH=src python scripts/run_continuous_benchmark.py \
 的 benchmark 起止记录。实验完成后运行：
 
 ```bash
-PYTHONPATH=src python scripts/verify_genesis_videos.py \
+PYTHONPATH=src .venv-vc-pilot/bin/python scripts/verify_genesis_videos.py \
   --input-dir /data1/sieniwgroup/sieniw/projects/HRC-Bench/results/continuous_v2/<run>
 ```
 
