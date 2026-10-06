@@ -1,43 +1,15 @@
 {
-  "checked_at": "2026-10-05T18:11:27+08:00",
-  "page_sha256": "ac53970cd6f397c40065ca0509dc6465ac354353d8ed9dc2c3ade149dc75f118",
-  "links_checked": 1465,
+  "checked_at": "2026-10-06T11:34:44+08:00",
+  "page_sha256": "8588ac1ad581e77ba193fe6185185d59e40e9ee249d52f4a53d9aef782759cff",
+  "links_checked": 1680,
   "broken_links": [],
-  "browser_checks": [
-    "11 experiment sections",
-    "31 directory rows",
-    "category filter",
-    "search filter",
-    "empty result state",
-    {
-      "video": 0,
-      "duration": 0.9
-    },
-    {
-      "video": 1,
-      "duration": 1.3
-    },
-    {
-      "video": 2,
-      "duration": 1.1
-    },
-    {
-      "video": 3,
-      "duration": 30.533333
-    },
-    {
-      "viewport": 375,
-      "no_page_horizontal_overflow": true
-    },
-    {
-      "viewport": 768,
-      "no_page_horizontal_overflow": true
-    },
-    {
-      "viewport": 1440,
-      "no_page_horizontal_overflow": true
-    },
-    "reduced motion"
+  "static_checks": [
+    "12 experiment sections present",
+    "38 directory rows present",
+    "5 embedded real Sim videos present",
+    "all 1680 local links and video sources resolve",
+    "dynamic_genesis_v2, task_catalog_genesis_v1 and pi05_droid_dynamic_genesis_v2 included"
   ],
+  "browser_checks": "未重新运行：当前环境没有 Chromium/Playwright；上一版浏览器检查保留在 Git 历史中。",
   "page_errors": []
 }
