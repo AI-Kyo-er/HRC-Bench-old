@@ -123,6 +123,7 @@ def main():
                   Path('src/hrc_pilot/native_personal_evidence.py'),Path('src/hrc_pilot/native_articulated_hand.py'),
                   Path('src/hrc_pilot/native_hand_policy.py'),Path('src/hrc_pilot/native_scene_catalog.py'),
                   Path('src/hrc_pilot/native_goal_evidence.py'),
+                  Path('src/hrc_pilot/native_relative_placement.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),
                   Path('src/hrc_pilot/native_placement.py'),

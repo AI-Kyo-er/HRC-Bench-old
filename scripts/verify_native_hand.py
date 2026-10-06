@@ -13,6 +13,8 @@ def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip
 def verify(directory,obj=None):
     trace=rows(directory/'trace.jsonl');control=rows(directory/'human_control.jsonl')
     metrics=json.loads((directory/'metrics.json').read_text());obj=obj or metrics.get('object_id','cookies_1')
+    destination=metrics.get('destination','cookies_shelf')
+    relative_receiver=destination.split(':',1)[1] if destination.startswith('on:') else None
     initial=np.asarray(trace[0]['objects'][obj]);bilateral=[];released=[]
     for r in trace:
         contacts=r['contacts'];finger=[False,False];support=False
@@ -21,7 +23,7 @@ def verify(directory,obj=None):
             if b.startswith(obj+'_'):a,b=b,a
             if a.startswith(obj+'_'):
                 for i,side in enumerate(['left','right']):finger[i]|=b=='human_'+side+'_finger_contact'
-                support|=b=='human_storage_support'
+                support|=b.startswith(relative_receiver+'_') if relative_receiver else b=='human_storage_support'
         lift=r['objects'][obj][2]-initial[2]
         if all(finger) and lift>.04:bilateral.append(r['time_s'])
         if support and not any(finger):released.append(r['time_s'])
@@ -31,7 +33,7 @@ def verify(directory,obj=None):
     assert all(c['human_object_pose_writes']==0 for c in control)
     np.testing.assert_allclose([r['physics_time_s']-trace[0]['physics_time_s'] for r in trace],np.arange(len(trace))*.05,atol=1e-7)
     result={'episode':str(directory),'object_id':obj,'first_bilateral_contact_lift_s':bilateral[0] if bilateral else None,
-            'first_released_support_contact_s':released[0] if released else None,
+            'first_released_support_contact_s':released[0] if released else None,'relative_receiver':relative_receiver,
             'maximum_object_lift_m':float(max(p[2]-initial[2] for p in positions)),
             'human_peak_speed_m_s':speed,'object_peak_sampled_speed_m_s':object_speed,
             'friction_grasp_and_release_observed':bool(bilateral and released),

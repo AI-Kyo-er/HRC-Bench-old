@@ -5,6 +5,7 @@ import numpy as np
 
 from .human_contact import bounded_motion
 from .native_contact_human import NativeContactHuman
+from .native_relative_placement import central_support, object_bottom, relative_destinations, receiver_contact
 
 
 def install_articulated_hand(root):
@@ -48,6 +49,7 @@ class NativeArticulatedHuman(NativeContactHuman):
         self.phase_start=float(env.sim.data.time);self.motor_failure=None;self.carry_object=None
         self.mass_z=float(model.body_subtreemass[model.jnt_bodyid[self.joints[2]]])
         self.grasp_initial_object=None;self.grasp_initial_z=None
+        self.relative_receiver=None;self.payload_hand_offset=None;self.payload_bottom_offset=None
 
     def set_phase(self,name):
         self.phase=name;self.phase_start=float(self.env.sim.data.time)
@@ -83,6 +85,7 @@ class NativeArticulatedHuman(NativeContactHuman):
         if command.intent=='release':
             self.finger_target=.095;self.set_phase('release');return
         self.object_id=command.object_id;self.destination=command.destination
+        self.relative_receiver=None
         if command.intent=='grasp':
             if self.carry_object==self.object_id and all(self.finger_contacts()):return
             self.carry_object=None;self.grasp_initial_object=self.object_position(self.object_id).copy()
@@ -108,7 +111,18 @@ class NativeArticulatedHuman(NativeContactHuman):
         elif self.carry_object!=self.object_id:
             self.motor_failure='requested_object_not_in_measured_hand';self.set_phase('failed')
         else:
-            self.target=self.position().copy();self.target[:2]=np.asarray(self.regions[self.destination])[:2]
+            self.target=self.position().copy()
+            if self.destination and self.destination.startswith('on:'):
+                self.relative_receiver=self.destination.split(':',1)[1]
+                support=central_support(self.env,self.relative_receiver)
+                if support is None or self.relative_receiver==self.object_id:
+                    self.motor_failure='invalid_relative_receiver';self.set_phase('failed');return
+                self.payload_hand_offset=self.position()-self.object_position(self.object_id)
+                try:self.payload_bottom_offset=float(self.position()[2]-object_bottom(self.env,self.object_id))
+                except ValueError as exc:
+                    self.motor_failure=str(exc);self.set_phase('failed');return
+                self.target[:2]=support[:2]+self.payload_hand_offset[:2]
+            else:self.target[:2]=np.asarray(self.regions[self.destination])[:2]
             self.target[2]=max(self.target[2],self.surface_z+.14)
             self.set_phase('place_transfer')
 
@@ -119,6 +133,9 @@ class NativeArticulatedHuman(NativeContactHuman):
                       measured_finger_target_contacts=self.finger_contacts(),wrist_yaw_rad=float(self.env.sim.data.qpos[self.yaw_q]),
                       object_measured_in_hand=self.carry_object if all(self.finger_contacts(self.carry_object)) else None,
                       last_confirmed_grasp_object=self.carry_object,motor_failure=self.motor_failure)
+        if hasattr(self.env.env,'obj_body_id'):
+            result['relative_placement_destinations']=relative_destinations(self.env)
+        result['active_relative_receiver']=getattr(self,'relative_receiver',None)
         if self.object_id is not None and self.grasp_initial_object is not None:
             result['grasp_target_snapshot_xyz']=self.grasp_initial_object.tolist()
             result['object_motion_since_grasp_snapshot_m']=float(np.linalg.norm(self.object_position(self.object_id)-self.grasp_initial_object))
@@ -130,7 +147,16 @@ class NativeArticulatedHuman(NativeContactHuman):
         if self.phase=='navigate':
             self.target=np.r_[self.body_base,1.12]
             if np.linalg.norm(self.body_base-self.body_target)<.01:self.phase='idle'
-        actual=self.position();near=np.linalg.norm(actual-self.target)<.010
+        actual=self.position()
+        if self.relative_receiver and self.phase in {'place_transfer','place_lower'}:
+            support=central_support(self.env,self.relative_receiver)
+            if support is None:
+                self.motor_failure='relative_receiver_support_unavailable';self.target=actual.copy();self.set_phase('failed')
+            else:
+                self.target[:2]=support[:2]+self.payload_hand_offset[:2]
+                if self.phase=='place_lower':self.target[2]=support[2]+self.payload_bottom_offset+.002
+        tolerance=.002 if self.phase=='grasp_descend' else .010
+        near=np.linalg.norm(actual-self.target)<tolerance
         elapsed=float(self.env.sim.data.time)-self.phase_start
         if self.phase=='grasp_approach' and near:
             self.target=self.grasp_point.copy();self.set_phase('grasp_descend')
@@ -147,8 +173,14 @@ class NativeArticulatedHuman(NativeContactHuman):
                 self.carry_object=self.object_id;self.set_phase('holding')
             else:self.motor_failure='contact_or_lift_not_retained';self.set_phase('failed')
         elif self.phase=='place_transfer' and near:
-            self.target=actual.copy();self.target[2]=self.grasp_point[2]+(self.regions[self.destination][2]-self.grasp_initial_z)+.003;self.set_phase('place_lower')
-        elif self.phase=='place_lower' and near:
+            self.target=actual.copy()
+            self.target[2]=(central_support(self.env,self.relative_receiver)[2]+self.payload_bottom_offset+.002
+                            if self.relative_receiver else self.grasp_point[2]+(self.regions[self.destination][2]-self.grasp_initial_z)+.003)
+            self.set_phase('place_lower')
+        elif self.phase=='place_lower' and (near or (self.relative_receiver
+             and np.linalg.norm(actual[:2]-self.target[:2])<.010
+             and receiver_contact(self.env,self.object_id,self.relative_receiver))):
+            # Release at actual support contact, including a bowl rim; no claim of containment.
             self.finger_target=.095;self.set_phase('release')
         elif self.phase=='release' and np.min(self.env.sim.data.qpos[self.finger_q])>.06:
             self.carry_object=None;self.target=actual+[0,0,.12];self.set_phase('grasp_retreat')
@@ -177,7 +209,8 @@ class NativeArticulatedHuman(NativeContactHuman):
                 other=c.geom2 if c.geom1 in self.contact_geoms else c.geom1
                 contacts.append(self.env.sim.model.geom_id2name(other))
         self.records.append({'physics_time_s':float(self.env.sim.data.time),'phase':self.phase,'object_id':self.object_id,
-            'destination':self.destination,'actual_position':actual.tolist(),'actual_velocity':measured.tolist(),
+            'destination':self.destination,'relative_receiver':self.relative_receiver,'motor_target_xyz':self.target.tolist(),
+            'actual_position':actual.tolist(),'actual_velocity':measured.tolist(),
             'reference':self.reference.tolist(),'motor_force_n':force.tolist(),'body_position':self.body_base.tolist(),
             'body_velocity':self.body_velocity.tolist(),'object_position':self.object_position(self.object_id).tolist() if self.object_id else None,
             'contact_geoms':contacts,'human_object_pose_writes':0,'contact_model':'articulated_hand',

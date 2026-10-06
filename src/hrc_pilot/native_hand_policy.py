@@ -21,19 +21,24 @@ class ArticulatedSkills:
                      '只有测得object_measured_in_hand为所选对象时，place才可搬运到destination并真实释放。'
                      'grasp尚在运行时，可再次选择grasp继续；observe暂停运动但保留夹指，不替你自动执行后续计划。'
                      'release明确打开手；不能拿着物体同时推另一个物体，先决定是否放下。'
-                     'contact_model和双指接触来自执行反馈，不是评分器给出的目标是否完成。')
+                     'contact_model和双指接触来自执行反馈，不是评分器给出的目标是否完成。'
+                     'place还支持relative_placement_destinations列出的on:物体名：跟随接收物当前位置的接触支撑放置。'
+                     '它不等于放入容器内部；固定bowl_home也不等于放入碗。自己决定是否采用该工具。'
+                     'personal_targets仍只记录公开固定区域关系，不能把on:工具目的地写成个人区域目标。')
 
     def _prompt(self,observation):
         value=json.loads(super()._prompt(observation).split('\n',1)[1])
         value['action_interface']['intents']=['push','grasp','place','release','observe','yield','away','return']
         value['action_interface']['manipulable_object_id_values']=observation.human_execution.get('manipulable_object_ids',list(observation.objects))
+        value['action_interface']['relative_placement_destinations']=observation.human_execution.get('relative_placement_destinations',{})
         return '根据实际接触手接口、自身意图及当前感知，自主选择下一动作：\n'+json.dumps(value,ensure_ascii=False,separators=(',',':'))
 
     def _native_command(self,value,observation):
         intent=value.get('intent')
         if intent=='grasp' and value.get('object_id') in observation.objects:
             return HumanCommand('grasp',value['object_id'],value.get('destination'),speed_mps=.20)
-        if intent=='place' and value.get('object_id') in observation.objects and value.get('destination') in observation.regions:
+        destinations={**observation.regions,**observation.human_execution.get('relative_placement_destinations',{})}
+        if intent=='place' and value.get('object_id') in observation.objects and value.get('destination') in destinations:
             return HumanCommand('place',value['object_id'],value['destination'],speed_mps=.20)
         if intent=='release':return HumanCommand('release')
         return super()._native_command(value,observation)
@@ -41,11 +46,15 @@ class ArticulatedSkills:
     def _validated_command(self,value,observation):
         command=self._native_command(value,observation)
         supported=['push','grasp','place','release','observe','yield','away','return']
-        self.last_command_feedback=command_feedback(value,command,observation.objects,observation.regions,valid_intents=supported)
+        destinations=dict(observation.regions)
+        if value.get('intent')=='place':
+            destinations.update(observation.human_execution.get('relative_placement_destinations',{}))
+        self.last_command_feedback=command_feedback(value,command,observation.objects,destinations,valid_intents=supported)
         held=observation.human_execution.get('object_measured_in_hand')
         error=('requested_object_not_in_measured_hand' if value.get('intent')=='place' and held!=value.get('object_id')
                else 'hand_occupied_requires_explicit_release' if value.get('intent')=='push' and held else None)
         if value.get('intent') in {'grasp','push'} and value.get('object_id') not in observation.human_execution.get('manipulable_object_ids',observation.objects):error='fixed_fixture_not_manipulable_by_hand'
+        if value.get('intent')=='place' and value.get('destination')==f'on:{value.get("object_id")}':error='cannot_place_object_on_itself'
         if error:
             command=HumanCommand('observe');self.last_command_feedback['status']='rejected'
             self.last_command_feedback['errors'].append(error)
