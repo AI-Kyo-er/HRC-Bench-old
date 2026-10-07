@@ -33,6 +33,7 @@ def main():
     parser.add_argument('--scene-case',choices=list(CASES))
     parser.add_argument('--destination',default='cookies_shelf')
     parser.add_argument('--video-layout',choices=['wide','wide_and_policy'],default='wide')
+    parser.add_argument('--pause-after-contact-lift',action='store_true')
     args=parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):parser.error('使用新输出目录')
     chosen=os.environ.get('CUDA_VISIBLE_DEVICES')
@@ -74,13 +75,18 @@ def main():
         actor=NativeArticulatedHuman(env,regions);actor._display(actor.position());env.sim.forward();env.env._update_observables(force=True);obs=env.env._get_observations()
         (episode/'scene.xml').write_text(env.sim.model.get_xml());initial=actor.object_position(args.object_id).copy();start=float(env.sim.data.time)
         actor.accept(HumanCommand('grasp',args.object_id));teacher.append({'time_s':0.,'intent':'grasp','object_id':args.object_id})
-        placed=False
+        placed=False;pause_start=None;held_after_pause=None
         for step in range(args.steps):
             t=step/20;record=physical_record(env,obs,time_s=t,step=step)
             record.update(human_hand_position=actor.position().tolist(),human_position=np.r_[actor.body_base,0].tolist(),human_execution=actor.public_feedback())
             trace.append(record);frame(t)
             if evidence and len(trace)>1:evidence.update(trace[-2],record,env.check_success())
-            if actor.phase=='holding' and not placed:
+            if args.pause_after_contact_lift and pause_start is None and actor.phase=='grasp_lift' and actor.carry_object==args.object_id:
+                actor.accept(HumanCommand('observe'));pause_start=t
+                teacher.append({'time_s':t,'intent':'observe','reason':'pause after actual bilateral contact and lift, before full lift endpoint'})
+            ready=(actor.phase=='holding' if not args.pause_after_contact_lift else pause_start is not None and t>=pause_start+2.)
+            if ready and not placed:
+                held_after_pause=actor.public_feedback()['object_measured_in_hand']==args.object_id
                 actor.accept(HumanCommand('place',args.object_id,args.destination));placed=True
                 teacher.append({'time_s':t,'intent':'place','object_id':args.object_id,'destination':args.destination})
             obs,*_=env.step([0.]*6+[-1.])
@@ -104,6 +110,7 @@ def main():
                 'maximum_object_lift_m':max(r['objects'][args.object_id][2]-initial[2] for r in trace),
                 'human_peak_speed_m_s':max(float(np.linalg.norm(r['actual_velocity'])) for r in actor.records),
                 'motor_failure':actor.motor_failure,'terminal_phase':actor.phase,'teacher_place_command_issued':placed,
+                'pause_after_contact_lift':args.pause_after_contact_lift,'pause_start_s':pause_start,'measured_held_after_two_second_pause':held_after_pause,
                 'interpretation':'独立真实抓放执行器校准；机器人原地，命令来自校准教师，不能算生成式人或HRC成功。'}
         write(episode/'metrics.json',result);write(args.output_dir/'summary.json',{'episodes':[result]})
     finally:writer.close();env.close()

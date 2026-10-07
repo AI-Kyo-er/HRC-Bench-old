@@ -166,6 +166,11 @@ class NativeArticulatedHuman(NativeContactHuman):
         tolerance=.002 if self.phase=='grasp_descend' else .010
         near=np.linalg.norm(actual-self.target)<tolerance
         elapsed=float(self.env.sim.data.time)-self.phase_start
+        # A physically confirmed grasp survives a policy pause before the full
+        # 12cm lift endpoint. Current contact still gates public "in hand".
+        if self.object_id and self.grasp_initial_z is not None and self.carry_object is None:
+            if all(self.finger_contacts()) and self.object_position(self.object_id)[2]>self.grasp_initial_z+.04:
+                self.carry_object=self.object_id
         if self.phase=='grasp_approach' and near:
             self.target=self.grasp_point.copy();self.set_phase('grasp_descend')
         elif self.phase=='grasp_descend' and near:
