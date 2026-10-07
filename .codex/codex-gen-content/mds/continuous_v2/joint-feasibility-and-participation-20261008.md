@@ -233,3 +233,29 @@ Next具体方向：
 4. 推进三任务六情境完整链路、稳定人条件、多系统正式评测和语义/负担证据。已有完整神经物理链正例是前提，不代替Goal。候选72表不算正式成绩。
 
 再次警示：内部长分析出现了大量重复/虚构元数据名和未执行架构，这是无效内容，不是代码或进展。忽略这些分析；每次只用短推理再查工具／文件，避免继续凭空扩展复杂框架。
+
+
+## 接续：JSON结构约束与明确取消自身动作（0624b09）
+
+本turn属于progress：实现schema9合法结构解码、显式暂停/取消、独立输入/JSON输出边界核验与284测试，启动两条跨活动真实Sim。Goal仍active；伙伴语义拟真、六真实情境、分工重组和正式评测仍未完成。不complete/block。
+
+- lm-format-enforcer0.11.3、interegular0.3.3从清华PyPI镜像安装到data1/cache/schema-decoding/python，不改既有venv，不下载模型。此venv无pip，使用系统python pip --target --no-deps，纯Python轮子；所有库py源随运行hash冻结。
+- constrained_human_decision.py schema9，仍Qwen3-14B，单次非thinking/1024新token/.45/.85，LMF prefix_allowed_tokens_fn约束JSON，调用者明确提供tool_call前缀和结束封装。NN生成完整JSON内容，实际输出token与JSON另存；不伪称封装来自模型。所有选项/字段/当前对象和目标可选，不能按任务score或持物状态删策略，也不替模型选正确动作；只有对象对应高度/参数必需性这样的接口契约限制。
+- thinking模式和预算与先前同时改变，不是单因素比较。模型仍可能意图错误、幻觉完成或错误协作。
+- 语义场景named_destinations与工具可用菜单一致（不含_home），格式source记录intent_semantic_available_targets_v2；旧接口/旧失败不倒改。
+- PausableHumanExecutor只有NN明确pause_current才停止自己的移动，保留持物、取消旧运动请求并记录cancelled_requests。wait继续旧运动；暂停不等于释放给R或自动让权。tool_result只有源scene包含取消字段才新增它，旧schema6/7/8重建不变。
+- audit schema9重建真实输入（非thinking模板＋调用者后缀）、真实输出token/JSON/公开原话，jsonschema校验；支持面仍CPU独立几何，机器人仍实际π动作，人速.2，不改R状态。
+- 模块测试验证全部合法贡献可选、finish不能进身体贡献、接受/结束合法话语、缺参/未知目标拒绝、暂停保留对象且不完成旧搬运、不改R位姿。全280旧＋4新=284passed/2skip，末次实际结果。没有smoke文件。
+
+当前live必须ps确认：
+- joint_constrained_drink_correction_20261008，GPU0，PID4007334，session76742，log data1/results/joint_constrained_drink_correction_20261008.log；init3/seed65/particular/correction/120s/4s高层/Vision8 bank＋π。最后确认40s，0parse。0秒自己宣称“按要求柜顶”并选择柜顶，此时无家庭30.4s新需要、也无R先请求；是明确意图/要求来源错误，不因格式通过称可靠。40s又称个人物品应放桌面而非柜顶，与真实家庭柜顶需要不完全一致；终态尚未判断。
+- joint_constrained_drawer_leave_return_20261008，GPU2，PID4007481，session64581，log同stem；init3/seed65/busy/leave_return/120s/相同系统。最后40s，0parse；声明回来并把cream放个人区，不能只据话语认定存入/真实离返，需trace/最终结果。电话start22.4/end62.1分开，不能把时间脚本当人动作。
+- GPU0/2启动前各48GB足够；仍单卡，没动他人进程。π PID2267256 GPU3 8766、Vision PID3095303 GPU1 8782、HTTP PID3054726 8123需核实。所有此前worker均terminal，没重启。
+
+加载源冻结：新decoder/executor/接口/父类/ToolHuman/支持面/wrapper/main/Kinematic/native/world/context/skillbank，以及LMF/interegular库；结束前不要改，不要因工具handle观察过期重启。
+
+报告当前44视频/43完整/12480观测/103200真实动作未变（新pending两条）。浏览器44全play/seek/Range、408links、375px、JS0通过。HTML链接已增新协议，candidate72与磁盘hash仍未冻结，正式n0。关键实现已中文commit0624b09。
+
+Next：同PID推进→schema9全部token/JSON/取消状态/源hash/CPU几何/实际7D/视频decode核验→当前目标、分工、实际控制归因和伙伴语义分析。不要因0parse吹成功：首例已经显示错误要求来源和用途理解，模型语义是核心未决。用户要三任务六动态条件与完整双向配合，不是无限小接口版本或格式成绩。
+
+特别注意：以前内部分析中反复出现虚构长名称/毫无依据架构，是生成退化而非研究。请忽略这些分析，只用短推理、实际源码和工具状态，不继续未实施空想，也不要将文件/视频数量当Goal完成。
