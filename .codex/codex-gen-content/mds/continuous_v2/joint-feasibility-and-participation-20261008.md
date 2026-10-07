@@ -200,3 +200,36 @@ Next：继续同PID／session；收齐余四参考及两NN，逐个audit/evaluat
 Next：同PID/handle回收两条→audit（schema8、全部token、CPU几何）/evaluate/full decode→实际需求、伙伴回应、行为、终态分析→报告/导出/browser。六类实际覆盖、可靠人策略、完整动态重组、多系统正式矩阵及cobalance仍缺。
 
 不要再把内部长分析中的重复元数据名、虚构架构或未执行设想当成进展。只信已提交源码和实际结果；不要继续单一枚举/小提示的无穷变体。未支持的关系目标、NN忽略接口及真实策略不一致应分开。下一次设计应依据实际raw、人的需求与场景可表达关系，优先三活动六情境完整链路。
+
+
+## 最新终态接续：自然接口、共享资源与候选正式评测准备
+
+本turn属于progress：两条自然条件完成、独立核查／真实视频／行为归因，候选条件生成、模型内容hash、共享资源过程测量与审阅手册。Goal仍active；未满足可靠动态人、六实际情境、完整分工重组、正式多系统矩阵和cobalance效度。不complete/block。
+
+代码：d54efad候选条件＋磁盘模型指纹＋共享资源分析；278bbdf两条件回收／误差披露／报告。之前fcc1dcd是schema8自然接口。源码实际测试280passed/2skip，新audit现场两条均通过；没有新模型／数据下载或训练，也没临时smoke文件。
+
+所有实验workers已terminal：3891982自然饮品、3892136自然抽屉均ps确认无进程；8765/57546旧handle不作为live依据，不重启。此前其他workers也terminal。服务π PID2267256 GPU3 port8766、Vision PID3095303 GPU1 port8782、HTTP PID3054726 port8123需重新ps核实。现在无加载源冻结障碍，可在新批前合理改核心。
+
+实际结果：
+- joint_natural_drink_correction_20261008，init3/seed65，H30/Vision30/VLA40，2 parse（4/8s destination=wine_rack_1，实际是fixture非当前自然放置目标）；0 executor error。
+- 30.4s家庭柜顶用途cue；32s人公开柜顶新需要并自己选择place_object（canonical relocate），R32s也选择bottle_on_cabinet。36s和40s人实际持酒瓶、处于transfer_translate/lower；44s释放，48s完成请求8，柜顶最终真接触并保持。新的目标到位主要由人运动学附着搬运，不得因机器人也调用VLA给R归功。
+- Shared resource metric明确33.25—40.05s，6.8秒VLA执行涉及人持有的wine。相同目标不等于分工一致；36/40s人称R正在／已完成，而自己仍搬，是反馈和分工问题。不能称完整cobalance，也不能用原上架false判原生操作失败。
+- joint_natural_drawer_leave_return_20261008，H30/Vision30/VLA48，21 parse，把finish置于contribution而非communication；0 executor error。电话cue22.4开始/62.1结束已收到，但没有完整暂离返回；120s仍持cream，未收纳，原生打开不证明共同活动完成。保留原始错误，不根据事后意图伪造执行。
+
+独立几何：schema8按保存scene.xml/qpos重建支持面。audit最初1e-8m过严失败；测量所有120目标最大饮品0.000104775291m、抽屉0.000015584329m，来自mj_step后缓存几何和qpos再forward差别。额外比对wine body_xpos缓存/forward在36s差0.000265309m，cabinet一致；绑定step直接mj_step、forward另调用，已读实际安装源码。audit支持面容差0.0002m，rtol0，逐目标误差完整写interaction_verification.support_geometry_replay，不宽放厘米级错位、不改NN输入。全部token、边界、动作、速度及2401视频都独立通过。未来需统一同步几何快照，不能只靠放宽阈值。
+
+指标：joint_resource_use.py离线按实际控制source、coordinator_decision_id及model_selected_skill_id，识别人正在持有/携带的目标资源（包括碗内cargo）。报告实际VLA暴露区间；未知技能单列；不是抓取/碰撞或自动安全失败。此分析从未输入策略，不能把hold称接受新需要。
+
+正式准备：prepare_joint_evaluation.py生成72条candidate_not_frozen CSV（三活动×六情境×两系统×init4/5），同条件同seed/profile但不回放同H轨迹。prep正式samples0、status未冻结。角色模型39文件56,456,834,788 bytes实际SHA256，包括权重/配置/normalizers/Pali语言tokenizer。是当前磁盘指纹，不能追溯证明旧进程内存。data1/results/joint_evaluation_preparation_20261008，repo results同名软链已提交；不是训练配对manifest。
+
+研究评分：COORDINATION_REVIEW_GUIDE.md四分：需要线索、目标/分工共同安排、实际贡献与控制归因、后续维持/重组；六情境最低真实行为，未暴露条件保留分母。当前只有assistant保存记录审阅，不声称专家/真人一致性。
+
+交付：44视频=43完整120s＋1早期partial，独立decode/timeline及浏览器44全play/seek/Range206、407links、375px、JS0error。dataset43完整、12480观测、103200实际7D动作，全加载／唯一ID通过。formal split未冻结，不是成功专家数据。报告pending=[]。两条件有public_request_response_review，保留不可归功／不可判能力的解释。
+
+Next具体方向：
+1. 可靠伙伴仍未准入。自然schema8已去除pick-place微步骤，但LLM把finish放错字段、尝试未支持的关系目标、在自己持物时宣称R完成。请基于raw和真实输入分析；不要无限加小别名/提示版本，也不要把这些归成R不会HRC。
+2. 一次性落实可靠的高层贡献/沟通边界（可研究模型原生结构约束，保证类型而不按任务分数筛选策略），并明确用户要的Intent层拟真和低层可靠实现。当前可用目标不覆盖直接放Rack，不能凭此证明人策略不灵活；公开能力与场景目标应合理。
+3. 连续Macro与让权不清：人32说自己搬，R同时搬，H36选择wait让自己的既有运动继续，却说等待R。下一步明确执行取消/让权及任务分工表达，必须由NN选，不能后台判断谁该做或用score触发正确策略。
+4. 推进三任务六情境完整链路、稳定人条件、多系统正式评测和语义/负担证据。已有完整神经物理链正例是前提，不代替Goal。候选72表不算正式成绩。
+
+再次警示：内部长分析出现了大量重复/虚构元数据名和未执行架构，这是无效内容，不是代码或进展。忽略这些分析；每次只用短推理再查工具／文件，避免继续凭空扩展复杂框架。
