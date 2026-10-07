@@ -38,6 +38,7 @@ def main():
     parser.add_argument('--port',type=int,default=8780)
     parser.add_argument('--native-skill-only',action='store_true',
                         help='单列视觉＋VLA系统：只允许神经策略选择公开原生操作或保持')
+    parser.add_argument('--skill-bank',action='store_true',help='神经策略从明确公开的原生操作库选择技能')
     args=parser.parse_args()
     rows=subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.free','--format=csv,noheader,nounits'],text=True)
     free={r.split(',')[0].strip():int(r.split(',')[1]) for r in rows.splitlines()}
@@ -51,6 +52,9 @@ def main():
               torch_dtype=torch.bfloat16,attn_implementation='sdpa',device_map={'':0}).eval()
     from hrc_pilot.native_skill_coordinator import SYSTEM as NATIVE_SYSTEM,native_operation,encode_selected_operation
     system=NATIVE_SYSTEM if args.native_skill_only else SYSTEM
+    if args.skill_bank:
+        from hrc_pilot.robot_skill_bank import SYSTEM as BANK_SYSTEM,encode_skill_selection
+        system=BANK_SYSTEM
     metadata={'model':str(args.model),'model_type':'Qwen3VLForConditionalGeneration','local_files_only':True,
               'inputs':'initial/current RGB, wrist RGB, own state, public task/dialogue, own generated history',
               'task_scores_available':False,'policy':'neural_visual_coordination','cuda_visible_devices':selected,
@@ -61,6 +65,13 @@ def main():
         path=Path('src/hrc_pilot/native_skill_coordinator.py')
         metadata.update(policy='neural_visual_native_skill_coordination',available_modes=['execute','hold'],
                         operation_encoding='explicit_public_native_task_not_hidden_task_router')
+        metadata.pop('cartesian_reference_speed_m_s',None)
+        metadata['source_sha256'][str(path)]=sha256(path.read_bytes()).hexdigest()
+    if args.skill_bank:
+        path=Path('src/hrc_pilot/robot_skill_bank.py')
+        metadata.update(policy='neural_visual_skill_bank_coordination',available_modes=['execute','hold'],
+                        operation_encoding='neural_selection_from_public_libero_goal_bank')
+        metadata.pop('cartesian_reference_speed_m_s',None)
         metadata['source_sha256'][str(path)]=sha256(path.read_bytes()).hexdigest()
     print('Qwen3-VL视觉协调器已离线载入',flush=True)
 
@@ -79,10 +90,11 @@ def main():
         def do_POST(self):
             if self.path!='/infer':self.send_error(404);return
             request=json.loads(self.rfile.read(int(self.headers['Content-Length'])))
-            if set(request)!=PUBLIC_KEYS:self.send_error(400,'Only public fields allowed');return
+            expected=PUBLIC_KEYS|{'available_vla_operations'} if args.skill_bank else PUBLIC_KEYS
+            if set(request)!=expected:self.send_error(400,'Only public fields allowed');return
             images=[decode_image(request['images'][name]) for name in ['initial','current','wrist']]
             visible={key:value for key,value in request.items() if key!='images'}
-            if args.native_skill_only:
+            if args.native_skill_only and not args.skill_bank:
                 visible['available_vla_operation']=native_operation(request['robot_task'])
             text='根据公开信息和真实画面更新当前协作计划：\n'+json.dumps(visible,ensure_ascii=False)
             messages=[{'role':'system','content':system},{'role':'user','content':[
@@ -94,7 +106,9 @@ def main():
             raw=processor.batch_decode(generated[:,inputs['input_ids'].shape[1]:],skip_special_tokens=True)[0]
             decision,error=validate_decision(raw)
             adapter={}
-            if args.native_skill_only:
+            if args.skill_bank:
+                decision,error,adapter=encode_skill_selection(raw,request['available_vla_operations'])
+            elif args.native_skill_only:
                 decision,error,adapter=encode_selected_operation(raw,visible['available_vla_operation'])
             self.reply({'raw_output':raw,'decision':decision,'parse_error':error,
                         'latency_s':time.perf_counter()-started,'public_input':visible,

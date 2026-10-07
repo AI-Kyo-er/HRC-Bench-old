@@ -22,35 +22,46 @@ SYSTEM=(
 
 
 class SymbolicRobotCoordinator:
-    def __init__(self,human_provider,generator=None):
+    def __init__(self,human_provider,generator=None,skill_bank=False):
         self.provider=human_provider;self.generator=generator;self.decisions=[]
+        self.skill_bank=skill_bank
+        if skill_bank:
+            from .robot_skill_bank import SYSTEM as BANK_SYSTEM
+            self.system_prompt=BANK_SYSTEM
+        else:self.system_prompt=SYSTEM
         self.metadata={'policy':'qwen3_symbolic_coordination_plus_vla','perception':'ideal_observable_geometry',
             'shared_frozen_model_weights_with_human':True,'shared_private_memory_with_human':False,
             'task_scores_available':False,'model':str(human_provider.model_path),
             'controls':['execute_vla','hold'],'interpretation':'独立策略系统，不等同裸VLA或纯视觉端到端能力。'}
+        if skill_bank:self.metadata.update(policy='qwen3_symbolic_skill_bank_plus_vla',skill_interface='public_libero_goal_bank')
 
     def infer(self,request):
-        if set(request)!=PUBLIC_FIELDS:raise ValueError('协调策略只接受明确公开的字段')
+        expected=PUBLIC_FIELDS|{'available_vla_operations'} if self.skill_bank else PUBLIC_FIELDS
+        if set(request)!=expected:raise ValueError('协调策略只接受明确公开的字段')
         prompt=json.dumps(request,ensure_ascii=False,separators=(',',':'))
         started=time.perf_counter()
-        if self.generator:raw=self.generator(SYSTEM,prompt)
+        if self.generator:raw=self.generator(self.system_prompt,prompt)
         else:
             import torch
             tokenizer=self.provider._tokenizer;model=self.provider._model
-            encoded=tokenizer.apply_chat_template([{'role':'system','content':SYSTEM},{'role':'user','content':prompt}],
+            encoded=tokenizer.apply_chat_template([{'role':'system','content':self.system_prompt},{'role':'user','content':prompt}],
                 tokenize=True,add_generation_prompt=True,enable_thinking=False,return_tensors='pt').to(model.device)
             with torch.inference_mode():
                 output=model.generate(input_ids=encoded,attention_mask=torch.ones_like(encoded),max_new_tokens=256,
                     do_sample=False,pad_token_id=tokenizer.eos_token_id)
             raw=tokenizer.decode(output[0,encoded.shape[-1]:],skip_special_tokens=True)
         decision,error=validate_decision(raw)
+        adapter={}
+        if self.skill_bank:
+            from .robot_skill_bank import encode_skill_selection
+            decision,error,adapter=encode_skill_selection(raw,request['available_vla_operations'])
         if decision['mode']=='move_ee':
             decision={'mode':'hold','instruction':'','message':'','reason':'本策略没有直接末端运动工具。',
                       'memory_note':'','current_goal':'','plan':[]};error='unsupported_direct_motion'
         record={'public_input':request,'raw_output':raw,'decision':decision,'parse_error':error,
-            'latency_s':time.perf_counter()-started,'system_prompt':SYSTEM,
-            'neural_inferences':1,'source':'actual_qwen3_symbolic_coordinator'}
-        if decision['mode']=='execute' and error is None:
+            'latency_s':time.perf_counter()-started,'system_prompt':self.system_prompt,
+            'neural_inferences':1,'source':'actual_qwen3_symbolic_coordinator',**adapter}
+        if not self.skill_bank and decision['mode']=='execute' and error is None:
             record['model_selected_operation']='available_vla_operation'
             record['generated_instruction']=decision['instruction']
             decision['instruction']=request['available_vla_operation']

@@ -77,6 +77,26 @@ def audit(root):
                 np.testing.assert_allclose(xyz,actual['objects'][name])
             assert 'private_context' not in request['observed_world']
             assert 'human_intention' not in request['observed_world']
+        if p['robot_system']=='visual_coordinator_plus_vla':
+            current=next(c for c in calls if c['step']==round(plan['time_s']*20))
+            assert plan['image_sha256']=={'initial':calls[0]['exterior_rgb_sha256'],
+                'current':current['exterior_rgb_sha256'],'wrist':current['wrist_rgb_sha256']}
+            np.testing.assert_allclose(request['state'],current['state'])
+            if p.get('coordinator_metadata',{}).get('policy')=='neural_visual_native_skill_coordination':
+                from hrc_pilot.native_skill_coordinator import native_operation,encode_selected_operation
+                operation=native_operation(request['robot_task'])
+                assert request['available_vla_operation']==operation==saved_task['native_robot_task']
+                decision,error,adapter=encode_selected_operation(plan['raw_output'],operation)
+                assert decision==plan['decision'] and error==plan['parse_error']
+                assert adapter['generated_instruction']==plan['generated_instruction']
+                assert adapter['model_selected_operation']==plan['model_selected_operation']
+        if p.get('robot_skill_bank'):
+            from hrc_pilot.robot_skill_bank import SKILLS,encode_skill_selection
+            assert request['available_vla_operations']==SKILLS
+            decision,error,adapter=encode_skill_selection(plan['raw_output'],request['available_vla_operations'])
+            assert decision==plan['decision'] and error==plan['parse_error']
+            assert adapter['model_selected_skill_id']==plan['model_selected_skill_id']
+            assert adapter['generated_instruction']==plan['generated_instruction']
         assert all(any(m['speaker']==message['speaker'] and m['kind']==message['kind'] and m['text']==message['text']
                        and m['time_s']<=plan['time_s'] for m in dialogue) for message in request['dialogue'])
     received=0
@@ -95,6 +115,8 @@ def audit(root):
                       base+'\nActual public conversation:\n'+spoken)
             assert c['prompt']==expected
             received+=sum(m['speaker']=='human' for m in visible[-12:])
+        if c['action_source']=='actual_vla_coordinator_instruction':
+            assert c['prompt']==plans[c['coordinator_decision_id']]['decision']['instruction']
         if 'language_input_evidence' in c:
             evidence=c['language_input_evidence']
             assert not evidence['truncated'] and evidence['token_count']<=evidence['token_limit']

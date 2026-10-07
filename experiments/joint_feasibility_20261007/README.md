@@ -2,6 +2,8 @@
 
 [真实 Sim 视频统一入口](index.html) · [关键行为分析](BEHAVIOR_REVIEW.md) · [参考协议](PROTOCOL.md) · [理想感知系统设置](SYMBOLIC_PROTOCOL.md) · [六类情境与证据门槛](SITUATIONS.md) · [整体研究设计](../dynamic_joint_activity_20261007/DESIGN.md)。
 
+[参与契约修复协议](CONTRACT_PROTOCOL_20261008.md) · [第二视觉系统协议](VISUAL_SYSTEM_PROTOCOL_20261008.md) · [可选技能与具体情境协议](SKILL_BANK_PROTOCOL_20261008.md) · [正式评测计划与当前准入状态](EVALUATION_PLAN.md)。当前19段视频均通过独立解码／时间轴核查，含18条完整120秒轨迹和1条部分崩溃诊断。此前18段通过浏览器播放检查，新增视觉系统视频继续执行同样核查。248项有效回归通过、2项跳过；测试不证明策略效度。
+
 目的：检验三个具有跨主体贡献依赖的日常活动是否可执行，以及在线生成的人与真实机器人系统能否建立、维持和调整活动。此批是开发及可执行性实验，尚无冻结的正式统计评测。
 
 人的策略为 Qwen3-14B，无抓放 LoRA；策略与执行分离，连续运动学持物约束只实现其所选贡献。机器人使用 π0.5 / LIBERO 原生 MuJoCo 场景及 7D OSC，不瞬移或吸附机器人。这里的视频是实际原生仿真，不能称为 Genesis 视频。直接 VLA、视觉协调＋VLA、理想几何协调＋VLA分别记录；共享冻结权重不共享人私有上下文。
@@ -27,6 +29,7 @@ PYTHONPATH=src .venv-libero-native/bin/python scripts/audit_joint_activity.py --
 PYTHONPATH=src .venv-libero-native/bin/python scripts/evaluate_joint_process.py --input-dir results/continuous_v2/joint_native_skill_drawer_access_change_use_20261007
 PYTHONPATH=src .venv-libero-native/bin/python scripts/verify_genesis_videos.py --input-dir results/continuous_v2/joint_native_skill_drawer_access_change_use_20261007 --require-timeline
 PYTHONPATH=src .venv-libero-native/bin/python scripts/build_joint_progress_report.py
+PYTHONPATH=src .venv-libero-native/bin/python scripts/export_joint_development_dataset.py
 python scripts/serve_reports.py --port 8123
 ```
 
@@ -46,3 +49,7 @@ python scripts/serve_reports.py --port 8123
 | 视频、数据、统一报告 | 本轮已增加可执行参考、开发及失败视频统一入口；正式研究交付仍需继续 |
 
 现有数据按 observation 同 stem 加载，动作标签来自实际执行的控制，不用未执行尾部充当训练目标。失败数据不标为专家成功。人物隐私、环境真值和评分不能直接注入被测机器人。
+
+[开发行为数据](../../datasets/dynamic_joint_activity_dev_20261008/README.md)已经全量加载核查：18条完整轨迹、6480组观测、43200步动作。相同stem在不同run下有独立sample_id，目录软链避免重复大文件，不创建配对manifest。后续新增轨迹后的实际数量以dataset_verification.json为准。
+
+新开发批针对点心临时饮品需要、饮品具体用途纠正、抽屉机器人请求展开；私有事实指明实际物品，双方公开了解可选择的原生操作库。高层NN选择skill_id，真实VLA执行；库内操作的实际成功仍需验证，不能将原始任务／保持两选项的局限当广义HRC结论。

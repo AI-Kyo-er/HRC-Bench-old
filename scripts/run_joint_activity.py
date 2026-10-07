@@ -27,6 +27,7 @@ from hrc_pilot.native_video_frame import compose_runtime_views
 from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.protocol import Message
 from hrc_pilot.joint_world import update_joint_regions,observable_world,actual_robot_execution
+from hrc_pilot.activity_private_context import specialize_private_context
 from hrc_pilot.joint_reference import JointReference
 from hrc_pilot.joint_situations import SITUATIONS
 from hrc_pilot.symbolic_robot_coordinator import SymbolicRobotCoordinator
@@ -87,7 +88,11 @@ def main():
     parser.add_argument('--robot-replay',type=Path,help='仅参考：回放已有成功神经轨迹的真实7D动作，当前NN调用0')
     parser.add_argument('--follow-reference-poses',action='store_true')
     parser.add_argument('--symbolic-coordinator',action='store_true')
+    parser.add_argument('--robot-skill-bank',action='store_true',
+                        help='协调NN从公开原生技能库选择操作，不由后台按活动阶段选动作')
     parser.add_argument('--situation',choices=list(SITUATIONS))
+    parser.add_argument('--activity-specific-context',action='store_true',
+                        help='把私有外部生活事实绑定到活动与具体物品，不生成双方下一动作')
     parser.add_argument('--human-decision-steps',type=int,default=40)
     parser.add_argument('--coordinator-decision-steps',type=int,default=40)
     parser.add_argument('--human-model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
@@ -98,6 +103,8 @@ def main():
     if args.follow_reference_poses and not args.robot_replay:parser.error('位姿参考要求显式参考轨迹')
     if args.symbolic_coordinator and (args.human_source!='neural' or args.coordinator_port):
         parser.error('理想感知神经协调器要求神经人和明确独立系统，不能混合其他协调器')
+    if args.robot_skill_bank and not (args.symbolic_coordinator or args.coordinator_port):
+        parser.error('公开技能库要求明确的神经协调系统')
     if args.output_dir.exists():parser.error('正式运行必须使用新目录，不能覆盖已有证据')
     entries={r.split(',')[0].strip():r.split(',') for r in subprocess.check_output(
         ['nvidia-smi','--query-gpu=index,memory.free,pci.bus_id','--format=csv,noheader,nounits'],text=True).splitlines()}
@@ -123,12 +130,17 @@ def main():
            JointHumanPolicy(activity,model_path=args.human_model,profile=args.profile,seed=args.seed,reflection=args.human_reflection))
     if args.human_source=='neural':human.prepare()
     client=WebsocketClientPolicy('127.0.0.1',args.port)
-    coordinator=CoordinatorClient(args.coordinator_port) if args.coordinator_port else None
-    if args.symbolic_coordinator:coordinator=SymbolicRobotCoordinator(human)
+    if args.robot_skill_bank:
+        from hrc_pilot.robot_skill_bank import SKILLS,SkillBankCoordinatorClient
+        coordinator=SkillBankCoordinatorClient(args.coordinator_port) if args.coordinator_port else None
+    else:coordinator=CoordinatorClient(args.coordinator_port) if args.coordinator_port else None
+    if args.symbolic_coordinator:coordinator=SymbolicRobotCoordinator(human,skill_bank=args.robot_skill_bank)
     paths=[Path(__file__),Path('src/hrc_pilot/joint_activity.py'),Path('src/hrc_pilot/joint_human_policy.py'),
            Path('src/hrc_pilot/kinematic_human.py'),Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/joint_world.py'),Path('src/hrc_pilot/joint_reference.py'),
            *Path('src/hrc_pilot').glob('native*.py'),Path('src/hrc_pilot/robot_coordination.py'),
-           Path('src/hrc_pilot/joint_situations.py'),Path('src/hrc_pilot/symbolic_robot_coordinator.py'),Path('src/hrc_pilot/trajectory_reference.py')]
+           Path('src/hrc_pilot/joint_situations.py'),Path('src/hrc_pilot/activity_private_context.py'),
+           Path('src/hrc_pilot/symbolic_robot_coordinator.py'),Path('src/hrc_pilot/robot_skill_bank.py'),
+           Path('src/hrc_pilot/trajectory_reference.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     args.output_dir.mkdir(parents=True);ep=args.output_dir/'episode';ep.mkdir();journal=NativeRunJournal(ep)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
@@ -137,9 +149,15 @@ def main():
     writer=imageio.get_writer(ep/'demo.mp4',fps=20)
     trace=[];controls=[];calls=[];plans=[];timeline=[];events=[];action_plan=deque()
     dialogue=[{'time_s':0.,'speaker':'environment','kind':'activity','text':activity.public_description}]
+    if args.robot_skill_bank:
+        dialogue.append({'time_s':0.,'speaker':'environment','kind':'robot_skill_interface',
+                         'text':'Public robot operation inputs (not guaranteed skills): '+json.dumps(SKILLS)})
     private_context=[];initial_image=None;last_plan=None;held_gripper=None;cartesian_target=None;reference_clearance_target=None
     replay_actions=None;replay_cursor=0;follower=None
     situation=SITUATIONS[args.situation].sample(args.seed) if args.situation else None
+    if args.activity_specific_context:
+        if situation is None:raise ValueError('活动具体情境需要指定situation')
+        situation=specialize_private_context(situation,args.activity)
     cue_cursor=0
     if args.robot_replay:
         replay_actions=np.asarray([json.loads(l)['action'] for l in (args.robot_replay/'policy_io.jsonl').read_text().splitlines() if l.strip()])
@@ -212,6 +230,7 @@ def main():
                     'action_interface':{'actions':['pick','place','relocate','point','move_hand','away','return','wait','message'],
                         'hand_workspace_xyz_min':[-.7,-.4,.95],'hand_workspace_xyz_max':[.7,.9,1.5],
                         'place_destination_names':list(regions),'held_object':actor.held}}
+                if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
                 d=(human.decide(scene,bool(placement.records and goal_success(placement.records[-1])))
                    if args.human_source=='reference' else human.decide(scene))
                 actor.accept_choice(d['choice'],d['decision_id'])
@@ -236,6 +255,7 @@ def main():
                         state=request['observation/state'],images={'initial':initial_image,'current':request['observation/image'],'wrist':request['observation/wrist_image']},
                         history=[p['decision'] for p in plans],current_goal=last_plan['decision']['current_goal'] if last_plan else '',
                         self_execution=actual_robot_execution(r,calls,controls))
+                    if args.robot_skill_bank:public_request['available_vla_operations']=dict(SKILLS)
                     if args.symbolic_coordinator:
                         public_request.pop('images')
                         public_request['available_vla_operation']=task.language
@@ -340,7 +360,9 @@ def main():
         'reference_pose_follower':args.follow_reference_poses,
         'robot_replay_source_sha256':{n:sha256((args.robot_replay/n).read_bytes()).hexdigest() for n in ['scene.xml','trace.jsonl','policy_io.jsonl']} if args.robot_replay else None,
         'coordinator_metadata':coordinator.metadata if coordinator else None,
-        'situation':args.situation,'human_decision_steps':args.human_decision_steps,
+        'situation':args.situation,'activity_specific_context':args.activity_specific_context,
+        'robot_skill_bank':args.robot_skill_bank,
+        'human_decision_steps':args.human_decision_steps,
         'coordinator_decision_steps':args.coordinator_decision_steps,
         'private_intent_in_robot_input':False,'background_task_action_router':False,
         'context_step':args.context_step,'steps':args.steps,'init_state_id':args.init_state_id,'seed':args.seed,

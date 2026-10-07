@@ -21,9 +21,10 @@ class JointActivity:
 
 ACTIVITIES={a.key:a for a in [
     JointActivity('snack_service','food_into_bowl','共同准备点心',
-        'Prepare a snack together. The human provides akita_black_bowl_1 by putting it on serving_ready '
-        'and releasing it. That means it is available to the robot, not merely held by the human. '
-        'the robot puts cream_cheese_1 into that bowl. The human receives or serves the prepared snack. '
+        'Prepare a snack together. The human can provide akita_black_bowl_1 at serving_ready, '
+        'and can receive or serve the prepared snack. The robot can put cream_cheese_1 into that bowl. '
+        'These are possible contributions, not already completed actions or accepted commitments. '
+        'A container is available only when placed and released, not merely held by the human. '
         'Agree on timing and placement using visible actions and public speech. '
         'Do not fill a container while the human is moving it. Current requests can revise the arrangement.',
         ('human prepares serving container -> robot fills it',
@@ -32,10 +33,11 @@ ACTIVITIES={a.key:a for a in [
         '你还可能要接电话；无需为了展示变化而改变意图。',
         '朋友发来消息：临时有事，点心需要打包带走而不是在桌边吃。你可依据实际进度考虑怎么处理。'),
     JointActivity('drink_storage','bottle_on_rack','共同整理饮品',
-        'Organize the drinks together. The human decides whether to keep or store wine_bottle_1. '
-        'If storing, the human makes it available at drink_staging and releases it. '
-        'The robot places the available bottle on the wooden rack. '
-        'The human checks the arrangement and clears personal belongings. Respect publicly changed needs '
+        'Organize the drinks together. The human can decide whether to keep or store wine_bottle_1, '
+        'make it available at drink_staging, check the arrangement and clear personal belongings. '
+        'The robot can place an available bottle on the wooden rack. '
+        'These are possible contributions, not already completed actions or accepted commitments. '
+        'An available bottle is released, not held by the human. Respect publicly changed needs '
         'and do not manipulate an object the partner is holding.',
         ('human communicates keep/store choice and makes bottle available -> robot stores',
          'robot releases stored bottle -> human checks arrangement or requests a correction'),
@@ -43,9 +45,10 @@ ACTIVITIES={a.key:a for a in [
         '不要假设机器人已经理解你没说的话。',
         '收到来客消息：客人提前到了，可能马上需要桌边的饮品。根据目前安排决定是否调整。'),
     JointActivity('drawer_access','drawer_access','共同清理取用区',
-        'Clear and organize the drawer area together. The human prepares access by moving plate_1 '
-        'tabletop items out of the way. The robot opens the middle drawer. The human then stores '
-        'cream_cheese_1 in the accessible drawer or publicly revises its intended use. '
+        'Clear and organize the drawer area together. The human can move plate_1 out of the way '
+        'and store cream_cheese_1 when the drawer is accessible. The robot can open the middle drawer. '
+        'These are possible contributions, not already completed actions or accepted commitments. '
+        'Establish the arrangement through public speech and visible actions; uses and contributions can change. '
         'Coordinate access and wait while the partner is using the same area.',
         ('human clears access -> robot opens middle drawer',
          'robot makes drawer accessible -> human stores or retrieves personal item'),

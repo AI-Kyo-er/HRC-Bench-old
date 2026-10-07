@@ -161,6 +161,58 @@
       "formal_benchmark_sample": false
     },
     {
+      "run": "joint_presence_contract_snack_leave_return_20261008",
+      "label": "点心：参与契约修复、新初始化",
+      "kind": "neural",
+      "activity": "snack_service",
+      "duration_s": 120.0,
+      "human_neural_calls": 60,
+      "actual_vla_calls": 176,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [
+        {
+          "start_s": 29.2,
+          "end_s": 32.95
+        }
+      ],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_dynamic_drink_correction_20261008",
+      "label": "饮品：纠正情境、新初始化",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 60,
+      "actual_vla_calls": 232,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_visual_native_snack_leave_return_20261008",
+      "label": "点心：视觉原生技能系统",
+      "kind": "neural",
+      "activity": "snack_service",
+      "duration_s": 120.0,
+      "human_neural_calls": 60,
+      "actual_vla_calls": 240,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [
+        {
+          "start_s": 29.2,
+          "end_s": 32.95
+        }
+      ],
+      "formal_benchmark_sample": false
+    },
+    {
       "run": "joint_feasibility_snack_service_20261007",
       "label": "点心：载荷接口崩溃",
       "kind": "diagnostic",
@@ -232,8 +284,8 @@
     }
   ],
   "pending": [
-    "点心：参与契约修复、新初始化：尚无终态结果",
-    "饮品：纠正情境、新初始化：尚无终态结果",
-    "点心：视觉原生技能系统：尚无终态结果"
+    "点心：临时饮品需要、可选技能库：尚无终态结果",
+    "饮品：具体用途纠正、可选技能库：尚无终态结果",
+    "抽屉：机器人请求、视觉技能库：尚无终态结果"
   ]
 }
