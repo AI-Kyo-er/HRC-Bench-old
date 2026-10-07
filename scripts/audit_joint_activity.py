@@ -47,6 +47,11 @@ def audit(root):
         if d.get('human_observation_encoding')=='intent_semantic_facts_v1':
             from hrc_pilot.intent_observation import intent_observation
             assert source['scene']==intent_observation(scene)
+        if d.get('human_contribution_contract')=='explicit_parameter_domains_v1':
+            from hrc_pilot.human_contribution_contract import contribution_interface
+            assert source['human_contribution_interface']==contribution_interface(scene)
+            if d['reflection_enabled']:
+                assert d['reflection_input']['human_contribution_interface']==contribution_interface(scene)
         if p.get('human_source','neural')=='neural':
             assert source['activity']==saved_activity
             assert 'private_background' not in source['activity']
@@ -69,7 +74,11 @@ def audit(root):
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            if d.get('choice_schema_version')==3:
+            if d.get('choice_schema_version')==4:
+                from hrc_pilot.human_contribution_contract import parse_contribution
+                choice,normalization=parse_contribution(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])
+                assert choice==d['choice'] and normalization==d['contribution_normalization']
+            elif d.get('choice_schema_version')==3:
                 from hrc_pilot.semantic_joint_human import parse_semantic_choice
                 assert parse_semantic_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])==d['choice']
             else:
