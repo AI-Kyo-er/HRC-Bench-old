@@ -1,0 +1,276 @@
+{
+  "research_goal_achieved": false,
+  "episodes": [
+    {
+      "scene": "qualification",
+      "motion_qualified": true,
+      "actual_vla_calls": 0,
+      "human_inferences": 30,
+      "robot_goal_success": null,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 0,
+      "joint_goal_time_s": null,
+      "human_commands": {
+        "grasp": 13,
+        "place": 11,
+        "observe": 6
+      },
+      "human_goal_action_scope": {
+        "current_personal_target_object": 24,
+        "no_object_manipulation_selected": 6
+      },
+      "cached_place_restart_witness_count": 2,
+      "selected_object_counts": {
+        "akita_black_bowl_1": 24
+      },
+      "robot_goal_time_s": null,
+      "parse_errors": 0,
+      "rejected_commands": 6,
+      "target_intervals": [
+        {
+          "object_id": "akita_black_bowl_1",
+          "destination": "akita_black_bowl_1_personal",
+          "start_s": 0.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.4343996188282807,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": 16.4,
+          "terminal_relation_satisfied": true,
+          "human_contact_in_target_interval": true,
+          "terminal_xy_distance_m": 0.0006787012346993574,
+          "object_displacement_in_target_interval_m": 0.4337229120327821
+        },
+        {
+          "object_id": "wine_bottle_1",
+          "destination": "wine_bottle_1_personal",
+          "start_s": 0.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.6507378058372667,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": false,
+          "terminal_xy_distance_m": 0.6507378058372667,
+          "object_displacement_in_target_interval_m": 0.0
+        }
+      ]
+    },
+    {
+      "scene": "food_into_bowl",
+      "motion_qualified": true,
+      "actual_vla_calls": 120,
+      "human_inferences": 30,
+      "robot_goal_success": false,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 0,
+      "joint_goal_time_s": 0.0,
+      "human_commands": {
+        "observe": 20,
+        "grasp": 10
+      },
+      "human_goal_action_scope": {
+        "no_object_manipulation_selected": 20,
+        "current_personal_target_object": 10
+      },
+      "cached_place_restart_witness_count": 0,
+      "selected_object_counts": {
+        "akita_black_bowl_1": 10
+      },
+      "robot_goal_time_s": 0.0,
+      "parse_errors": 0,
+      "rejected_commands": 1,
+      "target_intervals": [
+        {
+          "object_id": "akita_black_bowl_1",
+          "destination": "akita_black_bowl_1_personal",
+          "start_s": 0.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.43439967154484466,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": false,
+          "terminal_xy_distance_m": 0.46567116046653356,
+          "object_displacement_in_target_interval_m": 0.13874347223793806
+        },
+        {
+          "object_id": "wine_bottle_1",
+          "destination": "near_human",
+          "start_s": 0.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.5061904766622647,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": false,
+          "terminal_xy_distance_m": 0.5061905446579554,
+          "object_displacement_in_target_interval_m": 2.5896607318639854e-07
+        }
+      ]
+    },
+    {
+      "scene": "bowl_on_stove",
+      "motion_qualified": false,
+      "actual_vla_calls": 120,
+      "human_inferences": 30,
+      "robot_goal_success": true,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 3,
+      "joint_goal_time_s": 0.0,
+      "human_commands": {
+        "grasp": 17,
+        "place": 7,
+        "observe": 6
+      },
+      "human_goal_action_scope": {
+        "current_personal_target_object": 24,
+        "no_object_manipulation_selected": 6
+      },
+      "cached_place_restart_witness_count": 0,
+      "selected_object_counts": {
+        "plate_1": 24
+      },
+      "robot_goal_time_s": 55.099999999999994,
+      "parse_errors": 0,
+      "rejected_commands": 6,
+      "target_intervals": [
+        {
+          "object_id": "plate_1",
+          "destination": "plate_1_personal",
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "initial_xy_distance_m": 0.4686496705283714,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": true,
+          "terminal_xy_distance_m": 0.46854557028679583,
+          "object_displacement_in_target_interval_m": 0.04623710950248731
+        },
+        {
+          "object_id": "cream_cheese_1",
+          "destination": "cream_cheese_1_personal",
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "initial_xy_distance_m": 0.3093119331299936,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": false,
+          "terminal_xy_distance_m": 0.30931197232872615,
+          "object_displacement_in_target_interval_m": 7.452341652651253e-08
+        },
+        {
+          "object_id": "plate_1",
+          "destination": "plate_1_personal",
+          "start_s": 8.0,
+          "end_s": 14.0,
+          "initial_xy_distance_m": 0.4685330025948186,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": true,
+          "terminal_xy_distance_m": 0.24764236109785698,
+          "object_displacement_in_target_interval_m": 0.45210166271260765
+        },
+        {
+          "object_id": "plate_1",
+          "destination": "plate_1_personal",
+          "start_s": 14.0,
+          "end_s": 56.0,
+          "initial_xy_distance_m": 0.24764236109785698,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": 26.65,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": true,
+          "terminal_xy_distance_m": 0.0019574673698342627,
+          "object_displacement_in_target_interval_m": 0.26993296141913814
+        },
+        {
+          "object_id": "cream_cheese_1",
+          "destination": "cream_cheese_1_personal",
+          "start_s": 14.0,
+          "end_s": 56.0,
+          "initial_xy_distance_m": 0.30931197232872615,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": false,
+          "terminal_xy_distance_m": 0.30931197232872615,
+          "object_displacement_in_target_interval_m": 0.0
+        },
+        {
+          "object_id": "plate_1",
+          "destination": "plate_1_personal",
+          "start_s": 56.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.001954068143760362,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": true,
+          "terminal_xy_distance_m": 0.0010629682749522102,
+          "object_displacement_in_target_interval_m": 0.08945317367877043
+        }
+      ]
+    },
+    {
+      "scene": "delivery_qualification",
+      "motion_qualified": true,
+      "actual_vla_calls": 0,
+      "human_inferences": 30,
+      "robot_goal_success": null,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 0,
+      "joint_goal_time_s": null,
+      "human_commands": {
+        "grasp": 13,
+        "place": 10,
+        "observe": 7
+      },
+      "human_goal_action_scope": {
+        "current_personal_target_object": 23,
+        "no_object_manipulation_selected": 7
+      },
+      "cached_place_restart_witness_count": 0,
+      "selected_object_counts": {
+        "akita_black_bowl_1": 23
+      },
+      "robot_goal_time_s": null,
+      "parse_errors": 0,
+      "rejected_commands": 7,
+      "target_intervals": [
+        {
+          "object_id": "akita_black_bowl_1",
+          "destination": "akita_black_bowl_1_personal",
+          "start_s": 0.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.4343996188282807,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": 16.4,
+          "terminal_relation_satisfied": true,
+          "human_contact_in_target_interval": true,
+          "terminal_xy_distance_m": 0.004403540846356283,
+          "object_displacement_in_target_interval_m": 0.430000028422975
+        },
+        {
+          "object_id": "wine_bottle_1",
+          "destination": "wine_bottle_1_personal",
+          "start_s": 0.0,
+          "end_s": 60.0,
+          "initial_xy_distance_m": 0.6507378058372667,
+          "already_in_region_when_chosen": false,
+          "first_stable_relation_s": null,
+          "terminal_relation_satisfied": false,
+          "human_contact_in_target_interval": false,
+          "terminal_xy_distance_m": 0.6507378058372667,
+          "object_displacement_in_target_interval_m": 0.0
+        }
+      ]
+    }
+  ]
+}
