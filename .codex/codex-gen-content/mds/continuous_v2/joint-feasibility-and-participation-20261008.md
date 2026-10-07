@@ -61,3 +61,24 @@ activity_private_context.py：18种活动×情境的外部事实文本绑定实�
 4. 根据实际使用技能补齐匹配初态的原生操作参考／基线。九条原生语言存在不证明执行成功，饮品此前只有轨迹反馈完成，尤其不可直接宣称协作缺陷。
 5. 继续整个Benchmark：六类实测、人策略事实一致性及实际伙伴响应、完整双向案例，冻结多系统×多场景×测试init4/5正式矩阵。EVALUATION_PLAN的72例是计划未启动，不已完成。
 6. 最终语言／公开信息／输入权限／任务长度混杂要分开，cobalance负担与语义约定尚未验证；Goal保持active。
+
+## 后续权威更新（接续时以本节为准）
+
+- 8a5f5bf补齐init2匹配参考；三条reference全部完整True，机器人均实际π0.5：点心12次／20.8s、饮品20次／27.45s、抽屉12次／17.8s，人NN=0。现在不能继续说饮品只有轨迹反馈成功。
+- a7c2db6：human-auto-buffer可选，仅兑现NN已选relocate时连续暂放原持物到其公开个人缓冲区，再取目标物。不读评分、不选新活动。物品接触机器人仍拒绝。两个永久回归验证重复请求不重启、两物连续、机器人qpos0修改。此缓冲在NN复测因抽屉没打开而未启动，不当有效协作证据。
+- 9077c65：Intent语义观测、SemanticJointHumanPolicy、独立运行脚本run_semantic_joint_activity.py，actual private_input/reflection_input为NN真正得到的紧凑事实；observation_source_scene保留原始测量供重建。没有坐标／评分偷偷注入，事实和公开伙伴说法分开。辅助message_kind未知时notice保留原值，非法动作／区域不矫正；schema3独立重建。Source SHA含适配类和独立wrapper。
+- 全量有效pytest253 passed / 2 skipped。27视频独立解码／timeline通过；27浏览器核查正在session92993（先poll）。此前25全部播放拖动Range、224链接和375px通过。
+- 数据现在26完整轨迹、8400观测、62400实际动作（按dataset_verification.json核实）。没有正式split或专家成功标注。
+- 三条技能库NN全部终态：点心detour仅33.2—36.95s离返，无饮品操作；饮品4s留用后116s保持，但R回复仍等待释放后上架，不能称接受留用或证明理解；抽屉5.6s真开，人44s后7次奶酪请求因持餐盘被拒。无真实机器人主动请求见证。
+- 新drink公私请求复核文件是public_request_response_review.json，不是agreement。记录4s原话、之后0VLA、H一直持瓶、R回复8s进入H输入；R实际保持≠接受取消，不自动完整HRC分。
+- joint_buffered_drawer_request_20261008终态120s：VLM0s执行后4s虚称opened、保持，真实门未开；28次不可进入拒绝，buffer0启动。实际input／动作／视频审计通过，但伙伴事实理解及任务完成不成立。
+- joint_semantic_drink_detour_20261008终态120s：32s人暂停以处理餐盘需求，R真实hold；76s唯一relocate酒瓶到staging，87.3s释放准备、92.45s完成；未上架、餐盘没实际搬。大量目标名wine_rack_1不是区域、message:null语法造成失败；不能算全部policy错误或机器人HRC缺口。
+- METHOD_REFERENCE_UPDATE_20261008.md重新对照HABIT与COOPERA原文，采纳／未复现项明确。暂无真人效度或新NN训练。未来需先统一高层贡献与执行器目标的契约，别继续区域命名和辅助字段错误导致假失败；不要开始72正式矩阵直到伙伴有效。
+
+当前唯一live worker（必须用PID/stream重新确认，不因handle缺失重启）：
+- joint_semantic_drawer_request_20261008，GPU2，PID3495686，session8049，最新确认23.95s（2m55s）。init2/seed63/120s，busy robot_request，人Semantic＋auto-buffer，视觉技能库NN＋π。先前GPU2被其他用户进程占用，预算检查在加载/创建结果前exit2；GPU释放后才启动，拒绝日志保留data1/results/joint_semantic_drawer_request_20261008.gpu_unavailable.log，不覆写。
+- Vision bank服务GPU1 PID3095303，端口8782；πGPU3 PID2267256，端口8766；HTTP8123 session50226，需核实。
+- 其他新worker/匹配refs均terminal，没kill外部进程。不要改当前加载的main、Semantic/intent_observation、JointHuman、KinematicHuman、native*.py、skill_bank、world、context等源，等drawer终态后再修契约。
+- Next：回收drawer→独立audit/evaluate/完整解码→builder/export/browser。按照真实行为补六覆盖和可靠人策略，再做多系统测试init4/5正式矩阵。Goal仍active，未满足七项。
+
+最终报告检查：session92993已terminal exit0，27段全部实际play/seek/Range206、242链接、375px、JS0error通过。数据26/8400/62400全量加载通过。当前drawer PID3495686仍live，最近ps为3m45s；Goal不complete。

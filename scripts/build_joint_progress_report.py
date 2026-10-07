@@ -26,6 +26,8 @@ RUNS = [
     ('joint_skill_bank_drink_correction_20261008', '饮品：具体用途纠正、可选技能库', 'neural'),
     ('joint_skill_bank_drawer_request_20261008', '抽屉：机器人请求、视觉技能库', 'neural'),
     ('joint_buffered_drawer_request_20261008', '抽屉：已选人贡献的连续暂放执行', 'neural'),
+    ('joint_semantic_drawer_request_20261008', '抽屉：人意图语义观测与执行反馈', 'neural'),
+    ('joint_semantic_drink_detour_20261008', '饮品：人意图语义观测与临时需要', 'neural'),
     ('joint_matched_reference_snack_service_init2_20261008', '点心：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drink_storage_init2_20261008', '饮品：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drawer_access_init2_20261008', '抽屉：init2匹配原生操作参考', 'reference'),
