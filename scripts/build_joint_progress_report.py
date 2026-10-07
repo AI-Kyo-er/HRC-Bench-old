@@ -31,9 +31,17 @@ RUNS = [
     ('joint_contribution_snack_change_use_20261008', '点心：人贡献参数语义与用途变化', 'neural'),
     ('joint_contribution_drink_detour_20261008', '饮品：人贡献参数语义与临时需要', 'neural'),
     ('joint_reasoning_drawer_request_20261008', '抽屉：人策略原生推理资格检查', 'neural'),
+    ('joint_reasoning_snack_join_20261008', '点心：原生推理与实际加入资格', 'neural'),
+    ('joint_reasoning_drink_correction_20261008', '饮品：原生推理与用途纠正资格', 'neural'),
     ('joint_matched_reference_snack_service_init2_20261008', '点心：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drink_storage_init2_20261008', '饮品：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drawer_access_init2_20261008', '抽屉：init2匹配原生操作参考', 'reference'),
+    ('joint_reference_snack_service_init4_20261008', '点心：init4原生操作参考', 'reference'),
+    ('joint_reference_drink_storage_init4_20261008', '饮品：init4原生操作参考', 'reference'),
+    ('joint_reference_drawer_access_init4_20261008', '抽屉：init4原生操作参考', 'reference'),
+    ('joint_reference_snack_service_init5_20261008', '点心：init5原生操作参考', 'reference'),
+    ('joint_reference_drink_storage_init5_20261008', '饮品：init5原生操作参考', 'reference'),
+    ('joint_reference_drawer_access_init5_20261008', '抽屉：init5原生操作参考', 'reference'),
     ('joint_feasibility_snack_service_20261007', '点心：载荷接口崩溃', 'diagnostic'),
     ('joint_feasibility_drink_storage_20261007', '饮品：原固定人失败', 'diagnostic'),
     ('joint_feasibility_drink_storage_handoff_20261007', '饮品：持物初态失败', 'diagnostic'),
@@ -120,7 +128,7 @@ def build(results, output):
         system=SYSTEMS.get(provenance.get('robot_system'), '失败运行未写入完整 provenance；见协议及中断日志')
         if provenance.get('robot_skill_bank'):system+='；NN从明确公开的原生操作库选择技能'
         cards.append(f'''<section class="run" data-kind="{kind}"><p class="tag">{classification} · {duration:.2f} 模拟秒</p>
-<h2>{escape(label)}</h2><p>{escape(dependency)}</p><p>{escape(system)}。人策略来源：{escape(provenance.get('human_source','见协议'))}。</p>
+<h2>{escape(label)}</h2><p>{escape(dependency)}</p><p>{escape(system)}。人策略来源：{escape(provenance.get('human_source','见协议'))}；原生推理：{provenance.get('human_thinking_enabled','未记录')}；额外反思：{provenance.get('human_reflection','未记录')}。</p>
 <video controls playsinline preload="none" src="{src}"></video><p>{escape(conclusion)}</p>
 <p>{escape(arrangement_review.get('interpretation',''))}</p>
 <p>实际人神经调用 {human_calls}；实际 VLA 调用 {vla_calls}；协调器调用 {coordinator_calls}。
@@ -141,6 +149,8 @@ def build(results, output):
 <main><header><h1>动态共同活动：可执行性与神经策略进展</h1><p>人的拟真重点是意图、参与和伙伴响应。研究对象是双方如何组织共同活动。</p></header>
 <section><h2>这批实验要回答什么</h2><p>先确认双方能够在连续场景中贡献、交接和完成活动，再检查在线人策略与机器人是否利用实际交互调整行为。参考条件只回答任务能否执行；神经条件用于暴露策略、输入和执行问题。本批版本不同，尚未形成冻结的多模型统计评测。</p>
 <p>三类活动在init2已有完整实际π0.5参考。早期init0饮品成功参考使用既有轨迹的OSC反馈跟随，当前推理为零，来源仍单列保留。神经策略的完整共同活动、六类实际动态覆盖与cobalance仍未验收。</p>
+<p><a href="TEST_INITIALIZATION_REFERENCE_PROTOCOL_20261008.md">init4／5六条操作参考协议</a>：参考抓取／放置或打开由实际π0.5完成；人调度、机器人等待及完成后的清场控制另记来源，不能称整条参考轨迹均由VLA生成。六条参考不计正式动态样本。</p>
+<p><a href="REASONING_HUMAN_PROTOCOL_20261008.md">原生推理人资格设置</a> · <a href="GROUNDED_CONTRIBUTION_PROTOCOL_20261008.md">跨活动加入／纠正与测量修复协议</a>。已结束的推理抽屉条件：首次存放后再次取出，结束仍持奶酪；84秒公开说已存好与实物不符。旧接口10次拒绝返回＋搬物，旧观测漏报抽屉底面支撑。后续批修复接口并单独记录，历史结果不倒改。</p>
 <p>人：Qwen3-14B 在线生成意图、当前贡献与公开话语，部分条件另做一次实际神经反思。执行使用连续运动学和物体附着，手速上限 0.2m/s。机器人：π0.5 在原生 MuJoCo／LIBERO 场景中输出 7 维 OSC，20Hz 执行，不吸附或改写机器人位姿。此批不是 Genesis 场景。</p>
 <p>理想感知协调器得到公开几何／接触和真实执行历史；与人共享冻结权重，输入上下文与私有记忆分开。它是额外策略系统，不能归因于裸 VLA。等待与参考控制不计为 VLA 调用。</p>
 <p><a href="PROTOCOL.md">参考与开发协议</a> · <a href="SYMBOLIC_PROTOCOL.md">理想感知协调系统边界</a> · <a href="CONTRACT_PROTOCOL_20261008.md">参与契约修复协议</a> · <a href="VISUAL_SYSTEM_PROTOCOL_20261008.md">第二视觉系统协议</a> · <a href="SKILL_BANK_PROTOCOL_20261008.md">可选技能与具体情境协议</a> · <a href="SITUATIONS.md">六类情境及证据要求</a> · <a href="BEHAVIOR_REVIEW.md">关键行为分析</a> · <a href="README.md">实际进展与复现</a> · <a href="../dynamic_joint_activity_20261007/DESIGN.md">整体设计与文献依据</a></p>
