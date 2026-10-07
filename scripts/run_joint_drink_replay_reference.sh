@@ -8,7 +8,7 @@ export LIBERO_CONFIG_PATH=/data1/sieniwgroup/sieniw/projects/HRC-Bench/cache/lib
 
 # Python
 python_command=".venv-libero-native/bin/python"
-python_file="scripts/run_joint_activity_replay_reference.py"
+python_file="scripts/run_joint_activity.py"
 command="${python_command} ${python_file}"
 
 # Feasibility reference only

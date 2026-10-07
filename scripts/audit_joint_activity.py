@@ -24,7 +24,10 @@ def audit(root):
     planner_path=ep/'robot_planner_io.jsonl'
     plans=rows(planner_path) if planner_path.exists() else []
     assert bool(plans)==(p['robot_system']=='visual_coordinator_plus_vla')
-    raw_human=rows(ep/'human_control.jsonl');contexts=rows(ep/'private_context.jsonl')
+    raw_human=rows(ep/'human_control.jsonl')
+    context_path=ep/'private_context.jsonl';contexts=rows(context_path) if context_path.exists() else []
+    expected_context=p.get('human_source','neural')=='neural' and 0<=p['context_step']<p['steps']
+    assert bool(contexts)==expected_context
     language_records=[]
     if p['robot_model_metadata'].get('language_token_limit'):
         import sentencepiece as spm
@@ -43,16 +46,25 @@ def audit(root):
         assert not {'task_success','score','future_context'}.intersection(scene)
         for obj,xyz in scene['objects_xyz'].items():np.testing.assert_allclose(xyz,actual['objects'][obj])
         np.testing.assert_allclose(scene['robot_eef_xyz'],actual['robot_ee'])
+        if 'measured_world' in scene:
+            from hrc_pilot.joint_world import observable_world
+            expected_world=observable_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'])
+            assert scene['measured_world']==expected_world
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
             assert parse_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])==d['choice']
+            if d.get('reflection_enabled'):
+                assert d['neural_inferences']==2 and d['reflection_input']['scene']==scene
+                assert d['reflection_input']['candidate_choice_to_review']==d['candidate_raw_output']
     emitted=[(d['time_s'],d['choice']['message'],d['decision_id']) for d in human if d['choice'].get('message')]
     assert emitted==[(m['time_s'],m['text'],m['human_decision_id']) for m in dialogue if m['speaker']=='human']
     for plan in plans:
         request=plan['public_input']
         assert not {'private_context','personal_background','own_memory','private_intention','score'}.intersection(request)
-        assert request['robot_task']==activity.public_description
+        expected_task=(read(ep/'task.json')['native_robot_task']+'\nShared activity: '+activity.public_description
+                       if p.get('robot_language')=='native_with_activity' else activity.public_description)
+        assert request['robot_task']==expected_task
         assert all(any(m['speaker']==message['speaker'] and m['kind']==message['kind'] and m['text']==message['text']
                        and m['time_s']<=plan['time_s'] for m in dialogue) for message in request['dialogue'])
     received=0

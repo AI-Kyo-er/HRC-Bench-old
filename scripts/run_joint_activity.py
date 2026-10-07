@@ -82,9 +82,14 @@ def main():
     parser.add_argument('--human-reflection',action='store_true')
     parser.add_argument('--robot-language',choices=['context','native_with_activity','task_only'],default='context')
     parser.add_argument('--initial-human-holding',action='store_true')
+    parser.add_argument('--robot-replay',type=Path,help='仅参考：回放已有成功神经轨迹的真实7D动作，当前NN调用0')
+    parser.add_argument('--follow-reference-poses',action='store_true')
     parser.add_argument('--human-model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     parser.add_argument('--output-dir',type=Path,required=True)
     args=parser.parse_args()
+    if args.robot_replay and (args.human_source!='reference' or args.coordinator_port):
+        parser.error('动作回放只用于明确标注的可执行性参照，不能替代正式被测策略')
+    if args.follow_reference_poses and not args.robot_replay:parser.error('位姿参考要求显式参考轨迹')
     if args.output_dir.exists():parser.error('正式运行必须使用新目录，不能覆盖已有证据')
     entries={r.split(',')[0].strip():r.split(',') for r in subprocess.check_output(
         ['nvidia-smi','--query-gpu=index,memory.free,pci.bus_id','--format=csv,noheader,nounits'],text=True).splitlines()}
@@ -123,6 +128,13 @@ def main():
     trace=[];controls=[];calls=[];plans=[];timeline=[];events=[];action_plan=deque()
     dialogue=[{'time_s':0.,'speaker':'environment','kind':'activity','text':activity.public_description}]
     private_context=[];initial_image=None;last_plan=None;held_gripper=None;cartesian_target=None;reference_clearance_target=None
+    replay_actions=None;replay_cursor=0;follower=None
+    if args.robot_replay:
+        replay_actions=np.asarray([json.loads(l)['action'] for l in (args.robot_replay/'policy_io.jsonl').read_text().splitlines() if l.strip()])
+        if replay_actions.ndim!=2 or replay_actions.shape[1]!=7 or not np.isfinite(replay_actions).all():raise ValueError('参考轨迹须为实际7D控制')
+        if args.follow_reference_poses:
+            from hrc_pilot.trajectory_reference import TrajectoryReference
+            follower=TrajectoryReference([json.loads(l) for l in (args.robot_replay/'trace.jsonl').read_text().splitlines() if l.strip()],replay_actions)
     def frame(t,obs):
         rgb=compose_runtime_views(np.ascontiguousarray(env.sim.render(width=640,height=480,camera_name='hrc_view')[::-1,::-1]),obs,'wide_and_policy')
         writer.append_data(rgb)
@@ -132,6 +144,12 @@ def main():
     try:
         env.seed(args.seed);env.reset();obs=env.set_init_state(states[args.init_state_id])
         for _ in range(10):obs,*_=env.step([0.]*6+[-1.])
+        if args.robot_replay:
+            original=json.loads((args.robot_replay/'trace.jsonl').read_text().splitlines()[0])
+            env.env.reset_from_xml_string((args.robot_replay/'scene.xml').read_text())
+            env.sim.data.qpos[:]=original['qpos'];env.sim.data.qvel[:]=original['qvel']
+            env.sim.data.time=original['physics_time_s'];env.sim.forward()
+            env.env._update_observables(force=True);obs=env.env._get_observations()
         regions=scene_regions({n:env.sim.data.body_xpos[b].copy() for n,b in env.env.obj_body_id.items()},env.env.objects_dict)
         if 'akita_black_bowl_1' in env.env.obj_body_id:
             regions['serving_ready']=tuple(env.sim.data.body_xpos[env.env.obj_body_id['akita_black_bowl_1']])
@@ -186,7 +204,9 @@ def main():
                 source='actual_vla_public_dialogue';request=native_policy_input(obs,instruction)
                 if coordinator and (step%40==0 or last_plan is None):
                     if initial_image is None:initial_image=request['observation/image'].copy()
-                    public_request=coordination_request(time_s=t,robot_task=activity.public_description,
+                    public_robot_task=(task.language+'\nShared activity: '+activity.public_description
+                                       if args.robot_language=='native_with_activity' else activity.public_description)
+                    public_request=coordination_request(time_s=t,robot_task=public_robot_task,
                         human_task='Human chooses their participation and intent; infer only from visible actions and public speech.',
                         dialogue=[Message(m['speaker'],m['kind'],m['text']) for m in dialogue],
                         state=request['observation/state'],images={'initial':initial_image,'current':request['observation/image'],'wrist':request['observation/wrist_image']},
@@ -204,6 +224,14 @@ def main():
                         response={'actions':cartesian_actions(request['observation/state'],reference_clearance_target,10,held_gripper)}
                     else:
                         source='reference_scheduler_hold';response={'actions':hold_actions(request['observation/state'],10,held_gripper)}
+                elif args.robot_replay:
+                    available=replay_actions[replay_cursor:replay_cursor+10]
+                    if follower:
+                        source='recorded_pose_feedback_reference';response={'actions':follower.next_action(request['observation/state'])}
+                    elif len(available):
+                        source='saved_neural_actions_replay_reference';response={'actions':available};replay_cursor+=len(available)
+                    else:
+                        source='reference_replay_terminal_hold';response={'actions':hold_actions(request['observation/state'],10,held_gripper)}
                 elif coordinator:
                     selected=last_plan['decision']
                     if selected['mode']=='move_ee':
@@ -240,6 +268,7 @@ def main():
                 'human_avatar.jsonl':actor.avatar.records if actor.avatar else [],
                 'robot_control.jsonl':controls,'model_calls.jsonl':calls,'robot_planner_io.jsonl':plans,
                 'public_dialogue.jsonl':dialogue,'private_context.jsonl':events,'placement_evidence.jsonl':placement.records})
+            if follower:journal.flush({'reference_tracking.jsonl':follower.records})
             previous=r
         r=physical_record(env,obs,time_s=args.steps/20,step=args.steps)
         r.update(human_hand_position=actor.position().tolist(),human_body_xy=actor.body_base.tolist(),human_execution=actor.public_feedback())
@@ -275,7 +304,10 @@ def main():
         'human_source':args.human_source,'robot_language':args.robot_language,
         'initial_human_holding':args.initial_human_holding,
         'human_executor':'human_only_continuous_kinematic_attachment','robot_model_metadata':client.get_server_metadata(),
-        'robot_system':'visual_coordinator_plus_vla' if coordinator else 'direct_vla_public_dialogue',
+        'robot_system':'saved_actions_feasibility_reference' if args.robot_replay else 'visual_coordinator_plus_vla' if coordinator else 'direct_vla_public_dialogue',
+        'robot_replay_source':str(args.robot_replay) if args.robot_replay else None,
+        'reference_pose_follower':args.follow_reference_poses,
+        'robot_replay_source_sha256':{n:sha256((args.robot_replay/n).read_bytes()).hexdigest() for n in ['scene.xml','trace.jsonl','policy_io.jsonl']} if args.robot_replay else None,
         'coordinator_metadata':coordinator.metadata if coordinator else None,
         'private_intent_in_robot_input':False,'background_task_action_router':False,
         'context_step':args.context_step,'steps':args.steps,'init_state_id':args.init_state_id,'seed':args.seed,
