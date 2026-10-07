@@ -1,0 +1,51 @@
+{
+  "research_goal_achieved": false,
+  "training_complete": true,
+  "teacher_episodes": 16,
+  "episodes": [
+    {
+      "scene": "step40",
+      "human_goal_success": false,
+      "motion_qualified": true,
+      "human_model_calls": 30,
+      "init_state_id": 4,
+      "seed": 4,
+      "adapter": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B-HRC-contact-lora-20261007/checkpoints/step0040",
+      "robot_goal_success": null,
+      "joint_goal_time_s": null
+    },
+    {
+      "scene": "learned_food",
+      "human_goal_success": true,
+      "motion_qualified": true,
+      "human_model_calls": 30,
+      "init_state_id": 4,
+      "seed": 4,
+      "adapter": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B-HRC-contact-lora-20261007",
+      "robot_goal_success": null,
+      "joint_goal_time_s": null
+    },
+    {
+      "scene": "learned_drawer",
+      "human_goal_success": false,
+      "motion_qualified": true,
+      "human_model_calls": 30,
+      "init_state_id": 4,
+      "seed": 4,
+      "adapter": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B-HRC-contact-lora-20261007",
+      "robot_goal_success": null,
+      "joint_goal_time_s": null
+    },
+    {
+      "scene": "learned_hrc",
+      "human_goal_success": false,
+      "motion_qualified": true,
+      "human_model_calls": 30,
+      "init_state_id": 5,
+      "seed": 5,
+      "adapter": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B-HRC-contact-lora-20261007",
+      "robot_goal_success": false,
+      "joint_goal_time_s": 0.0
+    }
+  ]
+}

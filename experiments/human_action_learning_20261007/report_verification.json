@@ -1,0 +1,58 @@
+{
+  "status": "verified",
+  "videos": [
+    {
+      "id": "teacher0",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false
+    },
+    {
+      "id": "teacher1",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false
+    },
+    {
+      "id": "teacher2",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false
+    },
+    {
+      "id": "step40",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true
+    },
+    {
+      "id": "learned_food",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true
+    },
+    {
+      "id": "learned_drawer",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true
+    },
+    {
+      "id": "learned_hrc",
+      "duration_s": 60.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true
+    }
+  ],
+  "local_links_checked": 21,
+  "range_status": 206,
+  "javascript_errors": [],
+  "mobile_no_horizontal_overflow": true
+}
