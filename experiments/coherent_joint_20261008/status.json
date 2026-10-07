@@ -1,0 +1,210 @@
+{
+  "role": "development_status_not_training_pairs",
+  "conditions": [
+    {
+      "condition": {
+        "run": "coherent_snack_service_join_visual_20261008",
+        "activity": "snack_service",
+        "situation": "join",
+        "profile": "busy",
+        "initial_human_holding": "0",
+        "init_state_id": "3",
+        "seed": "70",
+        "system": "visual",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚无终态结果",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_snack_service_join_symbolic_20261008",
+        "activity": "snack_service",
+        "situation": "join",
+        "profile": "busy",
+        "initial_human_holding": "0",
+        "init_state_id": "3",
+        "seed": "70",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚无终态结果",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_snack_service_detour_visual_20261008",
+        "activity": "snack_service",
+        "situation": "detour",
+        "profile": "participating",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "71",
+        "system": "visual",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_snack_service_detour_symbolic_20261008",
+        "activity": "snack_service",
+        "situation": "detour",
+        "profile": "participating",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "71",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drink_storage_change_use_visual_20261008",
+        "activity": "drink_storage",
+        "situation": "change_use",
+        "profile": "participating",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "72",
+        "system": "visual",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drink_storage_change_use_symbolic_20261008",
+        "activity": "drink_storage",
+        "situation": "change_use",
+        "profile": "participating",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "72",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drink_storage_correction_visual_20261008",
+        "activity": "drink_storage",
+        "situation": "correction",
+        "profile": "particular",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "73",
+        "system": "visual",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drink_storage_correction_symbolic_20261008",
+        "activity": "drink_storage",
+        "situation": "correction",
+        "profile": "particular",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "73",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drawer_access_leave_return_visual_20261008",
+        "activity": "drawer_access",
+        "situation": "leave_return",
+        "profile": "busy",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "74",
+        "system": "visual",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drawer_access_leave_return_symbolic_20261008",
+        "activity": "drawer_access",
+        "situation": "leave_return",
+        "profile": "busy",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "74",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drawer_access_robot_request_visual_20261008",
+        "activity": "drawer_access",
+        "situation": "robot_request",
+        "profile": "busy",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "75",
+        "system": "visual",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "coherent_drawer_access_robot_request_symbolic_20261008",
+        "activity": "drawer_access",
+        "situation": "robot_request",
+        "profile": "busy",
+        "initial_human_holding": "1",
+        "init_state_id": "3",
+        "seed": "75",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "development_partner_and_coverage_qualification"
+      },
+      "state": "尚未启动",
+      "verified_terminal": false,
+      "formal_sample": false
+    }
+  ],
+  "verified_terminal_cases": 0
+}

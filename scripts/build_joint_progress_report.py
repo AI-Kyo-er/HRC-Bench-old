@@ -174,7 +174,7 @@ def build(results, output):
 <p><a href="NATIVE_TOOL_HUMAN_PROTOCOL_20261008.md">原生工具反馈机制</a> · <a href="STRUCTURED_TOOL_ACTIVITY_PROTOCOL_20261008.md">完整工具条件与新的加入初态</a>。工具返回报告真实进展，不将选择动作当完成。话语对象只转发模型原话；已放置物品的沉降由低层执行容差处理，不替人选择下一贡献。</p>
 <p><a href="HUMAN_DECISION_PROTOCOL_20261008.md">自然贡献／交流与真实支持面协议</a>：人选择搬放、持有、参与位置及独立的接受／拒绝／请求／结束表达；搬放包含完整取放，不要求学手指步骤。柜顶从当前碰撞几何计算，不使用柜体中心。人的结束声明仍需与实物和伙伴回应核对。新条件终态核查前只列待回收。</p>
 <p><a href="CONSTRAINED_DECISION_PROTOCOL_20261008.md">合法结构与明确暂停协议</a>：新的解码条件限制接口类型，不按任务进展选择策略；NN可主动停止自己的运动，但暂停不等于释放物品。新条件使用非thinking、1024生成token，与旧thinking条件的预算不同，不能作单因素改善结论。</p>
-<p><a href="../coherent_joint_20261008/PROTOCOL.md">三活动六情境一致开发批</a> · <a href="../coherent_joint_20261008/conditions.csv">预定12条条件</a>：同一原生思考＋结构约束的人方法，能力目录与队友实际话语分开；两个系统在同条件下允许不同的人回应。每条终态自动独立核查，不将尚未运行的配置算行为覆盖或正式成绩。</p>
+<p><a href="../coherent_joint_20261008/index.html">一致开发批：目的、设置与逐例结果</a> · <a href="../coherent_joint_20261008/PROTOCOL.md">协议</a> · <a href="../coherent_joint_20261008/conditions.csv">预定12条条件</a>：同一原生思考＋结构约束的人方法，能力目录与队友实际话语分开；两个系统在同条件下允许不同的人回应。每条终态自动独立核查，不将尚未运行的配置算行为覆盖或正式成绩。</p>
 <p><a href="COORDINATION_REVIEW_GUIDE.md">共同安排、实际贡献和负担审阅手册</a>：目标一致、分工一致、实际执行一致分别核对；不以两方都说完成或目标到位代表cobalance。
 <a href="../../results/joint_evaluation_preparation_20261008/candidate_conditions.csv">72条候选样本条件</a> · <a href="../../results/joint_evaluation_preparation_20261008/preparation.json">未冻结状态</a> · <a href="../../results/joint_evaluation_preparation_20261008/model_file_fingerprints.json">模型文件指纹</a>。候选条件和磁盘文件指纹不是正式结果，不追溯证明旧进程内存参数；正式执行样本目前为0。</p>
 <p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>
