@@ -37,14 +37,15 @@ def audit(root):
     for d,receipt in zip(human,receipts):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=source['scene'];actual=trace[round(d['time_s']*20)]
-        assert source['activity']==json.loads(json.dumps(activity.public(),ensure_ascii=False))
-        assert 'private_background' not in source['activity']
+        if p.get('human_source','neural')=='neural':
+            assert source['activity']==json.loads(json.dumps(activity.public(),ensure_ascii=False))
+            assert 'private_background' not in source['activity']
         assert not {'task_success','score','future_context'}.intersection(scene)
         for obj,xyz in scene['objects_xyz'].items():np.testing.assert_allclose(xyz,actual['objects'][obj])
         np.testing.assert_allclose(scene['robot_eef_xyz'],actual['robot_ee'])
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
-        if d['parse_error'] is None:
+        if d['parse_error'] is None and p.get('human_source','neural')=='neural':
             assert parse_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])==d['choice']
     emitted=[(d['time_s'],d['choice']['message'],d['decision_id']) for d in human if d['choice'].get('message')]
     assert emitted==[(m['time_s'],m['text'],m['human_decision_id']) for m in dialogue if m['speaker']=='human']
@@ -63,7 +64,11 @@ def audit(root):
             recent=([m for m in visible if m['speaker'] in {'human','robot'}][-2:]
                     if p['robot_model_metadata'].get('language_token_limit') else visible[-12:])
             spoken='\n'.join(f'{m["speaker"]}: {m["text"]}' for m in recent)
-            expected=activity.public_description+'\nActual public conversation:\n'+spoken
+            task=read(ep/'task.json')
+            base=(task['native_robot_task']+'\nShared activity: '+activity.public_description
+                  if p.get('robot_language')=='native_with_activity' else activity.public_description)
+            expected=(task['native_robot_task'] if p.get('robot_language')=='task_only' else
+                      base+'\nActual public conversation:\n'+spoken)
             assert c['prompt']==expected
             received+=sum(m['speaker']=='human' for m in visible[-12:])
         if 'language_input_evidence' in c:
@@ -107,7 +112,8 @@ def audit(root):
              'public_message':d['choice'].get('message'),'actual_action':d['choice']['action'],
              'execution_accepted':receipts[i]['accepted'],'execution_error':receipts[i]['error']}
             for i,d in enumerate(human)]
-    result={'status':'verified','world_initializations':1,'human_neural_calls':len(human),
+    result={'status':'verified','world_initializations':1,'human_neural_calls':sum(d.get('neural_inferences',1) for d in human),
+        'human_decision_rows':len(human),'human_source':p.get('human_source','neural'),
         'robot_action_blocks':len(calls),'actual_robot_control_steps':len(controls),
         'robot_actual_vla_calls':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction'} for c in calls),
         'robot_visual_coordinator_calls':len(plans),

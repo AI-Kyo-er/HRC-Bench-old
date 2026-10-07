@@ -60,7 +60,7 @@ def test_relocate_finishes_one_selected_contribution_and_keeps_robot_positions()
     actor.object_position=lambda n:data.qpos[6:9].copy();actor._display=lambda p:None
     robot=data.qpos[13:].copy()
     actor.accept_choice({'action':'relocate','object_id':'bowl','destination':'ready'},0)
-    for _ in range(6000):
+    for _ in range(12000):
         actor.physics_step();data.time+=actor.dt
         if actor.phase=='idle':break
     assert actor.completed_requests==[0] and actor.held is None

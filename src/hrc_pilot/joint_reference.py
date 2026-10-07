@@ -8,6 +8,9 @@ class JointReference:
 
     def decide(self,scene,robot_contribution):
         feedback=scene['own_execution'];done=feedback['completed_requests']
+        receipt=feedback.get('last_receipt')
+        if self.pending is not None and receipt and receipt['request_id']==self.pending and not receipt['accepted']:
+            self.pending=None
         choice={'action':'wait','object_id':None,'destination':None,'message':'','message_kind':'notice',
                 'intention':'reference_fixed_activity','participation':'reference',
                 'reason':'固定可执行性参照，不计神经人或动态策略效果。','memory':''}
@@ -29,6 +32,13 @@ class JointReference:
                 choice.update(action='relocate',object_id=obj,destination=dest,
                               message=f'I will receive or finish the activity by moving {obj} to {dest}.')
                 self.pending=len(self.decisions)
+        elif self.stage=='finish' and self.pending is None:
+            obj,dest={'snack_service':('akita_black_bowl_1','snack_delivery'),
+                      'drink_storage':('cream_cheese_1','cream_cheese_1_personal'),
+                      'drawer_access':('cream_cheese_1','drawer_storage')}[self.activity.key]
+            choice.update(action='relocate',object_id=obj,destination=dest,
+                          message='Waiting for partner clearance, then receiving the completed contribution.')
+            self.pending=len(self.decisions)
         row={'decision_id':len(self.decisions),'time_s':scene['time_s'],'private_input':{'scene':scene},
              'choice':choice,'raw_output':'','parse_error':None,'action_source':'fixed_feasibility_reference',
              'neural_inferences':0,'reference_stage':self.stage}

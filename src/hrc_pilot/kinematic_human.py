@@ -20,6 +20,15 @@ class KinematicHuman(NativeContactHuman):
         self.phase='idle';self.completed_requests=[];self.active_request=None
         self.transfer_destination=None;self.carried_offsets={};self.carried_quaternions={}
 
+    def initialize_held_object(self,name):
+        """仅用于第一帧前的场景初态：人持有待提供物品，不计任务贡献。"""
+        self.held=name;self.object_id=name;self.offset=np.array([0.,0.,-.06])
+        self.carried_offsets={name:self.offset.copy()}
+        q,_=self.object_q[name]
+        self.carried_quaternions={name:self.env.sim.data.qpos[q+3:q+7].copy()}
+        self.env.sim.data.qpos[q:q+3]=self.position()+self.offset
+        self.env.sim.forward()
+
     def accept_choice(self,choice,request_id):
         if request_id==self.last_request:return
         self.last_request=request_id;action=choice['action'];error=None
@@ -93,7 +102,7 @@ class KinematicHuman(NativeContactHuman):
             states=getattr(self.env.env,'object_states_dict',getattr(self.env.env,'object_states',{}))
             if self.held in states:
                 for name in self.object_q:
-                    if name!=self.held and name in states and states[self.held].check_contact(states[name]) and states[self.held].check_contain(states[name]):
+                    if name!=self.held and name in states and states[self.held].check_ontop(states[name]):
                         self.carried_offsets[name]=self.object_position(name)-self.reference
             for name in self.carried_offsets:
                 q,_=self.object_q[name];self.carried_quaternions[name]=self.env.sim.data.qpos[q+3:q+7].copy()
@@ -108,7 +117,7 @@ class KinematicHuman(NativeContactHuman):
         elif near and self.phase=='transfer_translate':
             self.target[2]=self.regions[self.transfer_destination][2]-self.offset[2];self.phase='transfer_lower'
         elif near and self.phase=='transfer_lower':
-            self._release();self.target=self.reference+[0,0,.15];self.phase='transfer_retreat'
+            self._release();self.target=np.r_[self.body_base,1.12];self.phase='transfer_retreat'
         elif near and self.phase in {'pick_lift','point','move_hand','away','return','transfer_retreat'}:
             self._complete()
         write=None;writes=[]
