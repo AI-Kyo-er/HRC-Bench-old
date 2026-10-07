@@ -54,6 +54,7 @@ class KinematicHuman(NativeContactHuman):
         if action in {'wait','message'}:return
         if action=='relocate' and self.active_request is not None and self.phase!='idle' and obj==self.object_id and dest==self.transfer_destination:
             return
+        if action=='relocate':self.body_target=np.array([.25,.60])
         self.active_request=request_id;self.object_id=obj;self.destination=dest
         self.transfer_destination=dest if action=='relocate' else None
         if action in {'pick','relocate'} and self.held is None:

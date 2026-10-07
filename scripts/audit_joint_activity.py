@@ -23,10 +23,13 @@ def audit(root):
     calls=rows(ep/'model_calls.jsonl');dialogue=rows(ep/'public_dialogue.jsonl');receipts=rows(ep/'human_command_receipts.jsonl')
     planner_path=ep/'robot_planner_io.jsonl'
     plans=rows(planner_path) if planner_path.exists() else []
-    assert bool(plans)==(p['robot_system']=='visual_coordinator_plus_vla')
+    assert bool(plans)==(p['robot_system'] in {'visual_coordinator_plus_vla','symbolic_coordinator_plus_vla'})
     raw_human=rows(ep/'human_control.jsonl')
     context_path=ep/'private_context.jsonl';contexts=rows(context_path) if context_path.exists() else []
     expected_context=p.get('human_source','neural')=='neural' and 0<=p['context_step']<p['steps']
+    if p.get('situation'):
+        situation=read(ep/'situation.json')
+        expected_context=any(c['time_s']<p['steps']/20 for c in situation['private_cues'])
     assert bool(contexts)==expected_context
     language_records=[]
     if p['robot_model_metadata'].get('language_token_limit'):
@@ -65,6 +68,12 @@ def audit(root):
         expected_task=(read(ep/'task.json')['native_robot_task']+'\nShared activity: '+activity.public_description
                        if p.get('robot_language')=='native_with_activity' else activity.public_description)
         assert request['robot_task']==expected_task
+        if p['robot_system']=='symbolic_coordinator_plus_vla':
+            actual=trace[round(plan['time_s']*20)]
+            for name,xyz in request['observed_world']['objects_xyz'].items():
+                np.testing.assert_allclose(xyz,actual['objects'][name])
+            assert 'private_context' not in request['observed_world']
+            assert 'human_intention' not in request['observed_world']
         assert all(any(m['speaker']==message['speaker'] and m['kind']==message['kind'] and m['text']==message['text']
                        and m['time_s']<=plan['time_s'] for m in dialogue) for message in request['dialogue'])
     received=0

@@ -15,7 +15,7 @@ class TrajectoryReference:
         rotation=Rotation.from_quat(target['eef_quaternion_xyzw'])*Rotation.from_rotvec(state[3:6]).inv()
         angular=rotation.as_rotvec()
         action=np.r_[np.clip(error/.05,-.2,.2),np.clip(angular/.5,-.1,.1),self.actions[index,-1]]
-        if np.linalg.norm(error)<.006 and np.linalg.norm(angular)<.12 and self.cursor<len(self.actions)-1:
+        if np.linalg.norm(error)<.015 and np.linalg.norm(angular)<.12 and self.cursor<len(self.actions)-1:
             self.cursor+=1
         self.records.append({'source_index':index,'target_eef_xyz':target['robot_ee'],
             'target_quaternion_xyzw':target['eef_quaternion_xyzw'],'position_error_m':float(np.linalg.norm(error)),
