@@ -25,6 +25,9 @@ RUNS = [
     ('joint_skill_bank_snack_detour_20261008', '点心：临时饮品需要、可选技能库', 'neural'),
     ('joint_skill_bank_drink_correction_20261008', '饮品：具体用途纠正、可选技能库', 'neural'),
     ('joint_skill_bank_drawer_request_20261008', '抽屉：机器人请求、视觉技能库', 'neural'),
+    ('joint_matched_reference_snack_service_init2_20261008', '点心：init2匹配原生操作参考', 'reference'),
+    ('joint_matched_reference_drink_storage_init2_20261008', '饮品：init2匹配原生操作参考', 'reference'),
+    ('joint_matched_reference_drawer_access_init2_20261008', '抽屉：init2匹配原生操作参考', 'reference'),
     ('joint_feasibility_snack_service_20261007', '点心：载荷接口崩溃', 'diagnostic'),
     ('joint_feasibility_drink_storage_20261007', '饮品：原固定人失败', 'diagnostic'),
     ('joint_feasibility_drink_storage_handoff_20261007', '饮品：持物初态失败', 'diagnostic'),
@@ -82,7 +85,7 @@ def build(results, output):
         classification = {'reference':'可执行性参考','neural':'神经策略开发','diagnostic':'保留的失败诊断'}[kind]
         conclusion = ('完整参考链成立。固定人／参考调度不计动态策略成绩。'
                       if metrics.get('reference_complete') else
-                      '参考链未完成。' if kind == 'diagnostic' and metrics else
+                      '参考链未完成。' if kind in {'diagnostic','reference'} and metrics else
                       '完整共同活动尚未验收；原生机器人目标只表示局部操作。')
         if failure: conclusion = '运行中断：' + failure['error'] + '。仅展示已录制部分，不计完整运行。'
         if provenance.get('robot_replay_source'): conclusion += ' 当前机器人推理为零，不是 VLA 闭环成功。'
