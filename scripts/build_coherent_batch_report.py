@@ -68,6 +68,10 @@ def build(table,results,output):
             audit=read(root/'interaction_verification.json');process=read(root/'joint_process_evidence.json')
             review=read(root/'public_request_response_review.json')
             html+=f'<p>实际人NN {audit.get("human_neural_calls")}，协调NN {audit.get("robot_visual_coordinator_calls")}，VLA调用 {audit.get("robot_actual_vla_calls")}。同资源执行重叠 {process.get("shared_resource_execution",{}).get("same_resource_vla_exposure_s","未测量")} 模拟秒。</p>'
+            contact=process.get('shared_resource_execution',{}).get('robot_gripper_contact_with_human_owned',{})
+            duration=contact.get('sampled_contact_duration_s')
+            label=f'{duration:.2f}' if duration is not None else '未测量'
+            html+=f'<p>夹爪与人持有／携带物品的采样接触时间：{label} 模拟秒。接触和技能执行重叠分别测量；合法交接、人体碰撞及安全性需另外判断。</p>'
             html+='<p>'+escape(review.get('interpretation','场景行为与当前安排尚待语义审阅；核验通过只证明输入和执行可重建。'))+'</p>'
             html+=render_findings(root,review)
             html+='<p>'+' · '.join(link(p,label) for p,label in [
@@ -89,7 +93,7 @@ def build(table,results,output):
     <p>页面和视频中的事件时刻为模拟时间。4秒决策间隔不代表模型能在真实墙钟4秒内完成推理；推理墙钟成本另外保存，本批不能证明实时部署能力。</p>
     <p>两个系统在同一条件下使用相同初始化、人物、外部事实和seed，但人可以因机器人行为不同产生不同回应。视觉与理想感知系统同时改变感知和模型，这不是单因素消融或裸VLA排名。</p>
     <p>不强迫每例加入、变心、离开或求助。人的私有意图不直接提供给机器人；只转发实际公开表达和可见行为。环境能力目录不当作队友请求。动作接受、目标到位和双方接受安排分别审阅。</p>
-    <p><a href="PROTOCOL.md">完整协议</a> · <a href="conditions.csv">运行前固定的12条条件</a> · <a href="../joint_feasibility_20261007/COORDINATION_REVIEW_GUIDE.md">协调证据口径</a> · <a href="../joint_feasibility_20261007/index.html">全部历史结果与失败</a></p></section>'''
+    <p><a href="PROTOCOL.md">完整协议</a> · <a href="conditions.csv">运行前固定的12条条件</a> · <a href="REFERENCE_DECISIONS.md">文献设计与当前缺口</a> · <a href="../joint_feasibility_20261007/COORDINATION_REVIEW_GUIDE.md">协调证据口径</a> · <a href="../joint_feasibility_20261007/index.html">全部历史结果与失败</a></p></section>'''
     page+=''.join(cards)+'''<section><h2>结论边界</h2><p>当前正式评测样本为0。任务配置、神经话语、类型校验及物理关系均不能代替六类实际变化、可靠伙伴、有效分工重组或cobalance。每条未发生/失败条件保留在预定分母，后续根据具体案例判断是否进入正式多初始化评测。</p></section></main></html>'''
     (output/'index.html').write_text(page)
     (output/'status.json').write_text(json.dumps({'role':'development_status_not_training_pairs',

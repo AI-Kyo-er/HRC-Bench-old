@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """独立重建共同活动过程见证；不把语言次数／原生目标自动当成cobalance。"""
 import argparse
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -100,6 +101,9 @@ def evaluate(root):
     result['original_arrangement_physical_observations']=original_arrangement_observations(
         provenance['activity'],trace,placements,last_scene['regions_xyz'])
     result['preparation_measurement_scope']='指定准备区域的桌面释放支撑，不穷尽可用准备方式；抽屉的plate_personal位置不是所有合理清理方式。'
+    from hrc_pilot import joint_process_metrics,joint_resource_use
+    result['analysis_source_sha256']={str(path):sha256(path.read_bytes()).hexdigest() for path in
+        [Path(__file__).resolve(),Path(joint_process_metrics.__file__),Path(joint_resource_use.__file__)]}
     (root/'joint_process_evidence.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
     print(json.dumps({k:v for k,v in result.items() if k not in {'completed_human_actions','public_message_input_receipts'}},ensure_ascii=False))
 

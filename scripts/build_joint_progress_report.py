@@ -104,6 +104,9 @@ def build(results, output):
         measured = process.get('measured_process', {})
         original_physical=process.get('original_arrangement_physical_observations',{})
         resources=process.get('shared_resource_execution',{})
+        actual_contacts=resources.get('robot_gripper_contact_with_human_owned',{})
+        contact_duration=actual_contacts.get('sampled_contact_duration_s')
+        contact_label=f'{contact_duration:.2f}' if contact_duration is not None else '未测量'
         participation = measured.get('actual_participation', {})
         activity = provenance.get('activity', metrics.get('activity', 'snack_service'))
         task_label, dependency = TASKS[activity]
@@ -159,6 +162,8 @@ def build(results, output):
 保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
 <p>同资源执行重叠：{resources.get('same_resource_vla_exposure_s','未重建')} 模拟秒；未识别技能的VLA控制步数：{resources.get('unmapped_vla_control_steps','未重建')}。
 {escape(resources.get('scope','尚未重建，不能推断不存在冲突。'))}</p>
+<p>夹爪与人持有／携带物品的采样接触：{contact_label} 模拟秒。
+这是实际接触记录；不自动判定交接是否合法，也不证明人体碰撞或全身安全。</p>
 <p>{' · '.join(links)}</p>{details}</section>''')
         data.append({'run':name,'label':label,'kind':kind,'activity':activity,'duration_s':duration,
                      'human_neural_calls':human_calls,'actual_vla_calls':vla_calls,'coordinator_calls':coordinator_calls,
