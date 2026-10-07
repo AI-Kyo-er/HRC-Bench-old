@@ -10,7 +10,7 @@ export HF_HUB_OFFLINE=1
 python_command=".venv-libero-native/bin/python"
 python_file="scripts/run_libero_native_reference.py"
 
-for activity in bowl_on_stove drawer_access shared_serving
+for activity in bowl_on_stove drawer_access
 do
     command="${python_command} ${python_file}"
 
