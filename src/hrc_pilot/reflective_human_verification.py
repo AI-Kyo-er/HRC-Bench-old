@@ -18,7 +18,7 @@ def verify_reflective_records(planners,motors):
         assert '只进行较长期意图反思' in row['system_prompt']
         if row['validation_error'] is None:
             raw=row['raw_output'];value=json.loads(raw[raw.find('{'):raw.rfind('}')+1])
-            chosen,error=validate_targets(value['personal_targets'],SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']))
+            chosen,error=validate_targets(value['personal_targets'],SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']),allow_pair_arrays=True)
             assert error is None
             if sorted(chosen,key=lambda t:t['object_id'])!=sorted(targets,key=lambda t:t['object_id']):revision+=1
             targets=chosen;intention=value['long_term_intention'][:500]
@@ -28,7 +28,7 @@ def verify_reflective_records(planners,motors):
             raw=row['raw_output'];invalid=False
             try:
                 value=json.loads(raw[raw.find('{'):raw.rfind('}')+1])
-                _,target_error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']))
+                _,target_error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']),allow_pair_arrays=True)
                 invalid=bool(target_error or value.get('decision_kind') not in {'continue','revise','suspend','finish_activity'}
                     or not isinstance(value.get('long_term_intention'),str) or not value['long_term_intention'].strip()
                     or not isinstance(value.get('plan',[]),list) or any(not isinstance(p,str) for p in value.get('plan',[])))

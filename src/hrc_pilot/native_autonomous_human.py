@@ -20,11 +20,13 @@ CONTEXTS={
 }
 
 
-def validate_targets(value,observation):
+def validate_targets(value,observation, *, allow_pair_arrays=False):
     """只校验可见参数，不检查分数或替模型选择个人目标。"""
     if not isinstance(value,list) or len(value)>3:return None,'personal_targets必须为最多3个对象/区域对'
     targets=[]
     for item in value:
+        if allow_pair_arrays and isinstance(item,list) and len(item)==2 and all(isinstance(x,str) for x in item):
+            item={'object_id':item[0],'destination':item[1]}
         if not isinstance(item,dict):return None,'每个目标必须是对象'
         obj,destination=item.get('object_id'),item.get('destination')
         if obj not in observation.objects or destination not in observation.regions:

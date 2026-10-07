@@ -72,7 +72,7 @@ class ReflectiveArticulatedHuman(ArticulatedAutonomousHuman):
             error=None;proposal_messages=()
             try:
                 value=self._parse(raw)
-                targets,error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']))
+                targets,error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']),allow_pair_arrays=True)
                 if error:raise ValueError(error)
                 if value.get('decision_kind') not in {'continue','revise','suspend','finish_activity'}:raise ValueError('未知反思类型')
                 intention=value.get('long_term_intention')

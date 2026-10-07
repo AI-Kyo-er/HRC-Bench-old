@@ -67,3 +67,11 @@ def test_stage_verifier_rejects_motor_goal_tampering():
     p,_=policy([intention(),{'intent':'observe'}]);p.step(observation())
     tampered=deepcopy(p.policy_io);tampered[0]['personal_goal_state']['personal_targets']=[]
     with pytest.raises(AssertionError):verify_reflective_records(p.planning_io,tampered)
+
+
+def test_model_pair_array_encoding_keeps_same_goal_semantics_as_object_encoding():
+    value=intention();value['personal_targets']=[['plate','personal']]
+    p,_=policy([value,{'intent':'observe'}]);p.step(observation())
+    assert p.personal_targets==[{'object_id':'plate','destination':'personal'}]
+    assert p.planning_io[0]['validation_error'] is None
+    assert verify_reflective_records(p.planning_io,p.policy_io)['status']=='verified'
