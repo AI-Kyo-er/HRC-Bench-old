@@ -24,6 +24,7 @@ from hrc_pilot.native_activity import public_surfaces
 from hrc_pilot.native_execution import NativeMotionObserver
 from hrc_pilot.native_personal_evidence import evaluate_personal_goals
 from hrc_pilot.native_run_journal import NativeRunJournal,native_time_limits
+from hrc_pilot.human_command_delivery import HumanCommandDelivery
 from hrc_pilot.native_video_frame import compose_runtime_views
 from hrc_pilot.protocol import Observation,Message
 from hrc_pilot.video_verification import finalize_video_verification
@@ -34,6 +35,7 @@ def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2))
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output-dir',type=Path,required=True)
+    parser.add_argument('--human-command-delivery',choices=['neural_request','cached_each_tick'],default='neural_request')
     parser.add_argument('--human-policy-architecture',choices=['grounded','deliberative'],default='grounded')
     parser.add_argument('--autonomous-human-context',choices=list(CONTEXTS),default='pantry_work')
     parser.add_argument('--steps',type=int,default=1200);parser.add_argument('--scene-case',choices=list(CASES),default='bowl_on_stove')
@@ -51,7 +53,7 @@ def main():
     from libero.libero import benchmark,get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
     import torch
-    paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py')]
+    paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_command_delivery.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     case=CASES[args.scene_case];suite=benchmark.get_benchmark_dict()[case.suite]();task=suite.get_task(case.task_id)
     human_class=GroundedReflectiveHuman;human_kwargs={'reflection_interval_s':6}
@@ -65,7 +67,7 @@ def main():
         camera_names=['agentview','robot0_eye_in_hand','frontview'],camera_heights=[256,256,480],camera_widths=[256,256,640],
         **native_time_limits(args.steps,80,True))
     args.output_dir.mkdir(parents=True);ep=args.output_dir/'human_activity';ep.mkdir()
-    writer=imageio.get_writer(ep/'demo.mp4',fps=20);timeline=[];trace=[];controls=[];parking=[];journal=NativeRunJournal(ep)
+    writer=imageio.get_writer(ep/'demo.mp4',fps=20);timeline=[];trace=[];controls=[];parking=[];journal=NativeRunJournal(ep);delivery=HumanCommandDelivery()
     def frame(t,obs):
         rgb=compose_runtime_views(np.ascontiguousarray(env.sim.render(width=640,height=480,camera_name='hrc_view')[::-1,::-1]),obs,'wide_and_policy')
         writer.append_data(rgb)
@@ -95,11 +97,15 @@ def main():
                 human_position=tuple(r['human_position']),held_by_human=(),completed_skills=(),time_s=t,robot_qpos=tuple(r['robot_qpos']),
                 human_hand_position=tuple(r['human_hand_position']),human_motor_phase=actor.phase,active_robot_action='native_joint_control',action_phase='native_control',
                 human_execution=r['human_execution'],robot_motion=motion,goal_surfaces=public_surfaces(regions),task_family='autonomous_personal_activity',task_description='Choose your own tabletop activity; no robot work is assigned.')
-            decision=human.step(public);messages.extend(decision.messages);actor.accept(decision.command);trace.append(r);frame(t,obs)
+            decision=human.step(public);messages.extend(decision.messages)
+            if args.human_command_delivery=='neural_request':delivery.submit(actor,decision.command,len(human.policy_io)-1)
+            else:actor.accept(decision.command)
+            trace.append(r);frame(t,obs)
             action=[0.]*6+[-1.];before=float(env.sim.data.time);obs,*_=env.step(action)
             controls.append({'step':step,'time_s':t,'action':action,'pre_physics_time_s':before,'post_physics_time_s':float(env.sim.data.time),'actuator_ctrl':env.sim.data.ctrl.tolist(),'source':'calibrated_stationary_robot_no_model'})
             journal.flush({'trace.jsonl':trace,'stationary_robot_control.jsonl':controls,'human_control.jsonl':actor.records,
-                'human_avatar.jsonl':actor.avatar.records,'human_policy_io.jsonl':human.policy_io,**({'human_planner_io.jsonl':human.planning_io} if hasattr(human,'planning_io') else {})})
+                'human_avatar.jsonl':actor.avatar.records,'human_policy_io.jsonl':human.policy_io,
+                'human_command_delivery.jsonl':delivery.records,**({'human_planner_io.jsonl':human.planning_io} if hasattr(human,'planning_io') else {})})
         r=physical_record(env,obs,time_s=args.steps/20,step=args.steps);r.update(human_hand_position=actor.position().tolist(),human_position=np.r_[actor.body_base,0].tolist(),human_execution=actor.public_feedback());trace.append(r);frame(args.steps/20,obs)
         assert np.isclose(env.sim.data.time-start,args.steps/20,atol=1e-7)
         personal=evaluate_personal_goals(regions,trace,actor.records,human.policy_io,[],require_table_release=True,allow_relative_relations=True)
@@ -118,7 +124,7 @@ def main():
         raise
     finally:writer.close();env.close()
     write(args.output_dir/'provenance.json',{'human_target_source':'model_generated_from_personal_preferences','human_policy_architecture':args.human_policy_architecture,
-        'human_model':str(model_path),'robot_policy':'calibration parking then stationary, no neural robot',
+        'human_model':str(model_path),'human_command_delivery':args.human_command_delivery,'robot_policy':'calibration parking then stationary, no neural robot',
         'personal_goal_table_release_required':True,'personal_goal_relative_relations_allowed':True,'source_sha256':hashes,
         'source_files_changed_during_run':[str(p) for p in paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
         'cuda_visible_devices':chosen,'renderer_device_binding':matched[0]})

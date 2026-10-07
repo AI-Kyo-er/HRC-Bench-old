@@ -6,6 +6,7 @@ class HumanCommandDelivery:
     def __init__(self):
         self.last_decision_id=None
         self.last_command=None
+        self.records=[]
 
     def submit(self,actor,command,decision_id):
         if not isinstance(decision_id,int) or decision_id<0:
@@ -16,7 +17,11 @@ class HumanCommandDelivery:
             raise ValueError('同一神经决定不能更改请求内容')
         if self.last_decision_id is not None and decision_id<self.last_decision_id:
             raise ValueError('不能递送更早的神经请求')
-        if same and actor.phase in {'idle','holding','failed'}:
+        forward=not (same and actor.phase in {'idle','holding','failed'})
+        self.records.append({'physics_time_s':float(actor.env.sim.data.time),
+            'neural_decision_id':decision_id,'new_request':not same,
+            'command':payload,'phase_before_delivery':actor.phase,'forwarded_to_primitive':forward})
+        if not forward:
             return False
         self.last_decision_id=decision_id
         self.last_command=payload

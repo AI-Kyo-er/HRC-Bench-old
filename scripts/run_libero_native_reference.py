@@ -19,6 +19,7 @@ from PIL import Image
 from hrc_pilot.libero_native import native_policy_input, input_audit, physical_record, perceived_object_contacts
 from hrc_pilot.native_video_frame import compose_runtime_views
 from hrc_pilot.native_run_journal import NativeRunJournal,native_time_limits
+from hrc_pilot.human_command_delivery import HumanCommandDelivery
 from hrc_pilot.video_verification import finalize_video_verification
 from hrc_pilot.native_task_contracts import NativeTaskContract,NativeTaskEvidence
 from hrc_pilot.native_execution import NativeMotionObserver, interaction_metrics
@@ -56,6 +57,7 @@ def main():
     parser.add_argument('--activity-profile',choices=PROFILES)
     parser.add_argument('--human-decision-interval-steps',type=int,default=20)
     parser.add_argument('--human-memory-scope',choices=['episode','session'],default='session')
+    parser.add_argument('--human-command-delivery',choices=['neural_request','cached_each_tick'],default='neural_request')
     parser.add_argument('--human-policy-architecture',choices=['flat','reflective','grounded','deliberative'],default='flat')
     parser.add_argument('--human-reflection-interval-s',type=float,default=6.)
     parser.add_argument('--video-layout',choices=['wide','wide_and_policy'],default='wide')
@@ -134,7 +136,7 @@ def main():
                   Path('src/hrc_pilot/native_hand_policy.py'),Path('src/hrc_pilot/native_scene_catalog.py'),
                   Path('src/hrc_pilot/native_goal_evidence.py'),
                   Path('src/hrc_pilot/native_reflective_human.py'),Path('src/hrc_pilot/native_video_frame.py'),
-                  Path('src/hrc_pilot/native_run_journal.py'),
+                  Path('src/hrc_pilot/native_run_journal.py'),Path('src/hrc_pilot/human_command_delivery.py'),
                   Path('src/hrc_pilot/native_grounded_human.py'),Path('src/hrc_pilot/native_deliberative_human.py'),
                   Path('src/hrc_pilot/native_contact_observation.py'),
                   Path('src/hrc_pilot/native_relative_placement.py'),
@@ -198,7 +200,7 @@ def main():
             task_evidence=NativeTaskEvidence(contract)
             motion_observer=NativeMotionObserver()
             writer = imageio.get_writer(directory / 'demo.mp4', fps=20)
-            journal=NativeRunJournal(directory);actor=None;placement=None
+            journal=NativeRunJournal(directory);actor=None;placement=None;delivery=HumanCommandDelivery()
             def save_running_evidence():
                 streams={'trace.jsonl':trace,'policy_io.jsonl':policy_io,'model_calls.jsonl':calls}
                 if coordinator is not None:streams['robot_planner_io.jsonl']=robot_plans
@@ -206,6 +208,7 @@ def main():
                     streams['human_control.jsonl']=actor.records
                     if actor.avatar is not None:streams['human_avatar.jsonl']=actor.avatar.records
                 if partner is not None:
+                    if args.human_command_delivery=='neural_request':streams['human_command_delivery.jsonl']=delivery.records
                     audit=partner.audit_state()
                     for name,key in [('human_policy_io.jsonl','policy_io'),('human_planner_io.jsonl','human_planner_io'),('human_memory.jsonl','memory')]:
                         if key in audit:streams[name]=audit[key]
@@ -325,7 +328,9 @@ def main():
                                 public=replace(public,goal_surfaces=public_surfaces(regions),task_family='autonomous_personal_activity')
                             decision=partner.step(public)
                             messages.extend(decision.messages)
-                            actor.accept(decision.command)
+                            if args.human_command_delivery=='neural_request':
+                                delivery.submit(actor,decision.command,len(partner.policy_io)-1)
+                            else:actor.accept(decision.command)
                         elif args.human_mode=='calibration':
                             actor.accept(HumanCommand('push',human_object,'near_human',speed_mps=.15))
                     trace.append(record)
@@ -588,6 +593,7 @@ def main():
         'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),
         'task_family':args.task_family,'human_public_work_requirement':None if args.autonomous_human_context else contract.human_instruction(),
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
+        'human_command_delivery':args.human_command_delivery if args.human_mode=='qwen' else None,
         'human_policy_architecture':args.human_policy_architecture,'human_reflection_interval_s':args.human_reflection_interval_s if args.human_policy_architecture in {'reflective','grounded'} else None,
         'video_layout':args.video_layout,'video_capture_source':'simultaneous runtime render + raw policy observation cameras',
         'human_execution_feedback':'measured_motor_state_and_public_geometry_no_evaluator_outcomes',
