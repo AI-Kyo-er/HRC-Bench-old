@@ -28,10 +28,13 @@ def verify_episode(directory):
             expected_contacts=own_contact_observation(actual['contacts'],'human')
             assert measured['hand_contact_report']==expected_contacts
             assert measured['hand_contact_geoms']==expected_contacts['contact_geoms']
-        np.testing.assert_allclose(measured['body_xy'],actual['human_position'][:2],atol=1e-9)
+        if public.get('observation_projection')=='compact_measured_world_v1':
+            np.testing.assert_allclose(public['human_position_xyz'],actual['human_position'],atol=.00051)
+        else:np.testing.assert_allclose(measured['body_xy'],actual['human_position'][:2],atol=1e-9)
         np.testing.assert_allclose(measured['fingertip_xyz'],actual['human_hand_position'],atol=1e-9)
-        np.testing.assert_allclose(measured['body_remaining_distance_m'],
-                                   np.linalg.norm(np.asarray(measured['body_xy'])-measured['body_target_xy']))
+        if 'body_remaining_distance_m' in measured:
+            np.testing.assert_allclose(measured['body_remaining_distance_m'],
+                                       np.linalg.norm(np.asarray(measured['body_xy'])-measured['body_target_xy']))
         motion=public['robot_measured_motion']
         if 'perceived_object_contacts' in motion:assert motion['perceived_object_contacts']==perceived_object_contacts(actual)
         previous=by_step.get(actual['step']-1)
