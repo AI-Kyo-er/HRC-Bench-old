@@ -288,7 +288,7 @@ class NativeContactHuman:
         """实际执行器测量；无任务标签、私有评分或策略动作建议。"""
         body_distance=float(np.linalg.norm(self.body_base-self.body_target))
         hand_distance=float(np.linalg.norm(self.position()-self.target))
-        running=self.phase!='idle' or body_distance>.01 or hand_distance>.02
+        running=self.phase not in {'idle','holding'} or body_distance>.01 or hand_distance>.02
         result={'accepted_intent':self.accepted_intent,'motor_phase':self.phase,
                 'status':'holding_position' if self.accepted_intent=='observe' else ('running' if running else 'motor_finished'),
                 'command_elapsed_s':float(self.env.sim.data.time)-self.command_started_at,

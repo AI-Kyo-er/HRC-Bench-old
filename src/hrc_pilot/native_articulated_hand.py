@@ -144,6 +144,9 @@ class NativeArticulatedHuman(NativeContactHuman):
         if hasattr(self.env.env,'obj_body_id'):
             result['relative_placement_destinations']=relative_destinations(self.env)
         result['active_relative_receiver']=getattr(self,'relative_receiver',None)
+        if result['object_measured_in_hand'] is not None and self.accepted_intent=='grasp':
+            result['status']='grasp_secured'
+            result['grasp_command_result']='actual_bilateral_contact_and_previously_measured_lift; next action remains policy choice'
         if self.object_id is not None and self.grasp_initial_object is not None:
             result['grasp_target_snapshot_xyz']=self.grasp_initial_object.tolist()
             result['object_motion_since_grasp_snapshot_m']=float(np.linalg.norm(self.object_position(self.object_id)-self.grasp_initial_object))
