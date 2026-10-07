@@ -45,6 +45,11 @@ def main():
         if provenance.get('robot_planner_metadata'):prefix+='__visual_coordination'
         if args.include_coordination_primitives:prefix+='__mixed_control'
         identifier=f'{prefix}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
+        if 'vla_language_interface' in provenance:
+            identifier+='__language_'+provenance['vla_language_interface']
+            identifier+='__persona_'+str(provenance.get('human_persona'))
+            identifier+='__memory_'+str(provenance.get('human_memory_scope'))
+        if provenance.get('human_command_delivery'):identifier+='__delivery_'+provenance['human_command_delivery']
         target=args.output_dir/'episodes'/identifier;target.mkdir(parents=True)
         activity_files=['personal_context.json','personal_evidence.json','human_intentions.jsonl','public_dialogue.jsonl'] if autonomous else ['activity_plan.json','activity_events.json','activity_evidence.json']
         source_files=activity_files+['metrics.json','scene.xml',
@@ -55,7 +60,7 @@ def main():
             source_files.append('robot_planner_io.jsonl')
         for name in source_files:(target/name).symlink_to((episode/name).resolve())
         auxiliary_audits={}
-        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json','continual_activity_verification.json','hand_robot_contact_verification.json','spatial_motion_verification.json','coordination_verification.json']:
+        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json','continual_activity_verification.json','hand_robot_contact_verification.json','spatial_motion_verification.json','coordination_verification.json','human_command_delivery_verification.json','cached_request_audit.json']:
             path=root/name
             if path.exists():
                 (target/name).symlink_to(path.resolve())
@@ -77,7 +82,9 @@ def main():
                                 'raw_joint_predicate':metrics['task_success'],'joint_success_protocol':score_protocol,
                                 'joint_goal_evaluable':metrics.get('human_goal_evaluable',True),
                                 'benchmark_episode_eligible':eligible,'motion_eligible':motion_eligible,'avatar_qualified':avatar_qualified,'hand_motion_qualified':hand_qualified,'world_initializations':1,'robot_model':provenance['model_server_metadata']['config'],
-                                'robot_planner_metadata':provenance.get('robot_planner_metadata')})
+                                'robot_planner_metadata':provenance.get('robot_planner_metadata'),
+                                'vla_language_interface':provenance.get('vla_language_interface'),
+                                'human_command_delivery':provenance.get('human_command_delivery')})
         for call in calls:
             executed=[r['action'] for r in actions if r['model_call']==call['model_call']]
             assert executed

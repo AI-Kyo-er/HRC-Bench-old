@@ -62,6 +62,8 @@ def main():
     parser.add_argument('--human-reflection-interval-s',type=float,default=6.)
     parser.add_argument('--video-layout',choices=['wide','wide_and_policy'],default='wide')
     parser.add_argument('--robot-planner-port',type=int)
+    parser.add_argument('--vla-language-interface',choices=['task_only','public_speech'],default='public_speech',
+                        help='直接VLA使用原任务，或原任务加最新公开人消息；视觉协调器仍自行选定VLA指令')
     parser.add_argument('--planner-interval-steps',type=int,default=20)
     parser.add_argument('--completion-criterion',choices=['native_geometry','released_stable'],default='released_stable')
     parser.add_argument('--human-persona', choices=['cooperative','independent','cautious','assertive'], default='cooperative')
@@ -342,7 +344,8 @@ def main():
                         if args.autonomous_human_context:instruction=task.language
                         if work_plan:
                             instruction=task.language+'\nCurrent public human work: '+active_work.instruction
-                        if partner is not None:
+                        if args.vla_language_interface=='task_only':instruction=task.language
+                        if partner is not None and args.vla_language_interface=='public_speech':
                             communication=[m.text for m in messages if m.kind in {'policy_message','negotiation_proposal'}][-2:]
                             if communication:instruction += '\nHuman: '+'\nHuman: '.join(communication)
                         request = native_policy_input(obs, instruction)
@@ -593,6 +596,7 @@ def main():
         'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),
         'task_family':args.task_family,'human_public_work_requirement':None if args.autonomous_human_context else contract.human_instruction(),
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
+        'vla_language_interface':args.vla_language_interface,
         'human_command_delivery':args.human_command_delivery if args.human_mode=='qwen' else None,
         'human_policy_architecture':args.human_policy_architecture,'human_reflection_interval_s':args.human_reflection_interval_s if args.human_policy_architecture in {'reflective','grounded'} else None,
         'video_layout':args.video_layout,'video_capture_source':'simultaneous runtime render + raw policy observation cameras',
