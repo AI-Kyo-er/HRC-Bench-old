@@ -1,0 +1,78 @@
+{
+  "status": "verified",
+  "formal_video_count": 9,
+  "playback": [
+    {
+      "time": 0.600531,
+      "duration": 60.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.594775,
+      "duration": 60.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.592765,
+      "duration": 60.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.593022,
+      "duration": 60.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.597736,
+      "duration": 30.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.59168,
+      "duration": 30.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.597402,
+      "duration": 30.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.596115,
+      "duration": 30.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    },
+    {
+      "time": 0.594359,
+      "duration": 30.05,
+      "paused": false,
+      "width": 896,
+      "height": 512
+    }
+  ],
+  "four_model_video_seek_and_stage_sync_verified": true,
+  "real_grasp_event_button_verified": true,
+  "mobile_width": {
+    "viewport": 375,
+    "content": 375
+  },
+  "javascript_errors": [],
+  "missing_local_links": [],
+  "screenshot": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/results/report_snapshots/reflective_activity_20261007/desktop.png"
+}
