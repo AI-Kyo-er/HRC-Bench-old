@@ -1,0 +1,27 @@
+{
+  "status": "verified",
+  "videos": [
+    {
+      "id": "bowl_on_stove",
+      "duration_s": 60.05,
+      "played": true,
+      "seek_and_sync_37_2_s": true
+    },
+    {
+      "id": "food_into_bowl",
+      "duration_s": 60.05,
+      "played": true,
+      "seek_and_sync_37_2_s": true
+    },
+    {
+      "id": "food_into_bowl_direct",
+      "duration_s": 60.05,
+      "played": true,
+      "seek_and_sync_37_2_s": true
+    }
+  ],
+  "local_links_checked": 22,
+  "javascript_errors": [],
+  "mobile_width_px": 375,
+  "no_horizontal_overflow": true
+}

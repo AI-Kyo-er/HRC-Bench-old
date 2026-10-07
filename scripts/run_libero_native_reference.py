@@ -198,6 +198,7 @@ def main():
             journal=NativeRunJournal(directory);actor=None;placement=None
             def save_running_evidence():
                 streams={'trace.jsonl':trace,'policy_io.jsonl':policy_io,'model_calls.jsonl':calls}
+                if coordinator is not None:streams['robot_planner_io.jsonl']=robot_plans
                 if actor is not None:
                     streams['human_control.jsonl']=actor.records
                     if actor.avatar is not None:streams['human_avatar.jsonl']=actor.avatar.records
@@ -564,7 +565,7 @@ def main():
         'model_server_metadata':metadata,'suite':args.suite,'seed':args.seed,'control_hz':20,
         'robot_planner_metadata':coordinator.metadata if coordinator is not None else None,
         'robot_planner_interval_steps':args.planner_interval_steps if coordinator is not None else None,
-        'robot_policy_composition':'Qwen3VL coordinator + VLA + explicit hold primitive' if coordinator is not None else 'native VLA',
+        'robot_policy_composition':'Qwen3VL coordinator + native VLA + explicitly sourced motion primitives' if coordinator is not None else 'native VLA',
         'execution_horizon':args.execution_horizon,'max_steps':args.steps,'settle_steps':10,
         'mujoco_version':mujoco.__version__,'robosuite_version':robosuite.__version__,
         'libero_commit':subprocess.check_output(['git','-C',str(Path(get_libero_path('benchmark_root')).parents[1]),'rev-parse','HEAD'],text=True).strip(),

@@ -1,0 +1,58 @@
+{
+  "research_goal_achieved": false,
+  "episodes": [
+    {
+      "scene": "bowl_on_stove",
+      "motion_qualified": false,
+      "sources": {
+        "vlm_selected_cartesian_primitive": 8,
+        "vlm_selected_hold_primitive": 112
+      },
+      "robot_visual_calls": 30,
+      "human_inferences": 41,
+      "model_selected_moves": 2,
+      "robot_goal_success": false,
+      "human_goal_success": false,
+      "joint_goal_time_s": 0.0,
+      "hand_robot_contact_time_s": 0.0,
+      "receiver_maximum_displacement_m": null,
+      "receiver_human_contact_samples": 58,
+      "receiver_targeted_human_commands": 0
+    },
+    {
+      "scene": "food_into_bowl",
+      "motion_qualified": true,
+      "sources": {
+        "vlm_selected_cartesian_primitive": 20,
+        "vlm_selected_hold_primitive": 100
+      },
+      "robot_visual_calls": 30,
+      "human_inferences": 41,
+      "model_selected_moves": 5,
+      "robot_goal_success": false,
+      "human_goal_success": false,
+      "joint_goal_time_s": 0.0,
+      "hand_robot_contact_time_s": 0.0,
+      "receiver_maximum_displacement_m": 2.8599582929202525e-07,
+      "receiver_human_contact_samples": 0,
+      "receiver_targeted_human_commands": 0
+    },
+    {
+      "scene": "food_into_bowl_direct",
+      "motion_qualified": true,
+      "sources": {
+        "learned_vla": 120
+      },
+      "robot_visual_calls": 0,
+      "human_inferences": 40,
+      "model_selected_moves": 0,
+      "robot_goal_success": true,
+      "human_goal_success": false,
+      "joint_goal_time_s": 0.0,
+      "hand_robot_contact_time_s": 10.29999999999998,
+      "receiver_maximum_displacement_m": 0.015314428184797267,
+      "receiver_human_contact_samples": 23305,
+      "receiver_targeted_human_commands": 0
+    }
+  ]
+}
