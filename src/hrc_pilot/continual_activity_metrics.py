@@ -16,26 +16,41 @@ def evaluate_continual_activity(trace,decisions,regions,placement):
         while index<len(decisions) and decisions[index]['time_s']<=previous['time_s']+1e-9:
             current=decisions[index]['personal_goal_state']['personal_targets'];index+=1
         # Regional aliases are identical relations, not intention changes.
-        signature=tuple(sorted((t['object_id'],*regions[t['destination']]) for t in current))
+        signature=tuple(sorted((t['object_id'],t['destination']) if t['destination'].startswith('on:') else (t['object_id'],*regions[t['destination']]) for t in current))
         if signature!=previous_signature:
             dwell={};previous_signature=signature;signatures.append(signature)
         target_records=[]
         for target in current:
-            name,dest=target['object_id'],target['destination'];point=np.asarray(regions[dest])
+            name,dest=target['object_id'],target['destination'];receiver=dest.split(':',1)[1] if dest.startswith('on:') else None
+            point=np.asarray(row['objects'][receiver] if receiver else regions[dest])
             position=np.asarray(row['objects'][name]);old=np.asarray(previous['objects'][name]);speed=float(np.linalg.norm(position-old)/dt)
             support=touch=False
             for c in row['contacts']:
                 a,b=c['geom1'] or '',c['geom2'] or ''
                 if b.startswith(name+'_'):a,b=b,a
                 if a.startswith(name+'_'):
-                    support|=b==('human_storage_support' if dest.endswith('_shelf') else 'table_collision')
+                    support|=b.startswith(receiver+'_') if receiver else b==('human_storage_support' if dest.endswith('_shelf') else 'table_collision')
                     touch|=b.startswith(('gripper','human_left_finger','human_right_finger','human_palm','human_fingertip'))
-            spatial=(np.linalg.norm(position[:2]-point[:2])<.025 and abs(position[2]-point[2])<.025)
-            key=(name,*regions[dest]);dwell[key]=dwell.get(key,0.)+dt if spatial and support and not touch and speed<.08 else 0.
+            spatial=(np.linalg.norm(position[:2]-point[:2])<(.03 if receiver else .025)
+                     and (position[2]>=point[2] if receiver else abs(position[2]-point[2])<.025))
+            receiver_speed=float(np.linalg.norm(point-np.asarray(previous['objects'][receiver]))/dt) if receiver else 0.
+            key=(name,dest) if receiver else (name,*regions[dest]);dwell[key]=dwell.get(key,0.)+dt if spatial and support and not touch and max(speed,receiver_speed)<.08 else 0.
             stable=bool(dwell[key]>=.2-1e-9)
             if stable:
                 initial=np.asarray(trace[0]['objects'][name])
-                if np.linalg.norm(initial[:2]-point[:2])>=.025 or abs(initial[2]-point[2])>=.025:new_relations.add(key)
+                baseline=np.asarray(trace[0]['objects'][receiver]) if receiver else point
+                initially_spatial=(np.linalg.norm(initial[:2]-baseline[:2])<(.03 if receiver else .025)
+                    and (initial[2]>=baseline[2] if receiver else abs(initial[2]-baseline[2])<.025))
+                if receiver:
+                    initial_support=initial_touch=False
+                    for pair in trace[0]['contacts']:
+                        a,b=pair['geom1'] or '',pair['geom2'] or ''
+                        if b.startswith(name+'_'):a,b=b,a
+                        if a.startswith(name+'_'):
+                            initial_support|=b.startswith(receiver+'_')
+                            initial_touch|=b.startswith(('gripper','human_left_finger','human_right_finger','human_palm','human_fingertip'))
+                    initially_spatial=initially_spatial and initial_support and not initial_touch
+                if not initially_spatial:new_relations.add(key)
             target_records.append({**target,'actual_support_contact':support,'any_hand_contact':touch,
                                    'object_speed_m_s':speed,'spatial_relation':bool(spatial),
                                    'stable_duration_s':dwell[key],'released_stable_relation':stable})

@@ -5,13 +5,15 @@ from .native_goal_evidence import goal_success
 
 
 def signature(targets,regions):
-    return tuple(sorted((t['object_id'],*tuple(regions[t['destination']])) for t in targets))
+    return tuple(sorted((t['object_id'],t['destination']) if t['destination'].startswith('on:') else
+                        (t['object_id'],*tuple(regions[t['destination']])) for t in targets))
 
 
-def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, require_shelf_release=False, require_table_release=False):
+def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, require_shelf_release=False, require_table_release=False, allow_relative_relations=False):
     revisions=[];previous=None
     for row in decisions:
         targets=row['personal_goal_state']['personal_targets'];key=signature(targets,regions)
+        if not allow_relative_relations and any(t['destination'].startswith('on:') for t in targets):raise ValueError('记录协议不允许相对关系')
         if key!=previous:
             revisions.append({'start_s':row['time_s'],'targets':targets,'long_term_intention':row['personal_goal_state']['long_term_intention']})
             previous=key
@@ -20,21 +22,29 @@ def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, requi
         start=revision['start_s'];end=revisions[i+1]['start_s'] if i+1<len(revisions) else trace[-1]['time_s']
         window=[r for r in trace if start<=r['time_s']<end or (i+1==len(revisions) and r['time_s']==end)]
         for target in revision['targets']:
-            obj,dest=target['object_id'],target['destination'];point=np.asarray(regions[dest])
+            obj,dest=target['object_id'],target['destination'];receiver=dest.split(':',1)[1] if dest.startswith('on:') else None
+            point=np.asarray(window[0]['objects'][receiver] if receiver else regions[dest])
+            initial_point=point.copy()
             initial=np.asarray(window[0]['objects'][obj]);distance=float(np.linalg.norm(initial[:2]-point[:2]))
             dwell=0.;first=None;previous_record=None;terminal_distance=None;witness=False
             for r in window:
+                if receiver:point=np.asarray(r['objects'][receiver])
                 position=np.asarray(r['objects'][obj]);terminal_distance=float(np.linalg.norm(position[:2]-point[:2]))
                 speed=float(np.linalg.norm(position-np.asarray(previous_record['objects'][obj]))/(r['time_s']-previous_record['time_s'])) if previous_record else float('inf')
                 eligible=terminal_distance<.025 and abs(position[2]-point[2])<.025 and speed<.08
-                if (require_shelf_release and dest.endswith('_shelf')) or (require_table_release and dest.endswith(('_personal','_home'))):
+                if receiver:
+                    eligible=terminal_distance<.03 and position[2]>=point[2] and speed<.08
+                    if previous_record:
+                        eligible=eligible and np.linalg.norm(point-np.asarray(previous_record['objects'][receiver]))/(r['time_s']-previous_record['time_s'])<.08
+                if receiver or (require_shelf_release and dest.endswith('_shelf')) or (require_table_release and dest.endswith(('_personal','_home'))):
                     supported=hand_contact=False
                     for c in r['contacts']:
                         a,b=c['geom1'] or '',c['geom2'] or ''
                         if b.startswith(obj+'_'):a,b=b,a
                         if a.startswith(obj+'_'):
-                            supported|=b==('human_storage_support' if dest.endswith('_shelf') else 'table_collision')
-                            hand_contact|=b.startswith(('human_left_finger','human_right_finger','gripper'))
+                            supported|=b.startswith(receiver+'_') if receiver else b==('human_storage_support' if dest.endswith('_shelf') else 'table_collision')
+                            prefixes=('human_left_finger','human_right_finger','gripper','human_palm','human_fingertip') if receiver else ('human_left_finger','human_right_finger','gripper')
+                            hand_contact|=b.startswith(prefixes)
                     eligible=eligible and supported and not hand_contact
                 dwell=dwell+.05 if eligible else 0.
                 if dwell>=.2-1e-9 and first is None:first=r['time_s']
@@ -42,8 +52,18 @@ def evaluate_personal_goals(regions,trace,controls,decisions,placement, *, requi
             # This is a contact witness, not causal credit for every displacement.
             relevant=[c for c in controls if window[0]['physics_time_s']<=c['physics_time_s']<=window[-1]['physics_time_s']]
             witness=any(any(n.startswith(obj+'_') for n in c['contact_geoms']) for c in relevant)
+            already=distance<.025 and abs(initial[2]-initial_point[2])<.025
+            if receiver:
+                initial_support=initial_touch=False
+                for pair in window[0]['contacts']:
+                    a,b=pair['geom1'] or '',pair['geom2'] or ''
+                    if b.startswith(obj+'_'):a,b=b,a
+                    if a.startswith(obj+'_'):
+                        initial_support|=b.startswith(receiver+'_')
+                        initial_touch|=b.startswith(('gripper','human_left_finger','human_right_finger','human_palm','human_fingertip'))
+                already=distance<.03 and initial[2]>=initial_point[2] and initial_support and not initial_touch
             goals.append({**target,'start_s':start,'end_s':end,'initial_xy_distance_m':distance,
-                          'already_in_region_when_chosen':distance<.025 and abs(initial[2]-point[2])<.025,
+                          'already_in_region_when_chosen':bool(already),
                           'first_stable_relation_s':first,'terminal_relation_satisfied':bool(dwell>=.2-1e-9),
                           'human_contact_in_target_interval':witness,'terminal_xy_distance_m':terminal_distance,
                           'object_displacement_in_target_interval_m':float(np.linalg.norm(np.asarray(window[-1]['objects'][obj])-initial))})

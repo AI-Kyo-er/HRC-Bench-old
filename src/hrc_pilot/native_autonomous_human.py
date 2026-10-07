@@ -20,7 +20,7 @@ CONTEXTS={
 }
 
 
-def validate_targets(value,observation, *, allow_pair_arrays=False):
+def validate_targets(value,observation, *, allow_pair_arrays=False, relative_destinations=()):
     """只校验可见参数，不检查分数或替模型选择个人目标。"""
     if not isinstance(value,list) or len(value)>3:return None,'personal_targets必须为最多3个对象/区域对'
     targets=[]
@@ -29,8 +29,9 @@ def validate_targets(value,observation, *, allow_pair_arrays=False):
             item={'object_id':item[0],'destination':item[1]}
         if not isinstance(item,dict):return None,'每个目标必须是对象'
         obj,destination=item.get('object_id'),item.get('destination')
-        if obj not in observation.objects or destination not in observation.regions:
+        if obj not in observation.objects or (destination not in observation.regions and destination not in relative_destinations):
             return None,'目标对象/区域不在当前公开感知中'
+        if destination==f'on:{obj}':return None,'物体不能位于自身之上'
         if any(t['object_id']==obj for t in targets):return None,'同一物体不能同时要求位于两个区域'
         targets.append({'object_id':obj,'destination':destination})
     return targets,None

@@ -72,7 +72,8 @@ class ReflectiveArticulatedHuman(ArticulatedAutonomousHuman):
             error=None;proposal_messages=()
             try:
                 value=self._parse(raw)
-                targets,error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']),allow_pair_arrays=True)
+                relative=public['action_interface'].get('relative_placement_destinations',{}) if getattr(self,'allow_relational_targets',False) else ()
+                targets,error=validate_targets(value.get('personal_targets'),SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']),allow_pair_arrays=True,relative_destinations=relative)
                 if error:raise ValueError(error)
                 if value.get('decision_kind') not in {'continue','revise','suspend','finish_activity'}:raise ValueError('未知反思类型')
                 intention=value.get('long_term_intention')
@@ -92,7 +93,7 @@ class ReflectiveArticulatedHuman(ArticulatedAutonomousHuman):
             self.target_validation_feedback=error
             state=self._personal_state()
             self.planning_io.append({'planner_decision_id':len(self.planning_io),'time_s':now,
-                'target_decoder':'dict_or_pair_v1',
+                'target_decoder':'dict_or_pair_relative_v1' if getattr(self,'allow_relational_targets',False) else 'dict_or_pair_v1',
                 'system_prompt':self._system_prompt(),'public_input':planning_input,'raw_output':raw,
                 'validation_error':error,'retained_or_accepted_personal_goal_state':state,
                 'active_intention_plan':dict(self.active_plan),'public_proposal_messages':[m.__dict__ for m in proposal_messages],

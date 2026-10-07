@@ -15,6 +15,14 @@ FACT_KEYS=('time_s','objects_xyz','regions_xyz','public_goal_surfaces','human_po
 
 
 class GroundedReflectiveHuman(ReflectiveArticulatedHuman):
+    allow_relational_targets=True
+
+    def _system_prompt(self):
+        text=super()._system_prompt()
+        if self._inference_stage=='intention':
+            text=text.replace('固定区域destination对','destination对；目的地为公开区域或action_interface中合法on:接收物体关系')
+        return text
+
     def reset(self,seed):
         super().reset(seed);self.stage_model_outputs={}
 
