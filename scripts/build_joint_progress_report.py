@@ -96,6 +96,7 @@ def build(results, output):
         arrangement_review=read(root/'public_request_response_review.json')
         measured = process.get('measured_process', {})
         original_physical=process.get('original_arrangement_physical_observations',{})
+        resources=process.get('shared_resource_execution',{})
         participation = measured.get('actual_participation', {})
         activity = provenance.get('activity', metrics.get('activity', 'snack_service'))
         task_label, dependency = TASKS[activity]
@@ -149,6 +150,8 @@ def build(results, output):
 重复近目标搬运请求：{process.get('already_near_relocation_request_count','尚无')}；该计数不是重复劳动结论。</p>
 <p>机器人所选保持时间：{measured.get('robot_selected_hold_duration_s','尚未核查')} 秒；已在目标的无运动请求满足：{measured.get('accepted_already_satisfied_request_count','尚未核查')}。
 保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p>同资源执行重叠：{resources.get('same_resource_vla_exposure_s','未重建')} 模拟秒；未识别技能的VLA控制步数：{resources.get('unmapped_vla_control_steps','未重建')}。
+{escape(resources.get('scope','尚未重建，不能推断不存在冲突。'))}</p>
 <p>{' · '.join(links)}</p>{details}</section>''')
         data.append({'run':name,'label':label,'kind':kind,'activity':activity,'duration_s':duration,
                      'human_neural_calls':human_calls,'actual_vla_calls':vla_calls,'coordinator_calls':coordinator_calls,
@@ -163,6 +166,8 @@ def build(results, output):
 <p><a href="REASONING_HUMAN_PROTOCOL_20261008.md">原生推理人资格设置</a> · <a href="GROUNDED_CONTRIBUTION_PROTOCOL_20261008.md">跨活动加入／纠正与测量修复协议</a>。已结束的推理抽屉条件：首次存放后再次取出，结束仍持奶酪；84秒公开说已存好与实物不符。旧接口10次拒绝返回＋搬物，旧观测漏报抽屉底面支撑。后续批修复接口并单独记录，历史结果不倒改。</p>
 <p><a href="NATIVE_TOOL_HUMAN_PROTOCOL_20261008.md">原生工具反馈机制</a> · <a href="STRUCTURED_TOOL_ACTIVITY_PROTOCOL_20261008.md">完整工具条件与新的加入初态</a>。工具返回报告真实进展，不将选择动作当完成。话语对象只转发模型原话；已放置物品的沉降由低层执行容差处理，不替人选择下一贡献。</p>
 <p><a href="HUMAN_DECISION_PROTOCOL_20261008.md">自然贡献／交流与真实支持面协议</a>：人选择搬放、持有、参与位置及独立的接受／拒绝／请求／结束表达；搬放包含完整取放，不要求学手指步骤。柜顶从当前碰撞几何计算，不使用柜体中心。人的结束声明仍需与实物和伙伴回应核对。新条件终态核查前只列待回收。</p>
+<p><a href="COORDINATION_REVIEW_GUIDE.md">共同安排、实际贡献和负担审阅手册</a>：目标一致、分工一致、实际执行一致分别核对；不以两方都说完成或目标到位代表cobalance。
+<a href="../../results/joint_evaluation_preparation_20261008/candidate_conditions.csv">72条候选样本条件</a> · <a href="../../results/joint_evaluation_preparation_20261008/preparation.json">未冻结状态</a> · <a href="../../results/joint_evaluation_preparation_20261008/model_file_fingerprints.json">模型文件指纹</a>。候选条件和磁盘文件指纹不是正式结果，不追溯证明旧进程内存参数；正式执行样本目前为0。</p>
 <p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>
 <p>完整工具＋理想测量协调的点心条件出现新的正例：27.8秒成品释放到交付区并维持至120秒，双方后续确认并保持。它说明神经共同活动物理链可以成立；人早期已选择active及三次未持物place错误，仍需按伙伴条件和情境覆盖分别审阅。完整工具饮品中“柜顶完成”的声明与终态table接触不符，不能据声明计成功。</p>
 <p>人：Qwen3-14B 在线生成意图、当前贡献与公开话语，部分条件另做一次实际神经反思。执行使用连续运动学和物体附着，手速上限 0.2m/s。机器人：π0.5 在原生 MuJoCo／LIBERO 场景中输出 7 维 OSC，20Hz 执行，不吸附或改写机器人位姿。此批不是 Genesis 场景。</p>

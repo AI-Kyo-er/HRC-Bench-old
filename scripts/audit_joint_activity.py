@@ -31,6 +31,7 @@ def audit(root):
         from transformers import AutoTokenizer
         tool_tokenizer=AutoTokenizer.from_pretrained(p['human_model'],local_files_only=True,trust_remote_code=True)
     support_sim=None
+    support_replay_errors=[]
     if p.get('human_support_targets')=='actual_collision_geometry_cabinet_top_v1':
         from robosuite.utils.binding_utils import MjSim
         support_sim=MjSim.from_xml_file(str((ep/'scene.xml').resolve()))
@@ -78,7 +79,12 @@ def audit(root):
                 support_sim.data.qpos[:]=actual['qpos'];support_sim.forward()
                 names=[n for n in ['wine_bottle_1','cream_cheese_1','akita_black_bowl_1','plate_1'] if n in scene['objects_xyz']]
                 expected_targets=cabinet_placement_targets(support_sim.model,support_sim.data,names)
-                for name,point in expected_targets.items():np.testing.assert_allclose(point,scene['regions_xyz'][name],atol=1e-8)
+                for name,point in expected_targets.items():
+                    delta=float(np.max(np.abs(np.asarray(point)-scene['regions_xyz'][name])))
+                    support_replay_errors.append({'time_s':d['time_s'],'target':name,'max_axis_error_m':delta})
+                    # mj_step后的记录包含缓存几何；以最终qpos重新forward会有亚毫米差异。
+                    # 保留实际误差，阈值远小于公开25mm区域，不能用来通过厘米级错位。
+                    np.testing.assert_allclose(point,scene['regions_xyz'][name],atol=.0002,rtol=0)
             assert payload==d['native_tool_model_input']
             assert d['chat_template_sha256']==sha256(tool_tokenizer.chat_template.encode()).hexdigest()
             encoded=tool_tokenizer.apply_chat_template(payload['messages'],tools=payload['tools'],
@@ -243,6 +249,11 @@ def audit(root):
         'human_attached_object_pose_write_samples':sum(r['human_attached_object_pose_write'] is not None for r in raw_human),
         'private_context_notifications':contexts,'behavior_review':review,
         'interpretation':'验证实际观测、公开渠道和执行一致；不证明真人策略、共同任务完成、语义变化或cobalance。'}
+    if support_replay_errors:
+        result['support_geometry_replay']={'tolerance_m':.0002,
+            'max_axis_error_m':max(r['max_axis_error_m'] for r in support_replay_errors),
+            'samples':support_replay_errors,
+            'scope':'最终qpos重新forward与运行时缓存几何的对照；保留亚毫米误差，不等于任务完成。'}
     write_path=root/'interaction_verification.json';write_path.write_text(json.dumps(result,ensure_ascii=False,indent=2))
     if p['robot_model_metadata'].get('language_token_limit'):
         (root/'language_observation_verification.json').write_text(json.dumps({
