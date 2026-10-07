@@ -186,6 +186,8 @@ def main():
                                  model_path=args.human_model, persona_id=args.human_persona,
                                  decision_interval_steps=args.human_decision_interval_steps, memory_scope=args.human_memory_scope,**human_kwargs)
         partner.prepare()
+    human_adapter_hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in args.human_adapter.glob('adapter*') if p.is_file()} if args.human_adapter else {}
+    if args.human_adapter:assert partner._adapter_loaded and human_adapter_hashes
     for task_id in args.task_ids:
         task = suite.get_task(task_id)
         bddl = Path(suite.get_task_bddl_file_path(task_id))
@@ -599,7 +601,8 @@ def main():
         'activity_profile':args.activity_profile,'human_decision_interval_steps':args.human_decision_interval_steps,
         'world_initializations_per_episode':1,'fixed_duration_with_no_success_early_exit':bool(work_plan or args.autonomous_human_context),
         'task_family':args.task_family,'human_public_work_requirement':None if args.autonomous_human_context else contract.human_instruction(),
-        'human_adapter':str(args.human_adapter) if args.human_adapter else None,
+        'human_adapter':str(args.human_adapter) if args.human_adapter else None,'human_adapter_sha256':human_adapter_hashes,
+        'human_adapter_files_changed_during_run':[p for p,h in human_adapter_hashes.items() if sha256(Path(p).read_bytes()).hexdigest()!=h],
         'human_memory_scope':args.human_memory_scope,'human_object_id':contract.human_object_id,
         'vla_language_interface':args.vla_language_interface,
         'human_command_delivery':args.human_command_delivery if args.human_mode=='qwen' else None,
