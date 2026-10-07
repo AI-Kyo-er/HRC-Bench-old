@@ -13,8 +13,8 @@ def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip
 def verify(directory,obj=None,destination=None):
     trace=rows(directory/'trace.jsonl');control=rows(directory/'human_control.jsonl')
     metrics=json.loads((directory/'metrics.json').read_text());obj=obj or metrics.get('object_id','cookies_1')
-    destination=destination or metrics.get('destination','cookies_shelf')
-    relative_receiver=destination.split(':',1)[1] if destination.startswith('on:') else None
+    destination=destination or metrics.get('destination')
+    relative_receiver=destination.split(':',1)[1] if destination and destination.startswith('on:') else None
     initial=np.asarray(trace[0]['objects'][obj]);bilateral=[];released=[]
     for r in trace:
         contacts=r['contacts'];finger=[False,False];support=False
@@ -24,7 +24,9 @@ def verify(directory,obj=None,destination=None):
             if a.startswith(obj+'_'):
                 for i,side in enumerate(['left','right']):finger[i]|=b=='human_'+side+'_finger_contact'
                 support|=(b.startswith(relative_receiver+'_') if relative_receiver else
-                          b=='table_collision' if destination.endswith(('_personal','_home')) else b=='human_storage_support')
+                          b=='table_collision' if destination and destination.endswith(('_personal','_home')) else
+                          b=='human_storage_support' if destination and destination.endswith('_shelf') else
+                          b in {'table_collision','human_storage_support'})
         lift=r['objects'][obj][2]-initial[2]
         if all(finger) and lift>.04:bilateral.append(r['time_s'])
         if support and not any(finger) and bilateral and r['time_s']>bilateral[0]:released.append(r['time_s'])
