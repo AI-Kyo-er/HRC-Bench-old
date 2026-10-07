@@ -34,6 +34,8 @@ def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2))
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output-dir',type=Path,required=True)
+    parser.add_argument('--human-policy-architecture',choices=['grounded','deliberative'],default='grounded')
+    parser.add_argument('--autonomous-human-context',choices=list(CONTEXTS),default='pantry_work')
     parser.add_argument('--steps',type=int,default=1200);parser.add_argument('--scene-case',choices=list(CASES),default='bowl_on_stove')
     args=parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):parser.error('使用新输出目录')
@@ -52,9 +54,13 @@ def main():
     paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     case=CASES[args.scene_case];suite=benchmark.get_benchmark_dict()[case.suite]();task=suite.get_task(case.task_id)
-    human=GroundedReflectiveHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),autonomous_context='pantry_work',
+    human_class=GroundedReflectiveHuman;human_kwargs={'reflection_interval_s':6}
+    if args.human_policy_architecture=='deliberative':
+        from hrc_pilot.native_deliberative_human import DeliberativeArticulatedHuman
+        human_class=DeliberativeArticulatedHuman;human_kwargs={}
+    human=human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),autonomous_context=args.autonomous_human_context,
         preferred_personal_objects=case.preferred_personal_objects,model_path=model_path,persona_id='independent',
-        decision_interval_steps=40,reflection_interval_s=6,memory_scope='episode');human.prepare();human.reset(0);torch.manual_seed(0)
+        decision_interval_steps=40,memory_scope='episode',**human_kwargs);human.prepare();human.reset(0);torch.manual_seed(0)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
         camera_names=['agentview','robot0_eye_in_hand','frontview'],camera_heights=[256,256,480],camera_widths=[256,256,640],
         **native_time_limits(args.steps,80,True))
@@ -79,7 +85,7 @@ def main():
             frame(None,obs);obs,*_=env.step(action.tolist())
         actor.records.clear();actor.avatar.records.clear()
         (ep/'scene.xml').write_text(env.sim.model.get_xml());messages=[Message('environment','scene_context','The robot is parked and has no active task. Choose your own activity based on your preferences and the measured scene.')]
-        context={'context_id':'pantry_work','context':CONTEXTS['pantry_work'],'preferred_personal_objects':human.preferred_personal_objects,
+        context={'context_id':args.autonomous_human_context,'context':CONTEXTS[args.autonomous_human_context],'preferred_personal_objects':human.preferred_personal_objects,
             'regions':regions,'robot_instruction':None,'human_assigned_targets':None,'timed_work_updates':[],'world_initializations':1,'human_policy_resets':1}
         write(ep/'personal_context.json',context);observer=NativeMotionObserver();start=float(env.sim.data.time)
         for step in range(args.steps):
@@ -93,13 +99,13 @@ def main():
             action=[0.]*6+[-1.];before=float(env.sim.data.time);obs,*_=env.step(action)
             controls.append({'step':step,'time_s':t,'action':action,'pre_physics_time_s':before,'post_physics_time_s':float(env.sim.data.time),'actuator_ctrl':env.sim.data.ctrl.tolist(),'source':'calibrated_stationary_robot_no_model'})
             journal.flush({'trace.jsonl':trace,'stationary_robot_control.jsonl':controls,'human_control.jsonl':actor.records,
-                'human_avatar.jsonl':actor.avatar.records,'human_policy_io.jsonl':human.policy_io,'human_planner_io.jsonl':human.planning_io})
+                'human_avatar.jsonl':actor.avatar.records,'human_policy_io.jsonl':human.policy_io,**({'human_planner_io.jsonl':human.planning_io} if hasattr(human,'planning_io') else {})})
         r=physical_record(env,obs,time_s=args.steps/20,step=args.steps);r.update(human_hand_position=actor.position().tolist(),human_position=np.r_[actor.body_base,0].tolist(),human_execution=actor.public_feedback());trace.append(r);frame(args.steps/20,obs)
         assert np.isclose(env.sim.data.time-start,args.steps/20,atol=1e-7)
         personal=evaluate_personal_goals(regions,trace,actor.records,human.policy_io,[],require_table_release=True,allow_relative_relations=True)
         result={'scenario':'neural_human_provider_qualification','scene_case':args.scene_case,'human_goal_success':personal['human_current_observable_goals_satisfied'],
             'human_goal_evaluable':personal['human_current_observable_goals_evaluable'],'new_goal_intervals_satisfied':personal['new_target_intervals_with_stable_relation'],
-            'personal_evidence':personal,'robot_neural_calls':0,'human_total_neural_inferences':len(human.policy_io)+len(human.planning_io),
+            'personal_evidence':personal,'robot_neural_calls':0,'human_total_neural_inferences':human.audit_state().get('total_neural_inferences',len(human.policy_io)),
             'interpretation':'神经人策略操作资格检查；机器人经真实控制泊车后静止，没有机器人协作成绩或模型排名。'}
         write(ep/'personal_evidence.json',personal);write(ep/'metrics.json',result);write(args.output_dir/'summary.json',{'episodes':[result]})
         journal.flush({'trace.jsonl':trace,'public_dialogue.jsonl':[m.__dict__ for m in messages]})
@@ -111,7 +117,7 @@ def main():
         write(ep/'video_timeline.json',{'fps':20,'frame_count':len(timeline),'frames':timeline})
         raise
     finally:writer.close();env.close()
-    write(args.output_dir/'provenance.json',{'human_target_source':'model_generated_from_personal_preferences','human_policy_architecture':'grounded',
+    write(args.output_dir/'provenance.json',{'human_target_source':'model_generated_from_personal_preferences','human_policy_architecture':args.human_policy_architecture,
         'human_model':str(model_path),'robot_policy':'calibration parking then stationary, no neural robot',
         'personal_goal_table_release_required':True,'personal_goal_relative_relations_allowed':True,'source_sha256':hashes,
         'source_files_changed_during_run':[str(p) for p in paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],

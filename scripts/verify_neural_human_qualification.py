@@ -34,8 +34,11 @@ def verify(root):
             [first['physics_time_s'],second['physics_time_s']],atol=1e-7)
         np.testing.assert_allclose(second['physics_time_s']-first['physics_time_s'],.05,atol=1e-7)
     assert all(c['human_object_pose_writes']==0 for c in rows(ep/'human_control.jsonl'))
-    human=rows(ep/'human_policy_io.jsonl');plans=rows(ep/'human_planner_io.jsonl')
-    assert human and plans and all('raw_model_output' in p for p in plans)
+    human=rows(ep/'human_policy_io.jsonl');plans=rows(ep/'human_planner_io.jsonl') if (ep/'human_planner_io.jsonl').exists() else []
+    assert human
+    if provenance['human_policy_architecture']=='deliberative':
+        assert not plans and all(h['human_policy_architecture']=='deliberative_joint_intention_action' and h['neural_calls_for_this_decision']==1 for h in human)
+    else:assert plans and all('raw_model_output' in p for p in plans)
     speed=max(np.linalg.norm(np.asarray(b['robot_ee'])-a['robot_ee'])*20 for a,b in zip(trace,trace[1:]))
     result={'status':'verified','human_action_calls':len(human),'human_planner_calls':len(plans),
         'robot_neural_calls':0,'parking_real_control_steps':80,'human_activity_steps':len(controls),

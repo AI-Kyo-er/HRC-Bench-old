@@ -16,7 +16,9 @@ CONTEXTS={
     'shared_serving':{'label':'移动餐盘完成共同上桌','preferences':'你与机械臂准备把食物上桌。你希望接收盘最后在靠近自己的高台上，可先整理自己的食物，也可在机械臂放好碗之后移动盘子。你根据实际进展选择时机、工具和分工提案，不把机器人动作或自己的命令当作已经完成。'},
     'pantry_work':{'label':'共享厨房中的个人整理','preferences':'你在共用厨房整理自己的食物和餐具，希望可移动物品位于自己容易取用的位置。你可以选择物品与个人整理区域、保留原位、向机械臂请求空间或协助，不必照搬它的工作。以当前库存和真实进展决定个人目标，没有固定物体清单或变化时刻。'},
     'workspace_owner':{'label':'整理并维护自己的工作空间',
-                       'preferences':'你与机械臂共用桌面，希望自己的食物和餐具容易取用、桌面不拥挤。你重视空间秩序，会根据对方的运动调整位置安排或提出协商；可以保留物品原位、重新整理或离开返回。没有预定的动作顺序和变化时刻。'}
+                       'preferences':'你与机械臂共用桌面，希望自己的食物和餐具容易取用、桌面不拥挤。你重视空间秩序，会根据对方的运动调整位置安排或提出协商；可以保留物品原位、重新整理或离开返回。没有预定的动作顺序和变化时刻。'},
+    'shared_meal':{'label':'边准备边调整的共同用餐',
+        'preferences':'你正在共用厨房准备一顿自己要吃的饭，希望接收食物的餐具最终靠近自己、其他需要的物品方便取用。你有独立的用餐安排，机械臂在做自己的公开工作。依据它实际在搬什么、自己的握持与餐具位置决定先整理、协助、等候、重新布置或请求空间；接收物可能需要调整位置，但你自行决定对象、时机和安排，没有预设动作序列或目标变化时刻。'}
 }
 
 
@@ -102,7 +104,9 @@ class AutonomousNativeHuman(NativeQwenHuman):
         if row['parse_error'] is None:
             value=self._parse(row['raw_output'])
             if 'personal_targets' in value:
-                targets,error=validate_targets(value['personal_targets'],observation)
+                targets,error=validate_targets(value['personal_targets'],observation,
+                    relative_destinations=observation.human_execution.get('relative_placement_destinations',{})
+                    if getattr(self,'allow_relational_targets',False) else ())
                 self.target_validation_feedback=error
                 if error is None:
                     if sorted(targets,key=lambda t:t['object_id'])!=sorted(self.personal_targets,key=lambda t:t['object_id']):self.target_revision+=1

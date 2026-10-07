@@ -20,7 +20,7 @@ def verify_episode(directory, *, require_shelf_release=False, require_table_rele
     context=read(directory/'personal_context.json');assert context['human_assigned_targets'] is None and context['timed_work_updates']==[]
     trace=rows(directory/'trace.jsonl');control=rows(directory/'human_control.jsonl')
     human=rows(directory/'human_policy_io.jsonl');dialogue=rows(directory/'public_dialogue.jsonl');calls=rows(directory/'model_calls.jsonl')
-    reflective=(directory/'human_planner_io.jsonl').exists()
+    reflective=(directory/'human_planner_io.jsonl').exists() and bool(rows(directory/'human_planner_io.jsonl'))
     reflection=verify_reflective_records(rows(directory/'human_planner_io.jsonl'),human) if reflective else None
     targets=[];revision=0;intention=''
     for d in human:
@@ -31,12 +31,20 @@ def verify_episode(directory, *, require_shelf_release=False, require_table_rele
         assert public['personal_context']==context['context']
         if 'preferred_personal_objects' in context:assert public['preferred_personal_object_ids']==context['preferred_personal_objects']
         assert not {'personal_evidence','human_goal_success','task_success'}.intersection(public)
+        if d.get('human_policy_architecture')=='deliberative_joint_intention_action':
+            assert not reflective and d['thinking_enabled'] and d['neural_calls_for_this_decision']==1
+            assert public['human_input_contract']=='joint_intention_action_v1'
+            assert public['agent_identity']=={'self':'human','other':'robot'}
+            raw=d['raw_model_output']
+            assert d['raw_output']==(raw.rsplit('</think>',1)[-1].strip() if '</think>' in raw else '')
+            assert public['previous_model_choices']['source']=='own_past_model_choices_not_current_world_facts'
         if reflective:
             targets=state['personal_targets'];revision=state['revision'];intention=state['long_term_intention']
         elif d['parse_error'] is None:
             value=json.loads(d['raw_output'][d['raw_output'].find('{'):d['raw_output'].rfind('}')+1])
             if 'personal_targets' in value:
-                expected,error=validate_targets(value['personal_targets'],SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']))
+                expected,error=validate_targets(value['personal_targets'],SimpleNamespace(objects=public['objects_xyz'],regions=public['regions_xyz']),
+                    relative_destinations=public['action_interface'].get('relative_placement_destinations',{}) if allow_relative_relations else ())
                 assert state['target_validation_error']==error
                 if error is None:
                     if sorted(expected,key=lambda t:t['object_id'])!=sorted(targets,key=lambda t:t['object_id']):revision+=1
