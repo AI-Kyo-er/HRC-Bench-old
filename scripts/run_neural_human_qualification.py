@@ -36,8 +36,10 @@ def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2))
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--human-command-delivery',choices=['neural_request','cached_each_tick'],default='neural_request')
-    parser.add_argument('--human-policy-architecture',choices=['grounded','deliberative'],default='grounded')
+    parser.add_argument('--human-policy-architecture',choices=['grounded','deliberative','learned'],default='grounded')
     parser.add_argument('--autonomous-human-context',choices=list(CONTEXTS),default='pantry_work')
+    parser.add_argument('--adapter-path',type=Path)
+    parser.add_argument('--init-state-id',type=int,default=0);parser.add_argument('--seed',type=int,default=0)
     parser.add_argument('--steps',type=int,default=1200);parser.add_argument('--scene-case',choices=list(CASES),default='bowl_on_stove')
     args=parser.parse_args()
     if args.output_dir.exists() and any(args.output_dir.iterdir()):parser.error('使用新输出目录')
@@ -53,16 +55,19 @@ def main():
     from libero.libero import benchmark,get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
     import torch
-    paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_command_delivery.py')]
+    paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_command_delivery.py'),Path('src/hrc_pilot/learned_human.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     case=CASES[args.scene_case];suite=benchmark.get_benchmark_dict()[case.suite]();task=suite.get_task(case.task_id)
     human_class=GroundedReflectiveHuman;human_kwargs={'reflection_interval_s':6}
     if args.human_policy_architecture=='deliberative':
         from hrc_pilot.native_deliberative_human import DeliberativeArticulatedHuman
         human_class=DeliberativeArticulatedHuman;human_kwargs={}
+    if args.human_policy_architecture=='learned':
+        from hrc_pilot.learned_human import LearnedArticulatedHuman
+        human_class=LearnedArticulatedHuman;human_kwargs={'adapter_path':args.adapter_path}
     human=human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),autonomous_context=args.autonomous_human_context,
         preferred_personal_objects=case.preferred_personal_objects,model_path=model_path,persona_id='independent',
-        decision_interval_steps=40,memory_scope='episode',**human_kwargs);human.prepare();human.reset(0);torch.manual_seed(0)
+        decision_interval_steps=40,memory_scope='episode',**human_kwargs);human.prepare();human.reset(args.seed);torch.manual_seed(args.seed)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
         camera_names=['agentview','robot0_eye_in_hand','frontview'],camera_heights=[256,256,480],camera_widths=[256,256,640],
         **native_time_limits(args.steps,80,True))
@@ -74,7 +79,7 @@ def main():
         if not timeline:Image.fromarray(rgb).save(ep/'preview.png')
         timeline.append({'frame':len(timeline),'video_time_s':len(timeline)/20,'benchmark_time_s':t,'physics_time_s':float(env.sim.data.time)})
     try:
-        env.seed(0);env.reset();states=torch.load(Path(get_libero_path('init_states'))/task.problem_folder/task.init_states_file,weights_only=False,map_location='cpu');obs=env.set_init_state(states[0])
+        env.seed(args.seed);env.reset();states=torch.load(Path(get_libero_path('init_states'))/task.problem_folder/task.init_states_file,weights_only=False,map_location='cpu');obs=env.set_init_state(states[args.init_state_id])
         for _ in range(10):obs,*_=env.step([0.]*6+[-1.])
         objects={n:env.sim.data.body_xpos[b].copy() for n,b in env.env.obj_body_id.items()};regions=scene_regions(objects,env.env.objects_dict)
         obs=augment_contact_human(env,regions['near_human'],public_regions=regions,contact_model='articulated_hand')
@@ -124,7 +129,7 @@ def main():
         raise
     finally:writer.close();env.close()
     write(args.output_dir/'provenance.json',{'human_target_source':'model_generated_from_personal_preferences','human_policy_architecture':args.human_policy_architecture,
-        'human_model':str(model_path),'human_command_delivery':args.human_command_delivery,'robot_policy':'calibration parking then stationary, no neural robot',
+        'human_model':str(model_path),'human_adapter':str(args.adapter_path) if args.adapter_path else None,'init_state_id':args.init_state_id,'seed':args.seed,'human_command_delivery':args.human_command_delivery,'robot_policy':'calibration parking then stationary, no neural robot',
         'personal_goal_table_release_required':True,'personal_goal_relative_relations_allowed':True,'source_sha256':hashes,
         'source_files_changed_during_run':[str(p) for p in paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
         'cuda_visible_devices':chosen,'renderer_device_binding':matched[0]})
