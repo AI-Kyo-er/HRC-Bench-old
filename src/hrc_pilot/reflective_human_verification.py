@@ -52,7 +52,7 @@ def verify_reflective_records(planners,motors):
         assert row['planner_decision_id']==max(p['planner_decision_id'] for p in planners if p['time_s']<=row['time_s'])
         assert planner['time_s']<=row['time_s'] and public['planner_decision_id']==planner['planner_decision_id']
         assert row['personal_goal_state']==planner['retained_or_accepted_personal_goal_state']
-        if public.get('human_input_contract')=='current_intentions_and_measured_geometry_v2':
+        if public.get('human_input_contract') in {'current_intentions_and_measured_geometry_v2','current_intentions_and_support_geometry_v3'}:
             state=row['personal_goal_state'];assert public['your_current_personal_targets']==state['personal_targets']
             assert 'your_previous_personal_targets' not in public and 'your_previous_generated_plan' not in public
             assert public['agent_identity']=={'self':'human','other':'robot'}
@@ -64,7 +64,10 @@ def verify_reflective_records(planners,motors):
             for target,g in zip(state['personal_targets'],geometry):
                 assert all(g[k]==v for k,v in target.items())
                 obj,dest=target['object_id'],target['destination'];relative=dest.startswith('on:')
-                point=public['objects_xyz'][dest.split(':',1)[1]] if relative else public['regions_xyz'][dest]
+                if relative and public['human_input_contract']=='current_intentions_and_support_geometry_v3':
+                    point=public['action_interface']['relative_placement_destinations'][dest]['support_xyz']
+                else:
+                    point=public['objects_xyz'][dest.split(':',1)[1]] if relative else public['regions_xyz'][dest]
                 np.testing.assert_allclose(g['destination_xyz'],point,atol=1e-9)
                 np.testing.assert_allclose(g['measured_xy_distance_m'],np.linalg.norm(np.asarray(public['objects_xyz'][obj])[:2]-np.asarray(point)[:2]),atol=1e-9)
                 assert g['visible_radius_m']==(.03 if relative else .025) and g['measurement_time_s']==public['time_s']

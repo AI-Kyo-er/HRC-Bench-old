@@ -54,7 +54,7 @@ class GroundedReflectiveHuman(ReflectiveArticulatedHuman):
         """在意图推理之后投影当前目标，不把过去的模型观察判断当动作事实。"""
         public=dict(public)
         planner=self.planning_io[-1]
-        public['human_input_contract']='current_intentions_and_measured_geometry_v2'
+        public['human_input_contract']='current_intentions_and_support_geometry_v3'
         public['agent_identity']={'self':'human','other':'robot'}
         public['your_current_personal_targets']=[dict(t) for t in self.personal_targets]
         public.pop('your_previous_personal_targets',None)
@@ -70,8 +70,7 @@ class GroundedReflectiveHuman(ReflectiveArticulatedHuman):
             if destination in public['regions_xyz']:
                 point=public['regions_xyz'][destination];radius=.025
             elif destination in relative:
-                receiver=relative[destination]['receiver_object_id']
-                point=public['objects_xyz'][receiver];radius=.03
+                point=relative[destination]['support_xyz'];radius=.03
             else:continue
             geometry.append({**target,'destination_xyz':point,
                 'measured_xy_distance_m':float(np.linalg.norm(np.asarray(public['objects_xyz'][obj])[:2]-np.asarray(point)[:2])),

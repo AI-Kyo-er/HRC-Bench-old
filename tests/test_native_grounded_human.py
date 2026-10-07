@@ -1,4 +1,6 @@
 import json
+import copy
+import numpy as np
 from pathlib import Path
 from dataclasses import replace
 
@@ -61,3 +63,37 @@ def test_new_and_revised_targets_get_current_geometry_before_motor_inference():
         assert 'Everything already placed!' not in row['public_input']
     assert p.planning_io[0]['active_intention_plan']['observed_changes']=='Everything already placed!'
     assert verify_reflective_records(p.planning_io,p.policy_io)['status']=='verified'
+
+
+def test_relative_goal_uses_current_collision_support_height_and_tracks_receiver():
+    outputs=iter([
+        'Reasoning </think>'+json.dumps({'decision_kind':'continue',
+            'long_term_intention':'把餐盘放到碗上','personal_targets':[['plate','on:bowl']],
+            'plan':['Move plate onto bowl']}),
+        '{"intent":"grasp","object_id":"plate"}',
+        '{"intent":"observe"}'])
+    p=GroundedReflectiveHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),
+        model_path=Path('/unused'),autonomous_context='pantry_work',generator=lambda _:next(outputs))
+    p.reset(0)
+    o=observation()
+    interface={'receiver_object_id':'bowl','support_xyz':[.1,0.,.96]}
+    p.step(replace(o,human_execution={**o.human_execution,
+        'relative_placement_destinations':{'on:bowl':interface}}))
+    moved=replace(o,time_s=2,objects={**o.objects,'bowl':(.3,.1,.92)},
+        human_execution={**o.human_execution,'relative_placement_destinations':{
+            'on:bowl':{**interface,'support_xyz':[.3,.1,.98]}}})
+    p.step(moved)
+    for row,point in zip(p.policy_io,[[.1,0.,.96],[.3,.1,.98]]):
+        public=json.loads(row['public_input'].split('\n',1)[1])
+        assert public['human_input_contract']=='current_intentions_and_support_geometry_v3'
+        np.testing.assert_allclose(public['your_target_geometry'][0]['destination_xyz'],point)
+        assert public['your_target_geometry'][0]['measurement_time_s']==row['time_s']
+    assert verify_reflective_records(p.planning_io,p.policy_io)['status']=='verified'
+    # 已保存的v2记录仍按原body位置语义审计，不回写历史输入。
+    legacy=copy.deepcopy(p.policy_io)
+    for row in legacy:
+        public=json.loads(row['public_input'].split('\n',1)[1])
+        public['human_input_contract']='current_intentions_and_measured_geometry_v2'
+        public['your_target_geometry'][0]['destination_xyz']=public['objects_xyz']['bowl']
+        row['public_input']='阶段：当前动作\n'+json.dumps(public)
+    assert verify_reflective_records(p.planning_io,legacy)['status']=='verified'
