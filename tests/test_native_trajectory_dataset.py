@@ -39,3 +39,8 @@ def test_mixed_loader_does_not_turn_model_selected_primitives_into_vla_supervisi
 def test_missing_mixed_source_is_not_silently_inferred_as_learned_vla(tmp_path):
     sample(tmp_path)
     with pytest.raises(FileNotFoundError):NativeMixedTrajectoryDataset(tmp_path)[0]
+
+
+def test_vla_only_loader_rejects_coordinate_primitive_as_motion_supervision(tmp_path):
+    sample(tmp_path);(tmp_path/'sample.action_source.txt').write_text('vlm_selected_cartesian_primitive')
+    with pytest.raises(ValueError,match='协调原语'):NativeTrajectoryDataset(tmp_path)[0]

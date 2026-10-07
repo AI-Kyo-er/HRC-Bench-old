@@ -6,6 +6,7 @@ from PIL import Image
 
 
 class NativeTrajectoryDataset:
+    allow_mixed_controls=False
     def __init__(self, directory):
         self.directory=Path(directory)
         self.stems=sorted(p.name.removesuffix('.state.npy') for p in self.directory.glob('*.state.npy'))
@@ -15,6 +16,9 @@ class NativeTrajectoryDataset:
 
     def __getitem__(self,index):
         stem=self.stems[index];base=self.directory/stem
+        source_path=Path(str(base)+'.action_source.txt')
+        if source_path.exists() and source_path.read_text().strip()!='learned_vla' and not self.allow_mixed_controls:
+            raise ValueError('样本包含协调原语，须使用NativeMixedTrajectoryDataset，不得作为学习VLA监督')
         state=np.load(str(base)+'.state.npy',allow_pickle=False)
         actions=np.load(str(base)+'.action.npy',allow_pickle=False)
         valid=np.load(str(base)+'.action_valid.npy',allow_pickle=False)
@@ -33,6 +37,7 @@ class NativeTrajectoryDataset:
 class NativeMixedTrajectoryDataset(NativeTrajectoryDataset):
     """混合策略轨迹显式标明控制来源；保持与位移不成为学习VLA动作标签。"""
     SOURCES={'learned_vla','vlm_selected_hold_primitive','vlm_selected_cartesian_primitive','planner_output_rejection_hold_primitive'}
+    allow_mixed_controls=True
 
     def __getitem__(self,index):
         sample=super().__getitem__(index)
