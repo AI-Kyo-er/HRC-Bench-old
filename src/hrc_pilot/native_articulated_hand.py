@@ -66,6 +66,13 @@ class NativeArticulatedHuman(NativeContactHuman):
         return touch
 
     def accept(self,command):
+        if command.intent=='move_hand':
+            signature=(command.intent,tuple(command.target))
+            if signature==self.signature and self.phase not in {'idle','failed'}:return
+            self.signature=signature;self.accepted_intent=command.intent
+            self.command_started_at=float(self.env.sim.data.time);self.motor_failure=None
+            self.target=np.asarray(command.target,dtype=float);self.set_phase('hand_waypoint')
+            return
         if command.intent not in {'grasp','place','release'}:
             # Observe suspends movement and preserves actual grasp pressure.
             if command.intent=='push':self.finger_target=.095
@@ -202,6 +209,7 @@ class NativeArticulatedHuman(NativeContactHuman):
              or (elapsed>.15 and self.object_id and not any(self.finger_contacts()))):
             self.carry_object=None;self.target=actual+[0,0,.12];self.set_phase('grasp_retreat')
         elif self.phase=='grasp_retreat' and near:self.set_phase('idle')
+        elif self.phase=='hand_waypoint' and near:self.set_phase('idle')
         elif near:
             if self.phase=='approach':self.phase='descend';self.target=self.push_start.copy()
             elif self.phase=='descend':self.phase='push';self.target=self.push_end.copy()
