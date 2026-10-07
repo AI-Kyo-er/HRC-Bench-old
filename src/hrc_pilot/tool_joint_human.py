@@ -49,7 +49,7 @@ def parse_tool_choice(raw,objects,regions):
 
 def execution_tool_result(decision_id,scene):
     execution=scene['own_execution'];receipt=execution.get('last_receipt') or {}
-    return {'policy_decision_id':decision_id,'observed_at_s':scene['time_s'],
+    result={'policy_decision_id':decision_id,'observed_at_s':scene['time_s'],
         'acceptance':receipt.get('accepted') if receipt.get('request_id')==decision_id else None,
         'completed_request_ids':list(execution.get('completed_requests',[])),
         'active_motion_request_id':execution.get('active_request_id'),
@@ -57,6 +57,8 @@ def execution_tool_result(decision_id,scene):
         'last_execution_error':receipt.get('error'),
         'measured_current_facts':list(scene['measured_world'].get('current_measured_fact_sentences',[])),
         'interpretation':'Actual observations after a policy selection. Acceptance is not completion; no task score, future cue, or prescribed next action.'}
+    if 'cancelled_requests' in execution:result['cancelled_request_ids']=list(execution['cancelled_requests'])
+    return result
 
 
 def tool_model_input(system,request,history,scene):

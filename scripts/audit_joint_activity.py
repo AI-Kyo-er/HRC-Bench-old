@@ -27,7 +27,7 @@ def audit(root):
     assert bool(plans)==(p['robot_system'] in {'visual_coordinator_plus_vla','symbolic_coordinator_plus_vla'})
     raw_human=rows(ep/'human_control.jsonl')
     tool_tokenizer=None
-    if any(d.get('choice_schema_version') in {6,7,8} for d in human):
+    if any(d.get('choice_schema_version') in {6,7,8,9} for d in human):
         from transformers import AutoTokenizer
         tool_tokenizer=AutoTokenizer.from_pretrained(p['human_model'],local_files_only=True,trust_remote_code=True)
     support_sim=None
@@ -53,15 +53,19 @@ def audit(root):
     for human_index,(d,receipt) in enumerate(zip(human,receipts)):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=d.get('observation_source_scene',source['scene']);actual=trace[round(d['time_s']*20)]
-        if d.get('human_observation_encoding')=='intent_semantic_facts_v1':
+        if d.get('human_observation_encoding') in {'intent_semantic_facts_v1','intent_semantic_available_targets_v2'}:
             from hrc_pilot.intent_observation import intent_observation
-            assert source['scene']==intent_observation(scene)
+            expected_scene=intent_observation(scene)
+            if d['human_observation_encoding']=='intent_semantic_available_targets_v2':
+                from hrc_pilot.human_decision_interface import available_destinations
+                expected_scene['named_destinations']=list(available_destinations(scene))
+            assert source['scene']==expected_scene
         if d.get('human_contribution_contract')=='explicit_parameter_domains_v1':
             from hrc_pilot.human_contribution_contract import contribution_interface
             assert source['human_contribution_interface']==contribution_interface(scene)
             if d['reflection_enabled']:
                 assert d['reflection_input']['human_contribution_interface']==contribution_interface(scene)
-        if d.get('choice_schema_version') in {6,7,8}:
+        if d.get('choice_schema_version') in {6,7,8,9}:
             from hrc_pilot.tool_joint_human import tool_model_input,retained_private_notes
             assert source['own_retained_private_notes']==retained_private_notes(human[:human_index])
             payload=tool_model_input(d['system_prompt'],source,human[:human_index],scene)
@@ -69,10 +73,19 @@ def audit(root):
                 from hrc_pilot.structured_tool_joint_human import structured_speech_payload
                 payload=structured_speech_payload(payload)
                 assert source['human_measured_object_contacts']==scene['measured_world'].get('object_contacts',{})
-            if d['choice_schema_version']==8:
+            if d['choice_schema_version'] in {8,9}:
                 from hrc_pilot.human_decision_interface import decision_tool,decision_interface
                 payload['tools']=[decision_tool(scene)]
-                assert source['human_decision_interface']==decision_interface(scene)
+                interface=decision_interface(scene)
+                if d['choice_schema_version']==9:
+                    from hrc_pilot.constrained_human_decision import constrained_tool,constrained_interface,decision_json_schema
+                    payload['tools']=[constrained_tool(scene)];interface=constrained_interface(scene)
+                    assert d['output_json_schema']==decision_json_schema(scene)
+                    assert d['raw_output']==d['caller_prefix']+d['actual_generated_json']+d['caller_suffix']
+                    assert tool_tokenizer.decode(d['actual_generated_token_ids'],skip_special_tokens=True).strip()==d['actual_generated_json']
+                    from jsonschema import validate
+                    validate(json.loads(d['actual_generated_json']),d['output_json_schema'])
+                assert source['human_decision_interface']==interface
                 assert 'human_contribution_interface' not in source
                 assert source['human_measured_object_contacts']==scene['measured_world'].get('object_contacts',{})
                 from hrc_pilot.human_support_targets import cabinet_placement_targets
@@ -88,7 +101,8 @@ def audit(root):
             assert payload==d['native_tool_model_input']
             assert d['chat_template_sha256']==sha256(tool_tokenizer.chat_template.encode()).hexdigest()
             encoded=tool_tokenizer.apply_chat_template(payload['messages'],tools=payload['tools'],
-                tokenize=True,add_generation_prompt=True,enable_thinking=True)
+                tokenize=True,add_generation_prompt=True,enable_thinking=d.get('generation_thinking',True))
+            if d['choice_schema_version']==9:encoded+=tool_tokenizer.encode(d['caller_prefix'],add_special_tokens=False)
             assert encoded==d['native_tool_input_token_ids']
         if p.get('human_source','neural')=='neural':
             assert source['activity']==saved_activity
@@ -113,8 +127,11 @@ def audit(root):
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            if d.get('choice_schema_version') in {6,7,8}:
-                if d['choice_schema_version']==8:
+            if d.get('choice_schema_version') in {6,7,8,9}:
+                if d['choice_schema_version']==9:
+                    from hrc_pilot.constrained_human_decision import parse_constrained_decision
+                    choice,normalization,call=parse_constrained_decision(d['raw_output'],scene)
+                elif d['choice_schema_version']==8:
                     from hrc_pilot.human_decision_interface import parse_decision
                     choice,normalization,call=parse_decision(d['raw_output'],scene)
                 else:
