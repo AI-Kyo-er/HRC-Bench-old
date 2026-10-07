@@ -92,6 +92,7 @@ class ReflectiveArticulatedHuman(ArticulatedAutonomousHuman):
             self.target_validation_feedback=error
             state=self._personal_state()
             self.planning_io.append({'planner_decision_id':len(self.planning_io),'time_s':now,
+                'target_decoder':'dict_or_pair_v1',
                 'system_prompt':self._system_prompt(),'public_input':planning_input,'raw_output':raw,
                 'validation_error':error,'retained_or_accepted_personal_goal_state':state,
                 'active_intention_plan':dict(self.active_plan),'public_proposal_messages':[m.__dict__ for m in proposal_messages],
