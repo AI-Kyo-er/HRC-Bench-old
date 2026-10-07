@@ -18,14 +18,18 @@ class KinematicHuman(NativeContactHuman):
         # 人身体只显示，接触球不施力；物品仍保留原生碰撞和机器人动力学。
         env.sim.model.geom_contype[self.geom]=0;env.sim.model.geom_conaffinity[self.geom]=0
         self.phase='idle';self.completed_requests=[];self.active_request=None
+        self.transfer_destination=None;self.carried_offsets={};self.carried_quaternions={}
 
     def accept_choice(self,choice,request_id):
         if request_id==self.last_request:return
         self.last_request=request_id;action=choice['action'];error=None
         obj=choice.get('object_id');dest=choice.get('destination')
+        if action in {'place','relocate'} and not getattr(self.env.env,'_hrc_region_accessibility',{}).get(dest,True):
+            error='destination_not_physically_accessible'
         if action=='pick' and self.held is not None:error='already_holding_an_object'
+        if action=='relocate' and self.held is not None and self.held!=obj:error='holding_a_different_object'
         if action=='place' and self.held is None:error='no_held_object'
-        if action=='pick' and not error:
+        if action in {'pick','relocate'} and not error and self.held is None:
             grippers=set()
             for i in range(self.env.sim.data.ncon):
                 c=self.env.sim.data.contact[i]
@@ -39,9 +43,14 @@ class KinematicHuman(NativeContactHuman):
         self.accepted_intent=action
         # wait继续当前运动，不自动生成新的抓放任务。
         if action in {'wait','message'}:return
+        if action=='relocate' and self.active_request is not None and self.phase!='idle' and obj==self.object_id and dest==self.transfer_destination:
+            return
         self.active_request=request_id;self.object_id=obj;self.destination=dest
-        if action=='pick':
+        self.transfer_destination=dest if action=='relocate' else None
+        if action in {'pick','relocate'} and self.held is None:
             self.target=self.object_position(obj)+[0,0,.06];self.phase='pick_approach'
+        elif action=='relocate':
+            self.target=self.position().copy();self.target[2]=1.35;self.phase='transfer_raise'
         elif action=='place':
             self.object_id=self.held
             self.target=np.asarray(self.regions[dest],dtype=float)-self.offset
@@ -58,7 +67,8 @@ class KinematicHuman(NativeContactHuman):
             'phase':self.phase,'accepted_action':self.accepted_intent,'held_object':self.held,
             'hand_xyz':self.position().tolist(),'target_xyz':self.target.tolist(),
             'remaining_distance_m':float(np.linalg.norm(self.position()-self.target)),
-            'body_xy':self.body_base.tolist(),'completed_requests':self.completed_requests[-6:],
+                      'body_xy':self.body_base.tolist(),'completed_requests':self.completed_requests[-6:],
+            'carried_objects':list(getattr(self,'carried_offsets',{})),
             'last_receipt':self.receipts[-1] if self.receipts else None}
 
     def physics_step(self):
@@ -66,6 +76,9 @@ class KinematicHuman(NativeContactHuman):
             dt=self.dt,speed=.20,acceleration=.5)
         if self.avatar is not None:self.avatar.rig.base[:2]=self.body_base
         if self.phase=='pick_approach':self.target=self.object_position(self.object_id)+[0,0,.06]
+        if self.phase in {'transfer_translate','transfer_lower'}:
+            self.target[:2]=np.asarray(self.regions[self.transfer_destination])[:2]-self.offset[:2]
+            if self.phase=='transfer_lower':self.target[2]=self.regions[self.transfer_destination][2]-self.offset[2]
         previous=self.position()
         self.reference,self.velocity=bounded_motion(self.reference,self.velocity,self.target,
             dt=self.dt,speed=self.motion_speed,acceleration=.4)
@@ -75,22 +88,47 @@ class KinematicHuman(NativeContactHuman):
         near=np.linalg.norm(self.reference-self.target)<.004
         if self.phase=='pick_approach' and near:
             self.held=self.object_id;self.offset=self.object_position(self.held)-self.reference
+            self.carried_offsets={self.held:self.offset.copy()};self.carried_quaternions={}
+            # 接触＋原生几何包含的载荷随人搬运容器；这是明确的人执行简化，不读取任务成绩。
+            states=getattr(self.env.env,'object_states_dict',getattr(self.env.env,'object_states',{}))
+            if self.held in states:
+                for name in self.object_q:
+                    if name!=self.held and name in states and states[self.held].check_contact(states[name]) and states[self.held].check_contain(states[name]):
+                        self.carried_offsets[name]=self.object_position(name)-self.reference
+            for name in self.carried_offsets:
+                q,_=self.object_q[name];self.carried_quaternions[name]=self.env.sim.data.qpos[q+3:q+7].copy()
             self.target=self.reference+[0,0,.12];self.phase='pick_lift'
         elif near and self.phase=='place_transport':
-            self.held=None;self.offset=None;self._complete()
-        elif near and self.phase in {'pick_lift','point','move_hand','away','return'}:
+            self._release();self._complete()
+        elif near and self.phase=='pick_lift' and getattr(self,'transfer_destination',None):
+            self.target=self.reference.copy();self.target[2]=1.35;self.phase='transfer_raise'
+        elif near and self.phase=='transfer_raise':
+            self.target[:2]=np.asarray(self.regions[self.transfer_destination])[:2]-self.offset[:2]
+            self.phase='transfer_translate'
+        elif near and self.phase=='transfer_translate':
+            self.target[2]=self.regions[self.transfer_destination][2]-self.offset[2];self.phase='transfer_lower'
+        elif near and self.phase=='transfer_lower':
+            self._release();self.target=self.reference+[0,0,.15];self.phase='transfer_retreat'
+        elif near and self.phase in {'pick_lift','point','move_hand','away','return','transfer_retreat'}:
             self._complete()
-        write=None
+        write=None;writes=[]
         if self.held is not None:
-            q,d=self.object_q[self.held];write=self.held
-            self.env.sim.data.qpos[q:q+3]=self.reference+self.offset
-            self.env.sim.data.qvel[d:d+3]=self.velocity;self.env.sim.data.qvel[d+3:d+6]=0
+            write=self.held
+            for name,offset in getattr(self,'carried_offsets',{self.held:self.offset}).items():
+                q,d=self.object_q[name];writes.append(name)
+                self.env.sim.data.qpos[q:q+3]=self.reference+offset
+                if name in getattr(self,'carried_quaternions',{}):self.env.sim.data.qpos[q+3:q+7]=self.carried_quaternions[name]
+                self.env.sim.data.qvel[d:d+3]=self.velocity;self.env.sim.data.qvel[d+3:d+6]=0
         self.physics_steps+=1
         if self.physics_steps%round(.05/self.dt)==0:self._display(self.reference)
         self.records.append({'physics_time_s':float(self.env.sim.data.time),'phase':self.phase,
             'hand_xyz':self.reference.tolist(),'hand_velocity':self.velocity.tolist(),
             'held_object':self.held,'human_attached_object_pose_write':write,
+            'human_carried_object_pose_writes':writes,
             'robot_pose_writes':0,'active_request_id':self.active_request})
 
     def _complete(self):
         self.completed_requests.append(self.active_request);self.phase='idle'
+
+    def _release(self):
+        self.held=None;self.offset=None;self.carried_offsets={};self.carried_quaternions={}

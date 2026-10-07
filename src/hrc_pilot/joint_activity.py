@@ -13,8 +13,10 @@ class JointActivity:
     external_context: str
 
     def public(self):
-        return {k:v for k,v in asdict(self).items()
-                if k not in {'private_background','external_context'}}
+        value={k:v for k,v in asdict(self).items()
+               if k not in {'private_background','external_context'}}
+        value['dependencies']=list(value['dependencies'])
+        return value
 
 
 ACTIVITIES={a.key:a for a in [

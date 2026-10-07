@@ -34,7 +34,7 @@ def test_pick_is_continuous_and_writes_only_human_held_object():
     actor=object.__new__(KinematicHuman)
     data=SimpleNamespace(time=0.,qpos=np.zeros(20),qvel=np.zeros(20),ctrl=np.zeros(3))
     data.qpos[:3]=[0,0,1.06];data.qpos[6:9]=[0,0,1.]
-    actor.env=SimpleNamespace(sim=SimpleNamespace(data=data))
+    actor.env=SimpleNamespace(sim=SimpleNamespace(data=data),env=SimpleNamespace(object_states_dict={}))
     actor.qidx=[0,1,2];actor.didx=[0,1,2];actor.actuators=[0,1,2]
     actor.body_base=np.array([.25,.6]);actor.body_target=actor.body_base.copy();actor.body_velocity=np.zeros(2)
     actor.reference=data.qpos[:3].copy();actor.velocity=np.zeros(3);actor.dt=.002;actor.motion_speed=.2
