@@ -100,3 +100,24 @@ activity_private_context.py：18种活动×情境的外部事实文本绑定实�
 - 服务仍π PID2267256 port8766，VLM PID3095303 port8782，HTTP PID3054726 port8123。旧语义drawer PID3495686已terminal，SemanticDrink PID3380481已terminal。不操作别人的GPU任务；旧显存拒绝日志保留。
 
 下一步：重新核实两个新PID／同session推进，终态后audit/evaluate/video→builder/export/browser，重点审阅政策变化是否体现在正确物品与约定、是否真正Robot响应并影响H。任务可执行性三init2原始操作已有actualπ成功，不能继续无休止底座证明。仅有actor逻辑、引用、绿灯与反复提示不算Goal。正式72计划仍未启动。
+
+## 后续接续：两个参数条件终态／原生推理资格
+
+本turn属于progress：回收两个120秒跨活动条件、独立审计及30视频发布，并开始NN原生thinking资格。Goal仍active，不能complete。
+
+- 两个950419b条件均terminal，init3/seed64，人各60NN／协调30NN：
+  * joint_contribution_snack_change_use_20261008：VLA120、人0parse error/0执行拒绝；10.8s准备，40s请求搬碗snack_delivery、60s完成；16近目标请求部分no-op。始终未真实填装，搬空碗不计点心交付；餐盘托盘用途没有实际餐盘行为。
+  * joint_contribution_drink_detour_20261008：VLA128、3parse error/0执行拒绝；11.35s准备，33.2—72.95s实际离返；餐盘未搬、酒瓶未上架。不能把身体离返当完成另一活动。两视频2401帧、输入／实际动作／schema4独立重建通过。
+- 当前报告30视频（29完整120s＋1 partial），全部play/seek/Range206、269 links、375px、JS0error通过。dataset29完整、9120观测块、69600实际控制动作，唯一ID全加载检验通过；无formal split或专家标签。
+- EVALUATION_PLAN已修正init2三类actualπ成功参考，不能说饮品只有replay；测试init4/5依然未运行。72正式矩阵未启动。
+- 56382a3：ReasoningJointHumanPolicy继承贡献／语义层，同一Qwen3-14B原生enable_thinking=True、最大4096新token。单次人NN，不候选＋反思第二次，机器人Vision8设置不变；这个人策略变体不是新增Robot模型覆盖。最终JSON从</think>后取，完整原始输出保留。无教师下一动作、私有评分、新训练或下载。
+- 永久新test验证剥离think后保持实际消息，不替换选择。先前full256passed/2skip，新focused2passed，尚未做最后full257。下一次有必要改动／验收时跑对应检查，不为绿灯无谓重复。
+
+当前live必须ps核实：
+- joint_reasoning_drawer_request_20261008，GPU2，PID3555437，session29736，log data1/results/joint_reasoning_drawer_request_20261008.log；init3/seed64/busy/robot_request/120s、human-auto-buffer、native技能库、Vision8＋π。
+- 最新观察thinking 0s place plate到personal，4s正确等待真实门未开（不能仅相信公开话语），8/12重复relocate_plate同位置，28/32实际away、36return，40relocateCreamDrawer，44继续，48有一次presence与搬物冲突→保留wait。47.95s真实持cream、transfer_raise，原生R开首次6.2s。这些均中途，不提前宣布完整HRC成功。
+- buffers0：人自行先放餐盘，既有自动缓冲未实际触发。这说明思考条件仍须实际frame和结束状态审阅，不能称buffer有效性已证明。
+- vision PID3095303 GPU1 port8782，π PID2267256 GPU3 port8766，HTTP PID3054726 port8123。其他新worker已terminal；不动外部GPU任务。
+- 当前job加载core main、humanBase、semantic/contribution/intent、Kinematic/native*.py以及reasoning wrapper等都保持源冻结，结束前不要修改。coordinator服务自身源保持加载版本。
+
+Next：按同PID/handle等待reasoning终态，audit/evaluate/full decode→builder/export/browser。审阅当前需求／实际贡献／伙伴响应，不能因格式少错、动作执行或世界关系满足就判cobalance。仍需六情景实际覆盖、可靠人策略、完整双向重组、多系统正式多init和评价。未来要扩大合理贡献接口／任务交互而非反复小提示或人体抓放LoRA；未支持动作不能当R能力缺口。
