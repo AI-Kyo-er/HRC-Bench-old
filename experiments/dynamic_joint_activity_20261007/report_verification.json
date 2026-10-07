@@ -1,0 +1,64 @@
+{
+  "status": "verified",
+  "videos": [
+    {
+      "video": "results/continuous_v2/joint_activity_snack_service_coordinated_20261007/episode/demo.mp4",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_s": 37.2,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_drink_storage_compact_20261007/episode/demo.mp4",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_s": 37.2,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_snack_service_dev_20261007/episode/demo.mp4",
+      "duration_s": 10,
+      "played": true,
+      "seek_s": 6.0,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_snack_service_schema_20261007/episode/demo.mp4",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_s": 37.2,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_drink_storage_dev_20261007/episode/demo.mp4",
+      "duration_s": 16,
+      "played": true,
+      "seek_s": 9.6,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_drink_storage_schema_20261007/episode/demo.mp4",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_s": 37.2,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_drawer_access_dev_20261007/episode/demo.mp4",
+      "duration_s": 14,
+      "played": true,
+      "seek_s": 8.4,
+      "range_status": 206
+    },
+    {
+      "video": "results/continuous_v2/joint_activity_drawer_access_schema_20261007/episode/demo.mp4",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_s": 37.2,
+      "range_status": 206
+    }
+  ],
+  "local_links": 28,
+  "mobile_no_horizontal_overflow": true,
+  "javascript_errors": []
+}

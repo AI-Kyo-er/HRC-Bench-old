@@ -3,6 +3,184 @@
   "development_runs": [
     {
       "activity": "snack_service",
+      "run_name": "joint_activity_snack_service_coordinated_20261007",
+      "complete": true,
+      "metrics": {
+        "activity": "snack_service",
+        "robot_native_goal_first_stable_s": null,
+        "robot_native_goal_terminal": false,
+        "human_explicit_pick_calls": 3,
+        "human_explicit_place_calls": 1,
+        "human_completed_place_before_native_goal_times_s": [
+          10.15
+        ],
+        "human_completed_place_after_native_goal_times_s": [],
+        "human_intention_text_changes_for_review": [
+          {
+            "time_s": 2.0,
+            "before": "",
+            "after": "Prepare a snack by providing the serving container and receiving the filled snack.",
+            "reason": "I need to provide the akita_black_bowl_1 as the serving container for the snack. I will pick it up and place it in a suitable location for the robot to use.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 14.0,
+            "before": "Prepare a snack by providing the serving container and receiving the filled snack.",
+            "after": "",
+            "reason": "输出非法，保留现场并等待下一次人决策。",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 16.0,
+            "before": "",
+            "after": "Prepare a snack by providing the serving container and receiving the filled snack.",
+            "reason": "The robot is currently in the process of filling the serving container, and I should wait until it finishes before proceeding to receive or serve the snack.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          }
+        ],
+        "human_neural_calls": 40,
+        "robot_actual_control_steps": 1600,
+        "world_initializations": 1,
+        "activity_completion_status": "requires_semantic_and_physical_review",
+        "interpretation": "记录机器人原生贡献及人明确动作的时间见证；尚未以原生任务或文字变化冒充完整活动成功。",
+        "init_state_id": 0,
+        "seed": 50,
+        "role": "development_joint_activity_run"
+      },
+      "language_status": "not_applicable_no_vla_inference",
+      "interaction_audit": {
+        "status": "verified",
+        "world_initializations": 1,
+        "human_neural_calls": 40,
+        "robot_action_blocks": 160,
+        "actual_robot_control_steps": 1600,
+        "robot_actual_vla_calls": 0,
+        "robot_visual_coordinator_calls": 40,
+        "robot_calls_with_actual_human_speech": 156,
+        "human_calls_with_actual_robot_measurement": 40,
+        "human_peak_reference_speed_m_s": 0.20000000000000007,
+        "human_peak_sampled_kinematic_speed_m_s": 0.20000000000005486,
+        "human_executor_rejection_count": 0,
+        "human_attached_object_pose_write_samples": 1645,
+        "private_context_notifications": [
+          {
+            "time_s": 40.0,
+            "source": "external_private_context",
+            "text": "朋友发来消息：临时有事，点心需要打包带走而不是在桌边吃。你可依据实际进度考虑怎么处理。",
+            "interpretation": "外部需要通知，不指定人的意图或动作"
+          }
+        ],
+        "interpretation": "验证实际观测、公开渠道和执行一致；不证明真人策略、共同任务完成、语义变化或cobalance。"
+      }
+    },
+    {
+      "activity": "drink_storage",
+      "run_name": "joint_activity_drink_storage_compact_20261007",
+      "complete": true,
+      "metrics": {
+        "activity": "drink_storage",
+        "robot_native_goal_first_stable_s": null,
+        "robot_native_goal_terminal": false,
+        "human_explicit_pick_calls": 0,
+        "human_explicit_place_calls": 0,
+        "human_completed_place_before_native_goal_times_s": [],
+        "human_completed_place_after_native_goal_times_s": [],
+        "human_intention_text_changes_for_review": [
+          {
+            "time_s": 2.0,
+            "before": "确认酒瓶是否需要存储",
+            "after": "决定是否将酒瓶存入酒架",
+            "reason": "I have decided that the wine bottle is not needed on the surface and should be stored.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 4.0,
+            "before": "决定是否将酒瓶存入酒架",
+            "after": "",
+            "reason": "输出非法，保留现场并等待下一次人决策。",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 6.0,
+            "before": "",
+            "after": "让机器人将酒瓶放入木架",
+            "reason": "根据活动描述，我决定将酒瓶存入木架，现在需要机器人执行此动作。",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 8.0,
+            "before": "让机器人将酒瓶放入木架",
+            "after": "",
+            "reason": "输出非法，保留现场并等待下一次人决策。",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 10.0,
+            "before": "",
+            "after": "让机器人将酒瓶放入木架",
+            "reason": "I want to organize the drinks by storing the wine bottle on the wooden rack as per our plan.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 12.0,
+            "before": "让机器人将酒瓶放入木架",
+            "after": "确认机器人已将酒瓶放入木架",
+            "reason": "I need to confirm that the wine bottle has been stored as requested.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 40.0,
+            "before": "确认机器人已将酒瓶放入木架",
+            "after": "调整安排以适应客人的提前到达",
+            "reason": "A guest has arrived early and may need a drink soon. I will adjust the plan to keep the wine bottle accessible.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          },
+          {
+            "time_s": 42.0,
+            "before": "调整安排以适应客人的提前到达",
+            "after": "确认酒瓶暂时留在桌边以满足客人的需要",
+            "reason": "A guest has arrived early and may need a drink soon. I have decided to keep the wine bottle accessible for now.",
+            "interpretation": "文字变化待结合行为判断，不当作语义重组计数"
+          }
+        ],
+        "human_neural_calls": 40,
+        "robot_actual_control_steps": 1600,
+        "world_initializations": 1,
+        "activity_completion_status": "requires_semantic_and_physical_review",
+        "interpretation": "记录机器人原生贡献及人明确动作的时间见证；尚未以原生任务或文字变化冒充完整活动成功。",
+        "init_state_id": 0,
+        "seed": 50,
+        "role": "development_joint_activity_run"
+      },
+      "language_status": "verified",
+      "interaction_audit": {
+        "status": "verified",
+        "world_initializations": 1,
+        "human_neural_calls": 40,
+        "robot_action_blocks": 160,
+        "actual_robot_control_steps": 1600,
+        "robot_actual_vla_calls": 160,
+        "robot_visual_coordinator_calls": 0,
+        "robot_calls_with_actual_human_speech": 160,
+        "human_calls_with_actual_robot_measurement": 40,
+        "human_peak_reference_speed_m_s": 0.20000000000000007,
+        "human_peak_sampled_kinematic_speed_m_s": 0.20000000000002774,
+        "human_executor_rejection_count": 0,
+        "human_attached_object_pose_write_samples": 0,
+        "private_context_notifications": [
+          {
+            "time_s": 40.0,
+            "source": "external_private_context",
+            "text": "收到来客消息：客人提前到了，可能马上需要桌边的饮品。根据目前安排决定是否调整。",
+            "interpretation": "外部需要通知，不指定人的意图或动作"
+          }
+        ],
+        "interpretation": "验证实际观测、公开渠道和执行一致；不证明真人策略、共同任务完成、语义变化或cobalance。"
+      }
+    },
+    {
+      "activity": "snack_service",
+      "run_name": "joint_activity_snack_service_schema_20261007",
       "complete": true,
       "metrics": {
         "activity": "snack_service",
@@ -70,6 +248,7 @@
     },
     {
       "activity": "drink_storage",
+      "run_name": "joint_activity_drink_storage_schema_20261007",
       "complete": true,
       "metrics": {
         "activity": "drink_storage",
@@ -130,6 +309,7 @@
     },
     {
       "activity": "drawer_access",
+      "run_name": "joint_activity_drawer_access_schema_20261007",
       "complete": true,
       "metrics": {
         "activity": "drawer_access",
