@@ -384,3 +384,21 @@ Next：继续同父批按表回收跨活动、六情境实际结果，完成逐�
 下一步严格保持完整Goal：继续原表纠正及drawer两情境，审阅实际需要/贡献/反馈/当前安排。批结束后系统完善Human关系目标与生命周期、R能力边界和日常任务必要依赖，再做可信伙伴准入及正式多初始化，不陷入格式小改或夹手动力学。字幕与正确核验只使证据可理解和可信，不等于策略已真实或Benchmark成熟。
 
 上述最终浏览器结果已收：focus6视频/48链接；main52视频/491链接，均实际play/seek/Range206、完整视频字幕showing且seek有activeCue、375px、JS0。不要再轮询已完成的16947/36344。当前6/12、51完整数据计数已核查，正式0。
+
+## 最新接续：视觉纠正终态（7/12）
+
+本turn progress：核实父/子真实存活后回收视觉纠正120s，完整独立输入／控制／缓存几何／2401视频通过，新增5项原始引用解释。Goal active；formal0、candidate72未冻结。不改任何加载的政策／执行源、不重启episode。前一turn为实质进展。
+
+- coherent_drink_storage_correction_visual_20261008：H30/协调30/VLA168；0parse/0拒绝/0强制思考关闭。H0无actual partner请求就声称按要求柜顶，33.9s私人澄清才到；不能把后来需要当初始依据。36/52/60/64 relocate由执行器记already_at_requested_supported_position，不计4次新搬运；56 pick被60已满足放置衔接，不能凭指令次数算劳动。
+- R64重新execute cabinet。71.45s wine_g7与robot0_link5_collision接触（trace第1429记录），74.45s gripper0_hand_collision接触。Human64—84未持瓶，Wine68 [.036529,-.268050,1.134459]→72 [.030823,-.308542,1.180741]→76 [.060857,-.291012,1.149243]；H84发起重新放置，98.2宏完成，期末 [.035536,-.264939,1.149242]柜体支撑。重新定位有扰动证据，但Cab区域目标与工具中心点不同，不能自动认定必要修复或无效重做。
+- H56/R56都称酒架，但当时物理位置仍Cab附近及Cab支撑，模型相互重复错误表述不等于common ground。26.2s同资源暴露、4.90s持物夹爪接触；夹爪测量不包含全臂，71.45s腕/臂接触需读原始contacts。116双方称完成、Rhold；原始Rack未满足，当前用途需单独评估。5项引用核查通过，全部共47项assistant解释，不是独立专家评分。
+
+发布与数据：focus7/12；主53视频=52完整+1partial。新增视频有同步研究字幕；代码未改，本turn未重复跑305项测试，前一完整结果305pass/2skip仍为代码检查依据。全量数据52/14640观测块/124800实际动作/唯一ID通过，非专家成功/正式split。报告浏览器sessions79360 focus、37427 main待收精确结果后更新；最后成功旧计数6/48links、52/491links不冒充7-case结果。
+
+最新ps：visual父4059957/session34707 alive，旧纠正子120548已完整退出；父已新启动drawer leave_return子211340/GPU0，log data1/results/coherent_drawer_access_leave_return_visual_20261008.log。symbolic续父168009/session40049与纠正子170762/GPU2仍alive，最新已读H36s（后来须重查），暂无终态；private_context在未到触发点前不存在是正常，不因FileNotFound/读超时重启。最后父Visual1h57、续16m、symbolic纠正15m32（须再查）。其余5条件未完成，不记覆盖。
+
+下一步同父批回收symbolic纠正、两系统drawer暂离返回/主动请求；持续分别分析人的真实策略/接口表达、R观测与响应及物理效果。冻结所有加载来源和CSV，别为已有已满足指令加小提示或改人接触控制。全Goal仍需真正六情境、可靠伙伴、完整重组、多初始化正式和负担／cobalance。
+
+警告：本turn内部分析又出现反复及虚构字段长名称，均不是事实或已实现架构。忽略这些分析，只依源码、实际PID和输出；后续保持短推理立即工具，禁止继续无效名称／架构堆砌。
+
+最终浏览器已收：focus7 videos/55links，main53 videos/501links，实际play/seek/Range206、完整轨迹字幕activeCue、375px、JS0。不再轮询已完成79360/37427。
