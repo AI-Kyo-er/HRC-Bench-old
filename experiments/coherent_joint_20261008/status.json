@@ -14,8 +14,8 @@
         "steps": "2400",
         "role": "development_partner_and_coverage_qualification"
       },
-      "state": "尚无终态结果",
-      "verified_terminal": false,
+      "state": "完整终态已独立核验",
+      "verified_terminal": true,
       "formal_sample": false
     },
     {
@@ -31,8 +31,8 @@
         "steps": "2400",
         "role": "development_partner_and_coverage_qualification"
       },
-      "state": "尚无终态结果",
-      "verified_terminal": false,
+      "state": "完整终态已独立核验",
+      "verified_terminal": true,
       "formal_sample": false
     },
     {
@@ -48,7 +48,7 @@
         "steps": "2400",
         "role": "development_partner_and_coverage_qualification"
       },
-      "state": "尚未启动",
+      "state": "尚无终态结果",
       "verified_terminal": false,
       "formal_sample": false
     },
@@ -65,7 +65,7 @@
         "steps": "2400",
         "role": "development_partner_and_coverage_qualification"
       },
-      "state": "尚未启动",
+      "state": "尚无终态结果",
       "verified_terminal": false,
       "formal_sample": false
     },
@@ -206,5 +206,5 @@
       "formal_sample": false
     }
   ],
-  "verified_terminal_cases": 0
+  "verified_terminal_cases": 2
 }

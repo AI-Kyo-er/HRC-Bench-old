@@ -2,6 +2,7 @@
 """面向未参与工作流的读者说明一致开发批；只发布独立核验的终态视频。"""
 import argparse
 import csv
+from hashlib import sha256
 from html import escape
 import json
 import os
@@ -22,6 +23,24 @@ SITUATIONS={
 
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
 def rows(path):return [json.loads(line) for line in path.read_text().splitlines() if line.strip()] if path.exists() else []
+
+
+def render_findings(root, review):
+    """展现有原始证据的案例解释；锚点核对与语义判断保持区分。"""
+    if not review.get('findings'):
+        return ''
+    verification=read(root/'review_evidence_verification.json')
+    current=verification.get('status')=='evidence_anchors_verified'
+    current=current and verification.get('review_sha256')==sha256((root/'public_request_response_review.json').read_bytes()).hexdigest()
+    for name,digest in verification.get('source_sha256',{}).items():
+        path=root/name
+        current=current and path.is_file() and sha256(path.read_bytes()).hexdigest()==digest
+    if not current:
+        return '<p>案例解释的证据引用尚未核对或来源已变化，暂不展示详细判断。</p>'
+    items=''.join('<li><strong>'+escape(finding.get('label','案例观察'))+'</strong>：'+
+                  escape(finding['interpretation'])+'</li>' for finding in review['findings'])
+    return ('<h3>这次实际发生了什么</h3><ul>'+items+
+            '</ul><p>以上为助手对保存记录的解释；引用已核对，不代表独立专家评分或真人验证。</p>')
 
 
 def case_state(root):
@@ -50,10 +69,12 @@ def build(table,results,output):
             review=read(root/'public_request_response_review.json')
             html+=f'<p>实际人NN {audit.get("human_neural_calls")}，协调NN {audit.get("robot_visual_coordinator_calls")}，VLA调用 {audit.get("robot_actual_vla_calls")}。同资源执行重叠 {process.get("shared_resource_execution",{}).get("same_resource_vla_exposure_s","未测量")} 模拟秒。</p>'
             html+='<p>'+escape(review.get('interpretation','场景行为与当前安排尚待语义审阅；核验通过只证明输入和执行可重建。'))+'</p>'
+            html+=render_findings(root,review)
             html+='<p>'+' · '.join(link(p,label) for p,label in [
                 (root/'provenance.json','设置与版本'),(root/'interaction_verification.json','输入／控制核验'),
                 (root/'joint_process_evidence.json','过程证据'),(root/'independent_video_verification.json','视频核验'),
-                (root/'public_request_response_review.json','行为与安排审阅')] if p.exists())+'</p>'
+                (root/'public_request_response_review.json','行为与安排审阅'),
+                (root/'review_evidence_verification.json','解释引用核对')] if p.exists())+'</p>'
             messages=rows(ep/'public_dialogue.jsonl')
             timeline=''.join(f'<tr><td>{m["time_s"]:.1f}</td><td>{escape(m["speaker"])}</td><td>{escape(m["text"])}</td></tr>'
                              for m in messages if m['speaker'] in {'human','robot'})
@@ -65,6 +86,7 @@ def build(table,results,output):
     <header><h1>三活动、六情境：同一伙伴方法的闭环开发批</h1><p>研究对象是双方如何组织并调整共同活动。12条预定条件，不是12条已经成功的情境。</p></header>
     <section><h2>实验目的与设置</h2><p>前期已证明神经策略可以完成点心共同活动物理链，但人会误解需求、声明未发生的完成，或与机器人同时搬同一物品。本批固定同一人方法，扩大到日常参与与意图变化，检验伙伴有效性、场景覆盖和协调过程。</p>
     <p>人：Qwen3-14B依据个人需要、实际测量、公开互动和自选记忆作决策；原生思考后约束调用格式。思考不是教师策略，合法格式不保证理解正确。执行为连续运动学附着，0.2m/s。机器人：π0.5在原生MuJoCo/LIBERO输出7D动作，20Hz控制，不吸附或改写机器人位姿。协调每4秒更新。</p>
+    <p>页面和视频中的事件时刻为模拟时间。4秒决策间隔不代表模型能在真实墙钟4秒内完成推理；推理墙钟成本另外保存，本批不能证明实时部署能力。</p>
     <p>两个系统在同一条件下使用相同初始化、人物、外部事实和seed，但人可以因机器人行为不同产生不同回应。视觉与理想感知系统同时改变感知和模型，这不是单因素消融或裸VLA排名。</p>
     <p>不强迫每例加入、变心、离开或求助。人的私有意图不直接提供给机器人；只转发实际公开表达和可见行为。环境能力目录不当作队友请求。动作接受、目标到位和双方接受安排分别审阅。</p>
     <p><a href="PROTOCOL.md">完整协议</a> · <a href="conditions.csv">运行前固定的12条条件</a> · <a href="../joint_feasibility_20261007/COORDINATION_REVIEW_GUIDE.md">协调证据口径</a> · <a href="../joint_feasibility_20261007/index.html">全部历史结果与失败</a></p></section>'''

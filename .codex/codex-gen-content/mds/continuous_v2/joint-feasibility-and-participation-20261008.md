@@ -315,3 +315,21 @@ Next：继续同父PID、检查第一完整案例能否自动完成schema10独�
 没有真正阻塞，Goal active，仍未完成。不因工具无新stdout或观察超时重启；继续同PID/日志等待首个完整案例及自动核查，再做事实/分工/后续维持的语义审阅。源码和12条条件表冻结，不在live时改逻辑；仅报告和离线分析可推进。
 
 内部本轮又有大量重复/虚构长元数据名称，毫无依据，不是进展；忽略这些分析，只依据源码、进程和真实结果。不要为制造progress写无关小模块，等终态真实证据后推进原Goal范围。
+
+## 最新接续：一致批首对完整结果与可追溯案例解释
+
+本turn为progress：回收预定12条中的首对完整120秒结果，独立输入／思考／JSON／几何／动作及视频核验通过；完成13项原始记录锚点解释、报告和全量开发数据更新。前一目标文本梳理未新增实验；本turn已重新核实真实进程后行动。Goal仍active，不complete／blocked／paused，正式样本0、候选72未冻结。
+
+- visual join（coherent_snack_service_join_visual_20261008）：H30、协调30、实际VLA104、2400步控制，0parse／0执行拒绝／0强制关闭思考，source变化[]。7.2s首次稳定填装，24.65s成品释放到交付区域并保持期末；人8s提前宣称已交付，16s仍持碗却说完成。R到52s才hold，同资源VLA暴露12.85—24.45s共11.6s，不自动认定碰撞。H0已指导填装、4.95s身体进入，早于15s有空消息，不证明消息驱动动态加入。88s个人区和交付区完全同坐标，执行器already_at_requested_supported_position，无新搬运，不当策略变化证据。
+- symbolic join（coherent_snack_service_join_symbolic_20261008）：同为H30／协调30／VLA104／2400步，0parse／0拒绝／0强制关闭，source变化[]。H16发起搬碗，20／24说等待却选延续宏的wait；24.3s局部填装发生在已持碗时，cargo只含碗，28s奶酪留桌。成品交付物理链从未满足，120s为空碗、奶酪在桌面，但双方后期均称完成。R模式0execute→32hold→64execute→84hold；36s输入明示H未持物，仍说等释放。身体16.95进入、53.2离开，无返回。9.45s同资源VLA暴露；同时涉及人物事实／取消语义、交接及运动学载荷简化，不能全部归于底层π能力。
+- 两例各2401帧／20fps全解码与120s时间轴通过。已查看保存视频的实际帧；未改动截图位于data1/results/coherent_case_review_frames_20261008。全部输入token、原生思考与真实生成边界由父批自动独立审计通过，不只部分IO核查。
+
+新增joint_review_evidence.py及verify_joint_case_review.py：助手解释逐项引用运行内JSON／JSONL（非空记录零起始row、JSON Pointer、原值），核对引用和SHA256，先要求完整终态、输入与视频已核查。布尔值不与数字混同。输出evidence_anchors_verified，semantic_validity仍assistant_interpretation_not_independently_validated，formal_benchmark_score=None；不自动认证人拟真、语义理解或cobalance。首对6＋7项均核对通过。报告仅在解释及来源hash一致时显示详细判断，旧解释保留历史身份。
+
+交付更新：专门报告2/12独立终态、两段视频及13项中文解释，375px／16链接／视频play-seek-Range通过；主历史报告48段=47完整＋1partial，48全部播放拖动Range206、451链接、375px、JS0核查通过。开发数据47完整、13440观测块、112800实际执行7D动作、13440唯一ID全量加载核查通过，非成功专家标签，正式split未冻结。完整pytest294passed／2skipped；无smoke临时文件。README、整体DESIGN和审阅口径已更新，纠正旧2s接口、46视频等陈旧说明；模拟时间与推理墙钟明确区分，不声称实时运行。
+
+批次仍进行：父visual PID4059957／session34707，父symbolic PID4060097／session58493，已按原表启动第二条件detour，未重启首例。新子visual PID4132416／GPU0，symbolic PID4141333／GPU2，last saved H决策16s／12s（须下一turn再ps核实）。单独log data1/results/coherent_snack_service_detour_{visual,symbolic}_20261008.log；两个父log原名不变。π服务PID2267256、Vision PID3095303、HTTP PID3054726均核实alive。其余10条不是已完成覆盖，不以首对差异排名。
+
+源冻结继续：人策略／动作／观测、NN思考过滤、native运行时、协调／技能库、批脚本和CSV、LMF库均未修改。新增核查是离线解释工具，报告／文档修改不在已加载策略源集合。不要编辑下一案例正在加载的源，不因观察handle过期重启。
+
+Next：继续同父批按表回收跨活动、六情境实际结果，完成逐例需要来源、实际响应、贡献控制及持续安排审阅；未暴露情境保留预定分母。首对证明神经物理链可成立，也证明格式通过远不足以伙伴准入。当前最重要缺口是可信人物事实与意图、有效交接／约定更新、真实六覆盖及当前安排／协调负担，不是继续夹手物理或增加格式小版本。正式多初始化矩阵与cobalance效度仍未完成，完整Goal保持。
