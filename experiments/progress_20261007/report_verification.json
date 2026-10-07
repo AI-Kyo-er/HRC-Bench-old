@@ -1,0 +1,13 @@
+{
+  "status": "verified",
+  "runtime_video_duration_s": 64.05,
+  "playback_advanced_s": 1.003816,
+  "seek_video_time_s": 24,
+  "synced_human_time_s": 20,
+  "actual_grip_event_seek_video_time_s": 11.95,
+  "local_links_checked": 16,
+  "range_http_status": 206,
+  "mobile_width_px": 375,
+  "no_horizontal_overflow": true,
+  "javascript_errors": []
+}

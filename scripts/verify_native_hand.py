@@ -10,10 +10,10 @@ import numpy as np
 def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
 
 
-def verify(directory,obj=None):
+def verify(directory,obj=None,destination=None):
     trace=rows(directory/'trace.jsonl');control=rows(directory/'human_control.jsonl')
     metrics=json.loads((directory/'metrics.json').read_text());obj=obj or metrics.get('object_id','cookies_1')
-    destination=metrics.get('destination','cookies_shelf')
+    destination=destination or metrics.get('destination','cookies_shelf')
     relative_receiver=destination.split(':',1)[1] if destination.startswith('on:') else None
     initial=np.asarray(trace[0]['objects'][obj]);bilateral=[];released=[]
     for r in trace:
@@ -33,7 +33,7 @@ def verify(directory,obj=None):
     object_speed=max(float(np.linalg.norm(b-a)/.05) for a,b in zip(positions,positions[1:]))
     assert all(c['human_object_pose_writes']==0 for c in control)
     np.testing.assert_allclose([r['physics_time_s']-trace[0]['physics_time_s'] for r in trace],np.arange(len(trace))*.05,atol=1e-7)
-    result={'episode':str(directory),'object_id':obj,'first_bilateral_contact_lift_s':bilateral[0] if bilateral else None,
+    result={'episode':str(directory),'object_id':obj,'destination':destination,'first_bilateral_contact_lift_s':bilateral[0] if bilateral else None,
             'first_released_support_contact_s':released[0] if released else None,'relative_receiver':relative_receiver,
             'maximum_object_lift_m':float(max(p[2]-initial[2] for p in positions)),
             'human_peak_speed_m_s':speed,'object_peak_sampled_speed_m_s':object_speed,
@@ -50,7 +50,13 @@ def main():
         metrics=json.loads((p.parent/'metrics.json').read_text())
         objects=[metrics['object_id']] if 'object_id' in metrics else sorted({r['object_id'] for r in rows(p) if r['object_id'] is not None})
         if not objects:objects=['cookies_1']
-        episodes.extend(verify(p.parent,obj) for obj in objects)
+        decisions=rows(p.parent/'human_policy_io.jsonl') if (p.parent/'human_policy_io.jsonl').exists() else []
+        for obj in objects:
+            destinations=sorted({r['parsed_decision']['destination'] for r in decisions
+                if r['parsed_decision']['intent']=='place' and r['parsed_decision']['object_id']==obj
+                and r['parsed_decision'].get('destination')})
+            if 'destination' in metrics:destinations=[metrics['destination']]
+            episodes.extend(verify(p.parent,obj,d) for d in destinations or [None])
     assert episodes
     result={'status':'audited','episodes':episodes,'friction_grasp_release_count':sum(e['friction_grasp_and_release_observed'] for e in episodes),
             'motion_qualified_count':sum(e['motion_qualified'] for e in episodes)}
