@@ -36,7 +36,7 @@ def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2))
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--human-command-delivery',choices=['neural_request','cached_each_tick'],default='neural_request')
-    parser.add_argument('--human-policy-architecture',choices=['grounded','deliberative','learned'],default='grounded')
+    parser.add_argument('--human-policy-architecture',choices=['grounded','deliberative','learned','interactive'],default='grounded')
     parser.add_argument('--autonomous-human-context',choices=list(CONTEXTS),default='pantry_work')
     parser.add_argument('--adapter-path',type=Path)
     parser.add_argument('--init-state-id',type=int,default=0);parser.add_argument('--seed',type=int,default=0)
@@ -55,7 +55,7 @@ def main():
     from libero.libero import benchmark,get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
     import torch
-    paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_command_delivery.py'),Path('src/hrc_pilot/learned_human.py')]
+    paths=[Path(__file__),*sorted(Path('src/hrc_pilot').glob('native*.py')),Path('src/hrc_pilot/llm_human.py'),Path('src/hrc_pilot/human_command_delivery.py'),Path('src/hrc_pilot/learned_human.py'),Path('src/hrc_pilot/interactive_human.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     case=CASES[args.scene_case];suite=benchmark.get_benchmark_dict()[case.suite]();task=suite.get_task(case.task_id)
     human_class=GroundedReflectiveHuman;human_kwargs={'reflection_interval_s':6}
@@ -65,6 +65,9 @@ def main():
     if args.human_policy_architecture=='learned':
         from hrc_pilot.learned_human import LearnedArticulatedHuman
         human_class=LearnedArticulatedHuman;human_kwargs={'adapter_path':args.adapter_path}
+    if args.human_policy_architecture=='interactive':
+        from hrc_pilot.interactive_human import InteractiveArticulatedHuman
+        human_class=InteractiveArticulatedHuman;human_kwargs={'adapter_path':args.adapter_path}
     human=human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),autonomous_context=args.autonomous_human_context,
         preferred_personal_objects=case.preferred_personal_objects,model_path=model_path,persona_id='independent',
         decision_interval_steps=40,memory_scope='episode',**human_kwargs);human.prepare();human.reset(args.seed);torch.manual_seed(args.seed)

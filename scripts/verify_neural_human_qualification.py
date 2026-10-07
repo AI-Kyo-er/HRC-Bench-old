@@ -36,7 +36,7 @@ def verify(root):
     assert all(c['human_object_pose_writes']==0 for c in rows(ep/'human_control.jsonl'))
     human=rows(ep/'human_policy_io.jsonl');plans=rows(ep/'human_planner_io.jsonl') if (ep/'human_planner_io.jsonl').exists() else []
     assert human
-    if provenance.get('human_policy_architecture','grounded')in {'deliberative','learned'}:
+    if provenance.get('human_policy_architecture','grounded')in {'deliberative','learned','interactive'}:
         assert not plans and all(h['human_policy_architecture']=='deliberative_joint_intention_action' and h['neural_calls_for_this_decision']==1 for h in human)
     else:assert plans and all('raw_model_output' in p for p in plans)
     speed=max(np.linalg.norm(np.asarray(b['robot_ee'])-a['robot_ee'])*20 for a,b in zip(trace,trace[1:]))

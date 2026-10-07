@@ -22,14 +22,18 @@ def verify_episode(directory):
         public=json.loads(decision['public_input'].split('\n',1)[1])
         assert not prohibited.intersection(public)
         if 'robot_action' in public:assert public['robot_action']=='native_joint_control'
-        else:assert public.get('observation_projection')=='compact_measured_world_v1'
+        else:assert public.get('observation_projection')in {'compact_measured_world_v1','compact_contact_history_v2'}
         actual=by_step[decision['step']]
         measured=public['your_measured_execution']
+        if 'hand_contact_summary' in public:
+            reconstructed=own_contact_observation(actual['contacts'],'human')
+            assert public['hand_contact_summary']['contact_with_other_agent']==reconstructed['contact_with_other_agent']
+            assert public['hand_contact_summary']['contact_geoms']==reconstructed['contact_geoms'][:12]
         if 'hand_contact_report' in measured:
             expected_contacts=own_contact_observation(actual['contacts'],'human')
             assert measured['hand_contact_report']==expected_contacts
             assert measured['hand_contact_geoms']==expected_contacts['contact_geoms']
-        if public.get('observation_projection')=='compact_measured_world_v1':
+        if public.get('observation_projection')in {'compact_measured_world_v1','compact_contact_history_v2'}:
             np.testing.assert_allclose(public['human_position_xyz'],actual['human_position'],atol=.00051)
         else:np.testing.assert_allclose(measured['body_xy'],actual['human_position'][:2],atol=1e-9)
         np.testing.assert_allclose(measured['fingertip_xyz'],actual['human_hand_position'],atol=1e-9)
