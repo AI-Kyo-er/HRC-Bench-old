@@ -17,6 +17,7 @@ def read(p):return json.loads(p.read_text())
 
 def audit(root):
     ep=root/'episode';p=read(root/'provenance.json');activity=ACTIVITIES[p['activity']]
+    saved_task=read(ep/'task.json');saved_activity=saved_task['public_activity']
     assert not p['source_files_changed_during_run']
     assert p['human_executor']=='human_only_continuous_kinematic_attachment'
     trace=rows(ep/'trace.jsonl');human=rows(ep/'human_policy_io.jsonl');controls=rows(ep/'robot_control.jsonl')
@@ -44,7 +45,7 @@ def audit(root):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=source['scene'];actual=trace[round(d['time_s']*20)]
         if p.get('human_source','neural')=='neural':
-            assert source['activity']==json.loads(json.dumps(activity.public(),ensure_ascii=False))
+            assert source['activity']==saved_activity
             assert 'private_background' not in source['activity']
         assert not {'task_success','score','future_context'}.intersection(scene)
         for obj,xyz in scene['objects_xyz'].items():np.testing.assert_allclose(xyz,actual['objects'][obj])
@@ -52,7 +53,8 @@ def audit(root):
         if 'measured_world' in scene:
             from hrc_pilot.joint_world import observable_world
             expected_world=observable_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'])
-            assert scene['measured_world']==expected_world
+            assert set(scene['measured_world']).issubset(expected_world)
+            assert all(scene['measured_world'][k]==expected_world[k] for k in scene['measured_world'])
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
@@ -65,8 +67,8 @@ def audit(root):
     for plan in plans:
         request=plan['public_input']
         assert not {'private_context','personal_background','own_memory','private_intention','score'}.intersection(request)
-        expected_task=(read(ep/'task.json')['native_robot_task']+'\nShared activity: '+activity.public_description
-                       if p.get('robot_language')=='native_with_activity' else activity.public_description)
+        expected_task=(saved_task['native_robot_task']+'\nShared activity: '+saved_activity['public_description']
+                       if p.get('robot_language')=='native_with_activity' else saved_activity['public_description'])
         assert request['robot_task']==expected_task
         if p['robot_system']=='symbolic_coordinator_plus_vla':
             actual=trace[round(plan['time_s']*20)]
@@ -86,8 +88,8 @@ def audit(root):
                     if p['robot_model_metadata'].get('language_token_limit') else visible[-12:])
             spoken='\n'.join(f'{m["speaker"]}: {m["text"]}' for m in recent)
             task=read(ep/'task.json')
-            base=(task['native_robot_task']+'\nShared activity: '+activity.public_description
-                  if p.get('robot_language')=='native_with_activity' else activity.public_description)
+            base=(task['native_robot_task']+'\nShared activity: '+saved_activity['public_description']
+                  if p.get('robot_language')=='native_with_activity' else saved_activity['public_description'])
             expected=(task['native_robot_task'] if p.get('robot_language')=='task_only' else
                       base+'\nActual public conversation:\n'+spoken)
             assert c['prompt']==expected

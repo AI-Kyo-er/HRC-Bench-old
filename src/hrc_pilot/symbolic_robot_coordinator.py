@@ -5,12 +5,14 @@ import time
 from .robot_coordination import validate_decision
 
 
-PUBLIC_FIELDS={'time_s','robot_task','human_task','dialogue','state','history','current_goal','self_execution','observed_world'}
+PUBLIC_FIELDS={'time_s','robot_task','human_task','dialogue','state','history','current_goal','self_execution','observed_world','available_vla_operation'}
 SYSTEM=(
     '你是共同活动中的机器人协调策略，self=robot，partner=human。输入中的observed_world是理想几何／接触感知，'
     '不是人的私有意图或评分。依据实际位置、抽屉开度、接触和公开交流决定当前贡献。'
     'history是你以前的想法，不能把它当现在的事实；self_execution只报告真正执行过的动作。'
-    '你只有两种当前控制：execute把简短英文物品操作指令交给真实VLA；hold保持并允许表达等待／询问。'
+    '你只有两种当前控制：execute选择available_vla_operation这个实际模型支持的操作；hold保持并表达等待／询问。'
+    '该操作是你的公开任务，不是建议你现在执行；是否执行由你依据共同活动、人的公开要求及实际状态决定。'
+    '不要重新命名技术关节或编造模型不支持的运动技能。程序只将你选择的操作编码为模型原生语言。'
     '取放／开关必须通过execute交给VLA，不可把移动末端或发送消息当成已经操作。'
     '人没有公开的需要你不知道；可以澄清、请求协助、提出安排，并接受对方公开提出的新用途或分工。'
     '不要为了继续原始目标而忽略新约定，也不要凭空宣布已经完成。考虑当前物品是否由人持有、是否有空间。'
@@ -48,4 +50,8 @@ class SymbolicRobotCoordinator:
         record={'public_input':request,'raw_output':raw,'decision':decision,'parse_error':error,
             'latency_s':time.perf_counter()-started,'system_prompt':SYSTEM,
             'neural_inferences':1,'source':'actual_qwen3_symbolic_coordinator'}
+        if decision['mode']=='execute' and error is None:
+            record['model_selected_operation']='available_vla_operation'
+            record['generated_instruction']=decision['instruction']
+            decision['instruction']=request['available_vla_operation']
         self.decisions.append(record);return record

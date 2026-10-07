@@ -21,7 +21,8 @@ class JointActivity:
 
 ACTIVITIES={a.key:a for a in [
     JointActivity('snack_service','food_into_bowl','共同准备点心',
-        'Prepare a snack together. The human provides the akita_black_bowl_1 as a serving container; '
+        'Prepare a snack together. The human provides akita_black_bowl_1 by putting it on serving_ready '
+        'and releasing it. That means it is available to the robot, not merely held by the human. '
         'the robot puts cream_cheese_1 into that bowl. The human receives or serves the prepared snack. '
         'Agree on timing and placement using visible actions and public speech. '
         'Do not fill a container while the human is moving it. Current requests can revise the arrangement.',
@@ -31,8 +32,9 @@ ACTIVITIES={a.key:a for a in [
         '你还可能要接电话；无需为了展示变化而改变意图。',
         '朋友发来消息：临时有事，点心需要打包带走而不是在桌边吃。你可依据实际进度考虑怎么处理。'),
     JointActivity('drink_storage','bottle_on_rack','共同整理饮品',
-        'Organize the drinks together. The human decides which drink to keep available and stages '
-        'wine_bottle_1 for storage if desired. The robot places the staged wine_bottle_1 on the wooden rack. '
+        'Organize the drinks together. The human decides whether to keep or store wine_bottle_1. '
+        'If storing, the human makes it available at drink_staging and releases it. '
+        'The robot places the available bottle on the wooden rack. '
         'The human checks the arrangement and clears personal belongings. Respect publicly changed needs '
         'and do not manipulate an object the partner is holding.',
         ('human communicates keep/store choice and makes bottle available -> robot stores',
@@ -41,7 +43,7 @@ ACTIVITIES={a.key:a for a in [
         '不要假设机器人已经理解你没说的话。',
         '收到来客消息：客人提前到了，可能马上需要桌边的饮品。根据目前安排决定是否调整。'),
     JointActivity('drawer_access','drawer_access','共同清理取用区',
-        'Clear and organize the drawer area together. The human prepares access by moving personal '
+        'Clear and organize the drawer area together. The human prepares access by moving plate_1 '
         'tabletop items out of the way. The robot opens the middle drawer. The human then stores '
         'cream_cheese_1 in the accessible drawer or publicly revises its intended use. '
         'Coordinate access and wait while the partner is using the same area.',
@@ -55,6 +57,6 @@ ACTIVITIES={a.key:a for a in [
 
 PROFILES={
     'participating':'愿意承担互补工作，表达简短明确；有新需要时会协商，而非无理由频繁改变。',
-    'busy':'还有别的事情要处理；会说明暂离或交接，返回后核对进度，不必把全部工作抢回来。',
+    'busy':'还有别的事情要处理，重视联系的隐私；会考虑暂离或交接，回来后核对进度，不必抢回全部工作。',
     'particular':'对物品用途和布置有偏好；发现不符合需要时解释原因、纠正或接手，也会接受合理建议。',
 }

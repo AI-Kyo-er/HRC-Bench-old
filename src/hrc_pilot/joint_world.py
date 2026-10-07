@@ -40,8 +40,19 @@ def observable_world(record,regions,drawer=None):
         delta=np.asarray(record['objects']['cream_cheese_1'])-record['objects']['akita_black_bowl_1']
         relative['cream_cheese_1_to_akita_black_bowl_1']={'xy_distance_m':float(np.linalg.norm(delta[:2])),
                                                       'relative_height_m':float(delta[2])}
+    supported={}
+    for name,info in contacts.items():
+        if info['robot_hand_contact'] or record.get('human_execution',{}).get('held_object')==name:
+            supported[name]=[];continue
+        supported[name]=[entity for entity in info['contact_entities']
+            if entity=='table' or (entity in record['objects']
+                and record['objects'][name][2]>=record['objects'][entity][2]
+                and np.linalg.norm(np.asarray(record['objects'][name])[:2]-np.asarray(record['objects'][entity])[:2])<.03)]
+    near_regions={name:[region for region,distance in ds.items() if distance<.025]
+                  for name,ds in distances.items()}
     return {'source':'current_geometry_and_contact_measurement_not_task_score',
         'object_contacts':contacts,'object_distance_to_named_region_xy_m':distances,
+        'released_object_support_contacts':supported,'near_named_regions':near_regions,
         'relative_object_positions':relative,'drawer':drawer,
         'robot_gripper_aperture_m':float(np.abs(np.asarray(record['robot_qpos'])[-2:]).sum())}
 

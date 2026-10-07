@@ -238,6 +238,7 @@ def main():
                         self_execution=actual_robot_execution(r,calls,controls))
                     if args.symbolic_coordinator:
                         public_request.pop('images')
+                        public_request['available_vla_operation']=task.language
                         public_request['observed_world']={**r['observable_world'],'objects_xyz':r['objects'],
                             'regions_xyz':regions,'fixture_joints':r['articulated_joints'],
                             'human_hand_xyz':r['human_hand_position'],'human_body_xy':r['human_body_xy'],

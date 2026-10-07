@@ -103,7 +103,12 @@ class KinematicHuman(NativeContactHuman):
             states=getattr(self.env.env,'object_states_dict',getattr(self.env.env,'object_states',{}))
             if self.held in states:
                 for name in self.object_q:
-                    if name!=self.held and name in states and states[self.held].check_ontop(states[name]):
+                    robot_touch=False
+                    for i in range(self.env.sim.data.ncon):
+                        c=self.env.sim.data.contact[i]
+                        pair=[self.env.sim.model.geom_id2name(g) or '' for g in [c.geom1,c.geom2]]
+                        if any(g.startswith(name+'_') for g in pair) and any(g.startswith('gripper') for g in pair):robot_touch=True
+                    if name!=self.held and name in states and not robot_touch and states[self.held].check_ontop(states[name]):
                         self.carried_offsets[name]=self.object_position(name)-self.reference
             for name in self.carried_offsets:
                 q,_=self.object_q[name];self.carried_quaternions[name]=self.env.sim.data.qpos[q+3:q+7].copy()
