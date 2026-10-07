@@ -47,7 +47,7 @@ def main():
         if (episode/'human_planner_io.jsonl').exists():source_files.append('human_planner_io.jsonl')
         for name in source_files:(target/name).symlink_to((episode/name).resolve())
         auxiliary_audits={}
-        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json','continual_activity_verification.json']:
+        for name in ['relative_geometry_verification.json','multi_actor_release_verification.json','scene_integrity_verification.json','continual_activity_verification.json','hand_robot_contact_verification.json']:
             path=root/name
             if path.exists():
                 (target/name).symlink_to(path.resolve())
