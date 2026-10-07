@@ -40,6 +40,7 @@ def main():
         prefix=(provenance['model_server_metadata']['config']+'__'+metrics['autonomous_human_context'] if autonomous else metrics['activity_profile'])
         if provenance.get('scene_case'):prefix+='__'+provenance['scene_case']['key']
         if provenance.get('human_policy_architecture','flat')!='flat':prefix+='__'+provenance['human_policy_architecture']
+        if provenance.get('robot_planner_metadata'):prefix+='__visual_coordination'
         if args.include_coordination_primitives:prefix+='__mixed_control'
         identifier=f'{prefix}__task{metrics["task_id"]:02d}_init{metrics["init_state_id"]:03d}_seed{metrics["seed"]:03d}'
         target=args.output_dir/'episodes'/identifier;target.mkdir(parents=True)
@@ -73,7 +74,8 @@ def main():
                                 'joint_success':stored_joint if eligible and metrics.get('human_goal_evaluable',True) else None,
                                 'raw_joint_predicate':metrics['task_success'],'joint_success_protocol':score_protocol,
                                 'joint_goal_evaluable':metrics.get('human_goal_evaluable',True),
-                                'benchmark_episode_eligible':eligible,'motion_eligible':motion_eligible,'avatar_qualified':avatar_qualified,'world_initializations':1,'robot_model':provenance['model_server_metadata']['config']})
+                                'benchmark_episode_eligible':eligible,'motion_eligible':motion_eligible,'avatar_qualified':avatar_qualified,'world_initializations':1,'robot_model':provenance['model_server_metadata']['config'],
+                                'robot_planner_metadata':provenance.get('robot_planner_metadata')})
         for call in calls:
             executed=[r['action'] for r in actions if r['model_call']==call['model_call']]
             assert executed
