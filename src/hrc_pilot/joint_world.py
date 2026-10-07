@@ -50,9 +50,19 @@ def observable_world(record,regions,drawer=None):
                 and np.linalg.norm(np.asarray(record['objects'][name])[:2]-np.asarray(record['objects'][entity])[:2])<.03)]
     near_regions={name:[region for region,distance in ds.items() if distance<.025]
                   for name,ds in distances.items()}
+    facts=[]
+    for name in record['objects']:
+        if supported[name]:facts.append(f'{name} is released and has support contact with '+', '.join(supported[name])+'.')
+        if contacts[name]['robot_hand_contact']:facts.append(f'Robot fingers currently contact {name}; contact alone is not completion.')
+        if near_regions[name]:facts.append(f'{name} is within 25mm XY of '+', '.join(near_regions[name])+'.')
+    held=record.get('human_execution',{}).get('held_object')
+    facts.append(f'Human is holding {held}.' if held else 'Human is not holding any object.')
+    if 'human_body_xy' in record:facts.append('Human body is '+('aside from the workspace.' if record['human_body_xy'][1]>=.8 else 'near the workspace.'))
+    if drawer:facts.append(f'Middle drawer opening is {drawer["opening_m"]:.3f}m; interior placement is '+('accessible.' if drawer['placement_accessible'] else 'not accessible.'))
     return {'source':'current_geometry_and_contact_measurement_not_task_score',
         'object_contacts':contacts,'object_distance_to_named_region_xy_m':distances,
         'released_object_support_contacts':supported,'near_named_regions':near_regions,
+        'current_measured_fact_sentences':facts,
         'relative_object_positions':relative,'drawer':drawer,
         'robot_gripper_aperture_m':float(np.abs(np.asarray(record['robot_qpos'])[-2:]).sum())}
 

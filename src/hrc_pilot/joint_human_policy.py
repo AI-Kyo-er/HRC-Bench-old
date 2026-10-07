@@ -15,6 +15,12 @@ def parse_choice(raw,objects,regions):
     text=raw.rsplit('</think>',1)[-1].strip()
     value=json.loads(text[text.index('{'):text.rindex('}')+1])
     if value.get('action') not in INTENTS:raise ValueError('非法人动作')
+    presence=value.get('presence_choice','keep')
+    if presence not in {'keep','step_aside','return_to_work'}:raise ValueError('非法参与位置选择')
+    if presence in {'step_aside','return_to_work'}:
+        if value['action'] not in {'message','wait','away','return'}:raise ValueError('参与位置改变与物品贡献冲突，需自己决定当前一项')
+        value['declared_action']=value['action']
+        value['action']='away' if presence=='step_aside' else 'return'
     if value['action'] in {'pick','point','relocate'} and value.get('object_id') not in objects:
         raise ValueError('所选物品不存在')
     if value['action'] in {'place','relocate'} and value.get('destination') not in regions:
@@ -65,6 +71,9 @@ class JointHumanPolicy(QwenHumanPolicy):
             '若仅询问、安排、拒绝或表达，可选action=message；它不会中止正在进行的身体动作。'
             '输出JSON：intention、participation、action、object_id、destination、target_xyz（仅move_hand需要）、'
             'message_kind（proposal/accept/reject/update/request/notice）、message（简短英文）、reason、memory。'
+            'presence_choice由你选择keep（保持位置）、step_aside（暂时离开桌边）、return_to_work（返回）。'
+            '这是参与策略，不是解释文字，执行器会连续兑现；改变参与位置时action选message或wait，别同时请求搬物。'
+            '你可以保持位置处理联系，不强迫离开；若确实决定暂离／返回，用这个明确选择，不能只说已经走开。'
             '不输出动作清单。')
 
     def decide(self,scene):

@@ -52,6 +52,17 @@ class KinematicHuman(NativeContactHuman):
         self.accepted_intent=action
         # wait继续当前运动，不自动生成新的抓放任务。
         if action in {'wait','message'}:return
+        # 只实现当前已选空间贡献；已在支撑位置时不反复抬起接收容器。
+        if action=='relocate' and self.held is None:
+            supported=False
+            for i in range(self.env.sim.data.ncon):
+                c=self.env.sim.data.contact[i]
+                pair=[self.env.sim.model.geom_id2name(g) or '' for g in [c.geom1,c.geom2]]
+                if any(g.startswith(obj+'_') for g in pair) and any(not g.startswith(('robot','gripper','human',obj+'_')) for g in pair):supported=True
+            if supported and np.linalg.norm(self.object_position(obj)-np.asarray(self.regions[dest]))<.01:
+                self.active_request=request_id;self.target=self.position().copy()
+                self.receipts[-1]['effect']='already_at_requested_supported_position'
+                self._complete();return
         if action=='relocate' and self.active_request is not None and self.phase!='idle' and obj==self.object_id and dest==self.transfer_destination:
             return
         if action=='relocate':self.body_target=np.array([.25,.60])
@@ -77,7 +88,8 @@ class KinematicHuman(NativeContactHuman):
             'phase':self.phase,'accepted_action':self.accepted_intent,'held_object':self.held,
             'hand_xyz':self.position().tolist(),'target_xyz':self.target.tolist(),
             'remaining_distance_m':float(np.linalg.norm(self.position()-self.target)),
-                      'body_xy':self.body_base.tolist(),'completed_requests':self.completed_requests[-6:],
+            'body_xy':self.body_base.tolist(),'completed_requests':self.completed_requests[-6:],
+            'active_request_id':self.active_request,
             'carried_objects':list(getattr(self,'carried_offsets',{})),
             'last_receipt':self.receipts[-1] if self.receipts else None}
 

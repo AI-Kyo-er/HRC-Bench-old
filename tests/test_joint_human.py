@@ -28,6 +28,8 @@ def test_private_need_is_not_in_public_activity_but_actual_feedback_changes_inpu
     structured=parse_choice('{"action":"pick","object_id":"bowl","memory":[]}',{'bowl':[]},{})
     assert structured['action']=='pick' and structured['memory']=='[]'
     assert parse_choice('{"action":"message","message":"Please wait."}',{}, {})['message']=='Please wait.'
+    chosen=parse_choice('{"action":"message","presence_choice":"step_aside","message":"I will take the call aside."}',{}, {})
+    assert chosen['action']=='away' and chosen['declared_action']=='message'
 
 
 def test_pick_is_continuous_and_writes_only_human_held_object():
