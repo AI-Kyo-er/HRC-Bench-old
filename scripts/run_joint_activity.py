@@ -87,7 +87,7 @@ def main():
     from libero.libero import benchmark,get_libero_path
     from libero.libero.envs import OffScreenRenderEnv
     from openpi_client.websocket_client_policy import WebsocketClientPolicy
-    from hrc_pilot.robot_coordination import CoordinatorClient,coordination_request,hold_actions
+    from hrc_pilot.robot_coordination import CoordinatorClient,coordination_request,hold_actions,cartesian_actions
     import torch
     torch.manual_seed(args.seed)
     activity=ACTIVITIES[args.activity];case=CASES[activity.scene_case]
@@ -108,7 +108,7 @@ def main():
     writer=imageio.get_writer(ep/'demo.mp4',fps=20)
     trace=[];controls=[];calls=[];plans=[];timeline=[];events=[];action_plan=deque()
     dialogue=[{'time_s':0.,'speaker':'environment','kind':'activity','text':activity.public_description}]
-    private_context=[];initial_image=None;last_plan=None;held_gripper=None
+    private_context=[];initial_image=None;last_plan=None;held_gripper=None;cartesian_target=None
     def frame(t,obs):
         rgb=compose_runtime_views(np.ascontiguousarray(env.sim.render(width=640,height=480,camera_name='hrc_view')[::-1,::-1]),obs,'wide_and_policy')
         writer.append_data(rgb)
@@ -148,7 +148,7 @@ def main():
                     'robot_eef_xyz':r['robot_ee'],'robot_motion':{'eef_speed_m_s':speed},
                     'fixture_joints':r['articulated_joints'],'own_execution':feedback,
                     'public_dialogue':dialogue[-16:],'private_context':private_context[-3:],
-                    'action_interface':{'actions':['pick','place','point','move_hand','away','return','wait'],
+                    'action_interface':{'actions':['pick','place','point','move_hand','away','return','wait','message'],
                         'hand_workspace_xyz_min':[-.7,-.4,.95],'hand_workspace_xyz_max':[.7,.9,1.5],
                         'place_destination_names':list(regions),'held_object':actor.held}}
                 d=human.decide(scene);actor.accept_choice(d['choice'],d['decision_id'])
@@ -172,13 +172,15 @@ def main():
                         self_execution={'actual_control_steps':len(controls),'eef_xyz':r['robot_ee'],
                             'last_action':controls[-1]['action'] if controls else None})
                     last_plan=coordinator.infer(public_request);last_plan.update(time_s=t,decision_id=len(plans));plans.append(last_plan)
+                    cartesian_target=(np.asarray(r['robot_ee'])+last_plan['decision']['delta_xyz_m']
+                                      if last_plan['decision']['mode']=='move_ee' else None)
                     if last_plan['decision']['message']:
                         dialogue.append({'time_s':t,'speaker':'robot','kind':'response','text':last_plan['decision']['message']})
                 if coordinator:
                     selected=last_plan['decision']
                     if selected['mode']=='move_ee':
-                        # 本入口仅支持VLA操作／保持，非法模式明确拒绝，不隐蔽增加低层教师。
-                        source='coordinator_unsupported_action_hold';response={'actions':hold_actions(request['observation/state'],10,held_gripper)}
+                        source='coordinator_selected_cartesian_control'
+                        response={'actions':cartesian_actions(request['observation/state'],cartesian_target,10,held_gripper)}
                     elif selected['mode']=='hold':
                         source='coordinator_selected_hold';response={'actions':hold_actions(request['observation/state'],10,held_gripper)}
                     else:
@@ -196,6 +198,7 @@ def main():
                     'visible_dialogue_count':len(dialogue),'prompt':request['prompt'],**input_audit(request),
                     'raw_action_chunk':chunk.tolist(),'executed_action_count':count,
                     'coordinator_decision_id':last_plan['decision_id'] if last_plan else None}
+                if cartesian_target is not None:call['cartesian_target_xyz_m']=cartesian_target.tolist()
                 calls.append(call);action_plan.extend(chunk[:count])
             action=action_plan.popleft();before=float(env.sim.data.time)
             obs,*_=env.step(action.tolist());held_gripper=float(action[-1])

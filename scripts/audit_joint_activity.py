@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """独立核对公开渠道、实际命令、连续人动作和真实机器人动作；不冒充语义效度。"""
 import argparse
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -27,7 +28,7 @@ def audit(root):
     for d,receipt in zip(human,receipts):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=source['scene'];actual=trace[round(d['time_s']*20)]
-        assert source['activity']==activity.public()
+        assert source['activity']==json.loads(json.dumps(activity.public(),ensure_ascii=False))
         assert 'private_background' not in source['activity']
         assert not {'task_success','score','future_context'}.intersection(scene)
         for obj,xyz in scene['objects_xyz'].items():np.testing.assert_allclose(xyz,actual['objects'][obj])
@@ -48,6 +49,10 @@ def audit(root):
             assert c['prompt']==expected
             received+=sum(m['speaker']=='human' for m in visible[-12:])
         np.testing.assert_allclose(np.load(ep/f'observation_{c["step"]:06d}_state.npy'),c['state'])
+        from PIL import Image
+        for suffix,field in [('', 'exterior_rgb_sha256'),('_wrist','wrist_rgb_sha256')]:
+            pixels=np.asarray(Image.open(ep/f'observation_{c["step"]:06d}{suffix}.png').convert('RGB'))
+            assert sha256(pixels.tobytes()).hexdigest()==c[field]
         actions=np.load(ep/f'observation_{c["step"]:06d}_actions.npy')
         np.testing.assert_allclose(actions,np.asarray(c['raw_action_chunk'])[:c['executed_action_count']])
     for control,actual,next_actual in zip(controls,trace,trace[1:]):

@@ -15,7 +15,11 @@ def link(p):return '../../'+p.relative_to(ROOT).as_posix()
 def main():
     cards=[];facts=[]
     for key,label in ACTIVITIES:
-        run=ROOT/'results/continuous_v2'/f'joint_activity_{key}_dev_20261007'
+        run=ROOT/'results/continuous_v2'/f'joint_activity_{key}_schema_20261007'
+        diagnostic=ROOT/'results/continuous_v2'/f'joint_activity_{key}_dev_20261007'
+        if (diagnostic/'diagnostic_video_verification.json').exists():
+            v=read(diagnostic/'diagnostic_video_verification.json');assert v['status']=='verified'
+            cards.append(f'<section><details><summary>{label}：首批接口诊断（主动中断，非完整活动）</summary><p>模型输出被参数／schema校验拒绝，保留现场，不能计完整实验或动态情景覆盖。实际录制到{v["timeline"]["benchmark_end_s"]:.2f}秒。</p><video controls playsinline preload="none" src="{link(diagnostic/"episode/demo.mp4")}"></video><p><a href="{link(diagnostic/"diagnostic_reason.json")}">中断原因与实际数量</a></p></details></section>')
         if not (run/'summary.json').exists():
             failure=read(run/'failure.json') if (run/'failure.json').exists() else None
             status='执行失败，完整错误证据保留' if failure else '尚无完成运行的证据'

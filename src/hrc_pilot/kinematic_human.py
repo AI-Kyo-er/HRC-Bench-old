@@ -38,7 +38,7 @@ class KinematicHuman(NativeContactHuman):
         if error:return
         self.accepted_intent=action
         # wait继续当前运动，不自动生成新的抓放任务。
-        if action=='wait':return
+        if action in {'wait','message'}:return
         self.active_request=request_id;self.object_id=obj;self.destination=dest
         if action=='pick':
             self.target=self.object_position(obj)+[0,0,.06];self.phase='pick_approach'

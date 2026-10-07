@@ -7,7 +7,7 @@ from .llm_human import QwenHumanPolicy
 from .joint_activity import PROFILES
 
 
-INTENTS={'pick','place','point','move_hand','away','return','wait'}
+INTENTS={'pick','place','point','move_hand','away','return','wait','message'}
 MESSAGE_KINDS={'proposal','accept','reject','update','request','notice'}
 
 
@@ -57,9 +57,9 @@ class JointHumanPolicy(QwenHumanPolicy):
             '一个动作未结束时可以选择wait让它继续，或明确选择另一个动作。程序不自动执行后续计划。'
             'scene.private_context是外部事实，不是要求你离开或变心的命令。你可以合理坚持当前安排。'
             '不要凭任务时间长或为满足测试而随机换目标。不读取评分，不编造伙伴隐藏目标。'
-            '严格输出一个完整JSON对象，action只能是pick/place/point/move_hand/away/return/wait之一。'
+            '严格输出一个完整JSON对象，action只能是pick/place/point/move_hand/away/return/wait/message之一。'
             'move_hand仅使用公开workspace内的target_xyz；place仅选择regions_xyz中实际存在的名字。'
-            '若需要询问、安排、拒绝或表达，用message实现，并选择wait或一个允许的身体动作，不创造delegate等动作名。'
+            '若仅询问、安排、拒绝或表达，可选action=message；它不会中止正在进行的身体动作。'
             '输出JSON：intention、participation、action、object_id、destination、target_xyz（仅move_hand需要）、'
             'message_kind（proposal/accept/reject/update/request/notice）、message（简短英文）、reason、memory。'
             '不输出动作清单。')

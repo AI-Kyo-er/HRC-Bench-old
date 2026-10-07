@@ -27,6 +27,7 @@ def test_private_need_is_not_in_public_activity_but_actual_feedback_changes_inpu
     with pytest.raises(ValueError):parse_choice('{"action":"pick","object_id":"hidden"}',{'bowl':[]},{})
     structured=parse_choice('{"action":"pick","object_id":"bowl","memory":[]}',{'bowl':[]},{})
     assert structured['action']=='pick' and structured['memory']=='[]'
+    assert parse_choice('{"action":"message","message":"Please wait."}',{}, {})['message']=='Please wait.'
 
 
 def test_pick_is_continuous_and_writes_only_human_held_object():
