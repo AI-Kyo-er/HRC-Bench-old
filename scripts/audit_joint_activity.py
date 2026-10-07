@@ -58,7 +58,8 @@ def audit(root):
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            assert parse_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])==d['choice']
+            assert parse_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'],
+                                schema_version=d.get('choice_schema_version',1))==d['choice']
             if d.get('reflection_enabled'):
                 assert d['neural_inferences']==2 and d['reflection_input']['scene']==scene
                 assert d['reflection_input']['candidate_choice_to_review']==d['candidate_raw_output']
@@ -135,7 +136,9 @@ def audit(root):
              'public_message':d['choice'].get('message'),'actual_action':d['choice']['action'],
              'execution_accepted':receipts[i]['accepted'],'execution_error':receipts[i]['error']}
             for i,d in enumerate(human)]
-    result={'status':'verified','world_initializations':1,'human_neural_calls':sum(d.get('neural_inferences',1) for d in human),
+    human_neural_calls=(sum(d.get('neural_inferences',1) for d in human)
+                        if p.get('human_source','neural')=='neural' else 0)
+    result={'status':'verified','world_initializations':1,'human_neural_calls':human_neural_calls,
         'human_decision_rows':len(human),'human_source':p.get('human_source','neural'),
         'robot_action_blocks':len(calls),'actual_robot_control_steps':len(controls),
         'robot_actual_vla_calls':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction'} for c in calls),

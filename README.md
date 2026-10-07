@@ -4,8 +4,11 @@
 
 研究对象是共同活动如何在指导、协作和干预交织时被重新组织。时长和模式切换次数不是第一版的主要变量；理解更新也可以发生在物体和人体动作尚未改变时。
 
-新Goal已转向动态共同活动：人策略重在意图和参与，执行采用明确标注的连续运动学持物约束；机器人保持真实VLA控制。已建立点心准备、饮品整理、取用区清理三活动的跨主体依赖和实际公开话语渠道，首批开发运行正在进行，尚无完整Benchmark验收结论。
+新Goal已转向动态共同活动：人策略重在意图和参与，执行采用明确标注的连续运动学持物约束；机器人保持真实模型控制。三类活动已有完整可执行参考，其中抽屉／点心操作由实际π0.5完成，饮品成功参考使用既有轨迹反馈控制，当前机器人神经推理为零。神经开发出现实际用途修改，也暴露了重复搬运、过时安排和参与字段未兑现的问题；尚无完整Benchmark验收结论。
 
+- [本轮可执行性与神经策略进展：真实Sim视频统一入口](experiments/joint_feasibility_20261007/index.html)
+- [本轮关键行为、失败原因与证据边界](experiments/joint_feasibility_20261007/BEHAVIOR_REVIEW.md)
+- [本轮设置、复现与七项Goal验收状态](experiments/joint_feasibility_20261007/README.md)
 - [动态共同活动统一入口](experiments/dynamic_joint_activity_20261007/index.html)
 - [与idea对齐的整体设计、信息边界及参考依据](experiments/dynamic_joint_activity_20261007/DESIGN.md)
 - [实际进展和七项Goal验收状态](experiments/dynamic_joint_activity_20261007/README.md)

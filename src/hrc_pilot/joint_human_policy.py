@@ -11,11 +11,19 @@ INTENTS={'pick','place','relocate','point','move_hand','away','return','wait','m
 MESSAGE_KINDS={'proposal','accept','reject','update','request','notice'}
 
 
-def parse_choice(raw,objects,regions):
+def parse_choice(raw,objects,regions,*,schema_version=1):
     text=raw.rsplit('</think>',1)[-1].strip()
     value=json.loads(text[text.index('{'):text.rindex('}')+1])
     if value.get('action') not in INTENTS:raise ValueError('非法人动作')
+    participation=value.get('participation')
+    typed_presence={'keep','step_aside','return_to_work'}
     presence=value.get('presence_choice','keep')
+    if schema_version>=2 and participation in typed_presence:
+        # 兼容模型把明确的参与操作放入participation；只映射枚举，不推断话语或意图。
+        if 'presence_choice' in value and presence!=participation:
+            raise ValueError('参与位置字段冲突，需自己选择一个当前参与操作')
+        presence=participation
+        value['presence_choice']=presence
     if presence not in {'keep','step_aside','return_to_work'}:raise ValueError('非法参与位置选择')
     if presence in {'step_aside','return_to_work'}:
         if value['action'] not in {'message','wait','away','return'}:raise ValueError('参与位置改变与物品贡献冲突，需自己决定当前一项')
@@ -69,7 +77,7 @@ class JointHumanPolicy(QwenHumanPolicy):
             '严格输出一个完整JSON对象，action只能是pick/place/relocate/point/move_hand/away/return/wait/message之一。'
             'move_hand仅使用公开workspace内的target_xyz；place仅选择regions_xyz中实际存在的名字。'
             '若仅询问、安排、拒绝或表达，可选action=message；它不会中止正在进行的身体动作。'
-            '输出JSON：intention、participation、action、object_id、destination、target_xyz（仅move_hand需要）、'
+            '输出JSON：intention、participation（参与方式的文字说明）、presence_choice、action、object_id、destination、target_xyz（仅move_hand需要）、'
             'message_kind（proposal/accept/reject/update/request/notice）、message（简短英文）、reason、memory。'
             'presence_choice由你选择keep（保持位置）、step_aside（暂时离开桌边）、return_to_work（返回）。'
             '这是参与策略，不是解释文字，执行器会连续兑现；改变参与位置时action选message或wait，别同时请求搬物。'
@@ -92,7 +100,7 @@ class JointHumanPolicy(QwenHumanPolicy):
                 '保留有依据的意图，修正无依据的事实，自己决定当前一个动作和是否表达／协商。'
                 '如果需要提供物品，用relocate兑现；不能只说已经准备好。输出最终完整JSON，不输出评分或任务路由。'}
             raw=self._generate(json.dumps(review,ensure_ascii=False,separators=(',',':')))
-        try:choice=parse_choice(raw,scene['objects_xyz'],scene['regions_xyz'])
+        try:choice=parse_choice(raw,scene['objects_xyz'],scene['regions_xyz'],schema_version=2)
         except (ValueError,TypeError,KeyError) as exc:
             error=str(exc);choice={'action':'wait','message':'','message_kind':'notice',
                 'intention':'','participation':'','reason':'输出非法，保留现场并等待下一次人决策。','memory':''}
@@ -100,7 +108,7 @@ class JointHumanPolicy(QwenHumanPolicy):
              'private_input':request,'raw_output':raw,'choice':choice,'parse_error':error,
              'latency_s':time.perf_counter()-started,'action_source':'actual_qwen_joint_human'}
         row.update(candidate_raw_output=candidate,reflection_enabled=self.reflection,
-                   neural_inferences=2 if self.reflection else 1,reflection_input=review)
+                   neural_inferences=2 if self.reflection else 1,reflection_input=review,choice_schema_version=2)
         self.decisions.append(row)
         if choice.get('memory'):self.private_memory.append({'time_s':scene['time_s'],'text':choice['memory']})
         return row

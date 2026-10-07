@@ -32,6 +32,25 @@ def test_private_need_is_not_in_public_activity_but_actual_feedback_changes_inpu
     assert chosen['action']=='away' and chosen['declared_action']=='message'
 
 
+def test_explicit_participation_operation_is_executed_without_reading_speech():
+    raw=json.dumps({'action':'message','participation':'step_aside','message':'Taking the call.'})
+    # 旧运行按保存的schema重建，不倒改其失败行为。
+    assert parse_choice(raw,{}, {})['action']=='message'
+    choice=parse_choice(raw,{}, {},schema_version=2)
+    assert choice['action']=='away' and choice['declared_action']=='message'
+    assert choice['presence_choice']=='step_aside'
+    return_choice=parse_choice('{"action":"wait","participation":"return_to_work"}',{}, {},schema_version=2)
+    assert return_choice['action']=='return'
+    # 不能根据一句话替人决定离开，也不能静默解决相反的明确操作。
+    text_only=parse_choice('{"action":"message","participation":"busy","message":"I left."}',{}, {},schema_version=2)
+    assert text_only['action']=='message'
+    with pytest.raises(ValueError,match='冲突'):
+        parse_choice('{"action":"message","participation":"step_aside","presence_choice":"keep"}',{}, {},schema_version=2)
+    with pytest.raises(ValueError,match='冲突'):
+        parse_choice('{"action":"relocate","object_id":"bowl","destination":"ready","participation":"step_aside"}',
+                     {'bowl':[]},{'ready':[]},schema_version=2)
+
+
 def test_pick_is_continuous_and_writes_only_human_held_object():
     actor=object.__new__(KinematicHuman)
     data=SimpleNamespace(time=0.,qpos=np.zeros(20),qvel=np.zeros(20),ctrl=np.zeros(3))
