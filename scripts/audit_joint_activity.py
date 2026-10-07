@@ -26,6 +26,10 @@ def audit(root):
     plans=rows(planner_path) if planner_path.exists() else []
     assert bool(plans)==(p['robot_system'] in {'visual_coordinator_plus_vla','symbolic_coordinator_plus_vla'})
     raw_human=rows(ep/'human_control.jsonl')
+    tool_tokenizer=None
+    if any(d.get('choice_schema_version')==6 for d in human):
+        from transformers import AutoTokenizer
+        tool_tokenizer=AutoTokenizer.from_pretrained(p['human_model'],local_files_only=True,trust_remote_code=True)
     context_path=ep/'private_context.jsonl';contexts=rows(context_path) if context_path.exists() else []
     expected_context=p.get('human_source','neural')=='neural' and 0<=p['context_step']<p['steps']
     if p.get('situation'):
@@ -41,7 +45,7 @@ def audit(root):
     assert len(trace)==len(controls)+1 and len(human)==len(receipts)
     np.testing.assert_allclose([r['physics_time_s']-trace[0]['physics_time_s'] for r in trace],
                                np.arange(len(trace))/20,atol=1e-7)
-    for d,receipt in zip(human,receipts):
+    for human_index,(d,receipt) in enumerate(zip(human,receipts)):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=d.get('observation_source_scene',source['scene']);actual=trace[round(d['time_s']*20)]
         if d.get('human_observation_encoding')=='intent_semantic_facts_v1':
@@ -52,6 +56,15 @@ def audit(root):
             assert source['human_contribution_interface']==contribution_interface(scene)
             if d['reflection_enabled']:
                 assert d['reflection_input']['human_contribution_interface']==contribution_interface(scene)
+        if d.get('choice_schema_version')==6:
+            from hrc_pilot.tool_joint_human import tool_model_input,retained_private_notes
+            assert source['own_retained_private_notes']==retained_private_notes(human[:human_index])
+            payload=tool_model_input(d['system_prompt'],source,human[:human_index],scene)
+            assert payload==d['native_tool_model_input']
+            assert d['chat_template_sha256']==sha256(tool_tokenizer.chat_template.encode()).hexdigest()
+            encoded=tool_tokenizer.apply_chat_template(payload['messages'],tools=payload['tools'],
+                tokenize=True,add_generation_prompt=True,enable_thinking=True)
+            assert encoded==d['native_tool_input_token_ids']
         if p.get('human_source','neural')=='neural':
             assert source['activity']==saved_activity
             assert 'private_background' not in source['activity']
@@ -75,7 +88,11 @@ def audit(root):
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            if d.get('choice_schema_version') in {4,5}:
+            if d.get('choice_schema_version')==6:
+                from hrc_pilot.tool_joint_human import parse_tool_choice
+                choice,normalization,call=parse_tool_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])
+                assert choice==d['choice'] and normalization==d['contribution_normalization'] and call==d['selected_tool_call']
+            elif d.get('choice_schema_version') in {4,5}:
                 from hrc_pilot.human_contribution_contract import parse_contribution
                 choice,normalization=parse_contribution(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'],
                                                         schema_version=d['choice_schema_version'])
