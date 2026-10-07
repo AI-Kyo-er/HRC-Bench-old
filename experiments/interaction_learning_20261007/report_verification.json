@@ -1,0 +1,128 @@
+{
+  "status": "verified",
+  "videos": [
+    {
+      "id": "qualification",
+      "duration_s": 64.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true,
+      "range_status": 206
+    },
+    {
+      "id": "food",
+      "duration_s": 60.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true,
+      "range_status": 206
+    },
+    {
+      "id": "stove",
+      "duration_s": 60.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": true,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_3",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_4",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_5",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_6",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_7",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_8",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_9",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_10",
+      "duration_s": 80.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_11",
+      "duration_s": 84.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_12",
+      "duration_s": 84.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_13",
+      "duration_s": 84.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    },
+    {
+      "id": "teacher_14",
+      "duration_s": 84.05,
+      "played": true,
+      "seek_37_2_s": true,
+      "nn_state_sync": false,
+      "range_status": 206
+    }
+  ],
+  "local_links_checked": 29,
+  "javascript_errors": [],
+  "mobile_no_horizontal_overflow": true
+}

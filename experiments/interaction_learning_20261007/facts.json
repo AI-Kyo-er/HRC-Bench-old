@@ -1,0 +1,73 @@
+{
+  "research_goal_achieved": false,
+  "training": {
+    "status": "trained",
+    "steps": 200,
+    "train_samples": 440,
+    "dev_samples": 200,
+    "trainable_parameters": 5242880,
+    "initial_dev_loss": 1.2201167390896723,
+    "final_dev_loss": 0.0015050860893097706,
+    "base_model": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B",
+    "adapter_weights": "/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B-HRC-interaction-lora-20261007",
+    "dataset": "/data1/sieniwgroup/sieniw/projects/HRC-Bench/datasets/interaction_contact_20261007/combined",
+    "answer_only_supervision": true,
+    "logits_keep_semantics": "answer_length+1, first label ignored, standard shifted causal loss",
+    "initial_intention_normalization": "time0 previous targets and intention cleared only in loader",
+    "cuda_visible_devices": "0",
+    "cuda_peak_allocated_mib": 30989.0927734375,
+    "source_sha256": {
+      "/home/sieniw/working-doc/projects/HRC-Bench/scripts/train_human_contact_lora.py": "d0787543234eb265090d1dbbe0174820c56644935abcd21cb8df77634e3d695f",
+      "src/hrc_pilot/human_learning_dataset.py": "8d92efa2a548935a6bc26edb9df9deb9c23f36c124f1dbd9bd69a806aa44887d"
+    },
+    "source_files_changed_during_run": [],
+    "adapter_parameter_delta_norm": 6.562392008125623,
+    "base_parameters_frozen": true,
+    "interpretation": "损失及真实参数更新不是闭环能力证明；需要未用于训练的实际Sim运行与视频。"
+  },
+  "new_teacher_videos_verified": 12,
+  "episodes": [
+    {
+      "scene": "qualification",
+      "human_goal_success": false,
+      "motion_qualified": true,
+      "human_calls": 30,
+      "actions": {
+        "grasp": 5,
+        "place": 4,
+        "release": 1,
+        "observe": 20
+      },
+      "contact_time_s": 0.0,
+      "direct_contact_feedback_calls": 30,
+      "robot_goal_success": null,
+      "joint_goal_time_s": null
+    },
+    {
+      "scene": "food",
+      "human_goal_success": false,
+      "motion_qualified": true,
+      "human_calls": 30,
+      "actions": {
+        "grasp": 30
+      },
+      "contact_time_s": 57.349999999999994,
+      "direct_contact_feedback_calls": 30,
+      "robot_goal_success": true,
+      "joint_goal_time_s": 0.0
+    },
+    {
+      "scene": "stove",
+      "human_goal_success": false,
+      "motion_qualified": true,
+      "human_calls": 30,
+      "actions": {
+        "grasp": 30
+      },
+      "contact_time_s": 1.2000000000000028,
+      "direct_contact_feedback_calls": 30,
+      "robot_goal_success": true,
+      "joint_goal_time_s": 0.0
+    }
+  ]
+}
