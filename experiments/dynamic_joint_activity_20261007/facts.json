@@ -1,0 +1,20 @@
+{
+  "goal_complete": false,
+  "development_runs": [
+    {
+      "activity": "snack_service",
+      "complete": false,
+      "failure": null
+    },
+    {
+      "activity": "drink_storage",
+      "complete": false,
+      "failure": null
+    },
+    {
+      "activity": "drawer_access",
+      "complete": false,
+      "failure": null
+    }
+  ]
+}

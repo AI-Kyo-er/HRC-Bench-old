@@ -147,7 +147,10 @@ def main():
                 scene={'time_s':t,'objects_xyz':r['objects'],'regions_xyz':regions,
                     'robot_eef_xyz':r['robot_ee'],'robot_motion':{'eef_speed_m_s':speed},
                     'fixture_joints':r['articulated_joints'],'own_execution':feedback,
-                    'public_dialogue':dialogue[-16:],'private_context':private_context[-3:]}
+                    'public_dialogue':dialogue[-16:],'private_context':private_context[-3:],
+                    'action_interface':{'actions':['pick','place','point','move_hand','away','return','wait'],
+                        'hand_workspace_xyz_min':[-.7,-.4,.95],'hand_workspace_xyz_max':[.7,.9,1.5],
+                        'place_destination_names':list(regions),'held_object':actor.held}}
                 d=human.decide(scene);actor.accept_choice(d['choice'],d['decision_id'])
                 if d['choice'].get('message'):
                     dialogue.append({'time_s':t,'speaker':'human','kind':d['choice'].get('message_kind','notice'),
@@ -212,7 +215,7 @@ def main():
         result=evaluate_chain(activity,trace,human.decisions,controls,placement.records)
         result.update(init_state_id=args.init_state_id,seed=args.seed,role='development_joint_activity_run')
         write(ep/'metrics.json',result);write(args.output_dir/'summary.json',{'episodes':[result]})
-    except Exception as error:
+    except BaseException as error:
         write(args.output_dir/'failure.json',{'error':repr(error),'completed_control_steps':len(controls)})
         raise
     finally:
@@ -220,6 +223,7 @@ def main():
         write(ep/'video_timeline.json',{'fps':20,'frame_count':len(timeline),'frames':timeline})
     write(args.output_dir/'provenance.json',{'activity':args.activity,'profile':args.profile,
         'human_policy':'actual_qwen3_intention_and_action_no_lora','human_model':str(args.human_model),
+        'human_model_class':type(human._model).__name__,'human_thinking_enabled':human.enable_thinking,
         'human_executor':'human_only_continuous_kinematic_attachment','robot_model_metadata':client.get_server_metadata(),
         'robot_system':'visual_coordinator_plus_vla' if coordinator else 'direct_vla_public_dialogue',
         'coordinator_metadata':coordinator.metadata if coordinator else None,

@@ -25,6 +25,8 @@ def test_private_need_is_not_in_public_activity_but_actual_feedback_changes_inpu
     assert inputs[1]['scene']['robot_motion']['eef_speed']==0.
     assert inputs[1]['own_memory'][0]['text']=='observed motion'
     with pytest.raises(ValueError):parse_choice('{"action":"pick","object_id":"hidden"}',{'bowl':[]},{})
+    structured=parse_choice('{"action":"pick","object_id":"bowl","memory":[]}',{'bowl':[]},{})
+    assert structured['action']=='pick' and structured['memory']=='[]'
 
 
 def test_pick_is_continuous_and_writes_only_human_held_object():

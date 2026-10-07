@@ -22,7 +22,7 @@ command+=" --init-state-id 0 --seed 50 --steps 1600 --context-step 800"
 command+=" --port 8766"
 
 # Output
-command+=" --output-dir ./results/continuous_v2/joint_activity_snack_service_dev_20261007"
+command+=" --output-dir ./results/continuous_v2/joint_activity_snack_service_schema_20261007"
 
 echo "$command"
 eval "$command"

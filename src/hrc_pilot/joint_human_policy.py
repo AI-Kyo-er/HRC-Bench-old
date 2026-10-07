@@ -25,14 +25,17 @@ def parse_choice(raw,objects,regions):
         if point.shape!=(3,) or not np.isfinite(point).all() or not np.all(point>=[-.7,-.4,.95]) or not np.all(point<=[.7,.9,1.5]):
             raise ValueError('手部目标超出工作空间')
     if value.get('message_kind','notice') not in MESSAGE_KINDS:raise ValueError('非法公开消息类型')
-    for key in ['intention','participation','reason','memory','message']:
+    # 记忆可为结构化记录；不能因辅助字段格式丢弃合法策略动作。
+    if not isinstance(value.get('memory',''),str):
+        value['memory']=json.dumps(value.get('memory'),ensure_ascii=False)
+    for key in ['intention','participation','reason','message']:
         if not isinstance(value.get(key,''),str):raise ValueError(key+'须为文字')
     return value
 
 
 class JointHumanPolicy(QwenHumanPolicy):
-    enable_thinking=True
-    generation_token_limit=1536
+    enable_thinking=False
+    generation_token_limit=1024
 
     def __init__(self,activity,*,model_path,profile='participating',seed=0,generator=None):
         self.activity=activity;self.profile=profile
@@ -54,12 +57,16 @@ class JointHumanPolicy(QwenHumanPolicy):
             '一个动作未结束时可以选择wait让它继续，或明确选择另一个动作。程序不自动执行后续计划。'
             'scene.private_context是外部事实，不是要求你离开或变心的命令。你可以合理坚持当前安排。'
             '不要凭任务时间长或为满足测试而随机换目标。不读取评分，不编造伙伴隐藏目标。'
+            '严格输出一个完整JSON对象，action只能是pick/place/point/move_hand/away/return/wait之一。'
+            'move_hand仅使用公开workspace内的target_xyz；place仅选择regions_xyz中实际存在的名字。'
+            '若需要询问、安排、拒绝或表达，用message实现，并选择wait或一个允许的身体动作，不创造delegate等动作名。'
             '输出JSON：intention、participation、action、object_id、destination、target_xyz（仅move_hand需要）、'
             'message_kind（proposal/accept/reject/update/request/notice）、message（简短英文）、reason、memory。'
             '不输出动作清单。')
 
     def decide(self,scene):
-        request={'activity':self.activity.public(),'personal_background':self.activity.private_background,
+        request={'agent_identity':{'self':'human','partner':'robot'},
+                 'activity':self.activity.public(),'personal_background':self.activity.private_background,
                  'profile':PROFILES[self.profile],'scene':scene,
                  'own_previous_choices':[{k:d['choice'].get(k) for k in ['intention','participation','action','message']}
                                          for d in self.decisions[-4:]],
