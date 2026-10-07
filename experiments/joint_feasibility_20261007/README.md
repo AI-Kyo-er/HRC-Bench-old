@@ -2,7 +2,7 @@
 
 [真实 Sim 视频统一入口](index.html) · [关键行为分析](BEHAVIOR_REVIEW.md) · [参考协议](PROTOCOL.md) · [理想感知系统设置](SYMBOLIC_PROTOCOL.md) · [六类情境与证据门槛](SITUATIONS.md) · [整体研究设计](../dynamic_joint_activity_20261007/DESIGN.md)。
 
-[参与契约修复协议](CONTRACT_PROTOCOL_20261008.md) · [第二视觉系统协议](VISUAL_SYSTEM_PROTOCOL_20261008.md) · [可选技能与具体情境协议](SKILL_BANK_PROTOCOL_20261008.md) · [正式评测计划与当前准入状态](EVALUATION_PLAN.md)。当前27段视频均通过独立解码／时间轴核查，含26条完整120秒轨迹和1条部分崩溃诊断；27段全部通过浏览器播放／拖动／Range、242个链接及375px手机布局核查。253项有效回归通过、2项跳过；测试不证明策略效度。
+[参与契约修复协议](CONTRACT_PROTOCOL_20261008.md) · [第二视觉系统协议](VISUAL_SYSTEM_PROTOCOL_20261008.md) · [可选技能与具体情境协议](SKILL_BANK_PROTOCOL_20261008.md) · [正式评测计划与当前准入状态](EVALUATION_PLAN.md)。当前28段视频均通过独立解码／时间轴核查，含27条完整120秒轨迹和1条部分崩溃诊断；28段全部通过浏览器播放／拖动／Range、251个链接及375px手机布局核查。256项有效回归通过、2项跳过；测试不证明策略效度。
 
 目的：检验三个具有跨主体贡献依赖的日常活动是否可执行，以及在线生成的人与真实机器人系统能否建立、维持和调整活动。此批是开发及可执行性实验，尚无冻结的正式统计评测。
 
@@ -52,6 +52,6 @@ python scripts/serve_reports.py --port 8123
 
 现有数据按 observation 同 stem 加载，动作标签来自实际执行的控制，不用未执行尾部充当训练目标。失败数据不标为专家成功。人物隐私、环境真值和评分不能直接注入被测机器人。
 
-[开发行为数据](../../datasets/dynamic_joint_activity_dev_20261008/README.md)已经全量加载核查：26条完整轨迹、8400组观测、62400步动作。相同stem在不同run下有独立sample_id，目录软链避免重复大文件，不创建配对manifest。后续新增轨迹后的实际数量以dataset_verification.json为准。
+[开发行为数据](../../datasets/dynamic_joint_activity_dev_20261008/README.md)已经全量加载核查：27条完整轨迹、8640组观测、64800步动作。相同stem在不同run下有独立sample_id，目录软链避免重复大文件，不创建配对manifest。后续新增轨迹后的实际数量以dataset_verification.json为准。
 
 新开发批针对点心临时饮品需要、饮品具体用途纠正、抽屉机器人请求展开；私有事实指明实际物品，双方公开了解可选择的原生操作库。高层NN选择skill_id，真实VLA执行；库内操作的实际成功仍需验证，不能将原始任务／保持两选项的局限当广义HRC结论。

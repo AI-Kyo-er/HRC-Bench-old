@@ -82,3 +82,21 @@ activity_private_context.py：18种活动×情境的外部事实文本绑定实�
 - Next：回收drawer→独立audit/evaluate/完整解码→builder/export/browser。按照真实行为补六覆盖和可靠人策略，再做多系统测试init4/5正式矩阵。Goal仍active，未满足七项。
 
 最终报告检查：session92993已terminal exit0，27段全部实际play/seek/Range206、242链接、375px、JS0error通过。数据26/8400/62400全量加载通过。当前drawer PID3495686仍live，最近ps为3m45s；Goal不complete。
+
+## 最新接续更新：显式贡献接口（950419b）
+
+上一turn属于progress：新增参数接口／空消息契约、回收语义抽屉、独立核查与跨两活动运行。Goal全部七项仍未完成，不complete/block。
+
+- joint_semantic_drawer_request_20261008已terminal120s。Rπ240调用，原生打开5.65s成立；人没有收纳，29.2s开始退出桌边直到120s未返回，0执行拒绝／0自动缓冲；尚无Robot主动求助。H反复等待可进入，R公开只Opening，不能把几何开放与释放操作区等同。NN输入及实际动作／2401视频核查全部通过。
+- human_contribution_contract.py：明确对象ID与区域ID区别、home只是初始位置不是on/in、staging是给伙伴可获取物品的位置。所有区域来自实际scene，不编造下一动作。message/memory:null规范为空不丢合法动作；unknown记录kind原值notice；非法动作／目标仍拒绝，不自动把wine_rack_1改成其他地方。
+- ContributionJointHumanPolicy独立适配类，在实际NN输入加human_contribution_interface并使用既有语义事实，源sha与原主运行时一起记录，schema4可重建。旧NN原始输出与失败不倒改。关键实现950419b，256 tests passed / 2 skipped。
+- run_contribution_joint_activity.py独立wrapper，继承已提交的运行时，未改正在加载的旧main／human/actor/semantic/intent等文件。不要在新worker结束前改这些及新contribution模块。
+- 新固定开发：init3／seed64／120s／每4s高层／H14B候选反思／auto-buffer／真实π技能库／理想感知14B协调（共享冻结权重但私有上下文独立）。两个活动，不作严格单因素对比，不作为正式多模型n。
+  * joint_contribution_snack_change_use_20261008：GPU0，PID3522129，session54368，log data1/results/joint_contribution_snack_change_use_20261008.log。
+  * joint_contribution_drink_detour_20261008：GPU3，PID3522133，session82535，log同stem.log；GPU3共享π8.9GB＋H预算36.36GB，启动前free39.6GB足够。
+- 最新实际中途：两worker约60模拟秒；点心0字段拒绝，0s提供碗，52s已请求搬碗snack_delivery，真实R填装关系仍未见；饮品1区域错误，4s等实际relocate wine到drink_staging，52s选择away。尚无buffer启动。不能把搬空碗当成品交付，不能把离返当已完成餐盘活动。
+- Actor／意图接口下一步仍需整体完善，NN源有语义不一致（目标Rack但实际选staging、等待可进入但门已几何打开）。不能仅凭格式通过或身体动了就称拟真／真实协作；也不要马上写复杂新手指／动力学。保留接口未支持动作的边界，不把这些算Robot能力失败。
+- 当前发布28视频（27完整120s＋1 partial483frames）、28全play/seek/Range、251links、375px、JS0err，browser verification_final.json。数据27完整／8640观测块／64800真实执行动作，全加载唯一stem来源检验通过。正式split、可靠HumanPolicy、六实际覆盖、多系统正式矩阵和cobalance效度仍缺。
+- 服务仍π PID2267256 port8766，VLM PID3095303 port8782，HTTP PID3054726 port8123。旧语义drawer PID3495686已terminal，SemanticDrink PID3380481已terminal。不操作别人的GPU任务；旧显存拒绝日志保留。
+
+下一步：重新核实两个新PID／同session推进，终态后audit/evaluate/video→builder/export/browser，重点审阅政策变化是否体现在正确物品与约定、是否真正Robot响应并影响H。任务可执行性三init2原始操作已有actualπ成功，不能继续无休止底座证明。仅有actor逻辑、引用、绿灯与反复提示不算Goal。正式72计划仍未启动。
