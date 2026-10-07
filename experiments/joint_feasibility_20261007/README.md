@@ -2,7 +2,7 @@
 
 [真实 Sim 视频统一入口](index.html) · [关键行为分析](BEHAVIOR_REVIEW.md) · [参考协议](PROTOCOL.md) · [理想感知系统设置](SYMBOLIC_PROTOCOL.md) · [六类情境与证据门槛](SITUATIONS.md) · [整体研究设计](../dynamic_joint_activity_20261007/DESIGN.md)。
 
-[参与契约修复协议](CONTRACT_PROTOCOL_20261008.md) · [第二视觉系统协议](VISUAL_SYSTEM_PROTOCOL_20261008.md) · [可选技能与具体情境协议](SKILL_BANK_PROTOCOL_20261008.md) · [正式评测计划与当前准入状态](EVALUATION_PLAN.md)。当前19段视频均通过独立解码／时间轴核查，含18条完整120秒轨迹和1条部分崩溃诊断。此前18段通过浏览器播放检查，新增视觉系统视频继续执行同样核查。248项有效回归通过、2项跳过；测试不证明策略效度。
+[参与契约修复协议](CONTRACT_PROTOCOL_20261008.md) · [第二视觉系统协议](VISUAL_SYSTEM_PROTOCOL_20261008.md) · [可选技能与具体情境协议](SKILL_BANK_PROTOCOL_20261008.md) · [正式评测计划与当前准入状态](EVALUATION_PLAN.md)。当前19段视频均通过独立解码／时间轴核查与浏览器播放／拖动／Range核查，含18条完整120秒轨迹和1条部分崩溃诊断；172个链接及375px手机布局通过。248项有效回归通过、2项跳过；测试不证明策略效度。
 
 目的：检验三个具有跨主体贡献依赖的日常活动是否可执行，以及在线生成的人与真实机器人系统能否建立、维持和调整活动。此批是开发及可执行性实验，尚无冻结的正式统计评测。
 
