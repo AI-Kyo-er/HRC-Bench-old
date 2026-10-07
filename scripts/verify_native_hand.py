@@ -49,7 +49,10 @@ def main():
     for p in sorted(args.input_dir.rglob('human_control.jsonl')):
         metrics=json.loads((p.parent/'metrics.json').read_text())
         objects=[metrics['object_id']] if 'object_id' in metrics else sorted({r['object_id'] for r in rows(p) if r['object_id'] is not None})
-        if not objects:objects=['cookies_1']
+        if not objects:
+            initial=json.loads((p.parent/'trace.jsonl').open().readline())
+            objects=initial['human_execution'].get('manipulable_object_ids',[])
+            assert objects,'记录没有可审计的实际物品库存'
         decisions=rows(p.parent/'human_policy_io.jsonl') if (p.parent/'human_policy_io.jsonl').exists() else []
         for obj in objects:
             destinations=sorted({r['parsed_decision']['destination'] for r in decisions
