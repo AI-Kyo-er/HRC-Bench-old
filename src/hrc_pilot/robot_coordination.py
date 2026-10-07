@@ -6,6 +6,7 @@ import json
 
 import numpy as np
 from PIL import Image
+from .native_contact_observation import own_contact_observation
 
 
 PUBLIC_KEYS={'time_s','robot_task','human_task','dialogue','state','images','history','current_goal','self_execution'}
@@ -42,6 +43,7 @@ def execution_feedback(record, initial_state, calls, actions):
             if geom.startswith('gripper0_finger1'):fingers['finger_1']+=1
             if geom.startswith('gripper0_finger2'):fingers['finger_2']+=1
     return {'source':'actual_native_controls_and_own_sensors',
+            'own_contact_report':own_contact_observation(record['contacts'],'robot'),
             'completed_native_control_steps':len(actions),
             'issued_learned_vla_blocks':sum(c['action_source']=='learned_vla' for c in calls),
             'issued_hold_blocks':sum(c['action_source']!='learned_vla' for c in calls),

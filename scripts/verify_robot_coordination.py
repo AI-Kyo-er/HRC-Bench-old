@@ -36,6 +36,7 @@ def verify_episode(directory):
                 [c for c in calls if c['step']<row['step']],[a for a in actions if a['step']<row['step']])
             actual=row['public_input']['self_execution']
             for key,value in expected.items():
+                if key=='own_contact_report' and key not in actual:continue
                 if key=='eef_displacement_from_start_m':np.testing.assert_allclose(actual[key],value,atol=1e-8)
                 else:assert actual[key]==value
     for call in calls:

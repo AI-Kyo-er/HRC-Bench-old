@@ -56,10 +56,26 @@ def verify_episode(directory, *, require_shelf_release=False, require_table_rele
     assert emitted==[m for m in dialogue if m['kind']=='negotiation_proposal']
     communicated=[m['text'] for m in dialogue if m['kind'] in {'policy_message','negotiation_proposal'}]
     proposal_uses=0
+    coordinated=(directory/'robot_planner_io.jsonl').exists()
+    robot_plans=rows(directory/'robot_planner_io.jsonl') if coordinated else []
+    plans_by_id={r['decision_id']:r for r in robot_plans}
+    if coordinated:
+        from hrc_pilot.robot_coordination import PUBLIC_KEYS
+        for r in robot_plans:
+            request=r['public_input'];assert set(request)==PUBLIC_KEYS-{'images'}
+            assert request['robot_task']==context['robot_instruction']
+            assert request['human_task']=='Human has private personal preferences; infer their current needs from public speech and visible actions.'
+            assert not {'personal_targets','personal_context','preferred_personal_objects','personal_evidence','task_success'}.intersection(request)
+            for message in request['dialogue']:
+                assert any(all(m.get(k)==v for k,v in message.items()) for m in dialogue)
     for c in calls:
-        assert c['prompt'].startswith(context['robot_instruction'])
+        if not coordinated:assert c['prompt'].startswith(context['robot_instruction'])
         assert c['model_input_keys']==['observation/image','observation/wrist_image','observation/state','prompt']
-        assert c['action_source']=='learned_vla'
+        if not coordinated:assert c['action_source']=='learned_vla'
+        else:
+            plan=plans_by_id[c['planner_decision_id']]
+            if c['action_source']=='learned_vla':assert c['prompt']==plan['decision']['instruction']
+            else:assert plan['decision']['mode']=='hold'
         assert '\nCurrent public human work:' not in c['prompt']
         # The only language suffix is publicly emitted speech; private targets are never routed to the robot.
         for text in c['prompt'].split('\nHuman: ')[1:]:assert text in communicated

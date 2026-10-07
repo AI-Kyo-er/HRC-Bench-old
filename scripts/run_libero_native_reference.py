@@ -136,6 +136,7 @@ def main():
                   Path('src/hrc_pilot/native_reflective_human.py'),Path('src/hrc_pilot/native_video_frame.py'),
                   Path('src/hrc_pilot/native_run_journal.py'),
                   Path('src/hrc_pilot/native_grounded_human.py'),
+                  Path('src/hrc_pilot/native_contact_observation.py'),
                   Path('src/hrc_pilot/native_relative_placement.py'),
                   Path('src/hrc_pilot/native_execution.py'),Path('src/hrc_pilot/protocol.py'),
                   Path('src/hrc_pilot/native_action_validation.py'),

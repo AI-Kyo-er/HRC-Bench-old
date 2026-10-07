@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 from hrc_pilot.libero_native import perceived_object_contacts
+from hrc_pilot.native_contact_observation import own_contact_observation
 
 
 def rows(path):return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -23,6 +24,10 @@ def verify_episode(directory):
         assert public['robot_action']=='native_joint_control'
         actual=by_step[decision['step']]
         measured=public['your_measured_execution']
+        if 'hand_contact_report' in measured:
+            expected_contacts=own_contact_observation(actual['contacts'],'human')
+            assert measured['hand_contact_report']==expected_contacts
+            assert measured['hand_contact_geoms']==expected_contacts['contact_geoms']
         np.testing.assert_allclose(measured['body_xy'],actual['human_position'][:2],atol=1e-9)
         np.testing.assert_allclose(measured['fingertip_xyz'],actual['human_hand_position'],atol=1e-9)
         np.testing.assert_allclose(measured['body_remaining_distance_m'],

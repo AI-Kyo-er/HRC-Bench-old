@@ -7,6 +7,7 @@ from .continuous import HumanCommand
 from .human_contact import bounded_motion
 from .llm_human import QwenHumanPolicy, PERSONAS
 from .native_action_validation import command_feedback
+from .native_contact_observation import own_contact_observation
 import json
 
 
@@ -294,6 +295,15 @@ class NativeContactHuman:
                 'body_xy':self.body_base.tolist(),'body_target_xy':self.body_target.tolist(),
                 'body_remaining_distance_m':body_distance,'fingertip_xyz':self.position().tolist(),
                 'fingertip_target_xyz':self.target.tolist(),'fingertip_remaining_distance_m':hand_distance}
+        data=self.env.sim.data
+        if hasattr(data,'ncon'):
+            pairs=[{'geom1':self.env.sim.model.geom_id2name(data.contact[i].geom1),
+                    'geom2':self.env.sim.model.geom_id2name(data.contact[i].geom2),
+                    'distance_m':float(data.contact[i].dist)} for i in range(data.ncon)]
+            result['hand_contact_report']=own_contact_observation(pairs,'human')
+            result['hand_contact_geoms']=result['hand_contact_report']['contact_geoms']
+            result['actual_hand_velocity_m_s']=data.qvel[self.didx].tolist()
+            result['hand_motor_command_force_n']=data.ctrl[self.actuators].tolist()
         point=self.destination_position()
         if self.object_id is not None and point is not None:
             actual=self.object_position(self.object_id)
