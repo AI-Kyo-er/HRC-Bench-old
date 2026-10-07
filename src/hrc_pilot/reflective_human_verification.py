@@ -1,5 +1,6 @@
 """独立核对两次模型推理、原始意图来源及动作层未修改个人目标。"""
 import json
+import numpy as np
 
 from .native_autonomous_human import validate_targets
 from types import SimpleNamespace
@@ -51,8 +52,25 @@ def verify_reflective_records(planners,motors):
         assert row['planner_decision_id']==max(p['planner_decision_id'] for p in planners if p['time_s']<=row['time_s'])
         assert planner['time_s']<=row['time_s'] and public['planner_decision_id']==planner['planner_decision_id']
         assert row['personal_goal_state']==planner['retained_or_accepted_personal_goal_state']
-        assert public['active_intention_plan']==planner['active_intention_plan']
-        assert public['your_previous_personal_targets']==row['personal_goal_state']['personal_targets']
+        if public.get('human_input_contract')=='current_intentions_and_measured_geometry_v2':
+            state=row['personal_goal_state'];assert public['your_current_personal_targets']==state['personal_targets']
+            assert 'your_previous_personal_targets' not in public and 'your_previous_generated_plan' not in public
+            assert public['agent_identity']=={'self':'human','other':'robot'}
+            expected={k:planner['active_intention_plan'].get(k) for k in ['decision_kind','long_term_intention','personal_targets','plan']}
+            expected.update(source='own_model_generated_intentions_not_world_measurements',generated_at_sim_time_s=planner['time_s'])
+            assert public['active_intention_plan']==expected
+            assert not {'observed_changes','assumption_corrections'}.intersection(public['active_intention_plan'])
+            geometry=public['your_target_geometry'];assert len(geometry)==len(state['personal_targets'])
+            for target,g in zip(state['personal_targets'],geometry):
+                assert all(g[k]==v for k,v in target.items())
+                obj,dest=target['object_id'],target['destination'];relative=dest.startswith('on:')
+                point=public['objects_xyz'][dest.split(':',1)[1]] if relative else public['regions_xyz'][dest]
+                np.testing.assert_allclose(g['destination_xyz'],point,atol=1e-9)
+                np.testing.assert_allclose(g['measured_xy_distance_m'],np.linalg.norm(np.asarray(public['objects_xyz'][obj])[:2]-np.asarray(point)[:2]),atol=1e-9)
+                assert g['visible_radius_m']==(.03 if relative else .025) and g['measurement_time_s']==public['time_s']
+        else:
+            assert public['active_intention_plan']==planner['active_intention_plan']
+            assert public['your_previous_personal_targets']==row['personal_goal_state']['personal_targets']
         assert '不在此层修改personal_targets' in row['system_prompt']
         emitted.extend(row['negotiation_proposal_messages'])
         if row['parse_error'] is None:

@@ -1,5 +1,6 @@
 """将可信测量与生成假设分开的人策略，反思采用本地推理模式。"""
 import json
+import numpy as np
 
 from .llm_human import QwenHumanPolicy
 from .native_reflective_human import ReflectiveArticulatedHuman
@@ -48,6 +49,35 @@ class GroundedReflectiveHuman(ReflectiveArticulatedHuman):
             answer=raw.rsplit('</think>',1)[-1].strip() if '</think>' in raw else ''
         else:answer=raw
         return answer,latency
+
+    def _motor_context(self,public):
+        """在意图推理之后投影当前目标，不把过去的模型观察判断当动作事实。"""
+        public=dict(public)
+        planner=self.planning_io[-1]
+        public['human_input_contract']='current_intentions_and_measured_geometry_v2'
+        public['agent_identity']={'self':'human','other':'robot'}
+        public['your_current_personal_targets']=[dict(t) for t in self.personal_targets]
+        public.pop('your_previous_personal_targets',None)
+        public.pop('your_previous_generated_plan',None)
+        public['active_intention_plan']={k:self.active_plan.get(k) for k in
+            ['decision_kind','long_term_intention','personal_targets','plan']}
+        public['active_intention_plan'].update(source='own_model_generated_intentions_not_world_measurements',
+            generated_at_sim_time_s=planner['time_s'])
+        geometry=[]
+        for target in self.personal_targets:
+            obj,destination=target['object_id'],target['destination']
+            relative=public['action_interface'].get('relative_placement_destinations',{})
+            if destination in public['regions_xyz']:
+                point=public['regions_xyz'][destination];radius=.025
+            elif destination in relative:
+                receiver=relative[destination]['receiver_object_id']
+                point=public['objects_xyz'][receiver];radius=.03
+            else:continue
+            geometry.append({**target,'destination_xyz':point,
+                'measured_xy_distance_m':float(np.linalg.norm(np.asarray(public['objects_xyz'][obj])[:2]-np.asarray(point)[:2])),
+                'visible_radius_m':radius,'measurement_time_s':public['time_s']})
+        public['your_target_geometry']=geometry
+        return public
 
     def step(self,observation):
         previous_plans=len(self.planning_io);previous_motors=len(self.policy_io)

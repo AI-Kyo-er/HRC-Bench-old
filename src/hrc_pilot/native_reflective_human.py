@@ -104,9 +104,13 @@ class ReflectiveArticulatedHuman(ArticulatedAutonomousHuman):
         public.update(active_intention_plan=self.active_plan,planner_decision_id=self.planning_io[-1]['planner_decision_id'],
                       your_previous_personal_targets=self.personal_targets,your_long_term_intention=self.long_term_intention,
                       your_previous_generated_plan=self.generated_plan,your_last_target_validation=self.target_validation_feedback)
+        public=self._motor_context(public)
         self._actual_motor_input='阶段：当前动作\n'+json.dumps(public,ensure_ascii=False,separators=(',',':'))
         raw,_=self._call_stage('motor',self._actual_motor_input)
         return raw
+
+    def _motor_context(self,public):
+        return public
 
     def _personal_state(self):
         return {'revision':self.target_revision,'personal_targets':[dict(t) for t in self.personal_targets],

@@ -38,3 +38,26 @@ def test_truncated_thinking_retains_intention_and_is_not_parsed_as_final_decisio
     p.reset(0);p.step(observation())
     assert p.planning_io[0]['validation_error'] and p.planning_io[0]['raw_output']==''
     assert p.personal_targets==[] and verify_reflective_records(p.planning_io,p.policy_io)['status']=='verified'
+
+
+def test_new_and_revised_targets_get_current_geometry_before_motor_inference():
+    outputs=iter([
+        'Reasoning </think>'+json.dumps({'decision_kind':'continue','long_term_intention':'整理餐盘',
+            'personal_targets':[['plate','personal']],'observed_changes':'Everything already placed!',
+            'assumption_corrections':['Wrong past belief'],'plan':['Move plate']}),
+        '{"intent":"grasp","object_id":"plate"}',
+        'Reasoning </think>'+json.dumps({'decision_kind':'revise','long_term_intention':'先整理碗',
+            'personal_targets':[['bowl','personal']],'plan':['Move bowl']}),
+        '{"intent":"grasp","object_id":"bowl"}'])
+    p=GroundedReflectiveHuman(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),model_path=Path('/unused'),
+        autonomous_context='pantry_work',generator=lambda _:next(outputs))
+    p.reset(0);p.step(observation());p.step(replace(observation(),time_s=6))
+    for row,obj in zip(p.policy_io,['plate','bowl']):
+        v=json.loads(row['public_input'].split('\n',1)[1])
+        assert v['your_current_personal_targets']==[{'object_id':obj,'destination':'personal'}]
+        assert [g['object_id'] for g in v['your_target_geometry']]==[obj]
+        assert v['your_target_geometry'][0]['measurement_time_s']==row['time_s']
+        assert 'observed_changes' not in v['active_intention_plan']
+        assert 'Everything already placed!' not in row['public_input']
+    assert p.planning_io[0]['active_intention_plan']['observed_changes']=='Everything already placed!'
+    assert verify_reflective_records(p.planning_io,p.policy_io)['status']=='verified'
