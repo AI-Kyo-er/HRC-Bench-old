@@ -70,6 +70,8 @@ class JointHumanPolicy(QwenHumanPolicy):
             '人执行由连续运动学动作完成，无需规划手指摩擦。pick接近并持有物品；place将当前持有物品放到区域；'
             'relocate(object_id,destination)可靠地把一个物品搬到区域并放下，包含连续取、搬、放和退手；'
             '它只实现你已经选择的这一个贡献，不自动执行后续任务。准备／递交到位置通常使用relocate。'
+            '若action_interface.relocate_can_buffer_owned_object为真，手持另一物品时relocate会先连续暂放原持物到它的公开个人缓冲区，'
+            '再兑现你已选的这一贡献；不愿暂放时自己选择其他安排。若为假需自己先place原持物。'
             'point指向物品但不移动它；move_hand指定位置；away/return移开或返回；wait等待并保留握持。'
             '一个动作未结束时可以选择wait让它继续，或明确选择另一个动作。程序不自动执行后续计划。'
             'scene.private_context是外部事实，不是要求你离开或变心的命令。你可以合理坚持当前安排。'

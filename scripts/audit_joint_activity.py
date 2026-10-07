@@ -48,6 +48,14 @@ def audit(root):
             assert source['activity']==saved_activity
             assert 'private_background' not in source['activity']
         assert not {'task_success','score','future_context'}.intersection(scene)
+        if receipt.get('automatic_buffer'):
+            buffer=receipt['automatic_buffer']
+            assert p.get('human_auto_buffer') and receipt['accepted']
+            assert d['choice']['action']=='relocate'
+            assert buffer['owned_object']==actual['human_execution']['held_object']
+            assert buffer['owned_object']!=d['choice']['object_id']
+            assert buffer['public_region']==buffer['owned_object']+'_personal'
+            assert buffer['public_region'] in scene['regions_xyz']
         for obj,xyz in scene['objects_xyz'].items():np.testing.assert_allclose(xyz,actual['objects'][obj])
         np.testing.assert_allclose(scene['robot_eef_xyz'],actual['robot_ee'])
         if 'measured_world' in scene:
@@ -165,6 +173,9 @@ def audit(root):
         'robot_action_blocks':len(calls),'actual_robot_control_steps':len(controls),
         'robot_actual_vla_calls':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction'} for c in calls),
         'robot_visual_coordinator_calls':len(plans),
+        'robot_coordinator_calls_with_public_human_speech':sum(any(m['speaker']=='human' for m in r['public_input']['dialogue']) for r in plans),
+        'robot_actual_vla_calls_with_human_speech':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction'}
+            and 'human:' in c.get('language_input_evidence',{}).get('decoded_actual_input',c['prompt']) for c in calls),
         'robot_calls_with_actual_human_speech':robot_received_human_calls,
         'human_calls_with_actual_robot_measurement':len(human),'human_peak_reference_speed_m_s':speed,
         'human_peak_sampled_kinematic_speed_m_s':sampled,'human_executor_rejection_count':sum(not r['accepted'] for r in receipts),

@@ -6,7 +6,7 @@ from .native_contact_human import NativeContactHuman
 
 
 class KinematicHuman(NativeContactHuman):
-    def __init__(self,env,regions):
+    def __init__(self,env,regions,*,auto_buffer=False):
         super().__init__(env,regions)
         self.held=None;self.offset=None;self.last_request=None;self.receipts=[]
         self.motion_speed=.20;self.object_home_z={n:float(self.object_position(n)[2]) for n in env.env.objects_dict}
@@ -18,6 +18,7 @@ class KinematicHuman(NativeContactHuman):
         # 人身体只显示，接触球不施力；物品仍保留原生碰撞和机器人动力学。
         env.sim.model.geom_contype[self.geom]=0;env.sim.model.geom_conaffinity[self.geom]=0
         self.phase='idle';self.completed_requests=[];self.active_request=None
+        self.auto_buffer=auto_buffer
         self.transfer_destination=None;self.carried_offsets={};self.carried_quaternions={}
 
     def initialize_held_object(self,name):
@@ -36,9 +37,12 @@ class KinematicHuman(NativeContactHuman):
         if action in {'place','relocate'} and not getattr(self.env.env,'_hrc_region_accessibility',{}).get(dest,True):
             error='destination_not_physically_accessible'
         if action=='pick' and self.held is not None:error='already_holding_an_object'
-        if action=='relocate' and self.held is not None and self.held!=obj:error='holding_a_different_object'
+        needs_buffer=(action=='relocate' and self.held is not None and self.held!=obj)
+        if needs_buffer and not getattr(self,'auto_buffer',False):error='holding_a_different_object'
+        if needs_buffer and getattr(self,'auto_buffer',False) and self.held+'_personal' not in self.regions:
+            error='no_public_buffer_for_owned_object'
         if action=='place' and self.held is None:error='no_held_object'
-        if action in {'pick','relocate'} and not error and self.held is None:
+        if action in {'pick','relocate'} and not error and (self.held is None or needs_buffer):
             grippers=set()
             for i in range(self.env.sim.data.ncon):
                 c=self.env.sim.data.contact[i]
@@ -68,7 +72,13 @@ class KinematicHuman(NativeContactHuman):
         if action=='relocate':self.body_target=np.array([.25,.60])
         self.active_request=request_id;self.object_id=obj;self.destination=dest
         self.transfer_destination=dest if action=='relocate' else None
-        if action in {'pick','relocate'} and self.held is None:
+        if needs_buffer:
+            buffer_region=self.held+'_personal'
+            self.receipts[-1]['automatic_buffer']={'owned_object':self.held,'public_region':buffer_region,
+                'interpretation':'只为兑现已选贡献连续暂放原持物，不是NN选择新任务或完成贡献'}
+            self.target=np.asarray(self.regions[buffer_region],dtype=float)-self.offset
+            self.phase='buffer_owned_object'
+        elif action in {'pick','relocate'} and self.held is None:
             self.target=self.object_position(obj)+[0,0,.06];self.phase='pick_approach'
         elif action=='relocate':
             self.target=self.position().copy();self.target[2]=1.35;self.phase='transfer_raise'
@@ -125,6 +135,10 @@ class KinematicHuman(NativeContactHuman):
             for name in self.carried_offsets:
                 q,_=self.object_q[name];self.carried_quaternions[name]=self.env.sim.data.qpos[q+3:q+7].copy()
             self.target=self.reference+[0,0,.12];self.phase='pick_lift'
+        elif near and self.phase=='buffer_owned_object':
+            self._release()
+            self.target=self.object_position(self.object_id)+[0,0,.06]
+            self.phase='pick_approach'
         elif near and self.phase=='place_transport':
             self._release();self._complete()
         elif near and self.phase=='pick_lift' and getattr(self,'transfer_destination',None):

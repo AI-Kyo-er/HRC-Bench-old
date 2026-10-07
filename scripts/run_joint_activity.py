@@ -85,6 +85,8 @@ def main():
     parser.add_argument('--human-reflection',action='store_true')
     parser.add_argument('--robot-language',choices=['context','native_with_activity','task_only'],default='context')
     parser.add_argument('--initial-human-holding',action='store_true')
+    parser.add_argument('--human-auto-buffer',action='store_true',
+                        help='兑现已选relocate时，先连续暂放原持物到公开个人缓冲区；不选择新任务')
     parser.add_argument('--robot-replay',type=Path,help='仅参考：回放已有成功神经轨迹的真实7D动作，当前NN调用0')
     parser.add_argument('--follow-reference-poses',action='store_true')
     parser.add_argument('--symbolic-coordinator',action='store_true')
@@ -189,7 +191,7 @@ def main():
             regions['drawer_storage']=(0.,0.,1.)
             update_joint_regions(env,regions)
         obs=augment_contact_human(env,regions['near_human'],public_regions=regions,contact_model='fingertip')
-        actor=KinematicHuman(env,regions);actor._display(actor.position());env.sim.forward()
+        actor=KinematicHuman(env,regions,auto_buffer=args.human_auto_buffer);actor._display(actor.position());env.sim.forward()
         if situation and situation['initial_presence']=='aside':
             actor.body_base=np.array([.25,.95]);actor.body_target=actor.body_base.copy()
             actor.reference=np.r_[actor.body_base,1.12];actor.target=actor.reference.copy()
@@ -229,7 +231,8 @@ def main():
                     'private_initial_situation':situation['private_initial_background'] if situation else None,
                     'action_interface':{'actions':['pick','place','relocate','point','move_hand','away','return','wait','message'],
                         'hand_workspace_xyz_min':[-.7,-.4,.95],'hand_workspace_xyz_max':[.7,.9,1.5],
-                        'place_destination_names':list(regions),'held_object':actor.held}}
+                        'place_destination_names':list(regions),'held_object':actor.held,
+                        'relocate_can_buffer_owned_object':args.human_auto_buffer}}
                 if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
                 d=(human.decide(scene,bool(placement.records and goal_success(placement.records[-1])))
                    if args.human_source=='reference' else human.decide(scene))
@@ -354,6 +357,7 @@ def main():
         'human_thinking_enabled':getattr(human,'enable_thinking',None),'human_reflection':args.human_reflection,
         'human_source':args.human_source,'robot_language':args.robot_language,
         'initial_human_holding':args.initial_human_holding,
+        'human_auto_buffer':args.human_auto_buffer,
         'human_executor':'human_only_continuous_kinematic_attachment','robot_model_metadata':client.get_server_metadata(),
         'robot_system':'saved_actions_feasibility_reference' if args.robot_replay else 'symbolic_coordinator_plus_vla' if args.symbolic_coordinator else 'visual_coordinator_plus_vla' if coordinator else 'direct_vla_public_dialogue',
         'robot_replay_source':str(args.robot_replay) if args.robot_replay else None,
