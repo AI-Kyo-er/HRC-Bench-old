@@ -5,15 +5,20 @@
 <p>三类活动在init2已有完整实际π0.5参考。早期init0饮品成功参考使用既有轨迹的OSC反馈跟随，当前推理为零，来源仍单列保留。神经策略的完整共同活动、六类实际动态覆盖与cobalance仍未验收。</p>
 <p><a href="TEST_INITIALIZATION_REFERENCE_PROTOCOL_20261008.md">init4／5六条操作参考协议</a>：参考抓取／放置或打开由实际π0.5完成；人调度、机器人等待及完成后的清场控制另记来源，不能称整条参考轨迹均由VLA生成。六条参考不计正式动态样本。</p>
 <p><a href="REASONING_HUMAN_PROTOCOL_20261008.md">原生推理人资格设置</a> · <a href="GROUNDED_CONTRIBUTION_PROTOCOL_20261008.md">跨活动加入／纠正与测量修复协议</a>。已结束的推理抽屉条件：首次存放后再次取出，结束仍持奶酪；84秒公开说已存好与实物不符。旧接口10次拒绝返回＋搬物，旧观测漏报抽屉底面支撑。后续批修复接口并单独记录，历史结果不倒改。</p>
+<p><a href="NATIVE_TOOL_HUMAN_PROTOCOL_20261008.md">原生工具反馈机制</a> · <a href="STRUCTURED_TOOL_ACTIVITY_PROTOCOL_20261008.md">完整工具条件与新的加入初态</a>。工具返回报告真实进展，不将选择动作当完成。话语对象只转发模型原话；已放置物品的沉降由低层执行容差处理，不替人选择下一贡献。</p>
+<p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>
+<p>完整工具＋理想测量协调的点心条件出现新的正例：27.8秒成品释放到交付区并维持至120秒，双方后续确认并保持。它说明神经共同活动物理链可以成立；人早期已选择active及三次未持物place错误，仍需按伙伴条件和情境覆盖分别审阅。完整工具饮品中“柜顶完成”的声明与终态table接触不符，不能据声明计成功。</p>
 <p>人：Qwen3-14B 在线生成意图、当前贡献与公开话语，部分条件另做一次实际神经反思。执行使用连续运动学和物体附着，手速上限 0.2m/s。机器人：π0.5 在原生 MuJoCo／LIBERO 场景中输出 7 维 OSC，20Hz 执行，不吸附或改写机器人位姿。此批不是 Genesis 场景。</p>
 <p>理想感知协调器得到公开几何／接触和真实执行历史；与人共享冻结权重，输入上下文与私有记忆分开。它是额外策略系统，不能归因于裸 VLA。等待与参考控制不计为 VLA 调用。</p>
 <p><a href="PROTOCOL.md">参考与开发协议</a> · <a href="SYMBOLIC_PROTOCOL.md">理想感知协调系统边界</a> · <a href="CONTRACT_PROTOCOL_20261008.md">参与契约修复协议</a> · <a href="VISUAL_SYSTEM_PROTOCOL_20261008.md">第二视觉系统协议</a> · <a href="SKILL_BANK_PROTOCOL_20261008.md">可选技能与具体情境协议</a> · <a href="SITUATIONS.md">六类情境及证据要求</a> · <a href="BEHAVIOR_REVIEW.md">关键行为分析</a> · <a href="README.md">实际进展与复现</a> · <a href="../dynamic_joint_activity_20261007/DESIGN.md">整体设计与文献依据</a></p>
 <p><a href="../../datasets/dynamic_joint_activity_dev_20261008/README.md">可加载的开发行为数据</a> · <a href="../../datasets/dynamic_joint_activity_dev_20261008/dataset_verification.json">全量数据核查与实际数量</a>：按同stem匹配，私有人记录不进入机器人输入。参考控制、失败和保持明确来源，不标为成功专家示范。</p><p><a href="EVALUATION_PLAN.md">正式评测计划与尚待满足的实际证据</a></p></section>
 <section><h2>如何读视频和指标</h2><p>视频是实际运行时 Sim，不是轨迹动画。每段已经独立解码并核对时间轴。公开话语是伙伴可收到的信息；私有意图是研究视图。模型声称完成、消息进入输入、物体实际到位和完整协作成立是不同层次。</p><p>抽屉原生技能条件显示用途更新及实际取出，但仍有重复搬运和过时计划。旧暂离字段问题已修复，新运行有实际桌边离返；具体时间、未覆盖的纠正／请求和执行阻断见关键行为分析。饮品中机器人虽停止操作，回复仍在等待释放后上架，不能据保持推断已接受留用。</p>
-<button data-filter="all">全部</button><button data-filter="reference">可执行性参考</button><button data-filter="neural">神经策略开发</button><button data-filter="diagnostic">失败诊断</button></section><section><h2>尚无终态结果</h2><p>点心：原生推理与实际加入资格：尚无终态结果；饮品：原生推理与用途纠正资格：尚无终态结果；抽屉：init4原生操作参考：尚无终态结果；点心：init5原生操作参考：尚无终态结果；饮品：init5原生操作参考：尚无终态结果；抽屉：init5原生操作参考：尚无终态结果。未完成运行不计入下方结果。</p></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
+<button data-filter="all">全部</button><button data-filter="reference">可执行性参考</button><button data-filter="neural">神经策略开发</button><button data-filter="diagnostic">失败诊断</button></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
 <h2>抽屉：固定人参考</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_drawer_access_20261007/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 41.05 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 16；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -26,6 +31,8 @@
 <h2>点心：固定人参考</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_snack_service_handoff_20261007/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 38.6 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 12；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -38,6 +45,8 @@
 <h2>饮品：轨迹反馈参考</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>已保存动作／轨迹反馈参考；当前机器人神经推理为零。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_drink_storage_tolerant_20261007/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。 当前机器人推理为零，不是 VLA 闭环成功。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 34.9 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 0；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -50,6 +59,8 @@
 <h2>抽屉：直接 VLA 开发</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_grounded_drawer_access_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。 存在已披露的运行期间文件编辑说明，仅作探索性证据。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 120；实际 VLA 调用 240；协调器调用 0。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -62,6 +73,8 @@
 <h2>抽屉：视觉协调开发</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_grounded_coordinated_drawer_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 120；实际 VLA 调用 8；协调器调用 60。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -74,6 +87,8 @@
 <h2>抽屉：理想感知协调初版</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_symbolic_drawer_access_change_use_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 208；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -86,6 +101,8 @@
 <h2>点心：理想感知协调初版</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_symbolic_snack_service_leave_return_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 16；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -98,6 +115,8 @@
 <h2>抽屉：原生技能接口</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_native_skill_drawer_access_change_use_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 24.95 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 80；协调器调用 30。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -110,6 +129,8 @@
 <h2>点心：原生技能接口</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_native_skill_snack_service_leave_return_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 88；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -122,6 +143,8 @@
 <h2>点心：中途加入开发</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_participation_snack_join_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 240；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 0.0, &quot;end_s&quot;: 4.95}]。
@@ -134,6 +157,8 @@
 <h2>点心：暂离返回开发</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_participation_snack_leave_return_20261007/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 152；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -146,6 +171,8 @@
 <h2>点心：参与契约修复、新初始化</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_presence_contract_snack_leave_return_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 176；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 29.2, &quot;end_s&quot;: 32.95}]。
@@ -158,6 +185,8 @@
 <h2>饮品：纠正情境、新初始化</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_dynamic_drink_correction_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 232；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -170,6 +199,8 @@
 <h2>点心：视觉原生技能系统</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_visual_native_snack_leave_return_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 240；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 29.2, &quot;end_s&quot;: 32.95}]。
@@ -182,6 +213,8 @@
 <h2>点心：临时饮品需要、可选技能库</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_skill_bank_snack_detour_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 208；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 33.2, &quot;end_s&quot;: 36.95}]。
@@ -194,6 +227,8 @@
 <h2>饮品：具体用途纠正、可选技能库</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_skill_bank_drink_correction_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p>人公开选择留用并撤回上架；机器人随后实际保持，但回复仍是等待人释放后再上架，没有明确接受撤回。此时停止操作不等于理解新约定；原生未上架也不能直接算操作失败。具体柜顶用途未执行，完整活动与负担未验收。</p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 8；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -206,6 +241,8 @@
 <h2>抽屉：机器人请求、视觉技能库</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_skill_bank_drawer_request_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 240；协调器调用 30。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -218,6 +255,8 @@
 <h2>抽屉：已选人贡献的连续暂放执行</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_buffered_drawer_request_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 8；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -230,6 +269,8 @@
 <h2>抽屉：人意图语义观测与执行反馈</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_semantic_drawer_request_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 240；协调器调用 30。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 29.2, &quot;end_s&quot;: 120.0}]。
@@ -242,6 +283,8 @@
 <h2>饮品：人意图语义观测与临时需要</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_semantic_drink_detour_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 88；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -254,6 +297,8 @@
 <h2>点心：人贡献参数语义与用途变化</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_contribution_snack_change_use_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 120；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -266,6 +311,8 @@
 <h2>饮品：人贡献参数语义与临时需要</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：False；额外反思：True。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_contribution_drink_detour_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 60；实际 VLA 调用 128；协调器调用 30。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 33.2, &quot;end_s&quot;: 72.95}]。
@@ -278,6 +325,8 @@
 <h2>抽屉：人策略原生推理资格检查</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：True；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
 <p>抽屉6.2秒真实打开；人59.15秒完成首次搬运退手，60秒记录存在奶酪与抽屉底面的真实接触。旧语义观测遗漏底面支撑，76秒人再次取物；84秒公开称收纳完成时实际仍持物并抬起，终态120秒仍持奶酪，不能计收纳完成。两次实际离返，机器人持续原生打开，无主动请求或有效后续交接见证。10次返回与搬物组合被旧解析拒绝，接口拒绝与错误完成理解分开；不能宣称原生推理已使伙伴可靠。</p>
+<p>原始安排的物理见证：首次满足 54.2 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 30；实际 VLA 调用 240；协调器调用 30。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[{&quot;start_s&quot;: 29.2, &quot;end_s&quot;: 36.95}, {&quot;start_s&quot;: 85.2, &quot;end_s&quot;: 108.95}]。
@@ -286,10 +335,82 @@
 重复近目标搬运请求：3；该计数不是重复劳动结论。</p>
 <p>机器人所选保持时间：0.0 秒；已在目标的无运动请求满足：2。
 保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
-<p><a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>place</td><td></td></tr><tr><td>0.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>4.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>8.0</td><td>人</td><td>relocate</td><td>Moving plate_1 to personal storage to clear drawer access</td></tr><tr><td>8.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>12.0</td><td>人</td><td>relocate</td><td>Moving plate_1 to personal storage to clear drawer access</td></tr><tr><td>12.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>16.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>20.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>24.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>28.0</td><td>人</td><td>away</td><td>Need to step away for personal task, will return to complete cream_cheese_1 storage after drawer is accessible</td></tr><tr><td>28.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>32.0</td><td>人</td><td>away</td><td>Need to step away for personal task, will return to complete cream_cheese_1 storage after drawer is accessible</td></tr><tr><td>32.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>36.0</td><td>人</td><td>return</td><td>Returning to workspace to complete cream_cheese_1 storage after drawer is fully accessible</td></tr><tr><td>36.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>40.0</td><td>人</td><td>relocate</td><td></td></tr><tr><td>40.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>44.0</td><td>人</td><td>relocate</td><td>Storing cream_cheese_1 in drawer_storage now that the drawer is accessible</td></tr><tr><td>44.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>48.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>52.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>56.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>60.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>64.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>68.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>72.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>76.0</td><td>人</td><td>relocate</td><td>Storing cream_cheese_1 in drawer_storage now that the drawer is accessible</td></tr><tr><td>76.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>80.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>84.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>84.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>88.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>88.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>92.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>92.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>96.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>96.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>100.0</td><td>人</td><td>away</td><td></td></tr><tr><td>100.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>104.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>104.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>108.0</td><td>人</td><td>return</td><td>Returning to workspace to check on drawer organization progress</td></tr><tr><td>108.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>112.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>116.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr></table></div></details></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
+<p><a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_reasoning_drawer_request_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>place</td><td></td></tr><tr><td>0.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>4.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>8.0</td><td>人</td><td>relocate</td><td>Moving plate_1 to personal storage to clear drawer access</td></tr><tr><td>8.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>12.0</td><td>人</td><td>relocate</td><td>Moving plate_1 to personal storage to clear drawer access</td></tr><tr><td>12.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>16.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>20.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>24.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>28.0</td><td>人</td><td>away</td><td>Need to step away for personal task, will return to complete cream_cheese_1 storage after drawer is accessible</td></tr><tr><td>28.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>32.0</td><td>人</td><td>away</td><td>Need to step away for personal task, will return to complete cream_cheese_1 storage after drawer is accessible</td></tr><tr><td>32.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>36.0</td><td>人</td><td>return</td><td>Returning to workspace to complete cream_cheese_1 storage after drawer is fully accessible</td></tr><tr><td>36.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>40.0</td><td>人</td><td>relocate</td><td></td></tr><tr><td>40.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>44.0</td><td>人</td><td>relocate</td><td>Storing cream_cheese_1 in drawer_storage now that the drawer is accessible</td></tr><tr><td>44.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>48.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>52.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>56.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>60.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>64.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>68.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>72.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>76.0</td><td>人</td><td>relocate</td><td>Storing cream_cheese_1 in drawer_storage now that the drawer is accessible</td></tr><tr><td>76.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>80.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>84.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>84.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>88.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>88.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>92.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>92.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>96.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>96.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>100.0</td><td>人</td><td>away</td><td></td></tr><tr><td>100.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>104.0</td><td>人</td><td>away</td><td>Cream_cheese_1 stored in drawer_storage. Stepping aside for personal matters.</td></tr><tr><td>104.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>108.0</td><td>人</td><td>return</td><td>Returning to workspace to check on drawer organization progress</td></tr><tr><td>108.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>112.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr><tr><td>116.0</td><td>机器人</td><td>execute</td><td>Opening the middle drawer.</td></tr></table></div></details></section><section class="run" data-kind="neural"><p class="tag">神经策略开发 · 120.00 模拟秒</p>
+<h2>点心：原生推理与实际加入资格</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：True；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_reasoning_snack_join_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
+<p>初始在旁边但0.95秒已进入，早于19.5秒个人事务结束线索，不能计通知后的中途加入。32.45秒曾有释放成品在交付区的物理见证；108秒又选择把碗搬回serving_ready，理由误称这是原依赖的最终步骤，116秒返回打断搬运，120秒仍持碗。曾完成交付与合理维持结束安排分开，无完整动态重组验收。</p>
+<p>原始安排的物理见证：首次满足 32.45 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 30；实际 VLA 调用 240；协调器调用 30。
+机器人原生目标期末：True。</p>
+<p>实际身体离开区间：[{&quot;start_s&quot;: 0.0, &quot;end_s&quot;: 0.95}]。
+初始是否在旁边：True；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：9.8 秒。
+重复近目标搬运请求：10；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：0.0 秒；已在目标的无运动请求满足：8。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_reasoning_snack_join_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>Bowl is being positioned at serving_ready for filling</td></tr><tr><td>0.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>4.0</td><td>人</td><td>place</td><td>Bowl is now placed at serving_ready for filling</td></tr><tr><td>4.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>8.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>12.0</td><td>人</td><td>return</td><td></td></tr><tr><td>12.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>16.0</td><td>人</td><td>relocate</td><td>Moving filled bowl to snack delivery area</td></tr><tr><td>16.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>20.0</td><td>人</td><td>relocate</td><td>Moving filled bowl to snack delivery area</td></tr><tr><td>20.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>24.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>24.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>28.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>28.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>32.0</td><td>人</td><td>relocate</td><td></td></tr><tr><td>32.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>36.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>36.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>40.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>40.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>44.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>44.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>48.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>48.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>52.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>52.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>56.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>56.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>60.0</td><td>人</td><td>relocate</td><td>Transferring filled snack to delivery position</td></tr><tr><td>60.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>64.0</td><td>人</td><td>relocate</td><td>Final transfer of filled bowl to snack_delivery</td></tr><tr><td>64.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>68.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>68.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>72.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>72.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>76.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>76.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>80.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>80.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>84.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>84.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>88.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>88.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>92.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>92.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>96.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>96.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>100.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>100.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>104.0</td><td>人</td><td>message</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>104.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>108.0</td><td>人</td><td>relocate</td><td>Moving bowl to serving_ready to complete snack service</td></tr><tr><td>108.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>112.0</td><td>人</td><td>relocate</td><td></td></tr><tr><td>112.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr><tr><td>116.0</td><td>人</td><td>return</td><td>Bowl is ready at snack_delivery. Service sequence complete.</td></tr><tr><td>116.0</td><td>机器人</td><td>execute</td><td>Putting cream cheese in the bowl</td></tr></table></div></details></section><section class="run" data-kind="neural"><p class="tag">神经策略开发 · 120.00 模拟秒</p>
+<h2>饮品：原生推理与用途纠正资格</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：True；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
+<p>原生酒瓶上架10.8秒曾成立；37.5秒具体用途澄清后，40秒人明确表达个人立即取用、实际改放个人区域，54.25秒请求完成。机器人44秒后仍多次选择上架，没有接受留用／新用途。不是单纯原生操作失败，也不是机器人已理解变化。人选个人桌面区域而非柜顶，未见约定柜顶的完成；后续反复取放还受目标高度与重力沉降的执行容差影响。</p>
+<p>原始安排的物理见证：首次满足 10.8 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 30；实际 VLA 调用 120；协调器调用 30。
+机器人原生目标期末：False。</p>
+<p>实际身体离开区间：[]。
+初始是否在旁边：False；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：5.6 秒。
+重复近目标搬运请求：18；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：60.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_reasoning_drink_correction_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>place</td><td></td></tr><tr><td>0.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>4.0</td><td>人</td><td>place</td><td></td></tr><tr><td>4.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>8.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>12.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>16.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>20.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>24.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>28.0</td><td>人</td><td>relocate</td><td>Placing wine_bottle_1 at drink_staging for storage</td></tr><tr><td>28.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>32.0</td><td>人</td><td>point</td><td>Verifying wine_bottle_1 placement on rack and overall arrangement</td></tr><tr><td>32.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>36.0</td><td>人</td><td>point</td><td>Verifying wine_bottle_1 placement on rack and overall arrangement</td></tr><tr><td>36.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>40.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>40.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>44.0</td><td>人</td><td>relocate</td><td></td></tr><tr><td>44.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>48.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>48.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>52.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>52.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>56.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>56.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>60.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>60.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>64.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>64.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>68.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>68.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>72.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>72.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>76.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>76.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>80.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>80.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>84.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>84.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>88.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>88.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>92.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>92.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>96.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>96.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>100.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>100.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>104.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>104.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>108.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>108.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>112.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>112.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>116.0</td><td>人</td><td>relocate</td><td>wine_bottle_1 is personal item for immediate use, placing in personal area</td></tr><tr><td>116.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr></table></div></details></section><section class="run" data-kind="neural"><p class="tag">神经策略开发 · 120.00 模拟秒</p>
+<h2>饮品：原生工具严格话语接口诊断</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：True；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_tool_drink_correction_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
+<p>严格话语接口26/30次解析失败，无法兑现所选贡献；它是接口诊断，不是可靠动态伙伴或机器人HRC成绩。完整原生工具输入token、连续控制及视频已核验。</p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 30；实际 VLA 调用 0；协调器调用 30。
+机器人原生目标期末：False。</p>
+<p>实际身体离开区间：[]。
+初始是否在旁边：False；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：None 秒。
+重复近目标搬运请求：1；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：120.0 秒；已在目标的无运动请求满足：1。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_tool_drink_correction_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>4.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>8.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>12.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>16.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>20.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>24.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>28.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>32.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>36.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>40.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>44.0</td><td>人</td><td>place</td><td></td></tr><tr><td>44.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>48.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>52.0</td><td>人</td><td>return</td><td></td></tr><tr><td>52.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>56.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>60.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>64.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>68.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>72.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>76.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>80.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>84.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>88.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>92.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>96.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>100.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>104.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>108.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>112.0</td><td>人</td><td>relocate</td><td></td></tr><tr><td>112.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr><tr><td>116.0</td><td>机器人</td><td>hold</td><td>Waiting for human to release a wine bottle.</td></tr></table></div></details></section><section class="run" data-kind="neural"><p class="tag">神经策略开发 · 120.00 模拟秒</p>
+<h2>饮品：完整工具反馈与用途纠正</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>Qwen3-VL 视觉协调＋π0.5；额外的神经协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：True；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/episode/demo.mp4"></video><p>完整共同活动尚未验收；原生机器人目标只表示局部操作。</p>
+<p>上架10.6秒曾成立；用途澄清后发生公开纠正和实际取放。10次action=accept被低层动作接口拒绝，需区分通信意图与物理动作。96秒说酒瓶已正确放到柜顶并离开，终态接触实体为table，并非柜顶完成见证。不得把新用途未完成直接归为原生上架失败；人事实理解与自然目标到执行接口仍需改进。</p>
+<p>原始安排的物理见证：首次满足 10.6 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 30；实际 VLA 调用 64；协调器调用 30。
+机器人原生目标期末：False。</p>
+<p>实际身体离开区间：[{&quot;start_s&quot;: 97.2, &quot;end_s&quot;: 120.0}]。
+初始是否在旁边：False；后续实际离返周期：[{&quot;departure_s&quot;: 97.2, &quot;return_s&quot;: null, &quot;duration_s&quot;: null}]。
+首次释放并支撑的准备位置见证：5.6 秒。
+重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：88.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_structured_tool_drink_correction_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>place</td><td>I&#x27;ll place the wine bottle at drink_staging for you to store.</td></tr><tr><td>0.0</td><td>机器人</td><td>hold</td><td>Waiting for human to place wine bottle at drink_staging.</td></tr><tr><td>4.0</td><td>人</td><td>message</td><td>Please store the wine bottle on the rack now.</td></tr><tr><td>4.0</td><td>机器人</td><td>execute</td><td>Storing the wine bottle on the rack.</td></tr><tr><td>8.0</td><td>人</td><td>message</td><td>The wine bottle is now on the rack. Please confirm the arrangement is correct.</td></tr><tr><td>8.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the rack.</td></tr><tr><td>12.0</td><td>人</td><td>message</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>12.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>16.0</td><td>人</td><td>message</td><td>The drink storage task is complete. Is there anything else we need to organize?</td></tr><tr><td>16.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>20.0</td><td>人</td><td>message</td><td>The task is complete. All items are properly organized.</td></tr><tr><td>20.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>24.0</td><td>人</td><td>message</td><td>All items are properly organized. The task is complete.</td></tr><tr><td>24.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>28.0</td><td>人</td><td>message</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>28.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>32.0</td><td>人</td><td>message</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>32.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>36.0</td><td>人</td><td>message</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>36.0</td><td>机器人</td><td>hold</td><td>The arrangement looks correct. No further adjustments are needed.</td></tr><tr><td>40.0</td><td>人</td><td>relocate</td><td>The wine bottle is a personal item needing immediate access; it should be placed on the countertop cabinet instead of the rack.</td></tr><tr><td>40.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the cabinet.</td></tr><tr><td>44.0</td><td>人</td><td>place</td><td>Correcting placement: wine_bottle_1 is a personal item requiring immediate access. Placing it on the countertop cabinet (wine_bottle_1_personal) as instructed.</td></tr><tr><td>44.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the cabinet.</td></tr><tr><td>48.0</td><td>人</td><td>message</td><td>The wine bottle is now correctly placed on the countertop cabinet for immediate access. The arrangement is complete and meets my personal needs.</td></tr><tr><td>48.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the cabinet.</td></tr><tr><td>52.0</td><td>人</td><td>message</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>52.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the cabinet.</td></tr><tr><td>56.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the cabinet.</td></tr><tr><td>60.0</td><td>机器人</td><td>execute</td><td>Placing the wine bottle on the cabinet.</td></tr><tr><td>64.0</td><td>机器人</td><td>hold</td><td>The task is complete and the wine bottle is correctly placed on the cabinet as requested.</td></tr><tr><td>68.0</td><td>机器人</td><td>hold</td><td>The task is complete and the wine bottle is correctly placed on the cabinet as requested.</td></tr><tr><td>72.0</td><td>机器人</td><td>hold</td><td>The task is complete and the wine bottle is correctly placed on the cabinet as requested.</td></tr><tr><td>76.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>80.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>84.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>88.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>92.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>96.0</td><td>人</td><td>away</td><td>Task complete. Wine_bottle_1 is correctly placed on countertop cabinet. Moving away from workspace.</td></tr><tr><td>96.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>100.0</td><td>人</td><td>message</td><td>Task complete. All items are organized as required. Wine_bottle_1 is on the countertop cabinet for immediate access. No further actions needed.</td></tr><tr><td>100.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>104.0</td><td>人</td><td>message</td><td>Final confirmation: Drink storage task is fully completed. Wine_bottle_1 is securely on the countertop cabinet as required. All items are organized and no further actions are needed.</td></tr><tr><td>104.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>108.0</td><td>人</td><td>message</td><td>Final confirmation: All tasks completed. Wine_bottle_1 is correctly positioned on the countertop cabinet. No further actions required.</td></tr><tr><td>108.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>112.0</td><td>人</td><td>message</td><td>Task finalized. All items are properly organized, and wine_bottle_1 is accessible on the countertop cabinet. No further actions required.</td></tr><tr><td>112.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr><tr><td>116.0</td><td>人</td><td>message</td><td>Final confirmation: All tasks are completed. Wine_bottle_1 is correctly placed on the countertop cabinet. No further actions are required.</td></tr><tr><td>116.0</td><td>机器人</td><td>hold</td><td>The drink organization task is fully completed. No further actions are required.</td></tr></table></div></details></section><section class="run" data-kind="neural"><p class="tag">神经策略开发 · 120.00 模拟秒</p>
+<h2>点心：忙碌伙伴加入与理想测量协调</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>Qwen3 理想几何／接触协调＋π0.5；额外感知与协调能力；NN从明确公开的原生操作库选择技能。人策略来源：neural；原生推理：True；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/episode/demo.mp4"></video><p>本例神经共同活动物理链成立并维持：机器人填装、人接收交付、双方随后保持。伙伴接口、动态加入及广覆盖仍需单独验收。</p>
+<p>原生填装9.1秒成立；27.8秒出现释放成品到交付区的物理见证，直到120秒保持，双方后续话语与机器人保持相符。这是神经共同活动完整物理链的正例，但人0秒就选择active，不能称通知后才加入。身体32.95秒进入、57.2秒退出；三次place因手中无物被拒，暴露意图表达与低层抓放接口不匹配。它不证明六情境覆盖、真人拟真或cobalance已验收。</p>
+<p>原始安排的物理见证：首次满足 27.8 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 30；实际 VLA 调用 96；协调器调用 30。
+机器人原生目标期末：True。</p>
+<p>实际身体离开区间：[{&quot;start_s&quot;: 0.0, &quot;end_s&quot;: 32.95}, {&quot;start_s&quot;: 57.2, &quot;end_s&quot;: 120.0}]。
+初始是否在旁边：True；后续实际离返周期：[{&quot;departure_s&quot;: 57.2, &quot;return_s&quot;: null, &quot;duration_s&quot;: null}]。
+首次释放并支撑的准备位置见证：0.15 秒。
+重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：72.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/episode/robot_planner_io.jsonl">机器人协调推理</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/episode/trace.jsonl">真实环境轨迹</a> · <a href="../../results/continuous_v2/joint_structured_tool_snack_join_symbolic_20261008/public_request_response_review.json">当前公开请求与响应的实际证据</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>place</td><td>The bowl is ready at serving_ready. Please proceed to fill it.</td></tr><tr><td>0.0</td><td>机器人</td><td>execute</td><td>I will put the cream cheese in the bowl.</td></tr><tr><td>4.0</td><td>人</td><td>pick</td><td>I will pick up the bowl to position it properly.</td></tr><tr><td>4.0</td><td>机器人</td><td>hold</td><td>Waiting for the human to position the bowl properly.</td></tr><tr><td>8.0</td><td>人</td><td>place</td><td>The bowl is now properly positioned at serving_ready.</td></tr><tr><td>8.0</td><td>机器人</td><td>execute</td><td>I will put the cream cheese in the bowl.</td></tr><tr><td>12.0</td><td>机器人</td><td>execute</td><td>I will put the cream cheese in the bowl.</td></tr><tr><td>16.0</td><td>人</td><td>place</td><td>Placing the bowl at serving_ready for the robot to fill.</td></tr><tr><td>16.0</td><td>机器人</td><td>execute</td><td>I will put the cream cheese in the bowl.</td></tr><tr><td>20.0</td><td>人</td><td>pick</td><td>I will take the filled bowl to my personal area.</td></tr><tr><td>20.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>24.0</td><td>人</td><td>place</td><td>I am taking the filled bowl to my personal area.</td></tr><tr><td>24.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>28.0</td><td>人</td><td>away</td><td>I have taken the filled bowl to my personal area. I will step aside now.</td></tr><tr><td>28.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>32.0</td><td>人</td><td>return</td><td>I will return to the workspace to see if there&#x27;s anything else I can assist with.</td></tr><tr><td>32.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>36.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>40.0</td><td>人</td><td>message</td><td>The cream cheese appears to be in the bowl. Is there anything else needed before I take it to the snack delivery area?</td></tr><tr><td>40.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>44.0</td><td>人</td><td>place</td><td>The cream cheese is in the bowl and positioned near snack_delivery. I will place it there now.</td></tr><tr><td>44.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>48.0</td><td>人</td><td>pick</td><td>I need to pick up the bowl first before I can place it at snack_delivery.</td></tr><tr><td>48.0</td><td>机器人</td><td>execute</td><td>Putting the cream cheese in the bowl.</td></tr><tr><td>52.0</td><td>人</td><td>place</td><td>I am now placing the filled bowl at the snack delivery area as the final step.</td></tr><tr><td>52.0</td><td>机器人</td><td>hold</td><td>The cream cheese is already in the bowl and positioned near snack_delivery. I will hold until further instructions.</td></tr><tr><td>56.0</td><td>人</td><td>away</td><td>The snack is delivered to the snack delivery area. I will step aside now.</td></tr><tr><td>56.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>60.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>64.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>68.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>72.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>76.0</td><td>人</td><td>away</td><td>The snack delivery is fully complete. I&#x27;ll step away now.</td></tr><tr><td>76.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>80.0</td><td>人</td><td>away</td><td>The snack delivery is fully complete. I&#x27;ll step away now.</td></tr><tr><td>80.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>84.0</td><td>人</td><td>away</td><td>The snack delivery process is fully concluded. I will no longer be involved in this task.</td></tr><tr><td>84.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>88.0</td><td>人</td><td>away</td><td>The snack delivery process is fully concluded. I will no longer be involved in this task.</td></tr><tr><td>88.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>92.0</td><td>人</td><td>away</td><td>The snack delivery process is fully concluded. I will no longer be involved in this task.</td></tr><tr><td>92.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>96.0</td><td>人</td><td>away</td><td>The snack delivery process is fully concluded. I will no longer be involved in this task.</td></tr><tr><td>96.0</td><td>机器人</td><td>hold</td><td>The snack is delivered to the snack delivery area. I will hold until further instructions.</td></tr><tr><td>100.0</td><td>人</td><td>away</td><td>Final confirmation: Snack delivery is fully completed. No further human involvement required.</td></tr><tr><td>100.0</td><td>机器人</td><td>hold</td><td>The snack delivery is fully completed. I will hold until further instructions.</td></tr><tr><td>104.0</td><td>人</td><td>away</td><td>Final confirmation: Snack delivery is fully completed. No further human involvement required.</td></tr><tr><td>104.0</td><td>机器人</td><td>hold</td><td>The snack delivery is fully completed. I will hold until further instructions.</td></tr><tr><td>108.0</td><td>人</td><td>away</td><td>Task fully completed. No further human action required.</td></tr><tr><td>108.0</td><td>机器人</td><td>hold</td><td>The snack delivery is fully completed. I will hold until further instructions.</td></tr><tr><td>112.0</td><td>人</td><td>away</td><td>Task fully completed. No further human action required.</td></tr><tr><td>112.0</td><td>机器人</td><td>hold</td><td>The snack delivery is fully completed. I will hold until further instructions.</td></tr><tr><td>116.0</td><td>人</td><td>away</td><td>Task fully completed. No further human action required.</td></tr><tr><td>116.0</td><td>机器人</td><td>hold</td><td>The snack delivery is fully completed. I will hold until further instructions.</td></tr></table></div></details></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
 <h2>点心：init2匹配原生操作参考</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_matched_reference_snack_service_init2_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 38.8 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 12；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -302,6 +423,8 @@
 <h2>饮品：init2匹配原生操作参考</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_matched_reference_drink_storage_init2_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 27.45 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 20；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -314,6 +437,8 @@
 <h2>抽屉：init2匹配原生操作参考</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_matched_reference_drawer_access_init2_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 32.1 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 12；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -326,6 +451,8 @@
 <h2>点心：init4原生操作参考</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_reference_snack_service_init4_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 40.7 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 16；协调器调用 0。
 机器人原生目标期末：True。</p>
 <p>实际身体离开区间：[]。
@@ -338,6 +465,8 @@
 <h2>饮品：init4原生操作参考</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/demo.mp4"></video><p>参考链未完成。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 204；协调器调用 0。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -346,10 +475,68 @@
 重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
 <p>机器人所选保持时间：18.0 秒；已在目标的无运动请求满足：0。
 保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
-<p><a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/trace.jsonl">真实环境轨迹</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>I will prepare wine_bottle_1 at drink_staging.</td></tr></table></div></details></section><section class="run" data-kind="diagnostic"><p class="tag">保留的失败诊断 · 24.10 模拟秒</p>
+<p><a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init4_20261008/episode/trace.jsonl">真实环境轨迹</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>I will prepare wine_bottle_1 at drink_staging.</td></tr></table></div></details></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
+<h2>抽屉：init4原生操作参考</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
+<p></p>
+<p>原始安排的物理见证：首次满足 34.25 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 0；实际 VLA 调用 16；协调器调用 0。
+机器人原生目标期末：True。</p>
+<p>实际身体离开区间：[]。
+初始是否在旁边：False；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：None 秒。
+重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：12.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init4_20261008/episode/trace.jsonl">真实环境轨迹</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>I will prepare plate_1 at plate_1_personal.</td></tr><tr><td>20.0</td><td>人</td><td>relocate</td><td>I will receive or finish the activity by moving cream_cheese_1 to drawer_storage.</td></tr></table></div></details></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
+<h2>点心：init5原生操作参考</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
+<p></p>
+<p>原始安排的物理见证：首次满足 38.8 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 0；实际 VLA 调用 12；协调器调用 0。
+机器人原生目标期末：True。</p>
+<p>实际身体离开区间：[]。
+初始是否在旁边：False；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：10.9 秒。
+重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：16.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reference_snack_service_init5_20261008/episode/trace.jsonl">真实环境轨迹</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>I will prepare akita_black_bowl_1 at serving_ready.</td></tr><tr><td>22.0</td><td>人</td><td>relocate</td><td>I will receive or finish the activity by moving akita_black_bowl_1 to snack_delivery.</td></tr></table></div></details></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
+<h2>饮品：init5原生操作参考</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/episode/demo.mp4"></video><p>参考链未完成。</p>
+<p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 0；实际 VLA 调用 204；协调器调用 0。
+机器人原生目标期末：False。</p>
+<p>实际身体离开区间：[]。
+初始是否在旁边：False；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：11.4 秒。
+重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：18.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reference_drink_storage_init5_20261008/episode/trace.jsonl">真实环境轨迹</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>I will prepare wine_bottle_1 at drink_staging.</td></tr></table></div></details></section><section class="run" data-kind="reference"><p class="tag">可执行性参考 · 120.00 模拟秒</p>
+<h2>抽屉：init5原生操作参考</h2><p>人清理入口 → 机器人打开中层抽屉 → 人收纳物品或公开修改用途。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
+<video controls playsinline preload="none" src="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/episode/demo.mp4"></video><p>完整参考链成立。固定人／参考调度不计动态策略成绩。</p>
+<p></p>
+<p>原始安排的物理见证：首次满足 32.2 秒；最后一秒持续满足 True。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
+<p>实际人神经调用 0；实际 VLA 调用 12；协调器调用 0。
+机器人原生目标期末：True。</p>
+<p>实际身体离开区间：[]。
+初始是否在旁边：False；后续实际离返周期：[]。
+首次释放并支撑的准备位置见证：None 秒。
+重复近目标搬运请求：0；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：12.0 秒；已在目标的无运动请求满足：0。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
+<p><a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/summary.json">结果</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/provenance.json">模型与设置</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/interaction_verification.json">输入／执行核查</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/joint_process_evidence.json">过程见证</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/independent_video_verification.json">独立视频核查</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/episode/human_policy_io.jsonl">人原始策略</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/episode/model_calls.jsonl">实际动作模型输入</a> · <a href="../../results/continuous_v2/joint_reference_drawer_access_init5_20261008/episode/trace.jsonl">真实环境轨迹</a></p><details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr><tr><td>0.0</td><td>人</td><td>relocate</td><td>I will prepare plate_1 at plate_1_personal.</td></tr><tr><td>18.0</td><td>人</td><td>relocate</td><td>I will receive or finish the activity by moving cream_cheese_1 to drawer_storage.</td></tr></table></div></details></section><section class="run" data-kind="diagnostic"><p class="tag">保留的失败诊断 · 24.10 模拟秒</p>
 <h2>点心：载荷接口崩溃</h2><p>人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。</p><p>失败运行未写入完整 provenance；见协议及中断日志。人策略来源：见协议；原生推理：未记录；额外反思：未记录。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_snack_service_20261007/episode/demo.mp4"></video><p>运行中断：AttributeError(&quot;&#x27;AkitaBlackBowl&#x27; object has no attribute &#x27;in_box&#x27;&quot;)。仅展示已录制部分，不计完整运行。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 未核查 秒；最后一秒持续满足 未核查。
+原始安排物理见证尚未重建；不据原生目标自动判断当前共同安排。</p>
 <p>实际人神经调用 未核查；实际 VLA 调用 未核查；协调器调用 未核查。
 机器人原生目标期末：无完整终态。</p>
 <p>实际身体离开区间：[]。
@@ -362,6 +549,8 @@
 <h2>饮品：原固定人失败</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_drink_storage_20261007/episode/demo.mp4"></video><p>参考链未完成。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 208；协调器调用 0。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -374,6 +563,8 @@
 <h2>饮品：持物初态失败</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>直接 π0.5；相机、状态及实际公开话语。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_drink_storage_handoff_20261007/episode/demo.mp4"></video><p>参考链未完成。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 204；协调器调用 0。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -386,6 +577,8 @@
 <h2>饮品：开环回放失败</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>已保存动作／轨迹反馈参考；当前机器人神经推理为零。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_drink_storage_replay_20261007/episode/demo.mp4"></video><p>参考链未完成。 当前机器人推理为零，不是 VLA 闭环成功。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 0；协调器调用 0。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。
@@ -398,6 +591,8 @@
 <h2>饮品：严格跟随失败</h2><p>人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。</p><p>已保存动作／轨迹反馈参考；当前机器人神经推理为零。人策略来源：reference；原生推理：None；额外反思：False。</p>
 <video controls playsinline preload="none" src="../../results/continuous_v2/joint_feasibility_drink_storage_tracking_20261007/episode/demo.mp4"></video><p>参考链未完成。 当前机器人推理为零，不是 VLA 闭环成功。</p>
 <p></p>
+<p>原始安排的物理见证：首次满足 None 秒；最后一秒持续满足 False。
+原始安排的物理关系／释放／目标位置见证；不评价更新后共同约定、完整抽屉包含、分工合理性或cobalance。</p>
 <p>实际人神经调用 0；实际 VLA 调用 0；协调器调用 0。
 机器人原生目标期末：False。</p>
 <p>实际身体离开区间：[]。

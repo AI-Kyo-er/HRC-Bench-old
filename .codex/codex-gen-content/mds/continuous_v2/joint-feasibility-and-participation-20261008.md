@@ -143,3 +143,36 @@ Next：按同PID/handle等待reasoning终态，audit/evaluate/full decode→buil
 源冻结：以上live加载main、JointHuman、Semantic／Contribution／Reasoning／intent_observation、Kinematic／native*.py、joint_world／activity_private_context／skill_bank等。终态前不要改这些文件，也不要因工具handle过期重启。只改报告、审计或独立分析（如需变更审计，保存准确版本）。本轮无临时smoke文件。
 
 Next：继续同PID／session；收齐余四参考及两NN，逐个audit/evaluate/independent full decode，解读当前实际共同安排与终态，不以NN宣称、格式通过、原生局部目标或身体移动计完整HRC。报告RUNS已登记8新条件，终态若还没独立video／audit则builder会拒绝发布，先完成核查再重建／导出／浏览器。仍缺可靠动态伙伴、六实际情景、完整持续重组、正式多系统多init与cobalance有效评价。不要回到长篇架构空想或同一小提示的无穷迭代。
+
+
+## 接续终态：原生工具链与首个维持到终态的神经物理链
+
+本轮progress：六条参考全部回收／独立核查，原生推理两条件终态分析，原生工具人接口、结构化话语及稳定放置执行落地，三条新工具条件全部运行结束并核查。Goal仍active，未满足六情境实际覆盖、可靠伙伴、完整动态重组、多系统正式矩阵和cobalance有效评价；不complete／block。
+
+权威提交：721c7d9原生工具反馈人；6c2585a结构化话语、接触事实、稳定放置及原始安排物理见证。有效完整pytest271passed/2skipped。没有新模型／数据下载、训练或临时smoke文件。
+
+全部worker已terminal，无待回收：旧推理PID3629154/3629322、参考父PID3634992及新Tool PID3683588、Structured PID3733762/3733839均已ps核实不存活；不要重启。π PID2267256 GPU3 port8766、Vision PID3095303 GPU1 port8782、HTTP PID3054726 port8123仍alive，需要重新核实再用。
+
+结果：
+- init4／5六条：snack两条reference_complete=true；drawer两条true且真实包含；drink两条false。所有完整120秒，audit／process／2401帧video独立通过。参考人NN0，等待／清场独立来源，不算整条VLA或动态能力。
+- reasoning_snack_join：H30/R30/VLA240；0.95秒进入早于19.5秒可用cue。32.45秒释放成品于delivery首次匹配，但108s改回serving_ready，116sreturn打断，终态持碗；不能据首次达成或语言自报称连续协调已完成。
+- reasoning_drink_correction：VLA120，上架10.8s曾成立。37.5s柜顶个人用途cue，40s改公开需要、54.25s移动个人区完成，R44s后仍上架；后续反复取放。不是原生目标未成立就等于操作失败，也不是新的共同约定被接受。
+- joint_tool_drink_correction_20261008：schema6，26/30parse failures，结构化message导致整选择拒绝；实际VLA0、合法后段relocate才放下酒瓶，NN错误完成人理解仍有。完整输入token／工具历史／控制／视频核验通过，保留接口诊断，不算可靠伙伴。
+- joint_structured_tool_drink_correction_20261008：schema7，H30/R30/VLA64，0执行拒绝；10次action=accept被原身体动作枚举拒绝（不是done，已核对raw并修正文档）。10.6s上架曾成立；96s声称柜顶完成并away，终态实际wine contact=table，held=None，97.2s退出未返回。人自己已公开需要柜顶，却误用位置／声明；当前安排未验收。
+- joint_structured_tool_snack_join_symbolic_20261008：schema7，H30/R30/VLA96，0parse、3执行拒绝no_held_object（0/8/44秒place）。9.1s真实填装、27.8s释放成品于delivery，120s及末一秒持续匹配；机器人后续确认并hold，人wait保留可用性。首次神经共同活动完整物理链维持正例。Human0秒已选active，身体32.95入、57.2退出，不据此计通知后才开始合作或完全可靠。NN策略真实决定，未后台选择正确下一策略。
+
+实现边界：
+- ToolJointHumanPolicy用本地Qwen自带Hermes原生tool_call／tool_response，最近四个实际交互＋六条自选非空私人记忆；一次thinking4096，实际message/tool输入和完整token逐条保存。接受不等于完成，反馈只有实测执行与事实，无评分、未来cue或下一动作教师。schema6/7独立token重建已全部通过。
+- StructuredToolJointHumanPolicy只转发明确message/message_kind对象或原字符串，拒绝未知私有嵌套字段／冲突，不重选动作。原始参数留在工具历史，canonical公开speech与执行choice留在记录。人额外获当前真实物体接触实体（不是完成谓词），源码中实际输入与保存private_input一致。
+- SettledPlacementHuman是独立低层类，只兑现已选relocate；释放支撑且速度<.02m/s、XY<.01m/Z<.025m时满足已在目标的请求，容纳实测18mm沉降，不改目标、不抓回、不写R状态。显式return即使物品已到位仍连续执行。原KinematicHuman未改，旧结果版本保留。
+- joint_process_metrics新增original_arrangement_physical_observations：原生关系、释放（碗和内容都不被持有）、接触及原目标。当前安排评分仍None，不以旧目标匹配给cobalance或新用途成功。该函数只在离线evaluate使用，不给策略馈送。
+
+已发布：42视频=41完整120s＋1早期partial；42全独立decode/timeline及浏览器play/seek/Range206、382links、375px、JS0error通过。dataset41完整、12000观测、98400实际7D动作，全加载／唯一ID验证。无formal split或成功专家标签，参考/失败/保持来源清晰。报告pending=[]，所有本轮结果及失败保留。每重要case有assistant_review_of_saved_records_not_human_study复核，不伪装真人研究。
+
+下一步必须从实际任务／伙伴接口推进，别继续同一字段的小版本空转：
+1. 人表达“放物”和“接受/拒绝/结束”等高层贡献与沟通，不应被迫学单手pick/place微步骤；实际三次no_held和10次accept提供直接证据。设计一次统一的自然贡献／沟通接口，策略仍由NN选，执行层可靠兑现；不能靠固定状态机安排人的下一策略，也不能自动判完成。
+2. 现有_home只是初始位置标记，不能承载on-cabinet等真实关系目标；提供实际场景可用的支持面／区域，或明确由机器人完成的请求。不要把cabinet_home当柜顶，不反复修手指接触。
+3. 先补三活动的可信伙伴和六类真实情境，再冻结多系统、多init正式样本。已有参考可用性与神经完整物理链正例是前提，不等于动态人研究全完成。保留原idea局部/长度匹配/复合/未见组合要求。
+4. 所有实验现在已终态，核心源可在新批前合理修改；若启动新worker再次冻结加载源。每次GPU先nvidia-smi，单卡预算足够，不操作他人进程。
+
+特别注意：此前长分析中大量重复、 speculative架构与虚构元数据名称不是代码或研究进展；只信实际文件、PID、日志和核验结果。不要延续那些分析，不新增无必要复杂类或列出永不执行的长计划。

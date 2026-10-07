@@ -33,6 +33,9 @@ RUNS = [
     ('joint_reasoning_drawer_request_20261008', '抽屉：人策略原生推理资格检查', 'neural'),
     ('joint_reasoning_snack_join_20261008', '点心：原生推理与实际加入资格', 'neural'),
     ('joint_reasoning_drink_correction_20261008', '饮品：原生推理与用途纠正资格', 'neural'),
+    ('joint_tool_drink_correction_20261008', '饮品：原生工具严格话语接口诊断', 'neural'),
+    ('joint_structured_tool_drink_correction_20261008', '饮品：完整工具反馈与用途纠正', 'neural'),
+    ('joint_structured_tool_snack_join_symbolic_20261008', '点心：忙碌伙伴加入与理想测量协调', 'neural'),
     ('joint_matched_reference_snack_service_init2_20261008', '点心：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drink_storage_init2_20261008', '饮品：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drawer_access_init2_20261008', '抽屉：init2匹配原生操作参考', 'reference'),
@@ -90,6 +93,7 @@ def build(results, output):
         process = read(root / 'joint_process_evidence.json')
         arrangement_review=read(root/'public_request_response_review.json')
         measured = process.get('measured_process', {})
+        original_physical=process.get('original_arrangement_physical_observations',{})
         participation = measured.get('actual_participation', {})
         activity = provenance.get('activity', metrics.get('activity', 'snack_service'))
         task_label, dependency = TASKS[activity]
@@ -103,6 +107,8 @@ def build(results, output):
                       '参考链未完成。' if kind in {'diagnostic','reference'} and metrics else
                       '完整共同活动尚未验收；原生机器人目标只表示局部操作。')
         if failure: conclusion = '运行中断：' + failure['error'] + '。仅展示已录制部分，不计完整运行。'
+        if arrangement_review.get('neural_physical_chain_maintained'):
+            conclusion='本例神经共同活动物理链成立并维持：机器人填装、人接收交付、双方随后保持。伙伴接口、动态加入及广覆盖仍需单独验收。'
         if provenance.get('robot_replay_source'): conclusion += ' 当前机器人推理为零，不是 VLA 闭环成功。'
         if (root/'source_edit_note.json').exists(): conclusion += ' 存在已披露的运行期间文件编辑说明，仅作探索性证据。'
         links = [link(p,l) for p,l in [(root/'summary.json','结果'),(root/'failure.json','中断原因'),
@@ -131,6 +137,8 @@ def build(results, output):
 <h2>{escape(label)}</h2><p>{escape(dependency)}</p><p>{escape(system)}。人策略来源：{escape(provenance.get('human_source','见协议'))}；原生推理：{provenance.get('human_thinking_enabled','未记录')}；额外反思：{provenance.get('human_reflection','未记录')}。</p>
 <video controls playsinline preload="none" src="{src}"></video><p>{escape(conclusion)}</p>
 <p>{escape(arrangement_review.get('interpretation',''))}</p>
+<p>原始安排的物理见证：首次满足 {original_physical.get('first_physical_match_s','未核查')} 秒；最后一秒持续满足 {original_physical.get('last_second_consistently_matches','未核查')}。
+{escape(original_physical.get('scope','原始安排物理见证尚未重建；不据原生目标自动判断当前共同安排。'))}</p>
 <p>实际人神经调用 {human_calls}；实际 VLA 调用 {vla_calls}；协调器调用 {coordinator_calls}。
 机器人原生目标期末：{metrics.get('robot_native_goal_terminal','无完整终态')}。</p>
 <p>实际身体离开区间：{escape(json.dumps(process.get('body_away_intervals',[]),ensure_ascii=False))}。
@@ -151,6 +159,9 @@ def build(results, output):
 <p>三类活动在init2已有完整实际π0.5参考。早期init0饮品成功参考使用既有轨迹的OSC反馈跟随，当前推理为零，来源仍单列保留。神经策略的完整共同活动、六类实际动态覆盖与cobalance仍未验收。</p>
 <p><a href="TEST_INITIALIZATION_REFERENCE_PROTOCOL_20261008.md">init4／5六条操作参考协议</a>：参考抓取／放置或打开由实际π0.5完成；人调度、机器人等待及完成后的清场控制另记来源，不能称整条参考轨迹均由VLA生成。六条参考不计正式动态样本。</p>
 <p><a href="REASONING_HUMAN_PROTOCOL_20261008.md">原生推理人资格设置</a> · <a href="GROUNDED_CONTRIBUTION_PROTOCOL_20261008.md">跨活动加入／纠正与测量修复协议</a>。已结束的推理抽屉条件：首次存放后再次取出，结束仍持奶酪；84秒公开说已存好与实物不符。旧接口10次拒绝返回＋搬物，旧观测漏报抽屉底面支撑。后续批修复接口并单独记录，历史结果不倒改。</p>
+<p><a href="NATIVE_TOOL_HUMAN_PROTOCOL_20261008.md">原生工具反馈机制</a> · <a href="STRUCTURED_TOOL_ACTIVITY_PROTOCOL_20261008.md">完整工具条件与新的加入初态</a>。工具返回报告真实进展，不将选择动作当完成。话语对象只转发模型原话；已放置物品的沉降由低层执行容差处理，不替人选择下一贡献。</p>
+<p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>
+<p>完整工具＋理想测量协调的点心条件出现新的正例：27.8秒成品释放到交付区并维持至120秒，双方后续确认并保持。它说明神经共同活动物理链可以成立；人早期已选择active及三次未持物place错误，仍需按伙伴条件和情境覆盖分别审阅。完整工具饮品中“柜顶完成”的声明与终态table接触不符，不能据声明计成功。</p>
 <p>人：Qwen3-14B 在线生成意图、当前贡献与公开话语，部分条件另做一次实际神经反思。执行使用连续运动学和物体附着，手速上限 0.2m/s。机器人：π0.5 在原生 MuJoCo／LIBERO 场景中输出 7 维 OSC，20Hz 执行，不吸附或改写机器人位姿。此批不是 Genesis 场景。</p>
 <p>理想感知协调器得到公开几何／接触和真实执行历史；与人共享冻结权重，输入上下文与私有记忆分开。它是额外策略系统，不能归因于裸 VLA。等待与参考控制不计为 VLA 调用。</p>
 <p><a href="PROTOCOL.md">参考与开发协议</a> · <a href="SYMBOLIC_PROTOCOL.md">理想感知协调系统边界</a> · <a href="CONTRACT_PROTOCOL_20261008.md">参与契约修复协议</a> · <a href="VISUAL_SYSTEM_PROTOCOL_20261008.md">第二视觉系统协议</a> · <a href="SKILL_BANK_PROTOCOL_20261008.md">可选技能与具体情境协议</a> · <a href="SITUATIONS.md">六类情境及证据要求</a> · <a href="BEHAVIOR_REVIEW.md">关键行为分析</a> · <a href="README.md">实际进展与复现</a> · <a href="../dynamic_joint_activity_20261007/DESIGN.md">整体设计与文献依据</a></p>

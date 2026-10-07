@@ -363,6 +363,95 @@
       "formal_benchmark_sample": false
     },
     {
+      "run": "joint_reasoning_snack_join_20261008",
+      "label": "点心：原生推理与实际加入资格",
+      "kind": "neural",
+      "activity": "snack_service",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 240,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": true,
+      "body_away_intervals": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.95
+        }
+      ],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_reasoning_drink_correction_20261008",
+      "label": "饮品：原生推理与用途纠正资格",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 120,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_tool_drink_correction_20261008",
+      "label": "饮品：原生工具严格话语接口诊断",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 0,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_structured_tool_drink_correction_20261008",
+      "label": "饮品：完整工具反馈与用途纠正",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 64,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [
+        {
+          "start_s": 97.2,
+          "end_s": 120.0
+        }
+      ],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_structured_tool_snack_join_symbolic_20261008",
+      "label": "点心：忙碌伙伴加入与理想测量协调",
+      "kind": "neural",
+      "activity": "snack_service",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 96,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": true,
+      "body_away_intervals": [
+        {
+          "start_s": 0.0,
+          "end_s": 32.95
+        },
+        {
+          "start_s": 57.2,
+          "end_s": 120.0
+        }
+      ],
+      "formal_benchmark_sample": false
+    },
+    {
       "run": "joint_matched_reference_snack_service_init2_20261008",
       "label": "点心：init2匹配原生操作参考",
       "kind": "reference",
@@ -429,6 +518,62 @@
       "coordinator_calls": 0,
       "reference_complete": false,
       "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_reference_drawer_access_init4_20261008",
+      "label": "抽屉：init4原生操作参考",
+      "kind": "reference",
+      "activity": "drawer_access",
+      "duration_s": 120.0,
+      "human_neural_calls": 0,
+      "actual_vla_calls": 16,
+      "coordinator_calls": 0,
+      "reference_complete": true,
+      "native_goal_terminal": true,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_reference_snack_service_init5_20261008",
+      "label": "点心：init5原生操作参考",
+      "kind": "reference",
+      "activity": "snack_service",
+      "duration_s": 120.0,
+      "human_neural_calls": 0,
+      "actual_vla_calls": 12,
+      "coordinator_calls": 0,
+      "reference_complete": true,
+      "native_goal_terminal": true,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_reference_drink_storage_init5_20261008",
+      "label": "饮品：init5原生操作参考",
+      "kind": "reference",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 0,
+      "actual_vla_calls": 204,
+      "coordinator_calls": 0,
+      "reference_complete": false,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_reference_drawer_access_init5_20261008",
+      "label": "抽屉：init5原生操作参考",
+      "kind": "reference",
+      "activity": "drawer_access",
+      "duration_s": 120.0,
+      "human_neural_calls": 0,
+      "actual_vla_calls": 12,
+      "coordinator_calls": 0,
+      "reference_complete": true,
+      "native_goal_terminal": true,
       "body_away_intervals": [],
       "formal_benchmark_sample": false
     },
@@ -503,12 +648,5 @@
       "formal_benchmark_sample": false
     }
   ],
-  "pending": [
-    "点心：原生推理与实际加入资格：尚无终态结果",
-    "饮品：原生推理与用途纠正资格：尚无终态结果",
-    "抽屉：init4原生操作参考：尚无终态结果",
-    "点心：init5原生操作参考：尚无终态结果",
-    "饮品：init5原生操作参考：尚无终态结果",
-    "抽屉：init5原生操作参考：尚无终态结果"
-  ]
+  "pending": []
 }
