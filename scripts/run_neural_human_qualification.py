@@ -68,6 +68,8 @@ def main():
     human=human_class(replace(CONTINUOUS_SCENARIOS['relay'],tick_hz=20),autonomous_context=args.autonomous_human_context,
         preferred_personal_objects=case.preferred_personal_objects,model_path=model_path,persona_id='independent',
         decision_interval_steps=40,memory_scope='episode',**human_kwargs);human.prepare();human.reset(args.seed);torch.manual_seed(args.seed)
+    adapter_hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in args.adapter_path.glob('adapter*') if p.is_file()} if args.adapter_path else {}
+    if args.adapter_path:assert human._adapter_loaded and adapter_hashes
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
         camera_names=['agentview','robot0_eye_in_hand','frontview'],camera_heights=[256,256,480],camera_widths=[256,256,640],
         **native_time_limits(args.steps,80,True))
@@ -129,6 +131,8 @@ def main():
         raise
     finally:writer.close();env.close()
     write(args.output_dir/'provenance.json',{'human_target_source':'model_generated_from_personal_preferences','human_policy_architecture':args.human_policy_architecture,
+        'human_model_class':type(human._model).__name__,'human_adapter_sha256':adapter_hashes,
+        'human_adapter_files_changed_during_run':[p for p,h in adapter_hashes.items() if sha256(Path(p).read_bytes()).hexdigest()!=h],
         'human_model':str(model_path),'human_adapter':str(args.adapter_path) if args.adapter_path else None,'init_state_id':args.init_state_id,'seed':args.seed,'human_command_delivery':args.human_command_delivery,'robot_policy':'calibration parking then stationary, no neural robot',
         'personal_goal_table_release_required':True,'personal_goal_relative_relations_allowed':True,'source_sha256':hashes,
         'source_files_changed_during_run':[str(p) for p in paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
