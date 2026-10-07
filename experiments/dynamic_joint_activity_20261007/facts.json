@@ -44,6 +44,7 @@
         "seed": 50,
         "role": "development_joint_activity_run"
       },
+      "language_status": "diagnostic_input_truncation",
       "interaction_audit": {
         "status": "verified",
         "world_initializations": 1,
@@ -103,6 +104,7 @@
         "seed": 50,
         "role": "development_joint_activity_run"
       },
+      "language_status": "diagnostic_input_truncation",
       "interaction_audit": {
         "status": "verified",
         "world_initializations": 1,
@@ -169,6 +171,7 @@
         "seed": 50,
         "role": "development_joint_activity_run"
       },
+      "language_status": "diagnostic_input_truncation",
       "interaction_audit": {
         "status": "verified",
         "world_initializations": 1,

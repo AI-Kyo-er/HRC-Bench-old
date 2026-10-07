@@ -47,6 +47,7 @@ class LiberoTorchPolicy:
             download.maybe_download = original_download
         self.config = config
         self.metadata = {'config': 'pi05_libero', 'checkpoint': str(self.root),
+                         'language_token_limit':config['tokenizer_max_length'],
                          'action_encoding': 'libero_osc_delta', 'action_dim': 7,
                          'state_encoding': 'eef_xyz_axisangle_signed_finger_positions',
                          'weight_key_mapping': 'strip_model_prefix_strict_813_key_shape_match',
@@ -66,6 +67,12 @@ class LiberoTorchPolicy:
         mean = self.stats['observation.state.mean'].numpy()
         std = self.stats['observation.state.std'].numpy()
         normalized = (state - mean) / (std + 1e-8)
+        cleaned=value['prompt'].strip().replace('_',' ').replace('\n',' ')
+        bins=np.digitize(normalized,bins=np.linspace(-1,1,257)[:-1])-1
+        full_prompt=f'Task: {cleaned}, State: '+ ' '.join(map(str,bins))+';\nAction: '
+        full_ids=self.tokenizer._tokenizer.encode(full_prompt,add_bos=True)
+        if len(full_ids)>self.config['tokenizer_max_length']:
+            raise ValueError(f'不能静默截断实际VLA语言和状态：{len(full_ids)}>{self.config["tokenizer_max_length"]}')
         tokens, mask = self.tokenizer.tokenize(value['prompt'], normalized)
         def image(key):
             from openpi_client.image_tools import resize_with_pad
@@ -85,4 +92,8 @@ class LiberoTorchPolicy:
             actions = self.model.sample_actions(self.device, observation, num_steps=self.config['num_inference_steps'])
         actions = actions[0, :, :7].float().cpu()
         actions = actions * (self.output_stats['action.std'] + 1e-8) + self.output_stats['action.mean']
-        return {'actions':actions.numpy(), 'policy_timing':{'infer_ms':(time.perf_counter()-started)*1000}}
+        return {'actions':actions.numpy(), 'policy_timing':{'infer_ms':(time.perf_counter()-started)*1000},
+                'language_input_evidence':{'token_count':len(full_ids),'token_limit':self.config['tokenizer_max_length'],
+                    'truncated':False,'token_ids':np.asarray(tokens,dtype=int).tolist(),
+                    'token_mask':np.asarray(mask,dtype=bool).tolist(),
+                    'decoded_actual_input':self.tokenizer._tokenizer.decode(tokens[mask].tolist())}}

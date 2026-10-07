@@ -44,10 +44,17 @@ def audit(root):
         visible=dialogue[:c['visible_dialogue_count']]
         assert all(m['time_s']<=c['time_s'] for m in visible)
         if p['robot_system']=='direct_vla_public_dialogue':
-            spoken='\n'.join(f'{m["speaker"]}: {m["text"]}' for m in visible[-12:])
+            # 依据保存的设置兼容旧开发记录，不能倒改旧输入。
+            recent=([m for m in visible if m['speaker'] in {'human','robot'}][-2:]
+                    if p['robot_model_metadata'].get('language_token_limit') else visible[-12:])
+            spoken='\n'.join(f'{m["speaker"]}: {m["text"]}' for m in recent)
             expected=activity.public_description+'\nActual public conversation:\n'+spoken
             assert c['prompt']==expected
             received+=sum(m['speaker']=='human' for m in visible[-12:])
+        if 'language_input_evidence' in c:
+            evidence=c['language_input_evidence']
+            assert not evidence['truncated'] and evidence['token_count']<=evidence['token_limit']
+            assert sum(evidence['token_mask'])==evidence['token_count']
         np.testing.assert_allclose(np.load(ep/f'observation_{c["step"]:06d}_state.npy'),c['state'])
         from PIL import Image
         for suffix,field in [('', 'exterior_rgb_sha256'),('_wrist','wrist_rgb_sha256')]:

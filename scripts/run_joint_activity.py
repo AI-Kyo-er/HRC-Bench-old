@@ -33,7 +33,10 @@ def write(p,value):p.write_text(json.dumps(value,ensure_ascii=False,indent=2))
 
 def robot_prompt(activity,dialogue):
     # 只转发已经公开的实际表达，不翻译私人意图，不判断下一步任务。
-    spoken='\n'.join(f'{m["speaker"]}: {m["text"]}' for m in dialogue[-12:])
+    # 原生π0.5编码上限200token；排除重复活动介绍，保留最新两条完整话语。
+    # 不截断或改写单条话语；服务端再次检查任务＋实际状态的总token数。
+    recent=[m for m in dialogue if m['speaker'] in {'human','robot'}][-2:]
+    spoken='\n'.join(f'{m["speaker"]}: {m["text"]}' for m in recent)
     return activity.public_description+'\nActual public conversation:\n'+spoken
 
 
@@ -200,6 +203,7 @@ def main():
                     'coordinator_decision_id':last_plan['decision_id'] if last_plan else None}
                 if cartesian_target is not None:call['cartesian_target_xyz_m']=cartesian_target.tolist()
                 calls.append(call);action_plan.extend(chunk[:count])
+                if 'language_input_evidence' in response:call['language_input_evidence']=response['language_input_evidence']
             action=action_plan.popleft();before=float(env.sim.data.time)
             obs,*_=env.step(action.tolist());held_gripper=float(action[-1])
             current=physical_record(env,obs,time_s=(step+1)/20,step=step+1)
