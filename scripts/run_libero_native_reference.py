@@ -603,7 +603,7 @@ def main():
     panels=[]
     for result in episodes:
         location=f'task_{result["task_id"]:02d}/init_{result["init_state_id"]:03d}'
-        panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，学习动作模型实际推理{result["actual_vla_model_calls"]}次、保持原语{result["hold_primitive_calls"]}块、视觉协调模型推理{result["robot_planner_model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
+        panels.append(f'<article><h2>{escape(result["instruction"])}</h2><p>原生初始状态{result["init_state_id"]}；{"完成" if result["task_success"] else "未完成"}；模拟{result["completion_time_s"]:.2f}秒，学习动作模型实际推理{result["actual_vla_model_calls"]}次、保持原语{result["hold_primitive_calls"]}块、末端位移原语{result["cartesian_primitive_calls"]}块、视觉协调模型推理{result["robot_planner_model_calls"]}次。</p><video controls preload="metadata" poster="{location}/preview.png" src="{location}/demo.mp4"></video></article>')
     model_label={'pi05_libero':'π0.5','openvla_libero_spatial':'OpenVLA'}.get(metadata.get('config'),'所选学习模型')
     if coordinator is not None:model_label='Qwen3-VL协调器 + '+model_label
     human_note = ('测试没有人类伙伴，不能解释为协作成绩。' if args.human_mode=='none' else
