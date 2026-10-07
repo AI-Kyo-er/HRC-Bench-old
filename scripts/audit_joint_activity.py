@@ -27,9 +27,13 @@ def audit(root):
     assert bool(plans)==(p['robot_system'] in {'visual_coordinator_plus_vla','symbolic_coordinator_plus_vla'})
     raw_human=rows(ep/'human_control.jsonl')
     tool_tokenizer=None
-    if any(d.get('choice_schema_version') in {6,7} for d in human):
+    if any(d.get('choice_schema_version') in {6,7,8} for d in human):
         from transformers import AutoTokenizer
         tool_tokenizer=AutoTokenizer.from_pretrained(p['human_model'],local_files_only=True,trust_remote_code=True)
+    support_sim=None
+    if p.get('human_support_targets')=='actual_collision_geometry_cabinet_top_v1':
+        from robosuite.utils.binding_utils import MjSim
+        support_sim=MjSim.from_xml_file(str((ep/'scene.xml').resolve()))
     context_path=ep/'private_context.jsonl';contexts=rows(context_path) if context_path.exists() else []
     expected_context=p.get('human_source','neural')=='neural' and 0<=p['context_step']<p['steps']
     if p.get('situation'):
@@ -56,7 +60,7 @@ def audit(root):
             assert source['human_contribution_interface']==contribution_interface(scene)
             if d['reflection_enabled']:
                 assert d['reflection_input']['human_contribution_interface']==contribution_interface(scene)
-        if d.get('choice_schema_version') in {6,7}:
+        if d.get('choice_schema_version') in {6,7,8}:
             from hrc_pilot.tool_joint_human import tool_model_input,retained_private_notes
             assert source['own_retained_private_notes']==retained_private_notes(human[:human_index])
             payload=tool_model_input(d['system_prompt'],source,human[:human_index],scene)
@@ -64,6 +68,17 @@ def audit(root):
                 from hrc_pilot.structured_tool_joint_human import structured_speech_payload
                 payload=structured_speech_payload(payload)
                 assert source['human_measured_object_contacts']==scene['measured_world'].get('object_contacts',{})
+            if d['choice_schema_version']==8:
+                from hrc_pilot.human_decision_interface import decision_tool,decision_interface
+                payload['tools']=[decision_tool(scene)]
+                assert source['human_decision_interface']==decision_interface(scene)
+                assert 'human_contribution_interface' not in source
+                assert source['human_measured_object_contacts']==scene['measured_world'].get('object_contacts',{})
+                from hrc_pilot.human_support_targets import cabinet_placement_targets
+                support_sim.data.qpos[:]=actual['qpos'];support_sim.forward()
+                names=[n for n in ['wine_bottle_1','cream_cheese_1','akita_black_bowl_1','plate_1'] if n in scene['objects_xyz']]
+                expected_targets=cabinet_placement_targets(support_sim.model,support_sim.data,names)
+                for name,point in expected_targets.items():np.testing.assert_allclose(point,scene['regions_xyz'][name],atol=1e-8)
             assert payload==d['native_tool_model_input']
             assert d['chat_template_sha256']==sha256(tool_tokenizer.chat_template.encode()).hexdigest()
             encoded=tool_tokenizer.apply_chat_template(payload['messages'],tools=payload['tools'],
@@ -92,12 +107,16 @@ def audit(root):
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            if d.get('choice_schema_version') in {6,7}:
-                if d['choice_schema_version']==7:
-                    from hrc_pilot.structured_tool_joint_human import parse_structured_tool_choice as parse_tool
+            if d.get('choice_schema_version') in {6,7,8}:
+                if d['choice_schema_version']==8:
+                    from hrc_pilot.human_decision_interface import parse_decision
+                    choice,normalization,call=parse_decision(d['raw_output'],scene)
                 else:
-                    from hrc_pilot.tool_joint_human import parse_tool_choice as parse_tool
-                choice,normalization,call=parse_tool(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])
+                    if d['choice_schema_version']==7:
+                        from hrc_pilot.structured_tool_joint_human import parse_structured_tool_choice as parse_tool
+                    else:
+                        from hrc_pilot.tool_joint_human import parse_tool_choice as parse_tool
+                    choice,normalization,call=parse_tool(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])
                 assert choice==d['choice'] and normalization==d['contribution_normalization'] and call==d['selected_tool_call']
             elif d.get('choice_schema_version') in {4,5}:
                 from hrc_pilot.human_contribution_contract import parse_contribution
