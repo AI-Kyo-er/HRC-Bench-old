@@ -6,6 +6,7 @@ from .semantic_joint_human import SemanticJointHumanPolicy
 
 
 class ContributionJointHumanPolicy(SemanticJointHumanPolicy):
+    contribution_schema_version=4
     def _system_prompt(self):
         return super()._system_prompt().replace('regions_xyz','named_destinations')+(
             'human_contribution_interface明确你的当前执行能力与目标参数，不是动作队列。'
@@ -20,13 +21,14 @@ class ContributionJointHumanPolicy(SemanticJointHumanPolicy):
 
     def decide(self,scene):
         row=super().decide(scene);previous_error=row['parse_error']
-        try:choice,normalization=parse_contribution(row['raw_output'],scene['objects_xyz'],scene['regions_xyz'])
+        try:choice,normalization=parse_contribution(row['raw_output'],scene['objects_xyz'],scene['regions_xyz'],
+                                                  schema_version=self.contribution_schema_version)
         except (ValueError,TypeError,KeyError):pass
         else:
             row['choice']=choice;row['parse_error']=None;row['contribution_normalization']=normalization
             if previous_error:
                 row['original_contribution_parse_error']=previous_error
                 if choice.get('memory'):self.private_memory.append({'time_s':scene['time_s'],'text':choice['memory']})
-        row['choice_schema_version']=4
+        row['choice_schema_version']=self.contribution_schema_version
         row['human_contribution_contract']='explicit_parameter_domains_v1'
         return row

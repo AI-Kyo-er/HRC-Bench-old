@@ -45,6 +45,26 @@ def test_observations_do_not_invent_robot_manipulation_or_read_scores():
     assert execution['actual_vla_blocks']==0 and execution['gripper_contact_objects']==[]
 
 
+def test_drawer_support_requires_real_bottom_contact_and_release_not_merely_proximity():
+    record={'objects':{'cream_cheese_1':[.03,-.10,1.003], 'wooden_cabinet_1':[.03,-.25,.905]},
+        'robot_qpos':[0]*9,'contacts':[{'geom1':'cream_cheese_1_g1','geom2':'wooden_cabinet_1_g27'}],
+        'human_execution':{'held_object':None}}
+    drawer={'support_xyz':[.03,-.10,.994], 'geometry_source':'wooden_cabinet_1_g27',
+            'opening_m':.16,'placement_accessible':True}
+    regions={'drawer_storage':(.03,-.10,1.021)}
+    def measured():return observable_world(record,regions,drawer)['released_object_support_contacts']['cream_cheese_1']
+    assert measured()==['middle_drawer_bottom']
+    legacy=observable_world(record,regions,drawer,measurement_version=1)
+    assert legacy['released_object_support_contacts']['cream_cheese_1']==[] and 'measurement_version' not in legacy
+    record['human_execution']['held_object']='cream_cheese_1'
+    assert measured()==[]
+    record['human_execution']['held_object']=None
+    record['contacts'][0]['geom2']='wooden_cabinet_1_side'
+    assert measured()==[]
+    record['contacts']=[]
+    assert measured()==[]
+
+
 def test_relocate_finishes_one_selected_contribution_and_keeps_robot_positions():
     actor=object.__new__(KinematicHuman)
     data=SimpleNamespace(time=0.,qpos=np.zeros(24),qvel=np.zeros(24),ctrl=np.zeros(3),ncon=0)

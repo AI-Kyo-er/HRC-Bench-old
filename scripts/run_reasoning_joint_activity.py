@@ -20,6 +20,7 @@ if __name__=='__main__':
         changed=[str(p) for p in sources if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]]
         adapter={'human_observation_encoding':'intent_semantic_facts_v1',
             'human_contribution_contract':'explicit_parameter_domains_v1','human_thinking_enabled':True,
+            'human_contribution_schema_version':ReasoningJointHumanPolicy.contribution_schema_version,
             'human_generation_token_limit':4096,'source_sha256':hashes,'source_files_changed_during_run':changed}
         if output.is_dir():(output/'observation_adapter_provenance.json').write_text(json.dumps(adapter,ensure_ascii=False,indent=2))
         if (output/'provenance.json').is_file():

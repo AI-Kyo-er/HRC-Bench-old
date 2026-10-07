@@ -30,7 +30,8 @@ def update_joint_regions(env,regions):
     return support
 
 
-def observable_world(record,regions,drawer=None):
+def observable_world(record,regions,drawer=None,*,measurement_version=2):
+    if measurement_version not in {1,2}:raise ValueError('未知共同环境测量版本')
     contacts=perceived_object_contacts(record)
     distances={name:{region:round(float(np.linalg.norm(np.asarray(xyz)[:2]-np.asarray(point)[:2])),4)
                      for region,point in regions.items() if region.endswith(('ready','staging','storage','delivery'))}
@@ -48,6 +49,16 @@ def observable_world(record,regions,drawer=None):
             if entity=='table' or (entity in record['objects']
                 and record['objects'][name][2]>=record['objects'][entity][2]
                 and np.linalg.norm(np.asarray(record['objects'][name])[:2]-np.asarray(record['objects'][entity])[:2])<.03)]
+        # 柜体中心不是抽屉底面的位置。真实底面接触才构成此处的支撑事实；
+        # 只有XY接近、侧壁接触或尚在手中，不能称已收纳或已完成共同活动。
+        if measurement_version>=2 and drawer and drawer.get('geometry_source'):
+            xyz=np.asarray(record['objects'][name]);surface=np.asarray(drawer['support_xyz'])
+            bottom=drawer['geometry_source']
+            bottom_contact=any(bottom in (pair['geom1'],pair['geom2']) and
+                any((g or '').startswith(name+'_') for g in (pair['geom1'],pair['geom2']))
+                for pair in record['contacts'])
+            if bottom_contact and np.linalg.norm(xyz[:2]-surface[:2])<.03 and 0<=xyz[2]-surface[2]<.05:
+                supported[name].append('middle_drawer_bottom')
     near_regions={name:[region for region,distance in ds.items() if distance<.025]
                   for name,ds in distances.items()}
     facts=[]
@@ -59,12 +70,14 @@ def observable_world(record,regions,drawer=None):
     facts.append(f'Human is holding {held}.' if held else 'Human is not holding any object.')
     if 'human_body_xy' in record:facts.append('Human body is '+('aside from the workspace.' if record['human_body_xy'][1]>=.8 else 'near the workspace.'))
     if drawer:facts.append(f'Middle drawer opening is {drawer["opening_m"]:.3f}m; interior placement is '+('accessible.' if drawer['placement_accessible'] else 'not accessible.'))
-    return {'source':'current_geometry_and_contact_measurement_not_task_score',
+    world={'source':'current_geometry_and_contact_measurement_not_task_score',
         'object_contacts':contacts,'object_distance_to_named_region_xy_m':distances,
         'released_object_support_contacts':supported,'near_named_regions':near_regions,
         'current_measured_fact_sentences':facts,
         'relative_object_positions':relative,'drawer':drawer,
         'robot_gripper_aperture_m':float(np.abs(np.asarray(record['robot_qpos'])[-2:]).sum())}
+    if measurement_version>=2:world['measurement_version']=measurement_version
+    return world
 
 
 def actual_robot_execution(record,calls,controls):

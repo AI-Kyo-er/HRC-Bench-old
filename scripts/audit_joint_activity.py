@@ -68,15 +68,17 @@ def audit(root):
         np.testing.assert_allclose(scene['robot_eef_xyz'],actual['robot_ee'])
         if 'measured_world' in scene:
             from hrc_pilot.joint_world import observable_world
-            expected_world=observable_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'])
+            expected_world=observable_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'],
+                                           measurement_version=scene['measured_world'].get('measurement_version',1))
             assert set(scene['measured_world']).issubset(expected_world)
             assert all(scene['measured_world'][k]==expected_world[k] for k in scene['measured_world'])
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            if d.get('choice_schema_version')==4:
+            if d.get('choice_schema_version') in {4,5}:
                 from hrc_pilot.human_contribution_contract import parse_contribution
-                choice,normalization=parse_contribution(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])
+                choice,normalization=parse_contribution(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'],
+                                                        schema_version=d['choice_schema_version'])
                 assert choice==d['choice'] and normalization==d['contribution_normalization']
             elif d.get('choice_schema_version')==3:
                 from hrc_pilot.semantic_joint_human import parse_semantic_choice

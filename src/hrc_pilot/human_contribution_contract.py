@@ -35,7 +35,8 @@ def contribution_interface(scene):
         'auto_buffer_owned_item':bool(scene['action_interface'].get('relocate_can_buffer_owned_object'))}
 
 
-def parse_contribution(raw,objects,regions):
+def parse_contribution(raw,objects,regions,*,schema_version=4):
+    if schema_version not in {4,5}:raise ValueError('未知贡献契约版本')
     text=raw.rsplit('</think>',1)[-1].strip()
     original=json.loads(text[text.index('{'):text.rindex('}')+1]);value=deepcopy(original)
     normalized=[]
@@ -45,6 +46,7 @@ def parse_contribution(raw,objects,regions):
     kind=value.get('message_kind','notice')
     if not isinstance(kind,str) or kind not in MESSAGE_KINDS:
         value['declared_message_kind']=kind;value['message_kind']='notice';normalized.append('message_kind')
-    choice=parse_choice(json.dumps(value,ensure_ascii=False),objects,regions,schema_version=2)
+    choice=parse_choice(json.dumps(value,ensure_ascii=False),objects,regions,
+                        schema_version=3 if schema_version==5 else 2)
     return choice,{'normalized_auxiliary_fields':normalized,
         'interpretation':'Only absent speech/memory and logging tags are normalized; action, object and destination remain the actual neural selection.'}

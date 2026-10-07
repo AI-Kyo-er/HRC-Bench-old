@@ -25,7 +25,8 @@ def parse_choice(raw,objects,regions,*,schema_version=1):
         presence=participation
         value['presence_choice']=presence
     if presence not in {'keep','step_aside','return_to_work'}:raise ValueError('非法参与位置选择')
-    if presence in {'step_aside','return_to_work'}:
+    returning_with_relocation=(schema_version>=3 and presence=='return_to_work' and value['action']=='relocate')
+    if presence in {'step_aside','return_to_work'} and not returning_with_relocation:
         if value['action'] not in {'message','wait','away','return'}:raise ValueError('参与位置改变与物品贡献冲突，需自己决定当前一项')
         value['declared_action']=value['action']
         value['action']='away' if presence=='step_aside' else 'return'

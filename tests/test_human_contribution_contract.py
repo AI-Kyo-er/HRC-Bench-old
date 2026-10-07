@@ -21,3 +21,15 @@ def test_interface_does_not_invent_fixture_support_or_a_next_action():
     assert 'not a promise' in by_id['rack_home']
     assert 'release a bottle' in by_id['drink_staging']
     assert 'rack' not in by_id and 'next_action' not in interface
+
+
+def test_return_with_selected_relocation_is_executable_but_old_contract_and_departure_remain_distinct():
+    raw='{"presence_choice":"return_to_work","action":"relocate","object_id":"cream","destination":"drawer"}'
+    with pytest.raises(ValueError,match='冲突'):
+        parse_contribution(raw,{'cream':[]},{'drawer':[]})
+    choice,_=parse_contribution(raw,{'cream':[]},{'drawer':[]},schema_version=5)
+    assert choice['action']=='relocate' and choice['object_id']=='cream' and choice['destination']=='drawer'
+    with pytest.raises(ValueError,match='冲突'):
+        parse_contribution(raw.replace('return_to_work','step_aside'),{'cream':[]},{'drawer':[]},schema_version=5)
+    with pytest.raises(ValueError,match='物品不存在'):
+        parse_contribution(raw,{}, {'drawer':[]},schema_version=5)
