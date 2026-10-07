@@ -46,7 +46,9 @@ def execution_feedback(record, initial_state, calls, actions):
             'own_contact_report':own_contact_observation(record['contacts'],'robot'),
             'completed_native_control_steps':len(actions),
             'issued_learned_vla_blocks':sum(c['action_source']=='learned_vla' for c in calls),
-            'issued_hold_blocks':sum(c['action_source']!='learned_vla' for c in calls),
+            'issued_hold_blocks':sum(c['action_source'] in {'vlm_selected_hold_primitive','planner_output_rejection_hold_primitive'} for c in calls),
+            'issued_cartesian_blocks':sum(c['action_source']=='vlm_selected_cartesian_primitive' for c in calls),
+            'last_cartesian_target_xyz_m':calls[-1].get('cartesian_target_xyz_m') if calls else None,
             'last_control_source':calls[-1]['action_source'] if calls else 'no_control_yet',
             'last_native_action':actions[-1]['action'] if actions else None,
             'eef_xyz_m':record['robot_ee'],
@@ -61,13 +63,18 @@ def validate_decision(raw):
     error=None
     try:
         value=json.loads(raw[raw.find('{'):raw.rfind('}')+1])
-        if not isinstance(value,dict) or value.get('mode') not in {'execute','hold'}:raise ValueError('mode必须为execute或hold')
+        if not isinstance(value,dict) or value.get('mode') not in {'execute','hold','move_ee'}:raise ValueError('mode必须为execute、hold或move_ee')
         if value['mode']=='execute' and (not isinstance(value.get('instruction'),str) or not value['instruction'].strip()):raise ValueError('execute必须给出运动目标指令')
+        if value['mode']=='move_ee':
+            delta=np.asarray(value.get('delta_xyz_m'),dtype=float)
+            if delta.shape!=(3,) or not np.isfinite(delta).all() or np.linalg.norm(delta)>.2+1e-9:
+                raise ValueError('move_ee须给出有限3维delta_xyz_m，向量长度最多0.2米')
     except (ValueError,TypeError) as exc:
         error=str(exc);value={'mode':'hold','reason':'输出无效，维持当前姿态。'}
     decision={key:str(value.get(key,''))[:500] for key in ['mode','instruction','message','reason','memory_note','current_goal']}
     decision['message']=decision['message'][:240]
     decision['plan']=[str(v)[:180] for v in value.get('plan',[])[:5]] if isinstance(value.get('plan',[]),list) else []
+    if decision['mode']=='move_ee':decision['delta_xyz_m']=delta.tolist()
     return decision,error
 
 
@@ -77,6 +84,24 @@ def hold_actions(state, steps, last_gripper_action=None):
     actions=np.zeros((steps,7),dtype=float)
     actions[:,-1]=(float(last_gripper_action) if last_gripper_action is not None
                   else (-1. if np.abs(state[-2:]).sum()>=.04 else 1.))
+    return actions
+
+
+def cartesian_actions(state,target,steps,last_gripper_action=None):
+    """将模型选择的目标转换为原生OSC增量；每动作块重新读取实际末端位置。
+
+    原生OSC xyz缩放0.05m，20Hz，参考速度最多0.05m/s。
+    不选择目标、不检查任务成绩、不修改物体或机器人位姿。
+    """
+    state=np.asarray(state,dtype=float);target=np.asarray(target,dtype=float)
+    if state.shape!=(8,) or target.shape!=(3,) or not np.isfinite(np.r_[state,target]).all():
+        raise ValueError('末端状态与目标须为有限坐标')
+    actions=hold_actions(state,steps,last_gripper_action)
+    reference=state[:3].copy()
+    for index in range(steps):
+        error=target-reference;distance=np.linalg.norm(error)
+        increment=error*min(1.,.0025/max(distance,1e-12))
+        actions[index,:3]=increment/.05;reference+=increment
     return actions
 
 

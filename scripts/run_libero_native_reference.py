@@ -121,7 +121,7 @@ def main():
     coordinator=None
     if args.robot_planner_port is not None:
         if args.human_mode!='qwen':parser.error('双向协调实验要求生成式人类伙伴')
-        from hrc_pilot.robot_coordination import CoordinatorClient, coordination_request, hold_actions, execution_feedback
+        from hrc_pilot.robot_coordination import CoordinatorClient, coordination_request, hold_actions, cartesian_actions, execution_feedback
         coordinator=CoordinatorClient(args.robot_planner_port)
     suite = benchmark.get_benchmark_dict()[args.suite]()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -358,6 +358,8 @@ def main():
                                 robot_plans.append({'step':step,'time_s':time_s,'decision_id':len(robot_plans)+1,
                                     'initial_artifact':'planner_initial.png','exterior_artifact':f'{stem}.png',
                                     'wrist_artifact':f'{stem}_wrist.png',**planned})
+                                if robot_decision['mode']=='move_ee':
+                                    robot_plans[-1]['cartesian_target_xyz_m']=(np.asarray(public_request['state'][:3])+robot_decision['delta_xyz_m']).tolist()
                                 robot_history.append({'time_s':time_s,'decision':robot_decision})
                                 next_plan_step=step+args.planner_interval_steps
                                 if robot_decision['message']:
@@ -367,11 +369,19 @@ def main():
                         Image.fromarray(request['observation/image']).save(directory / f'{stem}.png')
                         Image.fromarray(request['observation/wrist_image']).save(directory / f'{stem}_wrist.png')
                         started = time.perf_counter()
+                        held_gripper=policy_io[-1]['action'][-1] if policy_io else None
+                        cartesian_target=None
                         if coordinator is not None and robot_decision['mode']=='hold':
-                            held_gripper=policy_io[-1]['action'][-1] if policy_io else None
                             response={'actions':hold_actions(request['observation/state'],args.execution_horizon,held_gripper)}
                             action_source=('planner_output_rejection_hold_primitive' if robot_decision_error
                                            else 'vlm_selected_hold_primitive')
+                        elif coordinator is not None and robot_decision['mode']=='move_ee':
+                            cartesian_target=robot_plans[-1]['cartesian_target_xyz_m']
+                            controller=env.env.robots[0].controller
+                            if not np.allclose(controller.output_max[:3],.05) or not np.allclose(controller.output_min[:3],-.05):
+                                raise ValueError('末端位移原语要求核准的原生OSC xyz缩放0.05m')
+                            response={'actions':cartesian_actions(request['observation/state'],cartesian_target,args.execution_horizon,held_gripper)}
+                            action_source='vlm_selected_cartesian_primitive'
                         else:
                             response=client.infer(request);action_source='learned_vla'
                         chunk = np.asarray(response['actions'], dtype=float)
@@ -385,6 +395,9 @@ def main():
                                 **input_audit(request), 'exterior_artifact': f'{stem}.png',
                                 'wrist_artifact': f'{stem}_wrist.png', 'raw_action_chunk': chunk.tolist(),
                                 'latency_s': time.perf_counter()-started}
+                        if cartesian_target is not None:
+                            call['cartesian_target_xyz_m']=cartesian_target
+                            call['cartesian_reference_speed_m_s']=.05
                         calls.append(call)
                         if 'model_input_evidence' in response:
                             transformed=dict(response['model_input_evidence'])
@@ -440,7 +453,8 @@ def main():
                           'native_geometry_success':bool(env.check_success()),
                           'completion_criterion':args.completion_criterion,
                           'actual_vla_model_calls':sum(c['action_source']=='learned_vla' for c in calls),
-                          'hold_primitive_calls':sum(c['action_source']!='learned_vla' for c in calls),
+                          'hold_primitive_calls':sum(c['action_source'] in {'vlm_selected_hold_primitive','planner_output_rejection_hold_primitive'} for c in calls),
+                          'cartesian_primitive_calls':sum(c['action_source']=='vlm_selected_cartesian_primitive' for c in calls),
                           'planner_output_rejection_holds':sum(c['action_source']=='planner_output_rejection_hold_primitive' for c in calls),
                           'robot_planner_model_calls':len(robot_plans),
                           'interpretation': '原生基础操作参照，不含人类，不是HRC/cobalance成绩。'}

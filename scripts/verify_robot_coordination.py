@@ -36,6 +36,7 @@ def verify_episode(directory):
                 [c for c in calls if c['step']<row['step']],[a for a in actions if a['step']<row['step']])
             actual=row['public_input']['self_execution']
             for key,value in expected.items():
+                if key in {'issued_cartesian_blocks','last_cartesian_target_xyz_m'} and key not in actual:continue
                 if key=='own_contact_report' and key not in actual:continue
                 if key=='eef_displacement_from_start_m':np.testing.assert_allclose(actual[key],value,atol=1e-8)
                 else:assert actual[key]==value
@@ -45,6 +46,11 @@ def verify_episode(directory):
         if call['action_source']=='learned_vla':
             assert plan['decision']['mode']=='execute'
             assert call['prompt']==plan['decision']['instruction']
+        elif call['action_source']=='vlm_selected_cartesian_primitive':
+            assert plan['decision']['mode']=='move_ee' and plan['parse_error'] is None
+            target=np.asarray(plan['public_input']['state'][:3])+plan['decision']['delta_xyz_m']
+            np.testing.assert_allclose(call['cartesian_target_xyz_m'],target,atol=1e-9)
+            np.testing.assert_allclose(plan['cartesian_target_xyz_m'],target,atol=1e-9)
         else:
             assert plan['decision']['mode']=='hold'
             assert (call['action_source']=='planner_output_rejection_hold_primitive')==(plan['parse_error'] is not None)
@@ -56,7 +62,8 @@ def verify_episode(directory):
             'human_model_inputs_containing_robot_messages':seen,
             'planner_parse_errors':sum(p['parse_error'] is not None for p in plans),
             'vla_calls':sum(c['action_source']=='learned_vla' for c in calls),
-            'hold_primitive_calls':sum(c['action_source']!='learned_vla' for c in calls),
+            'hold_primitive_calls':sum(c['action_source'] in {'vlm_selected_hold_primitive','planner_output_rejection_hold_primitive'} for c in calls),
+            'cartesian_primitive_calls':sum(c['action_source']=='vlm_selected_cartesian_primitive' for c in calls),
             'public_visual_input_reconstructed':True,'model_decisions_and_execution_sources_reconstructed':True,
             'interpretation':'核查原始模型决定、视觉输入、控制来源与公开消息传递；不证明理解、协商成功或cobalance效度。'}
 

@@ -75,6 +75,7 @@ def verify_episode(directory, *, require_shelf_release=False, require_table_rele
         else:
             plan=plans_by_id[c['planner_decision_id']]
             if c['action_source']=='learned_vla':assert c['prompt']==plan['decision']['instruction']
+            elif c['action_source']=='vlm_selected_cartesian_primitive':assert plan['decision']['mode']=='move_ee'
             else:assert plan['decision']['mode']=='hold'
         assert '\nCurrent public human work:' not in c['prompt']
         # The only language suffix is publicly emitted speech; private targets are never routed to the robot.

@@ -1,6 +1,6 @@
 import numpy as np
 
-from hrc_pilot.robot_coordination import decode_image,hold_actions,image_payload,validate_decision,execution_feedback
+from hrc_pilot.robot_coordination import decode_image,hold_actions,cartesian_actions,image_payload,validate_decision,execution_feedback
 
 
 def test_visual_frames_roundtrip_without_label_or_score_injection():
@@ -38,3 +38,21 @@ def test_factual_execution_is_distinct_from_generated_plan_and_has_no_goal_label
     assert feedback['measured_gripper_aperture_m']==.08
     assert feedback['finger_contact_sample_counts']=={'finger_1':0,'finger_2':0}
     assert 'task_success' not in feedback and 'grasped' not in feedback
+
+
+def test_model_selected_cartesian_target_is_preserved_and_bad_targets_are_rejected():
+    decision,error=validate_decision('{"mode":"move_ee","delta_xyz_m":[0,-0.1,0.05]}')
+    assert error is None and decision['delta_xyz_m']==[0,-.1,.05]
+    for raw in ['{"mode":"move_ee"}','{"mode":"move_ee","delta_xyz_m":[1,0,0]}',
+                '{"mode":"move_ee","delta_xyz_m":[NaN,0,0]}']:
+        decision,error=validate_decision(raw)
+        assert error and decision['mode']=='hold'
+
+
+def test_cartesian_reference_has_bounded_speed_and_does_not_overshoot_close_target():
+    state=[0,0,1,0,0,0,.04,-.04]
+    actions=cartesian_actions(state,[.006,0,1],10,.8)
+    assert np.max(np.linalg.norm(actions[:,:3]*.05,axis=1))<=.0025+1e-12
+    np.testing.assert_allclose(np.sum(actions[:,:3]*.05,axis=0),[.006,0,0])
+    np.testing.assert_array_equal(actions[:,3:6],np.zeros((10,3)))
+    assert np.all(actions[:,-1]==.8)

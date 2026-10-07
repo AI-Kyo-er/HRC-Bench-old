@@ -22,9 +22,13 @@ SYSTEM=(
     'state依次是末端xyz米、轴角3维弧度、左右夹爪关节位置米。接触计数只表示感觉到接触，不能证明抓取或完成。'
     'mode为execute时，instruction给出当前要完成的简短英文机械臂运动目标，由真实VLA执行。'
     'mode为hold时保持当前位置和抓持状态，允许等待人让出空间或准备物体。'
+    'mode为move_ee时，你自己给delta_xyz_m三个世界坐标位移米数，长度最多0.2米。'
+    '坐标正z向上，正y朝人的工作台边缘；末端保持方向与现有夹爪命令，参考速度最多0.05米每秒。'
+    '可用于依据画面、实际接触和公开请求调整自己的空间位置，但不会自动抓放、避碰或保证整条手臂让开。'
+    '目标以本次state的末端位置为起点；每2秒重新看实际进展。你选择hold仍会留在原处，不会自动腾空间。'
     '明确的任务前置条件须通过当前观察理解；程序不会替你规划后续步骤，plan只记录你的想法。'
     '不必每次重复发同一句消息。等待时说明具体条件，遇到持续停顿可以重新协调。'
-    '只输出JSON：mode、instruction、message、reason、memory_note、current_goal、plan。'
+    '只输出JSON：mode、instruction、delta_xyz_m（仅move_ee必需）、message、reason、memory_note、current_goal、plan。'
     'message/instruction用简短英文，reason/memory_note/current_goal/plan用中文。')
 
 
@@ -46,6 +50,7 @@ def main():
     metadata={'model':str(args.model),'model_type':'Qwen3VLForConditionalGeneration','local_files_only':True,
               'inputs':'initial/current RGB, wrist RGB, own state, public task/dialogue, own generated history',
               'task_scores_available':False,'policy':'neural_visual_coordination','cuda_visible_devices':selected,
+              'available_modes':['execute','hold','move_ee'],'cartesian_reference_speed_m_s':.05,
               'source_sha256':{str(path):sha256(path.read_bytes()).hexdigest() for path in
                   [Path(__file__),Path('src/hrc_pilot/robot_coordination.py')]}}
     print('Qwen3-VL视觉协调器已离线载入',flush=True)
