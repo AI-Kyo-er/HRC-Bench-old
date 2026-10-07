@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from hrc_pilot.joint_process_metrics import measured_process
+from hrc_pilot.joint_process_metrics import measured_process,original_arrangement_observations
 
 
 def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
@@ -93,6 +93,10 @@ def evaluate(root):
         'interpretation':'动作完成／初始近目标／身体离返／输入递送的实测见证；重复搬运可能有合理原因，语言与模式数量不直接代表协作质量。'}
     controls=rows(ep/'robot_control.jsonl');receipts=rows(ep/'human_command_receipts.jsonl')
     result['measured_process']=measured_process(trace,human,controls,receipts)
+    provenance=json.loads((root/'provenance.json').read_text())
+    last_scene=human[-1].get('observation_source_scene',human[-1]['private_input']['scene'])
+    result['original_arrangement_physical_observations']=original_arrangement_observations(
+        provenance['activity'],trace,placements,last_scene['regions_xyz'])
     result['preparation_measurement_scope']='指定准备区域的桌面释放支撑，不穷尽可用准备方式；抽屉的plate_personal位置不是所有合理清理方式。'
     (root/'joint_process_evidence.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
     print(json.dumps({k:v for k,v in result.items() if k not in {'completed_human_actions','public_message_input_receipts'}},ensure_ascii=False))
