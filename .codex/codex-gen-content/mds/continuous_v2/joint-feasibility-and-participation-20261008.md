@@ -121,3 +121,25 @@ activity_private_context.py：18种活动×情境的外部事实文本绑定实�
 - 当前job加载core main、humanBase、semantic/contribution/intent、Kinematic/native*.py以及reasoning wrapper等都保持源冻结，结束前不要修改。coordinator服务自身源保持加载版本。
 
 Next：按同PID/handle等待reasoning终态，audit/evaluate/full decode→builder/export/browser。审阅当前需求／实际贡献／伙伴响应，不能因格式少错、动作执行或世界关系满足就判cobalance。仍需六情景实际覆盖、可靠人策略、完整双向重组、多系统正式多init和评价。未来要扩大合理贡献接口／任务交互而非反复小提示或人体抓放LoRA；未支持动作不能当R能力缺口。
+
+
+## 本轮接续：终态事实回收、契约／测量修复与测试初态参考
+
+本轮属于progress：回收推理抽屉、独立审计，修复两个真实接口问题，运行并核验init4两条参考，启动跨活动NN与剩余参考。先前仅整理Goal文本不构成实验进展；本轮已依据实际PID、日志与记录重新核实。Goal仍active，全七项未满足，不complete／block。
+
+- joint_reasoning_drawer_request_20261008已terminal120s。H30原生推理／R30视觉协调／240实际VLA；旧schema4独立重建通过，2401帧解码／timeline通过。6.2s真实打开；59.15s人请求10退手完成，60s记录cream与wooden_cabinet_1_g27真实底面接触；76s重复取物，84s说已存好但正在持物抬起，120s仍持奶酪。两离返29.2—36.95和85.2—108.95。无主动R请求，完整活动失败。public_request_response_review.json逐条保留事实，不是专家／真人标注。
+- 6b9cbe1：schema5只允许return_to_work＋relocate（执行器自身会接近桌边），物品／目标不变，step_aside＋搬物仍拒绝，旧schema4不倒改。ReasoningJointHumanPolicy新批schema5。旧有10拒绝保留。
+- measurement_version2增加真实抽屉底面几何接触＋相对高度／XY的释放支撑事实；手持／gripper接触／仅附近／侧壁不计。没有成功评分或下一策略。observable_world保留measurement_version1，独立audit按记录版本重建。260passed/2skipped；旧推理抽屉审计在新代码下复验通过。
+- b769989：发布推理终态，预先记录跨活动与测试初态参考协议。新的两NN条件用init3/seed64/120s/4s高层，单次H14B thinking4096，Vision8技能库＋实际π；没有新下载／训练／教师。
+- init4点心参考终态：实际VLA16，10.85s准备、22.25s填装、44.15s人请求交付完成，reference_complete=true。init4饮品终态：实际VLA204，11.35s释放准备、16.6s退手完成，无原生上架，reference_complete=false、stage robot。两条均全输入／控制／2401视频核验通过。此批无动态人，饮品不能归动态HRC失败。人参考调度／robot等待和清场有独立来源，不称整条轨迹都来自VLA。
+- 当前已发布33视频：32完整120s＋1早期partial。浏览器33全play／seek／Range206、298链接、375px、JS0err。数据32完整、9840观测、76800实际动作全加载／唯一ID通过；无formal split或专家成功标签。dataset和HTML已更新。
+
+必须重新ps确认的live（本次最后核实均alive）：
+- joint_reasoning_snack_join_20261008，GPU0，PID3629154，session54739，log data1/results/joint_reasoning_snack_join_20261008.log；最新NN32s、schema5解析无错。20s实测cream支持接触bowl，正在人所选交付运动；不是完整活动或加入后重组已经验收。它在初始aside开始放物，不强迫等待外部cue，需要审阅是否已提早参与。
+- joint_reasoning_drink_correction_20261008，GPU2，PID3629322，session57724，log同stem.log；最新NN32s，point rack，尚未收到具体用途cue（该次private_context=[]），不提前说纠正失败或覆盖成功。
+- 六参考串行父进程PID3634992，session83809，GPU1，log data1/results/joint_references_test_initializations_20261008.log。init4前两已terminal且核查，当前drawer init4子PID3648740最后alive约1m07；之后按同脚本依次init5三个，不能因旧子PID消失就重启父任务。
+- π服务GPU3 PID2267256 port8766；Vision服务GPU1 PID3095303 port8782；HTTP PID3054726 port8123。启动时GPU0/2各48GB空闲，H预算36.36GB；GPU1约30GB空闲供参考渲染，没停止他人GPU。
+
+源冻结：以上live加载main、JointHuman、Semantic／Contribution／Reasoning／intent_observation、Kinematic／native*.py、joint_world／activity_private_context／skill_bank等。终态前不要改这些文件，也不要因工具handle过期重启。只改报告、审计或独立分析（如需变更审计，保存准确版本）。本轮无临时smoke文件。
+
+Next：继续同PID／session；收齐余四参考及两NN，逐个audit/evaluate/independent full decode，解读当前实际共同安排与终态，不以NN宣称、格式通过、原生局部目标或身体移动计完整HRC。报告RUNS已登记8新条件，终态若还没独立video／audit则builder会拒绝发布，先完成核查再重建／导出／浏览器。仍缺可靠动态伙伴、六实际情景、完整持续重组、正式多系统多init与cobalance有效评价。不要回到长篇架构空想或同一小提示的无穷迭代。
