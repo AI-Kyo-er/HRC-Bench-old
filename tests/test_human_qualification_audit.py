@@ -13,7 +13,8 @@ def fixture(root):
     def write(name,value):
         (ep/name).write_text(json.dumps(value) if name.endswith('.json') else ''.join(json.dumps(r)+'\n' for r in value))
     (root/'provenance.json').write_text(json.dumps({'source_files_changed_during_run':[]}))
-    write('parking_control.json',[{'physics_time_s':i/20} for i in range(80)])
+    write('parking_control.json',[{'physics_time_s':i/20,'eef_xyz':[0,0,0],
+        'action':[-.3,-.3,.3,0,0,0,-1]} for i in range(80)])
     write('trace.jsonl',[{'step':i,'physics_time_s':4+i/20,'robot_ee':[0,0,0]} for i in range(3)])
     write('stationary_robot_control.jsonl',[{'source':'calibrated_stationary_robot_no_model','action':[0.]*6+[-1.],
         'step':i,'pre_physics_time_s':4+i/20,'post_physics_time_s':4+(i+1)/20} for i in range(2)])

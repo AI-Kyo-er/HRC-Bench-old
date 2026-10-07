@@ -21,6 +21,11 @@ def verify(root):
     assert len(parking)==80 and len(trace)==len(controls)+1 and controls
     np.testing.assert_allclose([r['physics_time_s'] for r in parking],
         parking[0]['physics_time_s']+np.arange(80)/20,atol=1e-7)
+    target=np.asarray(parking[0]['eef_xyz'])+[-.15,-.20,.25]
+    for row in parking:
+        expected=np.r_[np.clip((target-row['eef_xyz'])*20,-.3,.3),np.zeros(3),-1.]
+        np.testing.assert_allclose(row['action'],expected,atol=1e-9)
+    np.testing.assert_allclose(trace[0]['physics_time_s'],parking[-1]['physics_time_s']+.05,atol=1e-7)
     for c,first,second in zip(controls,trace,trace[1:]):
         assert c['source']=='calibrated_stationary_robot_no_model'
         assert c['action']==[0.]*6+[-1.]
@@ -34,6 +39,7 @@ def verify(root):
     speed=max(np.linalg.norm(np.asarray(b['robot_ee'])-a['robot_ee'])*20 for a,b in zip(trace,trace[1:]))
     result={'status':'verified','human_action_calls':len(human),'human_planner_calls':len(plans),
         'robot_neural_calls':0,'parking_real_control_steps':80,'human_activity_steps':len(controls),
+        'parking_target_error_m':float(np.linalg.norm(np.asarray(trace[0]['robot_ee'])-target)),
         'human_activity_duration_s':len(controls)/20,'robot_peak_measured_eef_speed_m_s':float(speed),
         'robot_eef_displacement_from_park_m':float(np.linalg.norm(np.asarray(trace[-1]['robot_ee'])-trace[0]['robot_ee'])),
         'interpretation':'验证零机器人模型调用、实际泊车和静止控制指令；静止指令不保证接触下身体绝对静止，也不构成HRC成绩。'}
