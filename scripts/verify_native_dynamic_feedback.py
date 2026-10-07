@@ -21,7 +21,8 @@ def verify_episode(directory):
             assert decision['parsed_decision']['intent']=='observe'
         public=json.loads(decision['public_input'].split('\n',1)[1])
         assert not prohibited.intersection(public)
-        assert public['robot_action']=='native_joint_control'
+        if 'robot_action' in public:assert public['robot_action']=='native_joint_control'
+        else:assert public.get('observation_projection')=='compact_measured_world_v1'
         actual=by_step[decision['step']]
         measured=public['your_measured_execution']
         if 'hand_contact_report' in measured:
