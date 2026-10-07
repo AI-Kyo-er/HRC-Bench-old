@@ -39,7 +39,8 @@ def evaluate(root):
             displacement=float(np.linalg.norm(np.asarray(end['objects'][obj])-r['objects'][obj]))
         destination=c.get('destination');already_near=None
         if obj in r['objects'] and destination:
-            point=d['private_input']['scene']['regions_xyz'].get(destination)
+            source_scene=d.get('observation_source_scene',d['private_input']['scene'])
+            point=source_scene['regions_xyz'].get(destination)
             if point is not None:already_near=float(np.linalg.norm(np.asarray(r['objects'][obj])[:2]-np.asarray(point)[:2]))<.025
         actions.append({'time_s':d['time_s'],'request_id':d['decision_id'],'action':c['action'],
             'object_id':obj,'destination':destination,'completed_time_s':complete,
@@ -65,7 +66,9 @@ def evaluate(root):
         read_time=None
         if message['speaker']=='robot':
             for h in human:
-                if message in h['private_input']['scene']['public_dialogue']:
+                actual_input=h['private_input']['scene']
+                actual_dialogue=actual_input.get('public_dialogue',actual_input.get('public_partner_statements_not_execution_facts',[]))
+                if message in actual_dialogue:
                     read_time=h['time_s'];break
         else:
             for p in plans:

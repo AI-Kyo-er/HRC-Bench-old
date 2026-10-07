@@ -25,6 +25,7 @@ RUNS = [
     ('joint_skill_bank_snack_detour_20261008', '点心：临时饮品需要、可选技能库', 'neural'),
     ('joint_skill_bank_drink_correction_20261008', '饮品：具体用途纠正、可选技能库', 'neural'),
     ('joint_skill_bank_drawer_request_20261008', '抽屉：机器人请求、视觉技能库', 'neural'),
+    ('joint_buffered_drawer_request_20261008', '抽屉：已选人贡献的连续暂放执行', 'neural'),
     ('joint_matched_reference_snack_service_init2_20261008', '点心：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drink_storage_init2_20261008', '饮品：init2匹配原生操作参考', 'reference'),
     ('joint_matched_reference_drawer_access_init2_20261008', '抽屉：init2匹配原生操作参考', 'reference'),
@@ -74,6 +75,7 @@ def build(results, output):
         if summary and audit.get('status')!='verified':
             raise ValueError(f'{name} 完整结果尚无独立输入／执行核查，不能发布')
         process = read(root / 'joint_process_evidence.json')
+        arrangement_review=read(root/'public_request_response_review.json')
         measured = process.get('measured_process', {})
         participation = measured.get('actual_participation', {})
         activity = provenance.get('activity', metrics.get('activity', 'snack_service'))
@@ -96,6 +98,7 @@ def build(results, output):
             (ep/'human_policy_io.jsonl','人原始策略'),(ep/'robot_planner_io.jsonl','机器人协调推理'),
             (ep/'model_calls.jsonl','实际动作模型输入'),(ep/'trace.jsonl','真实环境轨迹'),
             (root/'source_edit_note.json','源文件说明')] if p.exists()]
+        if arrangement_review:links.append(link(root/'public_request_response_review.json','当前公开请求与响应的实际证据'))
         human_rows = rows(ep/'human_policy_io.jsonl'); plans = rows(ep/'robot_planner_io.jsonl')
         events = []
         for h in human_rows:
@@ -114,6 +117,7 @@ def build(results, output):
         cards.append(f'''<section class="run" data-kind="{kind}"><p class="tag">{classification} · {duration:.2f} 模拟秒</p>
 <h2>{escape(label)}</h2><p>{escape(dependency)}</p><p>{escape(system)}。人策略来源：{escape(provenance.get('human_source','见协议'))}。</p>
 <video controls playsinline preload="none" src="{src}"></video><p>{escape(conclusion)}</p>
+<p>{escape(arrangement_review.get('interpretation',''))}</p>
 <p>实际人神经调用 {human_calls}；实际 VLA 调用 {vla_calls}；协调器调用 {coordinator_calls}。
 机器人原生目标期末：{metrics.get('robot_native_goal_terminal','无完整终态')}。</p>
 <p>实际身体离开区间：{escape(json.dumps(process.get('body_away_intervals',[]),ensure_ascii=False))}。
@@ -131,12 +135,12 @@ def build(results, output):
 <title>动态共同活动：可执行性与神经策略进展</title><style>*{box-sizing:border-box}body{margin:0;background:#edf3f1;color:#183c42;font:17px/1.75 system-ui}main{max-width:1100px;margin:auto;padding:24px 16px}header{background:#193d45;color:white;padding:28px;border-radius:16px}section{margin:20px 0;background:white;padding:24px;border-radius:14px}video{width:100%;background:#142d34;border-radius:8px}a{color:#13786e}h1,h2,p,a{overflow-wrap:anywhere}.tag{color:#6e4b15}.scroll{overflow-x:auto}table{width:100%;min-width:700px;border-collapse:collapse}td,th{padding:8px;text-align:left;border-bottom:1px solid #d1dfd8}button{margin:4px;padding:9px 14px;border:1px solid #13786e;border-radius:6px;background:#fff;color:#193d45;cursor:pointer}@media(max-width:600px){main{padding:12px}section,header{padding:18px 14px}}</style>
 <main><header><h1>动态共同活动：可执行性与神经策略进展</h1><p>人的拟真重点是意图、参与和伙伴响应。研究对象是双方如何组织共同活动。</p></header>
 <section><h2>这批实验要回答什么</h2><p>先确认双方能够在连续场景中贡献、交接和完成活动，再检查在线人策略与机器人是否利用实际交互调整行为。参考条件只回答任务能否执行；神经条件用于暴露策略、输入和执行问题。本批版本不同，尚未形成冻结的多模型统计评测。</p>
-<p>三类活动已有完整参考：点心和抽屉的机器人操作由实际 π0.5 输出；饮品成功参考使用既有轨迹的 OSC 反馈跟随，当前机器人推理为零。神经策略的完整共同活动、六类实际动态覆盖与 cobalance 仍未验收。</p>
+<p>三类活动在init2已有完整实际π0.5参考。早期init0饮品成功参考使用既有轨迹的OSC反馈跟随，当前推理为零，来源仍单列保留。神经策略的完整共同活动、六类实际动态覆盖与cobalance仍未验收。</p>
 <p>人：Qwen3-14B 在线生成意图、当前贡献与公开话语，部分条件另做一次实际神经反思。执行使用连续运动学和物体附着，手速上限 0.2m/s。机器人：π0.5 在原生 MuJoCo／LIBERO 场景中输出 7 维 OSC，20Hz 执行，不吸附或改写机器人位姿。此批不是 Genesis 场景。</p>
 <p>理想感知协调器得到公开几何／接触和真实执行历史；与人共享冻结权重，输入上下文与私有记忆分开。它是额外策略系统，不能归因于裸 VLA。等待与参考控制不计为 VLA 调用。</p>
 <p><a href="PROTOCOL.md">参考与开发协议</a> · <a href="SYMBOLIC_PROTOCOL.md">理想感知协调系统边界</a> · <a href="CONTRACT_PROTOCOL_20261008.md">参与契约修复协议</a> · <a href="VISUAL_SYSTEM_PROTOCOL_20261008.md">第二视觉系统协议</a> · <a href="SKILL_BANK_PROTOCOL_20261008.md">可选技能与具体情境协议</a> · <a href="SITUATIONS.md">六类情境及证据要求</a> · <a href="BEHAVIOR_REVIEW.md">关键行为分析</a> · <a href="README.md">实际进展与复现</a> · <a href="../dynamic_joint_activity_20261007/DESIGN.md">整体设计与文献依据</a></p>
 <p><a href="../../datasets/dynamic_joint_activity_dev_20261008/README.md">可加载的开发行为数据</a> · <a href="../../datasets/dynamic_joint_activity_dev_20261008/dataset_verification.json">全量数据核查与实际数量</a>：按同stem匹配，私有人记录不进入机器人输入。参考控制、失败和保持明确来源，不标为成功专家示范。</p><p><a href="EVALUATION_PLAN.md">正式评测计划与尚待满足的实际证据</a></p></section>
-<section><h2>如何读视频和指标</h2><p>视频是实际运行时 Sim，不是轨迹动画。每段已经独立解码并核对时间轴。公开话语是伙伴可收到的信息；私有意图是研究视图。模型声称完成、消息进入输入、物体实际到位和完整协作成立是不同层次。</p><p>抽屉原生技能条件显示用途更新及实际取出，但仍有重复搬运和过时计划。暂离条件出现“说已离开、身体未离开”的接口问题，不能按话语计覆盖。具体时间及结论见关键行为分析。</p>
+<section><h2>如何读视频和指标</h2><p>视频是实际运行时 Sim，不是轨迹动画。每段已经独立解码并核对时间轴。公开话语是伙伴可收到的信息；私有意图是研究视图。模型声称完成、消息进入输入、物体实际到位和完整协作成立是不同层次。</p><p>抽屉原生技能条件显示用途更新及实际取出，但仍有重复搬运和过时计划。旧暂离字段问题已修复，新运行有实际桌边离返；具体时间、未覆盖的纠正／请求和执行阻断见关键行为分析。饮品中机器人虽停止操作，回复仍在等待释放后上架，不能据保持推断已接受留用。</p>
 <button data-filter="all">全部</button><button data-filter="reference">可执行性参考</button><button data-filter="neural">神经策略开发</button><button data-filter="diagnostic">失败诊断</button></section>'''
     if pending:page+='<section><h2>尚无终态结果</h2><p>'+escape('；'.join(pending))+'。未完成运行不计入下方结果。</p></section>'
     page+=''.join(cards)+'''<section><h2>尚待完成的 Goal 要求</h2><p>六类情境的实际行为覆盖、经过验证的可靠动态伙伴、完整双向重组案例、多系统多初始化正式评测、共同约定与协调负担评价仍待完成。参考成功、局部原生目标和接口核查均不能替代这些要求。</p></section></main><script>for(const b of document.querySelectorAll('[data-filter]'))b.onclick=()=>{for(const s of document.querySelectorAll('.run'))s.hidden=b.dataset.filter!=='all'&&s.dataset.kind!==b.dataset.filter;};</script></html>'''

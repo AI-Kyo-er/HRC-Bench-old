@@ -43,7 +43,10 @@ def audit(root):
                                np.arange(len(trace))/20,atol=1e-7)
     for d,receipt in zip(human,receipts):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
-        source=d['private_input'];scene=source['scene'];actual=trace[round(d['time_s']*20)]
+        source=d['private_input'];scene=d.get('observation_source_scene',source['scene']);actual=trace[round(d['time_s']*20)]
+        if d.get('human_observation_encoding')=='intent_semantic_facts_v1':
+            from hrc_pilot.intent_observation import intent_observation
+            assert source['scene']==intent_observation(scene)
         if p.get('human_source','neural')=='neural':
             assert source['activity']==saved_activity
             assert 'private_background' not in source['activity']
@@ -66,10 +69,14 @@ def audit(root):
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])
         assert all(c in contexts and c['time_s']<=d['time_s'] for c in scene['private_context'])
         if d['parse_error'] is None and p.get('human_source','neural')=='neural':
-            assert parse_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'],
-                                schema_version=d.get('choice_schema_version',1))==d['choice']
+            if d.get('choice_schema_version')==3:
+                from hrc_pilot.semantic_joint_human import parse_semantic_choice
+                assert parse_semantic_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'])==d['choice']
+            else:
+                assert parse_choice(d['raw_output'],scene['objects_xyz'],scene['regions_xyz'],
+                                    schema_version=d.get('choice_schema_version',1))==d['choice']
             if d.get('reflection_enabled'):
-                assert d['neural_inferences']==2 and d['reflection_input']['scene']==scene
+                assert d['neural_inferences']==2 and d['reflection_input']['scene']==source['scene']
                 assert d['reflection_input']['candidate_choice_to_review']==d['candidate_raw_output']
     emitted=[(d['time_s'],d['choice']['message'],d['decision_id']) for d in human if d['choice'].get('message')]
     assert emitted==[(m['time_s'],m['text'],m['human_decision_id']) for m in dialogue if m['speaker']=='human']
