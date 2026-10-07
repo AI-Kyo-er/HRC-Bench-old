@@ -21,3 +21,15 @@ def test_labels_include_only_executed_prefix_after_public_message_interrupt(tmp_
     assert set(source)=={'image','wrist_image','state','prompt'}
     np.testing.assert_array_equal(target,actions[:2])
     assert metadata['truncated_by_reobservation'] and metadata['executed_block_steps']==2
+
+
+def test_symlink_collection_has_distinct_sample_ids_without_pair_manifest(tmp_path):
+    test_labels_include_only_executed_prefix_after_public_message_interrupt(tmp_path)
+    collection=tmp_path/'collection';collection.mkdir()
+    for name in ['run_a','run_b']:
+        run=collection/name;run.mkdir();(run/'episode').symlink_to(tmp_path/'episode',target_is_directory=True)
+    dataset=JointActivityDataset(collection)
+    assert len(dataset)==2
+    assert {dataset[i][2]['sample_id'] for i in range(2)}=={
+        'run_a/episode/observation_000000','run_b/episode/observation_000000'}
+    assert not list(collection.rglob('manifest.json'))

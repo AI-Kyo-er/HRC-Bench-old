@@ -36,6 +36,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-VL-8B-Instruct'))
     parser.add_argument('--port',type=int,default=8780)
+    parser.add_argument('--native-skill-only',action='store_true',
+                        help='单列视觉＋VLA系统：只允许神经策略选择公开原生操作或保持')
     args=parser.parse_args()
     rows=subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.free','--format=csv,noheader,nounits'],text=True)
     free={r.split(',')[0].strip():int(r.split(',')[1]) for r in rows.splitlines()}
@@ -47,12 +49,19 @@ def main():
     processor=AutoProcessor.from_pretrained(args.model,local_files_only=True)
     model=Qwen3VLForConditionalGeneration.from_pretrained(args.model,local_files_only=True,
               torch_dtype=torch.bfloat16,attn_implementation='sdpa',device_map={'':0}).eval()
+    from hrc_pilot.native_skill_coordinator import SYSTEM as NATIVE_SYSTEM,native_operation,encode_selected_operation
+    system=NATIVE_SYSTEM if args.native_skill_only else SYSTEM
     metadata={'model':str(args.model),'model_type':'Qwen3VLForConditionalGeneration','local_files_only':True,
               'inputs':'initial/current RGB, wrist RGB, own state, public task/dialogue, own generated history',
               'task_scores_available':False,'policy':'neural_visual_coordination','cuda_visible_devices':selected,
               'available_modes':['execute','hold','move_ee'],'cartesian_reference_speed_m_s':.05,
               'source_sha256':{str(path):sha256(path.read_bytes()).hexdigest() for path in
                   [Path(__file__),Path('src/hrc_pilot/robot_coordination.py')]}}
+    if args.native_skill_only:
+        path=Path('src/hrc_pilot/native_skill_coordinator.py')
+        metadata.update(policy='neural_visual_native_skill_coordination',available_modes=['execute','hold'],
+                        operation_encoding='explicit_public_native_task_not_hidden_task_router')
+        metadata['source_sha256'][str(path)]=sha256(path.read_bytes()).hexdigest()
     print('Qwen3-VL视觉协调器已离线载入',flush=True)
 
     class Handler(BaseHTTPRequestHandler):
@@ -73,8 +82,10 @@ def main():
             if set(request)!=PUBLIC_KEYS:self.send_error(400,'Only public fields allowed');return
             images=[decode_image(request['images'][name]) for name in ['initial','current','wrist']]
             visible={key:value for key,value in request.items() if key!='images'}
+            if args.native_skill_only:
+                visible['available_vla_operation']=native_operation(request['robot_task'])
             text='根据公开信息和真实画面更新当前协作计划：\n'+json.dumps(visible,ensure_ascii=False)
-            messages=[{'role':'system','content':SYSTEM},{'role':'user','content':[
+            messages=[{'role':'system','content':system},{'role':'user','content':[
                 {'type':'image','image':image} for image in images]+[{'type':'text','text':text}]}]
             template=processor.apply_chat_template(messages,tokenize=False,add_generation_prompt=True)
             inputs=processor(text=[template],images=images,return_tensors='pt').to(model.device)
@@ -82,9 +93,13 @@ def main():
             with torch.inference_mode():generated=model.generate(**inputs,max_new_tokens=384,do_sample=False)
             raw=processor.batch_decode(generated[:,inputs['input_ids'].shape[1]:],skip_special_tokens=True)[0]
             decision,error=validate_decision(raw)
+            adapter={}
+            if args.native_skill_only:
+                decision,error,adapter=encode_selected_operation(raw,visible['available_vla_operation'])
             self.reply({'raw_output':raw,'decision':decision,'parse_error':error,
                         'latency_s':time.perf_counter()-started,'public_input':visible,
-                        'image_sha256':{key:value['rgb_sha256'] for key,value in request['images'].items()}})
+                        'image_sha256':{key:value['rgb_sha256'] for key,value in request['images'].items()},
+                        'system_prompt':system,**adapter})
 
     HTTPServer(('127.0.0.1',args.port),Handler).serve_forever()
 

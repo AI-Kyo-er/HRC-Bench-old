@@ -19,6 +19,9 @@ RUNS = [
     ('joint_native_skill_snack_service_leave_return_20261007', '点心：原生技能接口', 'neural'),
     ('joint_participation_snack_join_20261007', '点心：中途加入开发', 'neural'),
     ('joint_participation_snack_leave_return_20261007', '点心：暂离返回开发', 'neural'),
+    ('joint_presence_contract_snack_leave_return_20261008', '点心：参与契约修复、新初始化', 'neural'),
+    ('joint_dynamic_drink_correction_20261008', '饮品：纠正情境、新初始化', 'neural'),
+    ('joint_visual_native_snack_leave_return_20261008', '点心：视觉原生技能系统', 'neural'),
     ('joint_feasibility_snack_service_20261007', '点心：载荷接口崩溃', 'diagnostic'),
     ('joint_feasibility_drink_storage_20261007', '饮品：原固定人失败', 'diagnostic'),
     ('joint_feasibility_drink_storage_handoff_20261007', '饮品：持物初态失败', 'diagnostic'),
@@ -63,6 +66,8 @@ def build(results, output):
         metrics = summary.get('episodes', [{}])[0]
         audit = read(root / 'interaction_verification.json')
         process = read(root / 'joint_process_evidence.json')
+        measured = process.get('measured_process', {})
+        participation = measured.get('actual_participation', {})
         activity = provenance.get('activity', metrics.get('activity', 'snack_service'))
         task_label, dependency = TASKS[activity]
         duration = video['timeline']['benchmark_end_s']
@@ -103,8 +108,11 @@ def build(results, output):
 <p>实际人神经调用 {human_calls}；实际 VLA 调用 {vla_calls}；协调器调用 {coordinator_calls}。
 机器人原生目标期末：{metrics.get('robot_native_goal_terminal','无完整终态')}。</p>
 <p>实际身体离开区间：{escape(json.dumps(process.get('body_away_intervals',[]),ensure_ascii=False))}。
+初始是否在旁边：{participation.get('initially_aside','尚未核查')}；后续实际离返周期：{escape(json.dumps(participation.get('departure_return_cycles',[]),ensure_ascii=False))}。
 首次释放并支撑的准备位置见证：{process.get('first_released_supported_preparation_s','尚无')} 秒。
 重复近目标搬运请求：{process.get('already_near_relocation_request_count','尚无')}；该计数不是重复劳动结论。</p>
+<p>机器人所选保持时间：{measured.get('robot_selected_hold_duration_s','尚未核查')} 秒；已在目标的无运动请求满足：{measured.get('accepted_already_satisfied_request_count','尚未核查')}。
+保持不自动等于无谓等待，动作请求完成不自动等于新增贡献。准备区域判据不穷尽所有合理准备方式。</p>
 <p>{' · '.join(links)}</p>{details}</section>''')
         data.append({'run':name,'label':label,'kind':kind,'activity':activity,'duration_s':duration,
                      'human_neural_calls':human_calls,'actual_vla_calls':vla_calls,'coordinator_calls':coordinator_calls,
@@ -117,7 +125,8 @@ def build(results, output):
 <p>三类活动已有完整参考：点心和抽屉的机器人操作由实际 π0.5 输出；饮品成功参考使用既有轨迹的 OSC 反馈跟随，当前机器人推理为零。神经策略的完整共同活动、六类实际动态覆盖与 cobalance 仍未验收。</p>
 <p>人：Qwen3-14B 在线生成意图、当前贡献与公开话语，部分条件另做一次实际神经反思。执行使用连续运动学和物体附着，手速上限 0.2m/s。机器人：π0.5 在原生 MuJoCo／LIBERO 场景中输出 7 维 OSC，20Hz 执行，不吸附或改写机器人位姿。此批不是 Genesis 场景。</p>
 <p>理想感知协调器得到公开几何／接触和真实执行历史；与人共享冻结权重，输入上下文与私有记忆分开。它是额外策略系统，不能归因于裸 VLA。等待与参考控制不计为 VLA 调用。</p>
-<p><a href="PROTOCOL.md">参考与开发协议</a> · <a href="SYMBOLIC_PROTOCOL.md">理想感知协调系统边界</a> · <a href="SITUATIONS.md">六类情境及证据要求</a> · <a href="BEHAVIOR_REVIEW.md">关键行为分析</a> · <a href="README.md">实际进展与复现</a> · <a href="../dynamic_joint_activity_20261007/DESIGN.md">整体设计与文献依据</a></p></section>
+<p><a href="PROTOCOL.md">参考与开发协议</a> · <a href="SYMBOLIC_PROTOCOL.md">理想感知协调系统边界</a> · <a href="CONTRACT_PROTOCOL_20261008.md">参与契约修复协议</a> · <a href="VISUAL_SYSTEM_PROTOCOL_20261008.md">第二视觉系统协议</a> · <a href="SITUATIONS.md">六类情境及证据要求</a> · <a href="BEHAVIOR_REVIEW.md">关键行为分析</a> · <a href="README.md">实际进展与复现</a> · <a href="../dynamic_joint_activity_20261007/DESIGN.md">整体设计与文献依据</a></p>
+<p><a href="../../datasets/dynamic_joint_activity_dev_20261008/README.md">可加载的开发行为数据</a>：15条完整轨迹、5760组观测、36000步实际动作；按同stem匹配，私有人记录不进入机器人输入。参考控制、失败和保持明确来源，不标为成功专家示范。</p></section>
 <section><h2>如何读视频和指标</h2><p>视频是实际运行时 Sim，不是轨迹动画。每段已经独立解码并核对时间轴。公开话语是伙伴可收到的信息；私有意图是研究视图。模型声称完成、消息进入输入、物体实际到位和完整协作成立是不同层次。</p><p>抽屉原生技能条件显示用途更新及实际取出，但仍有重复搬运和过时计划。暂离条件出现“说已离开、身体未离开”的接口问题，不能按话语计覆盖。具体时间及结论见关键行为分析。</p>
 <button data-filter="all">全部</button><button data-filter="reference">可执行性参考</button><button data-filter="neural">神经策略开发</button><button data-filter="diagnostic">失败诊断</button></section>'''
     if pending:page+='<section><h2>尚无终态结果</h2><p>'+escape('；'.join(pending))+'。未完成运行不计入下方结果。</p></section>'
