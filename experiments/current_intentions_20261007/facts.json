@@ -1,0 +1,62 @@
+{
+  "research_goal_achieved": false,
+  "episodes": [
+    {
+      "scene": "qualification",
+      "motion_qualified": true,
+      "actual_vla_calls": 0,
+      "human_inferences": 40,
+      "robot_goal_success": null,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 0,
+      "joint_goal_time_s": null,
+      "human_commands": {
+        "grasp": 16,
+        "place": 13,
+        "observe": 1
+      },
+      "human_goal_action_scope": {
+        "current_personal_target_object": 29,
+        "no_object_manipulation_selected": 1
+      }
+    },
+    {
+      "scene": "food_into_bowl",
+      "motion_qualified": true,
+      "actual_vla_calls": 120,
+      "human_inferences": 40,
+      "robot_goal_success": true,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 0,
+      "joint_goal_time_s": 0.0,
+      "human_commands": {
+        "grasp": 30
+      },
+      "human_goal_action_scope": {
+        "other_visible_object": 30
+      }
+    },
+    {
+      "scene": "drawer_access",
+      "motion_qualified": false,
+      "actual_vla_calls": 120,
+      "human_inferences": 40,
+      "robot_goal_success": true,
+      "human_goal_success": false,
+      "human_goal_evaluable": true,
+      "human_goal_changes": 0,
+      "joint_goal_time_s": 0.0,
+      "human_commands": {
+        "grasp": 23,
+        "place": 5,
+        "observe": 2
+      },
+      "human_goal_action_scope": {
+        "current_personal_target_object": 28,
+        "no_object_manipulation_selected": 2
+      }
+    }
+  ]
+}
