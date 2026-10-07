@@ -7,6 +7,8 @@ import json
 import os
 from pathlib import Path
 
+from hrc_pilot.joint_video_captions import ensure_research_captions
+
 
 RUNS = [
     ('joint_feasibility_drawer_access_20261007', '抽屉：固定人参考', 'reference'),
@@ -143,12 +145,15 @@ def build(results, output):
         timeline = ''.join(f'<tr><td>{t:.1f}</td><td>{who}</td><td>{escape(action)}</td><td>{escape(message)}</td></tr>'
                            for t,who,action,message in events)
         src=escape(os.path.relpath(ep/'demo.mp4',output),quote=True)
+        caption=ensure_research_captions(root) if summary else None
+        track=(f'<track kind="captions" srclang="zh-CN" label="研究者注释" default src="{escape(os.path.relpath(caption,output),quote=True)}">'
+               if caption else '')
         details = f'<details><summary>策略选择与公开交流时间表（话语不等于执行）</summary><div class="scroll"><table><tr><th>模拟秒</th><th>主体</th><th>所选动作</th><th>实际公开话语</th></tr>{timeline}</table></div></details>'
         system=SYSTEMS.get(provenance.get('robot_system'), '失败运行未写入完整 provenance；见协议及中断日志')
         if provenance.get('robot_skill_bank'):system+='；NN从明确公开的原生操作库选择技能'
         cards.append(f'''<section class="run" data-kind="{kind}"><p class="tag">{classification} · {duration:.2f} 模拟秒</p>
 <h2>{escape(label)}</h2><p>{escape(dependency)}</p><p>{escape(system)}。人策略来源：{escape(provenance.get('human_source','见协议'))}；原生推理：{provenance.get('human_thinking_enabled','未记录')}；额外反思：{provenance.get('human_reflection','未记录')}。</p>
-<video controls playsinline preload="none" src="{src}"></video><p>{escape(conclusion)}</p>
+<video controls playsinline preload="none" src="{src}">{track}</video><p>{escape(conclusion)}</p>
 <p>{escape(arrangement_review.get('interpretation',''))}</p>
 <p>原始安排的物理见证：首次满足 {original_physical.get('first_physical_match_s','未核查')} 秒；最后一秒持续满足 {original_physical.get('last_second_consistently_matches','未核查')}。
 {escape(original_physical.get('scope','原始安排物理见证尚未重建；不据原生目标自动判断当前共同安排。'))}</p>
@@ -172,6 +177,7 @@ def build(results, output):
     page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>动态共同活动：可执行性与神经策略进展</title><style>*{box-sizing:border-box}body{margin:0;background:#edf3f1;color:#183c42;font:17px/1.75 system-ui}main{max-width:1100px;margin:auto;padding:24px 16px}header{background:#193d45;color:white;padding:28px;border-radius:16px}section{margin:20px 0;background:white;padding:24px;border-radius:14px}video{width:100%;background:#142d34;border-radius:8px}a{color:#13786e}h1,h2,p,a{overflow-wrap:anywhere}.tag{color:#6e4b15}.scroll{overflow-x:auto}table{width:100%;min-width:700px;border-collapse:collapse}td,th{padding:8px;text-align:left;border-bottom:1px solid #d1dfd8}button{margin:4px;padding:9px 14px;border:1px solid #13786e;border-radius:6px;background:#fff;color:#193d45;cursor:pointer}@media(max-width:600px){main{padding:12px}section,header{padding:18px 14px}}</style>
 <main><header><h1>动态共同活动：可执行性与神经策略进展</h1><p>人的拟真重点是意图、参与和伙伴响应。研究对象是双方如何组织共同活动。</p></header>
+<section><h2>怎样观看视频</h2><p>完整真实Sim视频提供可关闭的同步研究字幕，分别显示人的选择、实际执行状态和机器人所选操作。给人的私人消息仅供研究者理解实验，机器人没有收到这些字幕；原视频与模型图像保持原样。字幕不依据自报完成判定成功。部分崩溃视频保留原片，不加完整运行字幕。</p></section>
 <section><h2>这批实验要回答什么</h2><p>先确认双方能够在连续场景中贡献、交接和完成活动，再检查在线人策略与机器人是否利用实际交互调整行为。参考条件只回答任务能否执行；神经条件用于暴露策略、输入和执行问题。本批版本不同，尚未形成冻结的多模型统计评测。</p>
 <p>三类活动在init2已有完整实际π0.5参考。早期init0饮品成功参考使用既有轨迹的OSC反馈跟随，当前推理为零，来源仍单列保留。神经策略的完整共同活动、六类实际动态覆盖与cobalance仍未验收。</p>
 <p><a href="TEST_INITIALIZATION_REFERENCE_PROTOCOL_20261008.md">init4／5六条操作参考协议</a>：参考抓取／放置或打开由实际π0.5完成；人调度、机器人等待及完成后的清场控制另记来源，不能称整条参考轨迹均由VLA生成。六条参考不计正式动态样本。</p>

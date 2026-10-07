@@ -54,6 +54,8 @@
 
 每次重要实验都保存运行时真实Sim场景视频及video_timeline.json，在正式HTML生成前逐帧解码核验。报告优先展示实际场景视频，轨迹用于辅助审计；视频缺失、损坏或时间轴不一致会阻止正式报告生成。
 
+完整共同活动视频现支持可关闭的同步研究字幕：分别展示人的选择、实际执行状态、机器人所选操作及给人的最新情境消息。字幕是独立WebVTT观看注释，原始Sim视频和模型观测图像未修改；私有消息仅供研究者理解实验，机器人仍只收到原有公开渠道。字幕来源及原文件SHA256保存在各运行的research_caption_provenance.json，浏览器检查实际字幕加载和跳转后的激活。
+
 终态案例的行为解释可通过 `PYTHONPATH=src .venv-libero-native/bin/python scripts/verify_joint_case_review.py --input-dir results/continuous_v2/<run>` 核对原始证据引用。解释保存在`public_request_response_review.json`的`findings`中，每项引用运行内文件、JSONL零起始记录索引、JSON Pointer及原值。核查只证明引用一致，不能将助手解释升级为正式协作评分或真人验证；详细解释在来源变化后停止展示。
 
 已增加独立的生成式伙伴操作资格检查：机器人经真实控制泊车后保持零末端增量，

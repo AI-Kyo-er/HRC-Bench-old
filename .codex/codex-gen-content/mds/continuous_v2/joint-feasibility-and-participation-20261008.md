@@ -348,3 +348,39 @@ Next：继续同父批按表回收跨活动、六情境实际结果，完成逐�
 最后ps父4059957/4060097、子4132416/4141333均alive，第二detour约22m31/19m54（下一turn重查）。最新已读片段：visual71.95s、H68s，0parse、1次预算强制关闭思考（只关通道，不选策略）；wine已到个人区、cream仍table，却说都完成。symbolic55.95s、H52s，0parse/0强制，wine仍原台面，cream接触table+stove，持续等填装并告知来客可取wine。均未完整，不认定偏离／恢复覆盖。后续新需要取消与原活动是否衔接需全trace终态。父队列／GPU0/2不重启，服务原PID继续；同session34707/58493。
 
 本turn只改离线分析／报告／文档和相应测试，不改冻结NN策略、动作执行、观测、native运行时、条件表及批runner。未来每条终态的父批evaluate读取同一新离线分析，首对和全历史已补测。勿用新增测量或2/12已回收替代完整Goal；下一步仍按同父批继续跨活动／六情境，依据真行为和人物有效性决定正式准入。
+
+## 最新接续：6条终态、真实视频研究字幕及缓存几何核验恢复
+
+本turn progress：新增4条完整结果（偏离两例、用途变化两例），12表当前6独立核验；每例有保存记录解释，累计42项引用核查。全Goal仍active，formal n0/candidate72未冻结；不把6/12或字幕／测试当成熟Benchmark。
+
+重要：本轮内部分析再出现大量反复和虚构字段／名称、未实施设想。这些不是代码或研究证据。下一turn忽略这些长分析，只用现有文件／PID／工具输出；每次短推理后工具，不继续扩展无关架构。
+
+偏离两例seed71/init3，同一私有消息26s饮品优先、68.2s取消饮品保留点心：
+- visual：H30/协调30/VLA240、0parse/0拒绝、1次预算关思考（只关通道）。人16s意图自己装奶酪却选碗的个人桌面区，真实奶酪移桌面而非碗；36s切换酒瓶、56.4s完整请求结束，位移.6383m。72s公开取消饮品、回到点心需要，但点心始终没填好/交付。28/36/72消息各同刻进入R输入（不是自动理解证明）。R全程cream_in_bowl；22.25s同资源暴露、1.45s实际夹爪接触。8项审阅引用核查通过。
+- symbolic：H30/协调30/VLA200、0parse/拒绝/强制关。12s误称已填好取碗，最终空碗交付区；28s收到饮品需要后实际point酒瓶，30/32s手接近wine上方，36s completed_requests=[7]，wine仍原位置且已在drink_staging，不搬酒不自动表示不合作。72s更新取消需要，仍待点心。20.95s技能暴露、实际持物夹爪接触0；不是全身安全。116s理由将request7说成R活跃请求，实为H已完成point，phase idle但active_request_id保留7：后续接口需区分最后请求／正在执行与双方标识。8项解释核查通过。
+
+用途变化两例seed72/init3，38.7s私人新用途柜顶即用而非酒架：
+- visual：H30/协调30/VLA128，0拒绝；H24s已因未完成上架发起搬柜（不是38.7消息造成），40s公开新用途进入同刻R输入；R44s选cabinet、68s hold确认。柜顶真实终态：最后1s21采样均released+g9接触，距H最后实测柜顶目标max.00468967m，updated_target_physical_witness.json仅助手选定公开目标的物理见证、formal_scoreNone。Human主要搬运，不给晚来的同技能调用重复记贡献。16.8s暴露、持物夹爪接触0，原始上架false不自动判更新用途失败。6项审阅核查通过。
+- symbolic：H30/协调30/VLA152、0拒绝；H32s自主搬柜早于38.7消息，40s表述新用途/R同刻cabinet，但当时H仍持物，双方提前声称到位。后期R在hold/cabinet间往返，112s又选rack、116s要求确认rack，与H继续柜顶客用冲突。终态真实柜顶g9接触；20.85s暴露、2.30s持物实际夹爪接触。5项审阅核查通过。不能只看初次响应或最后物理点位。
+
+源代码能力审阅写入REFERENCE_DECISIONS.md：Human目前是命名目标、柜顶和抽屉目标，缺少通用in/on动态参照关系；“放进碗”不等于选bowl_personal桌面点。R本批九技能/hold，无独立让出空间技能；reference_clearance_cartesian不能归给被测NN。现有字段/current_request_id与完整宏完成标记还需澄清，放置退手被下一贡献打断不表示物品没有释放。不要把这些接口限制统归为现有VLA HRC缺陷。
+
+字幕：joint_video_captions.py，独立WebVTT，显示人的选择和实际phase/held、R所选操作、已经实际到达的最新私人消息；不显示NN自报成功作为评分，不向模型加字幕，不改raw video/图像/IO。源文件/generator/caption SHA记录research_caption_provenance.json；前后输入hash断言、来源变化会重建。private消息按benchmark_time过滤；按video_timeline对应视频时刻，不假设视频从0开始。完整终态与独立核查才生成，partial原片不加完整字幕。中文按显示宽度换行，已实际查看手机截图（data1/results/coherent_caption_visual_check_20261008/symbolic_detour_31s_mobile_wrapped.png）避免长消息裁切。浏览器新增textTrack showing/activeCue/WebVTT检查；6相关单元覆盖选择≠完成、私人消息不提前、offset、来源变化／保留输入、验证失败及中文尾部。
+
+核验停止与恢复（不得重跑原episode）：
+- 原symbolic父4060097/子50640真实terminal；父log显示audit支持几何max.000200829m > 原.0002m，没有video独立结果，队列按协议停。
+- 原因是mj_step Euler最后积分qpos，记录xpos/xmat仍是积分前缓存帧。CPU实验在同30实际Human状态逆最后.002s位置积分：支持目标误差max3.3429e-11m、独立物体位置误差max1.4103e-8m；旧fresh qpos物体位置误差max.001161866m。不直接放宽目标容差。
+- geometry_frame_replay.py先按独立所有对象位置验证缓存/已forward帧（容差1e-6m），不按目标误差挑候选；然后既有柜顶核查仍atol.0002m。Euler缓存与forward实际Mujoco小模型测试通过，不一致记录拒绝。audit保存30记录重建方法/offset/误差。原sym用途120s原始模拟没重跑，审核/过程/2401视频独立核查通过。
+- 全51完整旧+新root已重新audit通过，日志data1/results/geometry_frame_regression_20261008.log，最终count51。42项case引用已全部再verify，保留assistant解释身份，不认证真人/语义/cobalance。
+- 新scripts/resume_coherent_joint_batch.py及symbolic.sh只重验已有summary、固定表字段/hash；existing无summary则拒绝覆盖；仅启动不存在的条件，log用x，错误即停。原批runner未编辑（visual仍live）。启动前nvidia GPU2 free48494/49140MB足够单卡14B+KV/Sim；CUDA_VISIBLE_DEVICES=2，无新模型/数据下载。
+
+最新运行（须再ps核实）：
+- visual原父4059957/session34707，第四纠正子120548/GPU0；原log data1/results/coherent_joint_visual_20261008.log。
+- symbolic续跑父168009/session40049，第四纠正子170762/GPU2；续跑log data1/results/coherent_joint_symbolic_resume_geometry_20261008.log。原父4060097已终止，不轮询/重启它；旧子50640已完成。
+- 最后实测父/子均alive（visual父1h47，纠正22m；symbolic续6m39/纠正6m）。纠正、drawer leave_return/robot_request还待回收；不把后六条记完成。服务π/vision/HTTP沿用，下一turn必要时核实。
+
+交付：专门报告6/12；主报告52视频=51完整+1partial，51完整有同步研究字幕。数据全量51/14400观测块/122400实际7D动作/唯一ID通过，不是成功专家或正式split。最终完整pytest305passed/2skip。无临时smoke产物；截图为保留的观看核查证据，数据/视频/字幕均data1项目目录，repo链接。最新6-case浏览器核查sessions16947（focus）/36344（main）仍需收结果后记录精确计数；早先5-case为5video/41links、51video/481links（不是最新6计数）。
+
+下一步严格保持完整Goal：继续原表纠正及drawer两情境，审阅实际需要/贡献/反馈/当前安排。批结束后系统完善Human关系目标与生命周期、R能力边界和日常任务必要依赖，再做可信伙伴准入及正式多初始化，不陷入格式小改或夹手动力学。字幕与正确核验只使证据可理解和可信，不等于策略已真实或Benchmark成熟。
+
+上述最终浏览器结果已收：focus6视频/48链接；main52视频/491链接，均实际play/seek/Range206、完整视频字幕showing且seek有activeCue、375px、JS0。不要再轮询已完成的16947/36344。当前6/12、51完整数据计数已核查，正式0。

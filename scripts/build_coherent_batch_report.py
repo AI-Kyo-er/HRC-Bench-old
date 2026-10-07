@@ -8,6 +8,8 @@ import json
 import os
 from pathlib import Path
 
+from hrc_pilot.joint_video_captions import ensure_research_captions
+
 
 TASKS={'snack_service':('点心准备','提供容器、填装点心、接收或交付'),
        'drink_storage':('饮品整理','公开决定留用或收纳、提供瓶子、放置并确认'),
@@ -64,7 +66,9 @@ def build(table,results,output):
         html+=f'<p>{escape(state)}。初态编号 {condition["init_state_id"]}，seed {condition["seed"]}，人物 {condition["profile"]}；初始持物：{condition["initial_human_holding"]=="1"}。共同贡献：{escape(steps)}。</p>'
         if verified:
             video=os.path.relpath(ep/'demo.mp4',output)
-            html+=f'<video controls playsinline preload="none" src="{escape(video,quote=True)}"></video>'
+            caption=os.path.relpath(ensure_research_captions(root),output)
+            html+=f'<video controls playsinline preload="none" src="{escape(video,quote=True)}"><track kind="captions" srclang="zh-CN" label="研究者注释" default src="{escape(caption,quote=True)}"></video>'
+            html+='<p>可关闭的同步字幕展示选择、实际执行和给人的情境消息。私人消息仅供研究者观看，机器人只收到实际公开渠道；原始视频和模型图像未加字幕。</p>'
             audit=read(root/'interaction_verification.json');process=read(root/'joint_process_evidence.json')
             review=read(root/'public_request_response_review.json')
             html+=f'<p>实际人NN {audit.get("human_neural_calls")}，协调NN {audit.get("robot_visual_coordinator_calls")}，VLA调用 {audit.get("robot_actual_vla_calls")}。同资源执行重叠 {process.get("shared_resource_execution",{}).get("same_resource_vla_exposure_s","未测量")} 模拟秒。</p>'
@@ -78,7 +82,9 @@ def build(table,results,output):
                 (root/'provenance.json','设置与版本'),(root/'interaction_verification.json','输入／控制核验'),
                 (root/'joint_process_evidence.json','过程证据'),(root/'independent_video_verification.json','视频核验'),
                 (root/'public_request_response_review.json','行为与安排审阅'),
-                (root/'review_evidence_verification.json','解释引用核对')] if p.exists())+'</p>'
+                (root/'review_evidence_verification.json','解释引用核对'),
+                (root/'updated_target_physical_witness.json','当前公开目标的物理见证'),
+                (root/'research_caption_provenance.json','字幕来源与原始文件校验')] if p.exists())+'</p>'
             messages=rows(ep/'public_dialogue.jsonl')
             timeline=''.join(f'<tr><td>{m["time_s"]:.1f}</td><td>{escape(m["speaker"])}</td><td>{escape(m["text"])}</td></tr>'
                              for m in messages if m['speaker'] in {'human','robot'})

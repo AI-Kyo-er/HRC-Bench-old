@@ -33,7 +33,17 @@ def verify(url, output):
             src=video.evaluate('(v)=>v.src')
             response=page.request.get(src,headers={'Range':'bytes=0-99'})
             if response.status!=206 or len(response.body())!=100:raise ValueError('视频Range失败')
-            checks.append({'src':src,'duration_s':duration,'play_seek_passed':True,'range_status':206})
+            caption_check=None
+            if video.locator('track').count():
+                video.evaluate('(v)=>{v.textTracks[0].mode="showing"}')
+                page.wait_for_function('(v)=>v.textTracks[0].activeCues&&v.textTracks[0].activeCues.length>0',arg=handle)
+                track=video.locator('track').first
+                caption_response=page.request.get(track.evaluate('(t)=>t.src'))
+                if not caption_response.ok or not caption_response.text().startswith('WEBVTT'):
+                    raise ValueError('研究字幕无法加载')
+                caption_check={'active_at_seek_s':seek,'showing':True,'webvtt_loaded':True}
+            checks.append({'src':src,'duration_s':duration,'play_seek_passed':True,'range_status':206,
+                           'research_caption':caption_check})
         if errors:raise ValueError('页面JS错误：'+str(errors))
         output.parent.mkdir(parents=True,exist_ok=True)
         output.write_text(json.dumps({'status':'verified','videos':len(videos),'links_checked':len(links),
