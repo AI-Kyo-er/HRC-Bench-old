@@ -489,6 +489,39 @@
       "formal_benchmark_sample": false
     },
     {
+      "run": "joint_constrained_drink_correction_20261008",
+      "label": "饮品：结构约束与明确暂停的资格检查",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 80,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
+      "run": "joint_constrained_drawer_leave_return_20261008",
+      "label": "抽屉：结构约束与参与变化的资格检查",
+      "kind": "neural",
+      "activity": "drawer_access",
+      "duration_s": 120.0,
+      "human_neural_calls": 30,
+      "actual_vla_calls": 240,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [
+        {
+          "start_s": 25.2,
+          "end_s": 28.95
+        }
+      ],
+      "formal_benchmark_sample": false
+    },
+    {
       "run": "joint_matched_reference_snack_service_init2_20261008",
       "label": "点心：init2匹配原生操作参考",
       "kind": "reference",
@@ -686,7 +719,17 @@
     }
   ],
   "pending": [
-    "饮品：结构约束与明确暂停的资格检查：尚无终态结果",
-    "抽屉：结构约束与参与变化的资格检查：尚无终态结果"
+    "一致开发批：snack_service／join／visual：尚无终态结果",
+    "一致开发批：snack_service／join／symbolic：尚无终态结果",
+    "一致开发批：snack_service／detour／visual：尚无终态结果",
+    "一致开发批：snack_service／detour／symbolic：尚无终态结果",
+    "一致开发批：drink_storage／change_use／visual：尚无终态结果",
+    "一致开发批：drink_storage／change_use／symbolic：尚无终态结果",
+    "一致开发批：drink_storage／correction／visual：尚无终态结果",
+    "一致开发批：drink_storage／correction／symbolic：尚无终态结果",
+    "一致开发批：drawer_access／leave_return／visual：尚无终态结果",
+    "一致开发批：drawer_access／leave_return／symbolic：尚无终态结果",
+    "一致开发批：drawer_access／robot_request／visual：尚无终态结果",
+    "一致开发批：drawer_access／robot_request／symbolic：尚无终态结果"
   ]
 }

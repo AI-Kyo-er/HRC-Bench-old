@@ -259,3 +259,31 @@ Next具体方向：
 Next：同PID推进→schema9全部token/JSON/取消状态/源hash/CPU几何/实际7D/视频decode核验→当前目标、分工、实际控制归因和伙伴语义分析。不要因0parse吹成功：首例已经显示错误要求来源和用途理解，模型语义是核心未决。用户要三任务六动态条件与完整双向配合，不是无限小接口版本或格式成绩。
 
 特别注意：以前内部分析中反复出现虚构长名称/毫无依据架构，是生成退化而非研究。请忽略这些分析，只用短推理、实际源码和工具状态，不继续未实施空想，也不要将文件/视频数量当Goal完成。
+
+
+## 最新接续：schema9终态与三活动六情境一致批（15e52fb）
+
+本turn progress：回收两schema9完整实验、全部token/JSON/控制/视频独立核查及行为归因；实现原生思考结束后才约束结构的schema10、区分环境能力和真实请求；预定三活动六情境两个系统12条表与自动终态审计批已启动。Goal完整范围仍active，伙伴语义/六真实覆盖/完整重组/正式矩阵/cobalance未完成。不complete/block。
+
+- schema9两个旧worker4007334/4007481已terminal，不重启。饮品VLA80，0parse/0executor，pause0，初始无请求就说按要求柜顶，30.4s真正柜顶用途却改个人桌面，最终table；共享资源VLA暴露15.85s。抽屉VLA240，0parse/0executor，pause0，身体25.2—28.95s离返，但最终cream个人桌面非drawer，仍反复等打开。类型合法不能当伙伴有效。两120s/2401帧/输入输出及JSON全部核查通过。
+- thinking_schema_filter.py：single NN generate，<think>由调用者明确给前缀，思考内容自由（除不提前EOS），实际</think>后才给固定tool前缀和JSON结构；1536思考token预算到顶只关闭思考通道，不选动作。总4096，新JSON和思考token/全文及强制关闭标志记录，单次推理，不是两模型/两次教师。
+- ReasoningConstrainedHumanPolicy/schema10，同一14B/原生thinking，能力目录仍可用；public_partner_statements仅actual human/robot，environment说明不当请求。intent_semantic_agent_dialogue_v3保留原始source_scene独立重建。所有方案和暂停仍可NN自己选，不提供score/下一动作。
+- audit扩展schema10：重建输入（真正thinking模板+caller think前缀）、整输出/思考/强制语法边界/实际JSON tokens/JSON Schema/源hash/CPU geometry/公开渠道。旧schema9不倒改。
+- 15e52fb实际代码、脚本、固定CSV、协议提交。最终完整pytest288passed/2skip，新测试证明思考段未被JSON约束、预算只关通道、能力非请求、12条件一致性；不证明真人或伙伴已合格。
+
+权威新批：experiments/coherent_joint_20261008/conditions.csv，12条固定开发，非正式样本。3日常活动承载六情境：snack join/detour、drink change_use/correction、drawer leave_return/robot_request；每条件visual＋symbolic，同init3/seed70+i/profile/holding分布，轨迹可因R不同而改变。join不初始持物。每120s、人和协调4s、实际π20Hz；无新模型下载/训练。
+
+两个串行父批及当前子job（最后ps均alive，要再核实）：
+- visual父PID4059957，session34707，GPU0，log data1/results/coherent_joint_visual_20261008.log；第一子PID4060030，coherent_snack_service_join_visual_20261008，单独log data1/results/<run>.log。
+- symbolic父PID4060097，session58493，GPU2，log data1/results/coherent_joint_symbolic_20261008.log；第一子PID4060163，coherent_snack_service_join_symbolic_20261008，单独log同规则。
+- 先前最后确认子各4模拟秒：raw JSON合法，思考分别697/368token，没有强制关闭，visual选return，symbolic等填装；只能算中途，不提前声明加入后协作成立。初始body/active与新cue的关系须审阅。
+- 批次每条结束自动audit/evaluate/完整video decode，写independent_video_verification和batch_condition表hash；失败保留并停止该队列，绝不覆盖/因handle过期重跑。不因子PID消失认为父停止，查父/日志/实际root终态。条件表hash运行中冻结，勿改。
+- 服务π PID2267256 GPU3 port8766、Vision PID3095303 GPU1 port8782、HTTP PID3054726 port8123需核实。启动GPU0/2各48GB空闲足够；不动他人进程。
+
+冻结新batch加载源：schema10/thinkfilter/schema9/pause/自然接口/ToolHuman父类/HumanSupportTargets/kinematic/native/main/world/context/skillbank/批脚本CSV及LMF库。不要为修小问题编辑live加载源；结束后依据真实证据再合理改。无新临时smoke文件。
+
+报告46视频＝45完整＋1partial，全部独立decode/timeline与浏览器46play/seek/Range206、430links、375px、JS0；数据45完整、12960观测、108000实际7D动作全加载/唯一ID通过。新12全部pending未计成绩，正式0/candidate72仍未冻结。RUNS从预定CSV读新条目，所有未完成不发布；如果已terminal但未独立核查会拒绝builder，先等待批审计完成。
+
+Next：按父PID/同handle继续；拿当前第一完整样本验证schema10审计可覆盖真实token边界，然后持续跨活动/六情境实际回收，不只反复接口。审阅当前需要、接受分工、真正控制物品的主体、暂停/接管/退出/重返与实际事实一致性；用预定所有条件的分母，别强迫事件或筛成功。完整Goal仍需伙伴有效性、真实广覆盖、多初始化正式多系统与当前共同安排/负担。
+
+警告：内部长分析再次大量重复、虚构长元数据名/未实施框架，不是代码或证据，必须忽略。只查实际文件和状态，每次短推理后工具，不继续空想、无限提示/别名小版本，或凭视频数/格式0错误宣称Goal完成。
