@@ -8,6 +8,14 @@ from pathlib import Path
 def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
 
 
+def has_direct_contact_feedback(decision):
+    public=json.loads(decision['public_input'].split('\n',1)[1])
+    summary=public.get('hand_contact_summary')
+    if isinstance(summary,dict):
+        return isinstance(summary.get('contact_with_other_agent'),bool) and isinstance(summary.get('contact_geoms'),list)
+    return 'hand_contact_geoms' in public['your_measured_execution']
+
+
 def audit(directory):
     trace=rows(directory/'trace.jsonl');decisions=rows(directory/'human_policy_io.jsonl')
     intervals=[];start=None;duration=0.;geoms=set();contact_samples=0
@@ -24,7 +32,7 @@ def audit(directory):
         elif start is not None:
             intervals.append({'start_s':start,'end_s':previous['time_s'],'robot_geoms':sorted(geoms)});start=None
     if start is not None:intervals.append({'start_s':start,'end_s':trace[-1]['time_s'],'robot_geoms':sorted(geoms)})
-    exposed=sum('hand_contact_geoms' in json.loads(d['public_input'].split('\n',1)[1])['your_measured_execution'] for d in decisions)
+    exposed=sum(has_direct_contact_feedback(d) for d in decisions)
     return {'episode':str(directory),'hand_robot_contact_record_time_s':duration,'sample_count':contact_samples,
             'intervals':intervals,'decision_count_with_direct_hand_contact_feedback':exposed,
             'interpretation':'只计记录中的人手与robot/gripper几何接触且distance<=0；不推断接触力、伤害、人体完整碰撞或唯一阻挡原因。接触反馈可见性单列。'}

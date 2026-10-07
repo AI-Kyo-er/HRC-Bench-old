@@ -16,6 +16,7 @@ def verify_episode(directory):
     trace=rows(directory/'trace.jsonl');decisions=rows(directory/'human_policy_io.jsonl')
     by_step={row['step']:row for row in trace}
     prohibited={'task_success','human_goal_success','task_contract','premature_placements','robot_placement_credit'}
+    expected_history=[]
     for decision in decisions:
         if decision['parse_error'] is not None:
             assert decision['parsed_decision']['intent']=='observe'
@@ -29,6 +30,13 @@ def verify_episode(directory):
             reconstructed=own_contact_observation(actual['contacts'],'human')
             assert public['hand_contact_summary']['contact_with_other_agent']==reconstructed['contact_with_other_agent']
             assert public['hand_contact_summary']['contact_geoms']==reconstructed['contact_geoms'][:12]
+            assert public['recent_measured_world_history']==expected_history[-2:]
+            expected_history.append({'time_s':actual['time_s'],
+                'fingertip_xyz':actual['human_hand_position'],
+                'fingertip_remaining_distance_m':actual['human_execution'].get('fingertip_remaining_distance_m'),
+                'phase':actual['human_execution']['motor_phase'],
+                'object_measured_in_hand':actual['human_execution'].get('object_measured_in_hand'),
+                'contact_with_other_agent':reconstructed['contact_with_other_agent']})
         if 'hand_contact_report' in measured:
             expected_contacts=own_contact_observation(actual['contacts'],'human')
             assert measured['hand_contact_report']==expected_contacts

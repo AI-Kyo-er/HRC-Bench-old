@@ -19,6 +19,10 @@ def verify(ep):
         decision=human[index]['parsed_decision'];command=delivery['command']
         assert delivery['neural_decision_id']==index
         assert all(command[k]==decision[k] for k in ['intent','object_id','destination','speed_mps'])
+        if command['intent']=='move_hand':
+            raw=json.loads(human[index]['raw_model_output'].rsplit('</think>',1)[-1].strip())
+            np.testing.assert_allclose(command['target'],raw['hand_target_xyz'],atol=1e-9)
+            np.testing.assert_allclose(command['target'],human[index]['hand_target_xyz'],atol=1e-9)
         np.testing.assert_allclose(delivery['physics_time_s'],r['physics_time_s'],atol=1e-7)
         phase=r['human_execution']['motor_phase'];assert delivery['phase_before_delivery']==phase
         new=index!=previous;assert delivery['new_request']==new
