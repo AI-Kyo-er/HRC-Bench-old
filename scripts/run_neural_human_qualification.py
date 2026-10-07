@@ -105,6 +105,11 @@ def main():
         journal.flush({'trace.jsonl':trace,'public_dialogue.jsonl':[m.__dict__ for m in messages]})
         write(ep/'parking_control.json',parking);(ep/'model_calls.jsonl').write_text('');(ep/'placement_evidence.jsonl').write_text('')
         write(ep/'video_timeline.json',{'fps':20,'frame_count':len(timeline),'frames':timeline})
+    except Exception as error:
+        write(args.output_dir/'failure.json',{'status':'failed','error':repr(error),'completed_steps':len(controls)})
+        write(ep/'parking_control.json',parking)
+        write(ep/'video_timeline.json',{'fps':20,'frame_count':len(timeline),'frames':timeline})
+        raise
     finally:writer.close();env.close()
     write(args.output_dir/'provenance.json',{'human_target_source':'model_generated_from_personal_preferences','human_policy_architecture':'grounded',
         'human_model':str(model_path),'robot_policy':'calibration parking then stationary, no neural robot',
