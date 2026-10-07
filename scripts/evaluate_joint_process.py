@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from hrc_pilot.joint_process_metrics import measured_process,original_arrangement_observations
+from hrc_pilot.joint_resource_use import resource_use_evidence
 
 
 def rows(p):return [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
@@ -93,6 +94,7 @@ def evaluate(root):
         'interpretation':'动作完成／初始近目标／身体离返／输入递送的实测见证；重复搬运可能有合理原因，语言与模式数量不直接代表协作质量。'}
     controls=rows(ep/'robot_control.jsonl');receipts=rows(ep/'human_command_receipts.jsonl')
     result['measured_process']=measured_process(trace,human,controls,receipts)
+    result['shared_resource_execution']=resource_use_evidence(trace,controls,calls,plans)
     provenance=json.loads((root/'provenance.json').read_text())
     last_scene=human[-1].get('observation_source_scene',human[-1]['private_input']['scene'])
     result['original_arrangement_physical_observations']=original_arrangement_observations(
