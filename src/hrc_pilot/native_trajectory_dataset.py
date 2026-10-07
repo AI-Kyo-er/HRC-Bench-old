@@ -28,3 +28,16 @@ class NativeTrajectoryDataset:
         return {'observation/image':rgb,'observation/wrist_image':wrist,'observation/state':state,
                 'prompt':Path(str(base)+'.prompt.txt').read_text(),
                 'actions':actions,'action_valid':valid}
+
+
+class NativeMixedTrajectoryDataset(NativeTrajectoryDataset):
+    """混合策略轨迹显式标明控制来源；保持与位移不成为学习VLA动作标签。"""
+    SOURCES={'learned_vla','vlm_selected_hold_primitive','vlm_selected_cartesian_primitive','planner_output_rejection_hold_primitive'}
+
+    def __getitem__(self,index):
+        sample=super().__getitem__(index)
+        source=(self.directory/(self.stems[index]+'.action_source.txt')).read_text().strip()
+        if source not in self.SOURCES:raise ValueError('未知控制来源，不推断为学习VLA')
+        sample['action_source']=source
+        sample['learned_vla_action_mask']=sample['action_valid'] & (source=='learned_vla')
+        return sample
