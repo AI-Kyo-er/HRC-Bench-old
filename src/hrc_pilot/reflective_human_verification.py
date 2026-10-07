@@ -12,6 +12,9 @@ def verify_reflective_records(planners,motors):
         assert row['planner_decision_id']==identifier and row['time_s']>previous_time
         previous_time=row['time_s'];public=json.loads(row['public_input'].split('\n',1)[1])
         assert public['time_s']==row['time_s']
+        if 'raw_model_output' in row:
+            expected=row['raw_model_output'].rsplit('</think>',1)[-1].strip() if '</think>' in row['raw_model_output'] else ''
+            assert row['raw_output']==expected and row['thinking_enabled']
         assert row['public_input'].startswith('阶段：意图反思\n')
         assert public['your_previous_personal_targets']==targets
         assert not {'task_success','human_goal_success','personal_evidence'}.intersection(public)
@@ -40,7 +43,8 @@ def verify_reflective_records(planners,motors):
         assert state['target_validation_error']==row['validation_error']
     emitted=[]
     for row in motors:
-        assert row['human_policy_architecture']=='reflective_intent_then_motor'
+        assert row['human_policy_architecture'] in {'reflective_intent_then_motor','grounded_reflective_intent_then_motor'}
+        if 'raw_model_output' in row:assert row['raw_output']==row['raw_model_output'] and not row['thinking_enabled']
         assert row['public_input'].startswith('阶段：当前动作\n')
         public=json.loads(row['public_input'].split('\n',1)[1]);planner=planners[row['planner_decision_id']]
         assert row['planner_decision_id']==max(p['planner_decision_id'] for p in planners if p['time_s']<=row['time_s'])

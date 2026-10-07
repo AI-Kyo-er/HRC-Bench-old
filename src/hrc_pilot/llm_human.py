@@ -104,7 +104,7 @@ class QwenHumanPolicy:
         ]
         encoded = self._tokenizer.apply_chat_template(
             messages, tokenize=True, add_generation_prompt=True,
-            enable_thinking=False, return_tensors="pt")
+            enable_thinking=getattr(self,'enable_thinking',False), return_tensors="pt")
         encoded = encoded.to(self._model.device)
         input_ids = (encoded["input_ids"] if hasattr(encoded, "keys")
                      and "input_ids" in encoded else encoded)
