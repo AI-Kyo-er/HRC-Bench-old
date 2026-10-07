@@ -176,3 +176,27 @@ Next：继续同PID／session；收齐余四参考及两NN，逐个audit/evaluat
 4. 所有实验现在已终态，核心源可在新批前合理修改；若启动新worker再次冻结加载源。每次GPU先nvidia-smi，单卡预算足够，不操作他人进程。
 
 特别注意：此前长分析中大量重复、 speculative架构与虚构元数据名称不是代码或研究进展；只信实际文件、PID、日志和核验结果。不要延续那些分析，不新增无必要复杂类或列出永不执行的长计划。
+
+
+## 接续：自然贡献／交流接口与真实支持面（fcc1dcd）
+
+本轮progress：统一自然人贡献和沟通接口，真实柜顶碰撞目标，低层当前贡献执行、原生输入／几何独立核查与277测试，启动跨两活动新批。完整Goal仍active未完成；不complete/block。
+
+- HumanDecisionPolicy/schema8，一次真实Qwen3-14B原生thinking4096，contribution与communication分别可空。place_object直接映射当前一次relocate，hold_object取来保留（已持有时明确停止旧放置）、step_aside/return/wait/indicate。accept/reject/request/finish等只转发NN原话；finish不标记环境成功或替伙伴同意。原始call参数保存，四实际工具交互＋六自选私人记忆，不选择下一任务。
+- human_decision_interface移除执行菜单中的_home调试中心；真实柜顶每个物品的目标以g9实际碰撞顶面和物品当前碰撞底面／姿态计算。HumanSupportTargets来自几何，不是任务分数。CPU实际MjSim.from_xml_file已验证真实存档XML；不是mujoco_py（环境未安装）。独立audit使用robosuite绑定重建每次qpos的目标与全部NN输入token。
+- ContributionHumanExecutor沿用连续附着、人速度.2；高目标运输抬升随目标位置，显式身体return/away不在身体未到位时完成。用户不需控制手指阶段。机器人仍实际π动作，不改R状态。
+- 包括自然指令、接受/结束、私人字段边界、几何随姿态、保留中止旧放置和身体返回的六项新测试。全回归277passed/2skip（最终代码已复验），不是伙伴语义有效性的证明。
+
+目前42视频／41完整／12000观测／98400实际动作终态产物不变，新条件只是pending。浏览器42全play/seek/Range、383links、375px、JS0error通过（增加自然接口协议链接）。未冻结正式split或样本统计。
+
+必须按PID重新核实的两个live：
+- joint_natural_drink_correction_20261008：GPU0，PID3891982，session8765，log data1/results/joint_natural_drink_correction_20261008.log。init3/seed65/particular/correction/120s；最新36模拟秒有家人柜顶用途后公开说明等待机器人放柜顶，但尚无终态，不能宣称成功。4/8秒尝试直接destination=wine_rack_1（物体非支持目标）被拒，意图是自己直接收纳，这属于未支持的具体目标／接口边界，不直接判策略或R失败。
+- joint_natural_drawer_leave_return_20261008：GPU2，PID3892136，session57546，log同stem。init3/seed65/busy/leave_return/120s；最新28模拟秒出现未知贡献parse_error，原始保留，尚无终态。按实际raw解释，不泛称字段改善或伙伴已拟真。
+- 两者人/协调每4s、Vision8技能库＋实际π，同一自然接口，无额外反思。GPU0/2启动前各48GB足够，H预算36.36GB；没动他人进程。
+- π PID2267256 GPU3 port8766、Vision PID3095303 GPU1 port8782、HTTP PID3054726 port8123仍需再核实。此前所有workers已terminal，没有重启。
+
+加载源冻结：main／humanDecisionInterface/Policy/supportTargets/contributionHumanExecutor／toolHuman及父类／Kinematic／native*.py／world／context／skill_bank及wrapper。不要改live加载的源。SourceSHA已记录本次全部依赖，旧版本不倒改。报告、审阅和独立审计可以继续。
+
+Next：同PID/handle回收两条→audit（schema8、全部token、CPU几何）/evaluate/full decode→实际需求、伙伴回应、行为、终态分析→报告/导出/browser。六类实际覆盖、可靠人策略、完整动态重组、多系统正式矩阵及cobalance仍缺。
+
+不要再把内部长分析中的重复元数据名、虚构架构或未执行设想当成进展。只信已提交源码和实际结果；不要继续单一枚举/小提示的无穷变体。未支持的关系目标、NN忽略接口及真实策略不一致应分开。下一次设计应依据实际raw、人的需求与场景可表达关系，优先三活动六情境完整链路。
