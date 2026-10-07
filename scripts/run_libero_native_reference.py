@@ -67,7 +67,7 @@ def main():
     args = parser.parse_args()
     if args.scene_case:
         case=CASES[args.scene_case];args.suite=case.suite;args.task_ids=[case.task_id]
-        if args.human_mode=='qwen' and args.autonomous_human_context!='pantry_work':parser.error('通用库存场景要求pantry_work自主背景')
+        if args.human_mode=='qwen' and args.autonomous_human_context not in {'pantry_work','shared_meal'}:parser.error('通用库存场景要求pantry_work或shared_meal自主背景')
     contract=NativeTaskContract(args.task_family)
     if args.human_policy_architecture in {'reflective','grounded','deliberative'} and (args.human_mode!='qwen' or not args.autonomous_human_context or args.human_contact_model!='articulated_hand'):
         parser.error('分层反思策略要求自主Qwen与真实接触手')
