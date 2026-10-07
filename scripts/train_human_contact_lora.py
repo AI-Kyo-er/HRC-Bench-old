@@ -26,6 +26,8 @@ def main():
     rows=subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.free','--format=csv,noheader,nounits'],text=True)
     entries={r.split(',')[0].strip():int(r.split(',')[1]) for r in rows.splitlines()};chosen=os.environ.get('CUDA_VISIBLE_DEVICES')
     if chosen not in entries or entries[chosen]<45000:parser.error('14B BF16 LoRA训练需要单卡至少45GB空闲显存')
+    paths=[Path(__file__),Path('src/hrc_pilot/human_learning_dataset.py')]
+    hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     random.seed(args.seed);torch.manual_seed(args.seed)
     train=HumanLearningDataset(args.dataset,'train');dev=HumanLearningDataset(args.dataset,'dev')
     tokenizer=AutoTokenizer.from_pretrained(str(args.base_model),local_files_only=True)
@@ -49,6 +51,8 @@ def main():
     model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant':False})
     model.enable_input_require_grads()
     parameters=[p for p in model.parameters() if p.requires_grad]
+    initial_parameters=[p.detach().float().cpu().clone() for p in parameters]
+    assert all('lora_' in name for name,p in model.named_parameters() if p.requires_grad)
     optimizer=torch.optim.AdamW(parameters,lr=1e-4,weight_decay=.01,foreach=False)
     def loss(sample):
         ids,n=sample;ids=ids[None].to('cuda');keep=n+1
@@ -71,19 +75,24 @@ def main():
         norm=float(torch.nn.utils.clip_grad_norm_(parameters,1.));optimizer.step()
         row={'step':step+1,'train_loss':value,'gradient_norm':norm,'elapsed_s':time.time()-started,
             'cuda_peak_allocated_mib':torch.cuda.max_memory_allocated()/1024**2}
-        if (step+1)%40==0:row['dev_loss']=evaluate()
+        if (step+1)%40==0:
+            row['dev_loss']=evaluate()
+            checkpoint=args.weights_dir/'checkpoints'/f'step{step+1:04d}'
+            model.save_pretrained(str(checkpoint));tokenizer.save_pretrained(str(checkpoint))
         with log.open('a') as f:f.write(json.dumps(row)+'\n')
         print(json.dumps(row),flush=True)
     model.save_pretrained(str(args.weights_dir));tokenizer.save_pretrained(str(args.weights_dir))
     final_dev=evaluate()
-    paths=[Path(__file__),Path('src/hrc_pilot/human_learning_dataset.py')]
+    delta=sum(float(((p.detach().float().cpu()-initial)**2).sum()) for p,initial in zip(parameters,initial_parameters))**.5
+    assert delta>0
     summary={'status':'trained','steps':args.steps,'train_samples':len(train),'dev_samples':len(dev),
         'trainable_parameters':sum(p.numel() for p in parameters),'initial_dev_loss':initial_dev,'final_dev_loss':final_dev,
         'base_model':str(args.base_model),'adapter_weights':str(args.weights_dir),'dataset':str(args.dataset),
         'answer_only_supervision':True,'logits_keep_semantics':'answer_length+1, first label ignored, standard shifted causal loss',
         'initial_intention_normalization':'time0 previous targets and intention cleared only in loader',
         'cuda_visible_devices':chosen,'cuda_peak_allocated_mib':torch.cuda.max_memory_allocated()/1024**2,
-        'source_sha256':{str(p):sha256(p.read_bytes()).hexdigest() for p in paths},
+        'source_sha256':hashes,'source_files_changed_during_run':[str(p) for p in paths if sha256(p.read_bytes()).hexdigest()!=hashes[str(p)]],
+        'adapter_parameter_delta_norm':delta,'base_parameters_frozen':True,
         'interpretation':'损失及真实参数更新不是闭环能力证明；需要未用于训练的实际Sim运行与视频。'}
     write(args.output_dir/'summary.json',summary);print(json.dumps(summary,ensure_ascii=False),flush=True)
 

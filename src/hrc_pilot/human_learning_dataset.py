@@ -6,11 +6,14 @@ from pathlib import Path
 class HumanLearningDataset:
     def __init__(self,root,split):
         self.root=Path(root);self.paths=[];self.diagnostic_episodes=set()
+        verification=json.loads((self.root/'training_data_verification.json').read_text())
+        assert verification['status']=='verified'
+        qualified={e['episode_id'] for e in verification['episodes'] if e['supervision_eligible']}
         for path in sorted((self.root/'samples'/split).glob('*.source.json')):
             source=json.loads(path.read_text());episode=path.name.removesuffix('.source.json').split('__step',1)[0]
             assert source['episode_id']==episode
             metric=json.loads((self.root/'episodes'/episode/'metrics.json').read_text())
-            if set(metric['terminal_released_stable_targets'])!={t['object_id'] for t in metric['targets']}:
+            if episode not in qualified or set(metric['terminal_released_stable_targets'])!={t['object_id'] for t in metric['targets']}:
                 self.diagnostic_episodes.add(episode);continue
             self.paths.append(path)
         if not self.paths:raise ValueError('没有完成全部真实释放稳定目标的示范')
