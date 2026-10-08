@@ -1,0 +1,2 @@
+run,activity,init_state_id,seed,steps,human_source,robot_language,role
+drawer_operation_floor_init2_seed113_20261009,drawer_access,2,113,800,reference,task_only,basic_operation_reference_not_dynamic_hrc_score
