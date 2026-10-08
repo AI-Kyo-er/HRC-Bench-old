@@ -195,3 +195,5 @@ c67c5af上轮progress。本轮首先确认同32942/2614613/2614614仍live，首�
 启动前nvidia GPU2空闲48494MiB、GPU3 π8880MiB；仅复用π2613996/session67855。新续跑session85963、parent2631518、drink子2631519，init2/seed115/correction，旧first被核验skip，非重启首例。当前loaded8shards，尚无新终态；后drawer原seed113依次运行。保持runtime、条件、伙伴与测量方法冻结。
 
 主builder48708 terminal79published视频（含旧partial）/2pending；新main browser1369和全量开发数据导出16838正在运行待收，不能预称通过。正式0/candidate72未冻结；全Goal可靠伙伴、实际六情境、组合对照和正式双系统仍未满足。无smoke/新权重/外部服务。GPU仍被后两任务需要，结束后按authoritative terminal停止自有服务并核释放。
+
+555c3e4后收实际终态：1369 exit0、主79videos/753links全部浏览器检查通过；16838 exit0、开发数据78完整episodes/20640blocks/184800执行控制动作/stem唯一与来源检查verified，无私有人状态入Robot输入。184800包括hold和reference等已标注来源，不称全为神经VLA输出；开发/非专家/formal_split not_frozen保持。旧1369/16838/48708均terminal勿再poll。饮品2631519现live、3.95秒，H0真实选Wine暂存Cab并向Robot确认长期Rack；没有新终态结论，续跑85963/parent2631518与π2613996仍需要。
