@@ -251,3 +251,5 @@ GPU0起前48494MiB，仅本地FP16非量化层加载测试；最初命令有缩�
 主43987 terminal81published视频（含旧partial）/0pending；导出89493 terminal80完整/21120blocks/189600实际controls、stem及来源核对通过，包含hold/reference，不全称神经动作，非专家/formal未冻结。新主browser89855待收；不要重poll已terminal的43987/89493/54940/98574。
 
 接下来必须继续完整Goal：将一致v5事实与候选两阶段真实策略接入后资格，检查第三场景的基本机器人操作前提，再落实六实际情境、原idea组合/匹配对照及两系统多初始化正式比较。不能把本批或模型准备当完成，也不再围绕单个字段与提示无限迭代。当前无GPU工作需求，起新任务前再次nvidia选单卡；原始失败保留。
+
+e88c0f8已提交完整三例、只读测量修复及候选准备入口。89855已terminal exit0：主81videos/773links全部浏览器核对通过，勿再poll。git工作区干净、nvidia compute-apps为空。全Goal仍active，正式样本0；下一轮直接推进真实策略接口与操作前提，不重跑这些已结束批次或重复加载检查。
