@@ -165,3 +165,15 @@ d53d717前轮是progress。本轮先确认无GPU任务。新增placement_areas.p
 main新增area条件与链接，78旧视频+3pending、未增加新终态；README注明351tests/未闭环，60155terminal生成。后续需收三条NN完整视频/audit，核对Area原规划快照/payload接触、事实字段与实际响应。无新权重/下载/外部消息或smoke。结束后停止不再需要的新模型服务并nvidia核释放；当前不能停。正式0/全Goalactive。
 
 78e7f4c后已到7.95，实际Human4 private_input.scene.self_contribution_observations[0]为Food仍Table/RefBowl支撑False、completionIDFalse；NN4继续选Food→Bowl，没有原先4秒提前改搬FilledBowl。只是早期实际响应，未完成填装、不证明方法改善或因果归因。notes已加早期观察；仍继续32942/2614613/首2614614，不改加载source。原0和4生成JSON/Token已保留在episode，终态audit须重建新字段。
+
+## 首例运行中交付与动态情境缺口（2026-10-09）
+
+999fab3后恢复先查实际worktree与进程。新父2614613、首子2614614及π2613996仍live；没有因上下文切换重启。最新trace87.95，H68继续wait，尚无summary/终态审计。旧批已terminal，不再轮询。
+
+已核对并保存两份实际前缀：results/area_feedback_prefix_20261009软链到data1，snack_food_release_28s.json为此前未提交产物，snack_delivery_64s.json新增21条选择/通知/trace、逐行SHA重读一致。H8实际自己持Food同时Robot指接触，人选择away保留Food；H12承认Food还在自己手中并返回放入碗，24实际released/Bowl支撑，不能将共享接触当转交完成。
+
+H24请求Robot搬却自己选BowlOnPlate；H28明确因Robot仍做过时Food操作而自己选LoadedBowl→Guest。H32/36仍同请求6继续，并早宣称完成；40请求6已complete/heldNone，Bowl由Table支撑、Food由Bowl支撑，64仍稳定。实际交付归Human，不归Robot。R24–40实际skill=bowl_on_plate，R32/36/40却说搬到Guest，仍是高层语言与技能错配，不能归为π收到正确动作后失败。
+
+29.8私人饮品优先Cue确在H32 agenda request.current_observation.private_context；Human32理由反称Wine已accessible、坚持snack，64Wine未移，没有实际饮品贡献。65.1取消Cue后H68仍wait，后续继续看，不以条件名detour算覆盖。当前只有一个区域物品放置，不能认证多物品并排效果。新方法+不同seed也不作单因素因果结论。
+
+OBSERVATION_NOTES添加明确成果/未兑现/局限。Report builder修正新批旧“六例”标签、改动说明（沿用活动，增加area+facts且newseed），不改运行时源码。页面重新生成0terminal/3conditions，真实浏览器0videos/12links exit0；没有把活跃未核视频展示为完整。未运行新GPU工作、没有新下载或smoke产物；服务仍被三条件batch需要。正式0、candidate72未冻结，全Goal继续。
