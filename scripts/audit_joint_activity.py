@@ -178,12 +178,12 @@ def audit(root):
                             assert 0<=plan_index<=round(d['time_s']*20)
                             planned=trace[plan_index]
                             from hrc_pilot.libero_native import perceived_object_contacts
-                            for payload in allocation['payload_names']:
-                                contact=perceived_object_contacts(planned)[payload]
+                            for payload_name in allocation['payload_names']:
+                                contact=perceived_object_contacts(planned)[payload_name]
                                 assert not contact['robot_hand_contact']
                                 assert (table['object_id'] in contact['contact_entities'] or
                                     (planned['human_execution']['held_object']==table['object_id'] and
-                                     payload in planned['human_execution']['carried_objects']))
+                                     payload_name in planned['human_execution']['carried_objects']))
                             replay_recorded_geometry(support_sim.model._model,support_sim.data._data,planned)
                             resolved=area_placement(support_sim.model,support_sim.data,table['object_id'],
                                 areas[dest],list(planned['objects']),payload_names=allocation['payload_names'],
