@@ -163,3 +163,5 @@ d53d717前轮是progress。本轮先确认无GPU任务。新增placement_areas.p
 首实际NN0已出、时间至3.95：选择cream→bowl，actual private_input.scene含公开区域中心范围x[.12,.44]/y[.33,.56]与self_contribution_observations={}（初始无过去选择）；原始输出非测试generator。下一H4会收到真选贡献进展，目前不宣称纠正了早报完成。地区分配只作用已选delivery而非该relation；所有runtime源自启动前冻结，不编辑加载文件。
 
 main新增area条件与链接，78旧视频+3pending、未增加新终态；README注明351tests/未闭环，60155terminal生成。后续需收三条NN完整视频/audit，核对Area原规划快照/payload接触、事实字段与实际响应。无新权重/下载/外部消息或smoke。结束后停止不再需要的新模型服务并nvidia核释放；当前不能停。正式0/全Goalactive。
+
+78e7f4c后已到7.95，实际Human4 private_input.scene.self_contribution_observations[0]为Food仍Table/RefBowl支撑False、completionIDFalse；NN4继续选Food→Bowl，没有原先4秒提前改搬FilledBowl。只是早期实际响应，未完成填装、不证明方法改善或因果归因。notes已加早期观察；仍继续32942/2614613/首2614614，不改加载source。原0和4生成JSON/Token已保留在episode，终态audit须重建新字段。
