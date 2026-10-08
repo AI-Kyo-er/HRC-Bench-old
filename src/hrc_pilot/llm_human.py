@@ -83,14 +83,20 @@ class QwenHumanPolicy:
         if self.generator is not None or self._model is not None:
             return
         import torch
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 
+        config = AutoConfig.from_pretrained(
+            str(self.model_path), local_files_only=True, trust_remote_code=True)
+        quantization = getattr(config, 'quantization_config', None) or {}
+        dtype = torch.float16 if quantization.get('quant_method') == 'awq' else torch.bfloat16
         self._tokenizer = AutoTokenizer.from_pretrained(
             str(self.model_path), local_files_only=True, trust_remote_code=True)
         self._model = AutoModelForCausalLM.from_pretrained(
             str(self.model_path), local_files_only=True, trust_remote_code=True,
-            torch_dtype=torch.bfloat16, device_map={"": 0}, low_cpu_mem_usage=True)
+            torch_dtype=dtype, device_map={"": 0}, low_cpu_mem_usage=True)
         self._model.eval()
+        self.inference_precision = {'quantization_config': quantization,
+                                    'non_quantized_dtype': str(dtype)}
 
     def _generate(self, prompt: str) -> str:
         if self.generator is not None:

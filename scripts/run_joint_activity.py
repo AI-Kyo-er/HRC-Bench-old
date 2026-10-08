@@ -109,6 +109,8 @@ def main():
                         help='将自己已选贡献与实际观测相连，不评分共同任务或选择下一策略')
     parser.add_argument('--human-area-placement',action='store_true',
                         help='在已选交付区域中按实际占用分开放置，不移动他物或选择新策略')
+    parser.add_argument('--human-carried-observation',action='store_true',
+                        help='显式v5：仍随人携带的载荷不能在文字或支撑表中声明已离手')
     parser.add_argument('--human-decision-steps',type=int,default=40)
     parser.add_argument('--coordinator-decision-steps',type=int,default=40)
     parser.add_argument('--human-model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
@@ -122,6 +124,8 @@ def main():
         parser.error('贡献事实反馈要求明确新工作区、活动契约及生成式人')
     if args.human_area_placement and not args.workspace_method:
         parser.error('区域放置要求明确工作区方法')
+    if args.human_carried_observation and not (args.workspace_method and args.interaction_contract and args.human_source=='neural'):
+        parser.error('载荷观测v5要求新工作区、活动契约及生成式人')
     if args.reference_drink_provision!='serving_ready' and not (args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage'):
         parser.error('提供位置控制仅用于明确标注的新布局固定饮品参考')
     if args.reference_vla_instruction and (args.human_source!='reference' or args.symbolic_coordinator or args.coordinator_port or args.robot_replay):
@@ -456,6 +460,7 @@ def main():
         'human_policy':'fixed_feasibility_reference' if args.human_source=='reference' else 'actual_qwen3_intention_and_action_no_lora',
         'human_model':str(args.human_model) if args.human_source=='neural' else None,
         'human_model_class':type(human._model).__name__ if args.human_source=='neural' else None,
+        'human_inference_precision':getattr(human,'inference_precision',None),
         'human_thinking_enabled':getattr(human,'enable_thinking',None),'human_reflection':args.human_reflection,
         'human_source':args.human_source,'robot_language':args.robot_language,
         'interaction_contract':args.interaction_contract,
@@ -464,6 +469,7 @@ def main():
         'human_decision_cadence':'observation_events_and_periodic_reconsideration' if human_schedule else 'fixed_decision_interval',
         'human_contribution_observations':args.human_contribution_observations,
         'human_area_placement':args.human_area_placement,
+        'human_carried_observation':args.human_carried_observation,
         'reference_vla_instruction':args.reference_vla_instruction,
         'reference_drink_provision':args.reference_drink_provision if args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage' else None,
         'initial_human_holding':args.initial_human_holding,

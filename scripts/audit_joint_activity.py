@@ -239,8 +239,15 @@ def audit(root):
         np.testing.assert_allclose(scene['robot_eef_xyz'],actual['robot_ee'])
         if 'measured_world' in scene:
             from hrc_pilot.joint_world import observable_world
-            expected_world=observable_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'],
-                                           measurement_version=scene['measured_world'].get('measurement_version',1))
+            version=scene['measured_world'].get('measurement_version',1)
+            if p.get('human_carried_observation'):
+                assert version==5 and p['world_measurement_version']==5
+                from hrc_pilot.carried_world_observation import observable_carried_world
+                expected_world=observable_carried_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'])
+            else:
+                assert version!=5
+                expected_world=observable_world(actual,scene['regions_xyz'],scene['measured_world']['drawer'],
+                                               measurement_version=version)
             assert set(scene['measured_world']).issubset(expected_world)
             assert all(scene['measured_world'][k]==expected_world[k] for k in scene['measured_world'])
         assert all(m in dialogue and m['time_s']<=d['time_s'] for m in scene['public_dialogue'])

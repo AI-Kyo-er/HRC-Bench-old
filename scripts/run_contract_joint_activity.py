@@ -17,9 +17,16 @@ def main():
     sources=[Path(__file__),Path('src/hrc_pilot/contract_human_executor.py'),
              Path('src/hrc_pilot/scene_relation_summary.py')]
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in sources}
+    carried='--human-carried-observation' in sys.argv
+    version=5 if carried else 4
+    if carried:
+        path=Path('src/hrc_pilot/carried_world_observation.py')
+        sources.append(path);hashes[str(path)]=sha256(path.read_bytes()).hexdigest()
+        from hrc_pilot.carried_world_observation import observable_carried_world
     output=Path(sys.argv[sys.argv.index('--output-dir')+1])
     original=runtime.observable_world
     def observable(record,regions,drawer=None,**kwargs):
+        if carried:return observable_carried_world(record,regions,drawer)
         return original(record,regions,drawer,measurement_version=4)
     runtime.observable_world=observable
     relation_runtime.RelationHumanExecutor=ContractHumanExecutor
@@ -28,7 +35,7 @@ def main():
         adapter_path=output/'observation_adapter_provenance.json'
         if adapter_path.exists():
             adapter=json.loads(adapter_path.read_text())
-            adapter.update(world_measurement_version=4,
+            adapter.update(world_measurement_version=version,
                            human_perception_contract='public_semantic_relations_and_geometry_v1',
                            human_actuation_domain='actual_movable_objects_and_bounded_pickup_v1')
             adapter['source_sha256'].update(hashes)
@@ -38,7 +45,7 @@ def main():
             p=json.loads((output/'provenance.json').read_text())
             p.update(activity_contract='joint_mission_and_information_asymmetry_v1',
                      human_actuation_domain='actual_movable_objects_and_bounded_pickup_v1',
-                     world_measurement_version=4,
+                     world_measurement_version=version,
                      human_perception_contract='public_semantic_relations_and_geometry_v1',
                      native_goal_scope='original_manipulation_probe_not_whole_activity_score')
             p['source_sha256'].update(hashes)
