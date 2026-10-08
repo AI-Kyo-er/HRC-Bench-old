@@ -470,3 +470,33 @@ Goal全部要求仍active：可信动态人、六类实际变化、完整持续�
 发布：旧神经结果video+8review已入relational单页（共3完整videos），新增完整观测pending说明及PERCEPTION_PROTOCOL.md；OBSERVATION_REVIEW注明旧版本缺测量与新已接入，保留原raw。统一main61video=58×120s+2×60s+1×24.1s；loader60complete/16320blocks/141600actualactions、唯一ID/source全部通过，formal split未冻结。315测试、旧compatibility、diff check通过。最终browser新页3videos/19links、main61videos/576links，全部play/seek/Range206、activeCue、375px、JS0，路径relation_visual_review_20261008/browser_perception_baseline_final.json及joint_report_browser_20261008/verification_perception_baseline_final.json，sessions54607/26105已exit0。无需重跑已验证report，除非以后新增完整结果/改动。
 
 下一步继续同新PID/session回收完整新观测结果：检查必要测量被利用、实际提供和接收、私有需求公开变化、R响应及H后续反馈，不以单例/暂停计可靠伙伴或cobalance；再按三活动/六情境统一接口扩大资格与改进真正动态意图及活动依赖。不长期停留在字段/提示小修。完整Goal仍active；可信Human、真实六情境、完整持续重组、冻结多初始化formal、当前有效安排/人负担/cobalance均未验收，formal n0/candidate72未冻结。
+
+## 最新接续：双阶段私人需要方法三活动全部终态；GPU已释放
+
+本轮progress，完整Goal仍active；formal0/candidate72未冻结。重要实现尚在当前工作树，需中文commit后记hash。不要依据内部长分析的未来架构／虚构字段实施代码：那些不是事实或已实现设计，尤其本轮再出现重复无意义字段。后续保持短分析立即工具，信当前源码和进程，不继续空转。
+
+实现src/hrc_pilot/private_agenda_human.py：每轮第一次真实NN从个人背景、当前实际观察、旧自生成需要及实际经历生成7项私人需要／意图／参与／约定理解／未解决需要／更新依据／记忆；第二次真实NN读同当刻观察和自己刚生成的解释选择当前贡献和公开表达。两次均NN，不从标签手写路由。非法第一阶段输出保留旧解释并标错误，不生成正确动作；当前贡献仍NN。场景score/未来cue不进入生成。私人理解不直接给R；共用冻结权重不共用上下文。
+
+历史架构显式改变：当前完整场景保留；历史用户只保留当时私有消息、公开话语、自生成理解；工具反馈仍有实际坐标、接触及持物，旧完整关系矩阵可从坐标重建，不重复整张旧场景。源原始数据全保存。旧完整观测条件实际约42k token/GPU0占46GB；新私人需要前缀实测5110→9812、贡献7055→13949（0—32s），部分input token重建9条实际通过，不冒充完整有效性。first need“提供碗并等待Robot...”确实由NN生成。
+
+新入口run_private_agenda_joint_activity.py通过进程内类选择复用原run_reasoning，无改变旧活跃GPU0源码；来源额外Hash保存，row schema10当前贡献不变，private_agenda_inference保存第一阶段完整payload/ids/output/schema/前后理解/耗时。audit新增第一阶段输入/模板/原token输出/agenda_before-after及进入第二阶段、压缩历史重建、真实neural2计数和单独agenda parse_errors。私有state不当世界事实。reference不冒充NN。5项新测试覆盖持久需要传递、非法输出处理、无后台动作队列、实际解码器、事实历史/当前全观测；full320passed/2skipped，diff check通过。
+
+private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/init3/seed71/participating，drink correction/init3/seed73/particular，drawer leave_return/init3/seed74/busy，初持物、120s、4s高层更新。只1个理想感知14B+π系统，Human方法架构资格，不是多Robot成绩。GPU2启动前48494/49140free，估权重28GB+推理/渲染/紧凑KV14GB约42GB足够。新bash遵守command分组/no error handling/no external param。Python batch不覆写、有失败stop、原表Hash及各root独立audit/evaluate/video；不是自动重跑。
+
+状态重要：batch父1076108、第一子1076116、最后drawer子1499968均真实terminal，三根summary/input/video均verified；session99238曾batchhandle，下一turn不轮询当作live。GPU0旧complete_observation子893607也terminal，独立audit70122/process92230/video21163 exit0。全部raw保留。
+
+完整公共观测case：H30/R30/VLA184，Rskillerrors64/116共2，Hparse/Hreject0。H8pause取消尚在lower的准备保留bowl，12claimfilled取碗、16再pause。40wine搬运，59.55完成，.6383265m真实位移；44Rhold等确认，68H公开碗ready/R实际重启cream；68.2取消wine，72H重新说明snack优先。晚92/108说filledready要交接、116又说未完成。终bowl在personal/delivery同点empty，cream柜顶，originalmatchFalse。34.55s技能暴露/heldgripper0。8review引用核对已发布，不认证单因素提升/validcobalance。完整public测量真实进NN与tool历史，不能再全归观测缺失。
+
+双阶段3case已完成：每条Human真实60调用（agenda30/body30）、协调30、controls2400；agenda parse0/Hreject0；VLA64/104/24，三条原始安排matchFalse，不一律等当前用途失败。
+- snack：H0准备宏15.5s终，R0已fill；20NN1还需确认fill，NN2/R已说filled。32wine->drink_staging已满足，没新搬运不等拒绝。72H搬plate->snack_delivery且同时请R搬，R选plate_front_stove异目的地；76Human emptybowl移delivery。终cream[2.2204,-1.85375,.02132]地面，bowlemptytable，不能成品交付。暴露10.65、heldgripper.85。真实机械动作/简化kinematic交互与coord违规需分开，没证明因果或人体安全。7review。
+- drink：H0主动先Cab检查，12point确认prefs、24结束；33.9即用cue后36wait公开即用，无新增实际纠正。R0 rack、12hold、16—52 rack（36仍过时）、56后hold确认Cab。终Cab支撑/释放，更新方向有证据但无接管交还。暴露10.5/heldgripper0。6review。
+- drawer：H0 clear plate，4pause说私事，8选plate入drawer而非原cream，16后wait结束；29.2/62.2私人call cue有口头回应但全程body[.25,.6]，无实际away/return。R0open、12后hold等确认。终creamtable、距drawer .22838m，nativeRelationTrue但物理组合False；plate完整包含/替换目标需分别语义审阅，不把原cream谓词算它成功。暴露/heldgripper0。6review。
+19条新助手解释anchors全部evidence_anchors_verified。DESIGN_REVIEW.md明确下一步任务契约、变化机会、贡献执行语义、可用操作及真正可理解场景，不只改提示词，不从任务score选择“正确下一动作”。图/视频不是架构效力或真人拟真证明。
+
+用户新AGENTS（最新替换）要求及时停止不再需要的自有GPU，不能动其他用户/活跃任务。经uid/cmdline/cwd/port确认，空闲本项目π服务2267256(SIGTERM)已退出；首次Zombie/CUDA仍8880MiB，3s后再nvidia确认释放，不能把首次记已释放。旧visual服务3095303本来已消失，GPU1已空闲，没有去kill其他进程。最终四卡free约48494/48492/48494/48492MiB，compute-apps空，无本项目GPU程序剩余。CPU报告HTTP仍用于阅览。后续实验必须重新nvidia选择足够单GPU，并按需重启模型服务，不留空闲模型等待泛泛未来计划。
+
+交付构建：private_agenda报告3/3，relational报告4video（2qual+2NN），统一main65videos=62×120s+2×60s+1×24.1s，no pending；loader更新目标64complete/17280blocks/151200actualactions，实际export session41422仍待精确收取（此前62complete/16800/146400为阶段快照，勿混）。320测试已正式通过，无临时smoke生成。最终浏览器当前sessions89981 private(3videos)、66970 relational(4videos)、81358 main(65videos)待收；之前pending页0video不是现在3-case最终验证。reports与doc已更新，最终收结果后commit。所有raw结果/data1文件及历史失败不覆盖，paired data依稳定stem无manifest。
+
+下一步仍需真正成熟的日常活动任务结构与可信动态伙伴，不要把更多数据、3/3终态、零parse、私人goal字典或机械关系称cobalance。当前接口/任务还需检查未来意图与立即搬运区别、真实主动求助信息缺口、私有背景/初目标的一致、固定fixture误列可搬物品；这些都是待验证设计问题，不是新代码已实现。所有Goal七项保持，不complete/paused/blocked。
+
+最终已收：export41422 exit0，64complete/17280blocks/151200actualactions及unique IDs通过；private browser89981=3videos/17links，relational66970=4/20，main81358=65/617，实际play/seek/Range206、active字幕、375px、JS0通过，全部terminal勿再poll。三例80s实际原视频帧已查看，data1/results/private_agenda_visual_review_20261008/{snack_detour,drink_correction,drawer_leave_return}_80s.png，保留审阅材料非smoke。Goal不因此完成。最后本项目GPU compute-apps为空、四卡显存释放已确认。

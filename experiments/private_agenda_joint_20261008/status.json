@@ -1,0 +1,57 @@
+{
+  "role": "human_policy_architecture_development_status",
+  "verified_terminal_cases": 3,
+  "conditions": [
+    {
+      "condition": {
+        "run": "agenda_snack_detour_symbolic_20261008",
+        "activity": "snack_service",
+        "situation": "detour",
+        "profile": "participating",
+        "init_state_id": "3",
+        "seed": "71",
+        "initial_human_holding": "1",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "human_policy_architecture_cross_activity_qualification"
+      },
+      "state": "完整终态已核查",
+      "verified_terminal": true,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "agenda_drink_correction_symbolic_20261008",
+        "activity": "drink_storage",
+        "situation": "correction",
+        "profile": "particular",
+        "init_state_id": "3",
+        "seed": "73",
+        "initial_human_holding": "1",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "human_policy_architecture_cross_activity_qualification"
+      },
+      "state": "完整终态已核查",
+      "verified_terminal": true,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "agenda_drawer_leave_return_symbolic_20261008",
+        "activity": "drawer_access",
+        "situation": "leave_return",
+        "profile": "busy",
+        "init_state_id": "3",
+        "seed": "74",
+        "initial_human_holding": "1",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "human_policy_architecture_cross_activity_qualification"
+      },
+      "state": "完整终态已核查",
+      "verified_terminal": true,
+      "formal_sample": false
+    }
+  ]
+}

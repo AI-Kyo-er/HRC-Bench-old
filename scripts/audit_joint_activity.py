@@ -54,6 +54,32 @@ def audit(root):
     for human_index,(d,receipt) in enumerate(zip(human,receipts)):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=d.get('observation_source_scene',source['scene']);actual=trace[round(d['time_s']*20)]
+        if 'private_agenda_inference' in d:
+            from hrc_pilot.private_agenda_human import agenda_request,parse_agenda,AGENDA_SCHEMA,AGENDA_SYSTEM
+            inference=d['private_agenda_inference']
+            previous=(human[human_index-1]['private_agenda_inference']['agenda_after'] if human_index else None)
+            assert inference['agenda_before']==previous
+            expected=agenda_request(scene,activity,p['profile'],previous,human[:human_index])
+            assert inference['request']==expected
+            payload_agenda={'messages':[{'role':'system','content':AGENDA_SYSTEM},
+                {'role':'user','content':json.dumps(expected,ensure_ascii=False,separators=(',',':'))}]}
+            assert inference['model_input']==payload_agenda and inference['output_schema']==AGENDA_SCHEMA
+            assert inference['decoder']=='lm-format-enforcer-0.11.3' and not inference['generation_thinking']
+            encoded_agenda=tool_tokenizer.apply_chat_template(payload_agenda['messages'],tokenize=True,
+                add_generation_prompt=True,enable_thinking=False)
+            assert encoded_agenda==inference['input_token_ids']
+            assert tool_tokenizer.decode(inference['generated_token_ids'],skip_special_tokens=True).strip()==inference['raw_output']
+            assert inference['chat_template_sha256']==sha256(tool_tokenizer.chat_template.encode()).hexdigest()
+            if inference['parse_error'] is None:assert inference['agenda_after']==parse_agenda(inference['raw_output'])
+            else:
+                try:parse_agenda(inference['raw_output'])
+                except (ValueError,TypeError):pass
+                else:raise AssertionError('意图错误标签与原始输出不符')
+                assert inference['agenda_after']==previous
+            assert source['self_generated_private_agenda']==inference['agenda_after']
+            assert source['private_agenda_status']==('generated_interpretation_not_world_fact' if inference['parse_error'] is None
+                else 'agenda_generation_invalid_previous_interpretation_retained')
+            assert d['neural_inferences']==2
         if d.get('human_observation_encoding') in {'intent_semantic_facts_v1','intent_semantic_available_targets_v2','intent_semantic_agent_dialogue_v3'}:
             from hrc_pilot.intent_observation import intent_observation
             expected_scene=intent_observation(scene)
@@ -121,6 +147,9 @@ def audit(root):
                     support_replay_errors.append({'time_s':d['time_s'],'target':name,'max_axis_error_m':delta})
                     # 独立对齐实际缓存几何；目标容差保持原值，不为失败样本放宽。
                     np.testing.assert_allclose(point,scene['regions_xyz'][name],atol=.0002,rtol=0)
+            if d.get('human_history_encoding')=='current_full_scene_and_compact_factual_experience_v1':
+                from hrc_pilot.private_agenda_human import compact_action_history
+                payload=compact_action_history(payload)
             assert payload==d['native_tool_model_input']
             assert d['chat_template_sha256']==sha256(tool_tokenizer.chat_template.encode()).hexdigest()
             encoded=tool_tokenizer.apply_chat_template(payload['messages'],tools=payload['tools'],
@@ -303,6 +332,13 @@ def audit(root):
             'samples':support_replay_errors,
             'recorded_geometry_frames':geometry_frames,
             'scope':'先按独立物体位置重建缓存或已forward的物理帧，再核对柜顶几何；目标容差未放宽，不等于任务完成。'}
+    if any('private_agenda_inference' in row for row in human):
+        assert all('private_agenda_inference' in row for row in human)
+        assert p['private_agenda_shared_with_robot'] is False
+        assert p['human_neural_inferences_per_decision']==2
+        result['human_private_agenda_calls']=len(human)
+        result['human_private_agenda_parse_errors']=sum(row['private_agenda_inference']['parse_error'] is not None for row in human)
+        result['private_agenda_interpretation']='两次真实生成的token与输入已核对；私人需要不经后台变成正确动作，不认证人物拟真。'
     write_path=root/'interaction_verification.json';write_path.write_text(json.dumps(result,ensure_ascii=False,indent=2))
     if p['robot_model_metadata'].get('language_token_limit'):
         (root/'language_observation_verification.json').write_text(json.dumps({
