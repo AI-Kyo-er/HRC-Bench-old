@@ -51,4 +51,6 @@ def intent_observation(scene):
         result['measured_scene_geometry_and_contact']=deepcopy(world['public_scene_measurements'])
     if world.get('measurement_version',1)>=4:
         result['measured_reference_relations']=deepcopy(world['public_relation_summary'])
+    if 'self_contribution_observations' in scene:
+        result['self_contribution_observations']=deepcopy(scene['self_contribution_observations'])
     return result

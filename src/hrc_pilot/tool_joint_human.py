@@ -66,6 +66,9 @@ def execution_tool_result(decision_id,scene):
         result['measured_scene_geometry_and_contact']=deepcopy(scene['measured_world']['public_scene_measurements'])
     if scene['measured_world'].get('measurement_version',1)>=4:
         result['measured_reference_relations']=deepcopy(scene['measured_world']['public_relation_summary'])
+    if 'self_contribution_observations' in scene:
+        result['selected_contribution_observation']=deepcopy(
+            scene['self_contribution_observations'].get(str(decision_id)))
     return result
 
 

@@ -105,6 +105,8 @@ def main():
     parser.add_argument('--situation',choices=list(SITUATIONS))
     parser.add_argument('--activity-specific-context',action='store_true',
                         help='把私有外部生活事实绑定到活动与具体物品，不生成双方下一动作')
+    parser.add_argument('--human-contribution-observations',action='store_true',
+                        help='将自己已选贡献与实际观测相连，不评分共同任务或选择下一策略')
     parser.add_argument('--human-decision-steps',type=int,default=40)
     parser.add_argument('--coordinator-decision-steps',type=int,default=40)
     parser.add_argument('--human-model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
@@ -114,6 +116,8 @@ def main():
         parser.error('退让语言操作要求明确的机器人操作库接口')
     if args.interaction_contract and not args.robot_skill_bank:
         parser.error('新活动契约需要显式操作能力库和神经协调器')
+    if args.human_contribution_observations and not (args.workspace_method and args.interaction_contract and args.human_source=='neural'):
+        parser.error('贡献事实反馈要求明确新工作区、活动契约及生成式人')
     if args.reference_drink_provision!='serving_ready' and not (args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage'):
         parser.error('提供位置控制仅用于明确标注的新布局固定饮品参考')
     if args.reference_vla_instruction and (args.human_source!='reference' or args.symbolic_coordinator or args.coordinator_port or args.robot_replay):
@@ -183,6 +187,8 @@ def main():
     if args.interaction_contract:paths.append(Path('src/hrc_pilot/interaction_contracts.py'))
     if args.workspace_method:paths.extend(Path('src/hrc_pilot')/name for name in
         ['workspace_contracts.py','activity_workspace.py','surface_human_executor.py','human_decision_schedule.py'])
+    if args.human_contribution_observations:
+        paths.append(Path('src/hrc_pilot/contribution_observations.py'))
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     args.output_dir.mkdir(parents=True);ep=args.output_dir/'episode';ep.mkdir();journal=NativeRunJournal(ep)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
@@ -303,6 +309,10 @@ def main():
                     scene['table_surface_positions']=workspace['zone_surface_positions']
                     scene['action_interface']['table_surface_placement']='Table destination coordinates describe the support surface; the selected object body height is resolved from current collision geometry. Selection is not completion.'
                 if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
+                if args.human_contribution_observations:
+                    from hrc_pilot.contribution_observations import contribution_observations
+                    scene['self_contribution_observations']={str(previous['decision_id']):
+                        contribution_observations(previous,scene) for previous in human.decisions[-4:]}
                 d=(human.decide(scene,bool(placement.records and goal_success(placement.records[-1])))
                    if args.human_source=='reference' else human.decide(scene))
                 actor.accept_choice(d['choice'],d['decision_id'])
@@ -435,6 +445,7 @@ def main():
         'workspace_method':args.workspace_method,
         'human_execution_class':type(actor).__name__,
         'human_decision_cadence':'observation_events_and_periodic_reconsideration' if human_schedule else 'fixed_decision_interval',
+        'human_contribution_observations':args.human_contribution_observations,
         'reference_vla_instruction':args.reference_vla_instruction,
         'reference_drink_provision':args.reference_drink_provision if args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage' else None,
         'initial_human_holding':args.initial_human_holding,

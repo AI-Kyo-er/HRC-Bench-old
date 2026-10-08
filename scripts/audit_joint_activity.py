@@ -74,6 +74,13 @@ def audit(root):
     for human_index,(d,receipt) in enumerate(zip(human,receipts)):
         assert d['decision_id']==receipt['request_id'] and d['choice']==receipt['choice']
         source=d['private_input'];scene=d.get('observation_source_scene',source['scene']);actual=trace[round(d['time_s']*20)]
+        if p.get('human_contribution_observations'):
+            from hrc_pilot.contribution_observations import contribution_observations
+            expected_contributions={str(previous['decision_id']):contribution_observations(previous,scene)
+                                    for previous in human[:human_index][-4:]}
+            assert scene['self_contribution_observations']==expected_contributions
+        else:
+            assert 'self_contribution_observations' not in scene
         if 'private_agenda_inference' in d:
             from hrc_pilot.private_agenda_human import agenda_request,parse_agenda,AGENDA_SCHEMA,AGENDA_SYSTEM
             inference=d['private_agenda_inference']

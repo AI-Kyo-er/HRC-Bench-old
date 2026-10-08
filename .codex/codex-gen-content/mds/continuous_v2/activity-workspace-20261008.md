@@ -128,7 +128,7 @@ Human60收到59.8结束通知后理由说private_done但话语又称将离场处
 
 406d7f5后的活跃工作跨日期继续。第三2472725、第四2488278、第五2503060、第六2524458全部terminal；父2441354/session49178已收exit0。新六条全input/scheduler/geometry/video verified，120s各2401frames，共202H推理/101贡献决定/180协调/464VLA/14400ctrl/14406frames，拒绝3均第五真实Robot指接触，source_changed全部[]。没有重启或修改运行中源。
 
-第三完整review8锚点/3区间已通过：初始奶酪物理匹配26.4、宏31.3、终态稳定，盘在个人区；Body全部.6。R16 cream_in_bowl、40 bowl_inside_top_drawer、72 open_middle却都称存奶酪；R100才认可完成并错误说H离开。初始成果真实、动态离返未证，不能全称失败。区间8–12开门4VLA、12–26.4存储14.4（4VLA/10.4hold）、28–100成果至认可72（8VLA/64hold、H7/逐字重复1）。765?不依赖未知handle；第三视频Frame8/28/40/116已提取，view28/116。
+第三完整review8锚点/3区间已通过：初始奶酪物理匹配26.4、宏31.3、终态稳定，盘在个人区；Body全部.6。R16 cream_in_bowl、40 bowl_inside_top_drawer、72 open_middle却都称存奶酪；R100才认可完成并错误说H离开。初始成果真实、动态离返未证，不能全称失败。区间8–12开门4VLA、12–26.4存储14.4（4VLA/10.4hold）、28–100成果至认可72（8VLA/64hold、H7/逐字重复1）。第三视频Frame8/28/40/116已提取，view28/116。
 
 第四完整review7/3区间通过：Food实际在Plate（20由盘支撑），H28持Plate+Cream载物，32因30.7饮品Cue转Wine并中断Plate请求4、暂放载盘至个人区；Wine56已Guest点，Bowl支持Wine，Food仍在个人区Plate。69.5取消、H72wait+公开调整，不能认证点心恢复。当前single-coordinate destination欠区内并排表达，不能把所有摆放失真归高层NN。Source同目标继续4而非重复起搬。区间32–56搬酒24hold、56–92保持36、72–100认可28含4VLA。第四Frame28/32/56/116已提取。
 
@@ -141,3 +141,9 @@ Human60收到59.8结束通知后理由说private_done但话语又称将离场处
 本轮确认父/全部子不存在且8766无活动连接、六summary/audit/video都terminal后，仅核UID/cwd/cmdline停止自有π2440833，session8693 exit143；nvidia compute-apps空，四卡48492–48494MiB空闲。旧49178/8693不再poll。无其他用户被停止，无smoke。CPU HTTP3054726保留读报告。
 
 新批6videos/48links浏览器67104 terminal通过，全部play/seek/Range206/字幕/inspector/375px/JS0；88327terminal数据导出77complete/20400blocks/182400实际actions、unique/source边界通过，主78videos无pending。主browser70280尚待收实际结果。所有大文件data1软链，原始视频/模型记录未覆写。README/index/stat及本批审阅需本轮commit；下一步不能以这一整批工程完整替Goal全验收。
+
+a68b6d6已提交全六条结果、报告和资源回收。70280已terminal exit0：主78videos/742links通过，勿再poll。六Actor及49178/8693皆terminal，GPU compute-apps仍空。
+
+新增contribution_observations.py及显式--human-contribution-observations：自己已选贡献关联当前obj离手/携带/参考支撑/命名位置距离、完成和中断ID记录；ID缺失不定义失败，完成不定义共同Task成功，无聚合分数/下一策略/未来cue。运行时只取之前四决策，放入Human scene、自有工具反馈和私人需要观测；Robot输入未增加这些私有选择。默认flagFalse，旧输入保留。新源列入provenance，audit重新计算每条map并验证，而不只信日志字段。区域并排表达仍待实现，未启动单字段微调实验。
+
+tests三个新语义边界案例：近目标但仍持物不称完成；请求完成与当前支撑可不同；未知接触保持None并拒未来。完整347 passed/2 skipped（34933terminal）、compile/diff通过。旧首snack实际audit74145terminal verified、再次8解释锚点通过；没有改原始轨迹/模型输出。用存量记录CPU重建首snack4秒未Food/Bowl支持、drawer20仍held/32已released且complete的事实，验证helper不会把已选贡献当成果。**尚未闭环模型验证新反馈有效性**，不能宣称伙伴改善。Next做完整空间表达与事实反馈方法及三活动真实Sim资格，再进组合/正式两系统，全Goalactive。
