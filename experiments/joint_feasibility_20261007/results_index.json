@@ -1130,6 +1130,20 @@
       "formal_benchmark_sample": false
     },
     {
+      "run": "drawer_operation_floor_init2_seed113_20261009",
+      "label": "同初态抽屉操作前提参考：固定人、真实π0.5",
+      "kind": "reference",
+      "activity": "drawer_access",
+      "duration_s": 40.0,
+      "human_neural_calls": 0,
+      "actual_vla_calls": 16,
+      "coordinator_calls": 0,
+      "reference_complete": false,
+      "native_goal_terminal": true,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
+    },
+    {
       "run": "workspace_snack_change_use_symbolic_20261008",
       "label": "新功能区生成式伙伴：snack_service／change_use",
       "kind": "neural",

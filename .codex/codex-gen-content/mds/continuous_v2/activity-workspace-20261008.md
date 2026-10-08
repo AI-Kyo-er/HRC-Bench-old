@@ -253,3 +253,21 @@ GPU0起前48494MiB，仅本地FP16非量化层加载测试；最初命令有缩�
 接下来必须继续完整Goal：将一致v5事实与候选两阶段真实策略接入后资格，检查第三场景的基本机器人操作前提，再落实六实际情境、原idea组合/匹配对照及两系统多初始化正式比较。不能把本批或模型准备当完成，也不再围绕单个字段与提示无限迭代。当前无GPU工作需求，起新任务前再次nvidia选单卡；原始失败保留。
 
 e88c0f8已提交完整三例、只读测量修复及候选准备入口。89855已terminal exit0：主81videos/773links全部浏览器核对通过，勿再poll。git工作区干净、nvidia compute-apps为空。全Goal仍active，正式样本0；下一轮直接推进真实策略接口与操作前提，不重跑这些已结束批次或重复加载检查。
+
+## v5/量化精度接入、三帧真接口及同初态开门参考（2026-10-09）
+
+e8f7c68前轮progress。本轮6090ffb显式--human-carried-observation：仅workspace/contract/neural可用，contract wrapper选v5并记录源码/adapter/provenance版本，默认仍v4；audit按显式版本重建，不能未声明就读取v5。QwenHuman _load_model读本地AutoConfig，AWQ非量化层FP16、普通模型仍BF16，记录inference_precision。未改私人需要/下一动作规则。全361passed/2skip及新增2版本路由测试通过，15549原area snack完整旧记录再audit verified且8项审阅重核通过，旧输入保持。
+
+qualify_human_model_interface及预定三帧条件：snack16/drink36/drawer56；候选32B在GPU0（起前48494MiB）实际两阶段，过去选择/主观记忆继承原14B，当前/历史测量更新v5。模型自己的闭环未运行，原当刻选择只作输出研究对照，不输入为教师。源/代码/table/模型receiptSHA均记录，失败不重试/覆写。
+
+35200/PID2703844现terminal exit0：3帧/6真NN，parse与agenda errors0/forcedCloseFalse，latency155.58/174.55/156.66墙钟秒。snack继续Food→Bowl，reason认识正在搬但message仍提前已放，未解决；drink明确选择Plate→个人区并撤回Rack确认（旧14当刻wait且错称全清），drawer选择wait请求确认而非旧14立即不可进入的存储。只是未执行的选择，不当改善/排名。28001 verifier重建实际world5、token输入/原始输出/思考及schema/call，source_and_token_records_verified3；无语义独立验证。数据1原记录不改，results/human_candidate_interface_20261009软链；新报告0videos/10links browser已terminal通过，原场景视频链接供理解。
+
+d3d27aa预定drawer操作floor：同init2/seed113、固定Human清盘、task_only原生OpenMiddle、40秒，reference等待和可能的收尾Cartesian明确标注。GPU2起前48494，πGPU3起前48492；新π2705550/session57382，floor session8225，现全部terminal。只16实际π调用/800ctrl/801frames，HumanNN0；16–24秒VLA8s，32块refhold/32块refclearance，不能都算神经操作。21.55原生门开见证、最大opening.161158，38.2原安排物理观察成立、末态containmentTrue，但40秒宏尚未全退手，reference_completeFalse；不等于门没开或完整共同活动完成。
+
+23608 floor audit verified、过程解析与80886 video verified801。initial_state_comparison：XML逐字一致且SHA，初始qpos/qvel/EEF/hand/body/objects差异全0；不是只按seed自称匹配。operation_witness：21.55前控制来源actual_vla_public_dialogue，后来的Cartesian清场不计开门。之后Human策略/指令选择/时序/时长不同，不能将与动态120s全关的差异单归某个协调机制；但证实此起始场景有可执行参考。22/39真实视频帧已提，view39能见打开与食品在内。
+
+两作业都终态且8766无连接，核UID/cwd/cmdline仅停止自有π2705550，57382 exit143，GPU0/2/3释放，四卡48492–48494MiB且compute为空。不停止其他人，不产生smoke文件。旧35200/8225/57382/28001/23608/80886均terminal不要再poll。
+
+新floor与候选报告/README/主入口已更新。floor首次browser1video/9links通过，后多加operation_witness链接；主84328 terminal82videos/783links全部play/seek/Range206/mobile/字幕/JS0通过。32650主82published/0pending terminal；51010导出81完整/21200blocks/190400真实执行动作、stem/来源verified（有hold/ref，不全为VLA），formal未冻结，非专家；不要再poll这些terminal。363测试总范围（361全+2新增）及compile/diff通过。
+
+下一步实际闭环v5＋候选，保留该候选仍有早报完成的失败，不能认为更大即可靠；共享候选的文字协调器也会换权重，须标为联合方法变化。利用已证实的操作前提进一步落实三活动的有效伙伴、六真实生活变化与原idea组合/匹配控制，然后正式两系统/多init。完整Goal active/正式0/candidate72未冻结，无GPU任务在跑。
