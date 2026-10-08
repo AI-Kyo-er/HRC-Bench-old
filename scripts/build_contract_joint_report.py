@@ -108,7 +108,8 @@ def build(output=Path('experiments/contract_joint_20261008')):
             '因此需要区分事实误记、约定更新失败、接口能力不匹配与具身执行失败。</p>'
             '<p>这是有原始锚点的助手审阅，未完成独立语义认证；不替代最终轨迹和完整视频核查。'
             '<a href="OBSERVATION_NOTES.md">33条原始来源及逐时刻解释</a> · '
-            '<a href="CAPABILITY_REVIEW.md">共同任务与实际能力的设计决定</a></p></section>')
+            '<a href="CAPABILITY_REVIEW.md">共同任务与实际能力的设计决定</a> · '
+            '<a href="../dynamic_joint_activity_20261007/DESIGN.md">完整Benchmark流程、模型适配及七项未完成要求</a></p></section>')
         page=page.replace('</main>',prefix_review+'</main>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'

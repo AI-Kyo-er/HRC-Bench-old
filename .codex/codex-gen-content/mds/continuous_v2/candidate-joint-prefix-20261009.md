@@ -11,3 +11,13 @@
 新增candidate实验CAPABILITY_REVIEW.md：日常活动依赖与真实操作接口先对应；超能力需要允许拒绝、替代、请求人接手，不静默重命名技能。若核心任务需任意功能区放置，应接入/适配真实策略并验证，不能后台搬Robot物体补洞。此设计不把Benchmark收窄到九操作。OBSERVATION_NOTES、BATCH_REVIEW与HTML前缀解释同步，仍0完整视频/正式0直到terminal输入和视频核查。
 
 下一步收齐同batch三例，不改运行模型/能力/提示；逐例区分伙伴事实错误、接口、执行和协调失败，检查全视频。之后落实可执行六情境与两实际不同系统。原idea结构关系与未见组合要求保留，不将六种生活通知视为结构覆盖。Goal保持active。
+
+## 后续全局设计与模型适配核对
+
+上一轮progress提交4855292。本轮同父／子／服务已复查live，并poll同session58742仍运行；首例推进至87.95秒，Robot84秒hold公开尊重人的暂停饮品要求。仍未terminal，不能重启或改已加载源码。
+
+沿用academic-research-suite实验设计inline；已核对COOPERA3.2及官方HUMAN.md、HABIT官方工作链／可观察反应及训练README、HRIBench3–5节。整体DESIGN.md补入活动实例化、关键状态可执行性、生成式闭环、伙伴审阅、stem数据发布、正式评测六阶段。保持私有边界与同一世界；生活情境和结构因子分开，未见组合保留，不预设复合一定更难。
+
+本地OpenVLA config.norm_stats只有libero_spatial；当前CASES三活动为libero_goal。直连ModelScope两个候选goal ID都404，仅是有限搜索未取到资源，未下载／绕行VPN，不能推断所有中国镜像都不存在。不同模型需适配依据与同任务操作资格；旧空间模型接入不能直接计两模型正式覆盖。文本／视觉协调＋同π可以明确不同系统比较，但不能称不同VLA比较。
+
+README明确旧布局成功与新区域饮品失败不可混用，更新32B/v5已真实运行而非仅资产准备。报告链接完整设计和七项证据状态；不因文档、来源核对或浏览器通过mark complete。运行GPU仍有实际工作，保留服务到批次结束再及时释放。
