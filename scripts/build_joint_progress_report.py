@@ -70,6 +70,10 @@ _agenda_table=Path('experiments/private_agenda_joint_20261008/conditions.csv')
 if _agenda_table.exists():
     for _row in csv.DictReader(_agenda_table.open()):
         RUNS.append((_row['run'],f"持续私人意图：{_row['activity']}／{_row['situation']}",'neural'))
+_contract_table=Path('experiments/contract_joint_20261008/conditions.csv')
+if _contract_table.exists():
+    for _row in csv.DictReader(_contract_table.open()):
+        RUNS.append((_row['run'],f"统一共同活动：{_row['activity']}／{_row['situation']}",'neural'))
 TASKS = {
     'snack_service': ('点心准备', '人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。'),
     'drink_storage': ('饮品整理', '人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。'),
@@ -120,6 +124,11 @@ def build(results, output):
         participation = measured.get('actual_participation', {})
         activity = provenance.get('activity', metrics.get('activity', 'snack_service'))
         task_label, dependency = TASKS[activity]
+        if provenance.get('interaction_contract'):
+            from hrc_pilot.interaction_contracts import CONTRACTS
+            contract=CONTRACTS[activity]
+            task_label=contract.activity.label
+            dependency=contract.jointly_organize+'；'+'；'.join(contract.activity.dependencies)
         if kind=='qualification':
             task_label='关系执行与VLA操作检查'
             dependency='固定人放奶酪到碗、搬碗到盘；机器人实际VLA持续执行退让语言，非动态协调链。'

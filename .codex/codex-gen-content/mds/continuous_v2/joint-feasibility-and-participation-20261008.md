@@ -530,3 +530,15 @@ private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/i
 三个既有完整private_agenda root各保存注释及reviewed_coordination_metrics.json：drink公开新用途36→R56确认hold，20s实际VLA、五Human说明中四逐字重复；不能从私有33.9起算，也不证明新的纠正搬运（人已先放Cab）。snack公开优先更新72→R72操作尝试0s，但炉前技能与snack_delivery不同且双方选同盘；drawer口头离开32→R32旧保持0s，不证明新线索被理解/H实际离返。三例结合原review分别解释，快速响应不等有效协调。
 
 报告已接入三例过程表，browser private_agenda_report_browser_20261008/verification_process_metrics.json验证3videos/17links、play/seek/Range206/activeCue/同步need/375px/JS0通过。331 tests/2skip；新增3项测部分控制区间、禁止私有通知起点、源变更及倒序区间拒绝。COORDINATION_REVIEW_GUIDE.md补齐协议及复现。未生成smoke文件；所有raw原始视频/模型输入不变。完整Goal仍active，formal0/未冻结72；尚缺六真实覆盖、可信伙伴、持续重组、正式系统比较与有效安排／负担效度。
+
+## 统一活动首例终态与任务设计决定（2026-10-08）
+
+上一轮progress提交1165264。饮品子2102625现已terminal；batch同parent2102624/session22121继续，第二实际子2273410（snack/change_use/init3/seed82）live，π2095935/session46190仍需第二及第三实验。不要因第一子missing重启batch。另一用户wangjy进程2251800在GPU0/3，不能停止；我们的π在3、Human在2，仍运行需要。空闲及时再nvidia检查，实验源和条件没有中途改动。
+
+首例contract_drink_request_symbolic完整120s，60H NN/30decision/30coord/40VLA/2400实际control；4执行拒绝、agenda parse0、source_files_changed_during_run=[]。视频2401frames/20fps/512×896、0–120timeline verified。真实8/44/80/116s帧保留data1/results/contract_visual_review_20261008，已查看44/116，非smoke。7项助手解释及源anchors已核对：H0/I'll place被R误读成让它放；H8仍自己放/R再execute，reason说hold而mode选execute。H宏16.2结束，23.5提醒后无明确新求助工作链。H口头退出但wait，全部trace body y=.6，无离返。44/48/52/76取瓶被真实Robot指接触拒绝，H44released=False，不能全算执行器无故故障；hold维持夹爪，不是放手，正式任务需检查实际释放／退出能力，不用参考clearance替被测Robot。
+
+H16说Robot正在处理碗但R当时hold且此前只选酒瓶；R76才开始bowl_on_cabinet，又说Human在处理碗，实际held=None。与记录冲突的归因有证据，不把时间先后称错误传播因果。终bottle/bowl柜体支撑且释放；原RackFalse不能自动判当前Cab用途失败。尚未认证主动请求—不同回应—贡献后果链，formal None。
+
+TASK_DESIGN_DECISIONS.md重新核对HABIT2.1/2.3/B.4及缓存COOPERA3.2，明确三活动/六情境的实际需要、布局与依赖。当前代码drink_staging=wine_home、snack_delivery=bowl_personal；三条首记录的位置别名/原地可用及原源码语句/sha保存data1/results/task_layout_review_20261008/initial_region_evidence.json，引用record0hash，不要求正在追加的全文件不变。设计待实现，不能计完成覆盖；下一步收齐三例后同时处理真实需要、布局和互依，不只调提示。保留original局部/串接/历史并发与未见组合要求。
+
+发布contract页1verified video/11links、7review、同步双方视图，browser contract_report_first_final_20261008.json通过play/seek/Range206/active字幕/同步need/375px/JS0。主入口正确描述新mission，66videos/628links同项验证通过（verification_contract_first.json，97373terminal）；63×120s、2×60s、1×24.1s，2新case pending不计完整。loader65complete/17520blocks/153600actual7D actions、uniqueID/source边界通过（82221terminal），不是专家数据/正式split。此前331 tests/2skip，本轮报告增量compile/diff/browser通过，无模型源改动。完整Goal仍active，formal0，所有未验收要求保持。
