@@ -36,3 +36,6 @@ contract报告已3视频/27links+1设计图，71276终态浏览器通过；main6
 下一资格条件已运行前固定experiments/workspace_reference_20261008：snack/drink/drawer init2 seed91/92/93、120s、初持、固定人、task_only原生VLA，Robot准备期参考hold和收尾Cartesian清场分开。不使用reference-vla-instruction免其覆盖参考准备调度，也不将完整活动长指令塞进200token限制。脚本run_workspace_reference_batch.sh固定GPU2，π按需GPU3；起前必须nvidia再查。全部终态video/audit/process核查后，才进入同一方法跨活动神经验证和两个系统正式比较。Goal全要求保持active，formal0/candidate72未冻结。
 
 若内部分析出现海量重复或不存在的变量名，不按那些内容写代码。只信本工作树、真实进程和输出；短分析立即工具，避免空转和单字段变体。
+
+
+下一版与整批提交aeda078。main最终93416已收：68videos/648links、play/seek/Range206/字幕/375px/JS0全部通过，不再poll；contract3videos/27links+1图通过。344/2skip已收80353。新参考已实际启动：π GPU3/session46355/PID2366870（不是已terminal的旧2095935），port8766听服务；batch GPU2/session13767/父2367442/第一子2367443，NN Human0，第一snack已推进32模拟秒且24秒选择接收。首receipt实际surface[.16,.04,.9]→bowl body[.16,.04,.9004189052601762]，读取时再核对精确原值，不以本行浮点文字替实际记录。实际新模块已进入运行，无模型源编辑。仍需收三条终态、完整视频及参考成功/失败，结束后及时停止不再需要的自有π并nvidia验证；不停止活跃新任务。旧batch/session22121与旧π46190均terminal，勿混。
