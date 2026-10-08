@@ -31,3 +31,19 @@
 同资源VLA暴露11.85秒；人持物时Robot夹爪接触累计0秒。暴露不是碰撞标签，夹爪零接触不是全身安全。身体离返区间为空，本例不认证暂离返回能力。撤回饮品的68秒公开线索被Robot同轮读到并选择保持，72秒人认可暂停；承认局部链路，同时保留早报完成、过时等待和操作目标错配。
 
 已从原始视频保存并查看[32秒](../../results/candidate_joint_prefix_20261009/visual_review/snack_32s.png)、[36秒](../../results/candidate_joint_prefix_20261009/visual_review/snack_36s.png)、[72秒](../../results/candidate_joint_prefix_20261009/visual_review/snack_72s.png)三帧，完整视频在[index.html](index.html)。这些是原始Sim视频取帧，供行为审阅保留，不替代完整视频或定量接触证据。正式样本0，后两例不预判。
+
+## 放置释放的独立重建
+
+[释放核查](../../results/continuous_v2/candidate_snack_detour_symbolic_20261009/released_placement_audit.json)绑定保存的公开食品入碗目标，叠加人明确持物／载荷归属和原始手部接触，重新累计0.2秒稳定时间。原始记录首次成功17.45秒，重建后的食品释放稳定首次18.35秒；完整点心交付首次34.2秒是另一项条件。115个采样状态与原成功标记不一致，其中111个仍有人持有或随人携带，包含搬运装好碗时的食品载荷；这些是同一条运行的采样状态，不是115个独立实验失败。
+
+核查只输出放置释放事实，Robot贡献和正式分数均为null；不改原始summary，不写策略输入。中断或不满预定步数、缺载荷归属、目标对象不对应、源文件版本变化时拒绝认证或展示。新增8项测试覆盖直接持物、载荷、所要求的容器释放、真实手接触、稳定时间重置、公开目标绑定、终态及来源变更。完整测试373通过／2跳过；更新后的候选报告1视频／23链接浏览器通过。
+
+复现：`PYTHONPATH=src .venv-libero-native/bin/python scripts/audit_released_placement.py --input-dir results/continuous_v2/candidate_snack_detour_symbolic_20261009 --object-id cream_cheese_1 --receiver-id akita_black_bowl_1`。其他任务须匹配自己的公开放置目标；抽屉开合不是放置，不用此核查替代关节评价。后续若导出完成标签，应从已核验观测重建，不能直接把旧summary字段当Robot完成标签。
+
+## 饮品运行中：持物、请求与实际提供
+
+[0至35.95秒的12条来源快照](../../results/candidate_joint_prefix_20261009/drink_resource_transfer_36s_prefix.json)已逐条重读并核对行文本SHA256。尚无完整终态，不计纠正接管或共同任务成功。
+
+- 人0、4、8秒实际持酒瓶并选择wait，同时要求Robot放酒架。Robot输入包含人持酒瓶，仍选择bottle_on_rack，没有先提出提供／释放请求；资源仍由人占有。8秒Robot实际夹爪接触是flat_stove_1，不能当已经接手酒瓶。
+- 人28秒的实际生成工具调用自己选择wine_bottle_1→wine_bottle_1_on_cabinet，公开话语仍要求Robot放酒架，理由还说临时柜顶会冲突。不是后台把酒架路由成柜顶，归一化只补memory。是否为合理暂放以供Robot后续搬运，需要实际释放和公开分工证据，不能先认证接管。
+- 35.95秒人仍持酒瓶transfer_translate，位置约(0.036,-0.240,1.290)，尚未柜顶放下。Robot32秒继续酒架操作。后续私人用途变化的实际机会与双方响应继续按同一版本核对。

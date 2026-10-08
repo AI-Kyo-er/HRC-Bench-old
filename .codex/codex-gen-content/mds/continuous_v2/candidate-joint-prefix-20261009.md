@@ -35,3 +35,11 @@ candidate_snack_detour_symbolic_20261009：120模拟秒，2401帧／20FPS／512�
 候选报告1完整视频／22links浏览器通过，含实际play/seek/Range206、字幕、同步私人需要与375px布局；12finding版已复核。统一入口已更新83published（含旧partial），候选2pending。全部82complete开发数据全量加载核对通过：21440观测块／192800实际执行动作／uniqueID21440，机器人输入仅image/wrist/state/prompt、无私有意图；参考保持／清场／回放与学习控制分别计，不称成功专家数据，正式split未冻结。main浏览器session56184已terminal exit0：83videos／794links通过，同样包含实际播放／拖动／Range及同步视图；勿再poll该完成handle。
 
 批父2719750、π2719139继续；第一子2719751已退出，第二子2748294实际启动，drinking已到7.95秒且H4输入已保存；不是batch失败或需重跑。CPU报告HTTP保留。GPU2/3仍服务后两活动，不停止。下一步收齐饮品和抽屉完整视频、伙伴及任务资格，再推进六情境和同版双系统，全部原Goal要求保持active，正式0。
+
+## 离线释放边界及饮品资源交接
+
+上一轮progress提交bbd9eff。本轮复查同batch／第二子／πlive，未修改已加载runtime。新增released_placement_audit.py（不在native*.py运行源匹配中）、audit_released_placement.py及8项测试；纯离线分析，不传入策略、不改原记录。绑定保存公开目标、核对完整预定步数/无failure/输入视频gates，按明确持物/载荷、真实手部接触和原放置几何/支撑/速度重新累计0.2s。未知载荷、错配目标、失效源版本拒绝；开放新目标需要保存明确native_placement_goal元数据，旧三放置任务按其保存的公开场景及原生指令核对，不作为策略表。
+
+首例实际重建original17.45→released18.35，115采样状态与旧成功标记不同、111有人持有/随人carry（也含搬装好碗时食品载荷）。不叫115实验失败，不归Robot贡献、不自动判断当前约定。食品释放18.35与完整点心交付34.2分别呈现；原summary不改。候选报告读取重建与sourceSHA一致才展示，1video/23links浏览器通过。完整回归373通过/2skip（session39165 terminalexit0），8目标测试通过。没有GPU测试或新GPU任务，没有临时smoke产物。
+
+饮品0/4/8人真实持Wine且wait、要求Robot上架；Robot收到持物仍execute，8实际夹爪接触Stove。H28实际NN工具选择Wine→Cab，但公开仍请求Rack，理由说临时Cab冲突；contribution_normalization仅补memory，不是后台换目标。35.95人仍持Wine/transfer_translate、z1.290；尚未释放Cab。12条原始JSONL行/SHA已独立重读存drink_resource_transfer_36s_prefix.json，不计终态/接管成功，后续是否合理暂放需公开分工及实际证据。第二完整轨迹/视频仍在运行，Goal active/正式0。

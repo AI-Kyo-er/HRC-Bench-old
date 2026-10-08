@@ -11,6 +11,7 @@ from hrc_pilot.interaction_contracts import CONTRACTS
 from hrc_pilot.joint_video_captions import ensure_research_captions
 from hrc_pilot.joint_episode_inspection import render_inspection_panel
 from hrc_pilot.reviewed_coordination_metrics import render_reviewed_metrics
+from hrc_pilot.released_placement_audit import render_released_placement_audit
 
 
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
@@ -47,6 +48,7 @@ def build(output=Path('experiments/contract_joint_20261008')):
             review=read(root/'public_request_response_review.json')
             card+='<p>'+escape(review.get('interpretation','尚未完成逐例行为审阅；不将原生操作成绩作为共同活动成绩。'))+'</p>'+render_findings(root,review)
             card+=render_reviewed_metrics(root)
+            card+=render_released_placement_audit(root)
             choices=[json.loads(line) for line in (ep/'human_policy_io.jsonl').read_text().splitlines() if line.strip()]
             rows=[]
             for decision in choices:
@@ -57,6 +59,8 @@ def build(output=Path('experiments/contract_joint_20261008')):
                 ('provenance.json','设置与源码'),('interaction_verification.json','实际输入与动作核查'),
                 ('joint_process_evidence.json','实际过程证据'),('independent_video_verification.json','完整视频核查'),
                 ('episode/public_dialogue.jsonl','双方实际公开交流'),('episode/trace.jsonl','完整环境轨迹')])+'</p>'
+            if (root/'released_placement_audit.json').exists():
+                card+='<p>'+link(root/'released_placement_audit.json','原生放置、显式持物与载荷释放核查')+'</p>'
         else:
             card+='<p>未核查的运行不展示为完整实验视频，不计动态行为覆盖或正式样本。</p>'
         cards.append(card+'</section>')
