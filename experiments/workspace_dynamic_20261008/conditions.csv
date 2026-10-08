@@ -1,0 +1,7 @@
+run,activity,situation,profile,init_state_id,seed,steps,initial_human_holding,system,role
+workspace_snack_change_use_symbolic_20261008,snack_service,change_use,participating,2,101,2400,1,symbolic,workspace_dynamic_development
+workspace_drink_request_symbolic_20261008,drink_storage,robot_request,busy,2,102,2400,1,symbolic,workspace_dynamic_development
+workspace_drawer_leave_return_symbolic_20261008,drawer_access,leave_return,busy,2,103,2400,1,symbolic,workspace_dynamic_development
+workspace_snack_detour_symbolic_20261008,snack_service,detour,participating,2,104,2400,1,symbolic,workspace_dynamic_development
+workspace_drink_correction_symbolic_20261008,drink_storage,correction,particular,2,105,2400,1,symbolic,workspace_dynamic_development
+workspace_drawer_join_symbolic_20261008,drawer_access,join,busy,2,106,2400,1,symbolic,workspace_dynamic_development

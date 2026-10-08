@@ -1,6 +1,6 @@
 {
   "role": "fixed_feasibility_reference_not_dynamic_policy",
-  "verified_terminal": 3,
+  "verified_terminal": 4,
   "reference_complete": 2,
   "formal_samples": 0,
   "conditions": [
@@ -44,6 +44,18 @@
       },
       "verified_terminal": true,
       "reference_complete": true,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "workspace_drink_provision_control_20261008",
+        "activity": "drink_storage",
+        "init_state_id": "2",
+        "seed": "92",
+        "role": "provision_control"
+      },
+      "verified_terminal": true,
+      "reference_complete": false,
       "formal_sample": false
     }
   ]

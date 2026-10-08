@@ -78,6 +78,11 @@ _workspace_reference_table=Path('experiments/workspace_reference_20261008/condit
 if _workspace_reference_table.exists():
     for _row in csv.DictReader(_workspace_reference_table.open()):
         RUNS.append((_row['run'],f"新功能区操作资格：{_row['activity']}",'reference'))
+RUNS.append(('workspace_drink_provision_control_20261008','饮品提供位置独立操作控制','reference'))
+_workspace_dynamic_table=Path('experiments/workspace_dynamic_20261008/conditions.csv')
+if _workspace_dynamic_table.exists():
+    for _row in csv.DictReader(_workspace_dynamic_table.open()):
+        RUNS.append((_row['run'],f"新功能区生成式伙伴：{_row['activity']}／{_row['situation']}",'neural'))
 TASKS = {
     'snack_service': ('点心准备', '人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。'),
     'drink_storage': ('饮品整理', '人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。'),
@@ -221,6 +226,7 @@ def build(results, output):
 <p><a href="../private_agenda_joint_20261008/index.html">持续私人需要与当前贡献分开生成：三活动资格批</a>：两次真实神经推理，当前完整场景和紧凑历史分开保留。后台不从意图标签选动作，私人理解不直接传给机器人。未结束条件不计终态结果或正式样本。</p>
 <p><a href="../contract_joint_20261008/index.html">日常共同活动、能力域与伙伴线索：统一开发验证</a>：重新区分原生操作、当前共同约定和私人用途；人取放菜单匹配实际可移动物体，公开关系摘要来自真实接触与几何。三条条件在运行前记录，未核查终态不计结果，仍非正式评测。</p>
 <p><a href="../workspace_reference_20261008/index.html">新功能区三活动真实操作资格</a>：固定人／参考调度与实际π0.5；2条参考链成立，饮品上架失败保留。静态几何可用不表示模型能操作，不计动态人或正式系统成绩。</p>
+<p><a href="../workspace_dynamic_20261008/index.html">明确需要与真实功能区：六情境生成式伙伴开发</a>：三活动、六条预先记录的情境配置，实际覆盖须审阅行为。饮品改变提供位置的独立参考仍未上架，两条失败都保留并区分基本操作与协调归因。</p>
 <p><a href="COORDINATION_REVIEW_GUIDE.md">共同安排、实际贡献和负担审阅手册</a>：目标一致、分工一致、实际执行一致分别核对；不以两方都说完成或目标到位代表cobalance。
 <a href="../../results/joint_evaluation_preparation_20261008/candidate_conditions.csv">72条候选样本条件</a> · <a href="../../results/joint_evaluation_preparation_20261008/preparation.json">未冻结状态</a> · <a href="../../results/joint_evaluation_preparation_20261008/model_file_fingerprints.json">模型文件指纹</a>。候选条件和磁盘文件指纹不是正式结果，不追溯证明旧进程内存参数；正式执行样本目前为0。</p>
 <p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>

@@ -16,14 +16,18 @@ from hrc_pilot.reviewed_coordination_metrics import render_reviewed_metrics
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
 
 
-def build():
-    output=Path('experiments/contract_joint_20261008')
+def build(output=Path('experiments/contract_joint_20261008')):
+    output=Path(output);contracts=CONTRACTS
+    workspace=output.name=='workspace_dynamic_20261008'
+    if workspace:
+        from hrc_pilot.workspace_contracts import WORKSPACE_CONTRACTS
+        contracts=WORKSPACE_CONTRACTS
     def link(path,label):
         return '<a href="'+escape(os.path.relpath(path,output),quote=True)+'">'+escape(label)+'</a>'
     cards=[];statuses=[]
     for row in csv.DictReader((output/'conditions.csv').open()):
         root=Path('results/continuous_v2')/row['run'];ep=root/'episode'
-        contract=CONTRACTS[row['activity']];situation,question=SITUATIONS[row['situation']]
+        contract=contracts[row['activity']];situation,question=SITUATIONS[row['situation']]
         audit=read(root/'interaction_verification.json');video=read(root/'independent_video_verification.json')
         verified=audit.get('status')=='verified' and video.get('status')=='verified'
         failure=read(root/'failure.json')
@@ -64,8 +68,17 @@ def build():
         section+='<p>'+link(geometry_root/'workspace_qualification.json','12条初态几何检查')+' · '+link(geometry_root/'initial_region_evidence.json','旧布局别名证据')+' · '+link(geometry_root/'workspace_geometry.svg','可导出的设计图')+'</p></section>'
         page=page.replace('</main>',section+'</main>')
     page=page.replace('<a href="conditions.csv">运行前固定的三条条件</a>', '<a href="conditions.csv">运行前固定的三条条件</a> · <a href="BATCH_REVIEW.md">整批结果、实际参与变化及下一版边界</a> · <a href="TASK_DESIGN_DECISIONS.md">任务依赖、布局证据与六情境设计决定</a>')
+    if workspace:
+        page=page.replace('日常共同活动与动态伙伴：统一开发验证','真实功能区与明确需要：六情境生成式伙伴开发')
+        page=page.replace('运行前固定的三条条件','运行前固定的六条条件')
+        page=page.replace('href="BATCH_REVIEW.md"','href="../contract_joint_20261008/BATCH_REVIEW.md"')
+        page=page.replace('href="TASK_DESIGN_DECISIONS.md"','href="../contract_joint_20261008/TASK_DESIGN_DECISIONS.md"')
+        page=page.replace('下一版布局设计：尚未运行新场景','本批使用的布局设计与静态资格')
+        page=page.replace('该图不代表实际搬运、机器人可达或新的协作成功。','该图只说明静态布局；实际搬运和协作结果由各例视频及证据判断。')
+        page=page.replace('<h2>目的与设置</h2>', '<h2>目的与设置</h2><p>六个配置覆盖三活动，实际行为覆盖须逐例核对。每4秒检查真实变化及20秒重新考虑决定是否调用NN；调度不选择动作。Robot读取公开需要与场景，私人用途只由人自己选择公开。</p>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
-    page=page.replace('</main></html>','</main><script src="inspection.js"></script></html>')
+    inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
+    page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')
     (output/'index.html').write_text(page)
     result={'role':'unified_task_and_interaction_development',
         'verified_terminal_cases':sum(s['verified_terminal'] for s in statuses),

@@ -16,13 +16,19 @@ def read(path):return json.loads(path.read_text()) if path.exists() else {}
 def build():
     output=Path('experiments/workspace_reference_20261008');cards=[];statuses=[]
     def link(path,label):return '<a href="'+escape(os.path.relpath(path,output),quote=True)+'">'+escape(label)+'</a>'
-    for row in csv.DictReader((output/'conditions.csv').open()):
+    conditions=list(csv.DictReader((output/'conditions.csv').open()))
+    control='workspace_drink_provision_control_20261008'
+    if (Path('results/continuous_v2')/control/'summary.json').exists():
+        conditions.append({'run':control,'activity':'drink_storage','init_state_id':'2','seed':'92','role':'provision_control'})
+    for row in conditions:
         root=Path('results/continuous_v2')/row['run'];ep=root/'episode'
         audit=read(root/'interaction_verification.json');video=read(root/'independent_video_verification.json')
         verified=audit.get('status')=='verified' and video.get('status')=='verified'
         summary=read(root/'summary.json').get('episodes',[{}])[0]
         success=summary.get('reference_complete') if verified else None
         card='<section><h2>'+escape(WORKSPACE_CONTRACTS[row['activity']].activity.label)+'</h2>'
+        if row.get('role')=='provision_control':
+            card+='<p>独立提供位置控制：固定人将瓶子提供至wine_bottle_1_personal (-.20,-.02)。本例另行预定，未改动原三条条件。</p>'
         card+='<p>init'+row['init_state_id']+'，seed'+row['seed']+'，预定120模拟秒。固定人准备／接收，Robot真实π0.5执行原生指令。</p>'
         if verified:
             captions=ensure_research_captions(root)
@@ -31,7 +37,7 @@ def build():
             process=read(root/'joint_process_evidence.json');physical=process.get('original_arrangement_physical_observations',{})
             card+='<p>准备释放支撑首次见证：'+str(process.get('first_released_supported_preparation_s'))+'秒；原生操作首次稳定关系：'+str(summary.get('robot_native_goal_first_stable_s'))+'秒。操作结果与完整共同安排分别判断。</p>'
             if row['activity']=='drink_storage' and not success:
-                card+='<p>人实际把酒瓶提供到新操作区，Robot没有完成上架，后续清盘参考因此未启动。这是当前模型在该新初态的操作失败；尚不能据单例证明不可达、位置是唯一原因或模型不具备HRC能力。</p>'
+                card+='<p>人实际把酒瓶提供到指定区域，Robot没有完成上架，后续清盘参考因此未启动。原提供位置与本次独立控制均失败；尚不能据此证明不可达、位置是唯一原因或模型不具备HRC能力。</p>'
             card+='<p>'+' · '.join(link(root/name,label) for name,label in [
                 ('summary.json','原始结果'),('workspace_layout.json','真实几何与功能区'),('provenance.json','模型和配置'),
                 ('interaction_verification.json','输入／控制核查'),('joint_process_evidence.json','实际过程证据'),

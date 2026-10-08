@@ -53,3 +53,13 @@ workspace_snack/drink/drawer_reference三条均完整120s、input/video verified
 
 
 ab85006已提交三参考报告与独立位置控制。π按新控制需要重启：GPU3/session15826/PID2377653，8766已listen；控制实际启动GPU2/session97129，需查其当前子PID，固定人/NN0，不把其动作当动态Policy。来源和配置启动前冻结。全部三原参考13767及旧π46355终态，勿混；前三视频均核验，其中2成功/1失败。新增报告control链接后需最终browser及主71视频验证，已知前browser3/22通过、help非法参数exit2验证未生成/tmp目录。新控制无重跑旧结果，仍需完整120s后audit/process/video，模型不再需要时及时停自有新服务并nvidia查释放。正式0，生成式方法效果仍待Sim验证。
+
+## 提供位置控制终态与六情境开发批预定
+
+前轮ed5287d之后控制workspace_drink_provision_control_20261008已terminal exit0：人NN0、200 VLA调用、2400控制、拒绝0，16.3秒放置宏完成，仍未上架；audit/process及2401帧20Hz完整视频核验通过。π2377653已SIGTERM、session15826 exit143；本轮nvidia再次确认四卡约48492–48494MiB空闲、compute-apps为空。不要继续poll旧控制和服务或重跑原条件。
+
+build_workspace_reference_report现以独立控制角色增加第四视频，原conditions三条不变；browser49346 terminal4videos/29links、播放拖动/字幕/Range206/375px/JS0通过。主报告已72视频（含旧partial）；全量开发loader71完整episodes、18960blocks、168000actual actions、uniqueID/source边界通过，3282 exit0。正式样本仍0。
+
+预定experiments/workspace_dynamic_20261008六条（init2、seed101–106、120s、同版workspace-method、生成式PrivateAgenda人、symbolic协调+真实π0.5）。覆盖六情境配置而非实际行为，不能记全部六覆盖；目前尚未启动，status verified0。run_workspace_dynamic_batch每条结束审计/process/video后更新HTML，不自动覆盖或重试。报告修正inspection.js路径生成顺序，pending browser用系统Python3.12已通过0videos/9links；缓存浏览器greenlet针对3.12，不要用Sim Python3.11。整套pytest使用schema-decoding PYTHONPATH和LIBERO_CONFIG_PATH后344 passed/2 skipped（30212terminal）；首次少环境变量2失败不属于代码回归，仍留工具记录。
+
+下一步新检查GPU再启动π3及开发批2，记录新PID/handle并收实际NN输入、scheduler及六例行为；大文件均data1。不将两条饮品操作失败归HRC缺口，也不做更多单一位置微调。未冻结候选72、多系统正式评测与全Goal仍active。
