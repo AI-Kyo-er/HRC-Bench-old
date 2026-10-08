@@ -17,6 +17,10 @@ def verify(url, output):
         links=page.locator('a').evaluate_all('(xs)=>xs.map(x=>x.href)')
         broken=[link for link in links if not page.request.get(link).ok]
         if broken:raise ValueError('失效链接：'+str(broken))
+        graphics=page.locator('img').all()
+        for graphic in graphics:
+            graphic.scroll_into_view_if_needed()
+            page.wait_for_function('(g)=>g.complete&&g.naturalWidth>0',arg=graphic.element_handle())
         videos=page.locator('video').all();checks=[]
         for video in videos:
             video.scroll_into_view_if_needed()
@@ -71,6 +75,7 @@ def verify(url, output):
         if errors:raise ValueError('页面JS错误：'+str(errors))
         output.parent.mkdir(parents=True,exist_ok=True)
         output.write_text(json.dumps({'status':'verified','videos':len(videos),'links_checked':len(links),
+             'loaded_figures':len(graphics),
              'mobile_width':375,'javascript_errors':errors,'video_checks':checks},ensure_ascii=False,indent=2))
         browser.close();print(f'verified {len(videos)} videos and {len(links)} links')
 

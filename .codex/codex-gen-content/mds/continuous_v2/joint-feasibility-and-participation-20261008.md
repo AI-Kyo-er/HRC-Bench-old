@@ -533,6 +533,8 @@ private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/i
 
 ## 统一活动首例终态与任务设计决定（2026-10-08）
 
+后续实现、12初态几何核验及活跃批状态见[下一版共同活动功能区](activity-workspace-20261008.md)。该模块尚未接入当前模型运行，不计新Sim任务完成。
+
 上一轮progress提交1165264。饮品子2102625现已terminal；batch同parent2102624/session22121继续，第二实际子2273410（snack/change_use/init3/seed82）live，π2095935/session46190仍需第二及第三实验。不要因第一子missing重启batch。另一用户wangjy进程2251800在GPU0/3，不能停止；我们的π在3、Human在2，仍运行需要。空闲及时再nvidia检查，实验源和条件没有中途改动。
 
 首例contract_drink_request_symbolic完整120s，60H NN/30decision/30coord/40VLA/2400实际control；4执行拒绝、agenda parse0、source_files_changed_during_run=[]。视频2401frames/20fps/512×896、0–120timeline verified。真实8/44/80/116s帧保留data1/results/contract_visual_review_20261008，已查看44/116，非smoke。7项助手解释及源anchors已核对：H0/I'll place被R误读成让它放；H8仍自己放/R再execute，reason说hold而mode选execute。H宏16.2结束，23.5提醒后无明确新求助工作链。H口头退出但wait，全部trace body y=.6，无离返。44/48/52/76取瓶被真实Robot指接触拒绝，H44released=False，不能全算执行器无故故障；hold维持夹爪，不是放手，正式任务需检查实际释放／退出能力，不用参考clearance替被测Robot。

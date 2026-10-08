@@ -56,6 +56,13 @@ def build():
         cards.append(card+'</section>')
         statuses.append({'condition':row,'verified_terminal':verified,'state':status,'formal_sample':False})
     page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>日常共同活动与动态伙伴：统一开发验证</title><style>body{margin:0;background:#edf1f5;color:#182536;font:16px/1.7 system-ui}main{max-width:1100px;margin:auto;padding:24px}section{background:white;padding:22px;border-radius:12px;margin:18px 0}video{width:100%;max-height:600px;background:#10151b}a{color:#155aa7}.scroll{overflow:auto}table{border-collapse:collapse;min-width:760px}th,td{border:1px solid #d6dde5;padding:8px;vertical-align:top}@media(max-width:500px){main{padding:10px}section{padding:15px}}</style><main><h1>日常共同活动与动态伙伴：统一开发验证</h1><section><h2>目的与设置</h2><p>此前双方能生成意图并操作物品，但尚未形成可靠的完整协作。本批重新组织共同任务与能力声明，检查人是否通过真实贡献和交流影响机器人，以及机器人能否据此调整行动。开发验证尚不构成正式Benchmark成绩。</p><p>人先生成持续私人需要，再依据实际场景选择当前贡献；机器人用公开几何、接触和对话独立决定操作，由π0.5真实生成机械臂动作。私人的意图不直接交给机器人。每条持续120模拟秒，不重置活动进度。人动作使用连续运动学附着，不声称真人手部接触动力学。</p><p>本批同时改变活动说明、能力菜单和可读场景关系，不作单因素改进结论。没有支撑关系、伙伴说完成或模型产生新意图，都不能单独证明活动结果或动态覆盖。</p><p><a href="PROTOCOL.md">任务依赖、私有与公开边界、评价及复现</a> · <a href="conditions.csv">运行前固定的三条条件</a> · <a href="../private_agenda_joint_20261008/DESIGN_REVIEW.md">此前整批失败与研究决定</a> · <a href="../joint_feasibility_20261007/index.html">统一进展与历史结果</a></p></section>'''+''.join(cards)+'</main></html>'
+    geometry_root=Path('results/task_layout_review_20261008')
+    if (geometry_root/'workspace_geometry.svg').is_file():
+        figure_url=escape(os.path.relpath(geometry_root/'workspace_geometry.svg',output),quote=True)
+        section='<section><h2>下一版布局设计：尚未运行新场景</h2><p>准备、个人暂放和交付位置已依据真实碰撞几何分开，12条保存初态的静态几何检查通过。该图不代表实际搬运、机器人可达或新的协作成功。</p>'
+        section+='<img style="width:100%;max-width:650px" src="'+figure_url+'" alt="新功能区的桌面几何设计图，尚非实际执行轨迹">'
+        section+='<p>'+link(geometry_root/'workspace_qualification.json','12条初态几何检查')+' · '+link(geometry_root/'initial_region_evidence.json','旧布局别名证据')+' · '+link(geometry_root/'workspace_geometry.svg','可导出的设计图')+'</p></section>'
+        page=page.replace('</main>',section+'</main>')
     page=page.replace('<a href="conditions.csv">运行前固定的三条条件</a>', '<a href="conditions.csv">运行前固定的三条条件</a> · <a href="TASK_DESIGN_DECISIONS.md">任务依赖、布局证据与六情境设计决定</a>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     page=page.replace('</main></html>','</main><script src="inspection.js"></script></html>')
