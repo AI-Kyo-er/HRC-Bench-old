@@ -508,3 +508,7 @@ private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/i
 新增统一入口run_contract_joint_activity.py及固定三条开发表contract_joint_20261008/conditions.csv：drink robot_request/init3/seed81/busy、snack change_use/seed82/participating、drawer leave_return/seed83/busy；初持、120s、4s高层更新。新批不带未经资格的额外退让操作；同时变化使命、菜单和语义事实，不作单因素改善结论。未来条件接收动作仍未实现，不声称已支持。正式0，六动态行为/可靠伙伴/持续重组/多系统正式成绩仍未验收。
 
 325测试通过、2跳过；增加5项有意义接口与实际两阶段payload／后续tool传递测试。旧agenda drink独立audit再次verified（60H/104VLA），旧语义可重建。新报告0videos/4links、375px/JS0浏览器通过，仅验证待运行页，不是实验。协议和报告及统一入口链接已写；无临时smoke产物。运行前四卡空闲约48492–48494MiB，接下来按需在GPU3启动π、GPU2运行三活动，实验源和条件运行期间冻结。
+
+实现及预定条件已提交1793fb6。本轮实际启动：π服务session46190/PID2095935，127.0.0.1:8766已listen、GPU3约8.6GB；batch session22121/父2102624，第一实际子2102625，GPU2约32GB且仍有16GB空闲。启动后读取首条Human、Robot及trace，真实执行已至3.95模拟秒；NN1和NN2实际输入都有v4关系摘要，Robot实际读公开CONTRACTS而非默认原生目标，private未泄漏。
+
+首轮H自己选择wine->Cab，并公开“I'll place ...”；R误解成自己被请求同搬wine并execute bottle_on_cabinet。共享渠道已存在但行动主体与约定理解仍出错，不把输入贯通当有效协调。仅首片段观察，不是完整因果归因/正式成绩；报告仍0完整视频。后续必须复查同session/PID和三个root，不能因超时重启或编辑正在加载的源码。批次会逐条audit/process/video核查并更新报告，结束后立即停止不再有活动任务的自有π服务并nvidia确认释放。CPU报告端口8123用于浏览保留。完整Goal仍active。
