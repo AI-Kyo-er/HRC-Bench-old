@@ -50,3 +50,6 @@ workspace_snack/drink/drawer_reference三条均完整120s、input/video verified
 新build_workspace_reference_report及index/status展示三完整视频与固定控制来源，首browser12565终态3videos/22links/375px/JS0/播放拖动/Range206/字幕通过。添加控制协议链接后报告84950待收；主入口71videos、loader70complete/18720blocks/165600actual7D、source/uniqueID通过（51082terminal）。正式0/未冻结split，原失败保留。
 
 已预先定义单条workspace_drink_provision_control_20261008：同init2/seed92/120s/初持/同新方法/原生task_only，仅固定参考提供位置改现有wine_bottle_1_personal(-.20,-.02)，不能把差异当单样本因果证明，π随机噪声未逐调用配对。新CLI reference-drink-provision仅workspace固定饮品可用，neural/source错误模式直接argparse exit2验证、无临时目录生成。没有改NNHuman选位置。入口run_workspace_drink_provision_control.sh；尚未启动时需nvidia确认、按需重启π。代码Full344/2skip（87922terminal），compile/diff通过，无smoke。下一步收位置控制后，启动同版三活动生成式Human、实际scheduler调用和几何审计；未验证NN方法有效性，不以参考2/3替完整Goal。
+
+
+ab85006已提交三参考报告与独立位置控制。π按新控制需要重启：GPU3/session15826/PID2377653，8766已listen；控制实际启动GPU2/session97129，需查其当前子PID，固定人/NN0，不把其动作当动态Policy。来源和配置启动前冻结。全部三原参考13767及旧π46355终态，勿混；前三视频均核验，其中2成功/1失败。新增报告control链接后需最终browser及主71视频验证，已知前browser3/22通过、help非法参数exit2验证未生成/tmp目录。新控制无重跑旧结果，仍需完整120s后audit/process/video，模型不再需要时及时停自有新服务并nvidia查释放。正式0，生成式方法效果仍待Sim验证。
