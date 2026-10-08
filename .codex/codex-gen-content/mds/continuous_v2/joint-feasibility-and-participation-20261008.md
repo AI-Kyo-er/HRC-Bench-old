@@ -512,3 +512,11 @@ private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/i
 实现及预定条件已提交1793fb6。本轮实际启动：π服务session46190/PID2095935，127.0.0.1:8766已listen、GPU3约8.6GB；batch session22121/父2102624，第一实际子2102625，GPU2约32GB且仍有16GB空闲。启动后读取首条Human、Robot及trace，真实执行已至3.95模拟秒；NN1和NN2实际输入都有v4关系摘要，Robot实际读公开CONTRACTS而非默认原生目标，private未泄漏。
 
 首轮H自己选择wine->Cab，并公开“I'll place ...”；R误解成自己被请求同搬wine并execute bottle_on_cabinet。共享渠道已存在但行动主体与约定理解仍出错，不把输入贯通当有效协调。仅首片段观察，不是完整因果归因/正式成绩；报告仍0完整视频。后续必须复查同session/PID和三个root，不能因超时重启或编辑正在加载的源码。批次会逐条audit/process/video核查并更新报告，结束后立即停止不再有活动任务的自有π服务并nvidia确认释放。CPU报告端口8123用于浏览保留。完整Goal仍active。
+
+## 视频同步双方行为审阅（2026-10-08，三活动批继续）
+
+上一轮是progress：提交1793fb6/965fa33、实际启动并验证新输入。当前复查同parent2102624/子2102625/π2095935仍live，session22121不能重启；饮品到约28s，人酒瓶已实际释放，R有“说hold却execute”及把人自己的贡献理解成机器人请求。H28说去处理私事但选wait，再次需区分话语/动作，未终态不作最终结论。GPU2约40.5GB使用/8GB空闲，GPU3约8.9GB；不停止仍需服务的任务。
+
+本轮新增独立joint_episode_inspection.py、inspection.js，给真实视频提供决策时刻菜单及同步人的私人需要/选定贡献/公开话语、Robot选择/话语、实际运动/持物/控制来源和公开事实。严格按video_timeline对应trace，无未来decision；最终状态不伪称还在执行最后动作。仅完整summary、input audit及视频verified后生成episode_inspection.json，来源和生成器SHA保存；不写模型输入/视频，不评分。新模块/报告构建/浏览器核验均不在正在实验的runtime源列表，不改活动中的策略。
+
+已接入旧private_agenda三完整案例及新contract报告（新仍0完整）。实际browser验证旧3videos/17links、375px/JS0、play/seek/Range206/activeCue及决策选择菜单跳转，60s私人need与保存记录完全一致；文件private_agenda_report_browser_20261008/verification_inspection.json。328测试通过/2skip（新增3项防未来／执行与说话区别、无匹配帧拒绝、未verified不能发布）；没有临时smoke文件。完整Goal仍active、正式0；报告可读性改进不替代可信伙伴/实际六覆盖/持续共同活动重组/正式比较。

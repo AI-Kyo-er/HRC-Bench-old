@@ -42,8 +42,32 @@ def verify(url, output):
                 if not caption_response.ok or not caption_response.text().startswith('WEBVTT'):
                     raise ValueError('研究字幕无法加载')
                 caption_check={'active_at_seek_s':seek,'showing':True,'webvtt_loaded':True}
+            inspection_check=None
+            panel=video.locator('xpath=ancestor::section').locator('.episode-inspector')
+            if panel.count():
+                panel_handle=panel.element_handle()
+                page.wait_for_function('(p)=>p.dataset.inspectionState==="ready"',arg=panel_handle)
+                inspection_url=panel.evaluate('(p)=>new URL(p.dataset.inspection,document.baseURI).href')
+                inspection=page.request.get(inspection_url).json()
+                selector=panel.locator('.inspection-seek')
+                options=selector.locator('option').count()
+                if not options:raise ValueError('审阅视图没有可定位的决策')
+                selector.select_option(index=options//2)
+                target=float(selector.input_value())
+                page.wait_for_function('([v,t])=>Math.abs(v.currentTime-t)<.1&&!v.seeking',arg=[handle,target])
+                expected=next(row for row in reversed(inspection['video_frames']) if row['video_time_s']<=target)
+                page.wait_for_function('([p,t])=>Math.abs(Number(p.dataset.benchmarkTime)-t)<1e-6',
+                                       arg=[panel_handle,expected['benchmark_time_s']])
+                human=inspection['human_decisions'][expected['human_decision_row']]
+                need=(human.get('private_agenda') or {}).get('current_need','本方法未记录私人需要')
+                if panel.locator('[data-view="human-need"]').inner_text()!=need:
+                    raise ValueError('视频所显示的私人需要与对应时刻实际记录不符')
+                if page.evaluate('document.documentElement.scrollWidth')>375:
+                    raise ValueError('加载审阅视图后手机页面水平溢出')
+                inspection_check={'video_seek_s':target,'benchmark_time_s':expected['benchmark_time_s'],
+                                  'decision_selector_worked':True,'need_matches_saved_record':True}
             checks.append({'src':src,'duration_s':duration,'play_seek_passed':True,'range_status':206,
-                           'research_caption':caption_check})
+                           'research_caption':caption_check,'research_inspection':inspection_check})
         if errors:raise ValueError('页面JS错误：'+str(errors))
         output.parent.mkdir(parents=True,exist_ok=True)
         output.write_text(json.dumps({'status':'verified','videos':len(videos),'links_checked':len(links),

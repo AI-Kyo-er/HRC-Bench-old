@@ -9,6 +9,7 @@ from pathlib import Path
 from build_coherent_batch_report import SITUATIONS,render_findings
 from hrc_pilot.interaction_contracts import CONTRACTS
 from hrc_pilot.joint_video_captions import ensure_research_captions
+from hrc_pilot.joint_episode_inspection import render_inspection_panel
 
 
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
@@ -34,6 +35,7 @@ def build():
         if verified:
             captions=ensure_research_captions(root)
             card+='<video controls playsinline preload="none" src="'+escape(os.path.relpath(ep/'demo.mp4',output),quote=True)+'"><track kind="captions" srclang="zh-CN" label="研究注释" default src="'+escape(os.path.relpath(captions,output),quote=True)+'"></video>'
+            card+=render_inspection_panel(root,output)
             card+='<p>真实人神经推理'+str(audit['human_neural_calls'])+'次；实际VLA调用'+str(audit['robot_actual_vla_calls'])+'次。核验覆盖输入和执行一致性，不等于人物可信或协作成功。</p>'
             review=read(root/'public_request_response_review.json')
             card+='<p>'+escape(review.get('interpretation','尚未完成逐例行为审阅；不将原生操作成绩作为共同活动成绩。'))+'</p>'+render_findings(root,review)
@@ -52,6 +54,8 @@ def build():
         cards.append(card+'</section>')
         statuses.append({'condition':row,'verified_terminal':verified,'state':status,'formal_sample':False})
     page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>日常共同活动与动态伙伴：统一开发验证</title><style>body{margin:0;background:#edf1f5;color:#182536;font:16px/1.7 system-ui}main{max-width:1100px;margin:auto;padding:24px}section{background:white;padding:22px;border-radius:12px;margin:18px 0}video{width:100%;max-height:600px;background:#10151b}a{color:#155aa7}.scroll{overflow:auto}table{border-collapse:collapse;min-width:760px}th,td{border:1px solid #d6dde5;padding:8px;vertical-align:top}@media(max-width:500px){main{padding:10px}section{padding:15px}}</style><main><h1>日常共同活动与动态伙伴：统一开发验证</h1><section><h2>目的与设置</h2><p>此前双方能生成意图并操作物品，但尚未形成可靠的完整协作。本批重新组织共同任务与能力声明，检查人是否通过真实贡献和交流影响机器人，以及机器人能否据此调整行动。开发验证尚不构成正式Benchmark成绩。</p><p>人先生成持续私人需要，再依据实际场景选择当前贡献；机器人用公开几何、接触和对话独立决定操作，由π0.5真实生成机械臂动作。私人的意图不直接交给机器人。每条持续120模拟秒，不重置活动进度。人动作使用连续运动学附着，不声称真人手部接触动力学。</p><p>本批同时改变活动说明、能力菜单和可读场景关系，不作单因素改进结论。没有支撑关系、伙伴说完成或模型产生新意图，都不能单独证明活动结果或动态覆盖。</p><p><a href="PROTOCOL.md">任务依赖、私有与公开边界、评价及复现</a> · <a href="conditions.csv">运行前固定的三条条件</a> · <a href="../private_agenda_joint_20261008/DESIGN_REVIEW.md">此前整批失败与研究决定</a> · <a href="../joint_feasibility_20261007/index.html">统一进展与历史结果</a></p></section>'''+''.join(cards)+'</main></html>'
+    page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
+    page=page.replace('</main></html>','</main><script src="inspection.js"></script></html>')
     (output/'index.html').write_text(page)
     result={'role':'unified_task_and_interaction_development',
         'verified_terminal_cases':sum(s['verified_terminal'] for s in statuses),
