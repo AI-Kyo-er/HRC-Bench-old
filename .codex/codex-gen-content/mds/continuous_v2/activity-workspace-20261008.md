@@ -117,3 +117,9 @@ a2e8da1已提交前缀/组合设计/接口容量。第二drink2453774现terminal
 新批页2videos/23links实际browser69942terminal通过（play/seek/Range206/字幕/inspector/375px/JS0）。提取drink24/32/56/116原视频帧69616terminal，view32/116可见实际aside/return与酒瓶仍Cab。73完整开发episodes/19440blocks/172800actions、unique/source边界核查73595terminal exit0；主报告74视频（含旧partial）/4pending；main browser25707现terminal exit0：74videos/702links通过，勿再poll；第三drawer已推进41.95模拟秒，2472725仍live。正式0、候选72未冻结，两段真实互动不等可靠伙伴和全部Goal。
 
 batch49178/父2441354仍live，第三drawer leave_return/init2/seed103已启动子2472725/GPU2，π2440833/GPU3仍需剩余batch，不停止。2453774与旧2441355均已terminal，勿重跑。当前第三日志Human12已选择cream→drawer但早称存储完成；没有以文字认证成果。12提私人联系早于未来cue，初始背景本身含等待私事，不能直接称泄漏未来；完整输入/事实/实际参与需继续核对。第三在运行，后3未开始，所有runtime源码保持。
+
+4c17797后本turn继续同一49178，第三2472725仍live。新的正面证据：Human8 wait时middle_accessibleFalse；Robot8再次开门，12实际opening≈.159886m/accessibleTrue；Human12选cream→drawer，20仍持物上举/早称已存，28实际released且middle_drawer_bottom支撑，40宏completed_request3/idle。承认真实跨主体执行依赖与存储成果，不能把三例全称失败。Body0–40仍y=.6；Human说离场但选wait，不认证身体离返。后续是否操作停止／返回有新贡献另核。
+
+新drawer_storage_prefix.json保存22条NN/状态/回执/通知，原行/文件SHA重读匹配。Robot40的真实model_selected_skill_id=bowl_inside_top_drawer、实际英文instruction是open_top+place_bowl，但message/goal说storecreamMiddle；这是协调器选择与话语目标错配，不是VLA收正确奶酪指令后失误。Robot72再选open_middle却也称自己存奶酪，其他轮仍错误说Human持cream，实际早已released。到79.95cream保持Middle支撑、top_joint0、bowl桌面未移。不能以错技能产生选择即称其他成果已被破坏，也不认证私事动态链。
+
+Human60收到59.8结束通知后理由说private_done但话语又称将离场处理，76才说已处理/任务结束，均选wait。通知/理解/真实行为仍需分开；没有强迫NN为了条件名必须变化。runtime、条件、模型均未改，资源仍有本批需要。Goal正式0、六真实情境及可靠伙伴未准入。
