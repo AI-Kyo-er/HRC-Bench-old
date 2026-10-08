@@ -177,3 +177,21 @@ H24请求Robot搬却自己选BowlOnPlate；H28明确因Robot仍做过时Food操�
 29.8私人饮品优先Cue确在H32 agenda request.current_observation.private_context；Human32理由反称Wine已accessible、坚持snack，64Wine未移，没有实际饮品贡献。65.1取消Cue后H68仍wait，后续继续看，不以条件名detour算覆盖。当前只有一个区域物品放置，不能认证多物品并排效果。新方法+不同seed也不作单因素因果结论。
 
 OBSERVATION_NOTES添加明确成果/未兑现/局限。Report builder修正新批旧“六例”标签、改动说明（沿用活动，增加area+facts且newseed），不改运行时源码。页面重新生成0terminal/3conditions，真实浏览器0videos/12links exit0；没有把活跃未核视频展示为完整。未运行新GPU工作、没有新下载或smoke产物；服务仍被三条件batch需要。正式0、candidate72未冻结，全Goal继续。
+
+## 首例完整核验、审计修复与明确续跑（2026-10-09）
+
+c67c5af上轮progress。本轮首先确认同32942/2614613/2614614仍live，首例至120秒terminal，summary/provenance/视频齐全。28H（14agenda+14贡献）、30coord、72VLA、2400controls/2401frames，source_changed=[]、拒绝0。原宏39.1complete；实物36.65BowlReleased/Table、36.85原安排Food/Bowl/Guest同时匹配，末秒稳定。H108仍wait；饮品优先通知进入输入但未兑现偏离，Wine终未移，不能按条件名认证动态覆盖。
+
+32942收exit1，原父/首子均不存在：不是Sim失败，audit区域载荷循环for payload把重建工具输入dict覆盖为Food名字，compact_action_history报TypeError string indices。只改审计变量payload_name，原样14决策重审93366 exit0 verified；不重跑首例、不放宽几何容差或改NN输入。过程91743 exit0 audited、独立视频20020 exit0 verified2401，原记录不变。旧32942 terminal不再poll。
+
+新增明确--resume-verified与resume_area_feedback_batch.sh，只有同row/同表SHA、summary/provenance/输入/过程/独立视频完整且无failure/source_changed才skip，不重试不完整或失败运行。7个测试含只读成功/错条件/错SHA/坏视频/缺summary/failure/source变更；完整358 passed/2 skipped（86404terminal22.73秒），compile/diff无误。首case实际重审是audit回归覆盖，非只靠单元测试。
+
+首例public_request_response_review 8findings及coordination_process_review 3区间已保存；核验9696 terminal：anchors verified（仅来源、非语义独立验证），过程源重建16→24错误技能8s/VLA8，28→36.85人接手8.85/VLA8.85、人消息3无逐字重复，40→44完成认可4/VLA4。Robot原生操作库没有Guest直接搬运，R32/40选BowlOnPlate却话语称Guest，不作为π正确指令失败或原始VLA HRC评分。
+
+新平台实证：H32实际agenda measured_current_facts说Food released，实际carriedObjects=Bowl+Food且public_scene_measurements Food carriedTrue/releasedFalse。joint_world仅排held_object而没排payload，旧文字摘要矛盾。保留作为输入平台缺陷，不全归Human策略；批内runtime不改，后续新测量版本修复并保留旧版可审计。不是已经解决的伙伴有效性。
+
+首报告1verified/3conditions，browser74110 terminal1video/18links通过play/seek/Range206/字幕/inspector/375px/JS0。真实Sim24和116帧已提取并view，8/40也保存在data1 prefix目录；原视频完整。68613f1提交audit/安全续跑/首报告/说明。README及主builder体现实际成果与局限，不认证region多物品（本例只有一个目标）。
+
+启动前nvidia GPU2空闲48494MiB、GPU3 π8880MiB；仅复用π2613996/session67855。新续跑session85963、parent2631518、drink子2631519，init2/seed115/correction，旧first被核验skip，非重启首例。当前loaded8shards，尚无新终态；后drawer原seed113依次运行。保持runtime、条件、伙伴与测量方法冻结。
+
+主builder48708 terminal79published视频（含旧partial）/2pending；新main browser1369和全量开发数据导出16838正在运行待收，不能预称通过。正式0/candidate72未冻结；全Goal可靠伙伴、实际六情境、组合对照和正式双系统仍未满足。无smoke/新权重/外部服务。GPU仍被后两任务需要，结束后按authoritative terminal停止自有服务并核释放。
