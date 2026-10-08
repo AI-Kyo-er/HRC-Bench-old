@@ -45,6 +45,7 @@ def build(output=Path('experiments/contract_joint_20261008')):
             card+='<video controls playsinline preload="none" src="'+escape(os.path.relpath(ep/'demo.mp4',output),quote=True)+'"><track kind="captions" srclang="zh-CN" label="研究注释" default src="'+escape(os.path.relpath(captions,output),quote=True)+'"></video>'
             card+=render_inspection_panel(root,output)
             card+='<p>真实人神经推理'+str(audit['human_neural_calls'])+'次；实际VLA调用'+str(audit['robot_actual_vla_calls'])+'次。核验覆盖输入和执行一致性，不等于人物可信或协作成功。</p>'
+            card+='<p>人策略解析错误'+str(audit.get('human_policy_parse_error_count',0))+'次。生成失败后的wait是执行回退，会延续原运动；不视为人自主选择等待或已经暂停。</p>'
             review=read(root/'public_request_response_review.json')
             card+='<p>'+escape(review.get('interpretation','尚未完成逐例行为审阅；不将原生操作成绩作为共同活动成绩。'))+'</p>'+render_findings(root,review)
             card+=render_reviewed_metrics(root)
@@ -53,8 +54,10 @@ def build(output=Path('experiments/contract_joint_20261008')):
             rows=[]
             for decision in choices:
                 agenda=decision['private_agenda_inference']['agenda_after'] or {};choice=decision['choice']
-                rows.append('<tr><td>'+str(decision['time_s'])+'</td><td>'+escape(agenda.get('current_need','未生成'))+'</td><td>'+escape(choice['action'])+'</td><td>'+escape(str(choice.get('object_id') or ''))+'</td><td>'+escape(str(choice.get('destination') or ''))+'</td><td>'+escape(choice.get('message') or '')+'</td></tr>')
-            card+='<details><summary>人的需要、选定贡献与公开话语：不作为完成事实</summary><div class="scroll"><table><tr><th>模拟秒</th><th>私人需要</th><th>动作</th><th>对象</th><th>目标</th><th>公开话语</th></tr>'+''.join(rows)+'</table></div></details>'
+                generation=('固定参考' if audit.get('human_source')=='reference' else
+                    '解析通过' if decision.get('parse_error') is None else '生成失败／执行回退：'+decision['parse_error'])
+                rows.append('<tr><td>'+str(decision['time_s'])+'</td><td>'+escape(agenda.get('current_need','未生成'))+'</td><td>'+escape(generation)+'</td><td>'+escape(choice['action'])+'</td><td>'+escape(str(choice.get('object_id') or ''))+'</td><td>'+escape(str(choice.get('destination') or ''))+'</td><td>'+escape(choice.get('message') or '')+'</td></tr>')
+            card+='<details><summary>人的需要、调用／回退与公开话语：不作为完成事实</summary><div class="scroll"><table><tr><th>模拟秒</th><th>私人需要</th><th>生成状态</th><th>动作</th><th>对象</th><th>目标</th><th>公开话语</th></tr>'+''.join(rows)+'</table></div></details>'
             card+='<p>'+' · '.join(link(root/path,label) for path,label in [
                 ('provenance.json','设置与源码'),('interaction_verification.json','实际输入与动作核查'),
                 ('joint_process_evidence.json','实际过程证据'),('independent_video_verification.json','完整视频核查'),

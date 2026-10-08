@@ -139,8 +139,8 @@ def audit(root):
                     assert d['output_json_schema']==decision_json_schema(scene)
                     assert d['raw_output']==d['caller_prefix']+d['actual_generated_json']+d['caller_suffix']
                     assert tool_tokenizer.decode(d['actual_generated_token_ids'],skip_special_tokens=True).strip()==d['actual_generated_json']
-                    from jsonschema import validate
-                    validate(json.loads(d['actual_generated_json']),d['output_json_schema'])
+                    from hrc_pilot.human_output_verification import verify_recorded_constrained_output
+                    verify_recorded_constrained_output(d,scene)
                     if d['choice_schema_version']==10:
                         whole=d['whole_generated_token_ids'];close=tool_tokenizer.encode('</think>',add_special_tokens=False)[0]
                         index=whole.index(close);prefix=tool_tokenizer.encode(d['caller_prefix'],add_special_tokens=False)
@@ -387,12 +387,17 @@ def audit(root):
     robot_received_human_calls=sum('human:' in c['prompt'] for c in calls)
     review=[{'time_s':d['time_s'],'private_intention':d['choice'].get('intention'),
              'public_message':d['choice'].get('message'),'actual_action':d['choice']['action'],
+             'policy_generation_parse_error':d.get('parse_error'),
+             'action_is_generation_failure_fallback':d.get('parse_error') is not None,
              'execution_accepted':receipts[i]['accepted'],'execution_error':receipts[i]['error']}
             for i,d in enumerate(human)]
     human_neural_calls=(sum(d.get('neural_inferences',1) for d in human)
                         if p.get('human_source','neural')=='neural' else 0)
     result={'status':'verified','world_initializations':1,'human_neural_calls':human_neural_calls,
         'human_decision_rows':len(human),'human_source':p.get('human_source','neural'),
+        'human_policy_parse_error_count':sum(d.get('parse_error') is not None for d in human),
+        'verified_schema_generation_failure_count':sum(d.get('parse_error') is not None
+            and d.get('choice_schema_version') in {9,10} for d in human),
         'robot_action_blocks':len(calls),'actual_robot_control_steps':len(controls),
         'robot_actual_vla_calls':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction','actual_vla_reference_instruction'} for c in calls),
         'robot_visual_coordinator_calls':len(plans),
