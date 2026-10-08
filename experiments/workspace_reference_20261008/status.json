@@ -1,0 +1,50 @@
+{
+  "role": "fixed_feasibility_reference_not_dynamic_policy",
+  "verified_terminal": 3,
+  "reference_complete": 2,
+  "formal_samples": 0,
+  "conditions": [
+    {
+      "condition": {
+        "run": "workspace_snack_reference_20261008",
+        "activity": "snack_service",
+        "init_state_id": "2",
+        "seed": "91",
+        "steps": "2400",
+        "initial_human_holding": "1",
+        "role": "workspace_physical_feasibility_reference"
+      },
+      "verified_terminal": true,
+      "reference_complete": true,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "workspace_drink_reference_20261008",
+        "activity": "drink_storage",
+        "init_state_id": "2",
+        "seed": "92",
+        "steps": "2400",
+        "initial_human_holding": "1",
+        "role": "workspace_physical_feasibility_reference"
+      },
+      "verified_terminal": true,
+      "reference_complete": false,
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "workspace_drawer_reference_20261008",
+        "activity": "drawer_access",
+        "init_state_id": "2",
+        "seed": "93",
+        "steps": "2400",
+        "initial_human_holding": "1",
+        "role": "workspace_physical_feasibility_reference"
+      },
+      "verified_terminal": true,
+      "reference_complete": true,
+      "formal_sample": false
+    }
+  ]
+}

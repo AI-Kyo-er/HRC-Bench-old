@@ -96,6 +96,8 @@ def main():
                         help='日常活动使命与信息缺口，不把原生任务指令当当前双方约定')
     parser.add_argument('--workspace-method',action='store_true',
                         help='统一任务需要、分离功能区、表面放置及基于观测的人策略调用；不选择正确动作')
+    parser.add_argument('--reference-drink-provision',choices=['serving_ready','wine_bottle_1_personal'],default='serving_ready',
+                        help='仅新布局固定饮品参考的提供位置控制，不改变神经伙伴策略')
     parser.add_argument('--robot-withdraw-operation',action='store_true',
                         help='额外退让语言目标，实际由VLA执行；不调用参考笛卡尔控制')
     parser.add_argument('--robot-skill-bank',action='store_true',
@@ -112,6 +114,8 @@ def main():
         parser.error('退让语言操作要求明确的机器人操作库接口')
     if args.interaction_contract and not args.robot_skill_bank:
         parser.error('新活动契约需要显式操作能力库和神经协调器')
+    if args.reference_drink_provision!='serving_ready' and not (args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage'):
+        parser.error('提供位置控制仅用于明确标注的新布局固定饮品参考')
     if args.reference_vla_instruction and (args.human_source!='reference' or args.symbolic_coordinator or args.coordinator_port or args.robot_replay):
         parser.error('固定VLA操作检查要求参考人且无协调器／回放')
     if args.robot_replay and (args.human_source!='reference' or args.coordinator_port):
@@ -154,7 +158,7 @@ def main():
     if args.workspace_method and args.human_source=='reference':
         human=JointReference(activity,prepare_targets={
             'snack_service':('akita_black_bowl_1','serving_ready'),
-            'drink_storage':('wine_bottle_1','serving_ready'),
+            'drink_storage':('wine_bottle_1',args.reference_drink_provision),
             'drawer_access':('plate_1','plate_1_personal')},finish_targets={
             'snack_service':('akita_black_bowl_1','snack_delivery'),
             'drink_storage':('plate_1','plate_1_personal'),
@@ -432,6 +436,7 @@ def main():
         'human_execution_class':type(actor).__name__,
         'human_decision_cadence':'observation_events_and_periodic_reconsideration' if human_schedule else 'fixed_decision_interval',
         'reference_vla_instruction':args.reference_vla_instruction,
+        'reference_drink_provision':args.reference_drink_provision if args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage' else None,
         'initial_human_holding':args.initial_human_holding,
         'human_auto_buffer':args.human_auto_buffer,
         'robot_withdraw_operation':args.robot_withdraw_operation,

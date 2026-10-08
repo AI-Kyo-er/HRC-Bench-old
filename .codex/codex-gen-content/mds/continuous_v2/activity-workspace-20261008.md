@@ -39,3 +39,14 @@ contract报告已3视频/27links+1设计图，71276终态浏览器通过；main6
 
 
 下一版与整批提交aeda078。main最终93416已收：68videos/648links、play/seek/Range206/字幕/375px/JS0全部通过，不再poll；contract3videos/27links+1图通过。344/2skip已收80353。新参考已实际启动：π GPU3/session46355/PID2366870（不是已terminal的旧2095935），port8766听服务；batch GPU2/session13767/父2367442/第一子2367443，NN Human0，第一snack已推进32模拟秒且24秒选择接收。首receipt实际surface[.16,.04,.9]→bowl body[.16,.04,.9004115578211194]，读取时再核对精确原值，不以本行浮点文字替实际记录。实际新模块已进入运行，无模型源编辑。仍需收三条终态、完整视频及参考成功/失败，结束后及时停止不再需要的自有π并nvidia验证；不停止活跃新任务。旧batch/session22121与旧π46190均terminal，勿混。
+
+
+## 新布局三参考已全部核查（2026-10-08）
+
+前轮aeda078/77205ab/950a259为progress。实际参考batch2367442/session13767现terminal exit0，三个子均terminal；π2366870因无活动需要SIGTERM退出，46355 exit143，nvidia compute-apps为空、四卡显存释放确认。不得重启原三条或继续poll旧handle。
+
+workspace_snack/drink/drawer_reference三条均完整120s、input/video verified，人NN0；点心/抽屉reference_complete True、饮品False，后者Human14.35s宏完成并提供wine到(.16,.04)，208VLA调用仍未上架、瓶终还在提供处而碗盘被扰动。不能将此基本操作失败归动态Human/HRC。点心准备支撑10.2、macro14.35，Robot原生21.65后接收24，39.95起物理匹配、macro42.2，链成立；参考Cart清场接触1.15s不归π协调，不能安全认证。
+
+新build_workspace_reference_report及index/status展示三完整视频与固定控制来源，首browser12565终态3videos/22links/375px/JS0/播放拖动/Range206/字幕通过。添加控制协议链接后报告84950待收；主入口71videos、loader70complete/18720blocks/165600actual7D、source/uniqueID通过（51082terminal）。正式0/未冻结split，原失败保留。
+
+已预先定义单条workspace_drink_provision_control_20261008：同init2/seed92/120s/初持/同新方法/原生task_only，仅固定参考提供位置改现有wine_bottle_1_personal(-.20,-.02)，不能把差异当单样本因果证明，π随机噪声未逐调用配对。新CLI reference-drink-provision仅workspace固定饮品可用，neural/source错误模式直接argparse exit2验证、无临时目录生成。没有改NNHuman选位置。入口run_workspace_drink_provision_control.sh；尚未启动时需nvidia确认、按需重启π。代码Full344/2skip（87922terminal），compile/diff通过，无smoke。下一步收位置控制后，启动同版三活动生成式Human、实际scheduler调用和几何审计；未验证NN方法有效性，不以参考2/3替完整Goal。
