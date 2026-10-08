@@ -21,3 +21,17 @@
 本地OpenVLA config.norm_stats只有libero_spatial；当前CASES三活动为libero_goal。直连ModelScope两个候选goal ID都404，仅是有限搜索未取到资源，未下载／绕行VPN，不能推断所有中国镜像都不存在。不同模型需适配依据与同任务操作资格；旧空间模型接入不能直接计两模型正式覆盖。文本／视觉协调＋同π可以明确不同系统比较，但不能称不同VLA比较。
 
 README明确旧布局成功与新区域饮品失败不可混用，更新32B/v5已真实运行而非仅资产准备。报告链接完整设计和七项证据状态；不因文档、来源核对或浏览器通过mark complete。运行GPU仍有实际工作，保留服务到批次结束再及时释放。
+
+## 首例完整结果与统一数据更新
+
+上一轮progress提交0bf5c61。本轮同session58742和实际PID持续核对，首例已完整结束，不因末段NN耗时重启。Human116秒的NN1约52.83墙钟秒、NN2约182.36秒；模拟时间与推理墙钟不能混称实时。
+
+candidate_snack_detour_symbolic_20261009：120模拟秒，2401帧／20FPS／512×896，完整输入控制及独立视频verified，相关source_files_changed_during_run=[]。人16次决定／32NN、Robot30协调／64实际VLA、2400control，人拒绝0。原安排首次物理匹配34.2，last_second_consistently_matches=True，终態碗／食品释放。主要装填交付由人完成，不归Robot原生谓词成绩。
+
+重要评价边界：summary.robot_native_goal_first_stable_s=17.45，当时trace人仍持食品transfer_lower、v5释放支撑空。原始summary保留，不能将此字段直接作释放、交付或Robot贡献标签。已加入第12项来源审阅并通过verify_joint_case_review，语义仍assistant_interpretation_not_independently_validated。5个过程区间经evaluate_reviewed_coordination重新计：36–56的20秒实际hold为过时等待；68–72的4秒hold加人反馈为局部撤回链。60秒饮品请求仍与酒架操作不匹配。
+
+同资源VLA暴露11.85s；人持物时Robot夹爪接触累计0s，不能混同暴露与碰撞，也不证明全身安全。body_away_intervals=[]，本例不计离返覆盖。原视频32/36/72s已取帧并实际查看，保留在candidate_joint_prefix/visual_review，为正式行为审阅材料而非smoke。
+
+候选报告1完整视频／22links浏览器通过，含实际play/seek/Range206、字幕、同步私人需要与375px布局；12finding版已复核。统一入口已更新83published（含旧partial），候选2pending。全部82complete开发数据全量加载核对通过：21440观测块／192800实际执行动作／uniqueID21440，机器人输入仅image/wrist/state/prompt、无私有意图；参考保持／清场／回放与学习控制分别计，不称成功专家数据，正式split未冻结。main浏览器session56184已terminal exit0：83videos／794links通过，同样包含实际播放／拖动／Range及同步视图；勿再poll该完成handle。
+
+批父2719750、π2719139继续；第一子2719751已退出，第二子2748294实际启动，drinking已到7.95秒且H4输入已保存；不是batch失败或需重跑。CPU报告HTTP保留。GPU2/3仍服务后两活动，不停止。下一步收齐饮品和抽屉完整视频、伙伴及任务资格，再推进六情境和同版双系统，全部原Goal要求保持active，正式0。

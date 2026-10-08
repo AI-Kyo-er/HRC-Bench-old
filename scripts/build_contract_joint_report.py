@@ -110,6 +110,8 @@ def build(output=Path('experiments/contract_joint_20261008')):
             '<a href="OBSERVATION_NOTES.md">33条原始来源及逐时刻解释</a> · '
             '<a href="CAPABILITY_REVIEW.md">共同任务与实际能力的设计决定</a> · '
             '<a href="../dynamic_joint_activity_20261007/DESIGN.md">完整Benchmark流程、模型适配及七项未完成要求</a></p></section>')
+        if statuses and statuses[0]['verified_terminal']:
+            prefix_review=prefix_review.replace('运行中前缀审阅：尚非完整结果','早期前缀审阅：完整结果见上方案例')
         page=page.replace('</main>',prefix_review+'</main>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'

@@ -1,10 +1,10 @@
 # 观察记录
 
-本批尚无完整终态结果。此前接口检查中候选点心帧仍提前报完成，饮品帧改选清盘，抽屉帧改等确认；均未执行，不能当本批效果。后续按真实输入、动作与物理终态逐例更新。
+当前首例点心已有完整终态、输入／控制／视频核验，后两例继续。此前接口检查中候选点心帧仍提前报完成，饮品帧改选清盘，抽屉帧改等确认；这些接口帧均未执行，不能当本批效果。以下先保留运行初期的观察，再给出完整结果。
 
 首例点心已启动并到3.95模拟秒。0秒实际人记录含v5测量与两次真实生成，选择Food→Bowl，没有公开话语。Robot0选择BowlOnPlate并公开说明摆盘，理由仍知道Bowl由人持有，memory_note却先写“Bowl placed”。这是选择与记忆中已完成表达的早期矛盾，不据此预判完整行为，也不将执行选择当成功。
 
-源记录在candidate_snack_detour_symbolic_20261009/episode的human_policy_io、robot_planner_io和trace，仍在增长。没有让后台改成另一策略、强制发消息或按预设成功路由。全部运行与视频核验尚待完成，正式样本0。
+源记录在candidate_snack_detour_symbolic_20261009/episode的human_policy_io、robot_planner_io和trace；运行初期曾持续增长，现首例已终态核验。没有让后台改成另一策略、强制发消息或按预设成功路由。后两例仍须完整运行与视频核验，正式样本0。
 
 ## 点心前缀：实物进展、有效请求与过早完成
 
@@ -18,4 +18,16 @@
 - 人40秒公开提出Robot可转饮品准备，60秒明确请求将酒瓶移至drink_staging。Robot60秒选择bottle_on_rack并生成“put the wine bottle on the rack”，公开话语和current_goal却说移至drink_staging。64秒仍如此。实际公开操作库只有放酒架/柜顶等原生操作，没有移至drink_staging的操作。酒架与饮品区不同，此处不能把选中另一技能解释成完成请求。
 - 人64秒说“wine_bottle_1正在移至drink_staging”，但酒瓶在60与64秒坐标相同，Robot64秒的自身夹爪接触为空。尚未建立真实持瓶证据，不能计其为已经开始有效转移。
 
-本前缀支持：人已经产生物理贡献，并公开改变需求；Robot据公开请求改变了所选操作。尚不支持：有效摆盘、饮品请求被兑现、完整双向重组成功或候选伙伴已合格。主要新增设计约束见[能力与共同任务边界审阅](CAPABILITY_REVIEW.md)。本批模型与运行设置保持冻结，完成后继续独立核验全部轨迹与视频。
+本前缀支持：人已经产生物理贡献，并公开改变需求；Robot据公开请求改变了所选操作。尚不支持：有效摆盘、饮品请求被兑现、完整双向重组成功或候选伙伴已合格。主要新增设计约束见[能力与共同任务边界审阅](CAPABILITY_REVIEW.md)。本批模型与运行设置保持冻结。
+
+## 首例完整120秒：视频、行为及评价边界
+
+输入／控制核验和完整2401帧视频核验均verified，相关源码运行中变化为空；v5、32B-AWQ及FP16事实由保存provenance核对。人16次双阶段决定、32次NN；Robot30次协调和64次实际VLA，2400步控制，人执行拒绝0。这里的核验不证明真人拟真或有效协作。
+
+[12项行为审阅](../../results/continuous_v2/candidate_snack_detour_symbolic_20261009/public_request_response_review.json)及[引用核对](../../results/continuous_v2/candidate_snack_detour_symbolic_20261009/review_evidence_verification.json)已发布；[5个过程区间](../../results/continuous_v2/candidate_snack_detour_symbolic_20261009/reviewed_coordination_metrics.json)有源锚点和实际控制时间。36至56秒有20秒保持，不称有效确认延迟；68至72秒有4秒保持及人反馈，不称此前饮品安排已经成立。
+
+原安排物理匹配首次34.2秒，最后一秒持续成立，终态碗／食品均释放。装填与交付是人实际执行的贡献；原生食品入碗谓词为真不是Robot装填证明。summary给出的原生目标首次稳定17.45秒，当时人仍持食品transfer_lower，v5释放支撑为空；该历史字段不能直接成为释放／交付／Robot贡献训练标签。原始summary不覆盖，独立过程证据另列。
+
+同资源VLA暴露11.85秒；人持物时Robot夹爪接触累计0秒。暴露不是碰撞标签，夹爪零接触不是全身安全。身体离返区间为空，本例不认证暂离返回能力。撤回饮品的68秒公开线索被Robot同轮读到并选择保持，72秒人认可暂停；承认局部链路，同时保留早报完成、过时等待和操作目标错配。
+
+已从原始视频保存并查看[32秒](../../results/candidate_joint_prefix_20261009/visual_review/snack_32s.png)、[36秒](../../results/candidate_joint_prefix_20261009/visual_review/snack_36s.png)、[72秒](../../results/candidate_joint_prefix_20261009/visual_review/snack_72s.png)三帧，完整视频在[index.html](index.html)。这些是原始Sim视频取帧，供行为审阅保留，不替代完整视频或定量接触证据。正式样本0，后两例不预判。

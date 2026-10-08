@@ -1288,10 +1288,23 @@
         }
       ],
       "formal_benchmark_sample": false
+    },
+    {
+      "run": "candidate_snack_detour_symbolic_20261009",
+      "label": "候选与v5真实闭环：snack_service／detour",
+      "kind": "neural",
+      "activity": "snack_service",
+      "duration_s": 120.0,
+      "human_neural_calls": 32,
+      "actual_vla_calls": 64,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": true,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
     }
   ],
   "pending": [
-    "候选与v5真实闭环：snack_service／detour：尚无终态结果",
     "候选与v5真实闭环：drink_storage／correction：尚无终态结果",
     "候选与v5真实闭环：drawer_access／leave_return：尚无终态结果"
   ]
