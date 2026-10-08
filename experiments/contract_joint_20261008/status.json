@@ -1,0 +1,58 @@
+{
+  "role": "unified_task_and_interaction_development",
+  "verified_terminal_cases": 0,
+  "formal_samples": 0,
+  "conditions": [
+    {
+      "condition": {
+        "run": "contract_drink_request_symbolic_20261008",
+        "activity": "drink_storage",
+        "situation": "robot_request",
+        "profile": "busy",
+        "init_state_id": "3",
+        "seed": "81",
+        "initial_human_holding": "1",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "unified_task_and_interaction_development"
+      },
+      "verified_terminal": false,
+      "state": "尚无完整结果核查",
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "contract_snack_change_use_symbolic_20261008",
+        "activity": "snack_service",
+        "situation": "change_use",
+        "profile": "participating",
+        "init_state_id": "3",
+        "seed": "82",
+        "initial_human_holding": "1",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "unified_task_and_interaction_development"
+      },
+      "verified_terminal": false,
+      "state": "尚无完整结果核查",
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "contract_drawer_leave_return_symbolic_20261008",
+        "activity": "drawer_access",
+        "situation": "leave_return",
+        "profile": "busy",
+        "init_state_id": "3",
+        "seed": "83",
+        "initial_human_holding": "1",
+        "system": "symbolic",
+        "steps": "2400",
+        "role": "unified_task_and_interaction_development"
+      },
+      "verified_terminal": false,
+      "state": "尚无完整结果核查",
+      "formal_sample": false
+    }
+  ]
+}

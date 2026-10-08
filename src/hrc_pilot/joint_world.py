@@ -31,7 +31,7 @@ def update_joint_regions(env,regions):
 
 
 def observable_world(record,regions,drawer=None,*,measurement_version=2):
-    if measurement_version not in {1,2,3}:raise ValueError('未知共同环境测量版本')
+    if measurement_version not in {1,2,3,4}:raise ValueError('未知共同环境测量版本')
     contacts=perceived_object_contacts(record)
     distances={name:{region:round(float(np.linalg.norm(np.asarray(xyz)[:2]-np.asarray(point)[:2])),4)
                      for region,point in regions.items() if region.endswith(('ready','staging','storage','delivery'))}
@@ -81,6 +81,10 @@ def observable_world(record,regions,drawer=None,*,measurement_version=2):
         from .public_scene_measurements import public_scene_measurements
         movable=[name for name in record['objects'] if name+'_personal' in regions]
         world['public_scene_measurements']=public_scene_measurements(record,movable)
+    if measurement_version>=4:
+        from .scene_relation_summary import scene_relation_summary
+        world['public_relation_summary']=scene_relation_summary(world['public_scene_measurements'])
+        world['current_measured_fact_sentences'].extend(world['public_relation_summary']['fact_sentences'])
     return world
 
 

@@ -500,3 +500,11 @@ private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/i
 下一步仍需真正成熟的日常活动任务结构与可信动态伙伴，不要把更多数据、3/3终态、零parse、私人goal字典或机械关系称cobalance。当前接口/任务还需检查未来意图与立即搬运区别、真实主动求助信息缺口、私有背景/初目标的一致、固定fixture误列可搬物品；这些都是待验证设计问题，不是新代码已实现。所有Goal七项保持，不complete/paused/blocked。
 
 最终已收：export41422 exit0，64complete/17280blocks/151200actualactions及unique IDs通过；private browser89981=3videos/17links，relational66970=4/20，main81358=65/617，实际play/seek/Range206、active字幕、375px、JS0通过，全部terminal勿再poll。三例80s实际原视频帧已查看，data1/results/private_agenda_visual_review_20261008/{snack_detour,drink_correction,drawer_leave_return}_80s.png，保留审阅材料非smoke。Goal不因此完成。最后本项目GPU compute-apps为空、四卡显存释放已确认。
+
+## 统一任务与能力接口开发（2026-10-08，运行前）
+
+本轮恢复检查确认无旧pytest／实验／GPU服务存活。上一条Goal文本仅是说明，不计实现进展；已采取下一安全动作完成未提交接口。CONTRACTS明确三类共同活动、信息缺口、双方可能贡献；Robot高层不再把原生任务当已达成约定。Human菜单实际free-joint域，固定fixture可指示不可取放；连续执行器拒绝超出已有声明工作区的拾取，不恢复掉地物品、不自动改选。公开测量v4增加真实接触／中心邻近／上下关系摘要，既不证明完整包含也不提供分数或下一动作；NN1、NN2及实际tool历史均接入，v1–v3保持旧输入。两阶段私人策略和真实π0.5控制沿用，不强制协商正确答案。
+
+新增统一入口run_contract_joint_activity.py及固定三条开发表contract_joint_20261008/conditions.csv：drink robot_request/init3/seed81/busy、snack change_use/seed82/participating、drawer leave_return/seed83/busy；初持、120s、4s高层更新。新批不带未经资格的额外退让操作；同时变化使命、菜单和语义事实，不作单因素改善结论。未来条件接收动作仍未实现，不声称已支持。正式0，六动态行为/可靠伙伴/持续重组/多系统正式成绩仍未验收。
+
+325测试通过、2跳过；增加5项有意义接口与实际两阶段payload／后续tool传递测试。旧agenda drink独立audit再次verified（60H/104VLA），旧语义可重建。新报告0videos/4links、375px/JS0浏览器通过，仅验证待运行页，不是实验。协议和报告及统一入口链接已写；无临时smoke产物。运行前四卡空闲约48492–48494MiB，接下来按需在GPU3启动π、GPU2运行三活动，实验源和条件运行期间冻结。

@@ -17,6 +17,9 @@ def read(p):return json.loads(p.read_text())
 
 def audit(root):
     ep=root/'episode';p=read(root/'provenance.json');activity=ACTIVITIES[p['activity']]
+    if p.get('interaction_contract'):
+        from hrc_pilot.interaction_contracts import CONTRACTS
+        activity=CONTRACTS[p['activity']].activity
     saved_task=read(ep/'task.json');saved_activity=saved_task['public_activity']
     assert not p['source_files_changed_during_run']
     assert p['human_executor']=='human_only_continuous_kinematic_attachment'
@@ -214,8 +217,11 @@ def audit(root):
         assert not {'private_context','personal_background','own_memory','private_intention','score'}.intersection(request)
         expected_task=(saved_task['native_robot_task']+'\nShared activity: '+saved_activity['public_description']
                        if p.get('robot_language')=='native_with_activity' else saved_activity['public_description'])
+        if p.get('interaction_contract'):
+            expected_task=json.dumps(CONTRACTS[p['activity']].public(),ensure_ascii=False)
         assert request['robot_task']==expected_task
         if p['robot_system']=='symbolic_coordinator_plus_vla':
+            assert request['available_vla_operation']==('' if p.get('interaction_contract') else saved_task['native_robot_task'])
             actual=trace[round(plan['time_s']*20)]
             for name,xyz in request['observed_world']['objects_xyz'].items():
                 np.testing.assert_allclose(xyz,actual['objects'][name])

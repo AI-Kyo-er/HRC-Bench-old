@@ -2,7 +2,7 @@
 from copy import deepcopy
 import json
 
-from .human_decision_interface import decision_tool,decision_interface,available_destinations,parse_decision,destinations_for_object
+from .human_decision_interface import decision_tool,decision_interface,available_destinations,parse_decision,destinations_for_object,movable_objects
 from .human_decision_policy import HumanDecisionPolicy
 
 
@@ -12,16 +12,22 @@ PREFIX='<tool_call>\n'
 def constrained_tool(scene):
     tool=decision_tool(scene)
     variants=[{'type':'null'}]
-    for obj in scene['objects_xyz']:
+    for obj in movable_objects(scene):
         destinations=destinations_for_object(scene,obj)
         variants.append({'type':'object','properties':{
             'kind':{'type':'string','enum':['place_object']},'object_id':{'type':'string','enum':[obj]},
             'destination':{'type':'string','enum':destinations}},
             'required':['kind','object_id','destination'],'additionalProperties':False})
-    variants.append({'type':'object','properties':{
-        'kind':{'type':'string','enum':['hold_object','indicate_object']},
-        'object_id':{'type':'string','enum':list(scene['objects_xyz'])}},
-        'required':['kind','object_id'],'additionalProperties':False})
+    # 新契约分开实际取放能力与指示固定实体；旧schema保持原形式供历史重建。
+    if 'movable_object_ids' in scene:
+        for kind,objects in [('hold_object',movable_objects(scene)),('indicate_object',list(scene['objects_xyz']))]:
+            variants.append({'type':'object','properties':{'kind':{'type':'string','enum':[kind]},
+                'object_id':{'type':'string','enum':objects}},'required':['kind','object_id'],'additionalProperties':False})
+    else:
+        variants.append({'type':'object','properties':{
+            'kind':{'type':'string','enum':['hold_object','indicate_object']},
+            'object_id':{'type':'string','enum':list(scene['objects_xyz'])}},
+            'required':['kind','object_id'],'additionalProperties':False})
     variants.append({'type':'object','properties':{'kind':{'type':'string',
         'enum':['step_aside','return_to_work','wait','pause_current']}},'required':['kind'],'additionalProperties':False})
     tool['function']['parameters']['properties']['contribution']={'anyOf':variants}

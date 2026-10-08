@@ -7,6 +7,8 @@ ERROR_FACTS={
     'no_held_object':'The last placement was rejected because no object was held.',
     'object_in_robot_gripper_contact':'The requested object currently has robot gripper contact; the human executor did not take it.',
     'no_public_buffer_for_owned_object':'There is no declared public buffer for the currently held object.',
+    'object_not_movable_by_human':'This entity is a fixed fixture or outside the declared movable object domain.',
+    'object_outside_declared_pickup_workspace':'The selected object is outside the human pickup workspace; no pickup occurred.',
 }
 
 
@@ -47,4 +49,6 @@ def intent_observation(scene):
             cancelled_request_ids=execution.get('cancelled_requests',[]))
     if world.get('measurement_version',1)>=3:
         result['measured_scene_geometry_and_contact']=deepcopy(world['public_scene_measurements'])
+    if world.get('measurement_version',1)>=4:
+        result['measured_reference_relations']=deepcopy(world['public_relation_summary'])
     return result

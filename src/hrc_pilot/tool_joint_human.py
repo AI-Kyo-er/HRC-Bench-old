@@ -64,6 +64,8 @@ def execution_tool_result(decision_id,scene):
                       motion_in_progress=execution['motion_in_progress'])
     if scene['measured_world'].get('measurement_version',1)>=3:
         result['measured_scene_geometry_and_contact']=deepcopy(scene['measured_world']['public_scene_measurements'])
+    if scene['measured_world'].get('measurement_version',1)>=4:
+        result['measured_reference_relations']=deepcopy(scene['measured_world']['public_relation_summary'])
     return result
 
 

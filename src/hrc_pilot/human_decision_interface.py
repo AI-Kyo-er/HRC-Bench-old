@@ -41,6 +41,11 @@ def destinations_for_object(scene,obj):
             and (name not in relations or relations[name]['object_id']==obj)]
 
 
+def movable_objects(scene):
+    # 旧记录保持原菜单；新契约由执行器实际free-joint对象提供能力域。
+    return list(scene.get('movable_object_ids',scene['objects_xyz']))
+
+
 def decision_interface(scene):
     destinations=[]
     for name in available_destinations(scene):
@@ -54,7 +59,7 @@ def decision_interface(scene):
         elif name.endswith('_personal'):meaning='Human-side table position for receiving or keeping this item.'
         else:meaning='Declared table position for preparing, receiving or delivering an item.'
         destinations.append({'destination_id':name,'meaning':meaning})
-    return {'actor':'human','contributions':{
+    result={'actor':'human','contributions':{
         'place_object':'Ensure selected object_id is placed and released at destination. Includes pickup when needed, or an already-satisfied receipt.',
         'hold_object':'Take and keep selected object_id; does not release it.',
         'indicate_object':'Indicate selected object_id; does not place it.',
@@ -64,6 +69,11 @@ def decision_interface(scene):
         'destination_choices':destinations,'object_ids':list(scene['objects_xyz']),
         'communication':'Accept, reject, request, update or finish with your actual words; does not mark the world or activity complete.',
         'one_current_contribution_not_plan_queue':True}
+    if 'movable_object_ids' in scene:
+        result['movable_object_ids']=movable_objects(scene)
+        result['observational_object_ids']=list(scene['objects_xyz'])
+        result['actuation_boundary']='Only movable_object_ids can be held or placed; fixed fixtures remain observable and can be indicated.'
+    return result
 
 
 def parse_decision(raw,scene):
@@ -80,6 +90,8 @@ def parse_decision(raw,scene):
         kind=motion.get('kind')
         if kind not in CONTRIBUTIONS:raise ValueError('未知人贡献')
         value.update(action=CONTRIBUTIONS[kind],object_id=motion.get('object_id'),destination=motion.get('destination'))
+        if kind in {'place_object','hold_object'} and motion.get('object_id') not in movable_objects(scene):
+            raise ValueError('所选实体不能由人取放；不会自动改选其他物品')
         if kind=='place_object':
             dest=motion.get('destination');obj=motion.get('object_id')
             if dest not in available_destinations(scene):raise ValueError('所选自然放置目标不存在')

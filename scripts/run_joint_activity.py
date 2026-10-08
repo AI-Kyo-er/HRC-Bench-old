@@ -92,6 +92,8 @@ def main():
     parser.add_argument('--robot-replay',type=Path,help='仅参考：回放已有成功神经轨迹的真实7D动作，当前NN调用0')
     parser.add_argument('--follow-reference-poses',action='store_true')
     parser.add_argument('--symbolic-coordinator',action='store_true')
+    parser.add_argument('--interaction-contract',action='store_true',
+                        help='日常活动使命与信息缺口，不把原生任务指令当当前双方约定')
     parser.add_argument('--robot-withdraw-operation',action='store_true',
                         help='额外退让语言目标，实际由VLA执行；不调用参考笛卡尔控制')
     parser.add_argument('--robot-skill-bank',action='store_true',
@@ -106,6 +108,8 @@ def main():
     args=parser.parse_args()
     if args.robot_withdraw_operation and not args.robot_skill_bank:
         parser.error('退让语言操作要求明确的机器人操作库接口')
+    if args.interaction_contract and not args.robot_skill_bank:
+        parser.error('新活动契约需要显式操作能力库和神经协调器')
     if args.reference_vla_instruction and (args.human_source!='reference' or args.symbolic_coordinator or args.coordinator_port or args.robot_replay):
         parser.error('固定VLA操作检查要求参考人且无协调器／回放')
     if args.robot_replay and (args.human_source!='reference' or args.coordinator_port):
@@ -132,7 +136,11 @@ def main():
     from hrc_pilot.robot_coordination import CoordinatorClient,coordination_request,hold_actions,cartesian_actions
     import torch
     torch.manual_seed(args.seed)
-    activity=ACTIVITIES[args.activity];case=CASES[activity.scene_case]
+    activity=ACTIVITIES[args.activity]
+    if args.interaction_contract:
+        from hrc_pilot.interaction_contracts import CONTRACTS,validate_contracts
+        validate_contracts();activity=CONTRACTS[args.activity].activity
+    case=CASES[activity.scene_case]
     suite=benchmark.get_benchmark_dict()[case.suite]();task=suite.get_task(case.task_id)
     states=torch.load(Path(get_libero_path('init_states'))/task.problem_folder/task.init_states_file,
                       map_location='cpu',weights_only=False)
@@ -155,6 +163,7 @@ def main():
            Path('src/hrc_pilot/joint_situations.py'),Path('src/hrc_pilot/activity_private_context.py'),
            Path('src/hrc_pilot/symbolic_robot_coordinator.py'),Path('src/hrc_pilot/robot_skill_bank.py'),
            Path('src/hrc_pilot/trajectory_reference.py')]
+    if args.interaction_contract:paths.append(Path('src/hrc_pilot/interaction_contracts.py'))
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     args.output_dir.mkdir(parents=True);ep=args.output_dir/'episode';ep.mkdir();journal=NativeRunJournal(ep)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
@@ -247,6 +256,7 @@ def main():
                         'relocate_can_buffer_owned_object':args.human_auto_buffer}}
                 if hasattr(env.env,'_hrc_relation_targets'):
                     scene['relation_targets']=json.loads(json.dumps(env.env._hrc_relation_targets))
+                if args.interaction_contract:scene['movable_object_ids']=list(actor.object_q)
                 if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
                 d=(human.decide(scene,bool(placement.records and goal_success(placement.records[-1])))
                    if args.human_source=='reference' else human.decide(scene))
@@ -266,6 +276,7 @@ def main():
                     if initial_image is None:initial_image=request['observation/image'].copy()
                     public_robot_task=(task.language+'\nShared activity: '+activity.public_description
                                        if args.robot_language=='native_with_activity' else activity.public_description)
+                    if args.interaction_contract:public_robot_task=json.dumps(CONTRACTS[args.activity].public(),ensure_ascii=False)
                     public_request=coordination_request(time_s=t,robot_task=public_robot_task,
                         human_task='Human chooses their participation and intent; infer only from visible actions and public speech.',
                         dialogue=[Message(m['speaker'],m['kind'],m['text']) for m in dialogue],
@@ -275,7 +286,7 @@ def main():
                     if args.robot_skill_bank:public_request['available_vla_operations']=dict(SKILLS)
                     if args.symbolic_coordinator:
                         public_request.pop('images')
-                        public_request['available_vla_operation']=task.language
+                        public_request['available_vla_operation']='' if args.interaction_contract else task.language
                         public_request['observed_world']={**r['observable_world'],'objects_xyz':r['objects'],
                             'regions_xyz':regions,'fixture_joints':r['articulated_joints'],
                             'human_hand_xyz':r['human_hand_position'],'human_body_xy':r['human_body_xy'],
@@ -373,6 +384,7 @@ def main():
         'human_model_class':type(human._model).__name__ if args.human_source=='neural' else None,
         'human_thinking_enabled':getattr(human,'enable_thinking',None),'human_reflection':args.human_reflection,
         'human_source':args.human_source,'robot_language':args.robot_language,
+        'interaction_contract':args.interaction_contract,
         'reference_vla_instruction':args.reference_vla_instruction,
         'initial_human_holding':args.initial_human_holding,
         'human_auto_buffer':args.human_auto_buffer,

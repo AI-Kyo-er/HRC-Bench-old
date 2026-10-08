@@ -1,0 +1,4 @@
+run,activity,situation,profile,init_state_id,seed,initial_human_holding,system,steps,role
+contract_drink_request_symbolic_20261008,drink_storage,robot_request,busy,3,81,1,symbolic,2400,unified_task_and_interaction_development
+contract_snack_change_use_symbolic_20261008,snack_service,change_use,participating,3,82,1,symbolic,2400,unified_task_and_interaction_development
+contract_drawer_leave_return_symbolic_20261008,drawer_access,leave_return,busy,3,83,1,symbolic,2400,unified_task_and_interaction_development

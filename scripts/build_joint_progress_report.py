@@ -201,6 +201,7 @@ def build(results, output):
 <p><a href="../coherent_joint_20261008/index.html">一致开发批：目的、设置与逐例结果</a> · <a href="../coherent_joint_20261008/PROTOCOL.md">协议</a> · <a href="../coherent_joint_20261008/conditions.csv">预定12条条件</a>：同一原生思考＋结构约束的人方法，能力目录与队友实际话语分开；两个系统在同条件下允许不同的人回应。每条终态自动独立核查，不将尚未运行的配置算行为覆盖或正式成绩。</p>
 <p><a href="../relational_joint_20261008/index.html">关系贡献、请求状态与退让操作资格检查</a>：两种初始化的固定人实际支撑有证据；π0.5未适配的退让指令不可靠。新神经闭环另列开发条件，不与旧批合并正式样本。</p>
 <p><a href="../private_agenda_joint_20261008/index.html">持续私人需要与当前贡献分开生成：三活动资格批</a>：两次真实神经推理，当前完整场景和紧凑历史分开保留。后台不从意图标签选动作，私人理解不直接传给机器人。未结束条件不计终态结果或正式样本。</p>
+<p><a href="../contract_joint_20261008/index.html">日常共同活动、能力域与伙伴线索：统一开发验证</a>：重新区分原生操作、当前共同约定和私人用途；人取放菜单匹配实际可移动物体，公开关系摘要来自真实接触与几何。三条条件在运行前记录，未核查终态不计结果，仍非正式评测。</p>
 <p><a href="COORDINATION_REVIEW_GUIDE.md">共同安排、实际贡献和负担审阅手册</a>：目标一致、分工一致、实际执行一致分别核对；不以两方都说完成或目标到位代表cobalance。
 <a href="../../results/joint_evaluation_preparation_20261008/candidate_conditions.csv">72条候选样本条件</a> · <a href="../../results/joint_evaluation_preparation_20261008/preparation.json">未冻结状态</a> · <a href="../../results/joint_evaluation_preparation_20261008/model_file_fingerprints.json">模型文件指纹</a>。候选条件和磁盘文件指纹不是正式结果，不追溯证明旧进程内存参数；正式执行样本目前为0。</p>
 <p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>
