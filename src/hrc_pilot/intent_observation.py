@@ -1,4 +1,5 @@
 """给人意图策略的语义观测：真实测量与伙伴话语分开，不提供评分或下一步策略。"""
+from copy import deepcopy
 ERROR_FACTS={
     'destination_not_physically_accessible':'The requested destination is not physically accessible now.',
     'holding_a_different_object':'The last contribution was rejected because the single hand was holding another object.',
@@ -44,4 +45,6 @@ def intent_observation(scene):
             last_received_request_id=execution['last_received_request_id'],
             motion_in_progress=execution['motion_in_progress'],
             cancelled_request_ids=execution.get('cancelled_requests',[]))
+    if world.get('measurement_version',1)>=3:
+        result['measured_scene_geometry_and_contact']=deepcopy(world['public_scene_measurements'])
     return result

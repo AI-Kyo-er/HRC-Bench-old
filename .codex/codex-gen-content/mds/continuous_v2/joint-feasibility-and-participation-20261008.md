@@ -446,3 +446,27 @@ R新增明确WITHDRAW_OPERATION语言输入，可由协调NN从公开库选择�
 Goal全部要求仍active：可信动态人、六类实际变化、完整持续重组、正式多初始化、有效安排及人负担／cobalance未达成。新低层能力和观测缺口诊断只作为完整链路的必要条件，不以310tests、资格视频或57+2轨迹替代研究验收。
 
 最终核验均terminal：新页2videos/14links、main60videos/566links，均实际播放/拖动/Range206、active字幕、375px、JS0通过；路径relation_visual_review_20261008/browser_verification_final.json及joint_report_browser_20261008/verification_relational_checks_final.json。不再轮询87739/32003。最新神经子788157经ps仍alive，已读H44s（step880）选择away并说点心／饮品完成；不能据话语计环境完成。下一turn继续同session37879及该PID，原始log未覆盖，不改冻结source。
+
+## 最新接续：旧观测闭环完整回收，完整公共测量进入新神经条件
+
+本轮progress：先确认旧子788157 live，等待至真正terminal，session37879已exit0、summary/provenance完整且source_files_changed_during_run=[]（80来源）。没有重跑或运行中修改源码。随后audit、evaluate、全视频独立核验均exit0，input/video verified。原diagnostic持续120s，H30/R30/VLA40、Hparse0/Rparse0/Hreject0；10.65s同资源暴露、持物夹爪接触0，原点心安排terminal=False。8项助手解释核对原始引用通过，不认证语义或cobalance：
+- H0称已准备但仍持碗；R0开始cream fill。
+- H12提前取所谓成品，真实cream-bowl XY .2233970905m/height .2385217m；源记录有距离却不进旧人输入。旧coherent sym detour12s距离.2400716m，勿混用；草稿数字误用已在发布前改正并重新核对。
+- R12—104 modehold却说moving gripper；108/112才execute WITHDRAW语言，116hold确认任务完成。不能据早期话语计实际退让，或据晚期动作认证清场。
+- 26饮品需要，32H wait说明wine已drink_staging，不搬运不等于拒绝；44away实际退出。68.2取消保留snack，72relocate同交付点already_at_requested_supported_position，无新搬运；终body.95仍aside。
+- 120碗在snack_delivery但为空；cream在柜顶附近。H/R116完成声明与环境不符。
+- H本例未选择新增关系目标；新request_state正确active_motion_request_id None、last_motion18，仍不是人物理解证明。
+
+独立完整测量模块public_scene_measurements.py不读取score/private/future/下一动作：实际XYZ、持物/cargo归属、gripper接触、contact实体、movable间相对位移/XY/contact。无接触数据=unknown。scripts/qualify_public_scene_measurements.py已在当时59完整记录/2310H决策/16170object/27720relative checks对应原source，保存各rawSHA及三活动重建examples；没有重模拟或宣称旧NN实际见到。log data1/results/public_observation_contract_qualification_20261008.log，报告data1/results/public_observation_contract_20261008/measurement_contract_verification.json，repo results/public_observation_contract_20261008软链已创建（results目录不是整个symlink，只有continuous_v2是）。初网页链接缺软链返回404已修复，最终browser通过，不把初失败写成成功。
+
+真正terminal之后接入：joint_world observable支持measurement_version3、显式public_scene_measurements；intent_observation当前scene和tool_joint_human execution_tool_result历史反馈均保留complete public data，v1/2输入原结构不变。run_reasoning_constrained_joint_activity.py增加显式--human-complete-observation，removed argv后wrapper注册v3，不改NN提示词/选择/解码；provenance human_perception_contract full_public_geometry_contact_v1、world_measurement_version3和新增moduleSHA。symbolic R也获得完整公共测量表达，不能称only-human单因素消融；visual R和directVLA仍原接口，不偷给几何。
+
+五项新public测量测试（私有/score无影响，cargo不当released，unknown接触不当zero，未知/非法坐标拒绝，以及真正模型payload+后续tool反馈+legacy保持）；full315passed/2skipped。旧已终态relational case在新代码后独立再audit exit0（session7168terminal，log relational_perception_legacy_audit_20261008.log），说明版本2重建保持。不是所有历史重新跑，也不是正式n。
+
+新条件已启动且source冻结：scripts/run_complete_observation_snack_detour.sh，root complete_observation_snack_detour_symbolic_20261008，GPU0启动前nvidia-smi 48494/49140 free，14B+8GB预留约36GB；同init3/seed71/participating/初持碗/120s/4s高层、26与68.2私有fact、同关系/操作接口/提示词/模型，用新完整观测。exec session4569、实际子893607（父893600/893606当时需ps查）；保留同root，不因handle观察超时重启。旧启动/检查全部已terminal不再poll。
+
+新H真实private_input.scene已有measured_scene_geometry_and_contact，首bowl XYZ[.25,.6,1.06]/human_carriedTrue/releasedFalse；下一真实chat tool_response同样带完整测量，非只保存shadow。最新读H16s（5次决策）：0/4 relocate bowl serving_ready，8pause，12relocate bowl personal，16pause；R0—16持续actual cream fill，trace19.95s human idle/held bowl。不能据pause直接说改善；仍有声明早于完成，需完整物理和后续cue行为。保持所有加载source/core/world/intent/tool/policy/decoding/参数冻结，直到真实terminal再迭代。
+
+发布：旧神经结果video+8review已入relational单页（共3完整videos），新增完整观测pending说明及PERCEPTION_PROTOCOL.md；OBSERVATION_REVIEW注明旧版本缺测量与新已接入，保留原raw。统一main61video=58×120s+2×60s+1×24.1s；loader60complete/16320blocks/141600actualactions、唯一ID/source全部通过，formal split未冻结。315测试、旧compatibility、diff check通过。最终browser新页3videos/19links、main61videos/576links，全部play/seek/Range206、activeCue、375px、JS0，路径relation_visual_review_20261008/browser_perception_baseline_final.json及joint_report_browser_20261008/verification_perception_baseline_final.json，sessions54607/26105已exit0。无需重跑已验证report，除非以后新增完整结果/改动。
+
+下一步继续同新PID/session回收完整新观测结果：检查必要测量被利用、实际提供和接收、私有需求公开变化、R响应及H后续反馈，不以单例/暂停计可靠伙伴或cobalance；再按三活动/六情境统一接口扩大资格与改进真正动态意图及活动依赖。不长期停留在字段/提示小修。完整Goal仍active；可信Human、真实六情境、完整持续重组、冻结多初始化formal、当前有效安排/人负担/cobalance均未验收，formal n0/candidate72未冻结。

@@ -60,6 +60,7 @@ RUNS = [
     ('relation_execution_init2_20261008','关系放置与真实VLA退让：init2资格检查','qualification'),
     ('relation_execution_init3_20261008','关系放置与真实VLA退让：init3资格检查','qualification'),
     ('relational_snack_detour_symbolic_20261008','关系贡献：点心偏离神经闭环开发','neural'),
+    ('complete_observation_snack_detour_symbolic_20261008','完整公共观测：点心偏离神经闭环开发','neural'),
 ]
 _coherent_table=Path('experiments/coherent_joint_20261008/conditions.csv')
 if _coherent_table.exists():

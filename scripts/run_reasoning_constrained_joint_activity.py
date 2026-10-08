@@ -14,6 +14,8 @@ from hrc_pilot.relation_human_executor import RelationHumanExecutor
 
 
 if __name__=='__main__':
+    complete_observation='--human-complete-observation' in sys.argv
+    if complete_observation:sys.argv.remove('--human-complete-observation')
     relational='--human-relational-targets' in sys.argv
     if relational:sys.argv.remove('--human-relational-targets')
     import lmformatenforcer,interegular
@@ -24,6 +26,7 @@ if __name__=='__main__':
          'semantic_joint_human.py','intent_observation.py']]]
     for package in (lmformatenforcer,interegular):sources.extend(sorted(Path(package.__file__).parent.rglob('*.py')))
     if relational:sources.extend([Path('src/hrc_pilot/human_relation_targets.py'),Path('src/hrc_pilot/relation_human_executor.py')])
+    if complete_observation:sources.append(Path('src/hrc_pilot/public_scene_measurements.py'))
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in sources}
     output=Path(sys.argv[sys.argv.index('--output-dir')+1])
     original_update=runtime.update_joint_regions
@@ -35,6 +38,11 @@ if __name__=='__main__':
     runtime.JointHumanPolicy=ReasoningConstrainedHumanPolicy
     runtime.KinematicHuman=RelationHumanExecutor if relational else PausableHumanExecutor
     runtime.update_joint_regions=update_regions
+    if complete_observation:
+        original_observable=runtime.observable_world
+        def observable(record,regions,drawer=None):
+            return original_observable(record,regions,drawer,measurement_version=3)
+        runtime.observable_world=observable
     original_augment=runtime.augment_contact_human
     def augment(env,*args,**kwargs):
         update_human_support_targets(env,kwargs['public_regions'])
@@ -53,6 +61,8 @@ if __name__=='__main__':
             'human_placement_contract':'atomic_place_object_v1','source_sha256':hashes,'source_files_changed_during_run':changed}
         if relational:adapter.update(human_relation_targets='measured_reference_collision_surface_v1',
                                      human_request_state='actor_and_active_motion_v2')
+        if complete_observation:adapter.update(human_perception_contract='full_public_geometry_contact_v1',
+                                               world_measurement_version=3)
         if output.is_dir():(output/'observation_adapter_provenance.json').write_text(json.dumps(adapter,ensure_ascii=False,indent=2))
         if (output/'provenance.json').is_file():
             provenance=json.loads((output/'provenance.json').read_text())

@@ -62,6 +62,8 @@ def execution_tool_result(decision_id,scene):
         result.update(request_actor='human',last_motion_request_id=execution['last_motion_request_id'],
                       last_received_request_id=execution['last_received_request_id'],
                       motion_in_progress=execution['motion_in_progress'])
+    if scene['measured_world'].get('measurement_version',1)>=3:
+        result['measured_scene_geometry_and_contact']=deepcopy(scene['measured_world']['public_scene_measurements'])
     return result
 
 
