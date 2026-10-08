@@ -91,3 +91,7 @@ public_request_response_review保存8项终态解释，verify_case8源锚点通�
 首视频已发布并验证89396 terminal1video/16links（实际play/seek/Range206/字幕/inspector/375px/JS0）。从完整MP4按真实timeline提取4/20/56/116帧，2603terminal，已view56/116，图中奶酪包装在空碗盘之外；仍只作为实际片段见证非总分。当前notes首段更新完整终态，旧前缀观察保留。主入口已73视频/5pending，数据导出18837运行中，主browser22317运行中，需收结果；源runtime未改。
 
 第二drink/request实际子PID2453774/GPU2，π2440833/GPU3仍被batch需要，不能停止。当前日志已实际Human0/4/8选择wine柜顶暂放并保留长期rack需要，尚未见证有效Robot主动请求，不能凭情境名计覆盖。其余四条未启动。formal0/72未冻结，多系统正式、有效伙伴和六真实变化等全Goal仍active。
+
+51df0e4已提交首例终态视频／审阅及报告。18837现terminal exit0：全量开发72完整episodes/19200观测块/170400实际动作，unique/source边界通过（不是候选72正式样本）。22317 terminal exit0：主报告73videos/692links，实际播放／拖动／字幕／375px／Range206通过。不要继续poll这两个终态handle。首case8锚点+3区间核对通过；未因其格式及视频核验而准入正式。
+
+第二drink22.05模拟秒仍live，Human0自己声明暂放酒瓶，Robot0也执行同类柜顶操作，Human4改清盘、Robot4等待最终用途；又有把自愿贡献当共享指派的线索，须完整收尾再归因。2453774显存约35311MiB、π2440833约8880MiB，仍被本批需要。当前第一子已结束，第二live，后四未开始；不因同类错误提前丢弃条件或覆写输入。所有runtime源未改，无smoke生成。
