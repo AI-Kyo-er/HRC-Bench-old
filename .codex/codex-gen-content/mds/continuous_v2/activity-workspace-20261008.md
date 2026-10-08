@@ -123,3 +123,21 @@ batch49178/父2441354仍live，第三drawer leave_return/init2/seed103已启动�
 新drawer_storage_prefix.json保存22条NN/状态/回执/通知，原行/文件SHA重读匹配。Robot40的真实model_selected_skill_id=bowl_inside_top_drawer、实际英文instruction是open_top+place_bowl，但message/goal说storecreamMiddle；这是协调器选择与话语目标错配，不是VLA收正确奶酪指令后失误。Robot72再选open_middle却也称自己存奶酪，其他轮仍错误说Human持cream，实际早已released。到79.95cream保持Middle支撑、top_joint0、bowl桌面未移。不能以错技能产生选择即称其他成果已被破坏，也不认证私事动态链。
 
 Human60收到59.8结束通知后理由说private_done但话语又称将离场处理，76才说已处理/任务结束，均选wait。通知/理解/真实行为仍需分开；没有强迫NN为了条件名必须变化。runtime、条件、模型均未改，资源仍有本批需要。Goal正式0、六真实情境及可靠伙伴未准入。
+
+## 2026-10-09 全六条终态、整批审阅与资源释放
+
+406d7f5后的活跃工作跨日期继续。第三2472725、第四2488278、第五2503060、第六2524458全部terminal；父2441354/session49178已收exit0。新六条全input/scheduler/geometry/video verified，120s各2401frames，共202H推理/101贡献决定/180协调/464VLA/14400ctrl/14406frames，拒绝3均第五真实Robot指接触，source_changed全部[]。没有重启或修改运行中源。
+
+第三完整review8锚点/3区间已通过：初始奶酪物理匹配26.4、宏31.3、终态稳定，盘在个人区；Body全部.6。R16 cream_in_bowl、40 bowl_inside_top_drawer、72 open_middle却都称存奶酪；R100才认可完成并错误说H离开。初始成果真实、动态离返未证，不能全称失败。区间8–12开门4VLA、12–26.4存储14.4（4VLA/10.4hold）、28–100成果至认可72（8VLA/64hold、H7/逐字重复1）。765?不依赖未知handle；第三视频Frame8/28/40/116已提取，view28/116。
+
+第四完整review7/3区间通过：Food实际在Plate（20由盘支撑），H28持Plate+Cream载物，32因30.7饮品Cue转Wine并中断Plate请求4、暂放载盘至个人区；Wine56已Guest点，Bowl支持Wine，Food仍在个人区Plate。69.5取消、H72wait+公开调整，不能认证点心恢复。当前single-coordinate destination欠区内并排表达，不能把所有摆放失真归高层NN。Source同目标继续4而非重复起搬。区间32–56搬酒24hold、56–92保持36、72–100认可28含4VLA。第四Frame28/32/56/116已提取。
+
+第五完整review8/2区间通过：H4先自行纠正长期Cab为Rack，早于35.1即用Cue；H36公开Cab即用，R60才换Cab，24s含16VLA/8hold，H6消息。60Wine接触Rack但释放support=[]，不是完整原生上架。H64选择自己搬并请求R，**69.9起Human实际持瓶，72/76仍owned，80释放Cab支持，搬运归Human，不归208VLA**。H36拒绝Robot接触、24/32另两拒绝。Plate56/60Cab附近，68Table，不能套用第二例没清盘。新的Bottle需求有成果，显式接管/交还及全部整理仍未证；H64–80接管16s实际VLA也在并行，不说明R完成。Frame36/60/72/80/116提取，view72。
+
+第六完整review6/1区间通过：H0已承诺清盘/后续存Cream，Body0.95sec便返workspace，19.9Cue前已参与，不能算中途加入。H等真实Door未可用，R20重新开门，32可用/H持Cream；R32错加CreamInBowl步骤。终态CreamReleased/middle_drawer_bottom支持、Plate个人区，但Door部分回缩至.07518（放置accessibleFalse），nativeOpenProbeFalse，**不能仅用原生开门分数否定已存物**；也不以底面支持自动认证包含/再取用/全协同。R最后认可完成。区间16→20响应4是hold、不操作已完成。Frame0/16/32/64/116提取，view116。
+
+合计46案例解释锚点/16过程区间：助手解释非真人/专家一致性。新BATCH_REVIEW已写整批成果、实际覆盖缺口、原nativeProbe与更新Goal、模块与裸VLA边界。next必须处理same区域多物品表达及与自己所选贡献相连的物理事实反馈，不继续单提示/单酒瓶微调；NN仍决定Intent/Contribution，不能后台路由正确下一策略。三活动端到端重新资格后再组合/双系统正式；正式0、72候选未冻结、全Goalactive。
+
+本轮确认父/全部子不存在且8766无活动连接、六summary/audit/video都terminal后，仅核UID/cwd/cmdline停止自有π2440833，session8693 exit143；nvidia compute-apps空，四卡48492–48494MiB空闲。旧49178/8693不再poll。无其他用户被停止，无smoke。CPU HTTP3054726保留读报告。
+
+新批6videos/48links浏览器67104 terminal通过，全部play/seek/Range206/字幕/inspector/375px/JS0；88327terminal数据导出77complete/20400blocks/182400实际actions、unique/source边界通过，主78videos无pending。主browser70280尚待收实际结果。所有大文件data1软链，原始视频/模型记录未覆写。README/index/stat及本批审阅需本轮commit；下一步不能以这一整批工程完整替Goal全验收。
