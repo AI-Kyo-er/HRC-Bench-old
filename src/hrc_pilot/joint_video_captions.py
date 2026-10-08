@@ -30,6 +30,9 @@ def plain(value):
 
 def destination(name):
     if not name:return ''
+    parts=name.split('__')
+    if len(parts)==3 and parts[1] in {'in','on'}:
+        return plain(parts[2])+('内' if parts[1]=='in' else '上')
     table={'serving_ready':'准备区','snack_delivery':'交付区','drink_staging':'饮品准备区','drawer_storage':'抽屉内部'}
     if name in table:return table[name]
     if name.endswith('_personal'):return plain(name.removesuffix('_personal'))+'的个人桌面区'
@@ -79,7 +82,8 @@ def make_captions(trace,human,plans,contexts,timeline,controls):
         else:
             index=min(max(0,round(time*20)),len(controls)-1)
             source=controls[index]['source'] if controls else ''
-            robot='参考控制' if any(word in source for word in ['reference','replay']) else '模型控制'
+            robot=('真实VLA（固定资格指令）' if source=='actual_vla_reference_instruction' else
+                   '参考控制' if any(word in source for word in ['reference','replay']) else '模型控制')
         lines=[f'人选择：{selected}；实际：{physical}',f'机器人选择／控制：{robot}']
         if ci>=0:
             cue=contexts[ci];text=plain(cue['text'])

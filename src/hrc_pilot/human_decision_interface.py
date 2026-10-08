@@ -30,12 +30,24 @@ def decision_tool(scene):
 def available_destinations(scene):
     # 调试用初始中心不作为自然放置目标；不把名字相似的对象映射为目标。
     return {name:xyz for name,xyz in scene['regions_xyz'].items()
-            if not name.endswith('_home') and name not in {'near_human','near_robot'}}
+            if not name.endswith('_home') and name not in {'near_human','near_robot'}
+            and ('__' not in name or name in scene.get('relation_targets',{}))}
+
+
+def destinations_for_object(scene,obj):
+    relations=scene.get('relation_targets',{})
+    return [name for name in available_destinations(scene)
+            if (not name.endswith('_on_cabinet') or name.removesuffix('_on_cabinet')==obj)
+            and (name not in relations or relations[name]['object_id']==obj)]
 
 
 def decision_interface(scene):
     destinations=[]
     for name in available_destinations(scene):
+        relation=scene.get('relation_targets',{}).get(name)
+        if relation:
+            destinations.append({'destination_id':name,'meaning':'Place the selected object '+relation['relation']+' the currently observed reference object; this is not a named table position.',**relation})
+            continue
         if name.endswith('_on_cabinet'):
             meaning='Actual cabinet top support surface, with placement height measured for '+name.removesuffix('_on_cabinet')+'.'
         elif name=='drawer_storage':meaning='Measured middle drawer interior support; accessibility is currently observed.'
@@ -71,6 +83,7 @@ def parse_decision(raw,scene):
         if kind=='place_object':
             dest=motion.get('destination');obj=motion.get('object_id')
             if dest not in available_destinations(scene):raise ValueError('所选自然放置目标不存在')
+            if dest not in destinations_for_object(scene,obj):raise ValueError('所选关系或支撑高度不是为此物品测量的')
             if dest.endswith('_on_cabinet') and dest.removesuffix('_on_cabinet')!=obj:
                 raise ValueError('支持面放置高度不是为该物品测量的')
     if speech is not None:

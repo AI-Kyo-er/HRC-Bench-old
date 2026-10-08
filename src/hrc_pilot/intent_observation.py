@@ -13,7 +13,7 @@ def intent_observation(scene):
     execution=scene['own_execution'];world=scene['measured_world']
     receipt=execution.get('last_receipt') or {}
     error=receipt.get('error')
-    return {
+    result = {
         'time_s':scene['time_s'],
         'measured_current_facts':list(world.get('current_measured_fact_sentences',[])),
         'object_ids':list(scene['objects_xyz']),
@@ -37,3 +37,11 @@ def intent_observation(scene):
         'public_robot_operation_inputs':scene.get('public_robot_operation_inputs',{}),
         'interpretation':'Measurements and own execution are current facts; partner statements and generated memories may be wrong. No task score or prescribed next action.',
     }
+    if execution.get('request_state_version')==2:
+        result['own_execution'].update(
+            actor='human',current_request_id=execution['active_motion_request_id'],
+            last_motion_request_id=execution['last_motion_request_id'],
+            last_received_request_id=execution['last_received_request_id'],
+            motion_in_progress=execution['motion_in_progress'],
+            cancelled_request_ids=execution.get('cancelled_requests',[]))
+    return result

@@ -9,9 +9,13 @@ import run_joint_activity as runtime
 from hrc_pilot.reasoning_constrained_human import ReasoningConstrainedHumanPolicy
 from hrc_pilot.pausable_human_executor import PausableHumanExecutor
 from hrc_pilot.human_support_targets import update_human_support_targets
+from hrc_pilot.human_relation_targets import update_human_relation_targets
+from hrc_pilot.relation_human_executor import RelationHumanExecutor
 
 
 if __name__=='__main__':
+    relational='--human-relational-targets' in sys.argv
+    if relational:sys.argv.remove('--human-relational-targets')
     import lmformatenforcer,interegular
     sources=[Path(__file__),*[Path('src/hrc_pilot')/name for name in
         ['reasoning_constrained_human.py','thinking_schema_filter.py','constrained_human_decision.py','pausable_human_executor.py','human_decision_policy.py','human_decision_interface.py','human_support_targets.py',
@@ -19,19 +23,22 @@ if __name__=='__main__':
          'reasoning_joint_human.py','contribution_joint_human.py','human_contribution_contract.py',
          'semantic_joint_human.py','intent_observation.py']]]
     for package in (lmformatenforcer,interegular):sources.extend(sorted(Path(package.__file__).parent.rglob('*.py')))
+    if relational:sources.extend([Path('src/hrc_pilot/human_relation_targets.py'),Path('src/hrc_pilot/relation_human_executor.py')])
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in sources}
     output=Path(sys.argv[sys.argv.index('--output-dir')+1])
     original_update=runtime.update_joint_regions
     def update_regions(env,regions):
         result=original_update(env,regions)
         update_human_support_targets(env,regions)
+        if relational:update_human_relation_targets(env,regions)
         return result
     runtime.JointHumanPolicy=ReasoningConstrainedHumanPolicy
-    runtime.KinematicHuman=PausableHumanExecutor
+    runtime.KinematicHuman=RelationHumanExecutor if relational else PausableHumanExecutor
     runtime.update_joint_regions=update_regions
     original_augment=runtime.augment_contact_human
     def augment(env,*args,**kwargs):
         update_human_support_targets(env,kwargs['public_regions'])
+        if relational:update_human_relation_targets(env,kwargs['public_regions'])
         return original_augment(env,*args,**kwargs)
     runtime.augment_contact_human=augment
     try:runtime.main()
@@ -44,6 +51,8 @@ if __name__=='__main__':
             'human_decoder':'lm-format-enforcer-0.11.3', 'human_caller_frame':'explicit_tool_envelope_v1',
             'human_support_targets':'actual_collision_geometry_cabinet_top_v1',
             'human_placement_contract':'atomic_place_object_v1','source_sha256':hashes,'source_files_changed_during_run':changed}
+        if relational:adapter.update(human_relation_targets='measured_reference_collision_surface_v1',
+                                     human_request_state='actor_and_active_motion_v2')
         if output.is_dir():(output/'observation_adapter_provenance.json').write_text(json.dumps(adapter,ensure_ascii=False,indent=2))
         if (output/'provenance.json').is_file():
             provenance=json.loads((output/'provenance.json').read_text())

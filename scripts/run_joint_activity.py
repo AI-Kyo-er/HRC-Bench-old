@@ -82,6 +82,8 @@ def main():
     parser.add_argument('--steps',type=int,default=1600);parser.add_argument('--context-step',type=int,default=800)
     parser.add_argument('--port',type=int,default=8766);parser.add_argument('--coordinator-port',type=int)
     parser.add_argument('--human-source',choices=['neural','reference'],default='neural')
+    parser.add_argument('--reference-vla-instruction',
+                        help='仅资格检查：固定语言目标由实际VLA执行，不计动态协调成绩')
     parser.add_argument('--human-reflection',action='store_true')
     parser.add_argument('--robot-language',choices=['context','native_with_activity','task_only'],default='context')
     parser.add_argument('--initial-human-holding',action='store_true')
@@ -90,6 +92,8 @@ def main():
     parser.add_argument('--robot-replay',type=Path,help='仅参考：回放已有成功神经轨迹的真实7D动作，当前NN调用0')
     parser.add_argument('--follow-reference-poses',action='store_true')
     parser.add_argument('--symbolic-coordinator',action='store_true')
+    parser.add_argument('--robot-withdraw-operation',action='store_true',
+                        help='额外退让语言目标，实际由VLA执行；不调用参考笛卡尔控制')
     parser.add_argument('--robot-skill-bank',action='store_true',
                         help='协调NN从公开原生技能库选择操作，不由后台按活动阶段选动作')
     parser.add_argument('--situation',choices=list(SITUATIONS))
@@ -100,6 +104,10 @@ def main():
     parser.add_argument('--human-model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
     parser.add_argument('--output-dir',type=Path,required=True)
     args=parser.parse_args()
+    if args.robot_withdraw_operation and not args.robot_skill_bank:
+        parser.error('退让语言操作要求明确的机器人操作库接口')
+    if args.reference_vla_instruction and (args.human_source!='reference' or args.symbolic_coordinator or args.coordinator_port or args.robot_replay):
+        parser.error('固定VLA操作检查要求参考人且无协调器／回放')
     if args.robot_replay and (args.human_source!='reference' or args.coordinator_port):
         parser.error('动作回放只用于明确标注的可执行性参照，不能替代正式被测策略')
     if args.follow_reference_poses and not args.robot_replay:parser.error('位姿参考要求显式参考轨迹')
@@ -134,6 +142,10 @@ def main():
     client=WebsocketClientPolicy('127.0.0.1',args.port)
     if args.robot_skill_bank:
         from hrc_pilot.robot_skill_bank import SKILLS,SkillBankCoordinatorClient
+        SKILLS=dict(SKILLS)
+        if args.robot_withdraw_operation:
+            from hrc_pilot.robot_skill_bank import WITHDRAW_OPERATION
+            SKILLS.update(WITHDRAW_OPERATION)
         coordinator=SkillBankCoordinatorClient(args.coordinator_port) if args.coordinator_port else None
     else:coordinator=CoordinatorClient(args.coordinator_port) if args.coordinator_port else None
     if args.symbolic_coordinator:coordinator=SymbolicRobotCoordinator(human,skill_bank=args.robot_skill_bank)
@@ -233,6 +245,8 @@ def main():
                         'hand_workspace_xyz_min':[-.7,-.4,.95],'hand_workspace_xyz_max':[.7,.9,1.5],
                         'place_destination_names':list(regions),'held_object':actor.held,
                         'relocate_can_buffer_owned_object':args.human_auto_buffer}}
+                if hasattr(env.env,'_hrc_relation_targets'):
+                    scene['relation_targets']=json.loads(json.dumps(env.env._hrc_relation_targets))
                 if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
                 d=(human.decide(scene,bool(placement.records and goal_success(placement.records[-1])))
                    if args.human_source=='reference' else human.decide(scene))
@@ -271,7 +285,10 @@ def main():
                                       if last_plan['decision']['mode']=='move_ee' else None)
                     if last_plan['decision']['message']:
                         dialogue.append({'time_s':t,'speaker':'robot','kind':'response','text':last_plan['decision']['message']})
-                if args.human_source=='reference' and not human.robot_permission:
+                if args.reference_vla_instruction:
+                    request=native_policy_input(obs,args.reference_vla_instruction)
+                    response=client.infer(request);source='actual_vla_reference_instruction'
+                elif args.human_source=='reference' and not human.robot_permission:
                     if human.stage in {'finish','done'}:
                         if reference_clearance_target is None:reference_clearance_target=np.asarray(r['robot_ee'])+[0,0,.20]
                         source='reference_clearance_cartesian'
@@ -356,8 +373,10 @@ def main():
         'human_model_class':type(human._model).__name__ if args.human_source=='neural' else None,
         'human_thinking_enabled':getattr(human,'enable_thinking',None),'human_reflection':args.human_reflection,
         'human_source':args.human_source,'robot_language':args.robot_language,
+        'reference_vla_instruction':args.reference_vla_instruction,
         'initial_human_holding':args.initial_human_holding,
         'human_auto_buffer':args.human_auto_buffer,
+        'robot_withdraw_operation':args.robot_withdraw_operation,
         'human_executor':'human_only_continuous_kinematic_attachment','robot_model_metadata':client.get_server_metadata(),
         'robot_system':'saved_actions_feasibility_reference' if args.robot_replay else 'symbolic_coordinator_plus_vla' if args.symbolic_coordinator else 'visual_coordinator_plus_vla' if coordinator else 'direct_vla_public_dialogue',
         'robot_replay_source':str(args.robot_replay) if args.robot_replay else None,

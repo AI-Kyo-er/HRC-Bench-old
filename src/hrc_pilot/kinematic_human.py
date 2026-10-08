@@ -100,6 +100,11 @@ class KinematicHuman(NativeContactHuman):
             'remaining_distance_m':float(np.linalg.norm(self.position()-self.target)),
             'body_xy':self.body_base.tolist(),'completed_requests':self.completed_requests[-6:],
             'active_request_id':self.active_request,
+            'request_state_version':2,'request_actor':'human',
+            'active_motion_request_id':self.active_request if self.phase!='idle' else None,
+            'last_motion_request_id':self.active_request,
+            'last_received_request_id':self.last_request,
+            'motion_in_progress':self.phase!='idle',
             'carried_objects':list(getattr(self,'carried_offsets',{})),
             'last_receipt':self.receipts[-1] if self.receipts else None}
 

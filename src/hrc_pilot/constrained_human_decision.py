@@ -2,7 +2,7 @@
 from copy import deepcopy
 import json
 
-from .human_decision_interface import decision_tool,decision_interface,available_destinations,parse_decision
+from .human_decision_interface import decision_tool,decision_interface,available_destinations,parse_decision,destinations_for_object
 from .human_decision_policy import HumanDecisionPolicy
 
 
@@ -13,8 +13,7 @@ def constrained_tool(scene):
     tool=decision_tool(scene)
     variants=[{'type':'null'}]
     for obj in scene['objects_xyz']:
-        destinations=[name for name in available_destinations(scene)
-                      if not name.endswith('_on_cabinet') or name.removesuffix('_on_cabinet')==obj]
+        destinations=destinations_for_object(scene,obj)
         variants.append({'type':'object','properties':{
             'kind':{'type':'string','enum':['place_object']},'object_id':{'type':'string','enum':[obj]},
             'destination':{'type':'string','enum':destinations}},

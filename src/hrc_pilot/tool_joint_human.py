@@ -52,12 +52,16 @@ def execution_tool_result(decision_id,scene):
     result={'policy_decision_id':decision_id,'observed_at_s':scene['time_s'],
         'acceptance':receipt.get('accepted') if receipt.get('request_id')==decision_id else None,
         'completed_request_ids':list(execution.get('completed_requests',[])),
-        'active_motion_request_id':execution.get('active_request_id'),
+        'active_motion_request_id':execution.get('active_motion_request_id',execution.get('active_request_id')),
         'held_object':execution['held_object'],'phase':execution['phase'],
         'last_execution_error':receipt.get('error'),
         'measured_current_facts':list(scene['measured_world'].get('current_measured_fact_sentences',[])),
         'interpretation':'Actual observations after a policy selection. Acceptance is not completion; no task score, future cue, or prescribed next action.'}
     if 'cancelled_requests' in execution:result['cancelled_request_ids']=list(execution['cancelled_requests'])
+    if execution.get('request_state_version')==2:
+        result.update(request_actor='human',last_motion_request_id=execution['last_motion_request_id'],
+                      last_received_request_id=execution['last_received_request_id'],
+                      motion_in_progress=execution['motion_in_progress'])
     return result
 
 

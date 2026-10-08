@@ -8,6 +8,7 @@
 
 2026-10-08当前阶段：已有完整神经点心物理链正例，最新开发也暴露了人提前宣称完成、误解用途和双方继续过时操作的问题。同一伙伴方法的三活动、六情境、两个系统开发批已完成12/12条完整运行和输入／执行／视频核查；71项逐例助手解释已核对来源。视觉暂离条件有实际返回但存储恢复受阻，两个主动求助条件均未出现明确求助链；完整运行不等于六情境行为验收。新init2三类固定人参考均有实际π0.5成功，但不能当作动态策略成绩；init4/5饮品参考失败也单独保留。六类实际行为覆盖、多初始化正式比较、伙伴拟真与cobalance效度尚未完成，正式样本为0。
 
+- [关系贡献、请求状态与退让能力：两条真实Sim资格检查](experiments/relational_joint_20261008/index.html)
 - [本轮可执行性与神经策略进展：真实Sim视频统一入口](experiments/joint_feasibility_20261007/index.html)
 - [同一伙伴方法的六情境开发批：目的、设置、视频与逐例解释](experiments/coherent_joint_20261008/index.html)
 - [完整12条开发批的行为覆盖、归因与后续取舍](experiments/coherent_joint_20261008/BATCH_REVIEW.md)
@@ -16,6 +17,8 @@
 - [动态共同活动统一入口](experiments/dynamic_joint_activity_20261007/index.html)
 - [与idea对齐的整体设计、信息边界及参考依据](experiments/dynamic_joint_activity_20261007/DESIGN.md)
 - [实际进展和七项Goal验收状态](experiments/dynamic_joint_activity_20261007/README.md)
+
+新增的两种初始化检查已验证关系动作的实际支撑；π0.5未适配退让指令的响应不可靠，不能当作可用退让技能。关系贡献神经闭环正在运行，尚无完整结论；设置与边界见上述报告。
 
 下文保留历次路线与结果。旧的人体接触／动作LoRA实验是历史证据，不再作为当前Goal的主线或完成前提。
 

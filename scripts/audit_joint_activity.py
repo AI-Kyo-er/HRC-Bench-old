@@ -106,6 +106,16 @@ def audit(root):
                 geometry_frames.append({'time_s':d['time_s'],**frame})
                 names=[n for n in ['wine_bottle_1','cream_cheese_1','akita_black_bowl_1','plate_1'] if n in scene['objects_xyz']]
                 expected_targets=cabinet_placement_targets(support_sim.model,support_sim.data,names)
+                if p.get('human_relation_targets')=='measured_reference_collision_surface_v1':
+                    from hrc_pilot.human_relation_targets import relation_placement_targets
+                    relations=relation_placement_targets(support_sim.model,support_sim.data,list(scene['objects_xyz']))
+                    assert set(relations)==set(scene['relation_targets'])
+                    for name,relation in relations.items():
+                        saved=scene['relation_targets'][name]
+                        for key in ['object_id','relation','reference_object_id','support_collision_geom','source']:
+                            assert relation[key]==saved[key]
+                        np.testing.assert_allclose(relation['target_xyz'],saved['target_xyz'],atol=.0002,rtol=0)
+                        expected_targets[name]=relation['target_xyz']
                 for name,point in expected_targets.items():
                     delta=float(np.max(np.abs(np.asarray(point)-scene['regions_xyz'][name])))
                     support_replay_errors.append({'time_s':d['time_s'],'target':name,'max_axis_error_m':delta})
@@ -197,7 +207,11 @@ def audit(root):
                 assert adapter['model_selected_operation']==plan['model_selected_operation']
         if p.get('robot_skill_bank'):
             from hrc_pilot.robot_skill_bank import SKILLS,encode_skill_selection
-            assert request['available_vla_operations']==SKILLS
+            operations=dict(SKILLS)
+            if p.get('robot_withdraw_operation'):
+                from hrc_pilot.robot_skill_bank import WITHDRAW_OPERATION
+                operations.update(WITHDRAW_OPERATION)
+            assert request['available_vla_operations']==operations
             decision,error,adapter=encode_skill_selection(plan['raw_output'],request['available_vla_operations'])
             assert decision==plan['decision'] and error==plan['parse_error']
             assert adapter['model_selected_skill_id']==plan['model_selected_skill_id']
@@ -208,7 +222,11 @@ def audit(root):
     for c in calls:
         visible=dialogue[:c['visible_dialogue_count']]
         assert all(m['time_s']<=c['time_s'] for m in visible)
-        if p['robot_system']=='direct_vla_public_dialogue':
+        if p.get('reference_vla_instruction'):
+            assert p['human_source']=='reference'
+            assert c['action_source']=='actual_vla_reference_instruction'
+            assert c['prompt']==p['reference_vla_instruction']
+        elif p['robot_system']=='direct_vla_public_dialogue':
             # 依据保存的设置兼容旧开发记录，不能倒改旧输入。
             recent=([m for m in visible if m['speaker'] in {'human','robot'}][-2:]
                     if p['robot_model_metadata'].get('language_token_limit') else visible[-12:])
@@ -268,7 +286,7 @@ def audit(root):
     result={'status':'verified','world_initializations':1,'human_neural_calls':human_neural_calls,
         'human_decision_rows':len(human),'human_source':p.get('human_source','neural'),
         'robot_action_blocks':len(calls),'actual_robot_control_steps':len(controls),
-        'robot_actual_vla_calls':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction'} for c in calls),
+        'robot_actual_vla_calls':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction','actual_vla_reference_instruction'} for c in calls),
         'robot_visual_coordinator_calls':len(plans),
         'robot_coordinator_calls_with_public_human_speech':sum(any(m['speaker']=='human' for m in r['public_input']['dialogue']) for r in plans),
         'robot_actual_vla_calls_with_human_speech':sum(c['action_source'] in {'actual_vla_public_dialogue','actual_vla_coordinator_instruction'}

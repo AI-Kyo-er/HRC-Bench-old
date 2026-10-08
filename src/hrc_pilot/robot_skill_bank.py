@@ -15,6 +15,8 @@ SKILLS={
     'bowl_on_plate':'put the bowl on the plate',
     'bottle_on_rack':'put the wine bottle on the rack',
 }
+# 额外语言操作不属于已验证的LIBERO技能；仍须由真实VLA生成动作。
+WITHDRAW_OPERATION={'withdraw_from_workspace':'move the gripper up and away from the objects and the open drawer'}
 SYSTEM=(
     '你是与人共同活动的机器人协调策略。依据实际观察、自身执行与公开交流决定当前贡献。'
     'available_vla_operations是公开的原生操作指令库，不是待执行队列，也不是已经验证成功的技能保证。'

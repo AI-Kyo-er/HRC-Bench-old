@@ -422,3 +422,27 @@ Next：继续同父批按表回收跨活动、六情境实际结果，完成逐�
 下一项系统工作：统一关系目标、请求生命周期及R退出操作区能力，NN仍选当前贡献、后台不调度下一步；按活动需要和伙伴观测检验在线生成式人物事实与意图，而非继续提示词小修或人接触动力学。当前六情境真实覆盖、可靠伙伴、完整重组、正式多初始化与人负担/cobalance未达成；formal n0，candidate72未冻结，Goal保持active。
 
 最终复核已收：focus最终12videos/92links，main最终58videos/551links，均实际play/seek/Range206、字幕activeCue、375px、JS0通过；路径coherent_report_browser_20261008及joint_report_browser_20261008/verification_twelve_cases_final.json。两页面本地href均无失效，12review所有SHA当前一致；pytest7passed，diff check通过。全批360HNN/360协调NN/1776VLA/28800controls/12次初始化，已列整批审阅。已完成builder、export、browser sessions全部terminal，不再轮询或重跑。
+
+## 最新接续：关系贡献／请求生命周期落地，两条实际资格检查及感知缺口
+
+本轮为progress，不是Goal完成。实现human_relation_targets.py：资产声明碗in、盘on；从真实中心水平碰撞盒找支撑面，按被放物品当前朝向测底部偏移，关系目标随参考物移动更新；过滤固定fixture作为被搬物品。不读取任务score或替NN选下一贡献。只有这些资产的中心关系解算，未宣称任意尺寸／完整包含／双人持物可靠。RelationHumanExecutor连续0.2m/s兑现，参考面翻倒不可用则blocked持物、可用后继续原贡献；模型选择新贡献记录superseded，wait只记录continues。旧active_request_id保留供历史兼容，新增request_state_version2/actor human/实际active_motion_request_id/last_motion_request_id/last_received_request_id/motion_in_progress，idle不将旧请求说成活跃。模型、history tool_response及intent_observation使用新实际状态；旧saved反馈无version2时保持旧payload，旧sym纠正audit已实际重验通过，不重模拟。
+
+R新增明确WITHDRAW_OPERATION语言输入，可由协调NN从公开库选择，实际仍π0.5输出7D；没有手写清场或物体／机器人位姿写入。额外操作不属于原LIBERO-goal指令集合，未适配，不保证成功。运行参数--robot-withdraw-operation必须skill-bank。--reference-vla-instruction只允许固定人资格检查、无协调器/回放，固定语言全部实际VLA；audit已检查prompt/action source并计实际调用，不把固定指令称神经协调。
+
+预定协议experiments/relational_joint_20261008/PROTOCOL.md先保存。scripts/run_relation_execution_checks.sh用单GPU0，启动前nvidia-smi free48494/49140MiB，reference+Sim预计4GB。init2/seed82、init3/seed83，两条60s fixed reference HNN0、VLA各120、controls各1200，固定H先cream in bowl再bowl on plate。session73124、子768993/773493及所有核验sessions已terminal，不重跑。保存两条完整视频、原始IO、状态／动作、geometry与relation witnesses。
+
+实际结果两例均：碗—盘最后1秒选定盘面contact+release+centre持续成立；奶酪—碗末期有侧壁contact+release+native ontop等价关系，但原解算中心底面contact判据False（原判据保留，不为结果放宽）。verify_relation_execution_check另列released_reference_support，不宣称整个盒装奶酪容纳在碗内。几何frame replay不拟合target；max error init2约1.4148e-8m，init3实际evidence可查。实际40s原video frames已查看，两角色、奶酪碗盘及模型双相机真实展示。图片data1/results/relation_visual_review_20261008/init2_40s.png/init3_40s.png是审阅材料，不是smoke。系统shell无ffmpeg命令，改用既有imageio解码成功，未下载。
+
+π退让未经资格：init2 terminal eef delta[-1.270674,.267135,.449965]m，init3[.147005,.406249,-.233725]m。一个大幅离桌、另一个向下，不能计可靠退让；末端位移不证明全臂清场。两条qualifications不计完整HRC成绩，native_goal由人填装改变，不能归给R。报告单列资格类及真实VLA固定目标，不混成reference task成功。
+
+新的神经诊断已启动：scripts/run_relational_snack_detour.sh，root relational_snack_detour_symbolic_20261008，120s/init3/seed71/participating/初持碗，同Qwen3-14B＋理想感知协调＋π0.5，关系目标及新请求状态、可选未合格退让语言；formal n0，方法与旧12不同，不混n排名。单GPU0再次检查足够约48GB，14B权重+8GB预留约36GB可用。当前exec session37879，父788151/788156、实际子788157 alive；最后读到H20/trace23.95s（后续须重查）。不得编辑已加载runtime/core/intent/tool/policy/relations/执行器/LLM decoder/参数或重启。其30决策未结束，不发布部分视频当完整。
+
+新早期H0说已放好却运动中，H12/16称filled bowl、H20称全部结束；真实23.95仍人持碗下降，奶酪在机器人夹爪/柜体接触。R16/20 mode hold却说正在退让，不能记实际移动。新接口不是伙伴已合格证明。
+
+更关键的源码+输入审阅：joint_world有relative_object_positions，却被intent_observation压掉；人没有图像/实际对象坐标。旧sym detour H第3行12s说filled，source奶酪—碗XY .2400716383m/height .2385216767m，实际private_input.scene无相对关系；16s距离.204011m。新条件16s .2117917m/height .163266m也未转发。仍有held/phase/robot contacts线索，因此不能说完全不可观测，但不得把环境保存的信息误说已进入NN；不能全归人理解失败。OBSERVATION_REVIEW.md及旧BATCH_REVIEW补充归因。下一项优先补必要感知契约（当前冻结运行结束后），再检验生成式背景/意图/历史，而非继续提示词小修。不得给task score、下一正确动作或私有意图R泄漏。
+
+交付：新relational_joint页面2条真实video与独立研究字幕（关系名称可读；actual_vla_reference_instruction字幕明确真实VLA固定指令），历史统一入口60videos=57×120s+2×60s+1×24.1s。数据59complete/16080blocks/139200actualactions，全部同stem加载／唯一ID通过，包含240个新固定VLA块，非专家／formal split未冻结。export85904 terminal exit0。全pytest310passed/2skipped，五项新测试覆盖动态参考面、翻倒、源物品匹配、active/last request区别、阻塞恢复和wait/替代；首次两个mock缺accepted_intent已补，真实actor无此问题。没有临时smoke文件。源码diff check及两个HTML本地link check通过。新页首浏览器2/13links通过、main60/566links通过，随后因为中文状态/感知说明link和资格筛选button更新进行最终检查session87739（新页）、32003（main），需收终态。不要重跑已terminal实验或核验handle。
+
+Goal全部要求仍active：可信动态人、六类实际变化、完整持续重组、正式多初始化、有效安排及人负担／cobalance未达成。新低层能力和观测缺口诊断只作为完整链路的必要条件，不以310tests、资格视频或57+2轨迹替代研究验收。
+
+最终核验均terminal：新页2videos/14links、main60videos/566links，均实际播放/拖动/Range206、active字幕、375px、JS0通过；路径relation_visual_review_20261008/browser_verification_final.json及joint_report_browser_20261008/verification_relational_checks_final.json。不再轮询87739/32003。最新神经子788157经ps仍alive，已读H44s（step880）选择away并说点心／饮品完成；不能据话语计环境完成。下一turn继续同session37879及该PID，原始log未覆盖，不改冻结source。
