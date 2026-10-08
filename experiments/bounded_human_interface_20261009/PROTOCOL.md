@@ -9,3 +9,5 @@
 本页不计完整伙伴资格或正式样本。语法成功后仍须用完整Sim检验动态意图、公开纠正与实际贡献的闭环，重要Sim实验继续提供完整运行视频。这里没有新Sim动作，不把原场景视频当新方法动作证据。
 
 运行：`bash scripts/run_bounded_human_interface.sh`。独立重建：`PYTHONPATH=src .venv-libero-native/bin/python scripts/verify_bounded_human_interface.py --input-dir results/bounded_human_interface_20261009 --source-dir results/continuous_v2/candidate_drink_correction_symbolic_20261009`。输出在data1，通过repo软链访问；原失败与正在进行的Sim设置不覆盖。
+
+后续已准备[持续活动运行接入](RUNTIME_INTEGRATION.md)：两个策略层均得到实际生成失败反馈，贡献层声明长度并做有效性检查；尚未启动新完整Sim，不计新的行为证据。

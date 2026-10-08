@@ -63,3 +63,13 @@ candidate_snack_detour_symbolic_20261009：120模拟秒，2401帧／20FPS／512�
 实际session79748/PID2772580已terminalexit0：568wholetoken、parse_error=None、thinkingCloseForcedFalse，生成96.5657墙钟秒、load7.1327。选择自身Wine→Cab，同时公开请求Robot放Cab；方向一致但同资源职责需完整Sim核对，不能当真实协作或伙伴可靠性。失败历史摘要没进入此36输入，不证其效果。不同seed与工具声明变化不作单因素归因。
 
 独立验证65083已terminalexit0：source_and_actual_token_records_verified，重建实际bounded工具输入、ChatTemplate及thinkPrefix、全部token分段/原始文本、JSONschema、动作解析，semantic_requires_review。报告browser0video/6links/375px/JS0通过；无新Sim动作，不把源场景视频冒充新动作。GPU0已nvidia确认15MiB背景占用、free48494，PID已退出，无空闲自有模型残留。GPU2/3仍有原第二和后续第三任务，不停止。正式0、完整Goal active；下一步收齐本批，再实际验证候选完整持续闭环，不长期停在接口帧。
+
+## 完整运行接入：两层真实失败反馈与有限文本
+
+上一轮progress提交49ad50f，本轮复查原父2719750/第二子2748294/π2719139live，原饮品84第三次JSON未闭合，原Sim继续不改。新增run_bounded_joint_activity.py独立完整入口与bounded_human_runtime.py（新模块，不改现有策略文件）。独立进程作用域内限制贡献工具schema自由文本，并对两个NN层的历史显式添加生成有效/回退状态；模型仍自主选需要、动作和交流。
+
+失败助手文本按实际历史逐条对应转为Error/ID/time/实际wait与未发消息摘要，原始有效选择、当前观察及随后执行不删改；不把错误文本当已公开纠正。原64秒输入当前实现重新检查：助手13313→289字符，仅一条failed assistant变更，current observation/tools/prior actual feedback保留，保存drink_64s_failure_history_runtime_v1.json及当前源SHA。新格式最终也经JSONschema检查，违规保留原输出/错误并回退，不自动修复为正确策略；独立核查重放格式或schema错误，误标及非法回退拒绝。
+
+新入口声明human_output_protocol=bounded_text_and_failure_feedback_v1、human_failed_history_encoding=actual_generation_status_v1、textlimits及相关源SHA；auditor按完整成对标记重建两个输入和实际工具声明/token。旧标记缺省仍原路径；不完整/未知版本拒绝。仅独立auditor增加分支，原运行策略及当前参数冻结未变。ctx退出恢复原函数，当前模型进程不受影响。
+
+新增6条集成测试含两阶段首次失败后第二次实际选择仍为reject、512长度违规不得执行、失败历史和实际观测对应、作用域恢复、完整标记。最终全回归385passed/2skip（4751已exit0），旧首例额外reaudit仍verified（47768已exit0）。新入口还没有完整Sim，不计伙伴/协作效度。RUNTIME_INTEGRATION.md给出准备配置及下一步完整链路要求；接口报告0video/7links浏览器通过，未新建GPU工作负载或遗留smoke。当前原饮品已至少103.95，后面104决定可能仍长推理，不能因观察等待重启；源批待完整终态与全视频，再收第三例。Goal active/正式0。

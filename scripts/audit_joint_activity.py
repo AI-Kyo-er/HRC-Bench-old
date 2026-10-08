@@ -17,6 +17,8 @@ def read(p):return json.loads(p.read_text())
 
 def audit(root):
     ep=root/'episode';p=read(root/'provenance.json');activity=ACTIVITIES[p['activity']]
+    from hrc_pilot.bounded_human_runtime import protocol_enabled,failure_aware_tool_payload,failure_aware_agenda_request
+    bounded_protocol=protocol_enabled(p)
     if p.get('interaction_contract'):
         from hrc_pilot.interaction_contracts import CONTRACTS
         activity=CONTRACTS[p['activity']].activity
@@ -87,6 +89,7 @@ def audit(root):
             previous=(human[human_index-1]['private_agenda_inference']['agenda_after'] if human_index else None)
             assert inference['agenda_before']==previous
             expected=agenda_request(scene,activity,p['profile'],previous,human[:human_index])
+            if bounded_protocol:expected=failure_aware_agenda_request(expected,human[:human_index])
             assert inference['request']==expected
             payload_agenda={'messages':[{'role':'system','content':AGENDA_SYSTEM},
                 {'role':'user','content':json.dumps(expected,ensure_ascii=False,separators=(',',':'))}]}
@@ -125,6 +128,7 @@ def audit(root):
             from hrc_pilot.tool_joint_human import tool_model_input,retained_private_notes
             assert source['own_retained_private_notes']==retained_private_notes(human[:human_index])
             payload=tool_model_input(d['system_prompt'],source,human[:human_index],scene)
+            if bounded_protocol:payload=failure_aware_tool_payload(payload,human[:human_index])
             if d['choice_schema_version']==7:
                 from hrc_pilot.structured_tool_joint_human import structured_speech_payload
                 payload=structured_speech_payload(payload)
@@ -136,7 +140,12 @@ def audit(root):
                 if d['choice_schema_version'] in {9,10}:
                     from hrc_pilot.constrained_human_decision import constrained_tool,constrained_interface,decision_json_schema
                     payload['tools']=[constrained_tool(scene)];interface=constrained_interface(scene)
-                    assert d['output_json_schema']==decision_json_schema(scene)
+                    expected_schema=decision_json_schema(scene)
+                    if bounded_protocol:
+                        from hrc_pilot.bounded_human_protocol import bounded_output_schema
+                        payload['tools'][0]['function']['parameters']=bounded_output_schema(payload['tools'][0]['function']['parameters'])
+                        expected_schema=bounded_output_schema(expected_schema)
+                    assert d['output_json_schema']==expected_schema
                     assert d['raw_output']==d['caller_prefix']+d['actual_generated_json']+d['caller_suffix']
                     assert tool_tokenizer.decode(d['actual_generated_token_ids'],skip_special_tokens=True).strip()==d['actual_generated_json']
                     from hrc_pilot.human_output_verification import verify_recorded_constrained_output

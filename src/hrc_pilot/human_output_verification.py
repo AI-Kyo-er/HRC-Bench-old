@@ -1,7 +1,7 @@
 """核对有效调用或已记录的真实生成失败；失败回退不是模型策略。"""
 import json
 
-from jsonschema import validate
+from jsonschema import validate,ValidationError
 
 from .constrained_human_decision import PREFIX,parse_constrained_decision
 
@@ -18,11 +18,13 @@ def verify_recorded_constrained_output(row,scene):
     if row['parse_error'] is None:
         validate(json.loads(row['actual_generated_json']),row['output_json_schema'])
         return {'status':'valid_json_schema','recorded_generation_failure':False}
-    try:
-        parse_constrained_decision(row['raw_output'],scene)
-    except (ValueError,TypeError,KeyError) as error:
-        if str(error)!=row['parse_error']:raise ValueError('生成失败标签与重放解析错误不同')
-    else:raise ValueError('输出可成功解析，不能伪标为生成失败')
+    errors=[]
+    try:validate(json.loads(row['actual_generated_json']),row['output_json_schema'])
+    except (ValueError,TypeError,ValidationError) as error:errors.append(str(error))
+    try:parse_constrained_decision(row['raw_output'],scene)
+    except (ValueError,TypeError,KeyError) as error:errors.append(str(error))
+    if not errors:raise ValueError('输出可成功解析，不能伪标为生成失败')
+    if row['parse_error'] not in errors:raise ValueError('生成失败标签与重放解析错误不同')
     if row['choice']!=INVALID_TOOL_FALLBACK or row['selected_tool_call'] is not None:
         raise ValueError('无效工具调用必须保留实际无公开消息的回退，不得冒充自主策略')
     if row.get('contribution_normalization') is not None:
