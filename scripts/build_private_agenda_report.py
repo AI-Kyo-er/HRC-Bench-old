@@ -9,6 +9,7 @@ from pathlib import Path
 from build_coherent_batch_report import TASKS,SITUATIONS,render_findings
 from hrc_pilot.joint_video_captions import ensure_research_captions
 from hrc_pilot.joint_episode_inspection import render_inspection_panel
+from hrc_pilot.reviewed_coordination_metrics import render_reviewed_metrics
 
 
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
@@ -32,6 +33,7 @@ def build():
             card+=render_inspection_panel(root,output)
             review=read(root/'public_request_response_review.json')
             card+='<p>'+escape(review.get('interpretation','私人需要如何兑现、双方如何继续或重组活动尚待逐例审阅。'))+'</p>'+render_findings(root,review)
+            card+=render_reviewed_metrics(root)
             card+='<p>'+' · '.join(link(root/f,label) for f,label in [('provenance.json','设置与源码'),('interaction_verification.json','两阶段输入与控制核查'),('joint_process_evidence.json','实际过程证据'),('independent_video_verification.json','完整视频核查')])+'</p>'
             io=[json.loads(line) for line in (ep/'human_policy_io.jsonl').read_text().splitlines() if line.strip()]
             records=[]

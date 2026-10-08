@@ -520,3 +520,13 @@ private_agenda_joint_20261008/conditions.csv启动前固定3条：snack detour/i
 本轮新增独立joint_episode_inspection.py、inspection.js，给真实视频提供决策时刻菜单及同步人的私人需要/选定贡献/公开话语、Robot选择/话语、实际运动/持物/控制来源和公开事实。严格按video_timeline对应trace，无未来decision；最终状态不伪称还在执行最后动作。仅完整summary、input audit及视频verified后生成episode_inspection.json，来源和生成器SHA保存；不写模型输入/视频，不评分。新模块/报告构建/浏览器核验均不在正在实验的runtime源列表，不改活动中的策略。
 
 已接入旧private_agenda三完整案例及新contract报告（新仍0完整）。实际browser验证旧3videos/17links、375px/JS0、play/seek/Range206/activeCue及决策选择菜单跳转，60s私人need与保存记录完全一致；文件private_agenda_report_browser_20261008/verification_inspection.json。328测试通过/2skip（新增3项防未来／执行与说话区别、无匹配帧拒绝、未verified不能发布）；没有临时smoke文件。完整Goal仍active、正式0；报告可读性改进不替代可信伙伴/实际六覆盖/持续共同活动重组/正式比较。
+
+## 有原始锚点的过程量（2026-10-08，运行中的策略未修改）
+
+上一轮progress已提交d1db214：同步视频双方行为视图。当前同一batch2102624/第一子2102625/π2095935继续，session22121真实poll仍live。到72s附近，人完成酒瓶后继续wait及重复口头退出，未宣布批次终态。GPU2曾使用48154MiB/空闲355MiB，未发现OOM，后续复查不能把高显存或观察超时当terminal；NN1输入约10.4k、NN2约15.6k，源和采样条件冻结不改。π仍需后续两case，不能停止。
+
+新增独立reviewed_coordination_metrics.py/evaluate_reviewed_coordination.py：完整终态/input/video gates后核对coordination_process_review.json的逐值JSON Pointer源锚点及起止time_s；起点必须公开对话/实际trace，禁止私人通知当Robot公开响应起点。实际control按时间区间精确裁切，测VLA/hold时间、Human消息和逐字重复数，零长度同轮回应不计消息/工作时长；不同区间不加总负担。附源、注释和分析SHA，stale量拒绝展示。语义有效性仍为assistant_interpretation_not_independently_validated，不产生正式score。
+
+三个既有完整private_agenda root各保存注释及reviewed_coordination_metrics.json：drink公开新用途36→R56确认hold，20s实际VLA、五Human说明中四逐字重复；不能从私有33.9起算，也不证明新的纠正搬运（人已先放Cab）。snack公开优先更新72→R72操作尝试0s，但炉前技能与snack_delivery不同且双方选同盘；drawer口头离开32→R32旧保持0s，不证明新线索被理解/H实际离返。三例结合原review分别解释，快速响应不等有效协调。
+
+报告已接入三例过程表，browser private_agenda_report_browser_20261008/verification_process_metrics.json验证3videos/17links、play/seek/Range206/activeCue/同步need/375px/JS0通过。331 tests/2skip；新增3项测部分控制区间、禁止私有通知起点、源变更及倒序区间拒绝。COORDINATION_REVIEW_GUIDE.md补齐协议及复现。未生成smoke文件；所有raw原始视频/模型输入不变。完整Goal仍active，formal0/未冻结72；尚缺六真实覆盖、可信伙伴、持续重组、正式系统比较与有效安排／负担效度。

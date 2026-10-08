@@ -10,6 +10,7 @@ from build_coherent_batch_report import SITUATIONS,render_findings
 from hrc_pilot.interaction_contracts import CONTRACTS
 from hrc_pilot.joint_video_captions import ensure_research_captions
 from hrc_pilot.joint_episode_inspection import render_inspection_panel
+from hrc_pilot.reviewed_coordination_metrics import render_reviewed_metrics
 
 
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
@@ -39,6 +40,7 @@ def build():
             card+='<p>真实人神经推理'+str(audit['human_neural_calls'])+'次；实际VLA调用'+str(audit['robot_actual_vla_calls'])+'次。核验覆盖输入和执行一致性，不等于人物可信或协作成功。</p>'
             review=read(root/'public_request_response_review.json')
             card+='<p>'+escape(review.get('interpretation','尚未完成逐例行为审阅；不将原生操作成绩作为共同活动成绩。'))+'</p>'+render_findings(root,review)
+            card+=render_reviewed_metrics(root)
             choices=[json.loads(line) for line in (ep/'human_policy_io.jsonl').read_text().splitlines() if line.strip()]
             rows=[]
             for decision in choices:
