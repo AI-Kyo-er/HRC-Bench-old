@@ -81,3 +81,13 @@ fce721d后首例0秒决策已实际产出：agenda375tokens、贡献1181tokens�
 c9ae078已提交0–20秒前缀审阅。后来已到43.95秒：Human40按39.5通知选择碗放盘，Robot40hold并等同一贡献。32/36无变化scheduleFalse，不能当生成wait。发现继承activity_private_context通知不全是生活事实：snack change_use明确建议plate作托盘/bowl放plate，drink部分也指定柜顶；**不能据此认证自主推导方案**。PROTOCOL/OBSERVATION_NOTES已纠正解释，原source/通知未改。另保存7条通知及40秒源记录，snack_change_cue_40s.json，重读哈希匹配通过；仍为running prefix而非终态。全部6本版收齐后统一审阅，正式条件需区分纯生活需要与外部具体建议，不能迭代单字段后宣称能力改善。
 
 343c0e6后本turn继续同一49178，父2441354/子2441355/π2440833仍live。新核对56秒真实物理见证：plate支持bowl，碗released且Robot无指接触；人phase transfer_retreat。认可碗盘调整实际兑现，不说只有意图文字、不将未退手称宏全部结束。cream仍原桌面、碗食品supports=[]；碗(.0592,-.01461)距snack_delivery(.28,.45)为.5144062086458274m，Human却说在delivery准备完，Robot仍等碗放盘。60Human再次宣布完成而选择wait；到67.95仍无summary，不能终态归分。新snack_support_56s.json保存4源记录+真实布局sha+距离，重读核对通过，notes新增结果/边界。没有改runtime源码/条件/动作；当前资源仍需batch，不停止。正式0，全Goalactive。
+
+## 新版首条神经条件完整终态与第二条实际运行
+
+96e96f0后首snack已terminal，batch49178自动核验后继续第二条，父2441354仍live；第一子2441355不再live，不要重跑。首例120s/24H（12agenda+12贡献）/30coord/8VLA/2400ctrl/2401frames，全input/scheduler/geometry及video verified，拒绝0，source_changed=[]。真实碗交付19.35完成，40按含具体建议的39.5通知改碗放盘，56释放并plate支撑；食品仍原桌面，终态碗盘距原delivery.5144065706393759m。**Robot60已经认同完成**，64至116继续错误认可，不是一直等到终态；更新notes明确补充此点。
+
+public_request_response_review保存8项终态解释，verify_case8源锚点通过；coordination_process_review三段，经独立重建：20–40过时等待20s、40–56实际新贡献16s（保持不全是无谓等待）、56–60认可延迟4s（不等成功），均0VLA，各区间H消息1/2/1、逐字重复0。解释是助手审阅，不是专家或自动cobalance。末trace120只有raw物理记录，没有observable_world，终态支撑用119.95摘要+120实际坐标/接触；首次写锚点引用120/world导致KeyError在写文件前已停止，改成上述正确范围后通过，不把不存在的字段当证据。
+
+首视频已发布并验证89396 terminal1video/16links（实际play/seek/Range206/字幕/inspector/375px/JS0）。从完整MP4按真实timeline提取4/20/56/116帧，2603terminal，已view56/116，图中奶酪包装在空碗盘之外；仍只作为实际片段见证非总分。当前notes首段更新完整终态，旧前缀观察保留。主入口已73视频/5pending，数据导出18837运行中，主browser22317运行中，需收结果；源runtime未改。
+
+第二drink/request实际子PID2453774/GPU2，π2440833/GPU3仍被batch需要，不能停止。当前日志已实际Human0/4/8选择wine柜顶暂放并保留长期rack需要，尚未见证有效Robot主动请求，不能凭情境名计覆盖。其余四条未启动。formal0/72未冻结，多系统正式、有效伙伴和六真实变化等全Goal仍active。

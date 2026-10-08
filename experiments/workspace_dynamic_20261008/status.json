@@ -1,6 +1,6 @@
 {
   "role": "unified_task_and_interaction_development",
-  "verified_terminal_cases": 0,
+  "verified_terminal_cases": 1,
   "formal_samples": 0,
   "conditions": [
     {
@@ -16,8 +16,8 @@
         "system": "symbolic",
         "role": "workspace_dynamic_development"
       },
-      "verified_terminal": false,
-      "state": "尚无完整结果核查",
+      "verified_terminal": true,
+      "state": "完整运行与视频核查通过，协作有效性仍须逐例审阅",
       "formal_sample": false
     },
     {
