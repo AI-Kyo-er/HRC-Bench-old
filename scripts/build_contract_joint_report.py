@@ -72,10 +72,12 @@ def build(output=Path('experiments/contract_joint_20261008')):
         page=page.replace('日常共同活动与动态伙伴：统一开发验证','真实功能区与明确需要：六情境生成式伙伴开发')
         page=page.replace('运行前固定的三条条件','运行前固定的六条条件')
         page=page.replace('href="BATCH_REVIEW.md"','href="../contract_joint_20261008/BATCH_REVIEW.md"')
+        page=page.replace('整批结果、实际参与变化及下一版边界','此前批次结果、实际参与变化及边界')
         page=page.replace('href="TASK_DESIGN_DECISIONS.md"','href="../contract_joint_20261008/TASK_DESIGN_DECISIONS.md"')
         page=page.replace('下一版布局设计：尚未运行新场景','本批使用的布局设计与静态资格')
         page=page.replace('该图不代表实际搬运、机器人可达或新的协作成功。','该图只说明静态布局；实际搬运和协作结果由各例视频及证据判断。')
         page=page.replace('<h2>目的与设置</h2>', '<h2>目的与设置</h2><p>六个配置覆盖三活动，实际行为覆盖须逐例核对。每4秒检查真实变化及20秒重新考虑决定是否调用NN；调度不选择动作。Robot读取公开需要与场景，私人用途只由人自己选择公开。</p>')
+        page=page.replace('<a href="PROTOCOL.md">','<a href="OBSERVATION_NOTES.md">运行中观察与原始前缀证据</a> · <a href="PROTOCOL.md">')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
     page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')

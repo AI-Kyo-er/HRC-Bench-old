@@ -71,3 +71,9 @@ build_workspace_reference_report现以独立控制角色增加第四视频，原
 fce721d后首例0秒决策已实际产出：agenda375tokens、贡献1181tokens；source含table_surface_positions及几何执行语义，current_need明确食品入碗并供取用。Human选择relocate cream_cheese→cream_cheese__in__bowl，0秒公开“I will place the cream cheese into the bowl.”，3.95秒实际pick_approach/held None（已先buffer自己的碗，不是食品已装完）。初始schedule仅initial_observation，实际记录与NN对应。
 
 首Robot0秒也选execute put cream cheese in bowl，并说同一句自己会装填；reason明确据Human的“I will”进行操作。这是早期重复贡献／自愿声明被理解成Robot指令的问题线索，不是完整失败结论。完整episode需核对并发执行、支撑和后续双方反馈，不改活跃模型或预设本例失败。Robot实际public_input顶层含time/robot_task/human_task/dialogue/state/history/current_goal/self_execution/available操作/observed_world，递归未发现私有context/background/agenda/memory字段；这只是本刻输入边界检查，不替代终态独立审计。
+
+## 首例运行中0–20秒证据：事实误判与提前转贡献
+
+本turn前轮74d766d是progress。本轮先re-poll49178且ps确认父2441354/子2441355/π2440833 live，无重启或改运行源码。已核对Human4秒输出：原请求0仍pick_approach、completed=[]、碗supported_items=[]，却生成“Cream cheese placed in bowl”并选搬碗；回执request1明确superseded_motion_request_id0。Robot4改hold并等搬碗。8秒重复搬碗回执continues_motion_request_id1，**不重启**该同目标运动，不应把每次重复选择都计无效劳动。20秒碗已释放/phaseidle，食品支持仍为空，Human宣称点心完成；Robot仍等搬碗。agenda4合法且未失效fallback，仍需确认食品入碗，贡献层先自报完成；agenda8也开始记食品入碗。输入含所需测量，不能归漏观测或低层拒绝。
+
+保存35条原始记录快照于data1/results/workspace_online_review_20261008/snack_through_20s.json；results/workspace_online_review_20261008软链已建。每条原JSONL路径/非空索引/原记录文本SHA，保存后重读逐条匹配；活跃文件继续追加不影响前缀。它不是终态review/audit或正式成绩，未判断整例失败，也尚未到用途通知。OBSERVATION_NOTES.md解释前缀，统一新批页新增链接并把旧BATCH_REVIEW明确为此前结果；browser0videos/10links通过。活跃源码保持，source审计应无变化。批全部terminal后及时回收不需要的自有服务并nvidia核对；目前仍被本批需要。
