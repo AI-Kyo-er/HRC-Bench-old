@@ -1142,10 +1142,28 @@
       "native_goal_terminal": false,
       "body_away_intervals": [],
       "formal_benchmark_sample": false
+    },
+    {
+      "run": "workspace_drink_request_symbolic_20261008",
+      "label": "新功能区生成式伙伴：drink_storage／robot_request",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 38,
+      "actual_vla_calls": 120,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [
+        {
+          "start_s": 25.2,
+          "end_s": 52.95
+        }
+      ],
+      "formal_benchmark_sample": false
     }
   ],
   "pending": [
-    "新功能区生成式伙伴：drink_storage／robot_request：尚无终态结果",
     "新功能区生成式伙伴：drawer_access／leave_return：尚无终态结果",
     "新功能区生成式伙伴：snack_service／detour：尚无终态结果",
     "新功能区生成式伙伴：drink_storage／correction：尚无终态结果",
