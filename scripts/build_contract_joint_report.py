@@ -100,6 +100,16 @@ def build(output=Path('experiments/contract_joint_20261008')):
                           '本批沿用此前三条的种子、布局及能力，同时改变人/协调模型、加载精度及v5事实观测。接口通过不证明伙伴拟真，原生操作关系也不自动归机器人贡献。')
         page=page.replace('href="HUMAN_MODEL_CANDIDATE.md"','href="../area_feedback_20261009/HUMAN_MODEL_CANDIDATE.md"')
         page=page.replace('下一版伙伴候选（尚无策略成绩）','候选准备与尚未取得资格的边界')
+        prefix_review=('<section><h2>运行中前缀审阅：尚非完整结果</h2>'
+            '<p>首例点心的0至64模拟秒记录已审阅。20秒食品已经离手并由碗支撑；36秒装好的碗已离手进入交付区。'
+            '这些是人的实际贡献，不能据此认定机器人完成摆盘或双方协作成功。</p>'
+            '<p>32秒人说任务完成时实际仍持碗下放；机器人随后持续等待已经公开表达的确认。'
+            '60秒双方说要将酒瓶移到饮品准备区，机器人实际选中的却是放酒架操作，当前九项操作没有相应自由区域目标。'
+            '因此需要区分事实误记、约定更新失败、接口能力不匹配与具身执行失败。</p>'
+            '<p>这是有原始锚点的助手审阅，未完成独立语义认证；不替代最终轨迹和完整视频核查。'
+            '<a href="OBSERVATION_NOTES.md">33条原始来源及逐时刻解释</a> · '
+            '<a href="CAPABILITY_REVIEW.md">共同任务与实际能力的设计决定</a></p></section>')
+        page=page.replace('</main>',prefix_review+'</main>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
     page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')
