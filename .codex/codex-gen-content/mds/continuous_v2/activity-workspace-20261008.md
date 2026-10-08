@@ -157,3 +157,9 @@ d53d717前轮是progress。本轮先确认无GPU任务。新增placement_areas.p
 几何3 tests通过；实际保留XML三对象连续宏test先因未重建avatar rig走旧显示bodyName而失败，**只在CPU test禁显示**后通过14.57秒，真实几何/运动逻辑未模拟，Robot qpos原样、手速≤.2、三XY分开。它不测试avatar/接触动力学，真实Sim仍待跑。全351 passed/2 skipped（1381terminal）及compile/diff通过。qualify_placement_areas可重现6初态CPU顺序几何探针，明确仅复制状态调整人可移动对象、非实际策略/运动/成功；JSON保存源哈希及原frame，40579终态6/6。
 
 下一批experiments/area_feedback_20261009三条已预定：snack/detour seed114、drink/correction115、drawer/leave_return113，init2、120s、初持、同生成式Human/理想协调+π0.5，联合area+自贡献facts。run_area_feedback_batch不覆盖、不自动重试，完整audit/process/video后发布；不是单因素比较，不计正式0。pending页浏览器0videos/12links通过，实际3资格未启动。起前nvidia四卡约48492–48494MiB，按需要πGPU3、HumanGPU2；启动后记新PID/handles，代码Source冻结直到结束。两项联合方法是否改善真实伙伴/成果仍未证，不以351tests替Goal。
+
+19ed78f已提交联合方法/资格与协议。现已实际启动：新π2613996/GPU3/session67855，严格加载且8766监听；新batch2614613/GPU2/session32942，首子2614614，snack/detour seed114。GPU2起前48494MiB空闲，现Model约32261MiB，π约8562MiB，仍被任务需要。旧49178/8693/所有6旧子均terminal，勿混/重跑。
+
+首实际NN0已出、时间至3.95：选择cream→bowl，actual private_input.scene含公开区域中心范围x[.12,.44]/y[.33,.56]与self_contribution_observations={}（初始无过去选择）；原始输出非测试generator。下一H4会收到真选贡献进展，目前不宣称纠正了早报完成。地区分配只作用已选delivery而非该relation；所有runtime源自启动前冻结，不编辑加载文件。
+
+main新增area条件与链接，78旧视频+3pending、未增加新终态；README注明351tests/未闭环，60155terminal生成。后续需收三条NN完整视频/audit，核对Area原规划快照/payload接触、事实字段与实际响应。无新权重/下载/外部消息或smoke。结束后停止不再需要的新模型服务并nvidia核释放；当前不能停。正式0/全Goalactive。

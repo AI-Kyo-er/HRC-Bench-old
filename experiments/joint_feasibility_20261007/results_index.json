@@ -1224,5 +1224,9 @@
       "formal_benchmark_sample": false
     }
   ],
-  "pending": []
+  "pending": [
+    "区域与贡献事实：snack_service／detour：尚无终态结果",
+    "区域与贡献事实：drink_storage／correction：尚无终态结果",
+    "区域与贡献事实：drawer_access／leave_return：尚无终态结果"
+  ]
 }
