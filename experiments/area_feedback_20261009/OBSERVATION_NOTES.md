@@ -37,3 +37,15 @@ Robot24–40秒实际选的都是bowl_on_plate；32、36、40秒公开话语却�
 首例运行成功，批次却在独立审计器报错后停止：区域载荷循环变量payload覆盖模型输入dict，compact_action_history收到字符串。只将审计循环变量改名payload_name，重审原始运行通过，没有重跑首例、放宽容差或改变模型结果。续跑仅允许跳过同条件、同表哈希且完整输入/过程/视频核验通过的产物，不重试失败。
 
 已查看真实视频24及116秒帧，[完整视频与审阅](index.html)为主要展示；抽帧仅辅助核对。全Goal未完成，正式样本0，多物品并排、可靠伙伴、六实际动态情境和正式两系统比较仍待验证。
+
+## 下一版载荷事实修复：仅保存帧资格
+
+独立observable_carried_world生成v5测量，只清除人仍携带物品的“已离手支撑”表与文字；实际接触、相对关系、位置等保持，已经离手的物品仍保留真实支撑。v4原实现及本批运行时不改，新模块尚未接入NN或Sim闭环。
+
+[本批首例14帧核对](../../results/area_feedback_prefix_20261009/snack_v5_observation_qualification.json)纠正3个决策帧；[旧点心14帧核对](../../results/area_feedback_prefix_20261009/workspace_snack_v5_observation_qualification.json)纠正2个帧。核对先原样重建v4实际输入，限制修改字段并重读原记录字节；不输出策略或协作评分。361项测试通过，不能替代下一版闭环资格。
+
+## 饮品例0–24秒：澄清请求及信息职责错位
+
+[运行中原始前缀](../../results/area_feedback_prefix_20261009/drink_clarification_24s.json)保存实际模型输入、选择、回执和状态，逐行哈希已重读核对。Human0选择暂存柜顶并讨论长期Rack，Human4具体问Robot酒架是否稳定且被指定为长期存储位置。Robot4仍重复柜顶操作，20/24转保持却说等待Human确认酒架。不能称没有沟通渠道，但谁需要回答问题的理解错位尚未解决。
+
+Human20公开说要清盘，实际选择仍是Wine→Cabinet；不得用话语认定已选择或完成清盘。私人纠正通知尚未发生，这只是初始安排的沟通观察，不认证correction条件覆盖，也不提前判断120秒结果。

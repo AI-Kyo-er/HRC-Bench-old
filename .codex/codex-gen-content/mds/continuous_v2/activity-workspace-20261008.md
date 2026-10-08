@@ -197,3 +197,15 @@ c67c5af上轮progress。本轮首先确认同32942/2614613/2614614仍live，首�
 主builder48708 terminal79published视频（含旧partial）/2pending；新main browser1369和全量开发数据导出16838正在运行待收，不能预称通过。正式0/candidate72未冻结；全Goal可靠伙伴、实际六情境、组合对照和正式双系统仍未满足。无smoke/新权重/外部服务。GPU仍被后两任务需要，结束后按authoritative terminal停止自有服务并核释放。
 
 555c3e4后收实际终态：1369 exit0、主79videos/753links全部浏览器检查通过；16838 exit0、开发数据78完整episodes/20640blocks/184800执行控制动作/stem唯一与来源检查verified，无私有人状态入Robot输入。184800包括hold和reference等已标注来源，不称全为神经VLA输出；开发/非专家/formal_split not_frozen保持。旧1369/16838/48708均terminal勿再poll。饮品2631519现live、3.95秒，H0真实选Wine暂存Cab并向Robot确认长期Rack；没有新终态结论，续跑85963/parent2631518与π2613996仍需要。
+
+## 下一版载荷测量离线资格与饮品澄清前缀（2026-10-09）
+
+c948dba前轮progress；本轮先核实际parent2631518/drink2631519/π2613996仍live，未重启也未改本批加载源码。Human4真实point Rack并询问Robot其长期稳定/指定用途，Robot4重复柜顶，20/24却说等待Human确认。H20公开要清盘而实际仍选Wine→Cab；20/24 Wine已Cab附近、持物None但宏retreat未结束，不能把话语当plate贡献。私人纠正Cue尚未发生，初始询问不自动计correction覆盖。
+
+drink_clarification_24s.json保存22条实际NN输入/选择/回执/trace，每原行SHA与内容重读相同，data1前缀目录软链。H4point替换请求0，12重新选WineCab为请求2，20继续2；完成ID1是point历史，不认证Wine宏完成。当前仍待全长120/video/audit。
+
+为下一版新增carried_world_observation.py纯只读observable_carried_world。调用原v4测量，按真实public_scene_measurements human_carried清除相应released_support与旧“released”文字，保留实际接触、关系、位置/其他字段；输出measurement_version5。没有动作路由/评分/隐藏信息，无修改原joint_world.py、run_joint_activity.py、audit源码或本批输入。**尚未集成运行时**，只准备结束后的修复，不能称本批已修好或伙伴提升。
+
+qualify_carried_world_observation.py完整存量决策帧重建原v4输入后与新v5比，限制三字段变动、校验携带排除并重读原文件字节，记录源/实现SHA。新area snack14帧纠正3，旧workspace snack detour14帧纠正2；两JSON保存在prefix结果目录。3个测试验证携带时有接触不等已释放、真实离手仍有支持且旧v4保持、Robot接触不称释放。全361 passed/2 skipped、27644 exit0 22.03s；无新GPU任务、下载、临时smoke。
+
+notes/BATCH_REVIEW明确离线资格和当前询问职责错位，尚不将此作为模型HRC通用结论。Next继续同85963完成饮品/抽屉两条、终态视频/输入审阅；batch全terminal后将v5接入明确新版本并做真实NN资格，不在batch中混条件。全Goal正式0/未冻结、可靠伙伴与真实六情境/正式两系统/组合控制仍欠缺。
