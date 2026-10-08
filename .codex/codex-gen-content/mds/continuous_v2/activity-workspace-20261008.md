@@ -209,3 +209,21 @@ drink_clarification_24s.json保存22条实际NN输入/选择/回执/trace，每�
 qualify_carried_world_observation.py完整存量决策帧重建原v4输入后与新v5比，限制三字段变动、校验携带排除并重读原文件字节，记录源/实现SHA。新area snack14帧纠正3，旧workspace snack detour14帧纠正2；两JSON保存在prefix结果目录。3个测试验证携带时有接触不等已释放、真实离手仍有支持且旧v4保持、Robot接触不称释放。全361 passed/2 skipped、27644 exit0 22.03s；无新GPU任务、下载、临时smoke。
 
 notes/BATCH_REVIEW明确离线资格和当前询问职责错位，尚不将此作为模型HRC通用结论。Next继续同85963完成饮品/抽屉两条、终态视频/输入审阅；batch全terminal后将v5接入明确新版本并做真实NN资格，不在batch中混条件。全Goal正式0/未冻结、可靠伙伴与真实六情境/正式两系统/组合控制仍欠缺。
+
+## 第二例完整用途更新及第三例启动（2026-10-09）
+
+7fec5ce前轮progress，本轮继续同85963/2631518，饮品2631519已terminal。完整120s、20H（10agenda+10贡献）、30coord、16VLA、2400controls/2401frames，全部输入/动作/区域/视频verified，source_changed=[]、拒绝0。没有重跑或使用离线v5。父自动启动第三2642972（drawer/leave_return/init2/seed113）且仍live，π2613996/session67855仍为该例需要。旧饮品子不能再次启动。
+
+新drink_use_update_52s.json保存26条actualNN/trace/私有通知/公开话语，逐行SHA重读相同：35.6私人Cab即用纠正，H36公开撤回长期Rack，R36reason读到撤回但message/current_goal还等Rack确认。完整终态修正前缀判断：R56已结束旧确认，此后到116保持结束，不能把错目标延伸到末尾。36→56共20s hold；H80说Robot已确认此时确有确认，不作错误指控。
+
+真实Wine由H12重新选Cab，20.05离手有Cab支持、宏25.75完成；H4point替换0，H20继续2，H28no-op already_supported。H20/28说清Plate却实际选Wine，H100再称Plate已organized，Plate0→120近乎未移；Robot结束也跟随workspace cleared。Cab满足更新用途，不以nativeRackFalse否定新需要；物理结果与整活动清理/伙伴事实理解/接管交还分开。
+
+drink_correction_opportunity_comparison.json保存旧workspace drink35.1与新35.6相同纠正Cue的实际帧及SHA：旧Bottle有Cab接触但Robot仍触/未released，新的已released/Cab支撑。同init2/同消息也不等相同操作机会，不作旧新因果排名，未来需按消息时实际状态记录暴露，不能以额外搬运次数或条件名计覆盖/事后筛样本。NN不被强制新动作。
+
+第二8findings/3过程区间已保存且44326terminal anchor/过程核对：4→36询问存续32s（4VLA/28hold/H4msg、逐字重复0），12→20.05暂存8.05s全hold（H2msg），36→56撤回到R结束20s全hold（H1msg）。只给源界定助手解释，不是专家或cobalance分。与首合计16解释/6区间。
+
+真实饮品36/56/116帧提取，view116可见BottleCab/Plate原位。报告2videos/24links最终95424terminal通过；初手机414px溢出，原因长字段文字，改report body overflow-wrap:anywhere后重建。一次检查早于45420 builder terminal还读旧页面，先收builder exit0再核对，最终375/play/seek/Range206/字幕/inspector/JS0全通过。无Sim runtime改动。
+
+notes/BATCH_REVIEW/README主描述更新两例完整（48H/60coord/88VLA/4800ctrl/4802frames）。主70485terminal80videos（含旧partial）/1pending；新主browser49151仍live待收，不预称成功。开发导出37829 terminal verified79完整episodes/20880blocks/187200真实执行control/stem唯一，包含hold/reference等来源，非全部VLA动作、非专家、formal未冻结；勿再poll37829/44326/95424/45420/70485。
+
+第三2642972已19.95秒，H12point Plate、H16选择pause_current并公开暂处理个人联系，实际phase idle/heldNone、body[.25,.6]。不把说pause当真实离场或完成私事，后续继续查状态及响应。尚无新终态。全Goal继续：正式0、candidate72未冻结，不能用两段正确物理成果/用途更新替代可靠伙伴、六情境、组合对照、正式两系统。

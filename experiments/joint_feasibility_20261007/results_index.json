@@ -1241,10 +1241,23 @@
         }
       ],
       "formal_benchmark_sample": false
+    },
+    {
+      "run": "area_drink_correction_symbolic_20261009",
+      "label": "区域与贡献事实：drink_storage／correction",
+      "kind": "neural",
+      "activity": "drink_storage",
+      "duration_s": 120.0,
+      "human_neural_calls": 20,
+      "actual_vla_calls": 16,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
     }
   ],
   "pending": [
-    "区域与贡献事实：drink_storage／correction：尚无终态结果",
     "区域与贡献事实：drawer_access／leave_return：尚无终态结果"
   ]
 }
