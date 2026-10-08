@@ -94,6 +94,8 @@ def main():
     parser.add_argument('--symbolic-coordinator',action='store_true')
     parser.add_argument('--interaction-contract',action='store_true',
                         help='日常活动使命与信息缺口，不把原生任务指令当当前双方约定')
+    parser.add_argument('--workspace-method',action='store_true',
+                        help='统一任务需要、分离功能区、表面放置及基于观测的人策略调用；不选择正确动作')
     parser.add_argument('--robot-withdraw-operation',action='store_true',
                         help='额外退让语言目标，实际由VLA执行；不调用参考笛卡尔控制')
     parser.add_argument('--robot-skill-bank',action='store_true',
@@ -140,12 +142,23 @@ def main():
     if args.interaction_contract:
         from hrc_pilot.interaction_contracts import CONTRACTS,validate_contracts
         validate_contracts();activity=CONTRACTS[args.activity].activity
+    if args.workspace_method:
+        from hrc_pilot.workspace_contracts import WORKSPACE_CONTRACTS
+        CONTRACTS=WORKSPACE_CONTRACTS;activity=CONTRACTS[args.activity].activity
     case=CASES[activity.scene_case]
     suite=benchmark.get_benchmark_dict()[case.suite]();task=suite.get_task(case.task_id)
     states=torch.load(Path(get_libero_path('init_states'))/task.problem_folder/task.init_states_file,
                       map_location='cpu',weights_only=False)
     human=(JointReference(activity) if args.human_source=='reference' else
            JointHumanPolicy(activity,model_path=args.human_model,profile=args.profile,seed=args.seed,reflection=args.human_reflection))
+    if args.workspace_method and args.human_source=='reference':
+        human=JointReference(activity,prepare_targets={
+            'snack_service':('akita_black_bowl_1','serving_ready'),
+            'drink_storage':('wine_bottle_1','serving_ready'),
+            'drawer_access':('plate_1','plate_1_personal')},finish_targets={
+            'snack_service':('akita_black_bowl_1','snack_delivery'),
+            'drink_storage':('plate_1','plate_1_personal'),
+            'drawer_access':('cream_cheese_1','drawer_storage')})
     if args.human_source=='neural':human.prepare()
     client=WebsocketClientPolicy('127.0.0.1',args.port)
     if args.robot_skill_bank:
@@ -164,6 +177,8 @@ def main():
            Path('src/hrc_pilot/symbolic_robot_coordinator.py'),Path('src/hrc_pilot/robot_skill_bank.py'),
            Path('src/hrc_pilot/trajectory_reference.py')]
     if args.interaction_contract:paths.append(Path('src/hrc_pilot/interaction_contracts.py'))
+    if args.workspace_method:paths.extend(Path('src/hrc_pilot')/name for name in
+        ['workspace_contracts.py','activity_workspace.py','surface_human_executor.py','human_decision_schedule.py'])
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     args.output_dir.mkdir(parents=True);ep=args.output_dir/'episode';ep.mkdir();journal=NativeRunJournal(ep)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
@@ -182,6 +197,11 @@ def main():
         if situation is None:raise ValueError('活动具体情境需要指定situation')
         situation=specialize_private_context(situation,args.activity)
     cue_cursor=0
+    human_schedule=None;human_schedule_checks=[]
+    if args.workspace_method and args.human_source=='neural':
+        from hrc_pilot.human_decision_schedule import HumanDecisionSchedule
+        human_schedule=HumanDecisionSchedule(min_interval_s=args.human_decision_steps/20,
+                                             max_silence_s=max(20.,args.human_decision_steps/20))
     if args.robot_replay:
         replay_actions=np.asarray([json.loads(l)['action'] for l in (args.robot_replay/'policy_io.jsonl').read_text().splitlines() if l.strip()])
         if replay_actions.ndim!=2 or replay_actions.shape[1]!=7 or not np.isfinite(replay_actions).all():raise ValueError('参考轨迹须为实际7D控制')
@@ -211,8 +231,20 @@ def main():
         if args.activity=='drawer_access':
             regions['drawer_storage']=(0.,0.,1.)
             update_joint_regions(env,regions)
+        workspace=None
+        if args.workspace_method:
+            from hrc_pilot.activity_workspace import make_table_workspace
+            movable=list(env.env.objects_dict);fixtures=[name for name in env.env.obj_body_id if name not in movable]
+            workspace=make_table_workspace(env.sim.model,env.sim.data,movable,fixtures)
+            regions.update({name:tuple(point) for name,point in workspace['zone_surface_positions'].items()})
         obs=augment_contact_human(env,regions['near_human'],public_regions=regions,contact_model='fingertip')
-        actor=KinematicHuman(env,regions,auto_buffer=args.human_auto_buffer);actor._display(actor.position());env.sim.forward()
+        actor_class=KinematicHuman
+        if args.workspace_method:
+            from hrc_pilot.surface_human_executor import SurfaceHumanExecutor
+            env.env._hrc_table_surface_positions=workspace['zone_surface_positions']
+            actor_class=SurfaceHumanExecutor
+            write(args.output_dir/'workspace_layout.json',workspace)
+        actor=actor_class(env,regions,auto_buffer=args.human_auto_buffer);actor._display(actor.position());env.sim.forward()
         if situation and situation['initial_presence']=='aside':
             actor.body_base=np.array([.25,.95]);actor.body_target=actor.body_base.copy()
             actor.reference=np.r_[actor.body_base,1.12];actor.target=actor.reference.copy()
@@ -242,7 +274,13 @@ def main():
                 while cue_cursor<len(situation['private_cues']) and situation['private_cues'][cue_cursor]['time_s']<=t:
                     context=dict(situation['private_cues'][cue_cursor]);context['delivered_time_s']=t
                     private_context.append(context);events.append(context);cue_cursor+=1
-            if step%args.human_decision_steps==0:
+            decide_now=step%args.human_decision_steps==0
+            if decide_now and human_schedule is not None:
+                check=human_schedule.check(r,dialogue,private_context)
+                check.update(step=step,dialogue_count_before_human=len(dialogue),private_context_count=len(private_context))
+                human_schedule_checks.append(check)
+                decide_now=check['call_neural_policy']
+            if decide_now:
                 speed=0. if previous is None else float(np.linalg.norm(np.asarray(r['robot_ee'])-previous['robot_ee'])*20)
                 scene={'time_s':t,'objects_xyz':r['objects'],'regions_xyz':regions,
                     'robot_eef_xyz':r['robot_ee'],'robot_motion':{'eef_speed_m_s':speed},
@@ -257,6 +295,9 @@ def main():
                 if hasattr(env.env,'_hrc_relation_targets'):
                     scene['relation_targets']=json.loads(json.dumps(env.env._hrc_relation_targets))
                 if args.interaction_contract:scene['movable_object_ids']=list(actor.object_q)
+                if args.workspace_method:
+                    scene['table_surface_positions']=workspace['zone_surface_positions']
+                    scene['action_interface']['table_surface_placement']='Table destination coordinates describe the support surface; the selected object body height is resolved from current collision geometry. Selection is not completion.'
                 if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
                 d=(human.decide(scene,bool(placement.records and goal_success(placement.records[-1])))
                    if args.human_source=='reference' else human.decide(scene))
@@ -346,6 +387,7 @@ def main():
             controls.append({'step':step,'time_s':t,'action':action.tolist(),'model_call_id':calls[-1]['call_id'],
                 'source':calls[-1]['action_source'],'pre_physics_time_s':before,'post_physics_time_s':float(env.sim.data.time)})
             journal.flush({'trace.jsonl':trace,'human_policy_io.jsonl':human.decisions,
+                'human_schedule_checks.jsonl':human_schedule_checks,
                 'human_control.jsonl':actor.records,'human_command_receipts.jsonl':actor.receipts,
                 'human_avatar.jsonl':actor.avatar.records if actor.avatar else [],
                 'robot_control.jsonl':controls,'model_calls.jsonl':calls,'robot_planner_io.jsonl':plans,
@@ -364,6 +406,7 @@ def main():
             target_obj,target_region={'snack_service':('akita_black_bowl_1','snack_delivery'),
                 'drink_storage':('cream_cheese_1','cream_cheese_1_personal'),
                 'drawer_access':('cream_cheese_1','drawer_storage')}[args.activity]
+            if args.workspace_method:target_obj,target_region=human.finish_targets[args.activity]
             terminal_error=float(np.linalg.norm(np.asarray(r['objects'][target_obj])[:2]-np.asarray(regions[target_region])[:2]))
             contained=True
             if args.activity=='drawer_access':
@@ -385,6 +428,9 @@ def main():
         'human_thinking_enabled':getattr(human,'enable_thinking',None),'human_reflection':args.human_reflection,
         'human_source':args.human_source,'robot_language':args.robot_language,
         'interaction_contract':args.interaction_contract,
+        'workspace_method':args.workspace_method,
+        'human_execution_class':type(actor).__name__,
+        'human_decision_cadence':'observation_events_and_periodic_reconsideration' if human_schedule else 'fixed_decision_interval',
         'reference_vla_instruction':args.reference_vla_instruction,
         'initial_human_holding':args.initial_human_holding,
         'human_auto_buffer':args.human_auto_buffer,

@@ -2,9 +2,13 @@
 
 
 class JointReference:
-    def __init__(self,activity):
+    def __init__(self,activity,prepare_targets=None,finish_targets=None):
         self.activity=activity;self.stage='prepare';self.decisions=[]
         self.pending=None
+        self.prepare_targets=prepare_targets or {'snack_service':('akita_black_bowl_1','serving_ready'),
+            'drink_storage':('wine_bottle_1','drink_staging'),'drawer_access':('plate_1','plate_1_personal')}
+        self.finish_targets=finish_targets or {'snack_service':('akita_black_bowl_1','snack_delivery'),
+            'drink_storage':('cream_cheese_1','cream_cheese_1_personal'),'drawer_access':('cream_cheese_1','drawer_storage')}
 
     def decide(self,scene,robot_contribution):
         feedback=scene['own_execution'];done=feedback['completed_requests']
@@ -17,25 +21,19 @@ class JointReference:
         if self.pending is not None and self.pending in done:
             self.stage={'prepare':'robot','finish':'done'}[self.stage];self.pending=None
         if self.stage=='prepare' and self.pending is None:
-            obj,dest={'snack_service':('akita_black_bowl_1','serving_ready'),
-                      'drink_storage':('wine_bottle_1','drink_staging'),
-                      'drawer_access':('plate_1','plate_1_personal')}[self.activity.key]
+            obj,dest=self.prepare_targets[self.activity.key]
             choice.update(action='relocate',object_id=obj,destination=dest,message=f'I will prepare {obj} at {dest}.')
             self.pending=len(self.decisions)
         elif self.stage=='robot':
             choice['message']='Preparation is physically complete; please perform your contribution.'
             if robot_contribution:
                 self.stage='finish'
-                obj,dest={'snack_service':('akita_black_bowl_1','snack_delivery'),
-                          'drink_storage':('cream_cheese_1','cream_cheese_1_personal'),
-                          'drawer_access':('cream_cheese_1','drawer_storage')}[self.activity.key]
+                obj,dest=self.finish_targets[self.activity.key]
                 choice.update(action='relocate',object_id=obj,destination=dest,
                               message=f'I will receive or finish the activity by moving {obj} to {dest}.')
                 self.pending=len(self.decisions)
         elif self.stage=='finish' and self.pending is None:
-            obj,dest={'snack_service':('akita_black_bowl_1','snack_delivery'),
-                      'drink_storage':('cream_cheese_1','cream_cheese_1_personal'),
-                      'drawer_access':('cream_cheese_1','drawer_storage')}[self.activity.key]
+            obj,dest=self.finish_targets[self.activity.key]
             choice.update(action='relocate',object_id=obj,destination=dest,
                           message='Waiting for partner clearance, then receiving the completed contribution.')
             self.pending=len(self.decisions)

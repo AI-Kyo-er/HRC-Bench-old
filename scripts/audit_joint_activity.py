@@ -20,6 +20,9 @@ def audit(root):
     if p.get('interaction_contract'):
         from hrc_pilot.interaction_contracts import CONTRACTS
         activity=CONTRACTS[p['activity']].activity
+    if p.get('workspace_method'):
+        from hrc_pilot.workspace_contracts import WORKSPACE_CONTRACTS
+        CONTRACTS=WORKSPACE_CONTRACTS;activity=CONTRACTS[p['activity']].activity
     saved_task=read(ep/'task.json');saved_activity=saved_task['public_activity']
     assert not p['source_files_changed_during_run']
     assert p['human_executor']=='human_only_continuous_kinematic_attachment'
@@ -40,6 +43,20 @@ def audit(root):
         from robosuite.utils.binding_utils import MjSim
         support_sim=MjSim.from_xml_file(str((ep/'scene.xml').resolve()))
     context_path=ep/'private_context.jsonl';contexts=rows(context_path) if context_path.exists() else []
+    if p.get('human_decision_cadence')=='observation_events_and_periodic_reconsideration':
+        from hrc_pilot.human_decision_schedule import HumanDecisionSchedule
+        schedule=HumanDecisionSchedule(min_interval_s=p['human_decision_steps']/20,
+            max_silence_s=max(20.,p['human_decision_steps']/20))
+        checks=rows(ep/'human_schedule_checks.jsonl');selected=[]
+        assert [c['step'] for c in checks]==list(range(0,p['steps'],p['human_decision_steps']))
+        for check in checks:
+            assert check['time_s']==check['step']/20
+            visible=dialogue[:check['dialogue_count_before_human']]
+            private=contexts[:check['private_context_count']]
+            expected=schedule.check(trace[check['step']],visible,private)
+            assert all(check[key]==value for key,value in expected.items())
+            if expected['call_neural_policy']:selected.append(check['time_s'])
+        assert selected==[row['time_s'] for row in human]
     expected_context=p.get('human_source','neural')=='neural' and 0<=p['context_step']<p['steps']
     if p.get('situation'):
         situation=read(ep/'situation.json')
@@ -133,6 +150,18 @@ def audit(root):
                 from hrc_pilot.geometry_frame_replay import replay_recorded_geometry
                 frame=replay_recorded_geometry(support_sim.model._model,support_sim.data._data,actual)
                 geometry_frames.append({'time_s':d['time_s'],**frame})
+                if p.get('workspace_method'):
+                    from hrc_pilot.activity_workspace import body_target_on_surface
+                    surfaces=read(root/'workspace_layout.json')['zone_surface_positions']
+                    assert scene['table_surface_positions']==surfaces
+                    assert all(scene['regions_xyz'][name]==point for name,point in surfaces.items())
+                    table=receipt.get('table_surface_placement')
+                    if table:
+                        assert receipt['accepted'] and table['destination']==d['choice']['destination']
+                        expected=body_target_on_surface(support_sim.model,support_sim.data,table['object_id'],
+                            surfaces[table['destination']])
+                        np.testing.assert_allclose(table['resolved_object_body_xyz'],expected,atol=.0002,rtol=0)
+                        assert table['surface_xyz']==surfaces[table['destination']]
                 names=[n for n in ['wine_bottle_1','cream_cheese_1','akita_black_bowl_1','plate_1'] if n in scene['objects_xyz']]
                 expected_targets=cabinet_placement_targets(support_sim.model,support_sim.data,names)
                 if p.get('human_relation_targets')=='measured_reference_collision_surface_v1':

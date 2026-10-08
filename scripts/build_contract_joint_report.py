@@ -63,7 +63,7 @@ def build():
         section+='<img style="width:100%;max-width:650px" src="'+figure_url+'" alt="新功能区的桌面几何设计图，尚非实际执行轨迹">'
         section+='<p>'+link(geometry_root/'workspace_qualification.json','12条初态几何检查')+' · '+link(geometry_root/'initial_region_evidence.json','旧布局别名证据')+' · '+link(geometry_root/'workspace_geometry.svg','可导出的设计图')+'</p></section>'
         page=page.replace('</main>',section+'</main>')
-    page=page.replace('<a href="conditions.csv">运行前固定的三条条件</a>', '<a href="conditions.csv">运行前固定的三条条件</a> · <a href="TASK_DESIGN_DECISIONS.md">任务依赖、布局证据与六情境设计决定</a>')
+    page=page.replace('<a href="conditions.csv">运行前固定的三条条件</a>', '<a href="conditions.csv">运行前固定的三条条件</a> · <a href="BATCH_REVIEW.md">整批结果、实际参与变化及下一版边界</a> · <a href="TASK_DESIGN_DECISIONS.md">任务依赖、布局证据与六情境设计决定</a>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     page=page.replace('</main></html>','</main><script src="inspection.js"></script></html>')
     (output/'index.html').write_text(page)

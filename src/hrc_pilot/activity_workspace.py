@@ -29,6 +29,14 @@ def object_collision_bounds(model,data,name):
     return np.min(lower,axis=0),np.max(upper,axis=0)
 
 
+def body_target_on_surface(model,data,name,surface_xyz):
+    surface=np.asarray(surface_xyz,dtype=float)
+    if surface.shape!=(3,) or not np.isfinite(surface).all():raise ValueError('支撑位置须是有限三维坐标')
+    lower,_=object_collision_bounds(model,data,name)
+    origin=data.body_xpos[model.body_name2id(name+'_main')]
+    return [float(surface[0]),float(surface[1]),float(surface[2]+origin[2]-lower[2]+.002)]
+
+
 def make_table_workspace(model,data,movable_names,fixture_names=(),*,zones=None,clearance_m=.025):
     """保守验证静态桌面位置；不保证运动路径、机器人可达性或活动成功。"""
     if not movable_names:raise ValueError('布局需要实际可移动物品')

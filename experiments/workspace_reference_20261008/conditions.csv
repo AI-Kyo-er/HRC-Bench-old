@@ -1,0 +1,4 @@
+run,activity,init_state_id,seed,steps,initial_human_holding,role
+workspace_snack_reference_20261008,snack_service,2,91,2400,1,workspace_physical_feasibility_reference
+workspace_drink_reference_20261008,drink_storage,2,92,2400,1,workspace_physical_feasibility_reference
+workspace_drawer_reference_20261008,drawer_access,2,93,2400,1,workspace_physical_feasibility_reference

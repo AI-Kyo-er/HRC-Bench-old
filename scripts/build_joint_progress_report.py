@@ -146,6 +146,8 @@ def build(results, output):
             conclusion='固定人关系动作及真实VLA操作资格检查。物理支撑与完整包含分开；退让指令响应不可靠。原生目标由人改变，不归功给机器人，也不计动态共同活动成绩。'
         if arrangement_review.get('neural_physical_chain_maintained'):
             conclusion='本例神经共同活动物理链成立并维持：机器人填装、人接收交付、双方随后保持。伙伴接口、动态加入及广覆盖仍需单独验收。'
+        if arrangement_review.get('initial_storage_chain_physically_matched'):
+            conclusion='初始存储成果有物理匹配：实际操作暂停后，人再请求打开、机器人执行、人存物。身体离返、通话时序、后续事实理解与完整动态协作验收分别判断。'
         if provenance.get('robot_replay_source'): conclusion += ' 当前机器人推理为零，不是 VLA 闭环成功。'
         if (root/'source_edit_note.json').exists(): conclusion += ' 存在已披露的运行期间文件编辑说明，仅作探索性证据。'
         links = [link(p,l) for p,l in [(root/'summary.json','结果'),(root/'failure.json','中断原因'),
