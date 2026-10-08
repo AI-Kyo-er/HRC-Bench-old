@@ -27,6 +27,14 @@ def test_resume_accepts_same_verified_condition_without_writing(tmp_path):
     assert before=={p.name:p.read_bytes() for p in tmp_path.iterdir()}
 
 
+@pytest.mark.parametrize('settings',[{'human_model':'/different','human_carried_observation':False},
+                                    {'human_model':None,'human_carried_observation':True}])
+def test_resume_cannot_skip_an_old_result_when_model_or_observation_method_changes(tmp_path,settings):
+    complete(tmp_path)
+    with pytest.raises(ValueError,match='方法配置不同'):
+        batch.verified_existing_condition(tmp_path,{'run':'sample'},'same',settings)
+
+
 @pytest.mark.parametrize('change',['condition','digest','video','missing','failure','source'])
 def test_resume_rejects_mismatched_unverified_and_failed_results(tmp_path,change):
     complete(tmp_path)

@@ -18,7 +18,8 @@ def read(path):return json.loads(path.read_text()) if path.exists() else {}
 
 def build(output=Path('experiments/contract_joint_20261008')):
     output=Path(output);contracts=CONTRACTS
-    area_feedback=output.name=='area_feedback_20261009'
+    candidate=output.name=='candidate_joint_20261009'
+    area_feedback=output.name=='area_feedback_20261009' or candidate
     workspace=output.name=='workspace_dynamic_20261008' or area_feedback
     if workspace:
         from hrc_pilot.workspace_contracts import WORKSPACE_CONTRACTS
@@ -91,6 +92,14 @@ def build(output=Path('experiments/contract_joint_20261008')):
         page=page.replace('href="COMPOSITION_DESIGN.md"','href="../workspace_dynamic_20261008/COMPOSITION_DESIGN.md"')
         page=page.replace('<a href="PROTOCOL.md">','<a href="HUMAN_MODEL_CANDIDATE.md">下一版伙伴候选（尚无策略成绩）</a> · <a href="PROTOCOL.md">')
         page=page.replace('<h2>本批使用的布局设计与静态资格</h2>', '<h2>继承中心位置与静态资格</h2><p>图只显示原中心位置，不画本批扩展的交付中心范围；区域边界和当前占用的实际求解见各例workspace_layout和执行回执。</p>')
+    if candidate:
+        page=page.replace('区域摆放与贡献事实：三活动联合验证','候选生成式伙伴与v5：三活动真实闭环')
+        page=page.replace('三条条件验证同一区域内多物品分开放置及自身贡献事实反馈；这是联合方法资格，不是单因素改进或正式成绩。',
+                          '三条同初始化、同种子的条件检验候选32B与v5在实际执行、反馈和交流中的表现；人和文字协调器都换模型，不作单因素效果或正式成绩。')
+        page=page.replace('本批同时增加区域放置与自身贡献事实反馈，并使用新的随机种子，不作单因素或因果改进结论。',
+                          '本批沿用此前三条的种子、布局及能力，同时改变人/协调模型、加载精度及v5事实观测。接口通过不证明伙伴拟真，原生操作关系也不自动归机器人贡献。')
+        page=page.replace('href="HUMAN_MODEL_CANDIDATE.md"','href="../area_feedback_20261009/HUMAN_MODEL_CANDIDATE.md"')
+        page=page.replace('下一版伙伴候选（尚无策略成绩）','候选准备与尚未取得资格的边界')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
     page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')
