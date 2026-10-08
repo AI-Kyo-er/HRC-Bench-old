@@ -49,13 +49,17 @@ def evaluate(root):
             'measured_object_displacement_m':displacement,'object_already_near_destination_at_request':already_near,
             'public_expression':c.get('message'),'private_reason_for_review':c.get('reason')})
     readiness=[]
+    activity=json.loads((root/'provenance.json').read_text())['activity']
+    obj,region={'snack_service':('akita_black_bowl_1','serving_ready'),
+        'drink_storage':('wine_bottle_1','drink_staging'),
+        'drawer_access':('plate_1','plate_1_personal')}[activity]
+    first_scene=human[0].get('observation_source_scene',human[0]['private_input']['scene'])
+    preparation_point=first_scene['regions_xyz'][region]
     for r in trace:
         world=r.get('observable_world',{});near=world.get('object_distance_to_named_region_xy_m',{})
-        obj,region={'snack_service':('akita_black_bowl_1','serving_ready'),
-            'drink_storage':('wine_bottle_1','drink_staging'),
-            'drawer_access':('plate_1','plate_1_personal')}[json.loads((root/'provenance.json').read_text())['activity']]
         contact=world.get('object_contacts',{}).get(obj,{})
-        ready=(near.get(obj,{}).get(region,float('inf'))<.025 and r['human_execution']['held_object']!=obj
+        xy_distance=float(np.linalg.norm(np.asarray(r['objects'][obj])[:2]-np.asarray(preparation_point)[:2]))
+        ready=(xy_distance<.025 and r['human_execution']['held_object']!=obj
                and not contact.get('robot_hand_contact',False) and 'table' in contact.get('contact_entities',[]))
         readiness.append(ready)
     stable=0.;first_ready=None
@@ -97,10 +101,23 @@ def evaluate(root):
     result['measured_process']=measured_process(trace,human,controls,receipts)
     result['shared_resource_execution']=resource_use_evidence(trace,controls,calls,plans)
     provenance=json.loads((root/'provenance.json').read_text())
+    if provenance['activity']=='drawer_access':
+        joint='wooden_cabinet_1_middle_level'
+        openings=[-float(record['articulated_joints'][joint]) for record in trace]
+        result['drawer_opening_measurements']={
+            'joint':joint,'sampled_states':len(openings),
+            'opening_min_m':min(openings),'opening_max_m':max(openings),
+            'interior_accessible_sample_count':sum(value>=.10 for value in openings),
+            'trace_sha256':sha256((ep/'trace.jsonl').read_bytes()).hexdigest(),
+            'scope':'全部实际状态的开度与既有0.10m进入阈值；不作为完整存储、协调或因果归因分数。'}
     last_scene=human[-1].get('observation_source_scene',human[-1]['private_input']['scene'])
     result['original_arrangement_physical_observations']=original_arrangement_observations(
         provenance['activity'],trace,placements,last_scene['regions_xyz'])
-    result['preparation_measurement_scope']='指定准备区域的桌面释放支撑，不穷尽可用准备方式；抽屉的plate_personal位置不是所有合理清理方式。'
+    result['preparation_position_measurement']={
+        'source':'actual_object_xy_and_declared_initial_public_region',
+        'object_id':obj,'region':region,'region_xyz':preparation_point,
+        'xy_threshold_m':.025,'stable_duration_s':.2}
+    result['preparation_measurement_scope']='由实际坐标计算指定准备区域的桌面释放支撑，不依赖未列personal区域的旧距离表；不穷尽可用准备方式，plate_personal不是所有合理清理方式。'
     from hrc_pilot import joint_process_metrics,joint_resource_use
     result['analysis_source_sha256']={str(path):sha256(path.read_bytes()).hexdigest() for path in
         [Path(__file__).resolve(),Path(joint_process_metrics.__file__),Path(joint_resource_use.__file__)]}

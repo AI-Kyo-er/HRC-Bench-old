@@ -89,6 +89,7 @@ def build(output=Path('experiments/contract_joint_20261008')):
         page=page.replace('本批重新组织共同任务与能力声明，检查人是否通过真实贡献和交流影响机器人，以及机器人能否据此调整行动。','本批沿用此前共同任务和能力声明，增加交付区域内可分开放置的表达，以及与人自己选定贡献关联的当前事实。检查这些表达能否在真实决策中兑现，同时继续核对双方分工与动态行为。')
         page=page.replace('本批同时改变活动说明、能力菜单和可读场景关系，不作单因素改进结论。','本批同时增加区域放置与自身贡献事实反馈，并使用新的随机种子，不作单因素或因果改进结论。')
         page=page.replace('href="COMPOSITION_DESIGN.md"','href="../workspace_dynamic_20261008/COMPOSITION_DESIGN.md"')
+        page=page.replace('<a href="PROTOCOL.md">','<a href="HUMAN_MODEL_CANDIDATE.md">下一版伙伴候选（尚无策略成绩）</a> · <a href="PROTOCOL.md">')
         page=page.replace('<h2>本批使用的布局设计与静态资格</h2>', '<h2>继承中心位置与静态资格</h2><p>图只显示原中心位置，不画本批扩展的交付中心范围；区域边界和当前占用的实际求解见各例workspace_layout和执行回执。</p>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'

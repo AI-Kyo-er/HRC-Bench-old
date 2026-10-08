@@ -229,3 +229,25 @@ notes/BATCH_REVIEW/README主描述更新两例完整（48H/60coord/88VLA/4800ctr
 第三2642972已19.95秒，H12point Plate、H16选择pause_current并公开暂处理个人联系，实际phase idle/heldNone、body[.25,.6]。不把说pause当真实离场或完成私事，后续继续查状态及响应。尚无新终态。全Goal继续：正式0、candidate72未冻结，不能用两段正确物理成果/用途更新替代可靠伙伴、六情境、组合对照、正式两系统。
 
 32ac749已提交第二完整结果与报告。主browser49151现terminal exit0：80videos/763links、播放/seek/Range206/字幕/mobile/JS0通过，勿再poll。第三2642972仍live、最新23.95，父2631518/session85963和π2613996/session67855仍需要；没有重启/停止，不以报告通过认证Goal完成。
+
+## 三活动整批结束与更大伙伴候选准备（2026-10-09）
+
+658aee6后持续同85963，现terminal exit0：第三2642972与父2631518均不存在，三条件全部120秒/独立input/动作/几何/video verified，source_changed=[]。合计92H/90coord/160VLA/7200controls/7203frames，拒绝2均第三44/56真实不可进入。3/3工程完整不是完整Goal，正式0、候选72未冻结。
+
+第三Plate确实清到个人区；16暂停当时idle且body没离场，22.6私人来电通知晚于暂停。H44自主恢复早于59.2结束通知，R44理由引用公开恢复而同轮改选OpenMiddle。H48正确说Door闭，52/56早称已开/可入，44/56拒；60/72/80又准确说不可入。2401原始关节状态的opening最大0，不能用这个未达操作前提的例子单独声称HRC能力缺口。44–60原始接触没Human geom，不能猜手指示阻挡。
+
+H84是Cream→serving_ready（不是Cab），88仍持物却早说完成；100实物released/Table且到准备点，宏101.85。R84已把未来暂放当完成，后期认识临时安排但仍await确认。H104away/108return，实际105.2–108.95旁移；私人理由与59.2结束联系衔接不明，不自动认证新的私人需要/六条件覆盖。实际临时重组与存储未成分开。原生目标关系不分Actor，不把它自动归Robot成果。
+
+后处理实际bug：旧距离表没personal区域，Plate清理准备被报None。evaluate_joint_process只读用实际XY与首个公开区域位置、Table支持/离手及0.2s稳定重算，第三9.65；新增开度min/max/all2401/count及traceSHA。旧轨迹/NN输入不变，旧结果按原分析版本理解。当前代码SHA已与第三保存analysis_source_sha一致。旧两个新案例的源记录及审阅不重写。
+
+第三8解释/4区间已核原始锚点，合全批24解释/10区间。16→44暂停28hold/H3/重复1；44同轮0不是墙钟即时；84→100暂放16hold；身体旁移3.75hold。首次解释脚本引用了第三缺失的choice.reason而报KeyError，未写文件；改用实际choice.intention后才保存并成功核验，不伪造字段。之后全部依赖命令按退出码顺序执行。Native3报告3videos/31links，54940 terminal全play/seek/Range206/字幕/inspector/375/JS0通过；98574 terminal361passed/2skip。12/56/100/108/116帧已提，view100/108符合暂放与旁移。
+
+全部Sim父/子terminal且8766无客户端后核UID/cwd/cmdline，仅SIGTERM自有π2613996。旧67855 tool handle已unknown，但authoritative PID消失/nvidia compute为空、四卡48492–48494MiB验证释放，不重启服务。CPU HTTP3054726保持。85963/96546/96527/83736/92217/44453/92004等均terminal，不再poll。
+
+为伙伴事实可靠性独立准备Qwen3-32B-AWQ，不当Robot覆盖。复用download_modelscope_policy --model：ModelScope直连、trust_env=False/中国host限制、15文件19341526164字节大小/SHA校验，shared models/Qwen/Qwen3-32B-AWQ；repo模型软链及.venv-human-awq-candidate。候选env在data1，只读site.addsitedir复用原libero-native→openpi的Torch2.7.1/Transformers4.53.2，新增AutoAWQ0.2.9及Tuna依赖，原环境未改；cache后续显式data1。CPUimport qwen3注册True。
+
+GPU0起前48494MiB，仅本地FP16非量化层加载测试；最初命令有缩进SyntaxError没执行，改正后44453加载成功但严格裸JSON断言失败。92004原样诊断：logits finite，回复是Markdown围栏中的正确ready:true加EOS，peak allocated19366689792 bytes。未假称裸JSON通过或人策略资格，进程退出且GPU0释放。未产生smoke文件。准备记录与来源/边界在HUMAN_MODEL_CANDIDATE.md及prefix/human_model_candidate_preparation.json；没有私有prompt上传。AutoAWQ已弃维护，当前有限加载不代替原生思考/工具/schema与完整Sim资格。当前原LLMHuman加载BF16，候选真实策略还需明确FP16支持及provenance，不能现在直接宣称接入完成。
+
+主43987 terminal81published视频（含旧partial）/0pending；导出89493 terminal80完整/21120blocks/189600实际controls、stem及来源核对通过，包含hold/reference，不全称神经动作，非专家/formal未冻结。新主browser89855待收；不要重poll已terminal的43987/89493/54940/98574。
+
+接下来必须继续完整Goal：将一致v5事实与候选两阶段真实策略接入后资格，检查第三场景的基本机器人操作前提，再落实六实际情境、原idea组合/匹配对照及两系统多初始化正式比较。不能把本批或模型准备当完成，也不再围绕单个字段与提示无限迭代。当前无GPU工作需求，起新任务前再次nvidia选单卡；原始失败保留。
