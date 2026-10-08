@@ -63,3 +63,7 @@ build_workspace_reference_report现以独立控制角色增加第四视频，原
 预定experiments/workspace_dynamic_20261008六条（init2、seed101–106、120s、同版workspace-method、生成式PrivateAgenda人、symbolic协调+真实π0.5）。覆盖六情境配置而非实际行为，不能记全部六覆盖；目前尚未启动，status verified0。run_workspace_dynamic_batch每条结束审计/process/video后更新HTML，不自动覆盖或重试。报告修正inspection.js路径生成顺序，pending browser用系统Python3.12已通过0videos/9links；缓存浏览器greenlet针对3.12，不要用Sim Python3.11。整套pytest使用schema-decoding PYTHONPATH和LIBERO_CONFIG_PATH后344 passed/2 skipped（30212terminal）；首次少环境变量2失败不属于代码回归，仍留工具记录。
 
 下一步新检查GPU再启动π3及开发批2，记录新PID/handle并收实际NN输入、scheduler及六例行为；大文件均data1。不将两条饮品操作失败归HRC缺口，也不做更多单一位置微调。未冻结候选72、多系统正式评测与全Goal仍active。
+
+63b76de已提交协议／六条条件／报告生成及控制终态。新π服务GPU3/PID2440833/session8693，严格权重加载且8766监听；新batch GPU2/PID2441354/session49178，首子2441355（snack/change_use）已加载Qwen并保存scene/task/situation/workspace。21:04:44子仍Rl、GPU2活跃；尚未产出首条完整NN决策，不认证行为。不要把观察等待当terminal或重启。旧GPU全部释放后按需新启，不停止仍被该batch需要的π。
+
+主入口browser21025 terminal72videos/682links，播放／拖动／字幕／375px／Range206等通过。README和整体DESIGN更新到新方法，明确参考四条终态、生成式开发配置未验收及原idea组合仍待做。发现run_joint_activity末尾单run HTML仍有旧“每2秒”静态文案；活跃源码不改，结束后需改为真实cadence，当前新批统一页与PROTOCOL已正确写4秒检查／20秒重考虑。
