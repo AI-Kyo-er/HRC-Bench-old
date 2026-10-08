@@ -67,3 +67,7 @@ build_workspace_reference_report现以独立控制角色增加第四视频，原
 63b76de已提交协议／六条条件／报告生成及控制终态。新π服务GPU3/PID2440833/session8693，严格权重加载且8766监听；新batch GPU2/PID2441354/session49178，首子2441355（snack/change_use）已加载Qwen并保存scene/task/situation/workspace。21:04:44子仍Rl、GPU2活跃；尚未产出首条完整NN决策，不认证行为。不要把观察等待当terminal或重启。旧GPU全部释放后按需新启，不停止仍被该batch需要的π。
 
 主入口browser21025 terminal72videos/682links，播放／拖动／字幕／375px／Range206等通过。README和整体DESIGN更新到新方法，明确参考四条终态、生成式开发配置未验收及原idea组合仍待做。发现run_joint_activity末尾单run HTML仍有旧“每2秒”静态文案；活跃源码不改，结束后需改为真实cadence，当前新批统一页与PROTOCOL已正确写4秒检查／20秒重考虑。
+
+fce721d后首例0秒决策已实际产出：agenda375tokens、贡献1181tokens；source含table_surface_positions及几何执行语义，current_need明确食品入碗并供取用。Human选择relocate cream_cheese→cream_cheese__in__bowl，0秒公开“I will place the cream cheese into the bowl.”，3.95秒实际pick_approach/held None（已先buffer自己的碗，不是食品已装完）。初始schedule仅initial_observation，实际记录与NN对应。
+
+首Robot0秒也选execute put cream cheese in bowl，并说同一句自己会装填；reason明确据Human的“I will”进行操作。这是早期重复贡献／自愿声明被理解成Robot指令的问题线索，不是完整失败结论。完整episode需核对并发执行、支撑和后续双方反馈，不改活跃模型或预设本例失败。Robot实际public_input顶层含time/robot_task/human_task/dialogue/state/history/current_goal/self_execution/available操作/observed_world，递归未发现私有context/background/agenda/memory字段；这只是本刻输入边界检查，不替代终态独立审计。
