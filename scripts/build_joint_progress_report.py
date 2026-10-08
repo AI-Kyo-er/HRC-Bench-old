@@ -88,6 +88,10 @@ _area_feedback_table=Path('experiments/area_feedback_20261009/conditions.csv')
 if _area_feedback_table.exists():
     for _row in csv.DictReader(_area_feedback_table.open()):
         RUNS.append((_row['run'],f"区域与贡献事实：{_row['activity']}／{_row['situation']}",'neural'))
+_candidate_table=Path('experiments/candidate_joint_20261009/conditions.csv')
+if _candidate_table.exists():
+    for _row in csv.DictReader(_candidate_table.open()):
+        RUNS.append((_row['run'],f"候选与v5真实闭环：{_row['activity']}／{_row['situation']}",'neural'))
 TASKS = {
     'snack_service': ('点心准备', '人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。'),
     'drink_storage': ('饮品整理', '人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。'),
@@ -234,6 +238,7 @@ def build(results, output):
 <p><a href="../workspace_dynamic_20261008/index.html">明确需要与真实功能区：六情境生成式伙伴开发</a>：三活动、六条预先记录的情境配置，实际覆盖须审阅行为。饮品改变提供位置的独立参考仍未上架，两条失败都保留并区分基本操作与协调归因。</p>
 <p><a href="../area_feedback_20261009/index.html">区域摆放与贡献事实：三活动联合验证</a>：三例完整120秒Sim已核验，24项案例解释及10个时间区间核对来源。点心由人交付，饮品更新后Robot延后撤回旧确认；抽屉例有真实临时方案与离返，但门未开、存储未成。载荷修复与更大伙伴仍待真实策略资格，不以局部成果计正式成绩；正式样本0。</p>
 <p><a href="../drawer_operation_floor_20261009/index.html">同初态抽屉操作参考</a>已提供40秒真实Sim：XML与初始记录状态完全一致，21.55秒有真实VLA开门见证；后续控制不同，不作单因素因果比较。<a href="../human_candidate_interface_20261009/index.html">更大伙伴三帧接口检查</a>核对6次实际生成，饮品/抽屉选择有区别，但点心仍提前声明完成；未执行新Sim动作，不计策略改善。</p>
+<p><a href="../candidate_joint_20261009/index.html">候选与v5三活动真实闭环</a>条件已预定并进入运行。人和文字协调器都改变，不作单因素比较；未完整核验的运行不计正式样本或动态行为覆盖。</p>
 <p><a href="COORDINATION_REVIEW_GUIDE.md">共同安排、实际贡献和负担审阅手册</a>：目标一致、分工一致、实际执行一致分别核对；不以两方都说完成或目标到位代表cobalance。
 <a href="../../results/joint_evaluation_preparation_20261008/candidate_conditions.csv">72条候选样本条件</a> · <a href="../../results/joint_evaluation_preparation_20261008/preparation.json">未冻结状态</a> · <a href="../../results/joint_evaluation_preparation_20261008/model_file_fingerprints.json">模型文件指纹</a>。候选条件和磁盘文件指纹不是正式结果，不追溯证明旧进程内存参数；正式执行样本目前为0。</p>
 <p>六条init4／5参考已结束：点心与抽屉各两条成立，饮品两条未上架。新推理点心32.45秒曾形成成品交付的物理见证，但108秒又取回、终态仍持物；0.95秒就加入，早于19.5秒个人事务结束消息。新饮品37.5秒用途澄清后，人改变公开要求并实际移瓶，机器人仍选择上架。原始关系未成立与未遵循当前需要是不同问题。</p>

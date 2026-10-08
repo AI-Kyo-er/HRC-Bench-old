@@ -271,3 +271,16 @@ d3d27aa预定drawer操作floor：同init2/seed113、固定Human清盘、task_onl
 新floor与候选报告/README/主入口已更新。floor首次browser1video/9links通过，后多加operation_witness链接；主84328 terminal82videos/783links全部play/seek/Range206/mobile/字幕/JS0通过。32650主82published/0pending terminal；51010导出81完整/21200blocks/190400真实执行动作、stem/来源verified（有hold/ref，不全为VLA），formal未冻结，非专家；不要再poll这些terminal。363测试总范围（361全+2新增）及compile/diff通过。
 
 下一步实际闭环v5＋候选，保留该候选仍有早报完成的失败，不能认为更大即可靠；共享候选的文字协调器也会换权重，须标为联合方法变化。利用已证实的操作前提进一步落实三活动的有效伙伴、六真实生活变化与原idea组合/匹配控制，然后正式两系统/多init。完整Goal active/正式0/candidate72未冻结，无GPU任务在跑。
+
+
+## 候选三活动真实闭环启动（2026-10-09）
+
+30bf7b2前轮progress，本轮先确认worktree干净及四卡48492–48494MiB/no compute。candidate_joint_20261009预定同init2、seed114/115/113、120s，沿用任务/布局/能力/连续人及π，联合换Human/文字协调32B-AWQ/FP16及显式v5，不作单因素效果或Robot多模型覆盖。原Goal六实际情境、组合控制及正式两系统保留。
+
+runner增加条件表/模型/v5/报告参数，旧默认不改；batch_condition保存method_settings，续跑核同模型/观测方法，拒跳旧14B/v4作新32B/v5。新增2拒绝测试，全365passed/2skip，67252terminal22.17s；compile/diff通过。pending页0videos/13links浏览器通过，9309255提交协议、条件、脚本、报告与方法保护。
+
+πGPU3起前48492MiB，新2719139/session44452严格加载并8766监听后启动候选。Human/协调/Sim GPU2起前48494MiB，新parent2719750、首child2719751/session58742仍live。加载source/条件/模型冻结，不因无新输出重启。旧32B接口/ref/π作业均terminal，勿混句柄。
+
+首0实际NN已出、trace3.95：world_version5/neural_inferences2、Food→Bowl、message空；Robot0 bowl_on_plate，reason知道Human持Bowl但memory_note提前Bowl placed。仅早期观察，不认证效果或最终失败，不强制交流/动作。notes保存边界。当前服务仍被三条件需要，不能停止；新任务结束再核释放。
+
+主注册3pending/链接，67735 terminal82旧published/3pending；README更新。正式0/candidate72未冻结，全Goalactive。下一步收同58742及三条完整原始输入/控制/视频，不重新跑已结束的接口或参考。HTTP3054726继续供读报告。
