@@ -39,4 +39,10 @@ def contribution_observations(decision, scene):
         result['xy_distance_to_selected_named_position_m'] = math.dist(
             scene['objects_xyz'][obj][:2], scene['regions_xyz'][destination][:2])
         result['named_position_measurement_scope'] = '命名坐标的水平距离，不单独表示已经放下或放好。'
+        area = scene.get('public_placement_areas', {}).get(destination)
+        if area is not None:
+            xy = scene['objects_xyz'][obj][:2]
+            result['object_center_within_selected_area'] = all(
+                lo <= value <= hi for lo, value, hi in zip(area['center_xy_min'], xy, area['center_xy_max']))
+            result['named_position_measurement_scope'] = '区域中心范围内的位置；离中心远仍可在区域内，不单独表示离手、支撑或任务成功。'
     return result

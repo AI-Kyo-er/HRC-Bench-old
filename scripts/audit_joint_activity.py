@@ -159,14 +159,42 @@ def audit(root):
                 geometry_frames.append({'time_s':d['time_s'],**frame})
                 if p.get('workspace_method'):
                     from hrc_pilot.activity_workspace import body_target_on_surface
-                    surfaces=read(root/'workspace_layout.json')['zone_surface_positions']
+                    layout=read(root/'workspace_layout.json');surfaces=layout['zone_surface_positions']
                     assert scene['table_surface_positions']==surfaces
                     assert all(scene['regions_xyz'][name]==point for name,point in surfaces.items())
+                    if p.get('human_area_placement'):
+                        from hrc_pilot.placement_areas import table_placement_areas,area_placement
+                        areas=table_placement_areas(layout)
+                        assert layout['placement_areas']==areas==scene['public_placement_areas']
+                    else:
+                        assert 'public_placement_areas' not in scene
                     table=receipt.get('table_surface_placement')
                     if table:
                         assert receipt['accepted'] and table['destination']==d['choice']['destination']
-                        expected=body_target_on_surface(support_sim.model,support_sim.data,table['object_id'],
-                            surfaces[table['destination']])
+                        if 'area_placement' in receipt:
+                            allocation=receipt['area_placement'];dest=table['destination']
+                            assert p.get('human_area_placement') and dest in areas
+                            plan_index=round((allocation['planning_physics_time_s']-trace[0]['physics_time_s'])*20)
+                            assert 0<=plan_index<=round(d['time_s']*20)
+                            planned=trace[plan_index]
+                            from hrc_pilot.libero_native import perceived_object_contacts
+                            for payload in allocation['payload_names']:
+                                contact=perceived_object_contacts(planned)[payload]
+                                assert not contact['robot_hand_contact']
+                                assert (table['object_id'] in contact['contact_entities'] or
+                                    (planned['human_execution']['held_object']==table['object_id'] and
+                                     payload in planned['human_execution']['carried_objects']))
+                            replay_recorded_geometry(support_sim.model._model,support_sim.data._data,planned)
+                            resolved=area_placement(support_sim.model,support_sim.data,table['object_id'],
+                                areas[dest],list(planned['objects']),payload_names=allocation['payload_names'],
+                                preferred_xy=allocation['preferred_xy'])
+                            np.testing.assert_allclose(allocation['body_target_xyz'],resolved['body_target_xyz'],atol=.0002,rtol=0)
+                            replay_recorded_geometry(support_sim.model._model,support_sim.data._data,actual)
+                            expected=body_target_on_surface(support_sim.model,support_sim.data,table['object_id'],
+                                [*allocation['body_target_xyz'][:2],areas[dest]['surface_z_m']])
+                        else:
+                            expected=body_target_on_surface(support_sim.model,support_sim.data,table['object_id'],
+                                surfaces[table['destination']])
                         np.testing.assert_allclose(table['resolved_object_body_xyz'],expected,atol=.0002,rtol=0)
                         assert table['surface_xyz']==surfaces[table['destination']]
                 names=[n for n in ['wine_bottle_1','cream_cheese_1','akita_black_bowl_1','plate_1'] if n in scene['objects_xyz']]
@@ -263,6 +291,8 @@ def audit(root):
                 np.testing.assert_allclose(xyz,actual['objects'][name])
             assert 'private_context' not in request['observed_world']
             assert 'human_intention' not in request['observed_world']
+            if p.get('human_area_placement'):
+                assert request['observed_world']['public_placement_areas']==read(root/'workspace_layout.json')['placement_areas']
         if p['robot_system']=='visual_coordinator_plus_vla':
             current=next(c for c in calls if c['step']==round(plan['time_s']*20))
             assert plan['image_sha256']=={'initial':calls[0]['exterior_rgb_sha256'],

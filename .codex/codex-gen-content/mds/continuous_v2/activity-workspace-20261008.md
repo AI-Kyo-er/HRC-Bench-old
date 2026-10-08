@@ -147,3 +147,13 @@ a68b6d6已提交全六条结果、报告和资源回收。70280已terminal exit0
 新增contribution_observations.py及显式--human-contribution-observations：自己已选贡献关联当前obj离手/携带/参考支撑/命名位置距离、完成和中断ID记录；ID缺失不定义失败，完成不定义共同Task成功，无聚合分数/下一策略/未来cue。运行时只取之前四决策，放入Human scene、自有工具反馈和私人需要观测；Robot输入未增加这些私有选择。默认flagFalse，旧输入保留。新源列入provenance，audit重新计算每条map并验证，而不只信日志字段。区域并排表达仍待实现，未启动单字段微调实验。
 
 tests三个新语义边界案例：近目标但仍持物不称完成；请求完成与当前支撑可不同；未知接触保持None并拒未来。完整347 passed/2 skipped（34933terminal）、compile/diff通过。旧首snack实际audit74145terminal verified、再次8解释锚点通过；没有改原始轨迹/模型输出。用存量记录CPU重建首snack4秒未Food/Bowl支持、drawer20仍held/32已released且complete的事实，验证helper不会把已选贡献当成果。**尚未闭环模型验证新反馈有效性**，不能宣称伙伴改善。Next做完整空间表达与事实反馈方法及三活动真实Sim资格，再进组合/正式两系统，全Goalactive。
+
+## 区域放置与贡献事实的联合方法接入（2026-10-09）
+
+d53d717前轮是progress。本轮先确认无GPU任务。新增placement_areas.py：snack_delivery给明确物品中心范围，真实碰撞盒须留真实桌面；当前其他物品和固定件占用检查，载荷包围盒合并，选最近可用点或拒绝，不移动其他物品/改区域/路由策略。原个人点和in/on关系保持。AreaHumanExecutor仅兑现已选区域，缓存同运动的点、按当前所选物品底部解高度；放下前若点变占用则area_target_unavailable持物受阻，清空后延续原选择，不自动新任务。真实路径/未来他方动作不保证，保持Scope。
+
+--human-area-placement显式注册到运行时及provenance/sourceSHA；区域是公开环境信息，进Human及理想Robot输入，自选贡献事实仍只进Human。审计重新解算原规划时刻几何和payload接触/携带证据，再核对当前高度，区域布局不变且没有私有选择给Robot。默认关闭，旧Source语义保留。
+
+几何3 tests通过；实际保留XML三对象连续宏test先因未重建avatar rig走旧显示bodyName而失败，**只在CPU test禁显示**后通过14.57秒，真实几何/运动逻辑未模拟，Robot qpos原样、手速≤.2、三XY分开。它不测试avatar/接触动力学，真实Sim仍待跑。全351 passed/2 skipped（1381terminal）及compile/diff通过。qualify_placement_areas可重现6初态CPU顺序几何探针，明确仅复制状态调整人可移动对象、非实际策略/运动/成功；JSON保存源哈希及原frame，40579终态6/6。
+
+下一批experiments/area_feedback_20261009三条已预定：snack/detour seed114、drink/correction115、drawer/leave_return113，init2、120s、初持、同生成式Human/理想协调+π0.5，联合area+自贡献facts。run_area_feedback_batch不覆盖、不自动重试，完整audit/process/video后发布；不是单因素比较，不计正式0。pending页浏览器0videos/12links通过，实际3资格未启动。起前nvidia四卡约48492–48494MiB，按需要πGPU3、HumanGPU2；启动后记新PID/handles，代码Source冻结直到结束。两项联合方法是否改善真实伙伴/成果仍未证，不以351tests替Goal。

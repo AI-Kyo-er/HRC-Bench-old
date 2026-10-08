@@ -107,6 +107,8 @@ def main():
                         help='把私有外部生活事实绑定到活动与具体物品，不生成双方下一动作')
     parser.add_argument('--human-contribution-observations',action='store_true',
                         help='将自己已选贡献与实际观测相连，不评分共同任务或选择下一策略')
+    parser.add_argument('--human-area-placement',action='store_true',
+                        help='在已选交付区域中按实际占用分开放置，不移动他物或选择新策略')
     parser.add_argument('--human-decision-steps',type=int,default=40)
     parser.add_argument('--coordinator-decision-steps',type=int,default=40)
     parser.add_argument('--human-model',type=Path,default=Path('/data1/sieniwgroup/sieniw/models/Qwen/Qwen3-14B'))
@@ -118,6 +120,8 @@ def main():
         parser.error('新活动契约需要显式操作能力库和神经协调器')
     if args.human_contribution_observations and not (args.workspace_method and args.interaction_contract and args.human_source=='neural'):
         parser.error('贡献事实反馈要求明确新工作区、活动契约及生成式人')
+    if args.human_area_placement and not args.workspace_method:
+        parser.error('区域放置要求明确工作区方法')
     if args.reference_drink_provision!='serving_ready' and not (args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage'):
         parser.error('提供位置控制仅用于明确标注的新布局固定饮品参考')
     if args.reference_vla_instruction and (args.human_source!='reference' or args.symbolic_coordinator or args.coordinator_port or args.robot_replay):
@@ -189,6 +193,8 @@ def main():
         ['workspace_contracts.py','activity_workspace.py','surface_human_executor.py','human_decision_schedule.py'])
     if args.human_contribution_observations:
         paths.append(Path('src/hrc_pilot/contribution_observations.py'))
+    if args.human_area_placement:
+        paths.extend(Path('src/hrc_pilot')/name for name in ['placement_areas.py','area_human_executor.py'])
     hashes={str(p):sha256(p.read_bytes()).hexdigest() for p in paths}
     args.output_dir.mkdir(parents=True);ep=args.output_dir/'episode';ep.mkdir();journal=NativeRunJournal(ep)
     env=OffScreenRenderEnv(bddl_file_name=suite.get_task_bddl_file_path(case.task_id),control_freq=20,
@@ -253,6 +259,12 @@ def main():
             from hrc_pilot.surface_human_executor import SurfaceHumanExecutor
             env.env._hrc_table_surface_positions=workspace['zone_surface_positions']
             actor_class=SurfaceHumanExecutor
+            if args.human_area_placement:
+                from hrc_pilot.placement_areas import table_placement_areas
+                from hrc_pilot.area_human_executor import AreaHumanExecutor
+                env.env._hrc_placement_areas=table_placement_areas(workspace)
+                workspace['placement_areas']=env.env._hrc_placement_areas
+                actor_class=AreaHumanExecutor
             write(args.output_dir/'workspace_layout.json',workspace)
         actor=actor_class(env,regions,auto_buffer=args.human_auto_buffer);actor._display(actor.position());env.sim.forward()
         if situation and situation['initial_presence']=='aside':
@@ -309,6 +321,9 @@ def main():
                     scene['table_surface_positions']=workspace['zone_surface_positions']
                     scene['action_interface']['table_surface_placement']='Table destination coordinates describe the support surface; the selected object body height is resolved from current collision geometry. Selection is not completion.'
                 if args.robot_skill_bank:scene['public_robot_operation_inputs']=dict(SKILLS)
+                if args.human_area_placement:
+                    scene['public_placement_areas']=workspace['placement_areas']
+                    scene['action_interface']['table_surface_placement']='Named delivery area bounds describe acceptable object centers. The executor resolves a free point inside the selected area from current collision geometry, without moving other items; placement can be rejected or blocked. Selection is not completion.'
                 if args.human_contribution_observations:
                     from hrc_pilot.contribution_observations import contribution_observations
                     scene['self_contribution_observations']={str(previous['decision_id']):
@@ -346,6 +361,8 @@ def main():
                             'regions_xyz':regions,'fixture_joints':r['articulated_joints'],
                             'human_hand_xyz':r['human_hand_position'],'human_body_xy':r['human_body_xy'],
                             'human_held_object':actor.held}
+                        if args.human_area_placement:
+                            public_request['observed_world']['public_placement_areas']=workspace['placement_areas']
                     last_plan=coordinator.infer(public_request);last_plan.update(time_s=t,decision_id=len(plans));plans.append(last_plan)
                     cartesian_target=(np.asarray(r['robot_ee'])+last_plan['decision']['delta_xyz_m']
                                       if last_plan['decision']['mode']=='move_ee' else None)
@@ -446,6 +463,7 @@ def main():
         'human_execution_class':type(actor).__name__,
         'human_decision_cadence':'observation_events_and_periodic_reconsideration' if human_schedule else 'fixed_decision_interval',
         'human_contribution_observations':args.human_contribution_observations,
+        'human_area_placement':args.human_area_placement,
         'reference_vla_instruction':args.reference_vla_instruction,
         'reference_drink_provision':args.reference_drink_provision if args.workspace_method and args.human_source=='reference' and args.activity=='drink_storage' else None,
         'initial_human_holding':args.initial_human_holding,

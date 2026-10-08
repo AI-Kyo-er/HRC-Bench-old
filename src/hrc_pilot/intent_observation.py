@@ -53,4 +53,6 @@ def intent_observation(scene):
         result['measured_reference_relations']=deepcopy(world['public_relation_summary'])
     if 'self_contribution_observations' in scene:
         result['self_contribution_observations']=deepcopy(scene['self_contribution_observations'])
+    if 'public_placement_areas' in scene:
+        result['public_placement_areas']=deepcopy(scene['public_placement_areas'])
     return result

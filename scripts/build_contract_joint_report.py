@@ -18,7 +18,8 @@ def read(path):return json.loads(path.read_text()) if path.exists() else {}
 
 def build(output=Path('experiments/contract_joint_20261008')):
     output=Path(output);contracts=CONTRACTS
-    workspace=output.name=='workspace_dynamic_20261008'
+    area_feedback=output.name=='area_feedback_20261009'
+    workspace=output.name=='workspace_dynamic_20261008' or area_feedback
     if workspace:
         from hrc_pilot.workspace_contracts import WORKSPACE_CONTRACTS
         contracts=WORKSPACE_CONTRACTS
@@ -80,6 +81,12 @@ def build(output=Path('experiments/contract_joint_20261008')):
         page=page.replace('<a href="PROTOCOL.md">','<a href="OBSERVATION_NOTES.md">案例审阅与运行中原始证据</a> · <a href="PROTOCOL.md">')
         page=page.replace('<a href="OBSERVATION_NOTES.md">','<a href="BATCH_REVIEW.md">本批六例完整结果与下一步决定</a> · <a href="OBSERVATION_NOTES.md">')
         page=page.replace('<a href="conditions.csv">','<a href="COMPOSITION_DESIGN.md">交互结构及匹配对照设计（待实施）</a> · <a href="conditions.csv">')
+    if area_feedback:
+        page=page.replace('真实功能区与明确需要：六情境生成式伙伴开发','区域摆放与贡献事实：三活动联合验证')
+        page=page.replace('运行前固定的六条条件','运行前固定的三条资格条件')
+        page=page.replace('六个配置覆盖三活动，实际行为覆盖须逐例核对。','三条条件验证同一区域内多物品分开放置及自身贡献事实反馈；这是联合方法资格，不是单因素改进或正式成绩。')
+        page=page.replace('href="COMPOSITION_DESIGN.md"','href="../workspace_dynamic_20261008/COMPOSITION_DESIGN.md"')
+        page=page.replace('<h2>本批使用的布局设计与静态资格</h2>', '<h2>继承中心位置与静态资格</h2><p>图只显示原中心位置，不画本批扩展的交付中心范围；区域边界和当前占用的实际求解见各例workspace_layout和执行回执。</p>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
     page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')
