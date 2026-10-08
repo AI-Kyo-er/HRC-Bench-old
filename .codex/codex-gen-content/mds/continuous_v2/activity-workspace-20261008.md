@@ -95,3 +95,15 @@ public_request_response_review保存8项终态解释，verify_case8源锚点通�
 51df0e4已提交首例终态视频／审阅及报告。18837现terminal exit0：全量开发72完整episodes/19200观测块/170400实际动作，unique/source边界通过（不是候选72正式样本）。22317 terminal exit0：主报告73videos/692links，实际播放／拖动／字幕／375px／Range206通过。不要继续poll这两个终态handle。首case8锚点+3区间核对通过；未因其格式及视频核验而准入正式。
 
 第二drink22.05模拟秒仍live，Human0自己声明暂放酒瓶，Robot0也执行同类柜顶操作，Human4改清盘、Robot4等待最终用途；又有把自愿贡献当共享指派的线索，须完整收尾再归因。2453774显存约35311MiB、π2440833约8880MiB，仍被本批需要。当前第一子已结束，第二live，后四未开始；不因同类错误提前丢弃条件或覆写输入。所有runtime源未改，无smoke生成。
+
+## 饮品运行中真实离返／约定及模型接口容量
+
+前轮c8130cc是progress。本轮继续同49178，父2441354/第二2453774/π2440833 live，现107.95模拟秒、无summary，未重启。日程21.3私有提醒后H24自己选away，25.2 body y≥.8，27.95 y≈.9498；先前H4中断wine请求选clearplate、8又中断plate返wine，H24却说plate已个人区，实际plate距新个人区.52519m。不是抓放拒绝导致的事实错认。drink_departure_prefix.json保存15条源码记录/哈希，重读匹配。
+
+H52选return并询问rack或cabinet，Robot52选择rack并真实VLA开始，H56公开accept。身体52.95越过返回阈值；R52首先收到公开返回表达，不能说身体已经回到位。H56同时选择wine柜顶，需要查实际回执是否noop/拒绝/干扰，不能仅凭选择认定实际冲突。私人事务完成仅H52自述，无额外过程/完成通知；允许自主判断返回，不认证私事实际完成或外部结束消息因果。drink_return_agreement_prefix.json保存14条决策/话语/身体及真实VLA控制，重读匹配。不是所有案例都独立无交流，也尚未完整活动成功。两前缀报告只给运行中证据，不formal分。
+
+重新读原始.codex/mds/idea.md第2/6节；它的六结构是接力、嵌套、同时、历史赋义、双向诱发、离返连续，而当前join/leave/change/detour/correction/request是生活情境维度。新增COMPOSITION_DESIGN明确三活动承载、局部/串接/复合匹配、结构留出与实际资格前提；**未实施**，不能计新任务成果。当前72候选没有这些因素，原样扩大会偏离原idea，正式0/未冻结。没有在active runtime更换通知或路由动作。
+
+另作CPU输入容量证据（不是裸VLA评测）：从run_joint_activity.py AST取真实robot_prompt，first snack真实state/已公开H话语、检查点均值标准差及本地原生SP。5时刻假设裸VLA公开输入242/273/270/274/291token，全部超过200；服务已有严格拒绝，**没有静默截断**。本例8实际协调后VLA调用最多49token，232hold块不当实际VLA输入。direct_public_input_capacity.json保存源文件/模型配置/assetSHA及实际与假设角色，说明直接语言历史条件需预先适配、不能把超限判协作失败。无新模型、下载、GPU工作、私有泄漏或外部服务调用。
+
+notes/PROTOCOL/新批index已新增链接，94615 terminal1video/17links、播放/seek/字幕/375px/Range206/inspector通过。新报告builder改动不在runtime源码路径。当前第二条107.95待terminal审计、其余四未开始，全Goal仍active；不以文档或容量检查代替伙伴有效性／双系统正式结果。
