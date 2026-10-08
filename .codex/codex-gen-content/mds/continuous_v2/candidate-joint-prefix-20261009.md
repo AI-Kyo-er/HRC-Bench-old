@@ -53,3 +53,13 @@ candidate_snack_detour_symbolic_20261009：120模拟秒，2401帧／20FPS／512�
 发现audit_joint_activity原先无条件json.loads/validate，即使真实标记parse_error也会中止后处理。新增human_output_verification重放解析错误及检查精确fallback、空工具与归一化，成功输出仍严格validate；auditor继续核对全token/输入/动作，不能降级误标成成功。新计数human_policy_parse_error_count与verified_schema_generation_failure_count，报告新增生成状态，failed wait明示非自主选择。修改的是独立auditor和报告，不在已加载策略source列表。
 
 首例已重新audit verified/生成error0，released_placement_audit按更新后的interaction_verification SHA重建，报告构建完成。全回归379passed/2skip（session7915已exit0），新增6测试包括实际长度解析器和真实失败fallback及误标拒绝；实际36记录重放失败通过。候选报告browser session84854已exit0：新生成状态页1video/23links、实际播放/拖动/Range/同步需要/375px检查通过，勿再poll。当前第二case至少63.95s且live，原父2719750/子2748294/π2719139继续，正式0，全部Goal仍active。
+
+## 有限文本协议实际NN单样本
+
+上一轮progress提交39109e6。本轮先复查同batch/第二子/π，原饮品64又出现未闭合JSON；至少83.95s仍live，当前模型/协议不改。为下一版实际接口资格，新增run_bounded_human_interface.py/.sh、verify_bounded_human_interface.py及报告构建；不是新的完整Sim。
+
+运行前nvidiaGPU0free48494MiB，采用单卡0，32BAWQ+FP16，旧实际输入36/已生成私人意图/原历史重放，seed14136，贡献层NN1次，body/Robot控制0。独立进程只覆盖工具声明和输出schema自由文本长度，没有修改模型源文件或当前Actor进程。source_row/SHA、源代码hash、实际输入/思考/output tokens/精度保存data1 results/bounded_human_interface_20261009，经repo results同名软链。
+
+实际session79748/PID2772580已terminalexit0：568wholetoken、parse_error=None、thinkingCloseForcedFalse，生成96.5657墙钟秒、load7.1327。选择自身Wine→Cab，同时公开请求Robot放Cab；方向一致但同资源职责需完整Sim核对，不能当真实协作或伙伴可靠性。失败历史摘要没进入此36输入，不证其效果。不同seed与工具声明变化不作单因素归因。
+
+独立验证65083已terminalexit0：source_and_actual_token_records_verified，重建实际bounded工具输入、ChatTemplate及thinkPrefix、全部token分段/原始文本、JSONschema、动作解析，semantic_requires_review。报告browser0video/6links/375px/JS0通过；无新Sim动作，不把源场景视频冒充新动作。GPU0已nvidia确认15MiB背景占用、free48494，PID已退出，无空闲自有模型残留。GPU2/3仍有原第二和后续第三任务，不停止。正式0、完整Goal active；下一步收齐本批，再实际验证候选完整持续闭环，不长期停在接口帧。
