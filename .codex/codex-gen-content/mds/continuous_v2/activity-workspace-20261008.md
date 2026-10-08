@@ -227,3 +227,5 @@ drink_correction_opportunity_comparison.json保存旧workspace drink35.1与新35
 notes/BATCH_REVIEW/README主描述更新两例完整（48H/60coord/88VLA/4800ctrl/4802frames）。主70485terminal80videos（含旧partial）/1pending；新主browser49151仍live待收，不预称成功。开发导出37829 terminal verified79完整episodes/20880blocks/187200真实执行control/stem唯一，包含hold/reference等来源，非全部VLA动作、非专家、formal未冻结；勿再poll37829/44326/95424/45420/70485。
 
 第三2642972已19.95秒，H12point Plate、H16选择pause_current并公开暂处理个人联系，实际phase idle/heldNone、body[.25,.6]。不把说pause当真实离场或完成私事，后续继续查状态及响应。尚无新终态。全Goal继续：正式0、candidate72未冻结，不能用两段正确物理成果/用途更新替代可靠伙伴、六情境、组合对照、正式两系统。
+
+32ac749已提交第二完整结果与报告。主browser49151现terminal exit0：80videos/763links、播放/seek/Range206/字幕/mobile/JS0通过，勿再poll。第三2642972仍live、最新23.95，父2631518/session85963和π2613996/session67855仍需要；没有重启/停止，不以报告通过认证Goal完成。
