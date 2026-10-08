@@ -72,6 +72,10 @@ def build(table,results,output):
             audit=read(root/'interaction_verification.json');process=read(root/'joint_process_evidence.json')
             review=read(root/'public_request_response_review.json')
             html+=f'<p>实际人NN {audit.get("human_neural_calls")}，协调NN {audit.get("robot_visual_coordinator_calls")}，VLA调用 {audit.get("robot_actual_vla_calls")}。同资源执行重叠 {process.get("shared_resource_execution",{}).get("same_resource_vla_exposure_s","未测量")} 模拟秒。</p>'
+            human_io=rows(ep/'human_policy_io.jsonl');robot_io=rows(ep/'robot_planner_io.jsonl')
+            human_errors=sum(row.get('parse_error') is not None for row in human_io)
+            robot_errors=sum(row.get('parse_error') is not None for row in robot_io)
+            html+=f'<p>人决策解析错误 {human_errors}，机器人协调解析／技能选择错误 {robot_errors}，人执行拒绝 {audit.get("human_executor_rejection_count","未测量")}。协调错误的保持回退不能当作模型主动等待。</p>'
             contact=process.get('shared_resource_execution',{}).get('robot_gripper_contact_with_human_owned',{})
             duration=contact.get('sampled_contact_duration_s')
             label=f'{duration:.2f}' if duration is not None else '未测量'
@@ -99,7 +103,14 @@ def build(table,results,output):
     <p>页面和视频中的事件时刻为模拟时间。4秒决策间隔不代表模型能在真实墙钟4秒内完成推理；推理墙钟成本另外保存，本批不能证明实时部署能力。</p>
     <p>两个系统在同一条件下使用相同初始化、人物、外部事实和seed，但人可以因机器人行为不同产生不同回应。视觉与理想感知系统同时改变感知和模型，这不是单因素消融或裸VLA排名。</p>
     <p>不强迫每例加入、变心、离开或求助。人的私有意图不直接提供给机器人；只转发实际公开表达和可见行为。环境能力目录不当作队友请求。动作接受、目标到位和双方接受安排分别审阅。</p>
-    <p><a href="PROTOCOL.md">完整协议</a> · <a href="conditions.csv">运行前固定的12条条件</a> · <a href="REFERENCE_DECISIONS.md">文献设计与当前缺口</a> · <a href="../joint_feasibility_20261007/COORDINATION_REVIEW_GUIDE.md">协调证据口径</a> · <a href="../joint_feasibility_20261007/index.html">全部历史结果与失败</a></p></section>'''
+    <p><a href="PROTOCOL.md">完整协议</a> · <a href="conditions.csv">运行前固定的12条条件</a> · <a href="BATCH_REVIEW.md">完整批次的行为覆盖、归因与后续取舍</a> · <a href="REFERENCE_DECISIONS.md">文献设计与当前缺口</a> · <a href="../joint_feasibility_20261007/COORDINATION_REVIEW_GUIDE.md">协调证据口径</a> · <a href="../joint_feasibility_20261007/index.html">全部历史结果与失败</a></p></section>'''
+    if len(states)==12 and all(s['verified_terminal'] for s in states):
+        page+='''<section><h2>12条运行结束后，研究问题回答到哪里</h2>
+        <p>完整运行与输入／执行／视频核查为12/12，每条120模拟秒；正式评测仍为0。下面是保存记录的助手审阅，不能当作独立专家评分。</p>
+        <p>点心案例中有完整物理链，也有提前取走空碗。临时饮品需要和取消进入了人的决策，但恢复点心未形成完整成品。饮品案例中双方公开更新了用途，物体柜顶终态有证据；人的柜顶选择却早于新用途消息，纠正条件不能因此算作消息诱发的实际纠正。</p>
+        <p>抽屉视觉暂离案例实际离开并返回，但返回后的存储被可达性检查拒绝，再改为个人区；理想感知暂离案例实际离开后未返回。两个主动求助条件都没有明确的机器人求助及人的回应链。视觉求助条件物理存储到位，但机器人仍持续开抽屉。</p>
+        <p>本批支持双向信息和跨主体物理依赖可运行，尚不支持六类完整行为覆盖或可靠动态协作。下一步需补齐用途与关系目标、请求执行状态及机器人退出操作区的接口，再检验情境下的伙伴选择；不通过强迫事件或筛选成功视频补齐覆盖。</p>
+        <p>逐项证据、接口归因和完整Goal未完成项见<a href="BATCH_REVIEW.md">批次审阅</a>。每例下方保留原始消息、行为锚点及完整失败过程。</p></section>'''
     page+=''.join(cards)+'''<section><h2>结论边界</h2><p>当前正式评测样本为0。任务配置、神经话语、类型校验及物理关系均不能代替六类实际变化、可靠伙伴、有效分工重组或cobalance。每条未发生/失败条件保留在预定分母，后续根据具体案例判断是否进入正式多初始化评测。</p></section></main></html>'''
     (output/'index.html').write_text(page)
     (output/'status.json').write_text(json.dumps({'role':'development_status_not_training_pairs',

@@ -402,3 +402,23 @@ Next：继续同父批按表回收跨活动、六情境实际结果，完成逐�
 警告：本turn内部分析又出现反复及虚构字段长名称，均不是事实或已实现架构。忽略这些分析，只依源码、实际PID和输出；后续保持短推理立即工具，禁止继续无效名称／架构堆砌。
 
 最终浏览器已收：focus7 videos/55links，main53 videos/501links，实际play/seek/Range206、完整轨迹字幕activeCue、375px、JS0。不再轮询已完成79360/37427。
+
+## 最新接续：一致批12/12终态，完整行为审阅
+
+本轮为progress：复查磁盘与PID，原visual父4059957、symbolic续父168009均真实terminal，无运行中实验子进程；symbolic续log最终明确robot_request条件verified。不要因旧session缺失重跑。服务仍在：端口8123 PID3054726、8782 PID3095303、8766 PID2267256，经ss验证；本轮没有新GPU实验、下载或运行时源码修改。
+
+补齐理想感知纠正及四个抽屉案例审阅，全部12条输入／执行及独立视频verified，条件状态更新12/12。实际解释共71项，verify_review核对原值及文件SHA，仍assistant解释，不认证语义／真人／cobalance。重点：
+- symbolic correction：H30/R30/VLA48，0拒绝。H0虚构请求选柜顶，16.35秒宏完成，33.9秒私有澄清后36秒同位置请求already satisfied；无消息诱发的新纠正。10.5秒暴露、持物夹爪接触0，柜顶terminal。
+- visual leave_return：H30/R30/VLA136、Hparse0/Rskillerror1、人拒绝1。H28away早于29.2私人联系，body32在.95退出位置；64return在62.2结束消息后，body68回.6。原安排21.25首次物理匹配却不保持；68存储不可达拒绝，72改个人区。R28后酒瓶柜顶，64/68继续酒瓶；80库外技能回退保持。暴露0/持物夹爪接触0，终态奶酪远抽屉。
+- symbolic leave_return：H30/R30/VLA24，无拒绝。8个人区非抽屉，随后双方完成声明。32away在29.2消息后；36说事务完成返回但wait，真正事务结束62.2才到；body120仍.95，无实际return。native_relationTrue但距目标.532m且table支撑，physical_matchFalse，暴露/夹爪0。
+- visual robot_request：H30/R30/VLA240，0拒绝/解析。人20pause，24恢复，30.6实际物理匹配且最后1秒保持，完整原空间链成立。R30条都Opening the middle drawer.，没有明确求助；human36away，不是接受求助。机器人到116仍开抽屉。暴露0/夹爪1.30，不能称主动求助覆盖。
+- symbolic robot_request：H30/R30/VLA232，0拒绝/解析。21.7提醒→24away携奶酪，56relocate临时桌面使body64回.6，终态桌面距目标.623m，original match始终False。R全表达为开抽屉/监视，无求助。暴露0但持物夹爪.40。
+- 全量另发现sym detour协调72/84/88/92/100共5库外技能error，不能把人的0parse泛指双方。追加第9项解释并核对，共71；全批Rerror6/Hparse0/Hreject1。保留原始IO，不修饰失败。
+
+发布BATCH_REVIEW.md：六种实际链条、代理／接口／模型分别归因、完整Goal缺口、下一步统一能力契约。builder新增完整批说明、每例H/R解析和拒绝统计，不把格式测试或视频数当覆盖。冻结批已结束，后续策略／能力接口改动须新批、独立版本，不覆盖原记录或伪称同条件。
+
+当前统一历史report58视频=57完整120s+1partial24.1s；全量loader数据57episode/15840blocks/136800actualactions，无manifest，formal_split not frozen。导出session88712已exit0。focus浏览器12videos/92links passed，main58/551 passed（报告再次重建后的最终复核随后收取）。7项相关pytest通过。原305passed/2skipped为先前全测，不冒充本轮全测。
+
+下一项系统工作：统一关系目标、请求生命周期及R退出操作区能力，NN仍选当前贡献、后台不调度下一步；按活动需要和伙伴观测检验在线生成式人物事实与意图，而非继续提示词小修或人接触动力学。当前六情境真实覆盖、可靠伙伴、完整重组、正式多初始化与人负担/cobalance未达成；formal n0，candidate72未冻结，Goal保持active。
+
+最终复核已收：focus最终12videos/92links，main最终58videos/551links，均实际play/seek/Range206、字幕activeCue、375px、JS0通过；路径coherent_report_browser_20261008及joint_report_browser_20261008/verification_twelve_cases_final.json。两页面本地href均无失效，12review所有SHA当前一致；pytest7passed，diff check通过。全批360HNN/360协调NN/1776VLA/28800controls/12次初始化，已列整批审阅。已完成builder、export、browser sessions全部terminal，不再轮询或重跑。
