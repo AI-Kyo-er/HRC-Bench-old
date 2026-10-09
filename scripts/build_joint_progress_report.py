@@ -92,6 +92,10 @@ _candidate_table=Path('experiments/candidate_joint_20261009/conditions.csv')
 if _candidate_table.exists():
     for _row in csv.DictReader(_candidate_table.open()):
         RUNS.append((_row['run'],f"候选与v5真实闭环：{_row['activity']}／{_row['situation']}",'neural'))
+_bounded_table=Path('experiments/bounded_joint_20261009/conditions.csv')
+if _bounded_table.exists():
+    for _row in csv.DictReader(_bounded_table.open()):
+        RUNS.append((_row['run'],f"有限文本完整共同活动：{_row['activity']}／{_row['situation']}",'neural'))
 TASKS = {
     'snack_service': ('点心准备', '人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。'),
     'drink_storage': ('饮品整理', '人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。'),

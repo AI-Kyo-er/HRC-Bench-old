@@ -19,7 +19,8 @@ def read(path):return json.loads(path.read_text()) if path.exists() else {}
 
 def build(output=Path('experiments/contract_joint_20261008')):
     output=Path(output);contracts=CONTRACTS
-    candidate=output.name=='candidate_joint_20261009'
+    bounded=output.name=='bounded_joint_20261009'
+    candidate=output.name=='candidate_joint_20261009' or bounded
     area_feedback=output.name=='area_feedback_20261009' or candidate
     workspace=output.name=='workspace_dynamic_20261008' or area_feedback
     if workspace:
@@ -119,7 +120,17 @@ def build(output=Path('experiments/contract_joint_20261008')):
             '<a href="../dynamic_joint_activity_20261007/DESIGN.md">完整Benchmark流程、模型适配及七项未完成要求</a></p></section>')
         if statuses and statuses[0]['verified_terminal']:
             prefix_review=prefix_review.replace('运行中前缀审阅：尚非完整结果','早期前缀审阅：完整结果见上方案例')
-        page=page.replace('</main>',prefix_review+'</main>')
+        if not bounded:
+            page=page.replace('</main>',prefix_review+'</main>')
+    if bounded:
+        page=page.replace('候选生成式伙伴与v5：三活动真实闭环','有限文本伙伴：三活动完整共同活动验证')
+        page=page.replace('三条同初始化、同种子的条件检验候选32B与v5在实际执行、反馈和交流中的表现；人和文字协调器都换模型，不作单因素效果或正式成绩。',
+            '三条完整持续活动沿用32B、v5、布局和种子，接入有限自由文本及真实生成失败反馈。检查私人需要、公开沟通、真实贡献和伙伴回应的完整链路，不以解析通过认证协作成功。')
+        page=page.replace('本批沿用此前三条的种子、布局及能力，同时改变人/协调模型、加载精度及v5事实观测。接口通过不证明伙伴拟真，原生操作关系也不自动归机器人贡献。',
+            '本批冻结模型、精度、v5测量、活动与执行能力，改变人贡献输出语法和历史中的失败表示；高层意图与动作仍由模型自主选择。不同方法的同seed不保证相同闭环随机流，不作单因素因果结论。')
+        page=page.replace('本批沿用此前共同任务和能力声明，增加交付区域内可分开放置的表达，以及与人自己选定贡献关联的当前事实。检查这些表达能否在真实决策中兑现，同时继续核对双方分工与动态行为。',
+            '本批将已接通的有限文本协议放入完整120秒共同活动，核对实际执行与双方反馈，不重放单帧作为新方法行为。抽屉、饮品和点心均保留失败与未发生的预期变化。')
+        page=page.replace('</main>', '<section><h2>当前边界与下一阶段</h2><p>原饮品的资源持有与初始相机条件保留，当前Robot操作库不支持任意饮品区放置。分别分析伙伴事实误判、超范围请求、资源／视觉前提、真实VLA操作与协调失败。六类实际动态情境、交互结构对照和双系统多初始化正式评测仍未完成，正式样本0。</p><p><a href="../bounded_human_interface_20261009/RUNTIME_INTEGRATION.md">协议接入与已有接口证据</a> · <a href="../candidate_joint_20261009/index.html">原candidate批及完整视频</a></p></section></main>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
     page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')
