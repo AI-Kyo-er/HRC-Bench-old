@@ -9,6 +9,7 @@ import sys
 class CabinetOccupiedReference:
     def __init__(self, activity, **kwargs):
         self.activity=activity;self.stage='prepare';self.pending=None;self.decisions=[]
+        self.finish_targets={'drink_storage':('plate_1','plate_1_on_cabinet')}
 
     @property
     def robot_permission(self):
@@ -29,6 +30,8 @@ class CabinetOccupiedReference:
                           message='Fixed qualification: request plate placement on the same occupied surface.')
         elif self.stage=='occupied_request' and receipt and receipt['request_id']==self.pending and not receipt['accepted']:
             self.stage='rejected';choice['message']='Fixed qualification: refusal retained; no alternative goal selected.'
+        elif self.stage=='occupied_request' and self.pending in feedback['completed_requests']:
+            self.stage='done';choice['message']='Fixed qualification: both selected placements completed in free surface space.'
         row={'decision_id':len(self.decisions),'time_s':scene['time_s'],'private_input':{'scene':scene},
              'choice':choice,'raw_output':'','parse_error':None,'action_source':'fixed_feasibility_reference',
              'neural_inferences':0,'reference_stage':self.stage}

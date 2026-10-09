@@ -9,3 +9,11 @@
 固定条件启动命令为`bash scripts/run_fixture_surface_qualification.sh`。保存完整真实Sim视频、实际动作、对象／Robot状态、拒绝回执及provenance。完成后检查800控制步／801视频帧、Wine保留在Cab、Plate未被强制压入；输入／执行／视频核查通过后才发布报告。失败全部保留，不自动重试。
 
 这是执行接口资格，不能证明新神经伙伴会合理处理拒绝、实际任务得到重组、路径／全身安全或六类情境覆盖。之后仍需三活动完整生成式闭环、可执行更新分支和同版多条件评测。正式样本0。
+
+## 实际结果与原导出失败
+
+原40秒运行完成800控制与801帧，在报告导出时因固定参考类缺少finish_targets失败。原failure.json及日志保留，原provenance未生成；不重跑、不补造旧设置。`inspect_saved_fixture_qualification.py`只检查保存轨迹、实际零神经调用、家具面回执及完整视频，结果是saved_trace_and_video_checks_passed，不是标准interaction_verification。
+
+实际两次放置均接受：Wine先位于柜顶边缘，Plate随后仍有安全点，最终均留在不同柜顶位置。原预期的“无空位拒绝”没有发生，不能按配置名计拒绝覆盖。真实中央占位帧的拒绝只在CPU重建／测试中验证，尚需完整神经反馈行为。
+
+原失败暴露固定参考导出接口遗漏，现已为未来入口补齐finish_targets及接受后完成状态，增加两项参考状态回归测试。没有重新执行本条原条件。诊断视频及限制见[index.html](index.html)。真实模型、动态人及正式样本仍为0。
