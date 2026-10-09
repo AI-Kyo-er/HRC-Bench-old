@@ -77,3 +77,15 @@
 已查看原始视频[0秒](../../results/candidate_joint_prefix_20261009/visual_review/drink_0s.png)、[36秒](../../results/candidate_joint_prefix_20261009/visual_review/drink_36s.png)、[44秒](../../results/candidate_joint_prefix_20261009/visual_review/drink_44s.png)及实际[初始策略图像](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/episode/observation_000000.png)。[相机与真实碰撞几何记录](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/target_camera_probe.json)重建XML/qpos缓存帧并核对物体位置：0/28秒Wine碰撞包围盒在外部、腕部两路提供相机视锥外；36秒外部相交时仍持物；40秒外部相交、腕部跨相机平面为未知。包围盒相交不证明可见或无遮挡，投影坐标在图像翻转前；翻转不影响是否相交。
 
 因此，早期VLA执行不能直接作为正常可见可用条件下的上架能力证据；高层提供／资源协调和下游视觉条件分开。完整Sim视频在[index.html](index.html)，原三活动方法仍冻结，抽屉继续，正式样本0。
+
+## 抽屉前缀：真实依赖与暂停恢复
+
+[0至36秒的17条来源快照](../../results/candidate_joint_prefix_20261009/drawer_pause_resume_36s.json)已独立重读与行SHA核对。第三例仍在运行，不计终态或完整离返覆盖。
+
+Robot0秒选择实际开中抽屉，原生关节稳定见证首次11.3秒；12秒人观察到0.160米可达开口，自己选择Cream→drawer_storage。随后16/20/24秒自己的执行测量分别为pick_approach、pick_lift、transfer_translate，Robot16秒之后保持并公开说明是人处理。人这几轮却把自己的搬运归为Robot。实际跨主体依赖成立与自生成角色理解错误须分开，不抹掉真实开门或给Robot记人搬运贡献。
+
+本例实际紧急联系通知22.6秒，后续结束消息59.2秒。人28、32秒选择pause_current，保留持Cream，原motion请求3取消；Robot28秒公开认可暂停，但其16秒已hold，不能将首次保持归因于28秒请求。人36秒选择重新放置，Robot公开认可恢复，同一世界保留已打开抽屉和手中物品，未重置任务进度。
+
+人36秒理由说联系已处理，尚未收到59.2秒后续消息；允许模型自主恢复，但这不是被外部结束消息触发的返回，其自述依据待审阅。0至43.95秒身体仍在[0.25,0.6]，没有实际旁移／身体返回。操作参与暂停8秒与身体离返不是同一证据。
+
+43.95秒Cream已离手、与柜体接触，Robot夹爪未接触该物品。完整内部包含、终态稳定、后续Plate需要及电话结束后的处理继续等完整轨迹核对，当前不得先认证整个存储／动态协作成功。

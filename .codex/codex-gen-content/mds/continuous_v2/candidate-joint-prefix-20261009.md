@@ -85,3 +85,11 @@ Wine38.45首次观测离手与Cab接触，终态继续Cab支撑/释放；实际�
 候选报告2videos/29links浏览器验证已terminal70650 exit0；main已84published、1pending，main浏览器88979已exit0：84videos/804links及实际play/seek/Range/字幕/同步视图/375px通过，勿再poll。开发数据export54307已exit0 verified：83complete/21680blocks/195200actualactions/unique21680，private不在Robot输入，开发非专家、split未冻结。新文档及README已2/3，接口限制真实单样本与完整Sim资格区分。
 
 第三原case已实际启动：子2791439（父2719750、π2719139仍live）。目前35.95s，drawer.opening_m=.157102（raw joint=-.157102，不把负号误判closed），Human0/4/8 wait，12自己选Cream→drawer_storage，Robot真实打开；Human16/20/24误把自己的移动说成Robot执行，Robot实际公开说Human处理。28/32 pause_current持Cream，要求Robot保持，身体离返尚待完整核对。实际private_phone cue22.6（不是旧版本29.2），end59.2；28接电话并非早于此次通知，旧时间不能搬用。第三策略与条件仍冻结。GPU2/3继续活跃，CPU报告保留，Goal全部范围active/正式0。
+
+## 抽屉真实暂停／恢复前缀
+
+上一轮progress提交5a9b321。本轮同父／子／π与session58742复查live，没有重启。第三至少43.95秒：Robot开门原生稳定首次11.3；H12依实际开口0.160选Cream存储。H16/20/24 own_execution明确自己pick_approach/pick_lift/transfer_translate，却说Robot在处理。Robot16已hold并公开说Human处理，R28认可暂停不能当新hold起点。
+
+H28/32 pause_current持Cream，request3取消；H36选择重新relocate，同一世界中的已打开抽屉和持物延续，R36公开认可恢复。H36自述联系已处理，实际结束cue59.2尚未到；允许自主恢复，但不认证为外部结束cue诱发或新事实已获知。至43.95 body都[.25,.6]，暂无真实旁移／返回，操作参与暂停和身体离返分开。43.95 Cream已离手、Cab接触、Robot未抓持；完整包含/终态/后续仍待核对。
+
+17条原始H/R/trace行与SHA独立重读保存drawer_pause_resume_36s.json，OBSERVATION_NOTES已更新；不计完整成绩。原三条件继续冻结，CPU报告仍可阅览，GPU2/3为原当前任务保留。全Goal active，正式0；下一步收齐第三完整视频与审阅，随后按全局设计推进真实人策略与双系统六情境，而非单个前缀充当完成。
