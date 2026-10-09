@@ -73,3 +73,15 @@ candidate_snack_detour_symbolic_20261009：120模拟秒，2401帧／20FPS／512�
 新入口声明human_output_protocol=bounded_text_and_failure_feedback_v1、human_failed_history_encoding=actual_generation_status_v1、textlimits及相关源SHA；auditor按完整成对标记重建两个输入和实际工具声明/token。旧标记缺省仍原路径；不完整/未知版本拒绝。仅独立auditor增加分支，原运行策略及当前参数冻结未变。ctx退出恢复原函数，当前模型进程不受影响。
 
 新增6条集成测试含两阶段首次失败后第二次实际选择仍为reject、512长度违规不得执行、失败历史和实际观测对应、作用域恢复、完整标记。最终全回归385passed/2skip（4751已exit0），旧首例额外reaudit仍verified（47768已exit0）。新入口还没有完整Sim，不计伙伴/协作效度。RUNTIME_INTEGRATION.md给出准备配置及下一步完整链路要求；接口报告0video/7links浏览器通过，未新建GPU工作负载或遗留smoke。当前原饮品已至少103.95，后面104决定可能仍长推理，不能因观察等待重启；源批待完整终态与全视频，再收第三例。Goal active/正式0。
+
+## 原饮品完整终态与第三例启动
+
+上一轮progress提交3a43bff。本轮同session58742逐次核对并收得第二例terminal：120秒/2401帧/20FPS/512×896视频verified，20HumanNN/10决定、30协调、80实际VLA、2400control，36/64/84/104四次工具JSON失败独立重放核对，human_executor_rejection_count=0，运行相关sourcechanged=[]。失败保持原记录，不把回退wait当自主选择或公开纠正。
+
+Wine38.45首次观测离手与Cab接触，终态继续Cab支撑/释放；实际移动在28开始，不能全部归因于35.6的新用途。原Rack谓词False不等于更新Cab用途失败，不归Robot上架贡献。Robot40hold且reason/memory已认可Cab新用途，40–116公开message仍循环澄清Rack；100 reason/currentGoal进一步认可无需Wine动作而message未同步。分别评价生成字段、实际控制、公开约定，不说完全没读到更新。13助手解释/4过程区间anchors_verified/source_bound；40→40模式变化0s不是完整有效理解，44→10056s和40→11676s为观察窗口不是有效响应延迟。同资源VLA暴露38.4、夹爪触人持Wine累计0，两者不作碰撞/全身安全分数。
+
+真实原视频0/36/44/100取帧保留visual_review，实际查看0/36/44及Model observation_000000.png。CPU MjSim重建XML/qpos缓存帧并核对真实objects后投影Wine碰撞AABB：0/28两路提供相机均视锥外，36 exterior相交但仍Human持有/wrist behind，40 exterior相交/wrist跨相机平面未知。根target_camera_probe.json保存相机姿态、fovy、box、各原模型图像SHA/trace行SHA。相交不认证遮挡或像素可见，两轴翻转不改变相交判定。避免从这段资源/视觉条件未满足的VLA动作推断正常上架能力缺失；高层提供/协作问题另判。外部单相机probe另保留prefix目录，最终审阅用两相机根文件。
+
+候选报告2videos/29links浏览器验证已terminal70650 exit0；main已84published、1pending，main浏览器88979已exit0：84videos/804links及实际play/seek/Range/字幕/同步视图/375px通过，勿再poll。开发数据export54307已exit0 verified：83complete/21680blocks/195200actualactions/unique21680，private不在Robot输入，开发非专家、split未冻结。新文档及README已2/3，接口限制真实单样本与完整Sim资格区分。
+
+第三原case已实际启动：子2791439（父2719750、π2719139仍live）。目前35.95s，drawer.opening_m=.157102（raw joint=-.157102，不把负号误判closed），Human0/4/8 wait，12自己选Cream→drawer_storage，Robot真实打开；Human16/20/24误把自己的移动说成Robot执行，Robot实际公开说Human处理。28/32 pause_current持Cream，要求Robot保持，身体离返尚待完整核对。实际private_phone cue22.6（不是旧版本29.2），end59.2；28接电话并非早于此次通知，旧时间不能搬用。第三策略与条件仍冻结。GPU2/3继续活跃，CPU报告保留，Goal全部范围active/正式0。

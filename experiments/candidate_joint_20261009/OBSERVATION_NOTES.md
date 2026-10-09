@@ -1,6 +1,6 @@
 # 观察记录
 
-当前首例点心已有完整终态、输入／控制／视频核验，后两例继续。此前接口检查中候选点心帧仍提前报完成，饮品帧改选清盘，抽屉帧改等确认；这些接口帧均未执行，不能当本批效果。以下先保留运行初期的观察，再给出完整结果。
+当前点心及饮品已有完整终态、输入／控制／视频核验，抽屉继续。此前接口检查中候选点心帧仍提前报完成，饮品帧改选清盘，抽屉帧改等确认；这些接口帧均未执行，不能当本批效果。以下保留运行初期的观察及随后完整结果。
 
 首例点心已启动并到3.95模拟秒。0秒实际人记录含v5测量与两次真实生成，选择Food→Bowl，没有公开话语。Robot0选择BowlOnPlate并公开说明摆盘，理由仍知道Bowl由人持有，memory_note却先写“Bowl placed”。这是选择与记忆中已完成表达的早期矛盾，不据此预判完整行为，也不将执行选择当成功。
 
@@ -65,3 +65,15 @@
 新选择是人自己Wine→Cab，同时公开请求Robot放Cab，符合柜顶立即取用方向；这仍有同资源分工不明确的问题。没有执行新Sim动作，没有新方法自己的持续历史，也没有认证Human伙伴可靠性或因果改善。原失败历史摘要未涉及本次36秒输入，不能借本样本证明该摘要的效果。检查进程已退出，nvidia-smi确认GPU0只剩15MiB背景占用；GPU2/3继续原三活动批。
 
 当前原饮品例到83.95秒，64秒再次记录Unterminated string生成失败，回退wait无公开消息。保留原失败，下一版方法只作为待完整闭环资格的候选；不改本批原始结果或设置。
+
+## 饮品完整120秒：物理结果、生成状态和公开衔接
+
+[完整13项审阅](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/public_request_response_review.json)、[来源核对](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/review_evidence_verification.json)与[4个过程区间](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/reviewed_coordination_metrics.json)已发布。20次人NN、30次Robot协调、80次真实VLA、2400控制步；4次贡献JSON未闭合（36/64/84/104），执行拒绝0。完整2401帧／20FPS真实视频核查通过，相关源码运行中变化为空。
+
+38.45秒首次观测酒瓶已离手并与柜体接触，120秒仍在柜体上释放支撑。原生Rack目标False不代表更新Cab用途必然失败；实际搬运从28秒开始，不将其全部归因于35.6秒变化。人40有效公开Cab立即取用，Robot同轮hold，理由和memory_note已包含新用途并说当前位置正确；公开澄清却重复到116秒。100秒理由进一步认为无需Wine动作，message仍旧。这是生成字段／控制／公开反馈不同步，不能说模型完全没读到更新。
+
+44至100秒56秒实际hold、40至116秒76秒实际hold只是所标过程窗口，不认证有效响应延迟或一致约定。64/84/104无有效公开消息，不拿失败草稿当新提醒。累计同资源VLA暴露38.4秒、夹爪接触人持物0秒；没有身体离返，不代表全身安全或离返能力覆盖。
+
+已查看原始视频[0秒](../../results/candidate_joint_prefix_20261009/visual_review/drink_0s.png)、[36秒](../../results/candidate_joint_prefix_20261009/visual_review/drink_36s.png)、[44秒](../../results/candidate_joint_prefix_20261009/visual_review/drink_44s.png)及实际[初始策略图像](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/episode/observation_000000.png)。[相机与真实碰撞几何记录](../../results/continuous_v2/candidate_drink_correction_symbolic_20261009/target_camera_probe.json)重建XML/qpos缓存帧并核对物体位置：0/28秒Wine碰撞包围盒在外部、腕部两路提供相机视锥外；36秒外部相交时仍持物；40秒外部相交、腕部跨相机平面为未知。包围盒相交不证明可见或无遮挡，投影坐标在图像翻转前；翻转不影响是否相交。
+
+因此，早期VLA执行不能直接作为正常可见可用条件下的上架能力证据；高层提供／资源协调和下游视觉条件分开。完整Sim视频在[index.html](index.html)，原三活动方法仍冻结，抽屉继续，正式样本0。
