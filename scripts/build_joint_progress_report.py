@@ -96,6 +96,10 @@ _bounded_table=Path('experiments/bounded_joint_20261009/conditions.csv')
 if _bounded_table.exists():
     for _row in csv.DictReader(_bounded_table.open()):
         RUNS.append((_row['run'],f"有限文本完整共同活动：{_row['activity']}／{_row['situation']}",'neural'))
+_bounded_visual_table=Path('experiments/bounded_visual_joint_20261009/conditions.csv')
+if _bounded_visual_table.exists():
+    for _row in csv.DictReader(_bounded_visual_table.open()):
+        RUNS.append((_row['run'],f"同版人／视觉协调完整活动：{_row['activity']}／{_row['situation']}",'neural'))
 TASKS = {
     'snack_service': ('点心准备', '人放下接收碗 → 机器人装入奶酪并释放 → 人接收或交付点心。'),
     'drink_storage': ('饮品整理', '人决定留用或收纳、提供酒瓶 → 机器人放上架 → 人确认并整理台面。'),

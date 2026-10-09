@@ -1,0 +1,58 @@
+{
+  "role": "unified_task_and_interaction_development",
+  "verified_terminal_cases": 0,
+  "formal_samples": 0,
+  "conditions": [
+    {
+      "condition": {
+        "run": "bounded_drawer_leave_return_visual_20261009",
+        "activity": "drawer_access",
+        "situation": "leave_return",
+        "profile": "busy",
+        "init_state_id": "2",
+        "seed": "113",
+        "steps": "2400",
+        "initial_human_holding": "1",
+        "system": "visual",
+        "role": "bounded_complete_visual_joint_development"
+      },
+      "verified_terminal": false,
+      "state": "尚无完整结果核查",
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "bounded_drink_correction_visual_20261009",
+        "activity": "drink_storage",
+        "situation": "correction",
+        "profile": "particular",
+        "init_state_id": "2",
+        "seed": "115",
+        "steps": "2400",
+        "initial_human_holding": "1",
+        "system": "visual",
+        "role": "bounded_complete_visual_joint_development"
+      },
+      "verified_terminal": false,
+      "state": "尚无完整结果核查",
+      "formal_sample": false
+    },
+    {
+      "condition": {
+        "run": "bounded_snack_detour_visual_20261009",
+        "activity": "snack_service",
+        "situation": "detour",
+        "profile": "participating",
+        "init_state_id": "2",
+        "seed": "114",
+        "steps": "2400",
+        "initial_human_holding": "1",
+        "system": "visual",
+        "role": "bounded_complete_visual_joint_development"
+      },
+      "verified_terminal": false,
+      "state": "尚无完整结果核查",
+      "formal_sample": false
+    }
+  ]
+}

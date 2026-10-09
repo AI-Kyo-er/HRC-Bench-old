@@ -1,0 +1,4 @@
+run,activity,situation,profile,init_state_id,seed,steps,initial_human_holding,system,role
+bounded_drawer_leave_return_visual_20261009,drawer_access,leave_return,busy,2,113,2400,1,visual,bounded_complete_visual_joint_development
+bounded_drink_correction_visual_20261009,drink_storage,correction,particular,2,115,2400,1,visual,bounded_complete_visual_joint_development
+bounded_snack_detour_visual_20261009,snack_service,detour,participating,2,114,2400,1,visual,bounded_complete_visual_joint_development

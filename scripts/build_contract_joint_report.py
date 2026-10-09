@@ -19,7 +19,8 @@ def read(path):return json.loads(path.read_text()) if path.exists() else {}
 
 def build(output=Path('experiments/contract_joint_20261008')):
     output=Path(output);contracts=CONTRACTS
-    bounded=output.name=='bounded_joint_20261009'
+    bounded_visual=output.name=='bounded_visual_joint_20261009'
+    bounded=output.name=='bounded_joint_20261009' or bounded_visual
     candidate=output.name=='candidate_joint_20261009' or bounded
     area_feedback=output.name=='area_feedback_20261009' or candidate
     workspace=output.name=='workspace_dynamic_20261008' or area_feedback
@@ -132,6 +133,17 @@ def build(output=Path('experiments/contract_joint_20261008')):
         page=page.replace('本批沿用此前共同任务和能力声明，增加交付区域内可分开放置的表达，以及与人自己选定贡献关联的当前事实。检查这些表达能否在真实决策中兑现，同时继续核对双方分工与动态行为。',
             '本批将已接通的有限文本协议放入完整120秒共同活动，核对实际执行与双方反馈，不重放单帧作为新方法行为。抽屉、饮品和点心均保留失败与未发生的预期变化。')
         page=page.replace('</main>', '<section><h2>当前边界与下一阶段</h2><p>原饮品的资源持有与初始相机条件保留，当前Robot操作库不支持任意饮品区放置。分别分析伙伴事实误判、超范围请求、资源／视觉前提、真实VLA操作与协调失败。六类实际动态情境、交互结构对照和双系统多初始化正式评测仍未完成，正式样本0。</p><p><a href="../bounded_human_interface_20261009/RUNTIME_INTEGRATION.md">协议接入与已有接口证据</a> · <a href="../candidate_joint_20261009/index.html">原candidate批及完整视频</a></p></section></main>')
+    if bounded_visual:
+        page=page.replace('有限文本伙伴：三活动完整共同活动验证','同版动态伙伴：视觉协调系统三活动开发')
+        page=page.replace('机器人用公开几何、接触和对话独立决定操作，由π0.5真实生成机械臂动作。',
+            '机器人由Qwen3-VL-8B读取初始／当前外部及腕部图像、自身状态／接触、公开交流独立决定操作，由π0.5真实生成动作。视觉协调器没有理想几何或人私有意图输入。')
+        page=page.replace('三条完整持续活动沿用32B、v5、布局和种子，接入有限自由文本及真实生成失败反馈。检查私人需要、公开沟通、真实贡献和伙伴回应的完整链路，不以解析通过认证协作成功。',
+            '三条活动复用32B人策略、v5、有限文本／真实失败反馈、布局和种子，Robot采用8B视觉协调＋π0.5。补齐同版第二系统的完整任务证据，不将旧版本成绩拼接，不以解析通过认证协作成功。')
+        page=page.replace('本批冻结模型、精度、v5测量、活动与执行能力，改变人贡献输出语法和历史中的失败表示；高层意图与动作仍由模型自主选择。不同方法的同seed不保证相同闭环随机流，不作单因素因果结论。',
+            '本批人的方法与理想测量开发批相同，改变Robot感知与协调模型：视觉8B／BF16对照理想测量32B-AWQ／FP16，底层VLA同版。是两个明确不同系统，不是两个不同VLA或感知单因素实验。闭环人响应和π随机流可不同，正式样本0。')
+        page=page.replace('本批将已接通的有限文本协议放入完整120秒共同活动，核对实际执行与双方反馈，不重放单帧作为新方法行为。抽屉、饮品和点心均保留失败与未发生的预期变化。',
+            '本批运行同版生成式伙伴与真实视觉Robot的完整120秒活动，核对观察线索、执行依赖与双方反馈；保留全部失败和未发生变化，不重放旧方法视频作为本系统行为。')
+        page=page.replace('</main>','<section><h2>同版对照与随机性边界</h2><p>两个系统共享任务／背景／外部事实条件，人可依据不同伙伴行为作出不同选择。独立π服务未记录逐episode随机初态，同seed不保证相同动作噪声，不作精确因果配对或排名。</p><p><a href="../bounded_joint_20261009/index.html">同版理想测量NN＋VLA开发批</a></p></section></main>')
     page=page.replace('</style>','.inspection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.episode-inspector{background:#f3f6fa;padding:16px;margin:12px 0;overflow-wrap:anywhere}select{max-width:100%;font:inherit}</style>')
     inspector='../contract_joint_20261008/inspection.js' if workspace else 'inspection.js'
     page=page.replace('</main></html>','</main><script src="'+inspector+'"></script></html>')
