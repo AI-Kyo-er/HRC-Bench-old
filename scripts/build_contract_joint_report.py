@@ -117,6 +117,7 @@ def build(output=Path('experiments/contract_joint_20261008')):
             '<p>这是有原始锚点的助手审阅，未完成独立语义认证；不替代最终轨迹和完整视频核查。'
             '<a href="OBSERVATION_NOTES.md">33条原始来源及逐时刻解释</a> · '
             '<a href="CAPABILITY_REVIEW.md">共同任务与实际能力的设计决定</a> · '
+            '<a href="PARTNER_VALIDITY_REVIEW.md">伙伴有效性、主体误记与文献取舍</a> · '
             '<a href="../dynamic_joint_activity_20261007/DESIGN.md">完整Benchmark流程、模型适配及七项未完成要求</a></p></section>')
         if statuses and statuses[0]['verified_terminal']:
             prefix_review=prefix_review.replace('运行中前缀审阅：尚非完整结果','早期前缀审阅：完整结果见上方案例')
