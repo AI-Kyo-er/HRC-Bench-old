@@ -1330,11 +1330,27 @@
       "native_goal_terminal": true,
       "body_away_intervals": [],
       "formal_benchmark_sample": false
+    },
+    {
+      "run": "bounded_drawer_leave_return_symbolic_20261009",
+      "label": "有限文本完整共同活动：drawer_access／leave_return",
+      "kind": "neural",
+      "activity": "drawer_access",
+      "duration_s": 120.0,
+      "human_neural_calls": 20,
+      "actual_vla_calls": 8,
+      "coordinator_calls": 30,
+      "reference_complete": null,
+      "native_goal_terminal": false,
+      "body_away_intervals": [],
+      "formal_benchmark_sample": false
     }
   ],
   "pending": [
-    "有限文本完整共同活动：drawer_access／leave_return：尚无终态结果",
     "有限文本完整共同活动：drink_storage／correction：尚无终态结果",
-    "有限文本完整共同活动：snack_service／detour：尚无终态结果"
+    "有限文本完整共同活动：snack_service／detour：尚无终态结果",
+    "同版人／视觉协调完整活动：drawer_access／leave_return：尚无终态结果",
+    "同版人／视觉协调完整活动：drink_storage／correction：尚无终态结果",
+    "同版人／视觉协调完整活动：snack_service／detour：尚无终态结果"
   ]
 }
