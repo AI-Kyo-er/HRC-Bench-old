@@ -1319,6 +1319,9 @@
     }
   ],
   "pending": [
-    "候选与v5真实闭环：drawer_access／leave_return：尚无终态结果"
+    "候选与v5真实闭环：drawer_access／leave_return：尚无终态结果",
+    "有限文本完整共同活动：drawer_access／leave_return：尚无终态结果",
+    "有限文本完整共同活动：drink_storage／correction：尚无终态结果",
+    "有限文本完整共同活动：snack_service／detour：尚无终态结果"
   ]
 }
