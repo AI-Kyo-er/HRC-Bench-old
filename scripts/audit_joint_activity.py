@@ -19,6 +19,10 @@ def audit(root):
     ep=root/'episode';p=read(root/'provenance.json');activity=ACTIVITIES[p['activity']]
     from hrc_pilot.bounded_human_runtime import protocol_enabled,failure_aware_tool_payload,failure_aware_agenda_request
     bounded_protocol=protocol_enabled(p)
+    fixture_contract=p.get('human_fixture_surface_contract')
+    if fixture_contract is not None:
+        from hrc_pilot.fixture_area_human_executor import CONTRACT as FIXTURE_CONTRACT
+        if fixture_contract!=FIXTURE_CONTRACT:raise ValueError('未知家具面执行协议')
     if p.get('interaction_contract'):
         from hrc_pilot.interaction_contracts import CONTRACTS
         activity=CONTRACTS[p['activity']].activity
@@ -174,6 +178,13 @@ def audit(root):
                     if p.get('human_area_placement'):
                         from hrc_pilot.placement_areas import table_placement_areas,area_placement
                         areas=table_placement_areas(layout)
+                        if fixture_contract:
+                            from hrc_pilot.fixture_area_human_executor import fixture_placement_areas
+                            assert layout.get('fixture_surface_contract')==fixture_contract
+                            areas.update(fixture_placement_areas(support_sim.model,support_sim.data,
+                                list(scene['objects_xyz']),scene['regions_xyz']))
+                        else:
+                            assert layout.get('fixture_surface_contract') is None
                         assert layout['placement_areas']==areas==scene['public_placement_areas']
                     else:
                         assert 'public_placement_areas' not in scene
@@ -393,6 +404,8 @@ def audit(root):
     assert np.all(np.diff(times)>0)
     sampled=float((np.linalg.norm(np.diff(positions,axis=0),axis=1)/np.diff(times)).max())
     assert sampled<=.200001
+    from hrc_pilot.fixture_receipt_verification import verify_fixture_receipts
+    fixture_receipt_checks=verify_fixture_receipts(p,trace,human,receipts,support_sim,saved_task['regions'])
     robot_received_human_calls=sum('human:' in c['prompt'] for c in calls)
     review=[{'time_s':d['time_s'],'private_intention':d['choice'].get('intention'),
              'public_message':d['choice'].get('message'),'actual_action':d['choice']['action'],
@@ -419,6 +432,9 @@ def audit(root):
         'human_attached_object_pose_write_samples':sum(r['human_attached_object_pose_write'] is not None for r in raw_human),
         'private_context_notifications':contexts,'behavior_review':review,
         'interpretation':'验证实际观测、公开渠道和执行一致；不证明真人策略、共同任务完成、语义变化或cobalance。'}
+    if fixture_contract:
+        result['fixture_surface_receipt_verification']={'contract':fixture_contract,'receipts':fixture_receipt_checks,
+            'scope':'实际接受点或拒绝按原规划帧重放；不认证意图、路径、安全或任务成功。'}
     if support_replay_errors:
         result['support_geometry_replay']={'tolerance_m':.0002,
             'max_axis_error_m':max(r['max_axis_error_m'] for r in support_replay_errors),
